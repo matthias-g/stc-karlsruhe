@@ -98,6 +98,7 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    filters_spam (0.3)
     friendly_id (4.0.9)
     globalize3 (0.3.0)
       activemodel (>= 3.0.0)
@@ -149,6 +150,12 @@ GEM
     refinerycms-i18n (2.0.2)
       refinerycms-core (~> 2.0.0)
       routing-filter (>= 0.2.3)
+    refinerycms-inquiries (2.0.3)
+      filters_spam (~> 0.2)
+      refinerycms-core (~> 2.0.1)
+      refinerycms-settings (~> 2.0.1)
+    refinerycms-settings (2.0.2)
+      refinerycms-core (~> 2.0.1)
     routing-filter (0.3.1)
       actionpack
     sass (3.2.8)
@@ -187,6 +194,7 @@ DEPENDENCIES
   rails (= 3.2.13)
   refinerycms (~> 2.0.0)!
   refinerycms-i18n (~> 2.0.0)
+  refinerycms-inquiries (~> 2.0.0)
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<%= render '/refinery/html_tag' %>
+  <%# site_bar = render('/refinery/site_bar', :head => true) -%>
+  <%= render '/refinery/head' %>
+  <body>
+    <%#= site_bar -%>
+    <%= render '/refinery/ie6check' if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
+    <div id="page_container">
+      <div id="skyline"></div>
+      <div id="inner">
+        <header id="header">
+          <%= render '/refinery/header' -%>
+        </header>
+        <a class="separator" name="introduction" href="#">back to top</a>
+        <section id="page">
+          <%= yield %>
+        </section>
+        <br style="clear: both;">
+      </div>
+      <footer>
+        <%= render '/refinery/footer' -%>
+      </footer>
+    </div>
+    <%= render '/refinery/javascripts' %>
+  </body>
+</html>

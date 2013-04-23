@@ -1,0 +1,11 @@
+#home {
+	background-size: 40% auto;
+}
+br.opt {
+	display: none;
+}
+.leftcol, .rightcol {
+	float: none;
+	width: auto;
+	padding: 30px;
+}

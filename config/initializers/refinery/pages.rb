@@ -1,5 +1,8 @@
 # encoding: utf-8
 Refinery::Pages.configure do |config|
+
+  config.new_page_parts = true
+
   # Configure specific page templates
   # config.types.register :home do |home|
   #   home.parts = %w[intro body]

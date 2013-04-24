@@ -30,11 +30,16 @@ gem 'jquery-rails', '~> 2.0.0'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+group :production do
+  # Use PostgreSQL as the production database
+  gem 'pg'
+end
 
-# Deploy with Capistrano
-# gem 'capistrano'
+group :development do
+  # Deploy with Capistrano
+  gem 'capistrano'
+  gem 'rvm-capistrano'
+end
 
 # To use debugger
 # gem 'debugger'

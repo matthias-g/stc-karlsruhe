@@ -1,10 +1,11 @@
-body {
-	background-image: url('hands.png'), url('bgshadow.png'), url('bg.png');
+﻿body {
+	background-image: url('bgshadow.png'),url('hands.png'),  url('bg.png');
 	/*background-attachment: fixed;*/
-	background-color: #7b1212;
+	background-color: #790f21/*#7b1212*/;
 	font-family: 'Arial';
 }
-#page_container {
+
+#outer {
 	width: 70%;
 	max-width: 1000px;
 	min-width: 350px;
@@ -23,9 +24,10 @@ body {
 	box-shadow: 5px 5px 20px rgba(0,0,0,0.5), -3px -3px 6px rgba(0,0,0,0.3);
 	overflow: hidden;
 }
-#header {
+#home {
 	margin: 60px 30px 0;
 	position: relative;
+	min-height: 250px;
 }
 #logo {
 	position: absolute;
@@ -39,28 +41,29 @@ body {
 	position: absolute;
 	right: 20px;
 	top: 20px;
-	width: 269px;
-	height: 209px;
+	width: 204px;
+	height: 171px;
 	background: url('logo_hands.png') no-repeat top right;
 }
 
-.leftcol {
+div.leftcol {
 	float: left;
 	width: 50%;
 	padding: 30px;
 	padding-right: 5px;
 	overflow: hidden;
 }
-.rightcol {
+div.rightcol {
 	padding: 30px;
 	padding-left: 0;
 	overflow: hidden;
 }
 .linklist a {
 	display: block;
-	color: #248;
-	text-decoration: none;
+	float: left;
+	clear: left;
 	padding-left: 20px;
+	padding-bottom: 5px;
 }
 .hands {
 	float: right;
@@ -75,14 +78,12 @@ body {
 	text-align: right;
 	padding: 8px;
 }
-footer {
+#impressum {
 	text-align: right;			
 	font-size: 12px;
 	margin: 10px;		
-	color: gray;
-	text-shadow: 1px 1px 0 #000;
 }
-footer a {
+#impressum a {
 	color: gray;
 	text-shadow: 1px 1px 0 #000;
 }
@@ -90,17 +91,35 @@ footer a {
 
 
 h1 {
+	margin-top: 30px;
+	margin-left: 30px;
+	font-size: 24px;
+}
+h2 {
 	margin-top: 50px;
 	font-size: 24px;
 }
+a {
+	color: #248;
+	text-decoration: none;
+}
 p {
 	clear: both;
+}
+ul {
+	list-style: none;
+	padding-left: 15px;
+}
+li {
+	margin-bottom: 6px;
+}
+br.opt2 {
+	display: none;
 }
 .box {
 	display: block;
 	float: left;
 	font-size: 18px;
-	text-decoration: bold;
 	box-shadow: 3px 3px 4px rgba(0,0,0,0.75);
 	padding: 4px 20px;
 	color: white;
@@ -121,9 +140,39 @@ p {
 	transform: rotate(-3deg);
 	margin-bottom: 25px;
 }
-ul {
-	list-style: none;
+
+/*#overlay {
+	position: fixed;
+	z-index: 10;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	display: none;
 }
-li {
-	margin-bottom: 6px;
+#overlay > div {
+	margin: 40px auto;
+	width: 60%;
+	min-width: 300px;
+	max-width: 800px;
+	height: 70%;
+	max-height: 400px;
+	background-color: white;
+	border-radius: 6px 6px 6px 6px;
+	/*box-shadow: 5px 5px 20px rgba(0,0,0,0.5);*./
+	display: none;
+	padding: 15px;
+	padding-bottom: 30px;
+	position: relative;
 }
+#overlay > div > a {
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+}
+#popup {
+	overflow: auto;
+	width: 100%;
+	height: 100%;
+}*/

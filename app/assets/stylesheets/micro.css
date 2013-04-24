@@ -1,6 +1,10 @@
-#home {
-	background: none;
+﻿#hands {
+	position: static;
+	width: 100%;
+	background-position: right top;
+	background-size: auto 130px;
+	height: 130px;
 }
-br.opt {
+br.opt, br.opt2 {
 	display: inline !important;
 }

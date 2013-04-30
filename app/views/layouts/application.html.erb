@@ -5,19 +5,18 @@
   <body>
     <%#= site_bar -%>
     <%= render '/refinery/ie6check' if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
-    <div id="page_container">
-      <div id="skyline"></div>
-      <div id="inner">
-        <header id="header">
+    <div id="page-boundary">
+      <div id="page-skyline"></div>
+      <div id="page-container">
+        <header id="page-header">
           <%= render '/refinery/header' -%>
         </header>
-        <a class="separator" name="introduction" href="#">back to top</a>
         <section id="page">
           <%= yield %>
         </section>
         <br style="clear: both;">
       </div>
-      <footer>
+      <footer id="page-footer">
         <%= render '/refinery/footer' -%>
       </footer>
     </div>

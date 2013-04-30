@@ -1,10 +1,10 @@
-#home {
-	background-size: 40% auto;
+﻿#logo1 {
+	position: relative;
 }
 br.opt {
 	display: none;
 }
-.leftcol, .rightcol {
+div.leftcol, div.rightcol {
 	float: none;
 	width: auto;
 	padding: 30px;

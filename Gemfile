@@ -40,6 +40,8 @@ group :development do
   # Deploy with Capistrano
   gem 'capistrano'
   gem 'rvm-capistrano'
+
+  gem 'letter_opener'
 end
 
 # To use debugger
@@ -54,3 +56,4 @@ gem 'refinerycms-i18n', '~> 2.0.0'
 gem 'refinerycms-inquiries', '~> 2.0.0'
 #  gem 'refinerycms-search', '~> 2.0.0'
 #  gem 'refinerycms-page-images', '~> 2.0.0'
+

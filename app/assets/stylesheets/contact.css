@@ -1,0 +1,38 @@
+#body_content_title {
+    /*display: block;*/
+    /*float: left;*/
+    /*font-size: 18px;*/
+    /*box-shadow: 3px 3px 4px rgba(0,0,0,0.75);*/
+    /*padding: 4px 20px;*/
+    /*color: white;*/
+    /*-webkit-transform: rotate(-3deg);*/
+    /*transform: rotate(-3deg);*/
+    /*margin-bottom: 25px;*/
+    /*background-color: #28b7af;*/
+}
+
+#body {
+    padding-left: 30px;
+}
+
+#body_content_left {
+    padding-left: 30px;
+}
+
+.field {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.field textarea, .field input {
+    width: 70%;
+    min-width: 285px;
+    max-width: 600px;
+    margin-right: 30px;
+}
+
+.field label {
+    min-width: 100px;
+    float: left;
+    margin-top: 2px;
+}

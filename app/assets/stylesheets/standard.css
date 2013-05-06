@@ -36,6 +36,7 @@
 	width: 100%;
 	height: 110px;
 	background: url('logo.png') no-repeat center top;
+    display: block;
 }
 #logo2 {
 	position: absolute;

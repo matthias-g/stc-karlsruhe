@@ -1,6 +1,9 @@
 ﻿#logo1 {
 	position: relative;
 }
+#logo2 {
+    top: 50px;
+}
 br.opt {
 	display: none;
 }

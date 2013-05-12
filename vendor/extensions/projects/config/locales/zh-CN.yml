@@ -1,0 +1,33 @@
+zh-CN:
+  refinery:
+    plugins:
+      projects:
+        title: Projects
+    projects:
+      admin:
+        projects:
+          actions:
+            create_new: 建立新的 Project
+            reorder: 对 Projects 重新排序
+            reorder_done: 对 Projects 的重新排序结束
+          records:
+            title: Projects
+            sorry_no_results: 对不起，未找到结果。 #Sorry! There are no results found.
+
+            # There are no Projects yet. Click "Add New Project" to add your first project.
+            no_items_yet: 目前没有 Projects . 点击 "Add New Project" 创建一个project.
+          project:
+            view_live_html: 查看 project 的最新内容.<br/><em>(新窗口中打开)</em>
+            edit: 编辑 project
+            delete: 永久删除 project
+      projects:
+        show:
+          other: 其他 Projects
+  activerecord:
+    attributes:
+      'refinery/projects/project':
+        title: Title
+        description: Description
+        start: Start
+        end: End
+        image: Image

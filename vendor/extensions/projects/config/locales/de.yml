@@ -1,0 +1,31 @@
+de:
+  refinery:
+    plugins:
+      projects:
+        title: Projekte
+    projects:
+      admin:
+        projects:
+          actions:
+            create_new: Neues Projekt erstellen
+            reorder: Projekte umsortieren
+            reorder_done: Reihenfolge speichern
+          records:
+            title: Projekte
+            sorry_no_results: Es wurden keine Projekte gefunden.
+            no_items_yet: Es wurden noch keine Projekte angelegt. Klicken Sie auf "Neues Projekt erstellen", um ein Projekt anzulegen.
+          project:
+            view_live_html: Dieses Projekt live ansehen <br/><em>(wird in neuem Fenster geöffnet)</em>
+            edit: Dieses Projekt bearbeiten
+            delete: Dieses Projekt löschen
+      projects:
+        show:
+          other: Weitere Projekte
+  activerecord:
+    attributes:
+      'refinery/projects/project':
+        title: Titel
+        description: Beschreibung
+        start: Start
+        end: Ende
+        image: Bild

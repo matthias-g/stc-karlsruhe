@@ -46,6 +46,10 @@
 	height: 171px;
 	background: url('logo_hands.png') no-repeat top right;
 }
+#body_content {
+    padding-left: 30px;
+    padding-right: 30px;
+}
 #page-footer {
 	text-align: right;			
 	font-size: 12px;

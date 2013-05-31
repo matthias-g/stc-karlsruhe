@@ -4,6 +4,7 @@ module Refinery
 
       before_filter :find_all_projects
       before_filter :find_page
+      before_filter :authenticate_refinery_user!, :only => [:enter]
 
       def index
         # you can use meta fields from your model instead (e.g. browser_title)
@@ -17,6 +18,18 @@ module Refinery
         # you can use meta fields from your model instead (e.g. browser_title)
         # by swapping @page for @project in the line below:
         present(@page)
+      end
+
+      def enter
+        @project = Project.find(params[:id])
+        @project.add_volunteer(current_refinery_user) if current_refinery_user.has_role?(:volunteer)
+        redirect_to refinery.projects_project_url(@project)
+      end
+
+      def leave
+        @project = Project.find(params[:id])
+        @project.delete_volunteer(current_refinery_user)
+        redirect_to refinery.projects_project_url(@project)
       end
 
     protected

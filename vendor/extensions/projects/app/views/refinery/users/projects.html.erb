@@ -1,0 +1,28 @@
+<% content_for :body do %>
+    Projekte als Freiwilliger:
+    <ul id="projects-as-volunteer">
+      <% if !@projects_as_volunteer || @projects_as_volunteer.size == 0 %>
+          keine Projekte vorhanden
+      <% else %>
+        <% @projects_as_volunteer.each do |project| %>
+          <li>
+            <%= link_to project.title, refinery.projects_project_path(project) %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+    Projekte als Projektleiter:
+    <ul id="projects-as-leader">
+      <% if !@projects_as_leader || @projects_as_leader.size == 0 %>
+          keine Projekte vorhanden
+      <% else %>
+          <% @projects_as_leader.each do |project| %>
+              <li>
+                <%= link_to project.title, refinery.projects_project_path(project) %>
+              </li>
+          <% end %>
+      <% end %>
+    </ul>
+<% end %>
+
+<%= render '/refinery/content_page' %>

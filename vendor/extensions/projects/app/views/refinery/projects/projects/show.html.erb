@@ -33,6 +33,16 @@
       <%= image_fu @project.image, nil %>
     </p>
   </section>
+    <section>
+      <% if @project.has_volunteer?(current_refinery_user) %>
+        <p>
+          Du nimmst an diesem Projekt teil.
+          <%= link_to 'Teilnahme beenden', refinery.leave_projects_project_path(@project) %>
+        </p>
+      <% else %>
+        <%= link_to 'Teilnehmen', refinery.enter_projects_project_path(@project) %>
+      <% end %>
+    </section>
 <% end %>
 
 <% content_for :side_body do %>

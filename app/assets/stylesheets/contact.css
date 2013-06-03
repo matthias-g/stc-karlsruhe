@@ -1,30 +1,24 @@
-#body_content_title {
-    /*display: block;*/
-    /*float: left;*/
-    /*font-size: 18px;*/
-    /*box-shadow: 3px 3px 4px rgba(0,0,0,0.75);*/
-    /*padding: 4px 20px;*/
-    /*color: white;*/
-    /*-webkit-transform: rotate(-3deg);*/
-    /*transform: rotate(-3deg);*/
-    /*margin-bottom: 25px;*/
-    /*background-color: #28b7af;*/
-}
+/* This file contains styles regarding the contact component.
+It should be included in any page containing the contact form. */
 
-.field {
-    margin-top: 3px;
-    margin-bottom: 3px;
+/* CONTACT FORM */
+.ctc-field, .ctc-submit {
+	margin-top: 5px;
+	font-size: 12px;
 }
-
-.field textarea, .field input {
-    width: 70%;
-    min-width: 285px;
-    max-width: 600px;
+.ctc-field > label {
+	float: left;
+	min-width: 100px;
+}
+.ctc-field > textarea, .ctc-field > input, .ctc-field > select {
     margin-right: 30px;
+    max-width: 600px;
+    min-width: 285px;
+    width: 70%;
 }
-
-.field label {
-    min-width: 100px;
-    float: left;
-    margin-top: 2px;
+.ctc-submit input {
+	width: 200px;
+	height: 30px;
+	margin: 20px 20px 0;
+	float: right;
 }

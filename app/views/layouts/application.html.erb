@@ -5,21 +5,32 @@
   <body>
     <%#= site_bar -%>
     <%= render '/refinery/ie6check' if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
-    <div id="page-boundary">
-      <div id="page-skyline"></div>
-      <div id="page-container">
-        <header id="page-header">
+    <%#
+    <div id="menu">
+      <div>
+        <a href="#">Überblick</a>
+        <a href="#">Mitmachen</a>
+        <a href="#">Berichte</a>
+        <a href="#">Vernetzt</a>
+        <a href="#" style="float:right">Log in</a>
+      </div>
+    </div>
+    %>
+    <div id="boundary">
+      <div id="skyline"></div>
+      <div id="pagebox">
+        <a id="logo" href="/"></a>
+        <div id="header">
           <%= render '/refinery/header' -%>
-        </header>
-        <a class="separator" href="#"></a>
-        <section id="page">
+        </div>
+        <div id="content">
           <%= yield %>
-        </section>
+        </div>
         <br style="clear: both;">
       </div>
-      <footer id="page-footer">
+      <div id="footer">
         <%= render '/refinery/footer' -%>
-      </footer>
+      </div>
     </div>
     <%= render '/refinery/javascripts' %>
   </body>

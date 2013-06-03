@@ -1,0 +1,164 @@
+﻿/* This file contains all styles regarding the main layout of the page.
+Additionally, it contains popup styles. It should be included on any page
+that is meant to be displayed as a stand-alone. */
+
+/* JS MOBILE DETECTION RULE */
+@media handheld {
+	body {
+		z-index: 1;
+	}
+}
+
+/* LAYOUT STYLES */
+body {
+	background-image: url('hands.png'), url('bg2.png');
+	background-attachment: fixed;
+	background-color: #790f21;
+}
+#menu {
+	background: rgba(16, 74, 71, 0.95);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 10;
+	box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+}
+#menu > div {
+	width: 90%;
+	max-width: 1200px;
+	min-width: 350px;
+	margin: 0 auto;
+}
+#menu a {
+	display: block;
+	float: left;
+	padding: 5px 15px;
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+#boundary {
+	width: 80%;
+	max-width: 1000px;
+	min-width: 350px;
+	margin: 20px auto;
+}
+#skyline {
+	width: 90%;
+	margin: 0 auto;
+	height: 135px;
+	background: url(skyline.png) repeat-x center bottom;
+	position: relative;
+	z-index: 1;
+}
+#pagebox {
+	border-radius: 6px 6px 6px 6px;
+	box-shadow: 5px 5px 20px rgba(0,0,0,0.5), -3px -3px 6px rgba(0,0,0,0.3);
+	background: #fff url(arrows.png) no-repeat center 70px;
+	position: relative;
+	padding: 65px 0 50px;
+}
+#logo {
+	position: absolute;
+	left: 0;
+	top: 15px;
+	width: 100%;
+	height: 110px;
+	background: url(logo.png) no-repeat center top;
+}
+#header {
+	padding: 0 30px;
+	min-height: 130px;
+	position: relative;
+}
+#slogan {
+	position: absolute;
+	right: 20px;
+	top: 0px;
+	width: 250px;
+	height: 171px;
+	background: url(logo_hands.png) no-repeat top right;
+}
+#footer {
+	text-align: right;			
+	font-size: 12px;
+	margin: 10px;		
+}
+#footer a {
+	color: gray;
+	text-shadow: 1px 1px 0 #000;
+}
+
+/* HEADER ADJUSTMENT for MINI style */
+@media all and (max-width: 1000px) {
+	#pagebox {
+		background-size: auto 130px;
+	}
+	#logo {
+		background-size: auto 100px;
+	}
+	#header {
+		margin-top: 70px;
+		min-height: 40px;
+	}
+}
+
+/* HEADER ADJUSTMENT for MICRO style */
+@media all and (max-width: 740px) {
+	#pagebox {
+		background-size: auto 100px;
+		background-position: center 60px;
+	}
+	#logo {
+		background-size: auto 85px;
+	}
+	#header {
+		margin-top: 90px;
+		min-height: 0;
+	}
+	#slogan {
+		background-size: auto 130px;
+		height: 130px;
+		top: -70px;
+	}
+}
+
+/* POPUP STYLE */
+#overlay {
+	position: fixed;
+	z-index: 10;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	display: none;
+}
+#overlay > div {
+	margin: 40px auto;
+	width: 60%;
+	min-width: 300px;
+	max-width: 800px;
+	height: 70%;
+	min-height: 200px;
+	max-height: 700px;
+	background-color: white;
+	border-radius: 6px 6px 6px 6px;
+	display: none;
+	padding: 15px;
+	padding-bottom: 30px;
+	position: relative;
+}
+#overlay > div > a {
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+}
+#popup {
+	overflow: auto;
+	width: 100%;
+	/*max-height: 500px;*/
+	height: 100%;
+}

@@ -9,9 +9,6 @@
   <%= yield :meta %>
 
   <%= stylesheet_link_tag 'application', 'formatting', 'theme' %>
-  <%= stylesheet_link_tag 'mini', :media => 'all and (max-width: 1000px)' %>
-  <%= stylesheet_link_tag 'micro', :media => 'all and (max-width: 750px)' %>
-  <%= stylesheet_link_tag 'home' if home_page? %>
   <%= yield :stylesheets %>
 
   <%= javascript_include_tag 'modernizr-min' %>

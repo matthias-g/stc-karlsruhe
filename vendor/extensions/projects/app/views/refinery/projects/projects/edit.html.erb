@@ -1,0 +1,41 @@
+<%= form_for [refinery, :projects_admin, @project] do |f| -%>
+    <%= render '/refinery/admin/error_messages',
+               :object => @project,
+               :include_object_name => true %>
+
+    <div class='field'>
+      <%= f.label :title -%>
+      <%= f.text_field :title, :class => 'larger widest' -%>
+    </div>
+
+    <div class='field'>
+      <%= render '/refinery/admin/wysiwyg',
+                 :f => f,
+                 :fields => [:description],
+                 :object => "projects/project" -%>
+    </div>
+
+    <div class='field'>
+      <%= f.label :start -%>
+      <%= f.datetime_select :start -%>
+    </div>
+
+    <div class='field'>
+      <%= f.label :end -%>
+      <%= f.datetime_select :end -%>
+    </div>
+
+    <div class='field'>
+      <%= f.label :image -%>
+      <%= render '/refinery/admin/image_picker',
+                 :f => f,
+                 :field => :image_id,
+                 :image => @project.image,
+                 :toggle_image_display => false -%>
+    </div>
+
+    <%= render '/refinery/admin/form_actions', :f => f,
+               :continue_editing => false,
+               :delete_title => t('delete', :scope => 'refinery.projects.admin.projects.project'),
+               :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @project.title) -%>
+<% end -%>

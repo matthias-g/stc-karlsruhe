@@ -4,7 +4,9 @@ module Refinery
 
       before_filter :find_all_projects
       before_filter :find_page
-      before_filter :authenticate_refinery_user!, :only => [:enter]
+      before_filter :authenticate_refinery_user!, :only => [:enter, :edit, :update]
+
+      layout 'project_explorer'
 
       def index
         # you can use meta fields from your model instead (e.g. browser_title)
@@ -18,6 +20,26 @@ module Refinery
         # you can use meta fields from your model instead (e.g. browser_title)
         # by swapping @page for @project in the line below:
         present(@page)
+      end
+
+      def edit
+        @project = Project.find(params[:id])
+        unless current_refinery_user.leads_project?(@project)
+          redirect_to refinery.projects_project_path(@project)
+        end
+      end
+
+      def update
+        @project = Project.find(params[:id])
+        unless current_refinery_user.leads_project?(@project)
+          # TODO flash error message
+          redirect_to refinery.projects_project_path(@project)
+        end
+        if @project.update_attributes(params[:project])
+          redirect_to refinery.projects_project_path(@project)
+        else
+          render(:action => :edit)
+        end
       end
 
       def enter

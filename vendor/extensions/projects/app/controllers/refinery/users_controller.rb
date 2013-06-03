@@ -3,7 +3,7 @@ module Refinery
 
     # Protect these actions behind an admin login
     before_filter :redirect?, :only => [:new, :create]
-    before_filter :authenticate_refinery_user!, :only => [:projects]
+    before_filter :redirect_to_login?, :only => [:my_profile]
 
     helper Refinery::Core::Engine.helpers
     layout 'refinery/layouts/login'
@@ -20,8 +20,7 @@ module Refinery
         if @user.create_volunteer
           sign_in(@user)
           flash[:message] = "<h2>#{t('welcome', :scope => 'refinery.users.create', :who => @user.username).gsub(/\.$/, '')}.</h2>".html_safe
-          # TODO gescheiter redirect
-          redirect_back_or_default('/users/projects')
+          redirect_back_or_default('/profile')
         else
           render :new
         end
@@ -37,11 +36,9 @@ module Refinery
       end
     end
 
-    def projects
-      if refinery_user_signed_in?
-        @projects_as_volunteer = current_refinery_user.projects_as_volunteer
-        @projects_as_leader = current_refinery_user.projects_as_leader
-      end
+    def my_profile
+      @projects_as_volunteer = current_refinery_user.projects_as_volunteer
+      @projects_as_leader = current_refinery_user.projects_as_leader
     end
 
     protected
@@ -49,6 +46,12 @@ module Refinery
     def redirect?
       if refinery_user?
         redirect_to refinery.admin_users_path
+      end
+    end
+
+    def redirect_to_login?
+      if !refinery_user_signed_in?
+        redirect_to '/refinery/login'
       end
     end
 

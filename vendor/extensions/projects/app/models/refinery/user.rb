@@ -98,6 +98,10 @@ module Refinery
       valid?
     end
 
+    def leads_project?(project)
+      projects_as_leader.any?{|p| p.id == project.id}
+    end
+
     def to_s
       username.to_s
     end

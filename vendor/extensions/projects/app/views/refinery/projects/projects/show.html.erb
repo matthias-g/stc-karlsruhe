@@ -42,6 +42,12 @@
       <% else %>
         <%= link_to 'Teilnehmen', refinery.enter_projects_project_path(@project) %>
       <% end %>
+      <% if current_refinery_user && current_refinery_user.leads_project?(@project) %>
+          <p>
+            Du bist Leiter dieses Projekts.
+            <%= link_to 'Projekt bearbeiten', refinery.edit_projects_project_path(@project) %>
+          </p>
+      <% end %>
     </section>
 <% end %>
 

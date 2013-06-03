@@ -1,11 +1,9 @@
-<% content_for :body do %>
-  <ul id="projects">
+<div id="content">
     <% @projects.each do |project| %>
-      <li>
-        <%= link_to project.title, refinery.projects_project_path(project) %>
-      </li>
+      <div class="xpl-teaser" data-lat="49.010" data-lon="8.415">
+        <%= link_to "<h3>#{project.title}</h3>".html_safe, refinery.projects_project_path(project), :target => '_top', :title => 'zur Projektseite' %>
+        <img src="media/hand.png" />
+        <div><%= project.description.html_safe %></div>
+      </div>
     <% end %>
-  </ul>
-<% end %>
-
-<%= render '/refinery/content_page' %>
+</div>

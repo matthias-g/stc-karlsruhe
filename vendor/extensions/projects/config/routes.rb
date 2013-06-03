@@ -2,7 +2,7 @@ Refinery::Core::Engine.routes.append do
 
   # Frontend routes
   namespace :projects do
-    resources :projects, :path => '', :only => [:index, :show] do
+    resources :projects, :path => '', :only => [:index, :show, :edit, :update] do
       member do
         get :enter
         get :leave
@@ -11,7 +11,7 @@ Refinery::Core::Engine.routes.append do
   end
 
   devise_scope :refinery_user do
-    get 'users/projects', :to => 'users#projects'
+    get 'profile', :to => 'users#my_profile'
     get 'users/register', :to => 'users#new'
   end
 

@@ -1,4 +1,14 @@
 <% content_for :body do %>
+    <table>
+      <tr>
+        <td>Username:</td>
+        <td><%= current_refinery_user.username %></td>
+      </tr>
+      <tr>
+        <td>E-Mail:</td>
+        <td><%= current_refinery_user.email %></td>
+      </tr>
+    </table>
     Projekte als Freiwilliger:
     <ul id="projects-as-volunteer">
       <% if !@projects_as_volunteer || @projects_as_volunteer.size == 0 %>

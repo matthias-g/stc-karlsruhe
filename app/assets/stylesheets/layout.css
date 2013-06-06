@@ -11,12 +11,12 @@ that is meant to be displayed as a stand-alone. */
 
 /* LAYOUT STYLES */
 body {
-	background-image: url('hands.png'), url('bg2.png');
+	background-image: url(hands.png), url(bg2.png);
 	background-attachment: fixed;
 	background-color: #790f21;
 }
 #menu {
-	background: rgba(16, 74, 71, 0.95);
+	background: /*rgba(16, 74, 71, 0.95)*/ url(menubg.png);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -38,6 +38,14 @@ body {
 	font-size: 14px;
 	font-weight: bold;
 	text-transform: uppercase;
+	text-shadow: 1px 1px 1px #082725;
+}
+#menu a:hover {
+	color: #fff;
+}
+#menu a.active {
+	border-top: 2px solid white;
+	color: #fff;
 }
 #boundary {
 	width: 80%;
@@ -49,7 +57,7 @@ body {
 	width: 90%;
 	margin: 0 auto;
 	height: 135px;
-	background: url(skyline.png) repeat-x center bottom;
+	background: url(skyline.png) no-repeat center bottom;
 	position: relative;
 	z-index: 1;
 }

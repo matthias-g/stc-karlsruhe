@@ -17,7 +17,11 @@ ul {
 li {
 	margin-bottom: 6px;
 }
-br.only-micro {
+h1, h2, h3, h4 {
+	margin: 0;
+	padding: 0;
+}
+.only-micro {
 	display: none;
 }
 .jsonly {
@@ -32,8 +36,6 @@ br.only-micro {
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	padding: 0;
-	margin: 0;
 	width: 100%;
 	text-align: center;
 	font-size: 26px;
@@ -56,30 +58,25 @@ br.only-micro {
 .section {
 	position: relative;
 	z-index: 1;
+	padding: 75px 30px 30px;
 }
-div.leftcol {
+.section.nopadding {
+	padding: 0;
+}
+.leftcol {
 	float: left;
 	width: 50%;
-	padding: 30px;
-	padding-right: 5px;
-	overflow: hidden;
+	padding-right: 35px;
 }
-div.rightcol {
-	padding: 30px;
-	padding-left: 0;
-	overflow: hidden;
-}
-div.fullcol {
-	padding: 30px;
-	overflow: hidden;
+.leftcol, .rightcol, .fullcol {
+	overflow: hidden; /* establish new float context */
 }
 .section h1 {
-	padding: 30px 30px 0;
-	max-width: 50px;
-	overflow: visible;
-	white-space: nowrap;
+	position: absolute;
+	left: 30px;
+	top: 30px;
 	font-size: 24px;
-	text-shadow: 1px 1px 10px #fff;	
+	text-shadow: 1px 1px 10px #fff;
 }
 .section h2 {
 	margin-top: 50px;
@@ -92,22 +89,21 @@ div.fullcol {
 
 /* SECTION ADJUSTMENT for MINI style  */
 @media all and (max-width: 1000px) {
-	br.not-mini {
+	.section {
+		padding: 75px 20px 20px;
+	}
+	.not-mini {
 		display: none;
 	}
-	div.leftcol, div.rightcol {
+	.leftcol {
 		float: none;
 		width: auto;
-		padding: 20px;
-	}
-	div.fullcol {
-		padding: 20px;
 	}
 }
 
 /* SECTION ADJUSTMENT for MICRO STYLE */
 @media all and (max-width: 740px) {
-	br.not-mini, br.only-micro {
+	.not-mini, .only-micro {
 		display: inline;
 	}
 }
@@ -123,10 +119,10 @@ div.fullcol {
 }
 a.box {
 	float: none;
+	overflow: hidden;
 	width: 200px;
 	background-color:#aaa;
 	transition: box-shadow 0.5s;
-    clear: both;
 }
 a.box:hover {
 	box-shadow: 3px 3px 8px rgba(0,0,0,0.75);

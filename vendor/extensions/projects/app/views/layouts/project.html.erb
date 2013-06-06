@@ -1,0 +1,33 @@
+<html>
+<head>
+  <title>Serve the City</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <%= stylesheet_link_tag 'layout', 'content', 'project' %>
+  <%= javascript_include_tag 'jquery', 'style' %>
+</head>
+<body>
+<div id="menu">
+  <div>
+    <a href="#">Überblick</a>
+    <a href="#">Mitmachen</a>
+    <a href="#">Berichte</a>
+    <a href="#">Vernetzt</a>
+    <a href="#" style="float:right">Log in</a>
+  </div>
+</div>
+<div id="boundary">
+  <div id="skyline"></div>
+  <div id="pagebox">
+    <a id="logo" href="/"></a>
+    <%= yield %>
+    <br style="clear: both">
+  </div>
+  <div id="footer">
+    <a href="contact">Kontakt</a>
+    | <a href="impressum">Impressum</a>
+    | <a href="impressum#privacy">Datenschutz</a>
+    | <a href="impressum#hints">Rechtliche Hinweise</a>
+  </div>
+</div>
+</body>
+</html>

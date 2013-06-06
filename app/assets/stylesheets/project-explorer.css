@@ -7,10 +7,9 @@ as well as in project list answers from the server. */
 .xpl-map {
 	width: 100%;
 	height: 250px;
-	background-color: #bbb;
+	background: #bbb;
 	position: relative;
-	bottom: 90px;
-	margin-bottom: /*-70px;*/ -130px;
+	margin-bottom: -40px;
 	z-index: -1;
 	transition: height 2s;
 }
@@ -165,7 +164,7 @@ as well as in project list answers from the server. */
 		position: static;
 		cursor: pointer;
 		padding: 2px;
-		background: url(dropdown.png) right top no-repeat;
+		background: url(dropdown.png) right center no-repeat;
 	}
 	.xpl-filter > div > div {
 		visibility: hidden;
@@ -193,9 +192,8 @@ as well as in project list answers from the server. */
 @media all and (max-width: 740px) {
 	.xpl-map {
 		height: 200px;
-		background-color: #bbb;
-		bottom: 0;
-		margin-bottom: 0;
+		top: 80px;
+		margin-bottom: 80px;
 	}
 	.xpl-map a[target=_blank] div {
 		margin-bottom: 0;

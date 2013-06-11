@@ -10,7 +10,10 @@ Refinery::Core::Engine.routes.append do
     end
   end
 
+
   devise_scope :refinery_user do
+    get 'login', :to => 'sessions#new', :as => :new_refinery_user_session
+    get 'logout', :to => 'sessions#destroy', :as => :destroy_refinery_user_session
     get 'profile', :to => 'users#my_profile'
     get 'users/register', :to => 'users#new'
   end

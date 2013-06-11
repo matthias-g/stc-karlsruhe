@@ -1,29 +1,18 @@
 <!DOCTYPE html>
 <%= render '/refinery/html_tag' %>
-  <%# site_bar = render('/refinery/site_bar', :head => true) -%>
   <%= render '/refinery/head' %>
   <body>
-    <%#= site_bar -%>
     <%= render '/refinery/ie6check' if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
-    <%#
-    <div id="menu">
-      <div>
-        <a href="#">Überblick</a>
-        <a href="#">Mitmachen</a>
-        <a href="#">Berichte</a>
-        <a href="#">Vernetzt</a>
-        <a href="#" style="float:right">Log in</a>
-      </div>
-    </div>
-    %>
+    <%= render '/refinery/mainmenu' %>
     <div id="boundary">
       <div id="skyline"></div>
       <div id="pagebox">
         <a id="logo" href="/"></a>
         <div id="header">
-          <%= render '/refinery/header' -%>
+          <%= raw @page.content_for(:headsection) %>
         </div>
-        <%= render 'refinery/flash_messages' -%>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
         <div id="content">
           <%= yield %>
         </div>

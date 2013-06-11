@@ -33,32 +33,28 @@ h1, h2, h3, h4 {
 
 /* HEADER SPECIFIC STYLES */
 #header h1 {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
+    margin-top: 60px;
 	text-align: center;
 	font-size: 26px;
 }
 #header h2 {
-	margin-top: 50px;
+	margin-top: 25px;
 	font-size: 24px;
+}
+#header .slogan {
+    margin-top: 30px;
+    float: right;
+    width: 250px;
+    height: 171px;
+    background: url(logo_hands.png) no-repeat top right;
 }
 
 /* SECTION SPECIFIC STYLES */
-.separator {
-	display: block;
-	border-bottom: 2px solid black;
-	clear: both;
-	color: #333;
-	text-decoration: none;
-	text-align: right;
-	padding: 8px;
-}
 .section {
 	position: relative;
 	z-index: 1;
-	padding: 75px 30px 30px;
+	padding: 95px 30px 30px;
+    border-top: 2px solid #333;
 }
 .section.nopadding {
 	padding: 0;
@@ -74,7 +70,7 @@ h1, h2, h3, h4 {
 .section h1 {
 	position: absolute;
 	left: 30px;
-	top: 30px;
+	top: 50px;
 	font-size: 24px;
 	text-shadow: 1px 1px 10px #fff;
 }
@@ -90,7 +86,7 @@ h1, h2, h3, h4 {
 /* SECTION ADJUSTMENT for MINI style  */
 @media all and (max-width: 1000px) {
 	.section {
-		padding: 75px 20px 20px;
+		padding: 95px 20px 20px;
 	}
 	.not-mini {
 		display: none;
@@ -103,6 +99,11 @@ h1, h2, h3, h4 {
 
 /* SECTION ADJUSTMENT for MICRO STYLE */
 @media all and (max-width: 740px) {
+    #header .slogan {
+        background-size: auto 130px;
+        height: 130px;
+        margin-top: 0;
+    }
 	.not-mini, .only-micro {
 		display: inline;
 	}

@@ -17,8 +17,9 @@ $(document).ready(function() {
 		$(window).scroll();	
 	}		
 	// define modal popup
-	$('body').prepend('<div id="overlay"><div><div id="popup"></div>'
-		+ '<a href="javascript:hidePopup()">schließen</a></div></div>');		
+	$('body').prepend('<div id="overlay"><div><div >' +
+        '<div id="popup"></div></div>' +
+        '<a href="javascript:hidePopup()">schließen</a></div></div>');
 	
 	updateLinks($('body'));
 });
@@ -39,8 +40,8 @@ function updateLinks(parent) {
 	$('a.popup', parent).click(function(e) {
 		e.preventDefault();
 		var url = $(this).attr('href') + ' #content > *';
-		$('#popup').empty().load(url, function() {
-			$('#popup a.separator').remove();
+		$('#popup').load(url, function() {
+			$('#popup .section').css({border: 'none'});
 		});
 		$('#overlay').fadeIn();
 		$('#overlay > div').delay(400).fadeIn();
@@ -53,13 +54,13 @@ function updateLinks(parent) {
  * The scroll animation duration is 1s.
  */
 function scrollToHash(hash) {
-	var target = $('*[name="' + hash + '"]');
+	var target = $('#' + hash);
 	if (!target) return;
 	//var intendation = 0.5 * (target.width() - $(window).width());
     $('html, body').animate({
 			scrollTop: (hash.length == 0) ? '0px' :
-			target.offset().top + 'px',
-			//scrollLeft: (hash.length == 0) ? intendation + 'px' :
+                target.offset().top + 'px'
+			//,scrollLeft: (hash.length == 0) ? intendation + 'px' :
 			//	intendation + target.offset().left + 'px'
 		}, 1000, 'swing', function() {
 			window.location.href = '#' + hash;

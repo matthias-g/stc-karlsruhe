@@ -1,6 +1,10 @@
 <% content_for :header, t('there_are_no_users', :scope => 'refinery.welcome') %>
 
 <div class="section" id="register">
+<h1>Registrierung</h1>
+
+<div class="frm-smallbox">
+
 <%= form_for :user, :url => refinery.refinery_user_registration_path do |f| -%>
 
   <%= render '/refinery/admin/error_messages', :object => @user, :include_object_name => true %>
@@ -29,4 +33,7 @@
              :hide_cancel => true %>
   </div>
 <% end -%>
+
+</div>
+
 </div>

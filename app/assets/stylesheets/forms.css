@@ -2,6 +2,9 @@
 It should be included in any page containing a contact or login form. */
 
 /* CONTACT/LOGIN FORM */
+.frm-smallbox {
+    max-width: 600px;
+}
 .frm-field, .frm-submit {
 	margin-top: 5px;
 	font-size: 12px;
@@ -9,6 +12,7 @@ It should be included in any page containing a contact or login form. */
 .frm-field > label {
 	float: left;
 	min-width: 140px;
+    padding-top: 5px;
 }
 .frm-field > textarea, .frm-field > input, .frm-field > select {
     margin-right: 30px;
@@ -16,9 +20,10 @@ It should be included in any page containing a contact or login form. */
     min-width: 285px;
     width: 70%;
 }
-.frm-submit input {
-	width: 200px;
-	height: 30px;
-	margin: 20px 20px 0;
-	float: right;
+.frm-submit {
+    margin: 25px;
+    float: right;
+}
+.frm-submit .button {
+	margin-right: 5px;
 }

@@ -1,33 +1,41 @@
 <div class="section" id="login">
+<h1>Anmeldung</h1>
 
 <% content_for :header, t('.hello_please_sign_in') %>
 
+<div class="frm-smallbox">
+
 <%= form_for resource, :as => resource_name,
                        :url => refinery.refinery_user_session_path do |f| %>
-  <div class='frm-field session_username clearfix'>
+
+  <div class='frm-field session_username'>
     <%= f.label :login %>
     <%= f.text_field :login, :class => 'larger widest' %>
   </div>
-  <div class='frm-field session_password clearfix'>
+
+  <div class='frm-field session_password'>
     <%= f.label :password %>
     <%= f.password_field :password, :autocomplete => 'off', :class => 'larger widest' %>
   </div>
-  <div class='clearfix'>
-    <% if devise_mapping.rememberable? %>
-      <div class='frm-field remember_me'>
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
-      </div>
-    <% end %>
-    <div class='frm-field forgot_password'>
-      <%= link_to t('.forgot_password'), refinery.new_refinery_user_password_path %>
-    </div>
+
+  <% if devise_mapping.rememberable? %>
+  <div class='frm-field remember_me'>
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
   </div>
+  <% end %>
+  <br/>
+  <div class='frm-field forgot_password'>
+    <%= link_to t('.forgot_password'), refinery.new_refinery_user_password_path %>
+  </div>
+
   <div class="frm-submit">
-  <%= render '/refinery/admin/form_actions', :f => f,
-             :submit_button_text => t('.sign_in'),
-             :hide_cancel => true %>
+    <%= render '/refinery/admin/form_actions', :f => f,
+        :submit_button_text => t('.sign_in'), :hide_cancel => true %>
   </div>
+
 <% end -%>
+
+</div>
 
 </div>

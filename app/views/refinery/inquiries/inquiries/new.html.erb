@@ -1,6 +1,8 @@
-<div class="section">
+<div class="section" id="contact">
 
 <%=raw @page.content_for(:body) %>
+
+<div class="frm-smallbox">
 
 <%= form_for [refinery, :inquiries, @inquiry] do |f| %>
   <%= render :partial => "/refinery/admin/error_messages",
@@ -25,9 +27,11 @@
     <%= f.text_area :message, :rows => 8, :required => 'required' %>
   </div>
   <div class="frm-submit">
-    <%= f.submit t('.send') %>
+    <%= f.submit t('.send'), :class => 'button'  %>
     <%#= link_to t('.privacy_policy'), "/pages/privacy-policy", :id => "privacy_link" if Refinery::Inquiries.show_contact_privacy_link %>
   </div>
 <% end %>
+
+</div>
 
 </div>

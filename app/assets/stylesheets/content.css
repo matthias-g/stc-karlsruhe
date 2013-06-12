@@ -70,7 +70,7 @@ h1, h2, h3, h4 {
 .section h1 {
 	position: absolute;
 	left: 30px;
-	top: 50px;
+	top: 40px;
 	font-size: 24px;
 	text-shadow: 1px 1px 10px #fff;
 }
@@ -143,4 +143,36 @@ a.box:hover {
 	-webkit-transform: rotate(-3deg);
 	transform: rotate(-3deg);
 	margin-bottom: 25px;
+}
+
+/* BUTTONS */
+.button {
+    display: inline-block;
+    padding: 4px 18px;
+    min-width: 100px;
+    background-color: #ee2046;
+
+    -webkit-box-shadow: inset 0px 1px 0px 0px #b83751;
+    box-shadow: inset 0px 1px 0px 0px #b83751;
+    border: 1px solid #942911;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+
+
+    color: #ffffff;
+    font-family: arial;
+    font-size: 13px;
+    text-shadow: 0px 1px 0px #2b2317;
+    text-align: center;
+    cursor: pointer;
+}
+a.button {
+    padding: 5px 18px;
+}
+.button:hover {
+    background-color: #d60d35;
+}
+.button:active {
+    position: relative;
+    top: 1px;
 }

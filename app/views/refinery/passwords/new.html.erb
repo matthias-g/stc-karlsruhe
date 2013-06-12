@@ -1,0 +1,28 @@
+<% content_for :header, t('enter_email_address', :scope => 'refinery.users.forgot') %>
+
+<div class="section" id="reset-password">
+<h1>Passwort zurücksetzen</h1>
+
+<div class="frm-smallbox">
+
+<%= form_for resource, :as => resource_name,
+                       :url => refinery.refinery_user_password_path,
+                       :html => { :method => :post } do |f| %>
+
+  Bitte geben Sie Ihre Emailadresse ein,<br/>
+  damit wir Ihnen einen Passwort-Reset-Link zusenden können:
+  <div class='frm-field'>
+    <%= f.text_field :email, :class => "larger widest", :placeholder => "Ihre Email-Adresse" %>
+  </div>
+
+  <div class="frm-submit">
+    <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :submit_button_text => t('reset_password', :scope => 'refinery.users.forgot'),
+             :cancel_url => refinery.refinery_user_session_path,
+             :cancel_title => nil -%>
+  </div>
+<% end -%>
+
+</div>
+</div>

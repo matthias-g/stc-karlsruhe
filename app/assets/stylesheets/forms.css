@@ -1,0 +1,29 @@
+/* This file contains styles regarding the contact component.
+It should be included in any page containing a contact or login form. */
+
+/* CONTACT/LOGIN FORM */
+.frm-smallbox {
+    max-width: 600px;
+}
+.frm-field, .frm-submit {
+	margin-top: 5px;
+	font-size: 12px;
+}
+.frm-field > label {
+	float: left;
+	min-width: 140px;
+    padding-top: 5px;
+}
+.frm-field > textarea, .frm-field > input, .frm-field > select {
+    margin-right: 30px;
+    max-width: 600px;
+    min-width: 285px;
+    width: 70%;
+}
+.frm-submit {
+    margin: 25px;
+    float: right;
+}
+.frm-submit .button {
+	margin-right: 5px;
+}

@@ -39,6 +39,31 @@
     <%= f.select(:leaders, usernames, {}, :multiple => true)  -%>
   </div>
 
+  <div class='field'>
+    <%= f.label :days -%>
+    <%= f.select(:days, project_days, {}, :multiple => true)  -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :locations -%>
+    <%= f.select(:locations, project_locations, {}, :multiple => true)  -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :sectors -%>
+    <%= f.select(:sectors, project_sectors, {}, :multiple => true)  -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :types -%>
+    <%= f.select(:types, project_types, {}, :multiple => true)  -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :volunteer_types -%>
+    <%= f.select(:volunteer_types, project_volunteer_types, {}, :multiple => true)  -%>
+  </div>
+
   <%= render '/refinery/admin/form_actions', :f => f,
              :continue_editing => false,
              :delete_title => t('delete', :scope => 'refinery.projects.admin.projects.project'),

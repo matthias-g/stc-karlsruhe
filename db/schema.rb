@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130511150426) do
+ActiveRecord::Schema.define(:version => 20130610152602) do
 
   create_table "refinery_images", :force => true do |t|
     t.string   "image_mime_type"
@@ -108,6 +108,71 @@ ActiveRecord::Schema.define(:version => 20130511150426) do
     t.integer  "position"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "refinery_projects_days", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "refinery_projects_leaders", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "user_id"
+  end
+
+  create_table "refinery_projects_locations", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "refinery_projects_projects_days", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "day_id"
+  end
+
+  create_table "refinery_projects_projects_locations", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "location_id"
+  end
+
+  create_table "refinery_projects_projects_sectors", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "sector_id"
+  end
+
+  create_table "refinery_projects_projects_types", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "type_id"
+  end
+
+  create_table "refinery_projects_projects_volunteer_types", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "volunteer_type_id"
+  end
+
+  create_table "refinery_projects_sectors", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "refinery_projects_types", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "refinery_projects_volunteer_types", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "refinery_projects_volunteers", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "user_id"
   end
 
   create_table "refinery_resources", :force => true do |t|

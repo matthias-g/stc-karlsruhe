@@ -12,28 +12,39 @@
       </div>
       <div>
         <h4>Projektleitung</h4>
-        Hans Meyer
+        <% @project.leaders.each do |leader| %>
+        <%= leader.username %>
+        <% end %>
       </div>
       <div>
         <h4>Projekttyp</h4>
-        Handwerkliches
+        <% @project.types.each do |type| %>
+          <%= type.title %>
+        <% end %>
       </div>
       <div>
         <h4>Geeignet für</h4>
-        Jugendliche
+        <% @project.volunteer_types.each do |volunteer_type| %>
+          <%= volunteer_type.title %>
+        <% end %>
       </div>
       <div>
         <h4>Bereich</h4>
-        ---
+        <% @project.sectors.each do |sector| %>
+          <%= sector.title %>
+        <% end %>
       </div>
       <div>
-        <h4>Termine</h4>
-        Mo, 32. Juli 2013<br/>
-        15:00 Uhr
+        <h4>Projekttage</h4>
+        <% @project.days.each do |day| %>
+          <%= day.title %>
+        <% end %>
       </div>
       <div>
         <h4>Einsatzort</h4>
-        Uni-Campus
+        <% @project.locations.each do |location| %>
+          <%= location.title %>
+        <% end %>
       </div>
       <div>
         <h4>Träger</h4>

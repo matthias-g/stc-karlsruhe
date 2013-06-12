@@ -1,0 +1,11 @@
+<div class='pagination_container'>
+  <% if @types.any? %>
+    <%= render 'types' %>
+  <% else %>
+    <p>
+    <strong>
+      <%= t('.no_items_yet') %>
+    </strong>
+    </p>
+  <% end %>
+</div>

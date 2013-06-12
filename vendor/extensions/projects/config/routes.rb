@@ -26,6 +26,11 @@ Refinery::Core::Engine.routes.append do
           post :update_positions
         end
       end
+      resources :types, :except => :show
+      resources :days, :except => :show
+      resources :locations, :except => :show
+      resources :sectors, :except => :show
+      resources :volunteer_types, :except => :show
     end
   end
 

@@ -6,8 +6,6 @@ module Refinery
       before_filter :find_page
       before_filter :authenticate_refinery_user!, :only => [:enter, :edit, :update]
 
-      layout 'project_explorer'
-
       def index
         # you can use meta fields from your model instead (e.g. browser_title)
         # by swapping @page for @project in the line below:
@@ -18,6 +16,7 @@ module Refinery
         @projects &= Location.find(params[:location]).collect{|l| l.projects}.flatten if params[:location]
         @projects &= Day.find(params[:day]).collect{|d| d.projects}.flatten if params[:day]
         present(@page)
+        render(:layout => 'project_explorer')
       end
 
       def show
@@ -26,7 +25,6 @@ module Refinery
         # you can use meta fields from your model instead (e.g. browser_title)
         # by swapping @page for @project in the line below:
         present(@page)
-        render(:layout => 'project')
       end
 
       def edit

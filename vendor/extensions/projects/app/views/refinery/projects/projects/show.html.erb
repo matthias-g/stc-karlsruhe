@@ -2,8 +2,7 @@
   <h1<%= @project.title %></h1>
 </div>
 <div id="content">
-  <a class="separator" name="project" href="#">back to top</a>
-  <div class="section nopadding">
+  <div class="section nopadding" id="project">
     <div class="prj-leftcol">
       <div>
         <div class="box purple lefttilt" style="margin:0 auto; float:none; text-align: center">
@@ -46,10 +45,6 @@
           <%= location.title %>
         <% end %>
       </div>
-      <div>
-        <h4>Träger</h4>
-        KIT
-      </div>
       <br style="clear: both">
     </div>
     <div class="prj-rightcol">
@@ -88,54 +83,14 @@
 %>
 
     </div>
+    <br style="clear:both">
   </div>
-  <a class="separator" name="comments" href="#">back to top</a>
-  <div class="section">
+  <div class="section" id="comments">
     <h1>Kommentare zum Projekt</h1>
   </div>
 </div>
 
-
-
-
-
-
-
-<% content_for :body_content_title do %>
-  <%= @project.title %>
-<% end %>
-
 <% content_for :body do %>
-  <section>
-    <h1>Title</h1>
-    <p>
-      <%=raw @project.title %>
-    </p>
-  </section>
-  <section>
-    <h1>Description</h1>
-    <p>
-      <%=raw @project.description %>
-    </p>
-  </section>
-  <section>
-    <h1>Start</h1>
-    <p>
-      <%=raw @project.start %>
-    </p>
-  </section>
-  <section>
-    <h1>End</h1>
-    <p>
-      <%=raw @project.end %>
-    </p>
-  </section>
-  <section>
-    <h1>Image</h1>
-    <p>
-      <%= image_fu @project.image, nil %>
-    </p>
-  </section>
     <section>
       <% if @project.has_volunteer?(current_refinery_user) %>
         <p>

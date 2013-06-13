@@ -9,7 +9,9 @@
   <div id="pagebox">
     <a id="logo" href="/"></a>
     <div id="header">
+      <%# TODO bitte löschen, eins davon jedenfalls eventuell (?) :-) %>
       <%= raw @page.content_for(:headsection) %>
+      <%= yield :headsection %>
     </div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

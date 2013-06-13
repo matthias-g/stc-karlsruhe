@@ -1,6 +1,6 @@
-<div id="header">
-  <h1<%= @project.title %></h1>
-</div>
+<% content_for :headsection do %>
+   <h1><%= @project.title %></h1>
+<% end %>
 <div id="content">
   <div class="section nopadding" id="project">
     <div class="prj-leftcol">

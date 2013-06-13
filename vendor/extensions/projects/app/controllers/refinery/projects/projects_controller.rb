@@ -11,6 +11,12 @@ module Refinery
       def index
         # you can use meta fields from your model instead (e.g. browser_title)
         # by swapping @page for @project in the line below:
+        @projects = Project.all
+        @projects &= Type.find(params[:type]).collect{|t| t.projects}.flatten if params[:type]
+        @projects &= Sector.find(params[:sector]).collect{|s| s.projects}.flatten if params[:sector]
+        @projects &= VolunteerType.find(params[:volunteer_type]).collect{|vt| vt.projects}.flatten if params[:volunteer_type]
+        @projects &= Location.find(params[:location]).collect{|l| l.projects}.flatten if params[:location]
+        @projects &= Day.find(params[:day]).collect{|d| d.projects}.flatten if params[:day]
         present(@page)
       end
 

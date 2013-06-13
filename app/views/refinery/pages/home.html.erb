@@ -1,1 +1,81 @@
 <%=raw @page.content_for(:body) %>
+
+<div class="section nopadding" id="projects">
+  <h1>Projekt-Explorer</h1>
+  <div class="xpl-map jsonly"></div>
+
+  <form action="projects" method="get">
+    <div class="xpl-filter">
+      <h3>Projekte filtern:</h3>
+      <div>
+        <h4>Typ:</h4>
+        <div>
+          <input name="ptype" value="1" id="ptype1" type="checkbox" /><label for="ptype1"><span></span>Ausflüge &amp; Besuche</label>
+          <input name="ptype" value="2" id="ptype2" type="checkbox" /><label for="ptype2"><span></span>Essen &amp; Catering</label>
+          <input name="ptype" value="3" id="ptype3" type="checkbox" /><label for="ptype3"><span></span>Events &amp; Doku</label>
+          <input name="ptype" value="3" id="ptype4" type="checkbox" /><label for="ptype4"><span></span>Garten &amp; Umwelt</label>
+          <input name="ptype" value="4" id="ptype5" type="checkbox" /><label for="ptype5"><span></span>Kunst &amp; Musik</label>
+          <input name="ptype" value="5" id="ptype6" type="checkbox" /><label for="ptype6"><span></span>Handwerkliches</label>
+          <input name="ptype" value="6" id="ptype7" type="checkbox" /><label for="ptype7"><span></span>Spiel &amp; Sport</label>
+          <input name="ptype" value="7" id="ptype8" type="checkbox" /><label for="ptype8"><span></span>Sonstiges</label>
+        </div>
+      </div>
+      <div>
+        <h4>Bereich:</h4>
+        <div>
+          <input name="pdom" value="1" id="pdom1" type="checkbox" /><label for="pdom1"><span></span>Kinder</label>
+          <input name="pdom" value="2" id="pdom2" type="checkbox" /><label for="pdom2"><span></span>Jugendliche</label>
+          <input name="pdom" value="3" id="pdom3" type="checkbox" /><label for="pdom3"><span></span>Alleinerziehende</label>
+          <input name="pdom" value="4" id="pdom4" type="checkbox" /><label for="pdom4"><span></span>Flüchtlinge</label>
+          <input name="pdom" value="5" id="pdom5" type="checkbox" /><label for="pdom5"><span></span>Migranten</label>
+          <input name="pdom" value="6" id="pdom6" type="checkbox" /><label for="pdom6"><span></span>mit Beeinträchtigung</label>
+          <input name="pdom" value="7" id="pdom7" type="checkbox" /><label for="pdom7"><span></span>Wohnungslose</label>
+          <input name="pdom" value="8" id="pdom8" type="checkbox" /><label for="pdom8"><span></span>Senioren</label>
+          <input name="pdom" value="9" id="pdom9" type="checkbox" /><label for="pdom9"><span></span>Inhaftierte</label>
+          <input name="pdom" value="10" id="pdom10" type="checkbox" /><label for="pdom10"><span></span>Medizin. Personal</label>
+          <input name="pdom" value="11" id="pdom11" type="checkbox" /><label for="pdom11"><span></span>Sonstiges</label>
+        </div>
+      </div>
+      <div>
+        <h4>benötigte Helfer:</h4>
+        <div>
+          <input name="pgr" value="1" id="pgr1" type="checkbox" /><label for="pgr1"><span></span>Kinder</label>
+          <input name="pgr" value="2" id="pgr2" type="checkbox" /><label for="pgr2"><span></span>Jugendliche</label>
+          <input name="pgr" value="3" id="pgr3" type="checkbox" /><label for="pgr3"><span></span>Erwachsene</label>
+          <input name="pgr" value="4" id="pgr4" type="checkbox" /><label for="pgr4"><span></span>Familien</label>
+          <input name="pgr" value="5" id="pgr5" type="checkbox" /><label for="pgr5"><span></span>nur Frauen</label>
+          <input name="pgr" value="6" id="pgr6" type="checkbox" /><label for="pgr6"><span></span>nur Männer</label>
+        </div>
+      </div>
+      <div>
+        <h4>Einsatzort:</h4>
+        <div>
+          <input name="ploc" value="1" id="ploc1" type="checkbox" /><label for="ploc1"><span></span>Altstadt</label>
+          <input name="ploc" value="2" id="ploc2" type="checkbox" /><label for="ploc2"><span></span>Campus</label>
+          <input name="ploc" value="3" id="ploc3" type="checkbox" /><label for="ploc3"><span></span>Nordwesten</label>
+          <input name="ploc" value="4" id="ploc4" type="checkbox" /><label for="ploc4"><span></span>Südwesten</label>
+          <input name="ploc" value="5" id="ploc5" type="checkbox" /><label for="ploc5"><span></span>Südstadt</label>
+          <input name="ploc" value="6" id="ploc6" type="checkbox" /><label for="ploc6"><span></span>Osten</label>
+          <input name="ploc" value="7" id="ploc7" type="checkbox" /><label for="ploc7"><span></span>Waldstadt</label>
+          <input name="ploc" value="8" id="ploc8" type="checkbox" /><label for="ploc8"><span></span>Außerhalb</label>
+        </div>
+      </div>
+      <div>
+        <h4>Einsatztag:</h4>
+        <div>
+          <input name="pday" value="1" id="pday1" type="checkbox" /><label for="pday1"><span></span>Montag, 1. Juli</label>
+          <input name="pday" value="2" id="pday2" type="checkbox" /><label for="pday2"><span></span>Dienstag, 2. Juli</label>
+          <input name="pday" value="3" id="pday3" type="checkbox" /><label for="pday3"><span></span>Mittwoch, 3. Juli</label>
+          <input name="pday" value="4" id="pday4" type="checkbox" /><label for="pday4"><span></span>Donnerstag, 4. Juli</label>
+          <input name="pday" value="5" id="pday5" type="checkbox" /><label for="pday5"><span></span>Freitag, 5. Juli</label>
+          <input name="pday" value="6" id="pday6" type="checkbox" /><label for="pday6"><span></span>Samstag, 6. Juli</label>
+        </div>
+      </div>
+      <input class="nojs" value="Filter anwenden" type="submit" />
+    </div>
+  </form>
+
+  <div class="xpl-list">
+    <iframe class="nojs" src="projects"></iframe>
+  </div>
+</div>

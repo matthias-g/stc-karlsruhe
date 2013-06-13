@@ -36,32 +36,32 @@
 
   <div class='field'>
     <%= f.label :leaders -%>
-    <%= f.select(:leaders, usernames, {}, :multiple => true)  -%>
+    <%= f.collection_select(:leader_ids, Refinery::User.all, :id, :username, {:selected => @project.leaders.collect {|t| t.id}}, :multiple => true)  -%>
   </div>
 
   <div class='field'>
     <%= f.label :days -%>
-    <%= f.select(:days, project_days, {}, :multiple => true)  -%>
+    <%= f.collection_select(:day_ids, Refinery::Projects::Day.all, :id, :title, {:selected => @project.days.collect {|t| t.id}}, :multiple => true)  -%>
   </div>
 
   <div class='field'>
     <%= f.label :locations -%>
-    <%= f.select(:locations, project_locations, {}, :multiple => true)  -%>
+    <%= f.collection_select(:location_ids, Refinery::Projects::Location.all, :id, :title, {:selected => @project.locations.collect {|t| t.id}}, :multiple => true)  -%>
   </div>
 
   <div class='field'>
     <%= f.label :sectors -%>
-    <%= f.select(:sectors, project_sectors, {}, :multiple => true)  -%>
+    <%= f.collection_select(:sector_ids, Refinery::Projects::Sector.all, :id, :title, {:selected => @project.sectors.collect {|t| t.id}}, :multiple => true)  -%>
   </div>
 
   <div class='field'>
     <%= f.label :types -%>
-    <%= f.select(:types, project_types, {}, :multiple => true)  -%>
+    <%= f.collection_select(:type_ids, Refinery::Projects::Type.all, :id, :title, {:selected => @project.types.collect {|t| t.id}}, :multiple => true)  -%>
   </div>
 
   <div class='field'>
     <%= f.label :volunteer_types -%>
-    <%= f.select(:volunteer_types, project_volunteer_types, {}, :multiple => true)  -%>
+    <%= f.collection_select(:volunteer_type_ids, Refinery::Projects::VolunteerType.all, :id, :title, {:selected => @project.volunteer_types.collect {|t| t.id}}, :multiple => true)  -%>
   </div>
 
   <%= render '/refinery/admin/form_actions', :f => f,

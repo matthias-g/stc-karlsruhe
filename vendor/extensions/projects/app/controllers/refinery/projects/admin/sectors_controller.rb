@@ -1,4 +1,4 @@
-class Refinery::Projects::Admin::SetorsController < ::Refinery::AdminController
+class Refinery::Projects::Admin::SectorsController < ::Refinery::AdminController
 
   crudify :'refinery/projects/sector', :xhr_paging => true
 

@@ -16,16 +16,6 @@
   </div>
 
   <div class='field'>
-    <%= f.label :start -%>
-    <%= f.datetime_select :start -%>
-  </div>
-
-  <div class='field'>
-    <%= f.label :end -%>
-    <%= f.datetime_select :end -%>
-  </div>
-
-  <div class='field'>
     <%= f.label :image -%>
     <%= render '/refinery/admin/image_picker',
                :f => f,
@@ -62,6 +52,11 @@
   <div class='field'>
     <%= f.label :volunteer_types -%>
     <%= f.collection_select(:volunteer_type_ids, Refinery::Projects::VolunteerType.all, :id, :title, {:selected => @project.volunteer_types.collect {|t| t.id}}, :multiple => true)  -%>
+  </div>
+
+  <div class='filed'>
+    <%= f.label :max_volunteer_count -%>
+    <%= f.text_field :max_volunteer_count, :size => 5 -%>
   </div>
 
   <%= render '/refinery/admin/form_actions', :f => f,

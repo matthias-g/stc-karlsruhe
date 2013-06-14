@@ -18,6 +18,36 @@ de:
             view_live_html: Dieses Projekt live ansehen <br/><em>(wird in neuem Fenster geöffnet)</em>
             edit: Dieses Projekt bearbeiten
             delete: Dieses Projekt löschen
+        types:
+          actions:
+            create_new: Neuen Projekttypen anlegen
+          type:
+            edit: Diesen Projekttypen bearbeiten
+            delete: Diesen Projekttypen löschen
+        sectors:
+          actions:
+            create_new: Neuen Projektbereich anlegen
+          sector:
+            edit: Diesen Projektbereich bearbeiten
+            delete: Diesen Projektbereich löschen
+        days:
+          actions:
+            create_new: Neuen Projekttag anlegen
+          day:
+            edit: Diesen Projekttag bearbeiten
+            delete: Diesen Projekttag löschen
+        volunteer_types:
+          actions:
+            create_new: Neuen Freiwilligentypen anlegen
+          volunteer_type:
+            edit: Diesen Freiwilligentypen bearbeiten
+            delete: Diesen Freiwilligentypen löschen
+        locations:
+          actions:
+            create_new: Neuen Projektort anlegen
+          location:
+            edit: Diesen Projektort bearbeiten
+            delete: Diesen Projektort löschen
       projects:
         show:
           other: Weitere Projekte
@@ -26,6 +56,24 @@ de:
       'refinery/projects/project':
         title: Titel
         description: Beschreibung
-        start: Start
-        end: Ende
         image: Bild
+        days: Projekttage
+        locations: Projektorte
+        sectors: Projektbereiche
+        types: Projekttypen
+        volunteer_types: Freiwilligentypen
+        max_volunteer_count: Maximale Freiwilligenzahl
+      'refinery/projects/type':
+        title: Titel
+      'refinery/projects/sector':
+        title: Titel
+      'refinery/projects/volunteer_type':
+        title: Titel
+      'refinery/projects/day':
+        title: Titel
+      'refinery/projects/location':
+        title: Titel
+  devise:
+    sessions:
+      refinery_user:
+        signed_out: Erfolgreich ausgeloggt.

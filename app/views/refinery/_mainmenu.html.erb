@@ -6,6 +6,10 @@
     <a href="/connected">Vernetzt</a>
     %>
     <a href="#" style="float:right">nach oben</a>
-    <a href="/login" style="float:right" class="popup">Login</a>
+    <% if refinery_user_signed_in? %>
+      <a href="/logout" style="float:right">Logout</a>
+    <% else %>
+      <a href="/login" style="float:right" class="popup">Login</a>
+    <% end %>
   </div>
 </div>

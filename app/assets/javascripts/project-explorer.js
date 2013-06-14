@@ -63,7 +63,7 @@ function collectFilterOptions(page) {
 
 /** Loads project list and updates the map according to the filter specs given in the url. **/
 function loadProjects(url, fadeOut) {
-	if (fadeOut) $('.xpl-list').fadeOut();
+	$('.xpl-list').hide();
 	$('.xpl-list').load(url + ' #content > *', function() {
 		$('.xpl-list').fadeIn();
 		removeMarkers();

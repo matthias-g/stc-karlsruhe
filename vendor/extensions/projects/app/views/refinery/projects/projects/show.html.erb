@@ -64,7 +64,7 @@
     </div>
     <div class="prj-maincol">
       <div>
-        <%= @project.description %>
+        <%= @project.description.html_safe %>
       </div>
 <%#      <div>
         <h4>Einzelne Arbeiten</h4>

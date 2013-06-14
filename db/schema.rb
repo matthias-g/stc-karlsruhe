@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130610152602) do
+ActiveRecord::Schema.define(:version => 20130614095200) do
 
   create_table "refinery_images", :force => true do |t|
     t.string   "image_mime_type"
@@ -102,12 +102,11 @@ ActiveRecord::Schema.define(:version => 20130610152602) do
   create_table "refinery_projects", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "start"
-    t.datetime "end"
     t.integer  "image_id"
     t.integer  "position"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "max_volunteer_count"
   end
 
   create_table "refinery_projects_days", :force => true do |t|

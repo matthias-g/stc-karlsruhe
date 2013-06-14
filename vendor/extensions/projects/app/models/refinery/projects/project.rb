@@ -3,12 +3,14 @@ module Refinery
     class Project < Refinery::Core::BaseModel
       self.table_name = 'refinery_projects'
 
-      attr_accessible :title, :description, :start, :end, :image_id, :position
+      attr_accessible :title, :description, :image_id, :position, :max_volunteer_count
       attr_accessible :leader_ids, :type_ids, :sector_ids, :volunteer_type_ids, :location_ids, :day_ids
 
       acts_as_indexed :fields => [:title, :description]
 
       validates :title, :presence => true, :uniqueness => true
+      validates :description, :presence => true
+      validates :max_volunteer_count, :presence => true
 
       belongs_to :image, :class_name => '::Refinery::Image'
 

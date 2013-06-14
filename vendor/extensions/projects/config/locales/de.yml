@@ -26,6 +26,10 @@ de:
       'refinery/projects/project':
         title: Titel
         description: Beschreibung
-        start: Start
-        end: Ende
         image: Bild
+        days: Projekttage
+        locations: Projektorte
+        sectors: Projektbereiche
+        types: Projekttypen
+        volunteer_types: Freiwilligentypen
+        max_volunteer_count: Maximale Freiwilligenzahl

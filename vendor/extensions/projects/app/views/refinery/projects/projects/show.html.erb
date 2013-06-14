@@ -1,13 +1,19 @@
 <% content_for :headsection do %>
-   <h1><%= @project.title %></h1>
+   <h1><%= 'Projekt: ' + @project.title %></h1>
 <% end %>
 <div id="content">
   <div class="section nopadding" id="project">
     <div class="prj-leftcol">
       <div>
-        <div class="box purple lefttilt" style="margin:0 auto; float:none; text-align: center">
-          Noch 3 Plätze
-        </div>
+        <% if missing_volunteer_count > 0 %>
+          <div class="box green lefttilt" style="margin:0 auto; float:none; text-align: center">
+            Noch <%= missing_volunteer_count %> Plätze
+          </div>
+        <% else %>
+          <div class="box purple lefttilt" style="margin:0 auto; float:none; text-align: center">
+            Vollbesetzt
+          </div>
+        <% end %>
       </div>
       <div>
         <h4>Projektleitung</h4>
@@ -49,7 +55,7 @@
     </div>
     <div class="prj-rightcol">
       <div class="prj-imagebox">
-        <%= image_fu @project.image, nil %>
+        <%= image_fu @project.image, '300x400>' %>
       </div>
       <div class="prj-imagebox">
         <img src="http://maps.googleapis.com/maps/api/staticmap?zoom=14&size=300x200&maptype=roadmap
@@ -59,10 +65,6 @@
     <div class="prj-maincol">
       <div>
         <%= @project.description %>
-      </div>
-      <div>
-        <h4>Gewünschte Teamgröße</h4>
-        maximal 6 Leute
       </div>
 <%#      <div>
         <h4>Einzelne Arbeiten</h4>
@@ -85,9 +87,11 @@
     </div>
     <br style="clear:both">
   </div>
+  <%#   Hier ist Platz für Kommentare...
   <div class="section" id="comments">
     <h1>Kommentare zum Projekt</h1>
   </div>
+      %>
 </div>
 
 <% content_for :body do %>
@@ -109,17 +113,6 @@
     </section>
 <% end %>
 
-<% content_for :side_body do %>
-  <aside>
-    <h2><%= t('.other') %></h2>
-    <ul id="projects">
-      <% @projects.each do |project| %>
-        <li>
-          <%= link_to project.title, refinery.projects_project_path(project) %>
-        </li>
-      <% end %>
-    </ul>
-  </aside>
-<% end %>
+<%# TODO include similar projects sometime %>
 
 <%= render '/refinery/content_page' %>

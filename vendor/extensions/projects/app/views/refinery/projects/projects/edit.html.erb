@@ -1,41 +1,68 @@
-<%= form_for [refinery, :projects, @project] do |f| -%>
-    <%= render '/refinery/admin/error_messages',
-               :object => @project,
-               :include_object_name => true %>
+<% content_for :headsection do %>
+  <h1><%= 'Projekt bearbeiten: ' + @project.title %></h1>
+<% end %>
 
-    <div class='field'>
-      <%= f.label :title -%>
-      <%= f.text_field :title, :class => 'larger widest' -%>
-    </div>
+<div id='content'>
+  <div class="section nopadding" id="project">
+    <%= form_for [refinery, :projects, @project] do |f| -%>
+      <%= render '/refinery/admin/error_messages',
+                 :object => @project,
+                 :include_object_name => true %>
 
-    <div class='field'>
-      <%= render '/refinery/admin/wysiwyg',
-                 :f => f,
-                 :fields => [:description],
-                 :object => "projects/project" -%>
-    </div>
+      <div class='field'>
+        <%= f.label :title -%>
+        <%= f.text_field :title, :class => 'larger widest' -%>
+      </div>
 
-    <div class='field'>
-      <%= f.label :start -%>
-      <%= f.datetime_select :start -%>
-    </div>
+      <div class='field'>
+        <%= f.label :description -%>
+        <%= f.text_area :description %>
+      </div>
 
-    <div class='field'>
-      <%= f.label :end -%>
-      <%= f.datetime_select :end -%>
-    </div>
+      <div class='field'>
+        <%= f.label :image -%>
+        <%= render '/refinery/admin/image_picker',
+                   :f => f,
+                   :field => :image_id,
+                   :image => @project.image,
+                   :toggle_image_display => false -%>
+      </div>
 
-    <div class='field'>
-      <%= f.label :image -%>
-      <%= render '/refinery/admin/image_picker',
-                 :f => f,
-                 :field => :image_id,
-                 :image => @project.image,
-                 :toggle_image_display => false -%>
-    </div>
+      <div class='field'>
+        <%= f.label :days -%>
+        <%= f.collection_select(:day_ids, Refinery::Projects::Day.all, :id, :title, {:selected => @project.days.collect {|t| t.id}}, :multiple => true)  -%>
+      </div>
 
-    <%= render '/refinery/admin/form_actions', :f => f,
-               :continue_editing => false,
-               :delete_title => t('delete', :scope => 'refinery.projects.admin.projects.project'),
-               :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @project.title) -%>
-<% end -%>
+      <div class='field'>
+        <%= f.label :locations -%>
+        <%= f.collection_select(:location_ids, Refinery::Projects::Location.all, :id, :title, {:selected => @project.locations.collect {|t| t.id}}, :multiple => true)  -%>
+      </div>
+
+      <div class='field'>
+        <%= f.label :sectors -%>
+        <%= f.collection_select(:sector_ids, Refinery::Projects::Sector.all, :id, :title, {:selected => @project.sectors.collect {|t| t.id}}, :multiple => true)  -%>
+      </div>
+
+      <div class='field'>
+        <%= f.label :types -%>
+        <%= f.collection_select(:type_ids, Refinery::Projects::Type.all, :id, :title, {:selected => @project.types.collect {|t| t.id}}, :multiple => true)  -%>
+      </div>
+
+      <div class='field'>
+        <%= f.label :volunteer_types -%>
+        <%= f.collection_select(:volunteer_type_ids, Refinery::Projects::VolunteerType.all, :id, :title, {:selected => @project.volunteer_types.collect {|t| t.id}}, :multiple => true)  -%>
+      </div>
+
+      <div class='filed'>
+        <%= f.label :max_volunteer_count -%>
+        <%= f.text_field :max_volunteer_count, :size => 5 -%>
+      </div>
+
+      <%= render '/refinery/admin/form_actions', :f => f,
+                 :continue_editing => false,
+                 :delete_title => t('delete', :scope => 'refinery.projects.admin.projects.project'),
+                 :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @project.title),
+                 :cancel_url => refinery.projects_project_path(@project) -%>
+    <% end -%>
+  </div>
+</div>

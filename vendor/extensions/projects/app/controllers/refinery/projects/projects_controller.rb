@@ -39,6 +39,7 @@ module Refinery
         unless current_refinery_user.leads_project?(@project)
           # TODO flash error message
           redirect_to refinery.projects_project_path(@project)
+          return
         end
         if @project.update_attributes(params[:project])
           redirect_to refinery.projects_project_path(@project)

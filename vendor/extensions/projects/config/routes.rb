@@ -15,6 +15,8 @@ Refinery::Core::Engine.routes.append do
     get 'login', :to => 'sessions#new', :as => :new_refinery_user_session
     get 'logout', :to => 'sessions#destroy', :as => :destroy_refinery_user_session
     get 'profile', :to => 'users#my_profile'
+    get 'profile/edit', :to => 'users#edit'
+    put 'profile/edit', :to => 'users#update'
     get 'users/register', :to => 'users#new'
   end
 

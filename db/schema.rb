@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130614095200) do
+ActiveRecord::Schema.define(:version => 20130614174742) do
 
   create_table "refinery_images", :force => true do |t|
     t.string   "image_mime_type"
@@ -232,6 +232,9 @@ ActiveRecord::Schema.define(:version => 20130614095200) do
     t.datetime "reset_password_sent_at"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.string   "forename"
+    t.string   "surname"
+    t.integer  "image_id"
   end
 
   add_index "refinery_users", ["id"], :name => "index_refinery_users_on_id"

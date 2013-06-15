@@ -9,6 +9,8 @@ module Refinery
     has_and_belongs_to_many :projects_as_volunteer, :class_name => '::Refinery::Projects::Project' , :join_table => :refinery_projects_volunteers
     has_and_belongs_to_many :projects_as_leader, :class_name => '::Refinery::Projects::Project', :join_table => :refinery_projects_leaders
 
+    belongs_to :image, :class_name => '::Refinery::Image'
+
     has_many :plugins, :class_name => "UserPlugin", :order => "position ASC", :dependent => :destroy
     friendly_id :username
 
@@ -23,9 +25,12 @@ module Refinery
     # :login is a virtual attribute for authenticating by either username or email
     # This is in addition to a real persisted field like 'username'
     attr_accessor :login
-    attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :plugins, :login
+    attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :forename, :surname, :image_id, :plugins, :login
 
+    validates :email, :presence => true, :uniqueness => true
     validates :username, :presence => true, :uniqueness => true
+    validates :forename, :presence => true
+    validates :surname, :presence => true
     before_validation :downcase_username
 
     class << self

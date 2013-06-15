@@ -56,8 +56,8 @@ h1, h2, h3, h4 {
 	padding: 95px 30px 30px;
     border-top: 2px solid #333;
 }
-.section.nopadding {
-	padding: 0;
+.nopadding {
+	padding: 0 !important;
 }
 .leftcol {
 	float: left;
@@ -94,6 +94,7 @@ h1, h2, h3, h4 {
 	.leftcol {
 		float: none;
 		width: auto;
+        padding-right: 0;
 	}
 }
 
@@ -143,6 +144,18 @@ a.box:hover {
 	-webkit-transform: rotate(-3deg);
 	transform: rotate(-3deg);
 	margin-bottom: 25px;
+}
+
+/* LIGHTBOX */
+.lightbox {
+    border: 1px solid #aaa;
+    border-radius: 7px;
+    margin: 5px;
+    padding: 10px;
+    transition: box-shadow 0.25s;
+}
+.lightbox:hover {
+    box-shadow: 0 0 2px #aaa;
 }
 
 /* BUTTONS */

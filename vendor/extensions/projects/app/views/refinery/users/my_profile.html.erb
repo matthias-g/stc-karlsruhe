@@ -1,38 +1,62 @@
+<% content_for :headsection do %>
+    <h1><%= current_refinery_user.username %></h1>
+<% end %>
+
 <% content_for :body do %>
-    <table>
-      <tr>
-        <td>Username:</td>
-        <td><%= current_refinery_user.username %></td>
-      </tr>
-      <tr>
-        <td>E-Mail:</td>
-        <td><%= current_refinery_user.email %></td>
-      </tr>
-    </table>
-    Projekte als Freiwilliger:
-    <ul id="projects-as-volunteer">
-      <% if !@projects_as_volunteer || @projects_as_volunteer.size == 0 %>
-          keine Projekte vorhanden
-      <% else %>
-        <% @projects_as_volunteer.each do |project| %>
-          <li>
-            <%= link_to project.title, refinery.projects_project_path(project) %>
-          </li>
-        <% end %>
-      <% end %>
-    </ul>
-    Projekte als Projektleiter:
-    <ul id="projects-as-leader">
-      <% if !@projects_as_leader || @projects_as_leader.size == 0 %>
-          keine Projekte vorhanden
-      <% else %>
+<div class="section nopadding" id="profile">
+  <div class="leftcol nopadding">
+    <div class="prf-profile lightbox">
+      <div class="prf-pic">
+        <img src="media/hand.png" class="lightbox" />
+      </div>
+      <h3>Mein Profil</h3>
+      <div>
+        <h4>Name:</h4>
+        <div><%= current_refinery_user.forename %> <%= current_refinery_user.surname %></div>
+      </div>
+      <div>
+        <h4>Email:</h4>
+        <div><%= current_refinery_user.email %></div>
+      </div>
+      <div>
+        <h4>Passwort:</h4>
+        <div>*******</div>
+      </div>
+    </div>
+    <div class="prf-projectlist lightbox">
+      <% if @projects_as_leader && @projects_as_leader.size > 0 %>
+          <h3>geleitete Projekte:</h3>
           <% @projects_as_leader.each do |project| %>
-              <li>
-                <%= link_to project.title, refinery.projects_project_path(project) %>
-              </li>
+              <%= link_to project.title, refinery.projects_project_path(project) %>
           <% end %>
       <% end %>
-    </ul>
+      <% if @projects_as_volunteer && @projects_as_volunteer.size > 0 %>
+          <h3>Projekt-Mitarbeit:</h3>
+          <% @projects_as_volunteer.each do |project| %>
+              <%= link_to project.title, refinery.projects_project_path(project) %>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="rightcol">
+    <div class="lightbox prf-actionlist">
+      <h3>Aufgaben</h3>
+      <a href="#">Neues Projekt erstellen</a>
+      <a href="#">"Serve the City" kontaktieren</a>
+      <a href="#">Projekte suchen</a>
+    </div>
+    <div class="lightbox prf-newslist">
+      <h3>Nachrichten</h3>
+      <div>
+        Ein internes News- & Messaging-System ist in Planung. Bis dahin bitten wir Sie,
+        zur Projektorganisation auf andere Kommunikationsmittel, wie den Emailverkehr, auszuweichen.
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
 <% end %>
 
 <%= render '/refinery/content_page' %>

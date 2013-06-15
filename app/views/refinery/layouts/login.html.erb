@@ -9,11 +9,12 @@
   <div id="pagebox">
     <a id="logo" href="/"></a>
     <div id="header">
+        <%= yield :headsection %>
     </div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <div id="content">
-        <%= yield %>
+        <%= yield :body %>
     </div>
     <br style="clear: both;">
   </div>

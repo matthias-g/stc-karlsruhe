@@ -1,37 +1,39 @@
 <% content_for :header, t('pick_new_password_for', :scope => 'refinery.users.reset', :email => @refinery_user.email) %>
 
-<div class="section" id="change-password">
-<h1>Passwort ändern</h1>
-
-<div class="frm-smallbox">
-
-<%= form_for resource, :as => resource_name,
-             :url => refinery.refinery_user_password_path,
-             :html => { :method => :put } do |f| %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <%= render '/refinery/admin/error_messages', :object => @refinery_user,
-             :include_object_name => true %>
-
-  <div class='frm-field'>
-    <%= f.label :password %>
-    <%= f.password_field :password, :class => 'larger widest' %>
-  </div>
-
-  <div class='frm-field'>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, :class => 'larger widest' %>
-  </div>
-
-  <div class="frm-submit">
-    <%= render '/refinery/admin/form_actions', :f => f,
-             :continue_editing => false,
-             :submit_button_text => t('reset_password', :scope => 'refinery.users.reset'),
-             :cancel_url => refinery.new_refinery_user_session_path,
-             :cancel_title => nil,
-             :hide_delete => true -%>
-  </div>
+<% content_for :headsection do %>
+    <h1>Passwort ändern</h1>
 <% end -%>
 
+<% content_for :body do %>
+<div class="section" id="change-password">
+    <div class="frm-smallbox">
+    <%= form_for resource, :as => resource_name,
+                 :url => refinery.refinery_user_password_path,
+                 :html => { :method => :put } do |f| %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <%= render '/refinery/admin/error_messages', :object => @refinery_user,
+                 :include_object_name => true %>
+
+      <div class='frm-field'>
+        <%= f.label :password %>
+        <%= f.password_field :password, :class => 'larger widest' %>
+      </div>
+
+      <div class='frm-field'>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, :class => 'larger widest' %>
+      </div>
+
+      <div class="frm-submit">
+        <%= render '/refinery/admin/form_actions', :f => f,
+                 :continue_editing => false,
+                 :submit_button_text => t('reset_password', :scope => 'refinery.users.reset'),
+                 :cancel_url => refinery.new_refinery_user_session_path,
+                 :cancel_title => nil,
+                 :hide_delete => true -%>
+      </div>
+    <% end -%>
+    </div>
 </div>
-</div>
+<% end -%>

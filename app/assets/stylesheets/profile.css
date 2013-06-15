@@ -1,0 +1,32 @@
+.prf-profile .prf-pic {
+    float: right;
+}
+.prf-profile > div {
+    padding: 5px 0 0 15px;
+}
+.prf-projectlist a {
+    display: block;
+    background-color: #eee;
+    padding: 8px;
+    margin: 4px 0;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.25s;
+}
+.prf-projectlist a:hover {
+    background-color: #e0e0e0;
+    color: black;
+}
+.prf-projectlist h3 {
+    padding: 4px 0;
+}
+.prf-actionlist a {
+    display: block;
+    margin: 6px;
+    cursor: pointer;
+}
+.prf-newslist div {
+    color: #777;
+    margin: 10px;
+    font-size: 12px;
+}

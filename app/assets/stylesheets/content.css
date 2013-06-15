@@ -66,6 +66,7 @@ h1, h2, h3, h4 {
 }
 .leftcol, .rightcol, .fullcol {
 	overflow: hidden; /* establish new float context */
+    padding-bottom: 30px;
 }
 .section h1 {
 	position: absolute;
@@ -109,17 +110,13 @@ h1, h2, h3, h4 {
 
 /* COLORED CAPTION BOXES */
 .box {
-	display: block;
-	float: left;
+	display: inline-block;
 	font-size: 18px !important;
 	box-shadow: 3px 3px 4px rgba(0,0,0,0.75);
 	padding: 4px 20px;
 	color: white;
 }
 a.box {
-	float: none;
-	overflow: hidden;
-	width: 200px;
 	background-color:#aaa;
 	transition: box-shadow 0.5s;
 }

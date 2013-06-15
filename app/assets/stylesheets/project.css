@@ -38,3 +38,7 @@
 .prj-rightbox img {
     border-radius: 4px;
 }
+.prj-rightbox a {
+    display: block;
+    margin: 5px;
+}

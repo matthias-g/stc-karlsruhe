@@ -13,15 +13,14 @@
       <%= raw @page.content_for(:headsection) %>
       <%= yield :headsection %>
     </div>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <div id="content">
+      <%= render '/refinery/flash-messages' %>
       <%= yield :body %>
     </div>
     <br style="clear: both;">
   </div>
   <div id="footer">
-    <%= render '/refinery/footer' -%>
+    <%= render '/refinery/footer' %>
   </div>
 </div>
 <%= render '/refinery/javascripts' %>

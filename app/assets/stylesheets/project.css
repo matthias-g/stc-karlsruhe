@@ -42,3 +42,22 @@
     display: block;
     margin: 5px;
 }
+.prj-rightcol label, .prj-leftcol label {
+    display: block;
+    font-size: 14px;
+}
+.prj-rightcol input, .prj-rightcol textarea {
+
+}
+
+.prj-leftcol input, .prj-leftcol select{
+    width: 80%;
+    font-size: 14px;
+    margin: 10px;
+}
+.form-actions-left {
+    float: left;
+}
+.form-actions-right {
+    float: right;
+}

@@ -1,6 +1,8 @@
 <% content_for :headsection do %>
    <h1><%= 'Projekt: ' + @project.title %></h1>
 <% end %>
+
+<% content_for :body do %>
 <div id="content">
   <div class="section nopadding" id="project">
     <div class="prj-leftcol">
@@ -66,7 +68,8 @@
       <div>
         <%= @project.description.html_safe %>
       </div>
-<%#      <div>
+<%#
+      <div>
         <h4>Einzelne Arbeiten</h4>
         Hauptsächlich Holzbearbeitung mit Stecheisen und Beitel.
       </div>
@@ -83,34 +86,32 @@
         100 - 150€ / Gespendetes Geld kommt ausschließlich der pädagogischen Arbeit der Farm zu gute.
       </div>
 %>
-
     </div>
     <br style="clear:both">
   </div>
-  <%#   Hier ist Platz für Kommentare...
+<%#
   <div class="section" id="comments">
     <h1>Kommentare zum Projekt</h1>
   </div>
-      %>
+%>
 </div>
 
-<% content_for :body do %>
-    <section>
-      <% if @project.has_volunteer?(current_refinery_user) %>
-        <p>
-          Du nimmst an diesem Projekt teil.
-          <%= link_to 'Teilnahme beenden', refinery.leave_projects_project_path(@project) %>
-        </p>
-      <% else %>
-        <%= link_to 'Teilnehmen', refinery.enter_projects_project_path(@project) %>
-      <% end %>
-      <% if current_refinery_user && current_refinery_user.leads_project?(@project) %>
-          <p>
-            Du bist Leiter dieses Projekts.
-            <%= link_to 'Projekt bearbeiten', refinery.edit_projects_project_path(@project) %>
-          </p>
-      <% end %>
-    </section>
+<section>
+  <% if @project.has_volunteer?(current_refinery_user) %>
+    <p>
+      Du nimmst an diesem Projekt teil.
+      <%= link_to 'Teilnahme beenden', refinery.leave_projects_project_path(@project) %>
+    </p>
+  <% else %>
+    <%= link_to 'Teilnehmen', refinery.enter_projects_project_path(@project) %>
+  <% end %>
+  <% if current_refinery_user && current_refinery_user.leads_project?(@project) %>
+      <p>
+        Du bist Leiter dieses Projekts.
+        <%= link_to 'Projekt bearbeiten', refinery.edit_projects_project_path(@project) %>
+      </p>
+  <% end %>
+</section>
 <% end %>
 
 <%# TODO include similar projects sometime %>

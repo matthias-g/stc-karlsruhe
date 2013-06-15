@@ -1,7 +1,6 @@
+<% content_for :body do %>
 <div class="section" id="contact">
-
     <%=raw @page.content_for(:body) %>
-
     <div class="frm-smallbox">
     <%= form_for [refinery, :inquiries, @inquiry] do |f| %>
       <%= render :partial => "/refinery/admin/error_messages",
@@ -31,5 +30,5 @@
       </div>
     <% end %>
     </div>
-
 </div>
+<% end %>

@@ -2,7 +2,7 @@
   <h1><%= 'Projekt bearbeiten: ' + @project.title %></h1>
 <% end %>
 
-<div id='content'>
+<% content_for :body do %>
   <div class="section nopadding" id="project">
     <%= form_for [refinery, :projects, @project] do |f| -%>
       <%= render '/refinery/admin/error_messages',
@@ -65,4 +65,4 @@
                  :cancel_url => refinery.projects_project_path(@project) -%>
     <% end -%>
   </div>
-</div>
+<% end %>

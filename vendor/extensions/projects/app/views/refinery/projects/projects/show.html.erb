@@ -1,9 +1,10 @@
 <% content_for :headsection do %>
-   <h1><%= 'Projekt: ' + @project.title %></h1>
+   <h1><%= 'Projekt "' + @project.title + '"' %></h1>
 <% end %>
 
 <% content_for :body do %>
 <div class="section nopadding" id="project">
+  <div class="prj-leftcol">
     <% if missing_volunteer_count > 0 %>
         <div class="prj-places lightbox" style="background: #8cc394">
             Noch <%= missing_volunteer_count %> Plätze
@@ -13,7 +14,7 @@
             Vollbesetzt
         </div>
     <% end %>
-    <div class="prj-leftcol lightbox">
+    <div class="prj-cats lightbox">
       <div>
         <h4>Projektleitung</h4>
         <% @project.leaders.each do |leader| %>
@@ -51,7 +52,8 @@
         <% end %>
       </div>
     </div>
-    <div class="prj-rightcol lightbox">
+  </div>
+  <div class="prj-rightcol lightbox">
       <div class="prj-rightbox lightbox">
         <h3>Optionen</h3>
         <% if current_refinery_user && current_refinery_user.leads_project?(@project) %>
@@ -90,7 +92,7 @@
         <h4>Spendenbedarf</h4>
         100 - 150€ / Gespendetes Geld kommt ausschließlich der pädagogischen Arbeit der Farm zu gute.
       </div>
-    </div>
+  </div>
 </div>
 <%#
   <div class="section" id="comments">

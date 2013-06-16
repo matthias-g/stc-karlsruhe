@@ -1,44 +1,56 @@
-<% content_for :body do %>
-  <%= form_for @user, :url => '/profile/edit' do |f| -%>
-
+<% content_for :headsection do %>
+    <h1>Profileinstellungen für <%= current_refinery_user.username %></h1>
     <%= render '/refinery/admin/error_messages', :object => @user, :include_object_name => true %>
+<% end %>
+<% content_for :body do %>
+<div class="section" id="edit-profile">
+  <h1>Profil bearbeiten</h1>
+  <%= form_for @user, :url => '/profile/edit' do |f| -%>
+    <div class="leftcol">
+        <div class='frm-field'>
+          <%= f.label :username %>
+          <%= f.text_field :username, :class => 'larger widest' %>
+        </div>
+        <div class='frm-field'>
+          <%= f.label :forename %>
+          <%= f.text_field :forename, :class => 'larger widest' %>
+        </div>
+        <div class='frm-field'>
+          <%= f.label :surname %>
+          <%= f.text_field :surname, :class => 'larger widest' %>
+        </div>
+        <div class='frm-field'>
+          <%= f.label :email %>
+          <%= f.text_field :email, :class => 'larger widest' %>
+        </div>
+    </div>
+    <div class="rightcol">
+        <div class='frm-field'>
+          <%= f.label :password %>
+          <%= f.password_field :password, :class => 'larger widest' %>
+        </div>
+        <div class='frm-field'>
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, :class => 'larger widest' %>
+        </div>
+        <div class='frm-field'>
+          <%= f.label :image -%>
+          <div class="lightbox" style="display:inline-block; max-width: 100px">
+            <%= render '/refinery/admin/image_picker',
+                     :f => f,
+                     :field => :image_id,
+                     :image => @user.image,
+                     :toggle_image_display => false -%>
+          </div>
+        </div>
 
-    <div class='field'>
-      <%= f.label :username %>
-      <%= f.text_field :username, :class => 'larger widest' %>
     </div>
-    <div class='field'>
-      <%= f.label :forename %>
-      <%= f.text_field :forename, :class => 'larger widest' %>
+    <div class='frm-submit' style="clear:both;">
+      <%= render '/refinery/admin/form_actions', :f => f,
+                 :submit_continue => false,
+                 :hide_delete => true,
+                 :cancel_url => '/profile' %>
     </div>
-    <div class='field'>
-      <%= f.label :surname %>
-      <%= f.text_field :surname, :class => 'larger widest' %>
-    </div>
-    <div class='field'>
-      <%= f.label :email %>
-      <%= f.text_field :email, :class => 'larger widest' %>
-    </div>
-    <div class='field'>
-      <%= f.label :password %>
-      <%= f.password_field :password, :class => 'larger widest' %>
-    </div>
-    <div class='field'>
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, :class => 'larger widest' %>
-    </div>
-    <div class='field'>
-      <%= f.label :image -%>
-      <%= render '/refinery/admin/image_picker',
-                 :f => f,
-                 :field => :image_id,
-                 :image => @user.image,
-                 :toggle_image_display => false -%>
-    </div>
-
-    <%= render '/refinery/admin/form_actions', :f => f,
-               :submit_continue => false,
-               :hide_delete => true,
-               :cancel_url => '/profile' %>
   <% end -%>
+</div>
 <% end %>

@@ -168,7 +168,7 @@ a.box:hover {
     display: inline-block;
     padding: 4px 18px;
     min-width: 100px;
-    background-color: #ee2046;
+    background-color: #ac2141;
 
     -webkit-box-shadow: inset 0px 1px 0px 0px #b83751;
     box-shadow: inset 0px 1px 0px 0px #b83751;
@@ -188,7 +188,7 @@ a.button {
     padding: 5px 18px;
 }
 .button:hover {
-    background-color: #d60d35;
+    background-color: #c72042;
 }
 .button:active {
     position: relative;

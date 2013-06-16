@@ -6,20 +6,20 @@
 <div class="section nopadding" id="profile">
   <div class="leftcol nopadding">
     <div class="prf-profile lightbox">
-      <div class="prf-pic">
-        <img src="media/hand.png" class="lightbox" />
+      <div class="prf-pic lightbox">
+        <img src="media/hand.png" alt="Kein Bild"/>
       </div>
       <h3>Mein Profil</h3>
-      <%= link_to 'Bearbeiten', '/profile/edit', :style => 'float:right;' %>
-      <div>
+      <%= link_to 'Bearbeiten', '/profile/edit', :class => 'prf-edit' %>
+      <div class="prf-block">
         <h4>Name:</h4>
-        <div><%#= current_refinery_user.forename %> <%#= current_refinery_user.surname %></div>
+        <div><%= current_refinery_user.forename %> <%= current_refinery_user.surname %></div>
       </div>
-      <div>
+      <div class="prf-block">
         <h4>Email:</h4>
         <div><%= current_refinery_user.email %></div>
       </div>
-      <div>
+      <div class="prf-block">
         <h4>Passwort:</h4>
         <div>*******</div>
       </div>
@@ -43,8 +43,8 @@
     <div class="lightbox prf-actionlist">
       <h3>Aufgaben</h3>
       <a href="#">Neues Projekt erstellen</a>
-      <a href="#">"Serve the City" kontaktieren</a>
-      <a href="#">Projekte suchen</a>
+      <a href="/contact" class="popup">"Serve the City" kontaktieren</a>
+      <a href="/#projects">Projekte suchen</a>
     </div>
     <div class="lightbox prf-newslist">
       <h3>Nachrichten</h3>

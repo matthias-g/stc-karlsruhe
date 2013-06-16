@@ -1,7 +1,12 @@
+.prf-profile {
+    position: relative;
+}
 .prf-profile .prf-pic {
     float: right;
+    min-width: 50px;
+    min-height: 70px;
 }
-.prf-profile > div {
+.prf-profile .prf-block {
     padding: 5px 0 0 15px;
 }
 .prf-projectlist a {
@@ -29,4 +34,10 @@
     color: #777;
     margin: 10px;
     font-size: 12px;
+}
+.prf-edit {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 14px;
 }

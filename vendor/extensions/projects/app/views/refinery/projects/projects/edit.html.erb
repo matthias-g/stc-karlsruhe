@@ -1,5 +1,5 @@
 <% content_for :headsection do %>
-  <h1><%= 'Projekt bearbeiten: ' + @project.title %></h1>
+  <h1><%= 'Projekt "' + @project.title + '" bearbeiten' %></h1>
     <%= render '/refinery/admin/error_messages',
         :object => @project,
         :include_object_name => true %>
@@ -8,32 +8,35 @@
 <% content_for :body do %>
   <div class="section nopadding" id="edit-project">
     <%= form_for [refinery, :projects, @project] do |f| -%>
-    <div class="prj-leftcol lightbox">
-      <div class='field'>
-        <%= f.label :max_volunteer_count -%>
-        <%= f.text_field :max_volunteer_count, :size => 5 -%>
+    <div class="prj-leftcol">
+      <div class="lightbox">
+          <div class='field'>
+            <%= f.label :max_volunteer_count -%>
+            <%= f.text_field :max_volunteer_count, :size => 5 -%>
+          </div>
       </div>
-    </div>
-    <div class="prj-leftcol lightbox">
-      <div class='field'>
-        <%= f.label :types -%>
-        <%= f.collection_select(:type_ids, Refinery::Projects::Type.all, :id, :title, {:selected => @project.types.collect {|t| t.id}}, :multiple => true)  -%>
-      </div>
-      <div class='field'>
-        <%= f.label :volunteer_types -%>
-        <%= f.collection_select(:volunteer_type_ids, Refinery::Projects::VolunteerType.all, :id, :title, {:selected => @project.volunteer_types.collect {|t| t.id}}, :multiple => true)  -%>
-      </div>
-      <div class='field'>
-        <%= f.label :sectors -%>
-        <%= f.collection_select(:sector_ids, Refinery::Projects::Sector.all, :id, :title, {:selected => @project.sectors.collect {|t| t.id}}, :multiple => true)  -%>
-      </div>
-      <div class='field'>
-        <%= f.label :days -%>
-        <%= f.collection_select(:day_ids, Refinery::Projects::Day.all, :id, :title, {:selected => @project.days.collect {|t| t.id}}, :multiple => true)  -%>
-      </div>
-      <div class='field'>
-        <%= f.label :locations -%>
-        <%= f.collection_select(:location_ids, Refinery::Projects::Location.all, :id, :title, {:selected => @project.locations.collect {|t| t.id}}, :multiple => true)  -%>
+
+      <div class="prj-cats lightbox">
+          <div class='field'>
+            <%= f.label :types -%>
+            <%= f.collection_select(:type_ids, Refinery::Projects::Type.all, :id, :title, {:selected => @project.types.collect {|t| t.id}}, :multiple => true)  -%>
+          </div>
+          <div class='field'>
+            <%= f.label :volunteer_types -%>
+            <%= f.collection_select(:volunteer_type_ids, Refinery::Projects::VolunteerType.all, :id, :title, {:selected => @project.volunteer_types.collect {|t| t.id}}, :multiple => true)  -%>
+          </div>
+          <div class='field'>
+            <%= f.label :sectors -%>
+            <%= f.collection_select(:sector_ids, Refinery::Projects::Sector.all, :id, :title, {:selected => @project.sectors.collect {|t| t.id}}, :multiple => true)  -%>
+          </div>
+          <div class='field'>
+            <%= f.label :days -%>
+            <%= f.collection_select(:day_ids, Refinery::Projects::Day.all, :id, :title, {:selected => @project.days.collect {|t| t.id}}, :multiple => true)  -%>
+          </div>
+          <div class='field'>
+            <%= f.label :locations -%>
+            <%= f.collection_select(:location_ids, Refinery::Projects::Location.all, :id, :title, {:selected => @project.locations.collect {|t| t.id}}, :multiple => true)  -%>
+          </div>
       </div>
     </div>
 

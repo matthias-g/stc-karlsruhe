@@ -42,6 +42,7 @@ function updateLinks(parent) {
 		var url = $(this).attr('href') + ' #content > *';
 		$('#popup').load(url, function() {
 			$('#popup .section').css({border: 'none'});
+            updateLinks($('#popup'));
 		});
 		$('#overlay').fadeIn();
 		$('#overlay > div').delay(400).fadeIn();

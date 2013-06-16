@@ -1,25 +1,23 @@
-.prj-places {
+.prj-leftcol {
     float: left;
-    width: 180px;
+    width: 200px;
+}
+.prj-places {
     font-size: 24px;
     text-align: center;
     color: white;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
 }
-.prj-leftcol {
-    clear: left;
-    float: left;
-    width: 180px;
-}
-.prj-leftcol > div {
+
+.prj-cats > div {
     margin: 5px 0 20px 5px;
 }
-.prj-leftcol h4 {
+.prj-cats h4 {
     margin-left: -5px;
 }
 
 .prj-rightcol {
-    margin-left: 215px;
+    margin-left: 205px;
     overflow: hidden;
 }
 .prj-block {
@@ -46,11 +44,11 @@
     display: block;
     font-size: 14px;
 }
-.prj-rightcol input, .prj-rightcol textarea {
-
+.prj-rightcol input {
+    max-width: 300px;
 }
 
-.prj-leftcol input, .prj-leftcol select{
+.prj-leftcol input, .prj-leftcol select {
     width: 80%;
     font-size: 14px;
     margin: 10px;
@@ -60,4 +58,33 @@
 }
 .form-actions-right {
     float: right;
+}
+
+/* PROJECT ADJUSTMENT for MINI style  */
+@media all and (max-width: 1000px) {
+    .prj-leftcol {
+        float: none;
+        width: auto;
+        text-align: center;
+    }
+    .prj-cats > div {
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 15px 10px;
+        text-align: left;
+    }
+    .prj-rightcol {
+        margin-left: 5px;
+    }
+}
+
+/* PROJECT ADJUSTMENT for MICRO STYLE */
+@media all and (max-width: 800px) {
+    .prj-rightbox {
+        float: none;
+        margin: 5px;
+    }
+    .prj-rightcol h2 {
+        margin-top: 30px;
+    }
 }

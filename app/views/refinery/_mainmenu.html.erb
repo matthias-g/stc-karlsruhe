@@ -10,10 +10,25 @@
     <% else %>
       <a href="/" style="float:right">zur Startseite</a>
     <% end %>
+
     <% if refinery_user_signed_in? %>
-      <a href="/logout" style="float:right" title='<%= current_refinery_user.username %> ausloggen'>Logout</a>
+    <ul class="dropdown" style="float:right">
+      <li><a href="/profile"><%= current_refinery_user.username %></a>
+        <ul>
+          <li><a href="/profile">Profil-Startseite</a></li>
+          <li><a href="/logout">Ausloggen</a></li>
+        </ul>
+      </li>
+    </ul>
     <% else %>
-      <a href="/login" style="float:right" class="popup">Login</a>
+    <ul class="dropdown" style="float:right">
+      <li><a href="/login" class="popup">Login</a>
+        <ul>
+          <li><a href="/login" class="popup">Login</a></li>
+          <li><a href="/users/register">Registrierung</a></li>
+        </ul>
+      </li>
+    </ul>
     <% end %>
   </div>
 </div>

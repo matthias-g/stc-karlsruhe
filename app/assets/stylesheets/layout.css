@@ -158,3 +158,28 @@ body {
     position: relative;
     overflow: hidden;
 }
+
+.dropdown {
+    margin: 0;
+}
+.dropdown > li {
+    float: left;
+    margin-bottom: 0;
+}
+.dropdown > li > ul {
+    top: 1.6em;
+    background-color: #082725;
+    border-radius: 0 0 5px 5px;
+}
+
+.dropdown li {
+    position: relative;
+}
+.dropdown ul {
+    position: absolute;
+    padding: 0;
+    display: none;
+}
+.dropdown li:hover > ul {
+    display: block;
+}

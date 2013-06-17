@@ -28,6 +28,8 @@
         <div class='frm-field'>
           <%= f.label :password %>
           <%= f.password_field :password, :class => 'larger widest' %>
+          <%= content_tag(:br) %>
+          <%= content_tag(:span, 'Diese Felder freilassen, um das aktuelle Passwort beizubehalten.') %>
         </div>
         <div class='frm-field'>
           <%= f.label :password_confirmation %>

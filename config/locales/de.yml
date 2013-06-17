@@ -25,3 +25,9 @@ de:
       image_picker:
         none_selected: Es ist momentan kein Bild ausgewählt, bitte klicken Sie hier, um eins hinzuzufügen.
         remove_current: Entferne aktuelles Bild
+  devise:
+    sessions:
+      refinery_user:
+        signed_out: Erfolgreich ausgeloggt.
+    failure:
+      already_authenticated: Sie sind bereits angemeldet!

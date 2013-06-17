@@ -19,7 +19,7 @@ as well as in project list answers from the server. */
 .xpl-map a[target=_blank] div {
 	margin-bottom: 50px;
 }
-.gmnoprint > div {
+.xpl-map .gmnoprint > div {
 	position: relative;
 	bottom: 5px;
 	z-index: 10;

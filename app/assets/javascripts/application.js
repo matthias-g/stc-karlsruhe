@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require style
 //= require project-explorer
+//= require location-picker

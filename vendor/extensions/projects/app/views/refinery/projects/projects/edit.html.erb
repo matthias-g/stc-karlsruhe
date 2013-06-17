@@ -50,9 +50,12 @@
                      :image => @project.image,
                      :toggle_image_display => false -%>
         </div>
+      </div>
+      <div class="prj-rightbox lightbox">
+        <div class="prj-location-picker"></div>
         <div class='field'>
-          <%= f.text_field :latitude, :hidden => true %>
-          <%= f.text_field :longitude, :hidden => true %>
+          <%= f.text_field :latitude, :hidden => true, :class => 'prj-latitude' %>
+          <%= f.text_field :longitude, :hidden => true, :class => 'prj-longitude' %>
         </div>
       </div>
       <div class='field'>

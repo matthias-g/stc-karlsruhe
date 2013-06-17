@@ -10,7 +10,6 @@ Refinery::Core::Engine.routes.append do
     end
   end
 
-
   devise_scope :refinery_user do
     get 'login', :to => 'sessions#new', :as => :new_refinery_user_session
     get 'logout', :to => 'sessions#destroy', :as => :destroy_refinery_user_session
@@ -18,6 +17,8 @@ Refinery::Core::Engine.routes.append do
     get 'profile/edit', :to => 'users#edit'
     put 'profile/edit', :to => 'users#update'
     get 'users/register', :to => 'users#new'
+    get 'register', :to => 'users#new'
+    get 'users/:id', :to => 'users#show', :as => :show_refinery_user
   end
 
   # Admin routes

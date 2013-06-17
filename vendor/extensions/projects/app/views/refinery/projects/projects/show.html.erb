@@ -18,7 +18,7 @@
       <div>
         <h4>Projektleitung</h4>
         <% @project.leaders.each do |leader| %>
-        <%= leader.username %>
+        <%= link_to leader.username, refinery.show_refinery_user_path(leader) %>
         <% end %>
       </div>
       <div>

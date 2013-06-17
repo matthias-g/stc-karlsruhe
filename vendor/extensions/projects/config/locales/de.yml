@@ -82,7 +82,3 @@ de:
         forename: Vorname
         surname: Nachname
         image: Profilbild
-  devise:
-    sessions:
-      refinery_user:
-        signed_out: Erfolgreich ausgeloggt.

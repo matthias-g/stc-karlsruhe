@@ -59,6 +59,9 @@
 .form-actions-right {
     float: right;
 }
+.prj-location-picker {
+    height: 200px;
+}
 
 /* PROJECT ADJUSTMENT for MINI style  */
 @media all and (max-width: 1000px) {

@@ -4,7 +4,7 @@
 
 <% content_for :body do %>
 <div class="section nopadding" id="profile">
-  <div class="maincol nopadding">
+  <div class="leftcol nopadding">
     <div class="prf-profile lightbox">
       <%#
       <div class="prf-pic lightbox">
@@ -21,6 +21,8 @@
         <div><%= mail_to @user.email, @user.email, :encode => 'hex' %></div>
       </div>
     </div>
+  </div>
+  <div class="rightcol nopadding">
     <div class="prf-projectlist lightbox">
       <% if @user.projects_as_leader && @user.projects_as_leader.size > 0 %>
           <h3>geleitete Projekte:</h3>

@@ -41,20 +41,20 @@
     </div>
 
     <div class="prj-rightcol lightbox">
-      <div class="prj-rightbox lightbox">
-        <div class='field'>
-          <%= f.label :image -%>
-          <%= render '/refinery/admin/image_picker',
+<%#      <div class="prj-rightbox lightbox">
+<%#        <div class='field'>
+<%#          <%= f.label :image -%>
+<%#          <%= render '/refinery/admin/image_picker',
                      :f => f,
                      :field => :image_id,
                      :image => @project.image,
                      :toggle_image_display => false -%>
-        </div>
+<%#      </div>
         <div class='field'>
-          <%= f.text_field :latitude, :hidden => true %>
-          <%= f.text_field :longitude, :hidden => true %>
-        </div>
-      </div>
+<%#          <%= f.text_field :latitude, :hidden => true %>
+<%#          <%= f.text_field :longitude, :hidden => true %>
+<%#        </div>
+      </div> %>
       <div class='field'>
         <%= f.label :title -%>
         <%= f.text_field :title, :class => 'larger widest' -%>

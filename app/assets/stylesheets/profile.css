@@ -1,5 +1,6 @@
 .prf-profile {
     position: relative;
+    min-height: 160px;
 }
 .prf-profile .prf-pic {
     float: right;
@@ -8,6 +9,9 @@
 }
 .prf-profile .prf-block {
     padding: 5px 0 0 15px;
+}
+.prf-projectlist {
+    min-height: 160px;
 }
 .prf-projectlist a {
     display: block;

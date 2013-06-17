@@ -63,6 +63,18 @@
         <%= f.label :description -%>
         <%= f.text_area :description %>
       </div>
+      <div class='field'>
+        <%= f.label :individual_tasks -%>
+        <%= f.text_area :individual_tasks, :rows => 8 %>
+      </div>
+      <div class='field'>
+        <%= f.label :requirements -%>
+        <%= f.text_area :requirements, :rows => 5 %>
+      </div>
+      <div class='field'>
+        <%= f.label :material -%>
+        <%= f.text_area :material, :rows => 5 %>
+      </div>
     </div>
     <div class="prj-rightcol lightbox">
       <%= render '/refinery/admin/form_actions', :f => f,

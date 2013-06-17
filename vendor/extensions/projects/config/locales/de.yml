@@ -63,6 +63,11 @@ de:
         types: Projekttypen
         volunteer_types: Freiwilligentypen
         max_volunteer_count: Maximale Freiwilligenzahl
+        latitude: Breitengrad
+        longitude: Längengrad
+        individual_tasks: Einzelne Arbeiten
+        requirements: Voraussetzungen
+        material: Material
       'refinery/projects/type':
         title: Titel
       'refinery/projects/sector':
@@ -73,6 +78,10 @@ de:
         title: Titel
       'refinery/projects/location':
         title: Titel
+      'refinery/user':
+        forename: Vorname
+        surname: Nachname
+        image: Profilbild
   devise:
     sessions:
       refinery_user:

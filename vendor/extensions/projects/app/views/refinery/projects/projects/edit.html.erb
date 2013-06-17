@@ -50,6 +50,10 @@
                      :image => @project.image,
                      :toggle_image_display => false -%>
         </div>
+        <div class='field'>
+          <%= f.text_field :latitude, :hidden => true %>
+          <%= f.text_field :longitude, :hidden => true %>
+        </div>
       </div>
       <div class='field'>
         <%= f.label :title -%>

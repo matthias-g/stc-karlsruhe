@@ -27,12 +27,10 @@ module Refinery
     end
 
     def my_profile
-      @projects_as_volunteer = current_refinery_user.projects_as_volunteer
-      @projects_as_leader = current_refinery_user.projects_as_leader
     end
 
     def show
-      if current_refinery_user.id.to_s == params[:id]
+      if current_refinery_user.id.to_s == params[:id] or current_refinery_user.username == params[:id]
         render :action => :my_profile
         return
       end

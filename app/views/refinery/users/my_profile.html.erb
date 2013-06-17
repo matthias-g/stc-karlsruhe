@@ -27,15 +27,15 @@
       </div>
     </div>
     <div class="prf-projectlist lightbox">
-      <% if @projects_as_leader && @projects_as_leader.size > 0 %>
+      <% if current_refinery_user.projects_as_leader && current_refinery_user.projects_as_leader.size > 0 %>
           <h3>geleitete Projekte:</h3>
-          <% @projects_as_leader.each do |project| %>
+          <% current_refinery_user.projects_as_leader.each do |project| %>
               <%= link_to project.title, refinery.projects_project_path(project) %>
           <% end %>
       <% end %>
-      <% if @projects_as_volunteer && @projects_as_volunteer.size > 0 %>
+      <% if current_refinery_user.projects_as_volunteer && current_refinery_user.projects_as_volunteer.size > 0 %>
           <h3>Projekt-Mitarbeit:</h3>
-          <% @projects_as_volunteer.each do |project| %>
+          <% current_refinery_user.projects_as_volunteer.each do |project| %>
               <%= link_to project.title, refinery.projects_project_path(project) %>
           <% end %>
       <% end %>

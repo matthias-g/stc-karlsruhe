@@ -64,3 +64,19 @@ ServeTheCityKarlsruhe::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 end
+
+Refinery::Core::Engine.routes.append do
+  # image picker
+  get 'images/insert', :to => 'images#insert', :as => :insert_images
+
+  devise_scope :refinery_user do
+    get 'login', :to => 'sessions#new', :as => :new_refinery_user_session
+    get 'logout', :to => 'sessions#destroy', :as => :destroy_refinery_user_session
+    get 'profile', :to => 'users#my_profile'
+    get 'profile/edit', :to => 'users#edit'
+    put 'profile/edit', :to => 'users#update'
+    get 'users/register', :to => 'users#new'
+    get 'register', :to => 'users#new'
+    get 'users/:id', :to => 'users#show', :as => :show_refinery_user
+  end
+end

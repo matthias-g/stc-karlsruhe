@@ -5,6 +5,7 @@ module Refinery
     has_and_belongs_to_many :projects_as_leader, :class_name => '::Refinery::Projects::Project', :join_table => :refinery_projects_leaders
 
     belongs_to :image
+    has_many :uploaded_images, :class_name => '::Refinery::Image'
 
     attr_accessible :forename, :surname, :image_id
 

@@ -4,15 +4,15 @@ var infoWindow;
 
 google.maps.event.addDomListener(window, 'load', function() {
     $('.prj-location-picker').each(function() {
-        var longval = $('.prj-longitude').attr('value');
-        var latval = $('.prj-latitude').attr('value');
+        var longval = parseFloat($('.prj-longitude').attr('value'));
+        var latval = parseFloat($('.prj-latitude').attr('value'));
         var curpoint = new google.maps.LatLng(
-            isNaN(latval)? 49.012 : parseFloat(latval),
-            isNaN(longval)? 8.4043 : parseFloat(longval));
+            isNaN(latval)? 49.012 : latval,
+            isNaN(longval)? 8.4043 : longval);
 
         gmap = new google.maps.Map(this, {
             center: curpoint,
-            zoom: 12, maxZoom: 15, minZoom: 10,
+            zoom: 13, minZoom: 10,
             disableDefaultUI: true,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });

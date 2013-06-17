@@ -1,5 +1,5 @@
 <% @projects.each do |project| %>
-  <div class="xpl-teaser">
+  <div class="xpl-teaser" data-lat="<%= project.latitude %>" data-lon="<%= project.longitude %>">
     <%= link_to "<h3>#{project.title}</h3>".html_safe, refinery.projects_project_path(project), :target => '_top', :title => 'zur Projektseite' %>
     <%= image_fu project.image, '100x100>' %>
     <div><%= project.description.html_safe %></div>

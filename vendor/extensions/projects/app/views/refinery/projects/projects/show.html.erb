@@ -87,19 +87,15 @@
       </div>
       <div class="prj-block">
         <h4>Einzelne Arbeiten</h4>
-        Hauptsächlich Holzbearbeitung mit Stecheisen und Beitel.
+        <%= @project.individual_tasks %>
       </div>
       <div class="prj-block">
         <h4>Voraussetzungen</h4>
-        Motivation/ mit Werkzeug umgehen können.
+        <%= @project.requirements %>
       </div>
       <div class="prj-block">
         <h4>Material</h4>
-        Stecheisen in verschiedenen Größen, Holzhämmer.
-      </div>
-      <div class="prj-block">
-        <h4>Spendenbedarf</h4>
-        100 - 150€ / Gespendetes Geld kommt ausschließlich der pädagogischen Arbeit der Farm zu gute.
+        <%= @project.material %>
       </div>
   </div>
 </div>

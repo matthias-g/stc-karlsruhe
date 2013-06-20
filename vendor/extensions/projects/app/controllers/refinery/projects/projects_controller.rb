@@ -4,17 +4,18 @@ module Refinery
 
       before_filter :find_all_projects
       before_filter :find_page
-      before_filter :authenticate_refinery_user!, :only => [:enter, :edit, :update]
+      before_filter :authenticate_refinery_user!, :only => [:enter, :leave, :edit, :update]
 
       def index
-        # you can use meta fields from your model instead (e.g. browser_title)
-        # by swapping @page for @project in the line below:
         @projects = Project.all
         @projects &= Type.find(params[:type]).collect{|t| t.projects}.flatten if params[:type]
         @projects &= Sector.find(params[:sector]).collect{|s| s.projects}.flatten if params[:sector]
         @projects &= VolunteerType.find(params[:volunteer_type]).collect{|vt| vt.projects}.flatten if params[:volunteer_type]
         @projects &= Location.find(params[:location]).collect{|l| l.projects}.flatten if params[:location]
         @projects &= Day.find(params[:day]).collect{|d| d.projects}.flatten if params[:day]
+
+        # you can use meta fields from your model instead (e.g. browser_title)
+        # by swapping @page for @project in the line below:
         present(@page)
         render(:layout => 'project_explorer')
       end
@@ -50,7 +51,11 @@ module Refinery
 
       def enter
         @project = Project.find(params[:id])
-        @project.add_volunteer(current_refinery_user) if current_refinery_user.has_role?(:volunteer)
+        unless @project.is_full?
+          @project.add_volunteer(current_refinery_user) if current_refinery_user.has_role?(:volunteer)
+        else
+          flash[:error] = 'Projekt ist schon vollbesetzt'
+        end
         redirect_to refinery.projects_project_url(@project)
       end
 

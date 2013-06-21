@@ -58,7 +58,7 @@ module Refinery
       end
 
       def is_full?()
-        volunteers.count - max_volunteer_count <= 0
+        volunteers.count - max_volunteer_count > 0
       end
 
     end

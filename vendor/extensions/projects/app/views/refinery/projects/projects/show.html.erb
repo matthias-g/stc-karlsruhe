@@ -1,67 +1,77 @@
 <% content_for :headsection do %>
-   <h1><%= 'Projekt "' + @project.title + '"' %></h1>
+  <h1><%= 'Projekt "' + @project.title + '"' %></h1>
 <% end %>
 
 <% content_for :body do %>
-<div class="section nopadding" id="project">
-  <div class="prj-leftcol">
-    <% if missing_volunteer_count > 0 %>
+  <div class="section nopadding" id="project">
+    <div class="prj-leftcol">
+      <% if missing_volunteer_count > 0 %>
         <div class="prj-places lightbox" style="background: #8cc394">
-            Noch <%= missing_volunteer_count %> Plätze
+          Noch <%= missing_volunteer_count %> Plätze
         </div>
-    <% else %>
+      <% else %>
         <div class="prj-places lightbox" style="background: #ee7c9a">
-            Vollbesetzt
+          Vollbesetzt
         </div>
-    <% end %>
-    <div class="prj-cats lightbox">
-      <div>
-        <h4>Projektleitung</h4>
-        <% @project.leaders.each do |leader| %>
-          <%= link_to leader.username, refinery.show_refinery_user_path(leader) %>
+      <% end %>
+      <div class="prj-cats lightbox">
+        <div>
+          <h4>Projektleitung</h4>
+          <% @project.leaders.each do |leader| %>
+            <%= link_to leader.username, refinery.show_refinery_user_path(linkname(leader)) %>
+          <% end %>
+        </div>
+        <% unless @project.types.empty? %>
+          <div>
+            <h4>Projekttyp</h4>
+            <% @project.types.each do |type| %>
+              <%= type.title %>
+            <% end %>
+          </div>
         <% end %>
-      </div>
-      <div>
-        <h4>Projekttyp</h4>
-        <% @project.types.each do |type| %>
-          <%= type.title %>
+        <% unless @project.volunteer_types.empty? %>
+          <div>
+            <h4>Geeignet für</h4>
+            <% @project.volunteer_types.each do |volunteer_type| %>
+              <%= volunteer_type.title %>
+            <% end %>
+          </div>
         <% end %>
-      </div>
-      <div>
-        <h4>Geeignet für</h4>
-        <% @project.volunteer_types.each do |volunteer_type| %>
-          <%= volunteer_type.title %>
+        <% unless @project.sectors.empty? %>
+          <div>
+            <h4>Bereich</h4>
+            <% @project.sectors.each do |sector| %>
+              <%= sector.title %>
+            <% end %>
+          </div>
         <% end %>
-      </div>
-      <div>
-        <h4>Bereich</h4>
-        <% @project.sectors.each do |sector| %>
-          <%= sector.title %>
+        <% unless @project.days.empty? %>
+          <div>
+            <h4>Projekttage</h4>
+            <% @project.days.each do |day| %>
+              <%= day.title %>
+            <% end %>
+          </div>
         <% end %>
-      </div>
-      <div>
-        <h4>Projekttage</h4>
-        <% @project.days.each do |day| %>
-          <%= day.title %>
-        <% end %>
-      </div>
-      <div>
-        <h4>Einsatzort</h4>
-        <% @project.locations.each do |location| %>
-          <%= location.title %>
+        <% unless @project.locations.empty? %>
+          <div>
+            <h4>Einsatzort</h4>
+            <% @project.locations.each do |location| %>
+              <%= location.title %>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>
-  </div>
-  <div class="prj-rightcol lightbox">
+    <div class="prj-rightcol lightbox">
       <div class="prj-rightbox lightbox">
         <h3>Optionen</h3>
         <% if current_refinery_user && current_refinery_user.leads_project?(@project) %>
-            <%= link_to 'Projekt bearbeiten', refinery.edit_projects_project_path(@project) %>
+          <%= link_to 'Projekt bearbeiten', refinery.edit_projects_project_path(@project) %>
         <% elsif @project.has_volunteer?(current_refinery_user) %>
-            <%= link_to 'Teilnahme beenden', refinery.leave_projects_project_path(@project) %>
+          <%= link_to 'Teilnahme beenden', refinery.leave_projects_project_path(@project) %>
         <% else %>
-            <%= link_to 'Teilnehmen', refinery.enter_projects_project_path(@project) %>
+          <%= link_to 'Teilnehmen', refinery.enter_projects_project_path(@project) %>
         <% end %>
       </div>
       <% if @project.image %>
@@ -78,27 +88,33 @@
       <div class="prj-rightbox lightbox">
         <h3>Teilnehmer</h3>
         <% @project.volunteers.each do |volunteer| %>
-            <%= link_to volunteer.username, refinery.show_refinery_user_path(volunteer) %>
+          <%= link_to volunteer.username, refinery.show_refinery_user_path(linkname(volunteer)) %>
         <% end %>
       </div>
       <div class="prj-block">
         <h2><%= @project.title %></h2>
         <%= @project.description.html_safe %>
       </div>
-      <div class="prj-block">
-        <h4>Einzelne Arbeiten</h4>
-        <%= @project.individual_tasks %>
-      </div>
-      <div class="prj-block">
-        <h4>Voraussetzungen</h4>
-        <%= @project.requirements %>
-      </div>
-      <div class="prj-block">
-        <h4>Material</h4>
-        <%= @project.material %>
-      </div>
+      <% unless @project.individual_tasks.empty? %>
+        <div class="prj-block">
+          <h4>Einzelne Arbeiten</h4>
+          <%= @project.individual_tasks %>
+        </div>
+      <% end %>
+      <% unless @project.requirements.empty? %>
+        <div class="prj-block">
+          <h4>Voraussetzungen</h4>
+          <%= @project.requirements %>
+        </div>
+      <% end %>
+      <% unless @project.material.empty? %>
+        <div class="prj-block">
+          <h4>Material</h4>
+          <%= @project.material %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
 <%#
   <div class="section" id="comments">
     <h1>Kommentare zum Projekt</h1>

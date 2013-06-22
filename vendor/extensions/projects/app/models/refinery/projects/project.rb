@@ -11,7 +11,6 @@ module Refinery
 
       validates :title, :presence => true, :uniqueness => true
       validates :description, :presence => true
-      validates :max_volunteer_count, :presence => true
 
       belongs_to :image, :class_name => '::Refinery::Image'
 
@@ -58,6 +57,7 @@ module Refinery
       end
 
       def is_full?()
+        false unless max_volunteer_count
         volunteers.count - max_volunteer_count > 0
       end
 

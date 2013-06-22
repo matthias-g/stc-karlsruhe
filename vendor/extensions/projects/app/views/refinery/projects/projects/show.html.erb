@@ -5,15 +5,7 @@
 <% content_for :body do %>
   <div class="section nopadding" id="project">
     <div class="prj-leftcol">
-      <% if missing_volunteer_count > 0 %>
-        <div class="prj-places lightbox" style="background: #8cc394">
-          Noch <%= missing_volunteer_count %> Plätze
-        </div>
-      <% else %>
-        <div class="prj-places lightbox" style="background: #ee7c9a">
-          Vollbesetzt
-        </div>
-      <% end %>
+      <%= missing_volunteer_count.html_safe %>
       <div class="prj-cats lightbox">
         <div>
           <h4>Projektleitung</h4>

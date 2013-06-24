@@ -16,5 +16,10 @@
         :title => t('.delete'),
         :confirm => t('message', :scope => 'refinery.admin.delete', :title => project.title),
         :method => :delete %>
+    <% if project.public %>
+      <%= link_to refinery_icon_tag("hide.ico"), refinery.hide_projects_admin_project_path(project), :title => 'Projekt verstecken' %>
+    <% else %>
+      <%= link_to refinery_icon_tag("publish.ico"), refinery.publish_projects_admin_project_path(project), :title => 'Projekt veröffentlichen' %>
+    <% end %>
   </span>
 </li>

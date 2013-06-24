@@ -1,6 +1,7 @@
 module Refinery
   module Projects
     class ProjectsController < ::ApplicationController
+      include ::Refinery::ApplicationController
 
       before_filter :find_all_projects
       before_filter :find_page
@@ -22,6 +23,10 @@ module Refinery
 
       def show
         @project = Project.find(params[:id])
+        unless @project.public || current_refinery_user.leads_project?(@project)
+          error_404
+          return
+        end
 
         # you can use meta fields from your model instead (e.g. browser_title)
         # by swapping @page for @project in the line below:

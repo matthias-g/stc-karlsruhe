@@ -1,0 +1,12 @@
+<% content_for :headsection do %>
+  <h1><%= 'Projekt erstellen' %></h1>
+  <%= render '/refinery/admin/error_messages',
+             :object => @project,
+             :include_object_name => true %>
+<% end %>
+
+<% content_for :body do %>
+  <div class="section nopadding" id="create-project">
+    <%= render 'form' %>
+  </div>
+<% end %>

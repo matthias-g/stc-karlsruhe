@@ -33,6 +33,20 @@ module Refinery
         present(@page)
       end
 
+      def new
+        @project = Project.new
+      end
+
+      def create
+        @project = Project.new(params[:project])
+        @project.add_leader(current_refinery_user)
+        if @project.save
+          redirect_to refinery.projects_project_path(@project), notice: "Projekt wurde erfolgreich angelegt."
+        else
+          render :action => :new
+        end
+      end
+
       def edit
         @project = Project.find(params[:id])
         unless current_refinery_user.leads_project?(@project)

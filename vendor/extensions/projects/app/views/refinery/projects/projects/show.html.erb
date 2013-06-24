@@ -84,6 +84,11 @@
         <% end %>
       </div>
       <div class="prj-block">
+        <% unless @project.public %>
+          <div style='color:red'>
+            Dieses Projekt ist noch nicht öffentlich. Bitte melden Sie sich über das Kontaktformular, wenn das Projekt veröffentlicht werden soll.
+          </div>
+        <% end %>
         <h2><%= @project.title %></h2>
         <%= @project.description.html_safe %>
       </div>

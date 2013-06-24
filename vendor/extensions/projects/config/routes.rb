@@ -2,7 +2,7 @@ Refinery::Core::Engine.routes.append do
 
   # Frontend routes
   namespace :projects do
-    resources :projects, :path => '', :only => [:index, :show, :edit, :update] do
+    resources :projects, :path => '' do
       member do
         get :enter
         get :leave

@@ -61,6 +61,16 @@ module Refinery
         volunteers.count - max_volunteer_count > 0
       end
 
+      def publish
+        self.public = true
+        self.save
+      end
+
+      def hide
+        self.public = false
+        self.save
+      end
+
     end
   end
 end

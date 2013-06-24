@@ -7,7 +7,7 @@ module Refinery
       before_filter :authenticate_refinery_user!, :only => [:enter, :leave, :edit, :update]
 
       def index
-        @projects = Project.all
+        @projects = Project.where(public: true)
         @projects &= Type.find(params[:type]).collect{|t| t.projects}.flatten if params[:type]
         @projects &= Sector.find(params[:sector]).collect{|s| s.projects}.flatten if params[:sector]
         @projects &= VolunteerType.find(params[:volunteer_type]).collect{|vt| vt.projects}.flatten if params[:volunteer_type]

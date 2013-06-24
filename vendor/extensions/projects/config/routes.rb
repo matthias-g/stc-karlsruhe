@@ -17,6 +17,10 @@ Refinery::Core::Engine.routes.append do
         collection do
           post :update_positions
         end
+        member do
+          get :publish
+          get :hide
+        end
       end
     end
     namespace :admin, :path => 'refinery/projects' do

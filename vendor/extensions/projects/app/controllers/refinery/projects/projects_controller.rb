@@ -5,7 +5,7 @@ module Refinery
 
       before_filter :find_all_projects
       before_filter :find_page
-      before_filter :authenticate_refinery_user!, :only => [:enter, :leave, :edit, :update]
+      before_filter :authenticate_refinery_user!, :only => [:enter, :leave, :edit, :update, :new, :create]
 
       def index
         @projects = Project.where(public: true)
@@ -23,7 +23,7 @@ module Refinery
 
       def show
         @project = Project.find(params[:id])
-        unless @project.public || current_refinery_user.leads_project?(@project)
+        unless @project.public || (current_refinery_user && current_refinery_user.leads_project?(@project))
           error_404
           return
         end

@@ -1,5 +1,5 @@
 <% page_code = Refinery::Core.google_analytics_page_code.to_s.strip %>
-<% unless local_request? or refinery_user? or page_code =~ /^(UA-xxxxxx-x)?$/ -%>
+<% unless local_request? or current_refinery_user or page_code =~ /^(UA-xxxxxx-x)?$/ -%>
     <script type="text/javascript">
         var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-41122948-1']); _gaq.push(['_trackPageview']);
         (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

@@ -57,7 +57,7 @@ module Refinery
       end
 
       def is_full?()
-        false unless max_volunteer_count
+        return false unless max_volunteer_count
         volunteers.count - max_volunteer_count > 0
       end
 

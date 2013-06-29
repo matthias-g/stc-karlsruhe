@@ -11,6 +11,7 @@ module Refinery
 
       validates :title, :presence => true, :uniqueness => true
       validates :description, :presence => true
+      validates :max_volunteer_count, :numericality => { :only_integer => true }, :allow_nil => true
 
       belongs_to :image, :class_name => '::Refinery::Image'
 

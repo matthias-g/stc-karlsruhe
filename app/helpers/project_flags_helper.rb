@@ -1,0 +1,2 @@
+module ProjectFlagsHelper
+end

@@ -1,0 +1,25 @@
+<h1>Listing project_flags</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @project_flags.each do |project_flag| %>
+  <tr>
+    <td><%= project_flag.name %></td>
+    <td><%= project_flag.type %></td>
+    <td><%= link_to 'Show', project_flag %></td>
+    <td><%= link_to 'Edit', edit_project_flag_path(project_flag) %></td>
+    <td><%= link_to 'Destroy', project_flag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Project flag', new_project_flag_path %>

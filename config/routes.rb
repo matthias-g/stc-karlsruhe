@@ -1,4 +1,13 @@
 ServethecityKarlsruhe::Application.routes.draw do
+  resources :project_flags
+
+
+  resources :projects
+
+
+  resources :pages
+
+
   resources :users
 
 

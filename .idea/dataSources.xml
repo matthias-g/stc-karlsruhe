@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="108015408">
-    <data-source source="LOCAL" name="Rails stc-karlsruhe: development" product="SQLite" version="3.7.2" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native" uuid="f6955a27-22a3-434d-b4dd-189780229e6f">
+  <component name="DataSourceManagerImpl" format="xml" hash="4094576486">
+    <data-source source="LOCAL" name="Rails stc-karlsruhe: development" product="SQLite" version="3.7.2" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native" uuid="bf6b820c-900e-42a4-bd6c-10ba6f2c33d7">
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/development.sqlite3</jdbc-url>
       <libraries>

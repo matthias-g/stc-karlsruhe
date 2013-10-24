@@ -1,4 +1,10 @@
 ServethecityKarlsruhe::Application.routes.draw do
+  resources :users
+
+
+  resources :page_sections
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

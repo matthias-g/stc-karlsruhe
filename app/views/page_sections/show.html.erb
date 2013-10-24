@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @page_section.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @page_section.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_page_section_path(@page_section) %> |
+<%= link_to 'Back', page_sections_path %>

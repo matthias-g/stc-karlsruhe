@@ -1,0 +1,29 @@
+<h1>Listing page_sections</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @page_sections.each do |page_section| %>
+      <tr>
+        <td><%= page_section.title %></td>
+        <td><%= page_section.content %></td>
+        <td><%= link_to 'Show', page_section %></td>
+        <td><%= link_to 'Edit', edit_page_section_path(page_section) %></td>
+        <td><%= link_to 'Destroy', page_section, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Page section', new_page_section_path %>

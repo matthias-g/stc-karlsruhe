@@ -1,4 +1,10 @@
 StcKarlsruhe::Application.routes.draw do
+  resources :page_sections
+
+  resources :pages
+
+  root 'pages#welcome'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

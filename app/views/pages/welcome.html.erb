@@ -6,7 +6,7 @@
 </p>
 
 <% @page.sections.each do |section| %>
-  <%= section.content %> <br />
+  <%= section.content.html_safe %> <br />
 <% end %>
 
 <%#= link_to 'Edit', edit_page_path(@page) %>

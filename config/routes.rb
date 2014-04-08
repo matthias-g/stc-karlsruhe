@@ -1,4 +1,8 @@
 StcKarlsruhe::Application.routes.draw do
+
+  devise_for :users
+  resources :users
+
   resources :page_sections
 
   resources :pages

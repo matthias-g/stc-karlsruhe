@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>StcKarlsruhe</title>
+  <title>Serve the City Karlsruhe</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<div>
+  <% if user_signed_in? %>
+    Logged in as <%= current_user.username %>
+    <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+  <% else %>
+    <%= link_to 'Sign in', new_user_session_path %>
+  <% end %>
+</div>
 
 <%= yield %>
 

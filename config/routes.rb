@@ -1,7 +1,14 @@
 StcKarlsruhe::Application.routes.draw do
 
+  resources :projects do
+    member do
+      get :enter
+      get :leave
+    end
+  end
+
   devise_for :users
-  resources :users
+  # resources :users
 
   resources :page_sections
 

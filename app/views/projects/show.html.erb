@@ -66,7 +66,7 @@
   <% else %>
       <%= link_to 'Enter', enter_project_path(@project) %>
   <% end %>
-  <% if user_signed_in? and current_user.leads_project?(@project) %>
+  <% if user_signed_in? and ( current_user.leads_project?(@project) or current_user.is_admin? ) %>
       <%= link_to 'Edit', edit_project_path(@project) %>
       <%= link_to 'Edit leaders', edit_leaders_project_path(@project) %>
   <% end %>

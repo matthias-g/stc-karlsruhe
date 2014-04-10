@@ -101,7 +101,7 @@ class ProjectsController < ApplicationController
     end
 
     def redirect_non_leaders
-      unless current_user.leads_project?(@project)
+      unless current_user.leads_project?(@project) or current_user.is_admin?
         redirect_to @project
       end
     end

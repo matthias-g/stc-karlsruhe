@@ -42,4 +42,8 @@ class User < ActiveRecord::Base
     roles.any?{|r| r.title == title.to_s.camelize}
   end
 
+  def is_admin?
+    has_role?(:admin)
+  end
+
 end

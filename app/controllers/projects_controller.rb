@@ -98,7 +98,7 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements, :visible, :user_id)
+      params.require(:project).permit(:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements, :visible, :user_id, :picture)
     end
 
     def redirect_non_leaders

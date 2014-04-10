@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Picture:</strong>
+  <%= image_tag @project.picture_url(:preview) if @project.picture %>
+</p>
+
+<p>
   <strong>Title:</strong>
   <%= @project.title %>
 </p>
@@ -60,10 +65,10 @@
 <% else %>
   <%= link_to 'Enter', enter_project_path(@project) %>
 <% end %>
-<% if current_user.leads_project?(@project) %>
+<% if user_signed_in? and current_user.leads_project?(@project) %>
   <%= link_to 'Edit', edit_project_path(@project) %>
   <%= link_to 'Edit leaders', edit_leaders_project_path(@project) %>
 <% end %>
-<% if current_user.is_admin? %>
+<% if user_signed_in? and current_user.is_admin? %>
   <%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>

@@ -3,6 +3,8 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :volunteers, :class_name => 'User', :join_table => 'projects_volunteers'
   has_and_belongs_to_many :leaders, :class_name => 'User', :join_table => 'projects_leaders'
 
+  mount_uploader :picture, ImageUploader
+
   def add_volunteer(user)
     raise ArgumentException, 'User should be a user object.' unless user.is_a?(User)
     volunteers << user unless has_volunteer?(user)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140410101251) do
+ActiveRecord::Schema.define(version: 20140410145510) do
 
   create_table "page_sections", force: true do |t|
     t.string   "title"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20140410101251) do
     t.boolean  "visible"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "picture"
   end
 
   create_table "projects_leaders", id: false, force: true do |t|

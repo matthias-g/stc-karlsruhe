@@ -1,6 +1,12 @@
-<h1>Editing page_section</h1>
+<%= render '/layouts/smallheader' -%>
 
-<%= render 'form' %>
+<section>
 
-<%= link_to t('section.action.edit'), @page_section %> |
-<%= link_to t('section.action.toOverview'), page_sections_path %>
+    <h1>Editing page_section</h1>
+
+    <%= render 'form' %>
+
+    <%= link_to t('section.action.edit'), @page_section %> |
+    <%= link_to t('section.action.toOverview'), page_sections_path %>
+
+</section>

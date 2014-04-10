@@ -1,20 +1,7 @@
-<% content_for :pageHeader do %>
-    <header>
-      <a id="logo" href="/">
-        05.-10.Mai 2014
-        <span>Projektwoche Karlsruhe</span>
-      </a>
-    </header>
-<% end %>
+<%= render '/layouts/bigheader' -%>
 
 <% @page.sections.each do |section| %>
   <section>
     <%= section.content.html_safe %>
   </section>
 <% end %>
-
-
-<%#= @page.title %>
-<%#= link_to 'Edit', edit_page_path(@page) %>
-<%#= link_to 'Back', pages_path %>
-

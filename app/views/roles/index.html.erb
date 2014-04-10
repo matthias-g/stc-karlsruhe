@@ -1,27 +1,31 @@
-<h1>Listing roles</h1>
+<%= render '/layouts/smallheader' -%>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<section>
+    <h1>Listing roles</h1>
 
-  <tbody>
-    <% @roles.each do |role| %>
-      <tr>
-        <td><%= role.title %></td>
-        <td><%= link_to 'Show', role %></td>
-        <td><%= link_to 'Edit', edit_role_path(role) %></td>
-        <td><%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
 
-<br>
+      <tbody>
+        <% @roles.each do |role| %>
+          <tr>
+            <td><%= role.title %></td>
+            <td><%= link_to 'Show', role %></td>
+            <td><%= link_to 'Edit', edit_role_path(role) %></td>
+            <td><%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<%= link_to 'New Role', new_role_path %>
+    <br>
+
+    <%= link_to 'New Role', new_role_path %>
+</section>

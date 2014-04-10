@@ -44,12 +44,13 @@ body {
     text-decoration: none;
     vertical-align: top;
 }
+
 header {
-    margin: 0 auto;
-    background: image-url("logo_bg.png") center top / auto 100% no-repeat;
-    padding: 70px 0;
-}
-#logo {
+  margin: 0 auto;
+  background: image-url("logo_bg.png") center top / auto 100% no-repeat;
+  padding: 70px 0;
+
+  .logo {
     display: block;
     width: 400px;
     margin: 0 auto;
@@ -60,11 +61,26 @@ header {
     text-shadow: 0 0 4px rgba(0,0,0,0.5);
     text-align: center;
     text-decoration: none;
+
+    span {
+      display: block;
+      font-size: 66%;
+    }
+  }
+
+  &.smallheader {
+    background-image: image-url("logo_bg_small.png");
+    padding: 50px 0 20px;
+    .logo {
+      width: 200px;
+      padding-top: 180px;
+      background-image: image-url("logo_small.png");
+      background-size: 200px;
+      font-size: 35px;
+    }
+  }
 }
-#logo span {
-    display: block;
-    font-size: 66%;
-}
+
 #notice {
     background-color: rgba(200,255,200,0.75);
     margin: 10px 0;

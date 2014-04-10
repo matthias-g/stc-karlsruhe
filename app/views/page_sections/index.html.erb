@@ -1,7 +1,10 @@
-<h1>Listing page_sections</h1>
+<%= render '/layouts/smallheader' -%>
 
-<table>
-  <thead>
+<section>
+  <h1>Listing page_sections</h1>
+
+  <table>
+    <thead>
     <tr>
       <th>Title</th>
       <th>Content</th>
@@ -9,21 +12,24 @@
       <th></th>
       <th></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
     <% @page_sections.each do |page_section| %>
-      <tr>
-        <td><%= page_section.title %></td>
-        <td><%= page_section.content %></td>
-        <td><%= link_to t('section.action.show'), page_section %></td>
-        <td><%= link_to t('section.action.edit'), edit_page_section_path(page_section) %></td>
-        <td><%= link_to t('section.action.delete'), page_section, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <tr>
+          <td><%= page_section.title %></td>
+          <td><%= page_section.content %></td>
+          <td><%= link_to t('section.action.show'), page_section %></td>
+          <td><%= link_to t('section.action.edit'), edit_page_section_path(page_section) %></td>
+          <td><%= link_to t('section.action.delete'), page_section, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 
-<br>
+  <br>
 
-<%= link_to t('section.action.new'), new_page_section_path %>
+  <%= link_to t('section.action.new'), new_page_section_path %>
+</section>
+
+

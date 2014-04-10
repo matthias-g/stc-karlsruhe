@@ -1,17 +1,22 @@
-<p>
-Leaders: <br />
-<% @project.leaders.each do |leader| %>
-  <%= leader.full_name %>
-  <%= link_to 'Remove leader', delete_leader_project_path(@project, :user_id => leader.id), :method => 'delete' %><br />
-<% end %>
-</p>
+<%= render '/layouts/smallheader' -%>
 
-<p>
-Volunteers:<br />
-<% @project.volunteers.each do |volunteer| %>
-  <%= volunteer.full_name %>
-  <%= link_to 'Add to leaders', add_leader_project_path(@project, :user_id => volunteer.id), :method => 'post' %><br />
-<% end %>
-</p>
+<section>
+    <p>
+    Leaders: <br />
+    <% @project.leaders.each do |leader| %>
+      <%= leader.full_name %>
+      <%= link_to 'Remove leader', delete_leader_project_path(@project, :user_id => leader.id), :method => 'delete' %><br />
+    <% end %>
+    </p>
 
-<td><%= link_to 'Back to project', @project %></td>
+    <p>
+    Volunteers:<br />
+    <% @project.volunteers.each do |volunteer| %>
+      <%= volunteer.full_name %>
+      <%= link_to 'Add to leaders', add_leader_project_path(@project, :user_id => volunteer.id), :method => 'post' %><br />
+    <% end %>
+    </p>
+
+    <%= link_to 'Back to project', @project %>
+
+</section>

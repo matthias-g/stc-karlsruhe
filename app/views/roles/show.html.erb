@@ -1,9 +1,11 @@
-<p id="notice"><%= notice %></p>
+<%= render '/layouts/smallheader' -%>
 
-<p>
-  <strong>Title:</strong>
-  <%= @role.title %>
-</p>
+<section>
+    <p>
+      <strong>Title:</strong>
+      <%= @role.title %>
+    </p>
 
-<%= link_to 'Edit', edit_role_path(@role) %> |
-<%= link_to 'Back', roles_path %>
+    <%= link_to 'Edit', edit_role_path(@role) %> |
+    <%= link_to 'Back', roles_path %>
+</section>

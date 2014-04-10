@@ -1,6 +1,10 @@
-<h1>Editing role</h1>
+<%= render '/layouts/smallheader' -%>
 
-<%= render 'form' %>
+<section>
+  <h1>Editing role</h1>
 
-<%= link_to 'Show', @role %> |
-<%= link_to 'Back', roles_path %>
+    <%= render 'form' %>
+
+    <%= link_to 'Show', @role %> |
+    <%= link_to 'Back', roles_path %>
+</section>

@@ -23,9 +23,6 @@
 
 <div id="content">
 
-  <% if error %>
-      <div id="error"><%= error %></div>
-  <% end %>
   <% if notice %>
       <div id="notice"><%= notice %></div>
   <% end %>
@@ -33,7 +30,7 @@
   <%= yield %>
 
   <footer>
-
+    <%= render '/layouts/footer' -%>
   </footer>
 </div>
 

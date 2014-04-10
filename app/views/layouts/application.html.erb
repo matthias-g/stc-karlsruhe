@@ -12,11 +12,11 @@
 <div id="menubar">
   <% if user_signed_in? %>
       Logged in as <%= current_user.username %>
-      <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+      <%= link_to 'Abmelden', destroy_user_session_path, :method => :delete %>
   <% else %>
-      <%= link_to 'Sign in', new_user_session_path %>
+      <%= link_to 'Anmelden', new_user_session_path %>
   <% end %>
-  <%#= link_to 'Sign up', new_registration_path %>
+  <%= link_to 'Registrieren', register_path %>
 </div>
 
 <%= yield %>

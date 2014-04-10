@@ -3,8 +3,10 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1.rc3'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+group :development, :test do
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+end
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -37,14 +39,15 @@ gem 'devise'
 gem 'rmagick'
 gem 'carrierwave'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+group :development do
+  # Use Capistrano for deployment
+  gem 'capistrano'
+  gem 'capistrano-rails'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+  gem 'letter_opener'
+end
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+group :production do
+  # Use PostgreSQL as the production database
+  gem 'pg'
+end

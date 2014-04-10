@@ -42,6 +42,11 @@ en:
         requirements: Requirements
         visible: Visible
         picture: Picture
+      user:
+        username: Username
+        first_name: "First Name"
+        last_name: "Last Name"
+        email: E-Mail
 
   project:
     creation_successful: 'Project was successfully created.'
@@ -49,3 +54,7 @@ en:
     leader:
       added: 'Leader was successfully added.'
       removed: 'Leader was successfully removed.'
+
+  user:
+    profile:
+      updated: 'Your profile was successfully updated.'

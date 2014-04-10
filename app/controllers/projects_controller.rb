@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :enter, :leave]
-  before_action :authenticate_user!, only: [:edit, :update, :enter, :leave, :destroy, :new]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :enter, :leave, :edit_leaders, :add_leader, :delete_leader]
+  before_action :authenticate_user!, only: [:edit, :update, :enter, :leave, :destroy, :new, :edit_leaders, :add_leader, :delete_leader]
 
   # GET /projects
   # GET /projects.json
@@ -72,6 +72,23 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def edit_leaders
+  end
+
+  def add_leader
+    new_leader = User.find(params[:user_id])
+    @project.add_leader(new_leader)
+    # TODO flash message
+    redirect_to edit_leaders_project_url(@project)
+  end
+
+  def delete_leader
+    leader = User.find(params[:user_id])
+    @project.delete_leader(leader)
+    # TODO flash message
+    redirect_to edit_leaders_project_url(@project)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
@@ -80,6 +97,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements, :visible)
+      params.require(:project).permit(:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements, :visible, :user_id)
     end
 end

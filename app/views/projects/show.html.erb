@@ -46,6 +46,10 @@
 </p>
 
 <p>
+  <strong>Leaders:</strong>
+  <%= @project.leaders.collect { |v| v.forename }.join(', ') %>
+</p>
+<p>
   <strong>Volunteers:</strong>
   <%= @project.volunteers.collect { |v| v.forename }.join(', ') %>
 </p>
@@ -57,3 +61,4 @@
 <% else %>
   <%= link_to 'Enter', enter_project_path(@project) %>
 <% end %>
+<td><%= link_to 'Edit leaders', edit_leaders_project_path(@project) %></td>

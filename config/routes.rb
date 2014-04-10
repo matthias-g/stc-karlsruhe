@@ -4,6 +4,9 @@ StcKarlsruhe::Application.routes.draw do
     member do
       get :enter
       get :leave
+      get :edit_leaders
+      post :add_leader
+      delete :delete_leader
     end
   end
 

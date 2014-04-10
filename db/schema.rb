@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140409093251) do
+ActiveRecord::Schema.define(version: 20140409180429) do
 
   create_table "page_sections", force: true do |t|
     t.string   "title"
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(version: 20140409093251) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "projects_leaders", id: false, force: true do |t|
+    t.integer "project_id", null: false
+    t.integer "user_id",    null: false
+  end
+
+  add_index "projects_leaders", ["project_id", "user_id"], name: "index_projects_leaders_on_project_id_and_user_id"
 
   create_table "projects_volunteers", id: false, force: true do |t|
     t.integer "project_id", null: false

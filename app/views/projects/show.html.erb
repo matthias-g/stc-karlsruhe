@@ -54,11 +54,16 @@
   <%= @project.volunteers.collect { |v| v.forename }.join(', ') %>
 </p>
 
-<%= link_to 'Edit', edit_project_path(@project) %>
 <%= link_to 'Back', projects_path %>
 <% if user_signed_in? and @project.has_volunteer?(current_user) %>
   <%= link_to 'Leave', leave_project_path(@project) %>
 <% else %>
   <%= link_to 'Enter', enter_project_path(@project) %>
 <% end %>
-<td><%= link_to 'Edit leaders', edit_leaders_project_path(@project) %></td>
+<% if current_user.leads_project?(@project) %>
+  <%= link_to 'Edit', edit_project_path(@project) %>
+  <%= link_to 'Edit leaders', edit_leaders_project_path(@project) %>
+<% end %>
+<% if current_user.is_admin? %>
+  <%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

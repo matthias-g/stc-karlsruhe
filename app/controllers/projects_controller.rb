@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :enter, :leave, :edit_leaders, :add_leader, :delete_leader]
   before_action :authenticate_user!, only: [:edit, :update, :enter, :leave, :destroy, :new, :edit_leaders, :add_leader, :delete_leader]
+  before_action :redirect_non_leaders, only: [:edit, :edit_leaders, :add_leader, :delete_leader, :destroy, :update]
 
   # GET /projects
   # GET /projects.json
@@ -98,5 +99,11 @@ class ProjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements, :visible, :user_id)
+    end
+
+    def redirect_non_leaders
+      unless current_user.leads_project?(@project)
+        redirect_to @project
+      end
     end
 end

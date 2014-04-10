@@ -1,5 +1,7 @@
 StcKarlsruhe::Application.routes.draw do
 
+  resources :roles
+
   resources :projects do
     member do
       get :enter
@@ -10,8 +12,14 @@ StcKarlsruhe::Application.routes.draw do
     end
   end
 
-  devise_for :users
-  # resources :users
+  devise_for :users, path: :profile, path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register'}
+  devise_scope :users do
+    get 'login', to: 'sessions#new' #, :as => :login_user
+    get 'logout', :to => 'sessions#destroy' #, :as => :logout_user
+    get 'profile', :to => 'users#my_profile'
+    # get 'users/:id', :to => 'users#show'
+    # get 'users', :to => 'users#index', :as => :user
+  end
 
   resources :page_sections
 

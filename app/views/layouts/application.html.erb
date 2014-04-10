@@ -1,28 +1,41 @@
 <!DOCTYPE html>
-<%= render '/refinery/html_tag' %>
-<%= render '/refinery/head' %>
+<html>
+<head>
+  <title><%= t('layout.title') %></title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" %>
+</head>
 <body>
-<%= render '/refinery/ie6check' if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
-<%= render '/refinery/mainmenu' %>
-<div id="boundary">
-  <div id="skyline"></div>
-  <div id="pagebox">
-    <a id="logo" href="/"></a>
-    <div id="header">
-      <%# TODO bitte löschen, eins davon jedenfalls eventuell (?) :-) %>
-      <%= raw @page.content_for(:headsection) %>
-      <%= yield :headsection %>
-    </div>
-    <div id="content">
-      <%= render '/refinery/flash-messages' %>
-      <%= yield :body %>
-    </div>
-    <br style="clear: both;">
-  </div>
-  <div id="footer">
-    <%= render '/refinery/footer' %>
-  </div>
+
+<div id="menubar">
+  <% if user_signed_in? %>
+      <%= t('user.message.loggedInAs') + current_user.username %>
+      <%= link_to t('user.action.logout'), destroy_user_session_path, :method => :delete %>
+  <% else %>
+      <%= link_to t('user.action.login'), new_user_session_path %>
+  <% end %>
+  <%= link_to t('user.action.register'), register_path %>
 </div>
-<%= render '/refinery/javascripts' %>
+
+<%= yield :pageHeader %>
+
+<div id="content">
+
+  <% if error %>
+      <div id="error"><%= error %></div>
+  <% end %>
+  <% if notice %>
+      <div id="notice"><%= notice %></div>
+  <% end %>
+
+  <%= yield %>
+
+  <footer>
+
+  </footer>
+</div>
+
 </body>
 </html>

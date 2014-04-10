@@ -52,7 +52,7 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to action: :my_profile, notice: t('user.profile.updated') }
+        format.html { redirect_to action: :my_profile, notice: t('user.messages.profileUpdated') }
         format.json { head :no_content }
       else
         format.html { render action: 'edit_my_profile' }

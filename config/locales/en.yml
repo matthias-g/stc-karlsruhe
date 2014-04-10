@@ -55,6 +55,18 @@ en:
       added: 'Leader was successfully added.'
       removed: 'Leader was successfully removed.'
 
+
+  page:
+    title: 'Serve The City Karlsruhe'
+
   user:
-    profile:
-      updated: 'Your profile was successfully updated.'
+    actions:
+      login: 'Sign In'
+      logout: 'Sign Out'
+      register: 'Sign Up'
+      confirmAccount: 'Confirm my account'
+      resendInstructions: 'Resend confirmation instructions'
+    labels:
+    messages:
+      loggedInAs: 'logged in as '
+      profileUpdated: 'Your profile was successfully updated.'

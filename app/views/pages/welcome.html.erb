@@ -1,22 +1,18 @@
-<header>
-  <a id="logo" href="/">
-    05.-10.Mai 2014
-    <span>Projektwoche Karlsruhe</span>
-  </a>
-</header>
-<div id="content">
-  <div id="notice"><%= notice %></div>
-  <% @page.sections.each do |section| %>
-      <section>
-        <%= section.content.html_safe %>
-      </section>
-  <% end %>
-  <footer>
-    <a href="/contact">Kontakt</a> | <a href="/impressum">Impressum</a>
-    | <a href="/privacy">Datenschutz</a> | <a href="/disclaimer">Rechtliche Hinweise</a>
-    | <a href="http://www.servethecity.net/">Serve the City international</a>
-  </footer>
-</div>
+<% content_for :pageHeader do %>
+    <header>
+      <a id="logo" href="/">
+        05.-10.Mai 2014
+        <span>Projektwoche Karlsruhe</span>
+      </a>
+    </header>
+<% end %>
+
+<% @page.sections.each do |section| %>
+  <section>
+    <%= section.content.html_safe %>
+  </section>
+<% end %>
+
 
 <%#= @page.title %>
 <%#= link_to 'Edit', edit_page_path(@page) %>

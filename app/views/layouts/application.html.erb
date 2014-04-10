@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Serve the City Karlsruhe</title>
+  <title><%= t('page.title') %></title>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
@@ -12,14 +12,24 @@
 <div id="menubar">
   <% if user_signed_in? %>
       Logged in as <%= current_user.username %>
-      <%= link_to 'Abmelden', destroy_user_session_path, :method => :delete %>
+      <%= link_to t('user.action.logout'), destroy_user_session_path, :method => :delete %>
   <% else %>
-      <%= link_to 'Anmelden', new_user_session_path %>
+      <%= link_to t('user.action.login'), new_user_session_path %>
   <% end %>
-  <%= link_to 'Registrieren', register_path %>
+  <%= link_to t('user.action.register'), register_path %>
 </div>
 
-<%= yield %>
+<%= yield :pageHeader %>
+
+<div id="content">
+  <div id="notice"><%= notice %></div>
+  <%= yield %>
+  <footer>
+    <a href="/contact">Kontakt</a> | <a href="/impressum">Impressum</a>
+    | <a href="/privacy">Datenschutz</a> | <a href="/disclaimer">Rechtliche Hinweise</a>
+    | <a href="http://www.servethecity.net/">Serve the City international</a>
+  </footer>
+</div>
 
 </body>
 </html>

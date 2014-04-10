@@ -1,5 +1,7 @@
 class PageSectionsController < ApplicationController
   before_action :set_page_section, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :check_admin
 
   # GET /page_sections
   # GET /page_sections.json
@@ -70,5 +72,11 @@ class PageSectionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_section_params
       params.require(:page_section).permit(:title, :content)
+    end
+
+    def check_admin
+      unless current_user.is_admin?
+        redirect_to '/'
+      end
     end
 end

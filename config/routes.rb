@@ -13,10 +13,11 @@ StcKarlsruhe::Application.routes.draw do
   end
 
   devise_for :users, path: :profile, path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register'}
-  devise_scope :users do
-    get 'login', to: 'sessions#new' #, :as => :login_user
-    get 'logout', :to => 'sessions#destroy' #, :as => :logout_user
+  devise_scope :user do
+    get 'login', to: 'devise/sessions#new' #, :as => :login_user
+    get 'logout', :to => 'devise/sessions#destroy' #, :as => :logout_user
     get 'profile', :to => 'users#my_profile'
+    get 'register', :to => 'devise/registrations#new'
     # get 'users/:id', :to => 'users#show'
     # get 'users', :to => 'users#index', :as => :user
   end

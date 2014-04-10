@@ -33,13 +33,13 @@ class User < ActiveRecord::Base
   # based on https://github.com/refinery/refinerycms/blob/master/authentication/app/models/refinery/user.rb
   def add_role(title)
     raise ArgumentException, 'Role should be the title of the role not a role object.' if title.is_a?(Role)
-    roles << Role[title] unless has_role?(title)
+    roles << Role.find {|r| r.title.camelize == title.to_s.camelize} unless has_role?(title)
   end
 
   # based on https://github.com/refinery/refinerycms/blob/master/authentication/app/models/refinery/user.rb
   def has_role?(title)
     raise ArgumentException, 'Role should be the title of the role not a role object.' if title.is_a?(Role)
-    roles.any?{|r| r.title == title.to_s.camelize}
+    roles.any?{|r| r.title.camelize == title.to_s.camelize}
   end
 
   def is_admin?

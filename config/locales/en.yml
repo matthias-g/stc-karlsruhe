@@ -23,5 +23,29 @@ en:
   activerecord:
     models:
       project:
+        zero: Project
+        one: Project
+        other: Projects
+      user:
+        zero: User
+        one: User
+        other: Users
     attributes:
       project:
+        title: Title
+        description: Description
+        location: Location
+        latitude: Latitude
+        longitude: Longitude
+        individual_tasks: "Individual Tasks"
+        material: Material
+        requirements: Requirements
+        visible: Visible
+        picture: Picture
+
+  project:
+    creation_successful: 'Project was successfully created.'
+    update_successful: 'Project was successfully updated.'
+    leader:
+      added: 'Leader was successfully added.'
+      removed: 'Leader was successfully removed.'

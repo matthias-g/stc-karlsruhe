@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to @project, notice: t('project.creation_successful') }
         format.json { render action: 'show', status: :created, location: @project }
       else
         format.html { render action: 'new' }
@@ -44,7 +44,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.html { redirect_to @project, notice: t('project.update_successful')}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -79,15 +79,13 @@ class ProjectsController < ApplicationController
   def add_leader
     new_leader = User.find(params[:user_id])
     @project.add_leader(new_leader)
-    # TODO flash message
-    redirect_to edit_leaders_project_url(@project)
+    redirect_to edit_leaders_project_url(@project), notice: t('project.leader.added')
   end
 
   def delete_leader
     leader = User.find(params[:user_id])
     @project.delete_leader(leader)
-    # TODO flash message
-    redirect_to edit_leaders_project_url(@project)
+    redirect_to edit_leaders_project_url(@project), notice: t('project.leader.removed')
   end
 
   private
@@ -98,7 +96,7 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements, :visible, :user_id, :picture)
+      params.require(:project).permit(:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements, :visible, :user_id)
     end
 
     def redirect_non_leaders

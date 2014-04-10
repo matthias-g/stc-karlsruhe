@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Picture:</strong>
+  <%= image_tag @project.picture_url(:preview) if @project.picture %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @project.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project.description %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @project.location %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @project.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @project.longitude %>
+</p>
+
+<p>
+  <strong>Individual tasks:</strong>
+  <%= @project.individual_tasks %>
+</p>
+
+<p>
+  <strong>Material:</strong>
+  <%= @project.material %>
+</p>
+
+<p>
+  <strong>Requirements:</strong>
+  <%= @project.requirements %>
+</p>
+
+<p>
+  <strong>Visible:</strong>
+  <%= @project.visible %>
+</p>
+
+<p>
+  <strong>Leaders:</strong>
+  <%= @project.leaders.collect { |v| v.first_name }.join(', ') %>
+</p>
+<p>
+  <strong>Volunteers:</strong>
+  <%= @project.volunteers.collect { |v| v.first_name }.join(', ') %>
+</p>
+
+<%= link_to 'Back', projects_path %>
+<% if user_signed_in? and @project.has_volunteer?(current_user) %>
+  <%= link_to 'Leave', leave_project_path(@project) %>
+<% else %>
+  <%= link_to 'Enter', enter_project_path(@project) %>
+<% end %>
+<% if user_signed_in? and current_user.leads_project?(@project) %>
+  <%= link_to 'Edit', edit_project_path(@project) %>
+  <%= link_to 'Edit leaders', edit_leaders_project_path(@project) %>
+<% end %>
+<% if user_signed_in? and current_user.is_admin? %>
+  <%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

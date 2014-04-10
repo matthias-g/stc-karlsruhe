@@ -19,10 +19,7 @@ test:
   timeout: 5000
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: servethecity
+  adapter: sqlite3
+  database: db/production.sqlite3
   pool: 5
-  username: rails
-  password: serve
-  min_messages: warning
+  timeout: 5000

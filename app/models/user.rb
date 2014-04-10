@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
 
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }, :format => { with: /\A[a-zA-Z0-9]+\z/, message: 'only allows letters' }
-  validates :forename, :presence => true
-  validates :lastname, :presence => true
+  validates :first_name, :presence => true
+  validates :last_name, :presence => true
   attr_accessor :login
 
   def self.find_first_by_auth_conditions(warden_conditions)
@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    forename + ' ' + lastname
+    first_name + ' ' + last_name
   end
 
   def leads_project?(project)

@@ -4,8 +4,8 @@
   <thead>
     <tr>
       <th>Username</th>
-      <th>Forename</th>
-      <th>Lastname</th>
+      <th>First Name</th>
+      <th>Last Name</th>
       <th>Email</th>
       <th></th>
       <th></th>
@@ -17,8 +17,8 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.username %></td>
-        <td><%= user.forename %></td>
-        <td><%= user.lastname %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
         <td><%= user.email %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>

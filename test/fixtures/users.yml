@@ -2,12 +2,12 @@
 
 one:
   username: MyString
-  forename: MyString
-  lastname: MyString
+  first_name: MyString
+  last_name: MyString
   email: MyString
 
 two:
   username: MyString
-  forename: MyString
-  lastname: MyString
+  first_name: MyString
+  last_name: MyString
   email: MyString

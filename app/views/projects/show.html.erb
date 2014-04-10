@@ -52,11 +52,11 @@
 
 <p>
   <strong>Leaders:</strong>
-  <%= @project.leaders.collect { |v| v.forename }.join(', ') %>
+  <%= @project.leaders.collect { |v| v.first_name }.join(', ') %>
 </p>
 <p>
   <strong>Volunteers:</strong>
-  <%= @project.volunteers.collect { |v| v.forename }.join(', ') %>
+  <%= @project.volunteers.collect { |v| v.first_name }.join(', ') %>
 </p>
 
 <%= link_to 'Back', projects_path %>

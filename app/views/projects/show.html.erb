@@ -23,26 +23,26 @@
   </div>
 
   <div class="rightCol">
-    <div class="infobox">
+    <div class="wide infobox level1">
       Noch XYZ Plätze.
     </div>
     <div>
       <% if user_signed_in? and @project.has_volunteer?(current_user) %>
-          <%= link_to 'Aussteigen', leave_project_path(@project), class: "button" %>
+          <%= link_to 'Aussteigen', leave_project_path(@project), class: "wide button" %>
       <% else %>
-          <%= link_to 'Mitmachen', enter_project_path(@project), class: "button" %>
+          <%= link_to 'Mitmachen', enter_project_path(@project), class: "wide button" %>
       <% end %>
     </div>
     <div>
-      <h4>Leitung</h4>
+      <h3>Leitung</h3>
       <%= @project.leaders.collect { |v| v.first_name }.join(', ') %>
     </div>
     <div>
-      <h4>Team</h4>
+      <h3>Team</h3>
       <%= @project.volunteers.collect { |v| v.first_name }.join(', ') %>
     </div>
     <div class="adminPanel">
-      <h4>Admin Panel</h4>
+      <h3>Admin Panel</h3>
       <ul>
         <% if user_signed_in? and ( current_user.leads_project?(@project) or current_user.is_admin? ) %>
           <li><%= link_to 'Edit Project', edit_project_path(@project) %></li>

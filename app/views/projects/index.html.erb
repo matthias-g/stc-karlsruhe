@@ -21,13 +21,17 @@
       <section>
         <div class="project-image">
           <%= link_to project do %>
-            <%= image_tag project.picture_url(:listview) if project.picture.file %>
+              <%= image_tag project.picture_url(:listview) if project.picture.file %>
           <% end %>
         </div>
-        <%= link_to project do %>
-            <h2><%= project.title %></h2>
-        <% end %>
-        <div class="description clipText"><div><%= project.description %></div></div>
+        <div class="project-title">
+            <%= link_to project do %>
+                <h2><%= project.title %></h2>
+            <% end %>
+        </div>
+        <div class="project-description clipText">
+            <div><%= project.description %></div>
+        </div>
       </section>
   <% end %>
 

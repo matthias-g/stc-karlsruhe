@@ -94,6 +94,8 @@ section {
     background-color: rgba(255,255,255,0.75);
     margin: 10px 0;
     padding: 20px 40px;
+    overflow: auto;
+    position: relative;
 }
 section.restyled {
     background: none;
@@ -114,10 +116,17 @@ footer a {
 
 /* GENERAL STYLES */
 
-h2 {
+a {
+  text-decoration: none;
+  color: rgb(44, 153, 145);
+}
+h2, h3 {
     font: 45px SFMoviePoster;
     margin-top: 5px;
     margin-bottom: 20px;
+}
+h3 {
+  margin-bottom: 10px;
 }
 .spotlights {
     text-align: center;
@@ -202,3 +211,42 @@ h2 {
     margin: 0 auto;
 }
 
+#project-list-header {
+  padding: 10px 20px;
+  h2 {
+    padding: 0;
+    margin: 25px 0 0 10px;
+  }
+}
+#project-list-options {
+  width: 150px;
+  float: right;
+  margin: 0 0 5px 10px;
+}
+#project-list {
+  margin-left: 40px;
+  section {
+    height: 160px;
+    padding-left: 220px;
+  }
+}
+.project-list-image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 200px;
+  background: #aaa;
+}
+
+
+.infobox {
+  float: right;
+  border: 1px solid #123;
+  text-align: center;
+  padding: 5px;
+  margin: 0 5px;
+  span {
+    font-size: 25px;
+  }
+}

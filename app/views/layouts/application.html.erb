@@ -22,13 +22,12 @@
 <%= yield :pageHeader %>
 
 <div id="content">
-
   <% if notice %>
       <div id="notice"><%= notice %></div>
   <% end %>
-
   <%= yield %>
 </div>
+
 <footer>
   <%= render '/layouts/footer' -%>
 </footer>

@@ -3,7 +3,7 @@
 <section>
   <p>
     <strong>Picture:</strong>
-    <%= image_tag @project.picture_url(:preview) if @project.picture %>
+    <%= image_tag @project.picture_url(:preview) if @project.picture.file %>
   </p>
 
   <p>

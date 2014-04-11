@@ -6,7 +6,7 @@
     <span>23</span>
   </div>
   <div class="infobox">
-    <div>Mitmacher 2014</div>
+    <div>Aktive 2014</div>
     <span>76</span>
   </div>
   <h2>Projektliste 2014</h2>
@@ -21,7 +21,7 @@
       <section>
         <div class="project-list-image">
           <%= link_to project do %>
-            <%= image_tag project.picture_url(:listview) if project.picture %>
+            <%= image_tag project.picture_url(:listview) if project.picture.file %>
           <% end %>
         </div>
         <%= link_to project do %>

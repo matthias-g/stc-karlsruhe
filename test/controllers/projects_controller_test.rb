@@ -5,8 +5,8 @@ class ProjectsControllerTest < ActionController::TestCase
     @project = projects(:one)
   end
 
-  test "should get index" do
-    get :index
+  test "should get contact" do
+    get :contact
     assert_response :success
     assert_not_nil assigns(:projects)
   end

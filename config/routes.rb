@@ -4,6 +4,8 @@ StcKarlsruhe::Application.routes.draw do
 
   resources :roles
 
+  resources :contact_form
+
   resources :projects do
     member do
       get :enter
@@ -21,7 +23,7 @@ StcKarlsruhe::Application.routes.draw do
     get 'profile', :to => 'users#my_profile'
     get 'register', :to => 'devise/registrations#new'
     # get 'users/:id', :to => 'users#show'
-    # get 'users', :to => 'users#index', :as => :user
+    # get 'users', :to => 'users#contact', :as => :user
   end
 
   resources :page_sections
@@ -34,7 +36,7 @@ StcKarlsruhe::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  # root 'welcome#contact'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

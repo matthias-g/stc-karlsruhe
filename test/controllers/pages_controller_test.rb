@@ -5,8 +5,8 @@ class PagesControllerTest < ActionController::TestCase
     @page = pages(:one)
   end
 
-  test "should get index" do
-    get :index
+  test "should get contact" do
+    get :contact
     assert_response :success
     assert_not_nil assigns(:pages)
   end

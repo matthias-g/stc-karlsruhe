@@ -5,8 +5,8 @@ class PageSectionsControllerTest < ActionController::TestCase
     @page_section = page_sections(:one)
   end
 
-  test "should get index" do
-    get :index
+  test "should get contact" do
+    get :contact
     assert_response :success
     assert_not_nil assigns(:page_sections)
   end

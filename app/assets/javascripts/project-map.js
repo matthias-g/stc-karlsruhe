@@ -41,7 +41,7 @@ google.maps.event.addDomListener(window, 'load', function() {
      }).attr('title', 'Karte aus-/einklappen');
      $('.project-map').append(fader);
      google.maps.event.addListener(map, 'bounds_changed', function() {
-     $('.project-map > div:not(.project-map-fader)').css('z-index', 'auto');
+     $('.project-map > div:not(.project-map-fader)').css('z-contact', 'auto');
      });*/
 
     // update project explorer to use ajax and the map view

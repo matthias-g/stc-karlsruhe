@@ -27,6 +27,7 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @project.add_leader(current_user)
 
     respond_to do |format|
       if @project.save
@@ -100,7 +101,7 @@ class ProjectsController < ApplicationController
     end
 
     def redirect_non_leaders
-      unless current_user.leads_project?(@project)
+      unless current_user.leads_project?(@project) or current_user.is_admin?
         redirect_to @project
       end
     end

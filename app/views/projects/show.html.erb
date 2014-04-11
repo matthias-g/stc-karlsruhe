@@ -41,18 +41,14 @@
       <h3>Team</h3>
       <%= @project.volunteers.collect { |v| v.first_name }.join(', ') %>
     </div>
+    <% if user_signed_in? and ( current_user.leads_project?(@project) or current_user.is_admin? ) %>
     <div class="adminPanel">
       <h3>Admin Panel</h3>
       <ul>
-        <% if user_signed_in? and ( current_user.leads_project?(@project) or current_user.is_admin? ) %>
-          <li><%= link_to 'Edit Project', edit_project_path(@project) %></li>
-          <li><%= link_to 'Edit Project Leaders', edit_leaders_project_path(@project) %></li>
-        <% end %>
-        <% if user_signed_in? and current_user.is_admin? %>
-          <li><%= link_to 'Delete Project', @project, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-        <% end %>
+        <li><%= link_to 'Edit Project', edit_project_path(@project) %></li>
       </ul>
     </div>
+    <% end %>
   </div>
 
   <div class="description">
@@ -64,4 +60,4 @@
 
 </section>
 
-  <%#= link_to 'Back', projects_path %>
+<%#= link_to 'Back', projects_path %>

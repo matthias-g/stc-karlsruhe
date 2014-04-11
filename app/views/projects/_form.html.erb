@@ -1,52 +1,89 @@
 <%= form_for(@project) do |f| %>
-  <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
 
-      <ul>
-      <% @project.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <% if @project.errors.any? %>
+        <section id="error_explanation">
+          <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+          <ul>
+            <% @project.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </section>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
-    <%= f.label :latitude %><br>
-    <%= f.text_field :latitude %>
-  </div>
-  <div class="field">
-    <%= f.label :longitude %><br>
-    <%= f.text_field :longitude %>
-  </div>
-  <div class="field">
-    <%= f.label :individual_tasks %><br>
-    <%= f.text_area :individual_tasks %>
-  </div>
-  <div class="field">
-    <%= f.label :material %><br>
-    <%= f.text_area :material %>
-  </div>
-  <div class="field">
-    <%= f.label :requirements %><br>
-    <%= f.text_area :requirements %>
-  </div>
-  <div class="field">
-    <%= f.file_field :picture %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <section class="project-view project-edit-view">
+      <h1><%= (isNew ? "Neues Projekt erstellen" : ("Projekt bearbeiten: " + @project.title)) %></h1>
+
+      <div class="leftCol">
+        <div>
+          <h3>Einsatzort</h3>
+          <%= f.text_field :location %>
+        </div>
+        <div>
+          <h3>Einzelne Arbeiten</h3>
+          <%= f.text_area :individual_tasks %>
+        </div>
+        <div>
+          <h3>Voraussetzungen</h3>
+          <%= f.text_area :requirements %>
+        </div>
+        <div>
+          <h3>Benötigtes Material</h3>
+          <%= f.text_area :material %>
+        </div>
+      </div>
+
+      <div class="rightCol">
+        <div class="wide infobox level0">
+          Verfügbare Plätze:
+          TODO
+        </div>
+        <% if not isNew %>
+            <div>
+              <h3>Leitung</h3>
+              <%= @project.leaders.collect { |v| v.first_name }.join(', ') %>
+              <div>
+                <%= link_to 'Edit Project Leaders', edit_leaders_project_path(@project) %>
+              </div>
+            </div>
+
+            <% if current_user.is_admin? %>
+                <div class="adminPanel">
+                  <h3>Admin Panel</h3>
+                  <ul>
+                    <li><%= link_to 'Delete Project', @project, method: :delete,
+                              data: { confirm: 'Are you sure?' } %></li>
+                  </ul>
+                </div>
+            <% end %>
+        <% end %>
+      </div>
+
+      <div class="description">
+        <%= image_tag @project.picture_url(:preview) if @project.picture.file %>
+
+        <div>
+          <h3>Projektname</h3>
+          <%= f.text_field :title %>
+        </div>
+        <div>
+          <h3>Bild hochladen</h3>
+          <%= f.file_field :picture %>
+        </div>
+        <div>
+          <h3>Beschreibung</h3>
+          <%= f.text_area :description %>
+        </div>
+      </div>
+
+      <%#= f.text_field :latitude %>
+      <%#= f.text_field :longitude %>
+    </section>
+
+    <section>
+      <%= f.submit %>
+      <%= link_to 'Show', @project %> |
+      <%= link_to 'Back', projects_path %>
+    </section>
+
 <% end %>

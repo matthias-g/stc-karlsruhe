@@ -360,7 +360,7 @@ h3 {
 
 .project-view {
   overflow: auto;
-  padding: 20px;
+  padding: 20px 20px 50px;
   h1 {
     padding: 0 10px 10px;
   }
@@ -369,6 +369,7 @@ h3 {
     float: left;
     border-right: 1px solid black;
     padding: 10px;
+    padding-right: 20px;
   }
   .rightCol {
     width: 180px;
@@ -384,5 +385,26 @@ h3 {
       border: 1px solid rgba(0,0,0,0.5);
       margin-bottom: 20px;
     }
+  }
+}
+
+.project-edit-view {
+  h3 {
+    margin-top: 10px;
+  }
+  input, textarea {
+    width: 98%;
+    max-width: 98%;
+    min-width: 98%;
+  }
+  textarea {
+    min-height: 80px;
+    padding: 5px;
+  }
+  .description textarea {
+    min-height: 300px;
+  }
+  .description img {
+    margin-bottom: 0;
   }
 }

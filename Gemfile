@@ -52,4 +52,5 @@ end
 group :production do
   # Use PostgreSQL as the production database
   gem 'pg'
+  gem 'dotenv-rails'
 end

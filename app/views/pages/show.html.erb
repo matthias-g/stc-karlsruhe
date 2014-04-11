@@ -1,12 +1,18 @@
 <%= render '/layouts/smallheader' -%>
 
+
 <section>
   <h1><%= @page.title %></h1>
-  <% @page.sections.each do |section| %>
-    <section>
+</section>
+
+<% @page.sections.each do |section| %>
+    <section <%#= ('class="' + section.cssClass + '"') if section.cssClass %> >
       <%= section.content.html_safe %>
     </section>
-  <% end %>
-  <%= link_to t('page.action.edit'), edit_page_path(@page) %> |
-  <%= link_to t('page.action.toOverview'), pages_path %>
+<% end %>
+
+<section>
+    <h2>Admin Panel</h2>
+    <%= link_to t('page.action.edit'), edit_page_path(@page) %><br>
+    <%= link_to t('page.action.toOverview'), pages_path %>
 </section>

@@ -9,7 +9,7 @@
     <div>Aktive 2014</div>
     <span>76</span>
   </div>
-  <h2>Projektliste 2014</h2>
+  <h1>Projektliste 2014</h1>
 </section>
 
 <section id="project-list-options">
@@ -19,15 +19,15 @@
 <div id="project-list">
   <% @projects.each do |project| %>
       <section>
-        <div class="project-list-image">
+        <div class="project-image">
           <%= link_to project do %>
             <%= image_tag project.picture_url(:listview) if project.picture.file %>
           <% end %>
         </div>
         <%= link_to project do %>
-            <h3><%= project.title %></h3>
+            <h2><%= project.title %></h2>
         <% end %>
-        <div class="project-list-description clipText"><div><%= project.description %></div></div>
+        <div class="description clipText"><div><%= project.description %></div></div>
       </section>
   <% end %>
 

@@ -1,76 +1,67 @@
 <%= render '/layouts/smallheader' -%>
 
-<section>
-  <p>
-    <strong>Picture:</strong>
+<section class="project-view">
+  <h1>Projekt: <%= @project.title %></h1>
+
+  <div class="leftCol">
+    <div>
+      <h3>Einsatzort</h3>
+      <%= @project.location %>
+     </div>
+    <div>
+      <h3>Einzelne Arbeiten</h3>
+      <%= @project.individual_tasks %>
+    </div>
+    <div>
+      <h3>Voraussetzungen</h3>
+      <%= @project.requirements %>
+    </div>
+    <div>
+      <h3>Benötigtes Material</h3>
+      <%= @project.material %>
+     </div>
+  </div>
+
+  <div class="rightCol">
+    <div class="infobox">
+      Noch XYZ Plätze.
+    </div>
+    <div>
+      <% if user_signed_in? and @project.has_volunteer?(current_user) %>
+          <%= link_to 'Aussteigen', leave_project_path(@project), class: "button" %>
+      <% else %>
+          <%= link_to 'Mitmachen', enter_project_path(@project), class: "button" %>
+      <% end %>
+    </div>
+    <div>
+      <h4>Leitung</h4>
+      <%= @project.leaders.collect { |v| v.first_name }.join(', ') %>
+    </div>
+    <div>
+      <h4>Team</h4>
+      <%= @project.volunteers.collect { |v| v.first_name }.join(', ') %>
+    </div>
+    <div class="adminPanel">
+      <h4>Admin Panel</h4>
+      <ul>
+        <% if user_signed_in? and ( current_user.leads_project?(@project) or current_user.is_admin? ) %>
+          <li><%= link_to 'Edit Project', edit_project_path(@project) %></li>
+          <li><%= link_to 'Edit Project Leaders', edit_leaders_project_path(@project) %></li>
+        <% end %>
+        <% if user_signed_in? and current_user.is_admin? %>
+          <li><%= link_to 'Delete Project', @project, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="description">
     <%= image_tag @project.picture_url(:preview) if @project.picture.file %>
-  </p>
+    <div>
+      <%= @project.description %>
+    </div>
+  </div>
 
-  <p>
-    <strong>Title:</strong>
-    <%= @project.title %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= @project.description %>
-  </p>
-
-  <p>
-    <strong>Location:</strong>
-    <%= @project.location %>
-  </p>
-
-  <p>
-    <strong>Latitude:</strong>
-    <%= @project.latitude %>
-  </p>
-
-  <p>
-    <strong>Longitude:</strong>
-    <%= @project.longitude %>
-  </p>
-
-  <p>
-    <strong>Individual tasks:</strong>
-    <%= @project.individual_tasks %>
-  </p>
-
-  <p>
-    <strong>Material:</strong>
-    <%= @project.material %>
-  </p>
-
-  <p>
-    <strong>Requirements:</strong>
-    <%= @project.requirements %>
-  </p>
-
-  <p>
-    <strong>Visible:</strong>
-    <%= @project.visible %>
-  </p>
-
-  <p>
-    <strong>Leaders:</strong>
-    <%= @project.leaders.collect { |v| v.first_name }.join(', ') %>
-  </p>
-  <p>
-    <strong>Volunteers:</strong>
-    <%= @project.volunteers.collect { |v| v.first_name }.join(', ') %>
-  </p>
-
-  <%= link_to 'Back', projects_path %>
-  <% if user_signed_in? and @project.has_volunteer?(current_user) %>
-      <%= link_to 'Leave', leave_project_path(@project) %>
-  <% else %>
-      <%= link_to 'Enter', enter_project_path(@project) %>
-  <% end %>
-  <% if user_signed_in? and ( current_user.leads_project?(@project) or current_user.is_admin? ) %>
-      <%= link_to 'Edit', edit_project_path(@project) %>
-      <%= link_to 'Edit leaders', edit_leaders_project_path(@project) %>
-  <% end %>
-  <% if user_signed_in? and current_user.is_admin? %>
-      <%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <% end %>
 </section>
+
+  <%#= link_to 'Back', projects_path %>

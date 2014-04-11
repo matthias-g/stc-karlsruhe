@@ -39,6 +39,8 @@ gem 'devise'
 gem 'rmagick'
 gem 'carrierwave'
 
+gem 'piwik_analytics'
+
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano'

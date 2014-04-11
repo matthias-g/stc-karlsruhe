@@ -89,10 +89,6 @@ GEM
     net-ssh (2.8.0)
     orm_adapter (0.5.0)
     pg (0.17.0)
-    piwik_analytics (1.0.2)
-      actionpack
-      activesupport
-      rails (>= 3.0.0)
     polyglot (0.3.4)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -171,7 +167,6 @@ DEPENDENCIES
   jquery-rails
   letter_opener
   pg
-  piwik_analytics
   rails (= 4.0.1.rc3)
   rmagick
   sass-rails (~> 4.0.0)

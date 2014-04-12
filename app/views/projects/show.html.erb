@@ -5,23 +5,19 @@
 
   <div class="leftCol">
     <div>
-      <h3><%= t('project.label.location') %></h3>
-      <h3><%= Project.human_attribute_name('location') %></h3>
+      <h3><%= t('project.label.location') + Project.human_attribute_name('location') %></h3>
       <%= @project.location %>
      </div>
     <div>
-      <h3><%= t('project.label.individualTasks') %></h3>
-      <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
+      <h3><%= t('project.label.individualTasks') +  Project.human_attribute_name('individual_tasks') %></h3>
       <%= @project.individual_tasks %>
     </div>
     <div>
-      <h3><%= t('project.label.requirements') %></h3>
-      <h3><%= Project.human_attribute_name('requirements') %></h3>
+      <h3><%= t('project.label.requirements') + Project.human_attribute_name('requirements') %></h3>
       <%= @project.requirements %>
     </div>
     <div>
-      <h3><%= t('project.label.material') %></h3>
-      <h3><%= Project.human_attribute_name('material') %></h3>
+      <h3><%= t('project.label.material') + Project.human_attribute_name('material') %></h3>
       <%= @project.material %>
      </div>
   </div>
@@ -29,28 +25,26 @@
   <div class="rightCol">
     <div class="wide infobox level1">
       <%= @project.status.title %>
-      <%= t('project.message.remainingVacancy') % ['XYZ'] %>
+      (<%= t('project.message.remainingVacancy') % ['XYZ'] %>)
     </div>
     <div>
       <% if user_signed_in? and @project.has_volunteer?(current_user) %>
-          <%= t('project.you_are_participating') %>
+          <%= t('project.message.teamMember') %>
           <%= link_to t('project.action.leave'), leave_project_path(@project), class: "wide button" %>
       <% else %>
           <%= link_to t('project.action.enter'), enter_project_path(@project), class: "wide button" %>
       <% end %>
     </div>
     <div>
-      <h3><%= Project.human_attribute_name('desired_team_size') %></h3>
+      <h3><%= t('project.label.desiredTeamSize') + Project.human_attribute_name('desired_team_size') %></h3>
       <%= @project.desired_team_size %>
     </div>
     <div>
-      <h3><%= t('project.label.leaders') %></h3>
-      <h3><%= Project.human_attribute_name('leaders') %></h3>
+      <h3><%= t('project.label.leaders') + Project.human_attribute_name('leaders') %></h3>
       <%= @project.leaders.collect { |v| v.first_name }.join(', ') %>
     </div>
     <div>
-      <h3><%= t('project.label.team') %></h3>
-      <h3><%= Project.human_attribute_name('volunteers') %></h3>
+      <h3><%= t('project.label.team') + Project.human_attribute_name('volunteers') %></h3>
       <%= @project.volunteers.collect { |v| v.first_name }.join(', ') %>
     </div>
     <% if user_signed_in? and ( current_user.leads_project?(@project) or current_user.is_admin? ) %>

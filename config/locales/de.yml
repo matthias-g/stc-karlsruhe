@@ -23,30 +23,34 @@ de:
   activerecord:
     models:
       project:
-        zero: Projekt
-        one: Projekt
-        other: Projekte
+        zero: 'Projekt'
+        one: 'Projekt'
+        other: 'Projekte'
       user:
-        zero: User
-        one: User
-        other: User
+        zero: 'User'
+        one: 'User'
+        other: 'User'
     attributes:
       project:
-        title: Titel
-        description: Beschreibung
-        location: Projektort
-        latitude: Breitengrad
-        longitude: Längengrad
+        title: 'Projekttitel'
+        description: 'Beschreibung'
+        location: 'Projektort'
+        latitude: 'Breitengrad'
+        longitude: 'Längengrad'
         individual_tasks: 'Einzelne Arbeiten'
-        material: Benötigtes Material
-        requirements: Voraussetzungen
-        visible: Sichtbar
-        picture: Bild
+        material: 'Benötigtes Material'
+        requirements: 'Voraussetzungen'
+        visible: 'Sichtbar'
+        picture: 'Bild'
+        desired_team_size: 'Gewünschte Teamgröße'
+        leaders: 'Leitung'
+        volunteers: 'Team'
+        status: 'Status'
       user:
-        username: Username
-        first_name: "Vorname"
-        last_name: "Nachname"
-        email: E-Mail
+        username: 'Username'
+        first_name: 'Vorname'
+        last_name: 'Nachname'
+        email: 'E-Mail'
 
   general:
     action:
@@ -66,13 +70,11 @@ de:
       disclaimer: 'Haftungsausschluss'
 
   project:
-    leader:
-      added: 'Projektleiter erfolgreich hinzugefügt.'
-      removed: 'Projektleiter erfolgreich entfernt.'
     action:
       new: 'Neues Projekt'
       edit: 'Projekt bearbeiten'
       save: 'Projekt speichern'
+      delete: 'Projekt löschen'
       enter: 'Team beitreten'
       leave: 'Team verlassen'
       editLeaders: 'Projektleiter ändern'
@@ -82,6 +84,7 @@ de:
       toProject: 'Zurück zum Projekt'
     label:
       project: 'Projekt'
+      status: 'Projektstatus'
       new: 'Neues Projekt erstellen'
       edit: 'Projekt bearbeiten: %s'
       list: 'Projekte 2014'
@@ -95,14 +98,15 @@ de:
       material: 'Benötigtes Material'
       leaders: 'Leitung'
       team: 'Team'
-      maxTeamSize: 'Maximale Teamgröße'
+      desiredTeamSize: 'Gewünschte Teamgröße'
     message:
       created: 'Projekt wurde erfolgreich erstellt.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'
-      leaderAdded: 'Der Leiter wurde erfolgreich hinzugefügt.'
-      leaderRemoved: 'Der Leiter wurde erfolgreich entfernt.'
+      leaderAdded: 'Projektleiter erfolgreich hinzugefügt.'
+      leaderRemoved: 'Projektleiter erfolgreich entfernt.'
       errorList: 'Wegen folgenden Fehlern konnte das Projekt nicht gespeichert werden:'
       remainingVacancy: '%s freie Plätze'
+      teamMember: 'Du bist im Projektteam.'
 
   user:
     action:

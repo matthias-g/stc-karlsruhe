@@ -23,34 +23,34 @@ en:
   activerecord:
     models:
       project:
-        zero: Project
-        one: Project
-        other: Projects
+        zero: 'Project'
+        one: 'Project'
+        other: 'Projects'
       user:
-        zero: User
-        one: User
-        other: Users
+        zero: 'User'
+        one: 'User'
+        other: 'Users'
     attributes:
       project:
         title: 'Project Title'
-        description: Description
-        location: Location
-        latitude: Latitude
-        longitude: Longitude
+        description: 'Description'
+        location: 'Location'
+        latitude: 'Latitude'
+        longitude: 'Longitude'
         individual_tasks: "Individual Tasks"
         material: 'Required Material'
-        requirements: Requirements
-        visible: Visible
-        picture: Picture
+        requirements: 'Requirements'
+        visible: 'Visible'
+        picture: 'Picture'
         desired_team_size: 'Desired Team Size'
         leaders: 'Leaders'
         volunteers: 'Team'
         status: 'Status'
       user:
-        username: Username
-        first_name: "First Name"
-        last_name: "Last Name"
-        email: E-Mail
+        username: 'Username'
+        first_name: 'First Name'
+        last_name: 'Last Name'
+        email: 'E-Mail'
 
   general:
     action:
@@ -74,6 +74,7 @@ en:
       new: 'New Project'
       edit: 'Edit Project'
       save: 'Update Project'
+      delete: 'Delete Project'
       enter: 'Enter Team'
       leave: 'Leave Team'
       editLeaders: 'Change Project Leaders'
@@ -83,6 +84,7 @@ en:
       toProject: 'Back to Project'
     label:
       project: 'Project'
+      status: 'Status'
       new: 'Create new Project'
       edit: 'Edit Project: %s'
       list: 'Projects in 2014'
@@ -96,7 +98,7 @@ en:
       material: 'Needed Material'
       leaders: 'Leadership'
       team: 'Team'
-      maxTeamSize: 'Max Team Size'
+      desiredTeamSize: 'Desired Team Size'
     message:
       created: 'Project was successfully created.'
       updated: 'Project was successfully updated.'
@@ -104,8 +106,7 @@ en:
       leaderRemoved: 'Leader was successfully removed.'
       errorList: 'Errors prohibited this project from being saved:'
       remainingVacancy: '%s vacancies'
-    upload_picture: 'Upload new picture'
-    you_are_participating: 'You are participating at this project.'
+      teamMember: 'You are a team member.'
 
   user:
     action:

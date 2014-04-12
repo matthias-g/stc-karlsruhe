@@ -1,6 +1,11 @@
 @font-face {
-  font-family: CaptionFont;
+  font-family: LogoFont;
   src: asset-url("sf_movie_poster.ttf");
+}
+
+@font-face {
+  font-family: CaptionFont;
+  src: asset-url("libelsuit.ttf");
 }
 
 @font-face {
@@ -65,7 +70,7 @@ header {
     margin: 0 auto;
     padding-top: 360px;
     background: image-url("logo.png") center top / 400px no-repeat;
-    font: bold 70px/0.65em CaptionFont;
+    font: bold 70px/0.65em LogoFont;
     color: #FFF;
     text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
     text-align: center;
@@ -136,7 +141,7 @@ a {
   color: rgb(44, 153, 145);
 }
 
-h1 {
+/*h1 {
   font: 50px CaptionFont;
   margin: 25px 0 20px;
   padding: 0;
@@ -151,6 +156,25 @@ h2 {
   font-weight: normal;
   letter-spacing: 0.03em;
 }
+
+*/
+
+h1 {
+  font: 35px CaptionFont;
+  margin: 10px 0 10px;
+  padding: 0;
+  font-weight: normal;
+  letter-spacing: 0.03em;
+}
+
+h2 {
+  font: 25px CaptionFont;
+  margin: 15px 0 10px;
+  padding: 0;
+  font-weight: normal;
+  letter-spacing: 0.03em;
+}
+
 
 h3 {
   font: 17px BoldFont;

@@ -1,5 +1,7 @@
 StcKarlsruhe::Application.routes.draw do
 
+  resources :project_days
+
   resources :project_statuses
 
   resources :roles

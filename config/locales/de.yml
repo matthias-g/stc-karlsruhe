@@ -46,6 +46,7 @@ de:
         leaders: 'Leitung'
         volunteers: 'Team'
         status: 'Status'
+        days: Projekttage
       user:
         username: 'Username'
         first_name: 'Vorname'

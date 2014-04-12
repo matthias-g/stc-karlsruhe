@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
 
   has_and_belongs_to_many :volunteers, :class_name => 'User', :join_table => 'projects_volunteers'
   has_and_belongs_to_many :leaders, :class_name => 'User', :join_table => 'projects_leaders'
+  has_and_belongs_to_many :days, :class_name => 'ProjectDay'
   belongs_to :status, :class_name => 'ProjectStatus'
 
   validates_presence_of :status_id

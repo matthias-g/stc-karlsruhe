@@ -67,8 +67,8 @@ de:
       confirmDelete: 'Wollen Sie das wirklich tun?'
 
   contact:
-    success: 'Vielen Danke für ihre Nachricht!'
-    fail: 'Nachricht konnte nicht gesendet werden'
+    success: 'Vielen Dank für Deine Nachricht!'
+    fail: 'Nachricht konnte nicht gesendet werden.'
     submit: 'Nachricht senden'
     title: 'Kontakt aufnehmen'
     text: 'Du hast die ein oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei dir.'

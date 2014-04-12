@@ -6,24 +6,24 @@
   <div class="leftCol">
     <div>
       <h3><%= Project.human_attribute_name('location') %></h3>
-      <%= @project.location %>
+      <%= simple_format @project.location %>
     </div>
     <% unless @project.individual_tasks.empty? %>
       <div>
         <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
-        <%= @project.individual_tasks %>
+        <%= simple_format @project.individual_tasks %>
       </div>
     <% end %>
     <% unless @project.requirements.empty? %>
       <div>
         <h3><%= Project.human_attribute_name('requirements') %></h3>
-        <%= @project.requirements %>
+        <%= simple_format @project.requirements %>
       </div>
     <% end %>
     <% unless @project.material.empty? %>
       <div>
         <h3><%= Project.human_attribute_name('material') %></h3>
-        <%= @project.material %>
+        <%= simple_format @project.material %>
       </div>
     <% end %>
     <div>
@@ -32,7 +32,7 @@
     </div>
     <div>
       <h3><%= Project.human_attribute_name('time') %></h3>
-      <%= @project.time %>
+      <%= simple_format @project.time %>
     </div>
   </div>
 

@@ -23,13 +23,13 @@
       <% if @user.projects_as_volunteer.count > 0 %>
         <h2>Teilnahme an</h2>
         <% @user.projects_as_volunteer.each do |project| %>
-           <%= link_to project.title, project %>
+           <%= link_to project.title, project %><br />
         <% end %>
       <% end %>
       <% if @user.projects_as_leader.count > 0 %>
         <h2>Leitung von</h2>
         <% @user.projects_as_leader.each do |project| %>
-          <%= link_to project.title, project %>
+          <%= link_to project.title, project %><br />
         <% end %>
       <% end %>
     </section>

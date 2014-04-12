@@ -67,6 +67,12 @@ class PagesController < ApplicationController
     end
   end
 
+  # GET /:page
+  def page
+    @page = Page.find_by(address: params[:page]) || not_found
+    render 'show'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_page
@@ -75,7 +81,7 @@ class PagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.require(:page).permit(:title, { :section_ids => [] }, :header_name )
+      params.require(:page).permit(:title, { :section_ids => [] }, :header_name, :address)
     end
 
     def check_admin

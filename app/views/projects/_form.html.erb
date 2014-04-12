@@ -16,36 +16,36 @@
 
       <div class="leftCol">
         <div>
-          <h3><%= t('project.label.location') + Project.human_attribute_name('location') %></h3>
+          <h3><%= Project.human_attribute_name('location') %></h3>
           <%= f.text_field :location %>
         </div>
         <div>
-          <h3><%= t('project.label.individualTasks') + Project.human_attribute_name('individual_tasks') %></h3>
+          <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
           <%= f.text_area :individual_tasks %>
         </div>
         <div>
-          <h3><%= t('project.label.requirements') + Project.human_attribute_name('requirements') %></h3>
+          <h3><%= Project.human_attribute_name('requirements') %></h3>
           <%= f.text_area :requirements %>
         </div>
         <div>
-          <h3><%= t('project.label.material') + Project.human_attribute_name('material') %></h3>
+          <h3><%= Project.human_attribute_name('material') %></h3>
           <%= f.text_area :material %>
         </div>
       </div>
 
       <div class="rightCol">
         <div class="wide infobox level0">
-          <%= t('project.label.status') + Project.human_attribute_name('status') %>
+          <%= Project.human_attribute_name('status') %>
           <%= f.collection_select :status_id, ProjectStatus.all, :id, :title %>
         </div>
         <div>
-          <h3> <%= t('project.label.desiredTeamSize') + Project.human_attribute_name('desired_team_size') %></h3>
+          <h3> <%= Project.human_attribute_name('desired_team_size') %></h3>
           <%= f.text_field :desired_team_size %>
         </div>
 
         <% if not isNew %>
             <div>
-              <h3><%= t('project.label.leaders') + Project.human_attribute_name('leaders') %></h3>
+              <h3><%= Project.human_attribute_name('leaders') %></h3>
               <% @project.leaders.each do |leader| %>
                   <div>
                     <%= leader.full_name %>
@@ -56,7 +56,7 @@
               <%#= @project.leaders.collect { |v| v.first_name }.join(', ') %>
             </div>
             <div>
-              <h3><%= t('project.label.team') %></h3>
+              <h3><%= Project.human_attribute_name('volunteers') %></h3>
               <% @project.volunteers.each do |volunteer| %>
                   <div>
                     <%= volunteer.full_name %>
@@ -83,7 +83,7 @@
         <%= image_tag @project.picture_url(:preview) if @project.picture.file %>
 
         <div>
-          <h3><%= t('project.label.projectName') + Project.human_attribute_name('title') %></h3>
+          <h3><%= Project.human_attribute_name('title') %></h3>
           <%= f.text_field :title %>
         </div>
         <div>
@@ -91,7 +91,7 @@
           <%= f.file_field :picture %>
         </div>
         <div>
-          <h3><%= t('project.label.description') + Project.human_attribute_name('description') %></h3>
+          <h3><%= Project.human_attribute_name('description') %></h3>
           <%= f.text_area :description %>
         </div>
       </div>

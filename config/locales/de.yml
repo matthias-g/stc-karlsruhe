@@ -91,14 +91,6 @@ de:
       countActive: 'Aktuelle Projekte'
       projectName: 'Projektname'
       uploadImage: 'Bild hochladen'
-      description: 'Beschreibung'
-      location: 'Projektort'
-      individualTasks: 'Einzelne Arbeiten'
-      requirements: 'Voraussetzungen'
-      material: 'Benötigtes Material'
-      leaders: 'Leitung'
-      team: 'Team'
-      desiredTeamSize: 'Gewünschte Teamgröße'
     message:
       created: 'Projekt wurde erfolgreich erstellt.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'
@@ -135,7 +127,7 @@ de:
     label:
       new: 'Neue Seite'
     message:
-      errorList: 'Wegen folgenden Fehlern konnte die Seite nicht gespeichert werden:'
+      errorList: 'Die Seite konnte wegen folgender Fehler nicht gespeichert werden:'
 
   section:
     action:
@@ -153,4 +145,4 @@ de:
       title: 'Titel'
       content: 'Inhalt'
     message:
-      errorList: 'Wegen folgenden Fehlern konnte der Seitenabschnitt nicht gespeichert werden:'
+      errorList: 'Der Seitenabschnitt konnte wegen folgender Fehler nicht gespeichert werden:'

@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   end
 
   def welcome
-    @page = Page.find(1)
+    @page = Page.first
   end
 
   # GET /pages/new

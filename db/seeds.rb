@@ -6,5 +6,5 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Page.create()
-Role.create(:title => :admin)
+Page.create!(header_name: 'bigheader')
+Role.create!(title: :admin)

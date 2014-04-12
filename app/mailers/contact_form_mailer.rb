@@ -1,5 +1,5 @@
 class ContactFormMailer < ActionMailer::Base
-  default to: CONTACT_RECIPIENT
+  default to: StcKarlsruhe::Application::CONTACT_RECIPIENT
 
   def new_message(message)
     @message = message.body

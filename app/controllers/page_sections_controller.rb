@@ -71,7 +71,7 @@ class PageSectionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_section_params
-      params.require(:page_section).permit(:title, :message, :css_class, :partial_name)
+      params.require(:page_section).permit(:title, :content, :css_class, :partial_name)
     end
 
     def check_admin

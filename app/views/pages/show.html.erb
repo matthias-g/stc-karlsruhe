@@ -10,7 +10,7 @@
       <% if section.partial_name %>
         <%= render section.partial_name %>
         <% else %>
-        <%= section.message.html_safe %>
+        <%= section.content.html_safe %>
         <% end %>
     </section>
 <% end %>

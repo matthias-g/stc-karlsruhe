@@ -16,31 +16,31 @@
 
       <div class="leftCol">
         <div>
-          <h3>Einsatzort</h3>
+          <h3><%= Project.human_attribute_name('location') %></h3>
           <%= f.text_field :location %>
         </div>
         <div>
-          <h3>Einzelne Arbeiten</h3>
+          <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
           <%= f.text_area :individual_tasks %>
         </div>
         <div>
-          <h3>Voraussetzungen</h3>
+          <h3><%= Project.human_attribute_name('requirements') %></h3>
           <%= f.text_area :requirements %>
         </div>
         <div>
-          <h3>Benötigtes Material</h3>
+          <h3><%= Project.human_attribute_name('material') %></h3>
           <%= f.text_area :material %>
         </div>
       </div>
 
       <div class="rightCol">
         <div class="wide infobox level0">
-          Verfügbare Plätze:
-          TODO
+          <%= Project.human_attribute_name('desired_team_size') %>:
+          <%= f.text_field :desired_team_size %>
         </div>
         <% if not isNew %>
             <div>
-              <h3>Leitung</h3>
+              <h3><%= Project.human_attribute_name('leaders') %></h3>
               <%= @project.leaders.collect { |v| v.first_name }.join(', ') %>
               <div>
                 <%= link_to 'Edit Project Leaders', edit_leaders_project_path(@project) %>
@@ -63,15 +63,15 @@
         <%= image_tag @project.picture_url(:preview) if @project.picture.file %>
 
         <div>
-          <h3>Projektname</h3>
+          <h3><%= Project.human_attribute_name('title') %></h3>
           <%= f.text_field :title %>
         </div>
         <div>
-          <h3>Bild hochladen</h3>
+          <h3><%= t('project.upload_picture') %></h3>
           <%= f.file_field :picture %>
         </div>
         <div>
-          <h3>Beschreibung</h3>
+          <h3><%= Project.human_attribute_name('description') %></h3>
           <%= f.text_area :description %>
         </div>
       </div>

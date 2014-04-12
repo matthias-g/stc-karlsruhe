@@ -32,16 +32,19 @@ en:
         other: Users
     attributes:
       project:
-        title: Title
+        title: 'Project Title'
         description: Description
         location: Location
         latitude: Latitude
         longitude: Longitude
         individual_tasks: "Individual Tasks"
-        material: Material
+        material: 'Required Material'
         requirements: Requirements
         visible: Visible
         picture: Picture
+        desired_team_size: 'Desired Team Size'
+        leaders: 'Leaders'
+        volunteers: 'Team'
       user:
         username: Username
         first_name: "First Name"
@@ -54,6 +57,8 @@ en:
     leader:
       added: 'Leader was successfully added.'
       removed: 'Leader was successfully removed.'
+    upload_picture: 'Upload new picture'
+    you_are_participating: 'You are participating at this project.'
 
   layout:
     title: 'Serve The City Karlsruhe'

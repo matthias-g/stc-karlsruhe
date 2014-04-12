@@ -22,6 +22,11 @@
     <%= f.label :css_class %><br>
     <%= f.text_field :css_class %>
   </div>
+  <div class="field">
+    <%= f.label :partial_name %><br>
+    <%= f.text_field :partial_name %>
+    If a partial name is given the specified partial is used instead of the message.
+  </div>
   <div class="actions">
     <%= f.submit t('section.action.save') %>
   </div>

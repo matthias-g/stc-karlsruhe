@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140412153723) do
+ActiveRecord::Schema.define(version: 20140412154842) do
 
   create_table "page_sections", force: true do |t|
     t.string   "title"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140412153723) do
     t.datetime "updated_at"
     t.integer  "page_id"
     t.string   "css_class"
+    t.string   "partial_name"
   end
 
   create_table "pages", force: true do |t|

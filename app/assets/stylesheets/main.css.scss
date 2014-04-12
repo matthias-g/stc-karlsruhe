@@ -369,10 +369,11 @@ h3 {
       position: absolute;
       top: 0;
       left: 210px;
+      * {line-height: 1.05em;}
     }
     .project-description {
       position: absolute;
-      top: 50px;
+      top: 70px;
       right: 5px;
       bottom: 5px;
       left: 210px;

@@ -1,9 +1,4 @@
 @font-face {
-  font-family: LogoFont;
-  src: asset-url("sf_movie_poster.ttf");
-}
-
-@font-face {
   font-family: CaptionFont;
   src: asset-url("libelsuit.ttf");
 }
@@ -67,19 +62,9 @@ header {
   .logo {
     display: block;
     width: 400px;
+    height: 443px;
     margin: 0 auto;
-    padding-top: 360px;
-    background: image-url("logo.png") center top / 400px no-repeat;
-    font: bold 70px/0.65em LogoFont;
-    color: #FFF;
-    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    text-decoration: none;
-
-    span {
-      display: block;
-      font-size: 66%;
-    }
+    background: image-url("logo.png") center top no-repeat;
   }
 
   &.smallheader {
@@ -87,10 +72,8 @@ header {
     padding: 50px 0 20px;
     .logo {
       width: 200px;
-      padding-top: 180px;
+      height: 206px;
       background-image: image-url("logo_small.png");
-      background-size: 200px;
-      font-size: 35px;
     }
   }
 }

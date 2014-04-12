@@ -8,18 +8,24 @@
       <h3><%= Project.human_attribute_name('location') %></h3>
       <%= @project.location %>
     </div>
-    <div>
-      <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
-      <%= @project.individual_tasks %>
-    </div>
-    <div>
-      <h3><%= Project.human_attribute_name('requirements') %></h3>
-      <%= @project.requirements %>
-    </div>
-    <div>
-      <h3><%= Project.human_attribute_name('material') %></h3>
-      <%= @project.material %>
-     </div>
+    <% unless @project.individual_tasks.empty? %>
+      <div>
+        <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
+        <%= @project.individual_tasks %>
+      </div>
+    <% end %>
+    <% unless @project.requirements.empty? %>
+      <div>
+        <h3><%= Project.human_attribute_name('requirements') %></h3>
+        <%= @project.requirements %>
+      </div>
+    <% end %>
+    <% unless @project.material.empty? %>
+      <div>
+        <h3><%= Project.human_attribute_name('material') %></h3>
+        <%= @project.material %>
+      </div>
+    <% end %>
   </div>
 
   <div class="rightCol">

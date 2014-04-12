@@ -53,6 +53,9 @@ en:
         first_name: 'First Name'
         last_name: 'Last Name'
         email: 'E-Mail'
+        password: 'Password'
+        password_confirmation: 'Confirm password'
+        remember_me: "Remember me"
 
   general:
     action:

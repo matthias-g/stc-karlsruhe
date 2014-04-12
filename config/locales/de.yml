@@ -27,9 +27,9 @@ de:
         one: 'Projekt'
         other: 'Projekte'
       user:
-        zero: 'User'
-        one: 'User'
-        other: 'User'
+        zero: 'Benutzer'
+        one: 'Benutzer'
+        other: 'Benutzer'
     attributes:
       project:
         title: 'Projekttitel'
@@ -49,10 +49,13 @@ de:
         days: Projekttage
         time: Zeit
       user:
-        username: 'Username'
+        username: 'Benutzername'
         first_name: 'Vorname'
         last_name: 'Nachname'
         email: 'E-Mail'
+        password: 'Passwort'
+        password_confirmation: 'Passwort bestätigen'
+        remember_me: "Angemeldet bleiben"
 
   general:
     action:
@@ -70,11 +73,11 @@ de:
     title: 'Kontakt aufnehmen'
     text: 'Du hast die ein oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei dir.'
     placeholder:
-      email: 'Email'
+      email: 'E-Mail'
       subject: 'Betreff'
       body: 'Nachricht'
     field_title:
-      email: 'Deine Email-Adresse'
+      email: 'Deine E-Mail-Adresse'
       subject: "Worum geht's?"
       body: 'Deine Nachricht'
 

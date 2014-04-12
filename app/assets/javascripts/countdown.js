@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    var counter = $('#counter');
+    var counter = $('#countdown');
     var fields = counter.find('div span');
-    var end = new Date($('#counter').data('date'));
+    var end = new Date($('#countdown').data('date'));
     var _second = 1000, _minute = _second * 60,
         _hour = _minute * 60, _day = _hour * 24;
     var timer;

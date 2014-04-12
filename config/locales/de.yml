@@ -67,6 +67,12 @@ de:
     success: 'Vielen Danke für ihre Nachricht!'
     fail: 'Nachricht konnte nicht gesendet werden'
     submit: 'Nachricht senden'
+    title: 'Kontakt'
+    text: 'Kontaktieren'
+    placeholder:
+      email: 'Email'
+      subject: 'Betreff'
+      body: 'Deine Nachricht'
 
   layout:
     title: 'Serve The City Karlsruhe'

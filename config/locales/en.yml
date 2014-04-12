@@ -67,6 +67,12 @@ en:
     success: 'Thank you for your message!'
     fail: 'Message could not be send!'
     submit: 'Send message'
+    title: 'Contact'
+    text: 'Contact us'
+    placeholder:
+      email: 'Email'
+      subject: 'Subject'
+      body: 'Your message'
 
   layout:
     title: 'Serve The City Karlsruhe'

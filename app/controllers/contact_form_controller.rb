@@ -1,10 +1,17 @@
 class ContactFormController < ApplicationController
-  def index
+  def new
+    @message = Message.new
   end
 
   def create
-    ContactFormMailer.contact(params[:subject], params[:message], params[:email]).deliver
-    redirect_to root_path, notice: t('contact.success')
+    @message = Message.new(params[:message])
+
+    if @message.valid?
+      ContactFormMailer.new_message(@message).deliver
+      redirect_to root_path, notice: t('contact.success')
+    else
+      redirect_to contact_path, notice: t('contact.fail')
+    end
   end
 
 end

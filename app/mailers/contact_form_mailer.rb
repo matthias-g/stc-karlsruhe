@@ -1,8 +1,8 @@
 class ContactFormMailer < ActionMailer::Base
-  default to: "admins@stc-karlsruhe.de"
+  default to: CONTACT_RECIPIENT
 
-  def contact subject, message, reply_to
-    @message = message
-    mail subject: subject, reply_to: reply_to
+  def new_message(message)
+    @message = message.body
+    mail subject: message.subject, reply_to: message.email
   end
 end

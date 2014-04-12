@@ -6,7 +6,8 @@ StcKarlsruhe::Application.routes.draw do
 
   resources :roles
 
-  resources :contact_form, path: 'contact'
+  get 'contact', to: 'contact_form#new'
+  post 'contact', to: 'contact_form#create'
 
   resources :projects do
     member do

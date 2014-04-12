@@ -1,19 +1,16 @@
 <%= render '/layouts/smallheader' -%>
 
-<section>
-
-  <%= form_tag contact_form_index_path do %>
-    <div><%= label_tag :email %><br />
-      <%= email_field_tag :email %></div>
-
-    <div><%= label_tag :subject %><br />
-      <%= text_field_tag :subject %></div>
-
-    <div><%= label_tag :message %><br />
-      <%= text_area_tag :message %></div>
-
-
-    <%= submit_tag t('contact.submit') %>
-  <% end %>
-
-</section>
+<%= form_for @message, :url => contact_path do |form| %>
+  <section>
+    <div>
+      <h1><%= t 'contact.title' %></h1>
+      <%= t 'contact.text' %>
+    </div>
+    <div>
+      <div><%= form.email_field :email, placeholder: t('contact.placeholder.email') %></div>
+      <div><%= form.text_field :subject, placeholder: t('contact.placeholder.subject') %></div>
+      <div><%= form.text_area :body, placeholder: t('contact.placeholder.body') %></div>
+      <div><%= form.submit t('contact.submit') %></div>
+    </div>
+  </section>
+<% end %>

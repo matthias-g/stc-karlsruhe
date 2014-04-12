@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140412205055) do
+ActiveRecord::Schema.define(version: 20140412231138) do
 
   create_table "page_sections", force: true do |t|
     t.string   "title"
@@ -59,10 +59,10 @@ ActiveRecord::Schema.define(version: 20140412205055) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "picture"
-    t.string   "desired_team_size"
-    t.integer  "status",            default: 1
+    t.integer  "desired_team_size", limit: 255
+    t.integer  "status",                        default: 1
     t.string   "time"
-    t.text     "short_description", default: ""
+    t.text     "short_description",             default: ""
   end
 
   create_table "projects_leaders", id: false, force: true do |t|

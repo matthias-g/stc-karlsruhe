@@ -41,11 +41,13 @@
       <%= t "project.status.#{@project.status}" %>
     </div>
     <div>
-      <% if user_signed_in? and @project.has_volunteer?(current_user) %>
-          <%= t('project.message.teamMember') %>
-          <%= link_to t('project.action.leave'), leave_project_path(@project), class: "wide button" %>
-      <% else %>
-          <%= link_to t('project.action.enter'), enter_project_path(@project), class: "wide button" %>
+      <% if @project.open? or @project.soon_full? %>
+        <% if user_signed_in? and @project.has_volunteer?(current_user) %>
+            <%= t('project.message.teamMember') %>
+            <%= link_to t('project.action.leave'), leave_project_path(@project), class: "wide button" %>
+        <% else %>
+            <%= link_to t('project.action.enter'), enter_project_path(@project), class: "wide button" %>
+        <% end %>
       <% end %>
     </div>
     <div>

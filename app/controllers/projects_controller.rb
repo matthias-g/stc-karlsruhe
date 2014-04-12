@@ -17,6 +17,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    # @project.visible = false
   end
 
   # GET /projects/1/edit
@@ -28,6 +29,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.add_leader(current_user)
+    @project.adjust_status!
 
     respond_to do |format|
       if @project.save
@@ -45,6 +47,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
+        @project.adjust_status!
         format.html { redirect_to @project, notice: t('project.message.updated')}
         format.json { head :no_content }
       else
@@ -55,6 +58,10 @@ class ProjectsController < ApplicationController
   end
 
   def enter
+    if @project.full? or @project.closed?
+      redirect_to project_url(@project), :notice => 'Dieses Projekt ist schon vollbesetzt.'
+      return
+    end
     @project.add_volunteer(current_user)
     redirect_to project_url(@project)
   end
@@ -98,7 +105,7 @@ class ProjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:title, :description, :short_description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements,
-                                      :visible, :user_id, :picture, :desired_team_size, :status, { :day_ids => [] }, :time)
+                                      :user_id, :picture, :desired_team_size, :status, { :day_ids => [] }, :time)
     end
 
     def redirect_non_leaders

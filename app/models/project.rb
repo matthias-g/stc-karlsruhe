@@ -11,6 +11,7 @@ class Project < ActiveRecord::Base
   def add_volunteer(user)
     raise ArgumentException, 'User should be a user object.' unless user.is_a?(User)
     volunteers << user unless has_volunteer?(user)
+    adjust_status!
   end
 
   def has_volunteer?(user)
@@ -23,6 +24,7 @@ class Project < ActiveRecord::Base
     if has_volunteer?(user)
       volunteers.delete(user)
     end
+    adjust_status!
   end
 
   def add_leader(user)
@@ -42,12 +44,12 @@ class Project < ActiveRecord::Base
     end
   end
 
-  def make_visible
+  def make_visible!
     self.visible = true
     self.save
   end
 
-  def make_invisible
+  def make_invisible!
     self.visible = false
     self.save
   end
@@ -61,6 +63,17 @@ class Project < ActiveRecord::Base
       array += project.volunteers
       array + project.leaders
     end.uniq
+  end
+
+  def adjust_status!
+    free = desired_team_size - volunteers.count
+    if free > 5
+      open!
+    elsif free > 0
+      soon_full!
+    else
+      full!
+    end
   end
 
 end

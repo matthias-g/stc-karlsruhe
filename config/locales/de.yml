@@ -125,7 +125,7 @@ de:
     status:
       open: Offen
       soon_full: Wenige Plätze
-      full: Voll
+      full: Vollbesetzt
       closed: Abgeschlossen
 
   user:

@@ -94,7 +94,7 @@ de:
 
   project:
     action:
-      new: 'Neues Projekt'
+      new: 'Neues Projekt erstellen'
       edit: 'Projekt bearbeiten'
       save: 'Projekt speichern'
       delete: 'Projekt löschen'

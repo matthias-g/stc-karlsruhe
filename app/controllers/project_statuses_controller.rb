@@ -71,7 +71,7 @@ class ProjectStatusesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_status_params
-      params.require(:project_status).permit(:title)
+      params.require(:project_status).permit(:title, :display_class)
     end
 
     def check_admin

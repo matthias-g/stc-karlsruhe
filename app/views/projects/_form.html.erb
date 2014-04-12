@@ -36,6 +36,10 @@
           <%= f.collection_select(:day_ids, ProjectDay.all, :id, :title,
                                   {:selected => @project.days.collect {|t| t.id}}, :multiple => true) -%>
         </div>
+        <div>
+          <h3><%= Project.human_attribute_name('time') %></h3>
+          <%= f.text_field :time %>
+        </div>
       </div>
 
       <div class="rightCol">

@@ -47,6 +47,7 @@ en:
         volunteers: 'Team'
         status: 'Status'
         days: 'Project Days'
+        time: Time
       user:
         username: 'Username'
         first_name: 'First Name'

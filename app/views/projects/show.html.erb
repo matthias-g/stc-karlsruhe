@@ -30,6 +30,10 @@
       <h3><%= Project.human_attribute_name('days') %></h3>
       <%= @project.days.collect { |day| day.title }.join('<br />').html_safe %>
     </div>
+    <div>
+      <h3><%= Project.human_attribute_name('time') %></h3>
+      <%= @project.time %>
+    </div>
   </div>
 
   <div class="rightCol">

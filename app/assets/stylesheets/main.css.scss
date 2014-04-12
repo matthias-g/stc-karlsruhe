@@ -40,18 +40,18 @@ body {
   text-align: right;
   z-index: 100;
   vertical-align: center;
+  & > a, & > * > a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 10px;
+    text-shadow: 1px 1px 1px rgba(8, 39, 37, 0.6);
+    text-transform: uppercase;
+    transition: color 0.25s ease 0s;
+    text-decoration: none;
+  }
   .miniPopup {
     display: inline-block;
-    & > a {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 14px;
-      font-weight: bold;
-      padding: 0 10px;
-      text-shadow: 1px 1px 1px rgba(8, 39, 37, 0.6);
-      text-transform: uppercase;
-      transition: color 0.25s ease 0s;
-      text-decoration: none;
-    }
     & > div {
       text-align: left;
       background: rgba(255,255,255,0.8);

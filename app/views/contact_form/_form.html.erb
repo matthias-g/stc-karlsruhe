@@ -1,9 +1,19 @@
-<%= form_tag contact_form_index_path do %>
-  <%= label_tag 'email' %>
-  <%= email_field_tag :email %>
-  <%= label_tag 'subject' %>
-  <%= text_field_tag :subject %>
-  <%= label_tag 'content' %>
-  <%= text_area_tag :content %>
-  <%= submit_tag 'test' %>
-<% end %>
+<%= render '/layouts/smallheader' -%>
+
+<section>
+
+  <%= form_tag contact_form_index_path do %>
+    <div><%= label_tag :email %><br />
+      <%= email_field_tag :email %></div>
+
+    <div><%= label_tag :subject %><br />
+      <%= text_field_tag :subject %></div>
+
+    <div><%= label_tag :message %><br />
+      <%= text_area_tag :message %></div>
+
+
+    <%= submit_tag t('contact.submit') %>
+  <% end %>
+
+</section>

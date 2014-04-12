@@ -3,7 +3,8 @@ class ContactFormController < ApplicationController
   end
 
   def create
-    ContactFormMailer.contact(params[:subject], params[:content], params[:email]).deliver
+    ContactFormMailer.contact(params[:subject], params[:message], params[:email]).deliver
+    redirect_to root_path, notice: t('contact.success')
   end
 
 end

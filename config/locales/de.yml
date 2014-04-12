@@ -61,6 +61,11 @@ de:
     message:
       confirmDelete: 'Wollen Sie das wirklich tun?'
 
+  contact:
+    success: 'Vielen Danke für ihre Nachricht!'
+    fail: 'Nachricht konnte nicht gesendet werden'
+    submit: 'Nachricht senden'
+
   layout:
     title: 'Serve The City Karlsruhe'
     pageLinks:

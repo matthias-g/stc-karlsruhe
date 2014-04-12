@@ -61,6 +61,11 @@ en:
     message:
       confirmDelete: 'Are you sure?'
 
+  contact:
+    success: 'Thank you for your message!'
+    fail: 'Message could not be send!'
+    submit: 'Send message'
+
   layout:
     title: 'Serve The City Karlsruhe'
     pageLinks:

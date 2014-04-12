@@ -3,7 +3,7 @@ class ContactUserController < ApplicationController
   end
 
   def create
-    ContactFormMailer.contact(params[:user], params[:subject], params[:content], params[:email]).deliver
+    ContactFormMailer.contact(params[:user], params[:subject], params[:message], params[:email]).deliver
   end
 
 end

@@ -18,7 +18,7 @@
     <% @page_sections.each do |page_section| %>
         <tr>
           <td><%= page_section.title %></td>
-          <td><%= page_section.content %></td>
+          <td><%= page_section.message %></td>
           <td><%= link_to t('section.action.show'), page_section %></td>
           <td><%= link_to t('section.action.edit'), edit_page_section_path(page_section) %></td>
           <td><%= link_to t('section.action.delete'), page_section, method: :delete, data: { confirm: 'Are you sure?' } %></td>

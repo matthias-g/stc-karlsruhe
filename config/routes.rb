@@ -4,7 +4,7 @@ StcKarlsruhe::Application.routes.draw do
 
   resources :roles
 
-  resources :contact_form
+  resources :contact_form, path: 'contact'
 
   resources :projects do
     member do

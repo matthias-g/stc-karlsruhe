@@ -52,4 +52,15 @@ class Project < ActiveRecord::Base
     self.save
   end
 
+  def self.active_projects
+    Project.where.not(status: 'closed')
+  end
+
+  def self.active_users
+    Project.active_projects.inject([]) do |array, project|
+      array += project.volunteers
+      array + project.leaders
+    end.uniq
+  end
+
 end

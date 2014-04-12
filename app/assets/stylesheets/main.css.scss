@@ -164,7 +164,7 @@ h2 {
 
 h3 {
   font: 17px BoldFont;
-  margin: 25px 0 5px;
+  margin: 20px 0 5px -3px;
   padding: 0;
 }
 
@@ -265,6 +265,7 @@ h3 {
       font-size: 25px;
       display: block;
       border-bottom: 1px solid #000;
+      line-height: 1.5em;
     }
   }
   & > span {
@@ -435,13 +436,16 @@ h3 {
 }
 
 .profile {
-  .info, .projects {
+  .info, .actions {
     margin-right: 5px;
     margin-top: 0;
   }
-  .actions {
+  .projects {
     margin-left: 5px;
     margin-top: 0;
+    .button {
+      margin: 5px 10px;
+    }
   }
 
 }

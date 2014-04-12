@@ -103,6 +103,11 @@
           <h3><%= Project.human_attribute_name('description') %></h3>
           <%= f.text_area :description %>
         </div>
+        <div>
+          <h3><%= Project.human_attribute_name('short_description') %></h3>
+          Wenn Du dieses Feld ausfüllst, wird es in der Projektliste statt der ausführlichen Beschreibung angezeigt.
+          <%= f.text_area :short_description %>
+        </div>
       </div>
 
       <%#= f.text_field :latitude %>

@@ -5,7 +5,7 @@
   <h1><%= @page.title %></h1>
 </section>
 
-<% @page.sections.each do |section| %>
+<% @page.sections.order(index: :asc).each do |section| %>
     <section <%#= ('class="' + section.cssClass + '"') if section.cssClass %> >
       <% if section.partial_name %>
         <%= render section.partial_name %>

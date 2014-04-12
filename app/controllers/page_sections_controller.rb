@@ -17,6 +17,7 @@ class PageSectionsController < ApplicationController
   # GET /page_sections/new
   def new
     @page_section = PageSection.new
+    @page_section.index = PageSection.order(index: :desc).first.index + 1
   end
 
   # GET /page_sections/1/edit
@@ -71,7 +72,7 @@ class PageSectionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_section_params
-      params.require(:page_section).permit(:title, :content, :css_class, :partial_name)
+      params.require(:page_section).permit(:title, :content, :css_class, :partial_name, :index)
     end
 
     def check_admin

@@ -1,6 +1,6 @@
 <%= render '/layouts/' + @page.header_name -%>
 
-<% @page.sections.each do |section| %>
+<% @page.sections.order(index: :asc).each do |section| %>
   <section>
     <%= section.content.html_safe %>
   </section>

@@ -1,16 +1,28 @@
 <%= render '/layouts/smallheader' -%>
 
 <%= form_for @message, :url => contact_path do |form| %>
-  <section>
-    <div>
-      <h1><%= t 'contact.title' %></h1>
+  <section class="contact-form">
+    <h1><%= t 'contact.title' %></h1>
+    <div class="leftCol">
       <%= t 'contact.text' %>
     </div>
-    <div>
-      <div><%= form.email_field :email, placeholder: t('contact.placeholder.email') %></div>
-      <div><%= form.text_field :subject, placeholder: t('contact.placeholder.subject') %></div>
-      <div><%= form.text_area :body, placeholder: t('contact.placeholder.body') %></div>
-      <div><%= form.submit t('contact.submit') %></div>
+    <div class="rightCol">
+      <div>
+        <h3><%= t('contact.field_title.email') %></h3>
+        <%= form.email_field :email %>
+      </div>
+      <div>
+        <h3><%= t('contact.field_title.subject') %></h3>
+        <%= form.text_field :subject %>
+      </div>
+      <div>
+        <h3><%= t('contact.field_title.body') %></h3>
+        <%= form.text_area :body %>
+      </div>
+      <div>
+        <br />
+        <%= form.submit t('contact.submit') %>
+      </div>
     </div>
   </section>
 <% end %>

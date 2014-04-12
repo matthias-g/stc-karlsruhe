@@ -67,11 +67,15 @@ de:
     success: 'Vielen Danke für ihre Nachricht!'
     fail: 'Nachricht konnte nicht gesendet werden'
     submit: 'Nachricht senden'
-    title: 'Kontakt'
-    text: 'Kontaktieren'
+    title: 'Kontakt aufnehmen'
+    text: 'Du hast die ein oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei dir.'
     placeholder:
       email: 'Email'
       subject: 'Betreff'
+      body: 'Nachricht'
+    field_title:
+      email: 'Deine Email-Adresse'
+      subject: "Worum geht's?"
       body: 'Deine Nachricht'
 
   layout:

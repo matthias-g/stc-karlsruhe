@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+  <%= current_user.full_name  %>
+  <%= link_to t('user.action.logout'), destroy_user_session_path, :method => :delete %>
+<% else %>
+  <div class="miniPopup">
+    <%= link_to t('user.action.login'), new_user_session_path %>
+    <div></div>
+  </div>
+  <div class="miniPopup">
+    <%= link_to t('user.action.register'), register_path %>
+    <div></div>
+  </div>
+<% end %>

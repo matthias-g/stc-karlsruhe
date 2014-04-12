@@ -10,13 +10,7 @@
 <body>
 
 <div id="menubar">
-  <% if user_signed_in? %>
-      <%= t('user.message.loggedInAs') % [current_user.username]  %>
-      <%= link_to t('user.action.logout'), destroy_user_session_path, :method => :delete %>
-  <% else %>
-      <%= link_to t('user.action.login'), new_user_session_path %>
-  <% end %>
-  <%= link_to t('user.action.register'), register_path %>
+  <%= render '/layouts/menubar' -%>
 </div>
 
 <%= yield :pageHeader %>

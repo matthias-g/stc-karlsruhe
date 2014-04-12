@@ -22,7 +22,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: image-url("bg.jpg") center / cover no-repeat fixed;
+  background: #929d9b image-url("bg.jpg") center / cover no-repeat fixed;
   /*background: url(bg.png) center top / 100% auto no-repeat,
   url(bg2.jpg) repeat;*/
   font: 16px NormalFont;
@@ -33,24 +33,37 @@ body {
 
 #menubar {
   position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
+  left: 0; top: 0; right: 0;
   padding: 5px 0;
   background: rgba(40, 183, 175, 0.8);
   box-shadow: 0 0 2px rgba(0, 0, 0, 1);
   text-align: right;
   z-index: 100;
-  a {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
-    font-weight: bold;
-    padding: 5px 15px;
-    text-shadow: 1px 1px 1px rgba(8, 39, 37, 0.6);
-    text-transform: uppercase;
-    transition: color 0.25s ease 0s;
-    text-decoration: none;
-    vertical-align: top;
+  vertical-align: center;
+  .miniPopup {
+    display: inline-block;
+    & > a {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      font-weight: bold;
+      padding: 0 10px;
+      text-shadow: 1px 1px 1px rgba(8, 39, 37, 0.6);
+      text-transform: uppercase;
+      transition: color 0.25s ease 0s;
+      text-decoration: none;
+    }
+    & > div {
+      text-align: left;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid black;
+      position: fixed;
+      right: 0;
+      top: 30px;
+      padding: 10px;
+      display: none;
+      min-width: 300px;
+      min-height: 80px;
+    }
   }
 }
 
@@ -91,7 +104,7 @@ header {
 }
 
 section {
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: rgba(255, 255, 255, 0.8);
   margin: 10px 0;
   padding: 20px 40px;
   overflow: hidden;

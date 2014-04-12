@@ -1,3 +1,7 @@
+<div id="metaLinks">
+  <%= link_to t('layout.meta_links.home'), root_path %>
+  <%= link_to t('layout.meta_links.projects'), projects_path %>
+</div>
 <% if user_signed_in? %>
   <%= link_to current_user.full_name, profile_path %>
   <%= link_to t('user.action.logout'), destroy_user_session_path, :method => :delete %>

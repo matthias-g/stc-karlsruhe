@@ -50,6 +50,11 @@ body {
     transition: color 0.25s ease 0s;
     text-decoration: none;
   }
+
+  #metaLinks {
+    float: left;
+  }
+
   .miniPopup {
     display: inline-block;
     & > div {

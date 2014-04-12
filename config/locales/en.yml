@@ -83,6 +83,9 @@ en:
 
   layout:
     title: 'Serve the City Karlsruhe'
+    meta_links:
+      projects: 'Projects'
+      home: 'Home'
     pageLinks:
       contact: 'Contact Us'
       aboutUs: 'Legal Notice'

@@ -6,7 +6,7 @@
 </section>
 
 <% @page.sections.order(index: :asc).each do |section| %>
-    <section <%= ('class="' + section.css_class + '"') if section.css_class %> >
+    <section <%= ('class="' + section.css_class + '"').html_safe if section.css_class %> >
       <% unless section.partial_name.empty? %>
         <%= render section.partial_name %>
       <% else %>

@@ -17,7 +17,11 @@ class PageSectionsController < ApplicationController
   # GET /page_sections/new
   def new
     @page_section = PageSection.new
-    @page_section.index = PageSection.order(index: :desc).first.index + 1
+    if PageSection.count > 0
+      @page_section.index = PageSection.order(index: :desc).first.index + 1
+    else
+      @page_section.index = 0
+    end
   end
 
   # GET /page_sections/1/edit

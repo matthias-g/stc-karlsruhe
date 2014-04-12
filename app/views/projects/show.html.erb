@@ -74,7 +74,7 @@
   <div class="description">
     <%= image_tag @project.picture_url(:preview) if @project.picture.file %>
     <div>
-      <%= @project.description %>
+      <%= simple_format @project.description %>
     </div>
   </div>
 

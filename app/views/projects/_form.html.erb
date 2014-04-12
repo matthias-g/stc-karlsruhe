@@ -2,7 +2,7 @@
 
     <% if @project.errors.any? %>
         <section id="error_explanation">
-          <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+          <h2><%= t('project.message.errorList') %></h2>
           <ul>
             <% @project.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>
@@ -12,22 +12,26 @@
     <% end %>
 
     <section class="project-view project-edit-view">
-      <h1><%= (isNew ? "Neues Projekt erstellen" : ("Projekt bearbeiten: " + @project.title)) %></h1>
+      <h1><%= (isNew ? t('project.label.new') : (t('project.label.edit') % [@project.title])) %></h1>
 
       <div class="leftCol">
         <div>
+          <h3><%= t('project.label.location') %></h3>
           <h3><%= Project.human_attribute_name('location') %></h3>
           <%= f.text_field :location %>
         </div>
         <div>
+          <h3><%= t('project.label.individualTasks') %></h3>
           <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
           <%= f.text_area :individual_tasks %>
         </div>
         <div>
+          <h3><%= t('project.label.requirements') %></h3>
           <h3><%= Project.human_attribute_name('requirements') %></h3>
           <%= f.text_area :requirements %>
         </div>
         <div>
+          <h3><%= t('project.label.material') %></h3>
           <h3><%= Project.human_attribute_name('material') %></h3>
           <%= f.text_area :material %>
         </div>
@@ -39,21 +43,38 @@
           <%= f.text_field :desired_team_size %>
         </div>
         <div class="wide infobox level0">
+          <%= t('project.label.maxTeamSize') %>
           <h3><%= Project.human_attribute_name('status') %></h3>
           <%= f.collection_select :status_id, ProjectStatus.all, :id, :title %>
         </div>
         <% if not isNew %>
             <div>
+              <h3><%= t('project.label.leaders') %></h3>
               <h3><%= Project.human_attribute_name('leaders') %></h3>
-              <%= @project.leaders.collect { |v| v.first_name }.join(', ') %>
-              <div>
-                <%= link_to 'Edit Project Leaders', edit_leaders_project_path(@project) %>
-              </div>
+              <% @project.leaders.each do |leader| %>
+                  <div>
+                    <%= leader.full_name %>
+                    <%#= link_to '(X)', delete_leader_project_path(@project,
+                         :user_id => leader.id), :method => 'delete' %>
+                  </div>
+              <% end %>
+              <%#= @project.leaders.collect { |v| v.first_name }.join(', ') %>
+            </div>
+            <div>
+              <h3><%= t('project.label.team') %></h3>
+              <% @project.volunteers.each do |volunteer| %>
+                  <div>
+                    <%= volunteer.full_name %>
+                    <%#= link_to '(=> as leader)', add_leader_project_path(@project,
+                         :user_id => volunteer.id), :method => 'post' %>
+                  </div>
+              <% end %>
+              <%#= @project.volunteers.collect { |v| v.first_name }.join(', ') %>
             </div>
 
             <% if current_user.is_admin? %>
                 <div class="adminPanel">
-                  <h3>Admin Panel</h3>
+                  <h3><%= t('general.label.adminPanel') %></h3>
                   <ul>
                     <li><%= link_to 'Delete Project', @project, method: :delete,
                               data: { confirm: 'Are you sure?' } %></li>
@@ -67,14 +88,16 @@
         <%= image_tag @project.picture_url(:preview) if @project.picture.file %>
 
         <div>
+          <h3><%= t('project.label.projectName') %></h3>
           <h3><%= Project.human_attribute_name('title') %></h3>
           <%= f.text_field :title %>
         </div>
         <div>
-          <h3><%= t('project.upload_picture') %></h3>
+          <h3><%= t('project.label.uploadImage') %></h3>
           <%= f.file_field :picture %>
         </div>
         <div>
+          <h3><%= t('project.label.description') %></h3>
           <h3><%= Project.human_attribute_name('description') %></h3>
           <%= f.text_area :description %>
         </div>
@@ -85,9 +108,9 @@
     </section>
 
     <section>
-      <%= f.submit %>
-      <%= link_to 'Show', @project %> |
-      <%= link_to 'Back', projects_path %>
+      <%= f.submit t('project.action.save') %>
+      <%= link_to t('general.action.show'), @project %> |
+      <%= link_to t('project.action.toOverview'), projects_path %>
     </section>
 
 <% end %>

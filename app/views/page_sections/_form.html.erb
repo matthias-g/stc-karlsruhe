@@ -1,8 +1,7 @@
 <%= form_for(@page_section) do |f| %>
   <% if @page_section.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@page_section.errors.count, "error") %> prohibited this page_section from being saved:</h2>
-
+      <h2><%= t('section.message.errorList') %></h2>
       <ul>
       <% @page_section.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -20,6 +19,6 @@
     <%= f.text_area :content %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit t('section.action.save') %>
   </div>
 <% end %>

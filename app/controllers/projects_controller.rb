@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: t('project.creation_successful') }
+        format.html { redirect_to @project, notice: t('project.message.created') }
         format.json { render action: 'show', status: :created, location: @project }
       else
         format.html { render action: 'new' }
@@ -45,7 +45,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: t('project.update_successful')}
+        format.html { redirect_to @project, notice: t('project.message.updated')}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -80,13 +80,13 @@ class ProjectsController < ApplicationController
   def add_leader
     new_leader = User.find(params[:user_id])
     @project.add_leader(new_leader)
-    redirect_to edit_leaders_project_url(@project), notice: t('project.leader.added')
+    redirect_to edit_leaders_project_url(@project), notice: t('project.message.leaderAdded')
   end
 
   def delete_leader
     leader = User.find(params[:user_id])
     @project.delete_leader(leader)
-    redirect_to edit_leaders_project_url(@project), notice: t('project.leader.removed')
+    redirect_to edit_leaders_project_url(@project), notice: t('project.message.leaderRemoved')
   end
 
   private

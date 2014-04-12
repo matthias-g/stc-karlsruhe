@@ -1,26 +1,35 @@
 <%= render '/layouts/smallheader' -%>
 
 <section>
-    <p>
-      <strong>Username:</strong>
-      <%= @user.username %>
-    </p>
-
-    <p>
-      <strong>First Name:</strong>
-      <%= @user.first_name %>
-    </p>
-
-    <p>
-      <strong>Last Name:</strong>
-      <%= @user.last_name %>
-    </p>
-
-    <p>
-      <strong>Email:</strong>
-      <%= @user.email %>
-    </p>
-
-    <%= link_to 'Edit', edit_user_registration_path %> |
-    <%= link_to 'Back', '/' %>
+  <h1><%= @user.full_name %></h1>
 </section>
+
+<div class="two-col-group profile">
+  <div>
+    <section class="info">
+      <h1>Mein Profil</h1>
+      <h3>Name</h3>
+      <%= @user.full_name %>
+      <h3>Email</h3>
+      <%= @user.email %>
+      <h3>Passwort</h3>
+      ********
+      <div>
+        <%= link_to 'Edit', edit_user_registration_path %>
+      </div>
+    </section>
+    <section class="projects">
+      <h1>Meine Projekte</h1>
+    </section>
+  </div>
+  <div>
+    <section class="actions">
+      <h1>Aufgaben</h1>
+    </section>
+  </div>
+</div>
+
+
+
+
+

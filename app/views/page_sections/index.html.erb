@@ -1,13 +1,13 @@
 <%= render '/layouts/smallheader' -%>
 
 <section>
-  <h1>Listing page_sections</h1>
+  <h1><%= t('section.label.list') %></h1>
 
   <table>
     <thead>
     <tr>
-      <th>Title</th>
-      <th>Content</th>
+      <th><%= t('section.label.title') %></th>
+      <th><%= t('section.label.content') %></th>
       <th></th>
       <th></th>
       <th></th>
@@ -30,7 +30,7 @@
   <br>
 
   <%= link_to t('section.action.new'), new_page_section_path %> |
-  <%= link_to 'Edit Pages', pages_path %>
+  <%= link_to t('page.action.maintain'), pages_path %>
 </section>
 
 

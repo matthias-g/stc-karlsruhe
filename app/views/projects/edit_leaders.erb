@@ -2,21 +2,23 @@
 
 <section>
     <p>
-    Leaders: <br />
+    <h3><%= t('project.label.leadership') %></h3>
     <% @project.leaders.each do |leader| %>
       <%= leader.full_name %>
-      <%= link_to 'Remove leader', delete_leader_project_path(@project, :user_id => leader.id), :method => 'delete' %><br />
+      <%= link_to t('project.action.notAsLeader'), delete_leader_project_path(@project,
+            :user_id => leader.id), :method => 'delete' %><br />
     <% end %>
     </p>
 
     <p>
-    Volunteers:<br />
+    <h3><%= t('project.label.team') %></h3>
     <% @project.volunteers.each do |volunteer| %>
       <%= volunteer.full_name %>
-      <%= link_to 'Add to leaders', add_leader_project_path(@project, :user_id => volunteer.id), :method => 'post' %><br />
+      <%= link_to t('project.action.asLeader'), add_leader_project_path(@project,
+            :user_id => volunteer.id), :method => 'post' %><br />
     <% end %>
     </p>
 
-    <%= link_to 'Back to project', @project %>
+    <%= link_to t('project.action.toProject'), @project %>
 
 </section>

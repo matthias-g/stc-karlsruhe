@@ -1,0 +1,152 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+de:
+  activerecord:
+    models:
+      project:
+        zero: Projekt
+        one: Projekt
+        other: Projekte
+      user:
+        zero: User
+        one: User
+        other: User
+    attributes:
+      project:
+        title: Titel
+        description: Beschreibung
+        location: Projektort
+        latitude: Breitengrad
+        longitude: Längengrad
+        individual_tasks: 'Einzelne Arbeiten'
+        material: Benötigtes Material
+        requirements: Voraussetzungen
+        visible: Sichtbar
+        picture: Bild
+      user:
+        username: Username
+        first_name: "Vorname"
+        last_name: "Nachname"
+        email: E-Mail
+
+  general:
+    action:
+      show: 'Anzeigen'
+    label:
+      adminPanel: 'Admin-Panel'
+      error: 'Fehler'
+    message:
+      confirmDelete: 'Wollen Sie das wirklich tun?'
+
+  layout:
+    title: 'Serve The City Karlsruhe'
+    pageLinks:
+      contact: 'Kontakt'
+      aboutUs: 'Impressum'
+      privacy: 'Datenschutz'
+      disclaimer: 'Haftungsausschluss'
+
+  project:
+    leader:
+      added: 'Projektleiter erfolgreich hinzugefügt.'
+      removed: 'Projektleiter erfolgreich entfernt.'
+    action:
+      new: 'Neues Projekt'
+      edit: 'Projekt bearbeiten'
+      save: 'Projekt speichern'
+      enter: 'Team beitreten'
+      leave: 'Team verlassen'
+      editLeaders: 'Projektleiter ändern'
+      asLeader: '(=> als Leiter)'
+      notAsLeader: '(X)'
+      toOverview: 'Zurück zur Übersicht'
+      toProject: 'Zurück zum Projekt'
+    label:
+      project: 'Projekt'
+      new: 'Neues Projekt erstellen'
+      edit: 'Projekt bearbeiten: %s'
+      list: 'Projekte 2014'
+      countActive: 'Aktuelle Projekte'
+      projectName: 'Projektname'
+      uploadImage: 'Bild hochladen'
+      description: 'Beschreibung'
+      location: 'Projektort'
+      individualTasks: 'Einzelne Arbeiten'
+      requirements: 'Voraussetzungen'
+      material: 'Benötigtes Material'
+      leaders: 'Leitung'
+      team: 'Team'
+      maxTeamSize: 'Maximale Teamgröße'
+    message:
+      created: 'Projekt wurde erfolgreich erstellt.'
+      updated: 'Projekt wurde erfolgreich aktualisiert.'
+      leaderAdded: 'Der Leiter wurde erfolgreich hinzugefügt.'
+      leaderRemoved: 'Der Leiter wurde erfolgreich entfernt.'
+      errorList: 'Wegen folgenden Fehlern konnte das Projekt nicht gespeichert werden:'
+      remainingVacancy: '%s freie Plätze'
+
+  user:
+    action:
+      login: 'Anmelden'
+      logout: 'Abmelden'
+      register: 'Registrieren'
+      confirmAccount: 'Account bestätigen'
+      unlockAccount: 'Account freischalten'
+      resendInstructions: 'Anleitung zur Bestätigung nochmal senden'
+      changePassword: 'Passwort ändern'
+    label:
+      countActive: 'Aktive 2014'
+    message:
+      profileUpdated: 'Profil erfolgreich aktualisiert.'
+      loggedInAs: 'eingeloggt als %s'
+
+  page:
+    action:
+      new: 'Neue Seite'
+      edit: 'Bearbeiten'
+      show: 'Anzeigen'
+      delete: 'Löschen'
+      save: 'Speichern'
+      maintain: 'Alle Seiten verwalten'
+      toOverview: 'Zurück zur Übersicht'
+    label:
+      new: 'Neue Seite'
+    message:
+      errorList: 'Wegen folgenden Fehlern konnte die Seite nicht gespeichert werden:'
+
+  section:
+    action:
+      new: 'Neuer Abschnitt'
+      edit: 'Bearbeiten'
+      show: 'Anzeigen'
+      delete: 'Löschen'
+      save: 'Abschnitt speichern'
+      maintain: 'Seitenabschnitte verwalten'
+      toOverview: 'Zurück zur Übersicht'
+    label:
+      new: 'Neuer Seitenabschnitt'
+      edit: 'Seitenabschnitt bearbeiten: %s'
+      list: 'Seitenabschnitte'
+      title: 'Titel'
+      content: 'Inhalt'
+    message:
+      errorList: 'Wegen folgenden Fehlern konnte der Seitenabschnitt nicht gespeichert werden:'

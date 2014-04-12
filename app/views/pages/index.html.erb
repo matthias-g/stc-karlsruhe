@@ -2,30 +2,19 @@
 
 <section>
   <table>
-    <thead>
-    <tr>
-      <th>Title</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-    </thead>
-
-    <tbody>
     <% @pages.each do |page| %>
         <tr>
           <td><%= page.title %></td>
           <td><%= link_to t('page.action.show'), page %></td>
           <td><%= link_to t('page.action.edit'), edit_page_path(page) %></td>
           <td><%= link_to t('page.action.delete'), page, method: :delete,
-                   data: { confirm: t('page.message.confirmDelete') } %></td>
+                   data: { confirm: t('general.message.confirmDelete') } %></td>
         </tr>
     <% end %>
-    </tbody>
   </table>
 
   <br>
 
   <%= link_to t('page.action.new'), new_page_path %> |
-  <%= link_to 'Edit Page Sections', page_sections_path %>
+  <%= link_to t('section.action.maintain'), page_sections_path %>
 </section>

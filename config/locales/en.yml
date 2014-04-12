@@ -52,17 +52,60 @@ en:
         last_name: "Last Name"
         email: E-Mail
 
-  project:
-    creation_successful: 'Project was successfully created.'
-    update_successful: 'Project was successfully updated.'
-    leader:
-      added: 'Leader was successfully added.'
-      removed: 'Leader was successfully removed.'
-    upload_picture: 'Upload new picture'
-    you_are_participating: 'You are participating at this project.'
+  general:
+    action:
+      show: 'Show'
+    label:
+      adminPanel: 'Admin Panel'
+      error: 'Error'
+    message:
+      confirmDelete: 'Are you sure?'
 
   layout:
     title: 'Serve The City Karlsruhe'
+    pageLinks:
+      contact: 'Contact Us'
+      aboutUs: 'Legal Notice'
+      privacy: 'Privacy'
+      disclaimer: 'Disclaimer'
+
+  project:
+    action:
+      new: 'New Project'
+      edit: 'Edit Project'
+      save: 'Update Project'
+      enter: 'Enter Team'
+      leave: 'Leave Team'
+      editLeaders: 'Change Project Leaders'
+      asLeader: '(=> as leader)'
+      notAsLeader: '(X)'
+      toOverview: 'Back to the Overview'
+      toProject: 'Back to Project'
+    label:
+      project: 'Project'
+      new: 'Create new Project'
+      edit: 'Edit Project: %s'
+      list: 'Projects in 2014'
+      countActive: 'Current Projects'
+      projectName: 'Project Name'
+      uploadImage: 'Upload Image'
+      description: 'Description'
+      location: 'Location'
+      individualTasks: 'Individual Tasks'
+      requirements: 'Required Skills'
+      material: 'Needed Material'
+      leaders: 'Leadership'
+      team: 'Team'
+      maxTeamSize: 'Max Team Size'
+    message:
+      created: 'Project was successfully created.'
+      updated: 'Project was successfully updated.'
+      leaderAdded: 'Leader was successfully added.'
+      leaderRemoved: 'Leader was successfully removed.'
+      errorList: 'Errors prohibited this project from being saved:'
+      remainingVacancy: '%s vacancies'
+    upload_picture: 'Upload new picture'
+    you_are_participating: 'You are participating at this project.'
 
   user:
     action:
@@ -70,29 +113,43 @@ en:
       logout: 'Sign Out'
       register: 'Sign Up'
       confirmAccount: 'Confirm my account'
+      unlockAccount: 'Unlock my account'
       resendInstructions: 'Resend confirmation instructions'
       changePassword: 'Change my password'
-      unlockAccount: 'Unlock my account'
     label:
+      countActive: 'Participants'
     message:
-      loggedInAs: 'logged in as '
       profileUpdated: 'Your profile was successfully updated.'
+      loggedInAs: 'logged in as %s'
 
   page:
     action:
       new: 'New Page'
-      show: 'Show'
       edit: 'Edit'
+      show: 'Show'
       delete: 'Delete'
+      save: 'Update Page'
+      maintain: 'Edit Pages'
       toOverview: 'Back to the overview'
+    label:
+      new: 'New Page'
     message:
-      confirmDelete: 'Are you sure?'
+      errorList: 'Errors prohibited this page from being saved:'
 
   section:
     action:
       new: 'New'
-      show: 'Show'
       edit: 'Edit'
+      show: 'Show'
       delete: 'Delete'
+      save: 'Update Page Section'
+      maintain: 'Edit Page Sections'
       toOverview: 'Back to the overview'
-
+    label:
+      new: 'New Page Section'
+      edit: 'Edit Page Section: %s'
+      list: 'Page Sections'
+      title: 'Title'
+      content: 'Content'
+    message:
+      errorList: 'Errors prohibited this page section from being saved:'

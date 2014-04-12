@@ -2,18 +2,18 @@
 
 <section id="project-list-header">
   <div class="infobox">
-    <div>Aktuelle Projekte</div>
-    <span>23</span>
+    <div><%= t('project.label.countActive') %></div>
+    <span>XYZ</span>
   </div>
   <div class="infobox">
-    <div>Aktive 2014</div>
-    <span>76</span>
+    <div><%= t('user.label.countActive') %></div>
+    <span>XYZ</span>
   </div>
-  <h1>Projektliste 2014</h1>
+  <h1><%= t('project.label.list') %></h1>
 </section>
 
 <section id="project-list-options">
-  <%= link_to 'New Project', new_project_path %>
+  <%= link_to t('project.action.new'), new_project_path %>
 </section>
 
 <div id="project-list">

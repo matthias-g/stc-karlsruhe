@@ -75,7 +75,7 @@ class PagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.require(:page).permit(:title, { :section_ids => [] } )
+      params.require(:page).permit(:title, { :section_ids => [] }, :header_name )
     end
 
     def check_admin

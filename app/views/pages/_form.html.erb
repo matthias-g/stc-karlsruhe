@@ -19,6 +19,10 @@
     <%= f.collection_select(:section_ids, PageSection.all, :id, :title,
         {:selected => @page.sections.collect {|t| t.id}}, :multiple => true) -%>
   </div>
+  <div class="field">
+    <%= f.label :header_name %><br>
+    <%= f.text_field :header_name, :placeholder => 'smallheader / bigheader' %>
+  </div>
   <div class="actions">
     <%= f.submit t('page.action.save') %>
   </div>

@@ -38,7 +38,7 @@
 
   <div class="rightCol">
     <div class="wide infobox level1">
-      <%= @project.status.title %>
+      <%= t "project.status.#{@project.status}" %>
     </div>
     <div>
       <% if user_signed_in? and @project.has_volunteer?(current_user) %>

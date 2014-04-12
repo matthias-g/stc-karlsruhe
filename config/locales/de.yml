@@ -119,6 +119,11 @@ de:
       errorList: 'Wegen folgenden Fehlern konnte das Projekt nicht gespeichert werden:'
       remainingVacancy: '%s freie Plätze'
       teamMember: 'Du bist im Projektteam.'
+    status:
+      open: Offen
+      soon_full: Wenige Plätze
+      full: Voll
+      closed: Abgeschlossen
 
   user:
     action:

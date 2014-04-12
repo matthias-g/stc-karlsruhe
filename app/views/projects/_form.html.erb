@@ -45,7 +45,7 @@
       <div class="rightCol">
         <div class="wide infobox level0">
           <%= Project.human_attribute_name('status') %>
-          <%= f.collection_select :status_id, ProjectStatus.all, :id, :title %>
+          <%= f.select :status, Project.statuses.keys.map { |s| [t("project.status.#{s}"), s] } %>
         </div>
         <div>
           <h3> <%= Project.human_attribute_name('desired_team_size') %></h3>

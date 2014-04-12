@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140412200215) do
+ActiveRecord::Schema.define(version: 20140412180755) do
 
   create_table "page_sections", force: true do |t|
     t.string   "title"
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20140412200215) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "header_name"
-    t.string   "address"
   end
 
   create_table "project_days", force: true do |t|
@@ -69,7 +68,6 @@ ActiveRecord::Schema.define(version: 20140412200215) do
     t.string   "desired_team_size"
     t.integer  "status_id"
     t.string   "time"
-    t.text     "short_description", default: ""
   end
 
   create_table "projects_leaders", id: false, force: true do |t|

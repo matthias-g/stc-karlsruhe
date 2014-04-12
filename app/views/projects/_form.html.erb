@@ -34,9 +34,13 @@
       </div>
 
       <div class="rightCol">
-        <div class="wide infobox level0">
-          <%= Project.human_attribute_name('desired_team_size') %>:
+        <div>
+          <h3><%= Project.human_attribute_name('desired_team_size') %></h3>
           <%= f.text_field :desired_team_size %>
+        </div>
+        <div class="wide infobox level0">
+          <h3><%= Project.human_attribute_name('status') %></h3>
+          <%= f.collection_select :status_id, ProjectStatus.all, :id, :title %>
         </div>
         <% if not isNew %>
             <div>

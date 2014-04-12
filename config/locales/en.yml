@@ -45,6 +45,7 @@ en:
         desired_team_size: 'Desired Team Size'
         leaders: 'Leaders'
         volunteers: 'Team'
+        status: 'Status'
       user:
         username: Username
         first_name: "First Name"

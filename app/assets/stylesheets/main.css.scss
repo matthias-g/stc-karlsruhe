@@ -4,8 +4,8 @@ $state_soon_full_color: lightgrey;
 $state_soon_full_background: #d49203;
 $state_full_color: lightgrey;
 $state_full_background: #a60000;
-$state_closed_color: lightgrey;
-$state_closed_background: black;
+$state_closed_color: black;
+$state_closed_background: transparent;
 
 @font-face {
   font-family: CaptionFont;
@@ -387,15 +387,15 @@ h3 {
     .project-status {
       position: absolute;
       right: 0;
-      bottom: 0;
-      width: 150px;
-      height: 31px;
-      padding-top: 9px;
+      top: 0;
+      width: 200px;
+      height: 25px;
+      padding-top: 4px;
       font-family: BoldFont;
       font-size: 18px;
       letter-spacing: 1px;
-      text-shadow: 1px 1px 3px #000;
       text-align: center;
+      border-bottom: 1px solid #000;
     }
 
     .open {
@@ -412,7 +412,7 @@ h3 {
     }
     .closed {
       color: $state_closed_color;
-      background: rgba($state_closed_background, .6);
+      background: $state_closed_background;
     }
   }
 }

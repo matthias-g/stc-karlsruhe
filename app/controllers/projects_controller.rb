@@ -14,8 +14,8 @@ class ProjectsController < ApplicationController
         visible = false
     end
     @projects = Project.where(:visible => visible)
-    @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] and params[:filter][:day]
-    @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] and params[:filter][:status]
+    @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] and not params[:filter][:day].empty
+    @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] and not params[:filter][:status].empty
   end
 
   # GET /projects/1

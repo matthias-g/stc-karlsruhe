@@ -4,6 +4,8 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :leaders, :class_name => 'User', :join_table => 'projects_leaders'
   has_and_belongs_to_many :days, :class_name => 'ProjectDay'
 
+  before_save :adjust_status
+
   enum status: { open: 1, soon_full: 2, full: 3, closed: 4 }
 
   mount_uploader :picture, ImageUploader
@@ -11,7 +13,7 @@ class Project < ActiveRecord::Base
   def add_volunteer(user)
     raise ArgumentException, 'User should be a user object.' unless user.is_a?(User)
     volunteers << user unless has_volunteer?(user)
-    adjust_status!
+    self.save # adjusts status
   end
 
   def has_volunteer?(user)
@@ -24,7 +26,7 @@ class Project < ActiveRecord::Base
     if has_volunteer?(user)
       volunteers.delete(user)
     end
-    adjust_status!
+    self.save # adjusts status
   end
 
   def add_leader(user)
@@ -65,14 +67,14 @@ class Project < ActiveRecord::Base
     end.uniq
   end
 
-  def adjust_status!
+  def adjust_status
     free = desired_team_size - volunteers.count
     if free > 5
-      open!
+      self.status = :open
     elsif free > 0
-      soon_full!
+      self.status = :soon_full
     else
-      full!
+      self.status = :full
     end
   end
 

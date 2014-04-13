@@ -37,7 +37,6 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.add_leader(current_user)
-    @project.adjust_status!
     @project.visible = false
 
     respond_to do |format|
@@ -56,7 +55,6 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        @project.adjust_status!
         format.html { redirect_to @project, notice: t('project.message.updated')}
         format.json { head :no_content }
       else

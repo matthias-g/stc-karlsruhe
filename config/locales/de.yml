@@ -67,11 +67,11 @@ de:
       confirmDelete: 'Wollen Sie das wirklich tun?'
 
   contact:
-    success: 'Vielen Dank für Deine Nachricht!'
+    success: 'Vielen Dank für Deine Nachricht! Wir werden sie so schnell wie möglich beantworten.'
     fail: 'Nachricht konnte nicht gesendet werden.'
     submit: 'Nachricht senden'
     title: 'Kontakt aufnehmen'
-    text: 'Du hast die ein oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei dir.'
+    text: 'Du hast die ein oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei Dir.'
     placeholder:
       email: 'E-Mail'
       subject: 'Betreff'
@@ -117,7 +117,7 @@ de:
       projectName: 'Projektname'
       uploadImage: 'Bild hochladen'
     message:
-      created: 'Projekt wurde erfolgreich erstellt.'
+      created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'
       leaderAdded: 'Projektleiter erfolgreich hinzugefügt.'
       leaderRemoved: 'Projektleiter erfolgreich entfernt.'

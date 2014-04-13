@@ -70,7 +70,7 @@ class ProjectsController < ApplicationController
       return
     end
     @project.add_volunteer(current_user)
-    redirect_to project_url(@project)
+    redirect_to project_url(@project), :notice => 'Du nimmst jetzt an diesem Projekt teil. Der Teamleiter wird sich mit Dir in Verbindung setzen.'
   end
 
   def leave

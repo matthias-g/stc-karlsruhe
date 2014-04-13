@@ -6,6 +6,7 @@ class Project < ActiveRecord::Base
 
   before_save :adjust_status
   validates_presence_of :desired_team_size
+  after_create :send_notice_mail
 
   enum status: { open: 1, soon_full: 2, full: 3, closed: 4 }
 
@@ -77,6 +78,20 @@ class Project < ActiveRecord::Base
     else
       self.status = :full
     end
+  end
+
+  private
+
+  def send_notice_mail
+    message = Message.new(:email => 'no-reply@servethecity-karlsruhe.de', :subject => 'Ein neues Projekt wurde erstellt',
+                          :body => "Hallo,
+
+soeben wurde ein neues Projekt für Serve the City erstellt.
+
+Projekttitel: #{title}
+Leiter: #{leaders.first.full_name}
+                          ")
+    ContactFormMailer.new_message(message).deliver
   end
 
 end

@@ -38,18 +38,8 @@ class ProjectsController < ApplicationController
     @project.add_leader(current_user)
     @project.visible = false
 
-    message = Message.new(:email => 'no-reply@servethecity-karlsruhe.de', :subject => 'Ein neues Projekt wurde erstellt',
-      :body => "Hallo,
-
-soeben wurde ein neues Projekt für Serve the City erstellt.
-
-Projekttitel: #{@project.title}
-Leiter: #{@project.leaders.first.full_name}
-")
-
     respond_to do |format|
       if @project.save
-        ContactFormMailer.new_message(message).deliver
         format.html { redirect_to @project, notice: t('project.message.created') }
         format.json { render action: 'show', status: :created, location: @project }
       else
@@ -145,4 +135,5 @@ Leiter: #{@project.leaders.first.full_name}
         redirect_to projects_path
       end
     end
+
 end

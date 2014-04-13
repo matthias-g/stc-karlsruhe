@@ -19,8 +19,10 @@
       <%= collection_select(:filter, :day, ProjectDay.all, :id, :title) %>
       <%= label(:filter, :day, "Projektstatus:") %>
       <%= select(:filter, :status, Project.statuses.keys.map { |s| [t("project.status.#{s}"), s] }) %>
-      <%= label(:filter, :day, "Sichtbarkeit:") %>
-      <%= select(:filter, :visibility, [['Sichtbar', :visible], ['Versteckt', :hidden]]) %>
+      <% if user_signed_in? and current_user.is_admin? %>
+        <%= label(:filter, :day, "Sichtbarkeit:") %>
+        <%= select(:filter, :visibility, [['Sichtbar', :visible], ['Versteckt', :hidden]]) %>
+      <% end %>
       <%= submit_tag("Filter") %>
   <% end %>
 </section>

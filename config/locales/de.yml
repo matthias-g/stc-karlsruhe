@@ -56,6 +56,9 @@ de:
         password: 'Passwort'
         password_confirmation: 'Passwort bestätigen'
         remember_me: "Angemeldet bleiben"
+    errors:
+      messages:
+        blank: 'darf nicht leer sein.'
 
   general:
     action:
@@ -121,7 +124,7 @@ de:
       updated: 'Projekt wurde erfolgreich aktualisiert.'
       leaderAdded: 'Projektleiter erfolgreich hinzugefügt.'
       leaderRemoved: 'Projektleiter erfolgreich entfernt.'
-      errorList: 'Wegen folgenden Fehlern konnte das Projekt nicht gespeichert werden:'
+      errorList: 'Wegen folgender Fehler konnte das Projekt nicht gespeichert werden:'
       remainingVacancy: '%s freie Plätze'
       teamMember: 'Du bist im Projektteam.'
     status:

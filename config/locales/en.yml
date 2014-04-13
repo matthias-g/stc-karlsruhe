@@ -56,6 +56,9 @@ en:
         password: 'Password'
         password_confirmation: 'Confirm password'
         remember_me: "Remember me"
+    errors:
+      messages:
+        blank: 'may not be blank.'
 
   general:
     action:

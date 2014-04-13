@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :days, :class_name => 'ProjectDay'
 
   before_save :adjust_status
+  validates_presence_of :desired_team_size
 
   enum status: { open: 1, soon_full: 2, full: 3, closed: 4 }
 

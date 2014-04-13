@@ -9,11 +9,11 @@
       <%= devise_error_messages! %>
     </section>
 
-    <div class="two-col-group profile">
+    <div class="two-col-group profile-view profile-edit-view">
       <div>
         <section class="info">
           <h1>Mein Profil</h1>
-          <h3>Benutername</h3>
+          <h3>Benutzername</h3>
           <%= f.text_field :username %>
           <h3>Vorname</h3>
           <%= f.text_field :first_name %>
@@ -27,18 +27,19 @@
         </section>
       </div>
       <div>
-        <section class="actions">
+        <section class="change_password">
           <h3>Passwort ändern</h3>
-          <div><i>Leeres Passwort um aktuelles zu behalten.</i><br />
-            <%= f.password_field :password, :autocomplete => "off", placeholder: 'Neues Passwort' %></div>
-          <br />
+          <div><i>Leer lassen, wenn du dein aktuelles Passwort beibehalten möchtest.</i><br />
+            <%= f.password_field :password, :autocomplete => "off", placeholder: 'Neues Passwort' %>
+          </div>
           <div>
-            <%= f.password_field :password_confirmation, placeholder: 'Passwort bestätigen' %></div>
+            <%= f.password_field :password_confirmation, placeholder: 'Passwort bestätigen' %>
+          </div>
 
         </section>
       </div>
       <div>
-        <section class="actions">
+        <section class="save_edit">
           <i>Gib dein aktuelles Passwort ein um die Änderungen zu bestätigen</i>
           <br />
           <%= f.password_field :current_password, placeholder: 'Aktuelles Passwort' %>

@@ -435,10 +435,13 @@ h3 {
   }
 }
 
-.profile {
+.profile-view {
   .info, .actions {
     margin-right: 5px;
     margin-top: 0;
+    h3 {
+      margin-top: 5px;
+    }
   }
   .projects {
     margin-left: 5px;
@@ -447,5 +450,15 @@ h3 {
       margin: 5px 10px;
     }
   }
+}
 
+.profile-edit-view {
+  input {
+    display: block;
+    min-width: 280px;
+  }
+  .change_password, .save_edit {
+    margin-left: 5px;
+    margin-top: 0;
+  }
 }

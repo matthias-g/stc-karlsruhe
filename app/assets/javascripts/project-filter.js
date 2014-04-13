@@ -4,8 +4,6 @@ $(document).ready(function() {
         var params = $.map($(":input", obj).serializeArray(), function(a) {
             return a.name + '=' + a.value;
         }).join('&');
-        $('#project-list').empty();
-        alert('QUERY: ' + params);
         $('#project-list').load('/projects?' + params + ' #project-list > *', function() {
             clipTexts($('#project-list'));
         });

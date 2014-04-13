@@ -1,3 +1,12 @@
+$state_open_color: lightgrey;
+$state_open_background: #197435;
+$state_soon_full_color: lightgrey;
+$state_soon_full_background: #d49203;
+$state_full_color: lightgrey;
+$state_full_background: #a60000;
+$state_closed_color: lightgrey;
+$state_closed_background: black;
+
 @font-face {
   font-family: CaptionFont;
   src: asset-url("libelsuit.ttf");
@@ -228,22 +237,22 @@ h3 {
     margin: 5px 0;
     text-align: center;
   }
-  &.level0 {
-    background: transparent;
-    color: black;
-    border: 1px solid black;
+
+  &.open {
+    color: $state_open_color;
+    background: $state_open_background;
   }
-  &.level1 {
-    background: green;
-    color: white;
+  &.soon_full {
+    color: $state_soon_full_color;
+    background: $state_soon_full_background;
   }
-  &.level2 {
-    background: yellow;
-    color: black;
+  &.full {
+    color: $state_full_color;
+    background: $state_full_background;
   }
-  &.level3 {
-    background: red;
-    color: white;
+  &.closed {
+    color: $state_closed_color;
+    background: $state_closed_background;
   }
 }
 
@@ -352,6 +361,7 @@ h3 {
   section {
     height: 200px;
     padding: 0;
+
     .project-image {
       position: absolute;
       left: 0;
@@ -373,6 +383,36 @@ h3 {
       bottom: 5px;
       left: 210px;
       overflow: hidden;
+    }
+    .project-status {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 150px;
+      height: 31px;
+      padding-top: 9px;
+      font-family: BoldFont;
+      font-size: 18px;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 3px #000;
+      text-align: center;
+    }
+
+    .open {
+      color: $state_open_color;
+      background: rgba($state_open_background, .8);
+    }
+    .soon_full {
+      color: $state_soon_full_color;
+      background: rgba($state_soon_full_background, .8);
+    }
+    .full {
+      color: $state_full_color;
+      background: rgba($state_full_background, .8);
+    }
+    .closed {
+      color: $state_closed_color;
+      background: rgba($state_closed_background, .6);
     }
   }
 }

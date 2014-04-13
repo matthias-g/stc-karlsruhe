@@ -37,7 +37,7 @@
   </div>
 
   <div class="rightCol">
-    <div class="wide infobox level1">
+    <div class="wide infobox <%= @project.status %>">
       <%= t "project.status.#{@project.status}" %>
     </div>
     <div>

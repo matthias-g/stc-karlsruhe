@@ -21,7 +21,10 @@
       <section>
         <div class="project-image">
           <%= link_to project do %>
-              <%= image_tag project.picture_url(:listview) if project.picture.file %>
+            <%= image_tag project.picture_url(:listview) if project.picture.file %>
+            <div class="project-status <%= project.status %>">
+              <%= t "project.status.#{project.status}" %>
+            </div>
           <% end %>
         </div>
         <div class="project-title">

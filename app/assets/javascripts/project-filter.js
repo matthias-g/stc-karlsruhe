@@ -1,9 +1,11 @@
 $(document).ready(function() {
-    var ajaxSubmitter = function(e) {
+    var ajaxSubmitter = function(e, obj) {
         e.preventDefault();
-        var params = $.map($(":input", this).serializeArray(), function(a) {
+        var params = $.map($(":input", obj).serializeArray(), function(a) {
             return a.name + '=' + a.value;
         }).join('&');
+        $('#project-list').empty();
+        alert('QUERY: ' + params);
         $('#project-list').load('/projects?' + params + ' #project-list > *', function() {
             clipTexts($('#project-list'));
         });

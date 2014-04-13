@@ -12,8 +12,21 @@
   <h1><%= t('project.label.list') %></h1>
 </section>
 
-<section id="project-list-options">
-  <%= link_to t('project.action.new'), new_project_path %>
+<section class="project-list-sidebox">
+  <h3>Projektliste filtern</h3>
+  <%= form_tag('/projects', method: 'get', id:'projectFilter') do %>
+      <%= label(:filter, :day, "Projekttag:") %>
+      <%= collection_select(:filter, :day, ProjectDay.all, :id, :title) %>
+      <%= label(:filter, :day, "Projektstatus:") %>
+      <%= select(:filter, :status, Project.statuses.keys.map { |s| [t("project.status.#{s}"), s] }) %>
+      <%= label(:filter, :day, "Sichtbarkeit:") %>
+      <%= select(:filter, :visibility, [['Sichtbar', :visible], ['Versteckt', :hidden]]) %>
+      <%= submit_tag("Filter") %>
+  <% end %>
+</section>
+<section class="project-list-sidebox">
+  <h3>Optionen</h3>
+  <%= link_to t('project.action.new'), new_project_path, class:'wide button' %>
 </section>
 
 <div id="project-list">

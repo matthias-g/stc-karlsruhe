@@ -140,7 +140,7 @@ de:
       resendInstructions: 'Anleitung zur Bestätigung nochmal senden'
       changePassword: 'Passwort ändern'
     label:
-      countActive: 'Aktive 2014'
+      countActive: 'TeilnehmerInnen'
     message:
       profileUpdated: 'Profil erfolgreich aktualisiert.'
       loggedInAs: 'eingeloggt als %s'

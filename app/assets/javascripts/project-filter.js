@@ -6,6 +6,7 @@ $(document).ready(function() {
         }).join('&');
         $('#project-list').load('/projects?' + params + ' #project-list > *', function() {
             clipTexts($('#project-list'));
+            $('#filterResults').text('Gefundene Projekte: ' + $('#project-list > *').size());
         });
     };
     $('#projectFilter').submit(ajaxSubmitter);

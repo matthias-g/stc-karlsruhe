@@ -25,6 +25,7 @@
         <%= select(:filter, :visibility, [['Sichtbar', :visible], ['Versteckt', :hidden]]) %>
       <% end %>
       <%= submit_tag("Filter") %>
+      <div id="filterResults"></div>
   <% end %>
 </section>
 <section class="project-list-sidebox">

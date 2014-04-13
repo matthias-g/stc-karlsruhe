@@ -7,15 +7,14 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   # GET /projects.json
-  #/projects?utf8=%E2%9C%93&filter[day]=1&filter[status]=open&filter[visibility]=visible&commit=Filter
   def index
     visible = true
     if params[:filter] and params[:filter][:visibility] == 'hidden' and current_user.is_admin?
         visible = false
     end
     @projects = Project.where(:visible => visible)
-    @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] and not params[:filter][:day].empty
-    @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] and not params[:filter][:status].empty
+    @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] and params[:filter][:day] != ''
+    @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] and params[:filter][:status] != ''
   end
 
   # GET /projects/1

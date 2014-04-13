@@ -73,10 +73,4 @@ class ProjectDaysController < ApplicationController
     def project_day_params
       params.require(:project_day).permit(:title)
     end
-
-    def check_admin
-      unless current_user.is_admin?
-        redirect_to '/'
-      end
-    end
 end

@@ -68,6 +68,13 @@
       <ul>
         <li><%= link_to t('project.action.edit'), edit_project_path(@project) %></li>
         <li><%= link_to t('project.action.editLeaders'), edit_leaders_project_path(@project) %></li>
+        <% if current_user.is_admin? %>
+          <% if @project.visible %>
+            <li><%= link_to t('project.action.makeInvisible'), make_invisible_project_path(@project) %></li>
+          <% else %>
+            <li><%= link_to t('project.action.makeVisible'), make_visible_project_path(@project) %></li>
+          <% end %>
+        <% end %>
       </ul>
     </div>
     <% end %>

@@ -105,6 +105,8 @@ de:
       notAsLeader: '(X)'
       toOverview: 'Zurück zur Übersicht'
       toProject: 'Zurück zum Projekt'
+      makeVisible: 'Sichtbar machen'
+      makeInvisible: 'Unsichtbar machen'
     label:
       project: 'Projekt'
       status: 'Projektstatus'

@@ -73,10 +73,4 @@ class ProjectStatusesController < ApplicationController
     def project_status_params
       params.require(:project_status).permit(:title, :display_class)
     end
-
-    def check_admin
-      unless current_user.is_admin?
-        redirect_to '/'
-      end
-    end
 end

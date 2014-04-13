@@ -1,7 +1,9 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :enter, :leave, :edit_leaders, :add_leader, :delete_leader]
-  before_action :authenticate_user!, only: [:edit, :update, :enter, :leave, :destroy, :new, :edit_leaders, :add_leader, :delete_leader]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :enter, :leave, :edit_leaders, :add_leader, :delete_leader, :make_visible, :make_invisible]
+  before_action :authenticate_user!, only: [:edit, :update, :enter, :leave, :destroy, :new, :edit_leaders, :add_leader, :delete_leader, :make_visible, :make_invisible]
   before_action :redirect_non_leaders, only: [:edit, :edit_leaders, :add_leader, :delete_leader, :destroy, :update]
+  before_action :check_admin, only: [:make_visible, :make_invisible]
+  before_action :check_visible, only: [:show, :edit, :update, :enter, :leave, :edit_leaders, :add_leader, :delete_leader, :destroy]
 
   # GET /projects
   # GET /projects.json
@@ -17,7 +19,6 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
-    # @project.visible = false
   end
 
   # GET /projects/1/edit
@@ -30,6 +31,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.add_leader(current_user)
     @project.adjust_status!
+    @project.visible = false
 
     respond_to do |format|
       if @project.save
@@ -96,6 +98,16 @@ class ProjectsController < ApplicationController
     redirect_to edit_leaders_project_url(@project), notice: t('project.message.leaderRemoved')
   end
 
+  def make_visible
+    @project.make_visible!
+    redirect_to @project, notice: 'Projekt wurde sichtbar gemacht.'
+  end
+
+  def make_invisible
+    @project.make_invisible!
+    redirect_to @project, notice: 'Projekt wurde unsichtbar gemacht.'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
@@ -111,6 +123,12 @@ class ProjectsController < ApplicationController
     def redirect_non_leaders
       unless current_user.leads_project?(@project) or current_user.is_admin?
         redirect_to @project
+      end
+    end
+
+    def check_visible
+      unless @project.visible or (user_signed_in? and current_user.is_admin?)
+        redirect_to projects_path
       end
     end
 end

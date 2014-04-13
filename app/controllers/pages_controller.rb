@@ -84,9 +84,4 @@ class PagesController < ApplicationController
       params.require(:page).permit(:title, { :section_ids => [] }, :header_name, :address)
     end
 
-    def check_admin
-      unless current_user.is_admin?
-        redirect_to '/'
-      end
-    end
 end

@@ -83,10 +83,4 @@ class UsersController < ApplicationController
       params.require(:user).permit(:username, :first_name, :last_name, :email)
     end
 
-    def check_admin
-      unless current_user.has_role?(:admin)
-        redirect_to '/profile'
-      end
-    end
-
 end

@@ -49,12 +49,11 @@
         </div>
         <div class="project-description clipText">
           <% if project.short_description.empty? %>
-            <div><%= simple_format project.description %></div>
+            <div><%= project.description %></div>
           <% else %>
-            <div><%= simple_format project.short_description %></div>
+            <div><%= project.short_description %></div>
           <% end %>
         </div>
       </section>
   <% end %>
-
 </div>

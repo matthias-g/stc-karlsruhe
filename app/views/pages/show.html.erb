@@ -15,8 +15,10 @@
     </section>
 <% end %>
 
+<% if user_signed_in? and current_user.is_admin? %>
 <section>
     <h2><%= t('general.label.adminPanel') %></h2>
     <%= link_to t('page.action.edit'), edit_page_path(@page) %><br>
     <%= link_to t('page.action.toOverview'), pages_path %>
 </section>
+<% end %>

@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    var popupTarget = ' #popupTarget';
+
+    // defines the login/registration popups in the top right corner
     $('.miniPopup').each(function() {
         var container = $(this);
         var link = container.children('a');
@@ -6,15 +9,31 @@ $(document).ready(function() {
         link.click(function() {
             $('.miniPopup').not(container).children('div').fadeOut();
             popup.fadeToggle();
-            popup.load(link.attr('href') + ' #popupTarget', function() {
+            popup.load(link.attr('href') + popupTarget, function() {
                 popup.find('input:not([type="hidden"]), textarea').eq(0).focus();
             });
             return false;
         });
     });
 
+    $.ajaxSetup({
+        statusCode: {
+            401: function(){
+                openPopup("/profile/login" + popupTarget,
+                          "/profile/register" + popupTarget);
+            }
+        }
+    });
+
     // define helper functions
-    function showPopup() {
+    function openPopup(url, url2) {
+        var closeButton = $('<a id="popupClose" alt="Abbrechen" href="#"></a>').click(hidePopup),
+            popup = $('#popupInner').empty().append(closeButton);
+        if (url2) {
+            var cols = $('<div class="two-col-group padded">').appendTo(popup);
+            $('<div>').appendTo(cols).load(url, autoFocus);
+            $('<div>').appendTo(cols).load(url2);
+        } else $('<div>').appendTo(popup).load(url, autoFocus);
         $('#popup').fadeIn().css({display: ''});
         return false;
     }
@@ -37,15 +56,7 @@ $(document).ready(function() {
     // open popup links in popup
     $('a.openInPopup').click(function() {
         var link = $(this),
-            closeButton = $('<a id="popupClose" alt="Abbrechen" href="#"></a>').click(hidePopup),
-            popup = $('#popupInner').empty().append(closeButton),
-            url = link.attr('href') + ' #popupTarget';
-        showPopup();
-        if (link.hasClass('dualPopup')) {
-            var cols = $('<div class="two-col-group">').appendTo(popup);
-            $('<div>').appendTo(cols).load(url, autoFocus);
-            $('<div>').appendTo(cols).load(url);
-        } else popup.load(url, autoFocus);
-        return false;
+            url = link.attr('href') + popupTarget;
+        return (link.hasClass('dualPopup')) ? openPopup(url, url) : openPopup(url);
     });
 });

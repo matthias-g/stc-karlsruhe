@@ -1,28 +1,30 @@
 <%= render '/layouts/smallheader' -%>
 
 <%= form_for @message, :url => contact_path do |form| %>
-  <section class="contact-form" id="popupTarget">
-    <h1><%= t 'contact.title' %></h1>
-    <div class="leftCol">
-      <%= t 'contact.text' %>
-    </div>
-    <div class="rightCol">
-      <div>
-        <h3><%= t('contact.field_title.email') %></h3>
-        <%= form.email_field :email %>
-      </div>
-      <div>
-        <h3><%= t('contact.field_title.subject') %></h3>
-        <%= form.text_field :subject %>
-      </div>
-      <div>
-        <h3><%= t('contact.field_title.body') %></h3>
-        <%= form.text_area :body %>
-      </div>
-      <div>
-        <br />
-        <%= form.submit t('contact.submit') %>
-      </div>
+  <section class="contact-form">
+    <div id="popupTarget">
+        <h1><%= t 'contact.title' %></h1>
+        <div class="leftCol">
+          <%= t 'contact.text' %>
+        </div>
+        <div class="rightCol">
+          <div>
+            <h3><%= t('contact.field_title.email') %></h3>
+            <%= form.email_field :email %>
+          </div>
+          <div>
+            <h3><%= t('contact.field_title.subject') %></h3>
+            <%= form.text_field :subject %>
+          </div>
+          <div>
+            <h3><%= t('contact.field_title.body') %></h3>
+            <%= form.text_area :body %>
+          </div>
+          <div>
+            <br />
+            <%= form.submit t('contact.submit') %>
+          </div>
+        </div>
     </div>
   </section>
 <% end %>

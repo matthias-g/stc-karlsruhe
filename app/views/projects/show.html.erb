@@ -45,6 +45,8 @@
         <% if user_signed_in? and @project.has_volunteer?(current_user) %>
             <%= t('project.message.teamMember') %>
             <%= link_to t('project.action.leave'), leave_project_path(@project), class: "wide button" %>
+        <% elsif user_signed_in? %>
+            <%= link_to t('project.action.enter'), enter_project_path(@project), class: "wide button" %>
         <% else %>
             <%= link_to t('project.action.enter'), enter_project_path(@project), class: "wide button openInPopup" %>
         <% end %>

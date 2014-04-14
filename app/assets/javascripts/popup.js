@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var popupTarget = ' #popupTarget';
+    var popupTarget = ' .popupTarget';
 
     // defines the login/registration popups in the top right corner
     $('.miniPopup').each(function() {

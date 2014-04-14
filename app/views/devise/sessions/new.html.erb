@@ -1,7 +1,7 @@
 <%= render '/layouts/smallheader' -%>
 
 <section>
-  <div id="popupTarget">
+  <div class="popupTarget">
     <h2>Anmelden</h2>
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
       <div><%= f.label :login %><br />

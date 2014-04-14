@@ -1,7 +1,7 @@
 <%= render '/layouts/smallheader' -%>
 
 <%= form_for @message, :url => contact_path do |form| %>
-  <section class="contact-form">
+  <section class="contact-form" id="popupTarget">
     <h1><%= t 'contact.title' %></h1>
     <div class="leftCol">
       <%= t 'contact.text' %>

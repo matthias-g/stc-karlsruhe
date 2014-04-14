@@ -149,6 +149,38 @@ footer a {
   text-decoration: none;
 }
 
+#popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 1000;
+  display: table;
+  #popupMiddle {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+  #popupInner {
+    position: relative;
+    display: inline-block;
+    background: rgba(#fff, 1.0);
+    min-width: 300px;
+    min-height: 200px;
+    box-shadow: 3px 3px 15px rgba(#000, 0.8);
+  }
+  #popupClose {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 32px;
+    height: 32px;
+    background: image-url("close.png");
+  }
+}
+
 /* GENERAL STYLES */
 
 a {

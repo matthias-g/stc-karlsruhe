@@ -1,27 +1,36 @@
 <%= render '/layouts/smallheader' -%>
 
 <section>
-    <p>
-      <strong>Username:</strong>
-      <%= @user.username %>
-    </p>
-
-    <p>
-      <strong>First Name:</strong>
-      <%= @user.first_name %>
-    </p>
-
-    <p>
-      <strong>Last Name:</strong>
-      <%= @user.last_name %>
-    </p>
-
-    <p>
-      <strong>Email:</strong>
-      <%= @user.email %>
-    </p>
-
-    <%= link_to 'Bearbeiten', profile_edit_path %> |
-    <%= link_to 'Zurück', '/' %>
-
+  <h1><%= @user.full_name %></h1>
 </section>
+
+<div class="two-col-group profile-view">
+  <div>
+    <section class="actions">
+
+    </section>
+  </div>
+
+  <div>
+    <section class="projects">
+      <h1>Projekte</h1>
+      <% if @user.projects_as_volunteer.count > 0 %>
+        <h2>Teilnahme an</h2>
+        <% @user.projects_as_volunteer.each do |project| %>
+          <%= link_to project.title, project, class: "wide button" %>
+        <% end %>
+      <% end %>
+      <% if @user.projects_as_leader.count > 0 %>
+        <h2>Leitung von</h2>
+        <% @user.projects_as_leader.each do |project| %>
+          <%= link_to project.title, project, class: "wide button" %>
+        <% end %>
+      <% end %>
+    </section>
+  </div>
+</div>
+
+
+
+
+

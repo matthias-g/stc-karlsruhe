@@ -16,10 +16,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    if current_user.has_role?(:admin)
-      set_user
-    else
-      redirect_to :action => :my_profile
+    set_user
+    if current_user == @user
+        redirect_to profile_path
     end
   end
 

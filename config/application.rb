@@ -23,7 +23,8 @@ module StcKarlsruhe
 
     config.assets.initialize_on_precompile = false
 
-    CONTACT_RECIPIENT = 'contact@servethecity-karlsruhe.de'
+    CONTACT_FORM_RECIPIENT = 'contact@servethecity-karlsruhe.de'
+    NO_REPLY_SENDER = 'no-reply@servethecity-karlsruhe.de'
 
   end
 end

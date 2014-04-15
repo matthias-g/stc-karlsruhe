@@ -1,7 +1,7 @@
 <%= render '/layouts/smallheader' -%>
 
 <section class="contact-form">
-    <div class="popupTarget">
+    <div class="">
       <%= form_for @message, :url => contact_path do |form| %>
         <h1><%= t 'contact.title' %></h1>
         <div class="leftCol">
@@ -10,7 +10,7 @@
         <div class="rightCol">
           <div>
             <h3><%= t('contact.field_title.email') %></h3>
-            <%= form.email_field :email %>
+            <%= form.email_field :sender %>
           </div>
           <div>
             <h3><%= t('contact.field_title.subject') %></h3>
@@ -22,6 +22,7 @@
           </div>
           <div>
             <br />
+            <%= form.hidden_field :recipient, value: 'default@servethecity-karlsruhe.de' %>
             <%= form.submit t('contact.submit') %>
           </div>
         </div>

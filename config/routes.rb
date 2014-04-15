@@ -27,13 +27,15 @@ StcKarlsruhe::Application.routes.draw do
     get 'logout', :to => 'devise/sessions#destroy' #, :as => :logout_user
     get 'profile', :to => 'users#my_profile'
     get 'register', :to => 'devise/registrations#new'
-    # get 'users/:id', :to => 'users#show'
-    # get 'users', :to => 'users#contact', :as => :user
+    #get 'users/:id', :to => 'users#show'
+    #get 'users', :to => 'users#contact', :as => :user
   end
 
   resources :page_sections
 
   resources :pages
+
+  resources :users
 
   # root 'pages#show', id: 1
   root 'pages#welcome'

@@ -1,7 +1,7 @@
 class Mailer < ActionMailer::Base
   default from: StcKarlsruhe::Application::NO_REPLY_SENDER
 
-  def contact_form_mail(message)
+  def contact_mail(message)
     @message = message.body
     mail from: message.sender, to: StcKarlsruhe::Application::CONTACT_FORM_RECIPIENT, reply_to: message.sender, subject: message.subject
   end

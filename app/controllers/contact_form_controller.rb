@@ -6,7 +6,7 @@ class ContactFormController < ApplicationController
   def create
     @message = Message.new(params[:message])
     if @message.valid?
-      Mailer.contact_form_mail(@message).deliver
+      Mailer.contact_mail(@message).deliver
       redirect_to root_path, notice: t('contact.success')
     else
       redirect_to contact_path, notice: t('contact.fail')

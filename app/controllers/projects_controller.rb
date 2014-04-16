@@ -40,6 +40,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
+        send_notice_mail
         format.html { redirect_to @project, notice: t('project.message.created') }
         format.json { render action: 'show', status: :created, location: @project }
       else
@@ -134,6 +135,17 @@ class ProjectsController < ApplicationController
       unless @project.visible or (user_signed_in? and current_user.is_admin?)
         redirect_to projects_path
       end
+    end
+
+    def send_notice_mail
+      message = Message.new(:sender => 'no-reply@servethecity-karlsruhe.de', :subject => 'Ein neues Projekt wurde erstellt',
+                            :body => "Hallo,
+
+soeben wurde ein neues Projekt für Serve the City erstellt.
+
+Projekttitel: #{title}
+Leiter: #{leaders.first.full_name}")
+      Mailer.contact_form_mail(message).deliver
     end
 
 end

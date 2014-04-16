@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show]
+  before_action :set_user, only: [:show, :contact_user]
   before_action :authenticate_user!
   before_action :check_admin, only: [:index]
 
@@ -12,6 +12,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    #Message for contac_user
+    @message = Message.new
   end
 
   def edit
@@ -29,6 +31,20 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def contact_user
+    @message = Message.new(params[:message])
+    @message.sender = current_user.email
+    @message.recipient = @user.email
+    if @message.valid?
+      Mailer.single_user_mail(@message).deliver
+      flash[:notice] = t('contact.success')
+      redirect_to action: :show
+    else
+      redirect_to action: :show, notice: t('contact.fail')
+    end
+
   end
 
   private

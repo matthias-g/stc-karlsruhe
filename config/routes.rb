@@ -9,6 +9,8 @@ StcKarlsruhe::Application.routes.draw do
   get 'contact', to: 'contact_form#new'
   post 'contact', to: 'contact_form#create'
 
+  post 'users/:id', to: 'users#contact_user'
+
   resources :projects do
     member do
       get :enter

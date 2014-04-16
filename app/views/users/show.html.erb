@@ -17,9 +17,26 @@
       </div>
     </section>
 
-    <section class="actions">
-      CONTACT FORM
-    </section>
+    <% unless @user == current_user  %>
+      <section class="contact-form">
+        <div class="">
+          <%= form_for @message, url: { action: 'contact_user' } do |form| %>
+            <div>
+              <h3><%= t('contact.field_title.subject') %></h3>
+              <%= form.text_field :subject %>
+            </div>
+            <div>
+              <h3><%= t('contact.field_title.body') %></h3>
+              <%= form.text_area :body %>
+            </div>
+            <div>
+              <br />
+              <%= form.submit t('contact.submit') %>
+            </div>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
 
     <% if @user == current_user  %>
       <section class="actions">

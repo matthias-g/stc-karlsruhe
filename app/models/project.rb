@@ -80,18 +80,4 @@ class Project < ActiveRecord::Base
     end
   end
 
-  private
-
-  def send_notice_mail
-    message = Message.new(:sender => 'no-reply@servethecity-karlsruhe.de', :subject => 'Ein neues Projekt wurde erstellt',
-                          :body => "Hallo,
-
-soeben wurde ein neues Projekt für Serve the City erstellt.
-
-Projekttitel: #{title}
-Leiter: #{leaders.first.full_name}
-                          ")
-    Mailer.contact_form_mail(message).deliver
-  end
-
 end

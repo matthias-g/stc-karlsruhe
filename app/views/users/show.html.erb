@@ -2,18 +2,41 @@
 
 <section>
   <h1><%= @user.full_name %></h1>
+
+  <% if @user == current_user  %>
+    ( <%= link_to 'Profil bearbeiten', edit_user_registration_path %> )
+  <% end %>
+
 </section>
 
 <div class="two-col-group profile-view">
   <div>
-    <section class="actions">
-
+    <section class="info">
+      <div>
+        INFO
+      </div>
     </section>
+
+    <section class="actions">
+      CONTACT FORM
+    </section>
+
+    <% if @user == current_user  %>
+      <section class="actions">
+        <h1>Aufgaben</h1>
+        <%= link_to 'Serve the City kontaktieren', contact_path %>
+        <br/>
+        <%= link_to 'Projekte suchen', projects_path %>
+        <br/>
+        <%= link_to 'Neues Projekt erstellen', new_project_path %>
+        <br/>
+      </section>
+    <% end %>
   </div>
 
   <div>
     <section class="projects">
-      <h1>Projekte</h1>
+      <h1><%= (@user == current_user) ? 'Meine Projekte' : 'Projekte' %></h1>
       <% if @user.projects_as_volunteer.count > 0 %>
         <h2>Teilnahme an</h2>
         <% @user.projects_as_volunteer.each do |project| %>

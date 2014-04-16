@@ -57,8 +57,13 @@ de:
         password_confirmation: 'Passwort bestätigen'
         remember_me: "Angemeldet bleiben"
     errors:
+      models:
+        user:
+          attributes:
+            current_password:
+              invalid: 'Falsches Passwort'
       messages:
-        blank: 'darf nicht leer sein.'
+        blank: 'Darf nicht leer sein.'
 
   general:
     action:

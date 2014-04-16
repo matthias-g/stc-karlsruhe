@@ -5,7 +5,7 @@
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
     <section>
-      <h1>Profil bearbeiten: <%= @user.full_name %></h1> ( <%= link_to "zurück zum Profil", :back %> )
+      <h1>Profil bearbeiten: <%= @user.full_name %></h1> ( <%= link_to "zurück zum Profil", user_path(@user) %> )
       <%= devise_error_messages! %>
     </section>
 

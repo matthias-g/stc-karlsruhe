@@ -1,50 +1,35 @@
 <%= render '/layouts/smallheader' -%>
 
-<%= form_for(@user) do |f| %>
+<%= form_for @user do |f| %>
+  <section>
+    <h1>Profil bearbeiten: <%= @user.full_name %></h1> ( <%= link_to "zurück zum Profil", user_path(@user) %> )
+  </section>
 
-<section>
-    <h1>Profil bearbeiten: <%= @user.full_name %></h1>
-    <%= render 'form' %>
-</section>
-
-<% if @user.errors.any? %>
-    <section id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
+  <div class="two-col-group profile-view profile-edit-view">
+    <div>
+      <section class="info">
+        <h1>Mein Profil</h1>
+        <h3>Benutzername</h3>
+        <%= f.text_field :username %>
+        <h3>Vorname</h3>
+        <%= f.text_field :first_name %>
+        <h3>Nachname</h3>
+        <%= f.text_field :last_name %>
+      </section>
+      <section class="info">
+        <i>Gib dein aktuelles Passwort ein um die Änderungen zu bestätigen</i>
+        <br />
+        <%= f.password_field :current_password, placeholder: 'Aktuelles Passwort' %>
+        <%= f.submit "Daten aktualisieren" %>
+      </section>
+    </div>
+    <div>
+      <section class="save_edit">
+        <% if @user == current_user  %>
+          ( <%= link_to 'Passwort oder E-Mail ändern', edit_user_registration_path %> )
         <% end %>
-      </ul>
-    </section>
-<% end %>
-
-<div class="two-col-group profile">
-  <div>
-    <section class="info">
-      <h1>Mein Profil</h1>
-      <h3>Username</h3>
-      <%= f.text_field :username %>
-      <h3>Vorname</h3>
-      <%= f.text_field :first_name %>
-      <h3>Nachname</h3>
-      <%= f.text_field :last_name %>
-      <h3>Email</h3>
-      <%= f.text_field :email %>
-    </section>
+      </section>
+    </div>
   </div>
-  <div>
-    <section class="actions">
-      <h1>Aufgaben</h1>
-      <h3>Passwort ändern</h3>
-    </section>
-  </div>
-</div>
-
-<section>
-  <%= f.submit %>
-  <%= link_to 'Show', @user %> |
-  <%= link_to 'Back', users_path %>
-</section>
 
 <% end %>

@@ -6,7 +6,6 @@ class Project < ActiveRecord::Base
 
   before_save :adjust_status
   validates_presence_of :desired_team_size
-  after_create :send_notice_mail
 
   enum status: { open: 1, soon_full: 2, full: 3, closed: 4 }
 

@@ -18,7 +18,7 @@
     </section>
 
     <% unless @user == current_user  %>
-      <section class="contact-form">
+      <section class="contact-user-form">
         <div class="">
           <%= form_for @message, url: { action: 'contact_user' } do |form| %>
             <div>

@@ -42,7 +42,8 @@ class UsersController < ApplicationController
       flash[:notice] = t('contact.success')
       redirect_to action: :show
     else
-      redirect_to action: :show, notice: t('contact.fail')
+      flash[:notice] = t('contact.fail')
+      redirect_to action: :show
     end
 
   end

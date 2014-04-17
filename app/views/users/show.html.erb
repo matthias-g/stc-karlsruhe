@@ -13,7 +13,11 @@
   <div>
     <section class="info">
       <div>
-        INFO
+        <h1><%= (@user == current_user) ? 'Mein Profil' : 'Profil' %></h1>
+        <h3>Name</h3>
+        <%= @user.full_name %>
+        <h3>Email</h3>
+        <%= @user.email %>
       </div>
     </section>
 

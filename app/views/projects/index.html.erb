@@ -3,11 +3,11 @@
 <section id="project-list-header">
   <div class="infobox">
     <div><%= t('project.label.countActive') %></div>
-    <span><%= Project.active_projects.count %></span>
+    <span><%= Project.active.count %></span>
   </div>
   <div class="infobox">
     <div><%= t('user.label.countActive') %></div>
-    <span><%= Project.active_users.size %></span>
+    <span><%= Participation.active_user_count %></span>
   </div>
   <h1><%= t('project.label.list') %></h1>
 </section>

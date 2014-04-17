@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: 
+  project: 
+  as_leader: false
+
+two:
+  user: 
+  project: 
+  as_leader: false

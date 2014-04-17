@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140412231138) do
+ActiveRecord::Schema.define(version: 20140417161519) do
 
   create_table "page_sections", force: true do |t|
     t.string   "title"
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(version: 20140412231138) do
     t.string   "header_name"
     t.string   "address"
   end
+
+  create_table "participations", id: false, force: true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.boolean  "as_leader",  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "participations", ["user_id", "project_id"], name: "index_participations_on_user_id_and_project_id", unique: true
 
   create_table "project_days", force: true do |t|
     t.string   "title"
@@ -64,21 +74,6 @@ ActiveRecord::Schema.define(version: 20140412231138) do
     t.string   "time"
     t.text     "short_description",             default: ""
   end
-
-  create_table "projects_leaders", id: false, force: true do |t|
-    t.integer "project_id", null: false
-    t.integer "user_id",    null: false
-  end
-
-  add_index "projects_leaders", ["project_id", "user_id"], name: "index_projects_leaders_on_project_id_and_user_id"
-  add_index "projects_leaders", ["user_id", "project_id"], name: "index_projects_leaders_on_user_id_and_project_id"
-
-  create_table "projects_volunteers", id: false, force: true do |t|
-    t.integer "project_id", null: false
-    t.integer "user_id",    null: false
-  end
-
-  add_index "projects_volunteers", ["project_id", "user_id"], name: "index_projects_volunteers_on_project_id_and_user_id"
 
   create_table "roles", force: true do |t|
     t.string   "title"

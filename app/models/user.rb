@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_and_belongs_to_many :projects_as_volunteer, :class_name => 'Project' , :join_table => 'projects_volunteers'
-  has_and_belongs_to_many :projects_as_leader, :class_name => 'Project' , :join_table => 'projects_leaders'
+  has_many :projects, through: :participations
+  has_many :participations
   has_and_belongs_to_many :roles
 
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }, :format => { with: /\A[a-zA-Z0-9]+\z/, message: 'only allows letters' }
@@ -26,8 +26,16 @@ class User < ActiveRecord::Base
     first_name + ' ' + last_name
   end
 
-  def leads_project?(project)
-    projects_as_leader.any?{|p| p.id == project.id}
+  def leads_project? project
+    projects_as_leader.include? project
+  end
+
+  def projects_as_volunteer
+    projects.where(participations: {as_leader: false})
+  end
+
+  def projects_as_leader
+    projects.where(participations: {as_leader: true})
   end
 
   # based on https://github.com/refinery/refinerycms/blob/master/authentication/app/models/refinery/user.rb

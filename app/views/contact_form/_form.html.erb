@@ -3,9 +3,9 @@
 <section class="contact-form">
     <div class="">
       <%= form_for @message, :url => contact_path do |form| %>
-        <h1><%= t 'contact.title' %></h1>
+        <h1><%= t 'contact.form.title' %></h1>
         <div class="leftCol">
-          <%= t 'contact.text' %>
+          <%= t 'contact.form.text' %>
         </div>
         <div class="rightCol">
           <div>
@@ -23,7 +23,7 @@
           <div>
             <br />
             <%= form.hidden_field :recipient, value: 'default@servethecity-karlsruhe.de' %>
-            <%= form.submit t('contact.submit') %>
+            <%= form.submit t('contact.form.submit') %>
           </div>
         </div>
       <% end %>

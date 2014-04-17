@@ -75,11 +75,24 @@ de:
       confirmDelete: 'Wollen Sie das wirklich tun?'
 
   contact:
-    success: 'Vielen Dank für Deine Nachricht! Wir werden sie so schnell wie möglich beantworten.'
-    fail: 'Nachricht konnte nicht gesendet werden.'
-    submit: 'Nachricht senden'
-    title: 'Kontakt aufnehmen'
-    text: 'Du hast die ein oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei Dir.'
+    form:
+      success: 'Vielen Dank für Deine Nachricht! Wir werden sie so schnell wie möglich beantworten.'
+      fail: 'Nachricht konnte nicht gesendet werden.'
+      submit: 'Nachricht senden'
+      title: 'Kontakt aufnehmen'
+      text: 'Du hast die ein oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei Dir.'
+    volunteers:
+      success: 'Die Nachricht wurde an dich und alle Teilnehmer geschickt.'
+      fail: 'Nachricht konnte nicht gesendet werden.'
+      submit: 'Nachricht verteilen'
+      title: 'Teilnehmer des Projekt benachrichtigen'
+      text: 'Hier kannst du den Teilnehmern des Projektes eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
+    user:
+      success: 'Die Nachricht wurde an %{recipient} geschickt.'
+      fail: 'Nachricht konnte nicht gesendet werden.'
+      submit: 'Nachricht senden'
+      title: ''
+      text: ''
     placeholder:
       email: 'E-Mail'
       subject: 'Betreff'

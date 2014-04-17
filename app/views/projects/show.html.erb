@@ -91,4 +91,29 @@
 
 </section>
 
+<% if @project.has_leader? current_user  %>
+  <section class="contact-volunteers-form">
+    <div class="">
+      <%= form_for @message, url: { action: 'contact_volunteers' } do |form| %>
+        <h1><%= t('contact.volunteers.title') %></h1>
+        <div>
+          <%= t('contact.volunteers.text') %>
+        </div>
+        <div>
+          <h3><%= t('contact.field_title.subject') %></h3>
+          <%= form.text_field :subject %>
+        </div>
+        <div>
+          <h3><%= t('contact.field_title.body') %></h3>
+          <%= form.text_area :body %>
+        </div>
+        <div>
+          <br />
+          <%= form.submit t('contact.volunteers.submit') %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+<% end %>
+
 <%#= link_to t('project.action.toOverview'), projects_path %>

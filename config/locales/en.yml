@@ -70,11 +70,24 @@ en:
       confirmDelete: 'Are you sure?'
 
   contact:
-    success: 'Thank you for your message!'
-    fail: 'Message could not be send!'
-    submit: 'Send message'
-    title: 'Get in touch!'
-    text: "Having a question? Use the form to get in touch quickly. We'll get back to you."
+    form:
+      success: 'Thank you for your message!'
+      fail: 'Message could not be send!'
+      submit: 'Send message'
+      title: 'Get in touch!'
+      text: "Having a question? Use the form to get in touch quickly. We'll get back to you."
+    volunteers:
+      success: 'The message was send to you and all volunteers.'
+      fail: 'Message could not be send!'
+      submit: 'Send message'
+      title: 'Contact volunteers.'
+      text: 'You can send a message to all the volunteers of this project. A copy is send to you, too'
+    user:
+      success: 'Message send to %{recipient}.'
+      fail: 'Message could not be send!'
+      submit: 'Send message'
+      title: ''
+      text: ''
     placeholder:
       email: 'Email'
       subject: 'Subject'

@@ -39,10 +39,10 @@ class UsersController < ApplicationController
     @message.recipient = @user.email
     if @message.valid?
       Mailer.single_user_mail(@message).deliver
-      flash[:notice] = t('contact.success')
+      flash[:notice] = t('contact.user.success', recipient: @user.full_name)
       redirect_to action: :show
     else
-      flash[:notice] = t('contact.fail')
+      flash[:notice] = t('contact.user.fail')
       redirect_to action: :show
     end
 

@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :enter, :leave, :edit_leaders, :add_leader, :delete_leader, :make_visible, :make_invisible]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :enter, :leave, :edit_leaders, :add_leader, :delete_leader, :make_visible, :make_invisible, :contact_volunteers]
   before_action :authenticate_user!, only: [:edit, :update, :enter, :leave, :destroy, :new, :edit_leaders, :add_leader, :delete_leader, :make_visible, :make_invisible]
   before_action :redirect_non_leaders, only: [:edit, :edit_leaders, :add_leader, :delete_leader, :destroy, :update]
   before_action :check_admin, only: [:make_visible, :make_invisible]
@@ -20,6 +20,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    #Message for contact_volunteers
+    @message = Message.new
   end
 
   # GET /projects/new
@@ -111,6 +113,21 @@ class ProjectsController < ApplicationController
   def make_invisible
     @project.make_invisible!
     redirect_to @project, notice: 'Projekt wurde unsichtbar gemacht.'
+  end
+
+  def contact_volunteers
+    @message = Message.new(params[:message])
+    @message.sender = current_user.email
+    @message.recipient = @project.volunteers.map { |v| v.email}.join(',') + ',' + current_user.email
+    if @message.valid?
+      Mailer.multi_user_bcc_mail(@message).deliver
+      flash[:notice] = t('contact.volunteers.success')
+      redirect_to action: :show
+    else
+      flash[:notice] = t('contact.volunteers.fail')
+      redirect_to action: :show
+    end
+
   end
 
   private

@@ -10,6 +10,7 @@ StcKarlsruhe::Application.routes.draw do
   post 'contact', to: 'contact_form#create'
 
   post 'users/:id', to: 'users#contact_user'
+  post 'projects/:id', to: 'projects#contact_volunteers'
 
   resources :projects do
     member do

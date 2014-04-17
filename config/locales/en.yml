@@ -142,6 +142,7 @@ en:
       teamMember: 'You are a team member.'
 
   user:
+    link_to_project: 'Show all projects!'
     action:
       login: 'Sign In'
       logout: 'Sign Out'

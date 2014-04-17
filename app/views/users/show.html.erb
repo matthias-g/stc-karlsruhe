@@ -59,6 +59,8 @@
         <% @user.projects_as_volunteer.each do |project| %>
           <%= link_to project.title, project, class: "wide button" %>
         <% end %>
+      <% else %>
+        <%= link_to 'zu den Projekten', projects_path, class: "wide button" %>
       <% end %>
       <% if @user.projects_as_leader.count > 0 %>
         <h2>Leitung von</h2>

@@ -152,6 +152,7 @@ de:
       closed: Abgeschlossen
 
   user:
+    link_to_project: 'Zu den Projekten'
     action:
       login: 'Anmelden'
       logout: 'Abmelden'

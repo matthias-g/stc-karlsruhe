@@ -10,8 +10,12 @@
         <div class="rightCol">
           <div>
             <h3><%= t('contact.field_title.email') %></h3>
-            <%= form.email_field :sender %>
-          </div>
+            <% if user_signed_in? %>
+              <%= form.email_field :sender, value: current_user.email %>
+            <% else %>
+              <%= form.email_field :sender %>
+            <% end %>
+      </div>
           <div>
             <h3><%= t('contact.field_title.subject') %></h3>
             <%= form.text_field :subject %>

@@ -14,6 +14,8 @@
     <section class="info">
       <div>
         <h1><%= (@user == current_user) ? 'Mein Profil' : 'Profil' %></h1>
+        <h3>Username</h3>
+        <%= @user.username %>
         <h3>Name</h3>
         <%= @user.full_name %>
         <h3>Email</h3>

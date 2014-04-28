@@ -78,8 +78,12 @@
           <%= link_to project.title, project, class: "wide button" %>
         <% end %>
       <% else %>
-        Du nimmst an noch keinem Projekt teil.<br />
-        <%= link_to 'Projekt finden', projects_path %>
+        <% if current_user == @user %>
+          Du nimmst an noch keinem Projekt teil.<br />
+          <%= link_to 'Projekt finden', projects_path %>
+        <% else %>
+          <%= "#{@user.first_name} nimmt an noch keinem Projekt teil." %>
+        <% end %>
       <% end %>
       <% if @user.projects_as_leader.any? %>
         <h2>Leitung von</h2>

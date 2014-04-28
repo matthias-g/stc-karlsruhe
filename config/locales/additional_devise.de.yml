@@ -2,7 +2,7 @@ de:
   devise:
     basic:
       sign_up: Registrieren
-      sign_in: Login
+      sign_in: Anmelden
       sign_out: Logout
       edit: Account bearbeiten
     confirmations:

@@ -19,6 +19,7 @@ class Project < ActiveRecord::Base
 
   def add_volunteer user
     users << user
+    self.save #adjusts status
   end
 
   def has_volunteer? user
@@ -27,6 +28,7 @@ class Project < ActiveRecord::Base
 
   def delete_volunteer user
     volunteers.delete user
+    self.save #adjusts status
   end
 
   def leaders

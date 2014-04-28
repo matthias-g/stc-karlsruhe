@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
     if params[:filter] and params[:filter][:visibility] == 'hidden' and current_user.is_admin?
         visible = false
     end
-    @projects = Project.where(:visible => visible)
+    @projects = Project.where(:visible => visible).order(:status)
     @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] and params[:filter][:day] != ''
     @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] and params[:filter][:status] != ''
   end

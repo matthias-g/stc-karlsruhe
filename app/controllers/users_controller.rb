@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         format.html { redirect_to action: :show, notice: t('user.message.profileUpdated') }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit_my_profile' }
+        format.html { render action: 'edit' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

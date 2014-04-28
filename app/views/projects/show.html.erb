@@ -45,10 +45,8 @@
         <% if user_signed_in? and @project.has_volunteer?(current_user) %>
             <%= t('project.message.teamMember') %>
             <%= link_to t('project.action.leave'), leave_project_path(@project), class: "wide button" %>
-        <% elsif user_signed_in? %>
-            <%= link_to t('project.action.enter'), enter_project_path(@project), class: "wide button" %>
         <% else %>
-            <%= link_to t('project.action.enter'), enter_project_path(@project), class: "wide button openInPopup" %>
+            <%= link_to t('project.action.enter'), enter_project_path(@project), class: "wide button" %>
         <% end %>
       <% end %>
     </div>
@@ -58,11 +56,11 @@
     </div>
     <div>
       <h3><%= Project.human_attribute_name('leaders') %></h3>
-      <%= @project.leaders.collect { |v| v.first_name }.join(', ') %>
+      <%= @project.leaders.collect { |v| link_to(v.first_name, user_path(v)) }.join(', ').html_safe %>
     </div>
     <div>
       <h3><%= Project.human_attribute_name('volunteers') %></h3>
-      <%= @project.volunteers.map { |v| link_to(v.username , user_path(v)) }.join(', ').html_safe %>
+      <%= @project.volunteers.map { |v| link_to(v.first_name , user_path(v)) }.join(', ').html_safe %>
     </div>
     <% if user_signed_in? and ( current_user.leads_project?(@project) or current_user.is_admin? ) %>
     <div class="adminPanel">

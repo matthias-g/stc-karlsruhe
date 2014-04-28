@@ -59,6 +59,7 @@ en:
     errors:
       messages:
         blank: 'may not be blank.'
+        onlyLetters: 'only allows letters.'
 
   general:
     action:

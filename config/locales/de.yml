@@ -63,7 +63,8 @@ de:
             current_password:
               invalid: 'Falsches Passwort'
       messages:
-        blank: 'Darf nicht leer sein.'
+        blank: 'darf nicht leer sein.'
+        onlyLetters: 'darf nur Buchstaben enthalten.'
 
   general:
     action:
@@ -85,7 +86,7 @@ de:
       success: 'Die Nachricht wurde an dich und alle Teilnehmer geschickt.'
       fail: 'Nachricht konnte nicht gesendet werden.'
       submit: 'Nachricht verteilen'
-      title: 'Teilnehmer des Projekt benachrichtigen'
+      title: 'Teilnehmer des Projektes benachrichtigen'
       text: 'Hier kannst du den Teilnehmern des Projektes eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
     user:
       success: 'Die Nachricht wurde an %{recipient} geschickt.'

@@ -125,7 +125,7 @@ class ProjectsController < ApplicationController
       redirect_to action: :show
     else
       flash[:alert] = @message.errors.values
-      redirect_to action: :show
+      render action: :show
     end
 
   end

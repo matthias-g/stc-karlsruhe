@@ -109,10 +109,24 @@ header {
   }
 }
 
-#notice {
-  background-color: rgba(200, 255, 200, 0.75);
-  margin: 10px 0;
+#notice{
+  position: fixed;
+  left: 0; top: 50px; right: 0;
+  margin: 0 auto 0;
   padding: 20px 40px;
+  width: 900px;
+  overflow: auto;
+  background-color: rgba(200, 255, 200, 0.75);
+}
+
+#alert {
+  padding: 10px 5% 10px 5%;
+  width: 90%;
+  overflow: auto;
+  background-color: rgba(255, 141, 130, 0.75);
+  li {
+    margin-left: 10px;
+  }
 }
 
 #content {

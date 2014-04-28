@@ -2,6 +2,15 @@
 
 <section class="contact-form">
     <div class="">
+
+      <% if alert %>
+          <ul id="alert" class="popupTarget">
+            <% alert.each do |msg| %>
+                <li><%= msg[0] %></li>
+            <% end %>
+          </ul>
+      <% end %>
+
       <%= form_for @message, :url => contact_path do |form| %>
         <h1><%= t 'contact.form.title' %></h1>
         <div class="leftCol">

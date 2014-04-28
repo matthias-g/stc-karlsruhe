@@ -90,6 +90,15 @@
 <% if @project.has_leader? current_user  %>
   <section class="contact-volunteers-form">
     <div class="">
+
+      <% if alert %>
+          <ul id="alert" class="popupTarget">
+            <% alert.each do |msg| %>
+                <li><%= msg[0] %></li>
+            <% end %>
+          </ul>
+      <% end %>
+
       <%= form_for @message, url: { action: 'contact_volunteers' } do |form| %>
         <h1><%= t('contact.volunteers.title') %></h1>
         <div>

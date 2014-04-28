@@ -66,6 +66,20 @@ de:
         blank: 'darf nicht leer sein.'
         onlyLetters: 'darf nur Buchstaben enthalten.'
 
+  activemodel:
+    errors:
+      models:
+        message:
+          attributes:
+            sender:
+             blank: 'Bitte gib deine E-Mail-Adresse an.'
+            recipient:
+             blank: 'Wohin soll die Nachricht gehen? Bitte einen Empfänger angeben.'
+            subject:
+             blank: 'Bitte gib einen kurzen Betreff an.'
+            body:
+             blank: 'Nachricht konnte gesendet werden: Du hast nichts geschrieben.'
+
   general:
     action:
       show: 'Anzeigen'
@@ -78,22 +92,17 @@ de:
   contact:
     form:
       success: 'Vielen Dank für Deine Nachricht! Wir werden sie so schnell wie möglich beantworten.'
-      fail: 'Nachricht konnte nicht gesendet werden.'
       submit: 'Nachricht senden'
       title: 'Kontakt aufnehmen'
       text: 'Du hast die ein oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei Dir.'
     volunteers:
       success: 'Die Nachricht wurde an dich und alle Teilnehmer geschickt.'
-      fail: 'Nachricht konnte nicht gesendet werden.'
       submit: 'Nachricht verteilen'
       title: 'Teilnehmer des Projektes benachrichtigen'
       text: 'Hier kannst du den Teilnehmern des Projektes eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
     user:
       success: 'Die Nachricht wurde an %{recipient} geschickt.'
-      fail: 'Nachricht konnte nicht gesendet werden.'
       submit: 'Nachricht senden'
-      title: ''
-      text: ''
     placeholder:
       email: 'E-Mail'
       subject: 'Betreff'

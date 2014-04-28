@@ -42,7 +42,7 @@ class UsersController < ApplicationController
       flash[:notice] = t('contact.user.success', recipient: @user.full_name)
       redirect_to action: :show
     else
-      flash[:notice] = t('contact.user.fail')
+      flash[:alert] = @message.errors.values
       redirect_to action: :show
     end
 

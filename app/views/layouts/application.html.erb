@@ -14,12 +14,13 @@
   <%= render '/layouts/menubar' -%>
 </div>
 
+<% if notice %>
+    <div id="notice" class="popupTarget"><%= notice %></div>
+<% end %>
+
 <%= yield :pageHeader %>
 
 <div id="content">
-  <% if notice %>
-      <div id="notice" class="popupTarget"><%= notice %></div>
-  <% end %>
   <%= yield %>
 </div>
 

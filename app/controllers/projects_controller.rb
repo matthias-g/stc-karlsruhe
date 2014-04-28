@@ -124,7 +124,7 @@ class ProjectsController < ApplicationController
       flash[:notice] = t('contact.volunteers.success')
       redirect_to action: :show
     else
-      flash[:notice] = t('contact.volunteers.fail')
+      flash[:alert] = @message.errors.values
       redirect_to action: :show
     end
 

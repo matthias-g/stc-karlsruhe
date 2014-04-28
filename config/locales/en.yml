@@ -61,6 +61,20 @@ en:
         blank: 'may not be blank.'
         onlyLetters: 'only allows letters.'
 
+  activemodel:
+    errors:
+      models:
+        message:
+          attributes:
+            sender:
+             blank: 'Missing Email Address'
+            recipient:
+             blank: 'Missing recipient.'
+            subject:
+             blank: 'Missing subject.'
+            body:
+             blank: 'Missing message.'
+
   general:
     action:
       show: 'Show'
@@ -94,7 +108,7 @@ en:
       subject: 'Subject'
       body: 'Message'
     field_title:
-      email: 'Your Email Adress'
+      email: 'Your Email Address'
       subject: 'Subject'
       body: 'Your message'
 

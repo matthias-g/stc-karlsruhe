@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :projects, through: :participations
   has_many :participations
+  has_many :projects, through: :participations
   has_and_belongs_to_many :roles
 
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }, :format => { with: /\A[a-zA-Z0-9]+\z/, message: I18n.t('activerecord.errors.messages.onlyLetters') }

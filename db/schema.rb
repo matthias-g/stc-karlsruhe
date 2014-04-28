@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417161519) do
+ActiveRecord::Schema.define(version: 20140428230245) do
 
   create_table "page_sections", force: true do |t|
     t.string   "title"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20140417161519) do
     t.string   "address"
   end
 
-  create_table "participations", id: false, force: true do |t|
+  create_table "participations", force: true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
     t.boolean  "as_leader",  default: false

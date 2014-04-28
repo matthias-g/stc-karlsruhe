@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
 
-  has_many :users, through: :participations
   has_many :participations
+  has_many :users, through: :participations
   has_and_belongs_to_many :days, :class_name => 'ProjectDay'
 
   before_save :adjust_status
@@ -27,7 +27,7 @@ class Project < ActiveRecord::Base
   end
 
   def delete_volunteer user
-    volunteers.delete user
+    Participation.where(project_id: self.id, user_id: user.id, as_leader: false).first.destroy!
     self.save #adjusts status
   end
 
@@ -44,7 +44,7 @@ class Project < ActiveRecord::Base
   end
 
   def delete_leader(user)
-    leaders.delete(user)
+    Participation.where(project_id: self.id, user_id: user.id, as_leader: true).first.destroy!
   end
 
   def make_visible!

@@ -7,7 +7,7 @@ class CreateParticipations < ActiveRecord::Migration
       t.references :project
       t.boolean :as_leader, default: false
 
-      t.index [:user_id, :project_id], unique: true
+      t.index [:user_id, :project_id, :as_leader], unique: true
 
       t.timestamps
     end

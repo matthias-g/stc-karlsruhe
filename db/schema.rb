@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20140417161519) do
     t.datetime "updated_at"
   end
 
-  add_index "participations", ["user_id", "project_id"], name: "index_participations_on_user_id_and_project_id", unique: true
+  add_index "participations", ["user_id", "project_id", "as_leader"], name: "index_participations_on_user_id_and_project_id_and_as_leader", unique: true
 
   create_table "project_days", force: true do |t|
     t.string   "title"

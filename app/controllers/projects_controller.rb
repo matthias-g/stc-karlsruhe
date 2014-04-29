@@ -120,7 +120,7 @@ class ProjectsController < ApplicationController
     @message.sender = current_user.email
     @message.recipient = @project.volunteers.map { |v| v.email}.join(',') + ',' + current_user.email
     if @message.valid?
-      Mailer.multi_user_bcc_mail(@message, @project.title).deliver
+      Mailer.multi_user_bcc_mail(@message, current_user.full_name, @project.title).deliver
       flash[:notice] = t('contact.volunteers.success')
       redirect_to action: :show
     else

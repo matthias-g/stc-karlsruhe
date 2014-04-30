@@ -5,7 +5,7 @@ class Participation < ActiveRecord::Base
   validates_presence_of :user, :project
 
   def self.active
-    Participation.joins(:project).where.not(projects: {status: 'closed'})
+    Participation.joins(:project).where.not(projects: {status: 'closed'}).where(projects: {visible: true})
   end
 
   def self.active_user_count

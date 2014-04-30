@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
   before_save :adjust_status
   validates_presence_of :desired_team_size
 
-  scope :active, -> { where.not(status: 'closed') }
+  scope :active, -> { where.not(status: 'closed').where(projects: {visible: true}) }
 
   enum status: { open: 1, soon_full: 2, full: 3, closed: 4 }
 

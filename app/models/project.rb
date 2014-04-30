@@ -57,7 +57,7 @@ class Project < ActiveRecord::Base
 
   def adjust_status
     free = desired_team_size - volunteers.count
-    if free > 5
+    if free > 2
       self.status = :open
     elsif free > 0
       self.status = :soon_full

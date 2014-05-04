@@ -19,6 +19,7 @@ StcKarlsruhe::Application.routes.draw do
       get :edit_leaders
       post :add_leader
       delete :delete_leader
+      delete :delete_volunteer
       get :make_visible
       get :make_invisible
     end

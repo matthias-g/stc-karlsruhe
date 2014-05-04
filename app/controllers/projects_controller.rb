@@ -1,8 +1,8 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :enter, :leave, :edit_leaders, :add_leader, :delete_leader, :make_visible, :make_invisible, :contact_volunteers]
-  before_action :authenticate_user!, only: [:edit, :update, :enter, :leave, :destroy, :new, :edit_leaders, :add_leader, :delete_leader, :make_visible, :make_invisible]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :enter, :leave, :edit_leaders, :add_leader, :delete_leader, :make_visible, :make_invisible, :contact_volunteers, :delete_volunteer]
+  before_action :authenticate_user!, only: [:edit, :update, :enter, :leave, :destroy, :new, :edit_leaders, :add_leader, :delete_leader, :make_visible, :make_invisible, :delete_volunteer]
   before_action :redirect_non_leaders, only: [:edit, :edit_leaders, :add_leader, :delete_leader, :destroy, :update]
-  before_action :check_admin, only: [:make_visible, :make_invisible]
+  before_action :check_admin, only: [:make_visible, :make_invisible, :delete_volunteer]
   before_action :check_visible, only: [:show, :edit, :update, :enter, :leave, :edit_leaders, :add_leader, :delete_leader, :destroy]
 
   # GET /projects
@@ -103,6 +103,12 @@ class ProjectsController < ApplicationController
     leader = User.find(params[:user_id])
     @project.delete_leader(leader)
     redirect_to edit_leaders_project_url(@project), notice: t('project.message.leaderRemoved')
+  end
+
+  def delete_volunteer
+    volunteer = User.find(params[:user_id])
+    @project.delete_volunteer(volunteer)
+    redirect_to edit_leaders_project_url(@project), notice: t('project.message.volunteerRemoved')
   end
 
   def make_visible

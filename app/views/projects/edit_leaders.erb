@@ -15,7 +15,12 @@
     <% @project.volunteers.each do |volunteer| %>
       <%= volunteer.full_name %>
       <%= link_to t('project.action.asLeader'), add_leader_project_path(@project,
-            :user_id => volunteer.id), :method => 'post' %><br />
+            :user_id => volunteer.id), :method => 'post' %>
+      <% if current_user.is_admin? %>
+        <%= link_to t('project.action.removeVolunteer'), delete_volunteer_project_path(@project,
+              :user_id => volunteer.id), :method => 'delete' %>
+        <% end %>
+      <br />
     <% end %>
     </p>
 

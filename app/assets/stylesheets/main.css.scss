@@ -370,6 +370,21 @@ h3 {
   }
 }
 
+#photo-link {
+  display: block;
+  margin: 0;
+  padding: 35px 50px 25px;
+  background: image-url("photolink_bg.png") left center / cover;
+  font: 45px CaptionFont;
+  color: #000;
+  text-decoration: none;
+  transition: text-shadow 0.3s;
+  &:hover {
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  }
+}
+
+
 #project-map {
   background: #aaa;
   height: 300px;

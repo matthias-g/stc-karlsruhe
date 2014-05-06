@@ -139,6 +139,8 @@ en:
       toProject: 'Back to Project'
       makeVisible: 'Make visible'
       makeInvisible: 'Make invisible'
+      open: 'Open project'
+      close: 'Close project'
     label:
       project: 'Project'
       status: 'Status'

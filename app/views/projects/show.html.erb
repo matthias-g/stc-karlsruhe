@@ -41,11 +41,13 @@
       <%= t "project.status.#{@project.status}" %>
     </div>
     <div>
-      <% if user_signed_in? and @project.has_volunteer?(current_user) %>
-        <%= t('project.message.teamMember') %>
-        <%= link_to t('project.action.leave'), leave_project_path(@project), class: "wide button" %>
-      <% elsif @project.open? or @project.soon_full? %>
-        <%= link_to t('project.action.enter'), enter_project_path(@project), class: "wide button" %>
+      <% if @project.open? %>
+        <% if user_signed_in? and @project.has_volunteer?(current_user) %>
+          <%= t('project.message.teamMember') %>
+          <%= link_to t('project.action.leave'), leave_project_path(@project), class: "wide button" %>
+        <% elsif @project.open? or @project.soon_full? %>
+          <%= link_to t('project.action.enter'), enter_project_path(@project), class: "wide button" %>
+        <% end %>
       <% end %>
     </div>
     <div>
@@ -66,6 +68,11 @@
       <ul>
         <li><%= link_to t('project.action.edit'), edit_project_path(@project) %></li>
         <li><%= link_to t('project.action.editLeaders'), edit_leaders_project_path(@project) %></li>
+        <% if @project.closed? %>
+          <li><%= link_to t('project.action.open'), open_project_path(@project) %></li>
+        <% else %>
+          <li><%= link_to t('project.action.close'), close_project_path(@project) %></li>
+        <% end %>
         <% if current_user.is_admin? %>
           <% if @project.visible %>
             <li><%= link_to t('project.action.makeInvisible'), make_invisible_project_path(@project) %></li>

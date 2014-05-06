@@ -55,7 +55,24 @@ class Project < ActiveRecord::Base
     update_attribute :visible, false
   end
 
+  def close!
+    self.status = :closed
+    self.save
+  end
+
+  def open!
+    self.status = :open
+    self.save
+  end
+
+  def closed?
+    self.status == 'closed'
+  end
+
   def adjust_status
+    if self.status == 'closed'
+      return
+    end
     free = desired_team_size - volunteers.count
     if free > 2
       self.status = :open

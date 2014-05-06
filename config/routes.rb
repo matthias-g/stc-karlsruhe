@@ -22,6 +22,8 @@ StcKarlsruhe::Application.routes.draw do
       delete :delete_volunteer
       get :make_visible
       get :make_invisible
+      get :open
+      get :close
     end
   end
 

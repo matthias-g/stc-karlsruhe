@@ -139,6 +139,8 @@ de:
       toProject: 'Zurück zum Projekt'
       makeVisible: 'Sichtbar machen'
       makeInvisible: 'Unsichtbar machen'
+      open: 'Projekt öffnen'
+      close: 'Projekt abschließen'
     label:
       project: 'Projekt'
       status: 'Projektstatus'

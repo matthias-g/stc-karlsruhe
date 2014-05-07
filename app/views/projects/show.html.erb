@@ -41,7 +41,7 @@
       <%= t "project.status.#{@project.status}" %>
     </div>
     <div>
-      <% if @project.open? %>
+      <% unless @project.closed? %>
         <% if user_signed_in? and @project.has_volunteer?(current_user) %>
           <%= t('project.message.teamMember') %>
           <%= link_to t('project.action.leave'), leave_project_path(@project), class: "wide button" %>

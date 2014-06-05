@@ -1,11 +1,176 @@
-.contact-volunteers-form {
+@import "definitions";
 
-  #message_subject {
-    width: 550px;
-  }
+/* SPECIFIC STYLES: PROJECT LIST PAGE */
 
-  #message_body {
-    width: 550px;
-    height: 275px;
+#project-list-header {
+  padding: 10px 20px;
+  h2 {
+    padding: 0;
+    margin: 25px 0 0 10px;
   }
+  .infobox {
+    float: right;
+    border: 1px solid $border_default;
+    text-align: center;
+    padding: 5px;
+    margin: 0 5px;
+    span {
+      font-size: 25px;
+    }
+  }
+}
+
+.project-list-sidebox {
+  width: 200px;
+  clear: right;
+  float: right;
+  margin: 0 0 10px 10px;
+  padding: 15px;
+  select, input {
+    display: block;
+    width: 100%;
+  }
+  input {
+    margin-top: 20px;
+  }
+  #filterResults {
+    margin-top: 20px;
+    font-style: italic;
+  }
+}
+
+#project-list {
+  margin-left: 40px;
+  margin-right: 240px;
+  section {
+    height: 200px;
+    padding: 0;
+
+    .project-image {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 200px;
+      background: $bg_default;
+    }
+    .project-title {
+      position: absolute;
+      top: 0;
+      left: 210px;
+      * {line-height: 1.05em;}
+    }
+    .project-description {
+      position: absolute;
+      top: 70px;
+      right: 5px;
+      bottom: 5px;
+      left: 210px;
+      overflow: hidden;
+    }
+    .project-status {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 200px;
+      height: 25px;
+      padding-top: 4px;
+      font-family: BoldFont;
+      font-size: 18px;
+      letter-spacing: 1px;
+      text-align: center;
+      border-bottom: 1px solid $border_default;
+    }
+
+    .open {
+      color: $col_positive;
+      background: rgba($bg_positive, .8);
+    }
+    .soon_full {
+      color: $col_neutral;
+      background: rgba($bg_neutral, .8);
+    }
+    .full {
+      color: $col_negative;
+      background: rgba($bg_negative, .8);
+    }
+    .closed {
+      color: $color_inactive;
+      background: $bg_inactive;
+    }
+  }
+}
+
+
+/* SPECIFIC STYLES: PROJECT PAGE */
+
+.project-view {
+  overflow: auto;
+  padding: 20px 20px 50px;
+  h1 {
+    padding: 0 10px 10px;
+  }
+  .leftCol {
+    width: 180px;
+    float: left;
+    border-right: 1px solid $border_default;
+    padding: 10px;
+    padding-right: 20px;
+    p {
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+  }
+  .rightCol {
+    width: 180px;
+    float: right;
+    border-left: 1px solid $border_default;
+    padding: 10px;
+  }
+  .description {
+    margin: 0 230px;
+    img {
+      width: 100%;
+      height: auto;
+      border: 1px solid rgba($border_default,0.5);
+      margin-bottom: 20px;
+    }
+  }
+  .contact-volunteers-form {
+    #message_subject {
+      width: 550px;
+    }
+
+    #message_body {
+      width: 550px;
+      height: 275px;
+    }
+  }
+}
+
+.project-edit-view {
+  h3 {
+    margin-top: 10px;
+  }
+  input, textarea {
+    width: 98%;
+    max-width: 98%;
+    min-width: 98%;
+  }
+  textarea {
+    min-height: 80px;
+    padding: 5px;
+  }
+  .description textarea {
+    min-height: 300px;
+  }
+  .description img {
+    margin-bottom: 0;
+  }
+}
+
+.map-location {
+  border-radius: 6px;
+  border: 1px solid rgba($border_default,0.5);
+  height: 150px;
 }

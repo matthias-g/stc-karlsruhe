@@ -1,0 +1,125 @@
+@import "definitions";
+
+
+/* GENERAL STYLES */
+
+a {
+  text-decoration: none;
+  color: rgb(44, 153, 145);
+}
+
+h1 {
+  font: 35px CaptionFont;
+  margin: 10px 0 10px;
+  padding: 0;
+  font-weight: normal;
+  letter-spacing: 0.03em;
+}
+
+h2 {
+  font: 25px CaptionFont;
+  margin: 15px 0 10px;
+  padding: 0;
+  font-weight: normal;
+  letter-spacing: 0.03em;
+}
+
+h3 {
+  font: 17px BoldFont;
+  margin: 15px 0 5px -3px;
+  padding: 0;
+}
+
+/* MULTI-USE STYLES */
+
+.spotlights {
+  text-align: center;
+  & > div {
+    display: inline-block;
+    width: 32%;
+    text-align: center;
+    padding: 20px 0;
+  }
+  img {
+    width: 70px;
+    height: auto;
+    margin: 15px;
+  }
+}
+
+.button {
+  border:1px solid rgba($bg_button, 0.80);
+  display: inline-block;
+  padding: 5px;
+  margin: 0 5px;
+  &.wide {
+    display: block;
+    margin: 5px 0;
+    text-align: center;
+  }
+  &,* {
+    color: $bg_button;
+  }
+}
+
+.two-col-group {
+  overflow: hidden;
+  & > * {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+  &.padded {
+    & > *:first-child {
+      padding-right: 20px;
+    }
+    & > *:last-child {
+      padding-left: 20px;
+    }
+  }
+}
+
+
+.adminPanel {
+  ul {
+    margin: 0;
+    padding-left: 5px;
+    list-style: none;
+  }
+}
+
+.infobox {
+  display: inline-block;
+  padding: 10px;
+  margin: 0 5px;
+  &.wide {
+    display: block;
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  &.open {
+    color: $col_positive;
+    background: $bg_positive;
+  }
+  &.soon_full {
+    color: $col_neutral;
+    background: $bg_neutral;
+  }
+  &.full {
+    color: $col_negative;
+    background: $bg_negative;
+  }
+  &.closed {
+    color: $color_inactive;
+    background: $bg_inactive;
+  }
+}
+
+
+
+
+
+
+

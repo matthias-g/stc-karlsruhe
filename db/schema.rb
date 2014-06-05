@@ -73,9 +73,9 @@ ActiveRecord::Schema.define(version: 20140605173300) do
     t.integer  "status",                        default: 1
     t.string   "time"
     t.text     "short_description",             default: ""
-    t.float    "map_latitude"
-    t.float    "map_longitude"
-    t.integer  "map_zoom"
+    t.float    "map_latitude",                  default: 49.01347014
+    t.float    "map_longitude",                 default: 8.40445518
+    t.integer  "map_zoom",                      default: 12
   end
 
   create_table "roles", force: true do |t|

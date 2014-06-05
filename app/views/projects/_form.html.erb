@@ -15,10 +15,7 @@
       <h1><%= (isNew ? t('project.label.new') : (t('project.label.edit') % [@project.title])) %></h1>
 
       <div class="leftCol">
-        <div>
-          <h3><%= Project.human_attribute_name('location') %></h3>
-          <%= f.text_area :location %>
-        </div>
+
         <div>
           <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
           <%= f.text_area :individual_tasks %>
@@ -34,11 +31,29 @@
         <div>
           <h3><%= Project.human_attribute_name('days') %></h3>
           <%= f.collection_select(:day_ids, ProjectDay.all, :id, :title,
-                                  {:selected => @project.days.collect {|t| t.id}}, :multiple => true) -%>
+             {:selected => @project.days.collect {|t| t.id}}, :multiple => true) -%>
         </div>
         <div>
           <h3><%= Project.human_attribute_name('time') %></h3>
           <%= f.text_field :time %>
+        </div>
+        <div>
+          <h3><%= Project.human_attribute_name('location') %></h3>
+          <%= f.text_area :location %>
+        </div>
+        <div>
+            <div class="map-location edit"
+                 data-lon="<%= @project.longitude %>"
+                 data-lat="<%= @project.latitude %>"
+                 data-map-lon="<%= @project.map_longitude %>"
+                 data-map-lat="<%= @project.map_latitude %>"
+                 data-map-zoom="<%= @project.map_zoom %>">
+            </div>
+            <%= f.text_field :longitude, :type => :hidden %>
+            <%= f.text_field :latitude, :type => :hidden %>
+            <%= f.text_field :map_longitude, :type => :hidden %>
+            <%= f.text_field :map_latitude, :type => :hidden %>
+            <%= f.text_field :map_zoom, :type => :hidden %>
         </div>
       </div>
 

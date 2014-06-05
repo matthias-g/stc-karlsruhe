@@ -4,10 +4,6 @@
   <h1><%= Project.model_name.human %>: <%= @project.title %></h1>
 
   <div class="leftCol">
-    <div>
-      <h3><%= Project.human_attribute_name('location') %></h3>
-      <%= simple_format @project.location %>
-    </div>
     <% unless @project.individual_tasks.empty? %>
       <div>
         <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
@@ -31,9 +27,23 @@
       <%= @project.days.collect { |day| day.title }.join('<br />').html_safe %>
     </div>
     <div>
-      <h3><%= Project.human_attribute_name('time') %></h3>
       <%= simple_format @project.time %>
     </div>
+    <div>
+      <h3><%= Project.human_attribute_name('location') %></h3>
+      <%= simple_format @project.location %>
+    </div>
+    <% unless @project.longitude == 0 %>
+        <div>
+          <div class="map-location"
+               data-lon="<%= @project.longitude %>"
+               data-lat="<%= @project.latitude %>"
+               data-map-lon="<%= @project.map_longitude %>"
+               data-map-lat="<%= @project.map_latitude %>"
+               data-map-zoom="<%= @project.map_zoom %>">
+          </div>
+        </div>
+    <% end %>
   </div>
 
   <div class="rightCol">

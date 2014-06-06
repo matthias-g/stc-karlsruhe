@@ -9,9 +9,11 @@ $(document).ready(function() {
         link.click(function() {
             $('.miniPopup').not(container).children('div').fadeOut();
             popup.fadeToggle();
-            popup.load(link.attr('href') + popupTarget, function() {
-                popup.find('input:not([type="hidden"]), textarea').eq(0).focus();
-            });
+            if (container.hasClass('loadFromLink')) {
+                popup.load(link.attr('href') + popupTarget, function() {
+                    popup.find('input:not([type="hidden"]), textarea').eq(0).focus();
+                });
+            }
             return false;
         });
     });

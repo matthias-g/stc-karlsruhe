@@ -1,10 +1,9 @@
 <%= render '/layouts/smallheader' -%>
 
 <section>
-  <h1>Editing role</h1>
-
-    <%= render 'form' %>
-
-    <%= link_to 'Show', @role %> |
-    <%= link_to 'Back', roles_path %>
+  <h1><%= t('role.captionEdit') % [@role.title] %></h1>
+  <%= link_to t('role.list'), roles_path %>
+</section>
+<section id="roleEdit">
+  <%= render 'form' %>
 </section>

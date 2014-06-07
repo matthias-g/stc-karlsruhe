@@ -1,14 +1,16 @@
 <%= render '/layouts/smallheader' -%>
 
 <section>
-  <h1><%= t('section.label.list') %></h1>
-
+  <h1><%= t('section.captionList') %></h1>
+  <%= link_to t('section.new'), new_page_section_path %> &nbsp; &nbsp; | &nbsp; &nbsp;
+  <%= link_to t('page.list'), pages_path %>
+</section>
+<section id="pageSectionList">
   <table>
     <thead>
     <tr>
-      <th><%= t('section.label.title') %></th>
-      <th><%= t('section.label.content') %></th>
-      <th></th>
+      <th><%= t('gen.name') %></th>
+      <th><%= t('gen.actions') %></th>
       <th></th>
       <th></th>
     </tr>
@@ -17,20 +19,17 @@
     <tbody>
     <% @page_sections.each do |page_section| %>
         <tr>
-          <td><%= page_section.title %></td>
-          <td><%= page_section.content %></td>
-          <td><%= link_to t('section.action.show'), page_section %></td>
-          <td><%= link_to t('section.action.edit'), edit_page_section_path(page_section) %></td>
-          <td><%= link_to t('section.action.delete'), page_section, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to page_section.title, page_section %></td>
+          <td>
+            <%= link_to t('gen.edit'), edit_page_section_path(page_section) %> |
+            <%= link_to t('gen.delete'), page_section, method: :delete,
+                 data: { confirm: t('section.confirmDelete') % [page_section.title] } %>
+          </td>
         </tr>
     <% end %>
     </tbody>
   </table>
 
-  <br>
-
-  <%= link_to t('section.action.new'), new_page_section_path %> |
-  <%= link_to t('page.action.maintain'), pages_path %>
 </section>
 
 

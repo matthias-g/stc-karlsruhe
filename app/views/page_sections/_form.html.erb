@@ -1,7 +1,7 @@
 <%= form_for(@page_section) do |f| %>
   <% if @page_section.errors.any? %>
     <div id="error_explanation">
-      <h2><%= t('section.message.errorList') %></h2>
+      <h2><%= t('section.errorsExist') %></h2>
       <ul>
       <% @page_section.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -10,28 +10,33 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="two-col-group">
+      <div>
+        <div class="field">
+          <%= f.label :title %> (<%= t('general.label.notDisplayed') %>)<br>
+          <%= f.text_field :title %>
+        </div>
+        <div class="field">
+          <%= f.label :index %><br>
+          <%= f.text_field :index %>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <%= f.label :css_class %><br>
+          <%= f.text_field :css_class %>
+        </div>
+        <div class="field">
+          <%= f.label  :partial_name %><br>
+          <%= f.text_field :partial_name %>
+        </div>
+      </div>
   </div>
   <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
-  </div>
-  <div class="field">
-    <%= f.label :css_class %><br>
-    <%= f.text_field :css_class %>
-  </div>
-  <div class="field">
-    <%= f.label :partial_name %><br>
-    <%= f.text_field :partial_name %>
-    If a partial name is given the specified partial is used instead of the message.
-  </div>
-  <div class="field">
-    <%= f.label :index %><br>
-    <%= f.text_field :index %>
+      <%= f.label :content %><br>
+      <%= f.text_area :content %>
   </div>
   <div class="actions">
-    <%= f.submit t('section.action.save') %>
+    <%= f.submit t('section.save') %>
   </div>
 <% end %>

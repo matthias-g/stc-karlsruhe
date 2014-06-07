@@ -1,27 +1,28 @@
-<h1>Listing project_days</h1>
+<%= render '/layouts/smallheader' -%>
+<section>
+    <h1><%= t('project_day.captionList') %></h1>
+    <%= link_to t('project_day.new'), new_project_day_path %>
+</section>
+<section id="projectDayList">
+    <table>
+      <thead>
+        <tr>
+          <th><%= t('gen.name') %></th>
+          <th><%= t('gen.actions') %></th>
+        </tr>
+      </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @project_days.each do |project_day| %>
-      <tr>
-        <td><%= project_day.title %></td>
-        <td><%= link_to 'Show', project_day %></td>
-        <td><%= link_to 'Edit', edit_project_day_path(project_day) %></td>
-        <td><%= link_to 'Destroy', project_day, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Project day', new_project_day_path %>
+      <tbody>
+        <% @project_days.each do |project_day| %>
+          <tr>
+            <td><%= link_to project_day.title, project_day %></td>
+            <td>
+              <%= link_to t('gen.edit'), edit_project_day_path(project_day) %> |
+              <%= link_to t('gen.delete'), project_day, method: :delete,
+                  data: { confirm: t('project_day.confirmDelete') % [project_day.title]} %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</section>

@@ -1,17 +1,14 @@
 <%= render '/layouts/smallheader' -%>
 
 <section>
-    <p>
-      <strong><%= t('section.label.title') %></strong>
-      <%= @page_section.title %>
-    </p>
-
-    <p>
-      <strong><%= t('section.label.content') %></strong>
-      <%= @page_section.content %>
-    </p>
-
+    <h1>Seitenabschnitt "<%= @page_section.title %>"</h1>
     <%= link_to t('section.action.edit'), edit_page_section_path(@page_section) %> |
     <%= link_to t('section.action.toOverview'), page_sections_path %>
-
+</section>
+<section <%= ('class="' + @page_section.css_class + '"').html_safe if @page_section.css_class %> >
+  <% unless @page_section.partial_name.empty? %>
+      <%= render @page_section.partial_name %>
+  <% else %>
+      <%= @page_section.content.html_safe %>
+  <% end %>
 </section>

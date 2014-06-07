@@ -1,31 +1,29 @@
 <%= render '/layouts/smallheader' -%>
 
 <section>
-    <h1>Listing roles</h1>
-
+  <h1><%= t('role.captionList') %></h1>
+  <%= link_to t('role.new'), new_role_path %>
+</section>
+<section id="roleList">
     <table>
       <thead>
         <tr>
-          <th>Title</th>
-          <th></th>
-          <th></th>
-          <th></th>
+          <th><%= t('gen.name') %></th>
+          <th><%= t('gen.actions') %></th>
         </tr>
       </thead>
 
       <tbody>
         <% @roles.each do |role| %>
           <tr>
-            <td><%= role.title %></td>
-            <td><%= link_to 'Show', role %></td>
-            <td><%= link_to 'Edit', edit_role_path(role) %></td>
-            <td><%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to role.title, role %></td>
+            <td>
+              <%= link_to t('gen.edit'), edit_role_path(role) %> |
+              <%= link_to t('gen.delete'), role, method: :delete,
+                  data: { confirm: t('role.confirmDelete') % [role.title]} %>
+            </td>
           </tr>
         <% end %>
       </tbody>
     </table>
-
-    <br>
-
-    <%= link_to 'New Role', new_role_path %>
 </section>

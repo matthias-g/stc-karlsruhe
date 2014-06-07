@@ -1,5 +1,10 @@
-<h1>New project_day</h1>
+<%= render '/layouts/smallheader' -%>
 
-<%= render 'form' %>
+<section>
+  <h1><%= t('project_day.captionNew') %></h1>
+  <%= link_to t('project_day.list'), project_days_path %>
+</section>
+<section id="projectDayNew">
+  <%= render 'form' %>
+</section>
 
-<%= link_to 'Back', project_days_path %>

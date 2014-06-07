@@ -1,7 +1,7 @@
 <%= form_for(@page) do |f| %>
   <% if @page.errors.any? %>
     <div id="error_explanation">
-      <h2><%= t('page.message.errorList') %></h2>
+      <h2><%= t('page.errorsExist') %></h2>
       <ul>
       <% @page.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -10,24 +10,31 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="two-col-group">
+    <div>
+      <div class="field">
+        <%= f.label :title %><br>
+        <%= f.text_field :title %>
+      </div>
+      <div class="field">
+        <%= f.label :header_name %><br>
+        <%= f.text_field :header_name, :placeholder => 'smallheader / bigheader' %>
+      </div>
+      <div class="field">
+        <%= f.label :address %><br>
+        <%= f.text_field :address %>
+      </div>
+    </div>
+    <div>
+      <div class='field'>
+        <%= f.label :sections -%><br>
+        <%= f.collection_select(:section_ids, PageSection.all, :id, :title,
+           {:selected => @page.sections.collect {|t| t.id}}, :multiple => true) -%>
+      </div>
+    </div>
   </div>
-  <div class='field'>
-    <%= f.label :sections -%>
-    <%= f.collection_select(:section_ids, PageSection.all, :id, :title,
-        {:selected => @page.sections.collect {|t| t.id}}, :multiple => true) -%>
-  </div>
-  <div class="field">
-    <%= f.label :header_name %><br>
-    <%= f.text_field :header_name, :placeholder => 'smallheader / bigheader' %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </div>
+
   <div class="actions">
-    <%= f.submit t('page.action.save') %>
+    <%= f.submit t('page.save') %>
   </div>
 <% end %>

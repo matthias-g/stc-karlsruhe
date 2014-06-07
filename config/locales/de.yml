@@ -56,6 +56,19 @@ de:
         password: 'Passwort'
         password_confirmation: 'Passwort bestätigen'
         remember_me: "Angemeldet bleiben"
+      page:
+        title: 'Seitentitel'
+        header_name: 'Partial-Name des Headers'
+        address: 'URL-Pfad der Seite'
+        sections: 'Seitenabschnitte'
+      page_section:
+        title: 'Abschnitt-Name'
+        partial_name: 'Partial-Name'
+        index: 'Index (zur Sortierung auf der Seite)'
+        content: 'HTML-Eingabe (falls kein Partial angegeben wurde)'
+        css_class: 'CSS-Klasse für den Container'
+      project_day:
+        title: 'Titel'
     errors:
       models:
         user:
@@ -86,6 +99,7 @@ de:
     label:
       adminPanel: 'Admin-Panel'
       error: 'Fehler'
+      notDisplayed: 'wird nicht angezeigt'
     message:
       confirmDelete: 'Wollen Sie das wirklich tun?'
 
@@ -181,34 +195,58 @@ de:
       profileUpdated: 'Profil erfolgreich aktualisiert.'
       loggedInAs: 'eingeloggt als %s'
 
+  gen:
+    name: 'Name'
+    actions: 'Aktionen'
+    edit: 'Bearbeiten'
+    delete: 'Löschen'
+
   page:
-    action:
-      new: 'Neue Seite'
-      edit: 'Bearbeiten'
-      show: 'Anzeigen'
-      delete: 'Löschen'
-      save: 'Speichern'
-      maintain: 'Alle Seiten verwalten'
-      toOverview: 'Zurück zur Übersicht'
-    label:
-      new: 'Neue Seite'
-    message:
-      errorList: 'Die Seite konnte wegen folgender Fehler nicht gespeichert werden:'
+    new: 'Neue Seite'
+    save: 'Seite speichern'
+    list: 'Seiten verwalten'
+    captionList: 'Seitenindex'
+    captionNew: 'Neue Seite erstellen'
+    captionEdit: 'Seite bearbeiten: "%s"'
+    errorsExist: 'Die Seite konnte wegen folgenden Fehlern nicht gespeichert werden:'
+    confirmDelete: 'Wollen Sie die Seite "%s" wirklich löschen?'
 
   section:
-    action:
-      new: 'Neuer Abschnitt'
-      edit: 'Bearbeiten'
-      show: 'Anzeigen'
-      delete: 'Löschen'
-      save: 'Abschnitt speichern'
-      maintain: 'Seitenabschnitte verwalten'
-      toOverview: 'Zurück zur Übersicht'
-    label:
-      new: 'Neuer Seitenabschnitt'
-      edit: 'Seitenabschnitt bearbeiten: %s'
-      list: 'Seitenabschnitte'
-      title: 'Titel'
-      content: 'Inhalt'
-    message:
-      errorList: 'Der Seitenabschnitt konnte wegen folgender Fehler nicht gespeichert werden:'
+    new: 'Neuer Abschnitt'
+    save: 'Abschnitt speichern'
+    list: 'Seitenabschnitte verwalten'
+    captionList: 'Seitenabschnitte'
+    captionNew: 'Neuer Seitenabschnitt'
+    captionEdit: 'Seitenabschnitt bearbeiten: "%s"'
+    errorsExist: 'Der Abschnitt konnte wegen folgenden Fehlern nicht gespeichert werden:'
+    confirmDelete: 'Wollen Sie den Abschnitt "%s" wirklich löschen?'
+
+  project_day:
+    new: 'Neuer Projekttag'
+    save: 'Projekttag speichern'
+    list: 'Projekttage verwalten'
+    captionList: 'Projekttage'
+    captionNew: 'Neuer Projekttag'
+    captionEdit: 'Projekttag bearbeiten: "%s"'
+    errorsExist: 'Der Tag konnte wegen folgenden Fehlern nicht gespeichert werden:'
+    confirmDelete: 'Wollen Sie den Projekttag "%s" wirklich löschen?'
+
+  #project_status:
+  #  new: 'Neuer Projekt-Status'
+  #  save: 'Status speichern'
+  #  list: 'Projekt-Statusse verwalten'
+  #  captionList: 'Projekt-Statusse'
+  #  captionNew: 'Neuer Projekt-Status'
+  #  captionEdit: 'Projekt-Status bearbeiten: "%s"'
+  #  errorsExist: 'Der Status konnte wegen folgenden Fehlern nicht gespeichert werden:'
+  #  confirmDelete: 'Wollen Sie den Projekt-Status "%s" wirklich löschen?'
+
+  role:
+    new: 'Neue User-Rolle'
+    save: 'Rolle speichern'
+    list: 'User-Rollen verwalten'
+    captionList: 'User-Rollen'
+    captionNew: 'Neue User-Rolle'
+    captionEdit: 'User-Rolle bearbeiten: "%s"'
+    errorsExist: 'Die Rolle konnte wegen folgenden Fehlern nicht gespeichert werden:'
+    confirmDelete: 'Wollen Sie die User-Rolle "%s" wirklich löschen?'

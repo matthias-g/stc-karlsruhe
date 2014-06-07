@@ -1,3 +1,23 @@
-// Place all the styles related to the ProjectDays controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#projectDayList {
+  table {
+    display: block;
+    border-collapse: collapse;
+    margin: 50px;
+  }
+  td {
+    border: 1px solid black;
+    padding: 10px;
+  }
+  td:first-child {
+    min-width: 60%;
+  }
+}
+#projectDayEdit, #projectDayNew {
+  .field {
+    margin-bottom: 10px;
+  }
+  .field input {
+    box-sizing: border-box;
+    width: 50%;
+  }
+}

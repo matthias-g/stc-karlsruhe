@@ -1,9 +1,11 @@
 <%= render '/layouts/smallheader' -%>
 
 <section>
-  <h1><%= t('page.label.new') %></h1>
+  <h1><%= t('page.captionNew') %></h1>
+  <%= link_to t('page.list'), pages_path %>
+</section>
+<section id="pageNew">
   <%= render 'form' %>
-  <%= link_to t('page.action.toOverview'), pages_path %>
 </section>
 
 

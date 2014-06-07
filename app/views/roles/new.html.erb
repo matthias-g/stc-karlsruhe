@@ -1,7 +1,9 @@
 <%= render '/layouts/smallheader' -%>
 
 <section>
-  <h1>New role</h1>
+  <h1><%= t('role.captionNew') %></h1>
+  <%= link_to t('role.list'), roles_path %>
+</section>
+<section id="roleNew">
   <%= render 'form' %>
-  <%= link_to 'Back', roles_path %>
 </section>

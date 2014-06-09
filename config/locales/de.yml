@@ -76,9 +76,11 @@ de:
             current_password:
               invalid: 'Falsches Passwort'
             email:
-              taken: 'Die Emailadresse wird bereits von einem anderen Konto verwendet.'
+              taken: ' wird bereits von einem anderen Konto verwendet.'
             password_confirmation:
-              confirmation: 'Bitte wiederholen Sie Ihr Passwort.'
+              confirmation: ': Passwörter stimmen nicht überein.'
+            username:
+              taken: ' ist bereits vergeben.'
       messages:
         blank: 'darf nicht leer sein.'
         onlyLetters: 'darf nur Buchstaben enthalten.'

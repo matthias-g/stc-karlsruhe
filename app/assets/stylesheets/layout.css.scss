@@ -10,8 +10,6 @@ body {
   margin: 0;
   padding: 0;
   background: #929d9b image-url("bg.jpg") center / cover no-repeat fixed;
-  /*background: url(bg.png) center top / 100% auto no-repeat,
-  url(bg2.jpg) repeat;*/
   font: 16px NormalFont;
   color: #000;
   min-height: 100%;
@@ -101,19 +99,18 @@ header {
   margin: 0 auto;
   width: 700px;
   & > * {
-    padding: 20px 40px;
+    padding: 10px 40px;
     margin: 10px 0;
+    overflow: auto;
   }
-  .notice {
-    overflow: auto;
-    background-color: rgba($bg_notice, 0.75);
+  .alert-notice {
+    background: rgba($bg_notice, 0.85);
    }
-  .alert {
-    overflow: auto;
-    background-color: rgba($bg_alert, 0.75);
-    li {
-      margin-left: 10px;
-    }
+  .alert-alert {
+    background: rgba($bg_alert, 0.85);
+  }
+  .alert-devise {
+    background: rgba($bg_alert, 0.85);
   }
 }
 
@@ -131,11 +128,10 @@ section {
   padding: 20px 40px;
   overflow: hidden;
   position: relative;
-}
-
-section.restyled {
-  background: none;
-  padding: 0 0;
+  &.restyled {
+    background: none;
+    padding: 0 0;
+  }
 }
 
 footer {

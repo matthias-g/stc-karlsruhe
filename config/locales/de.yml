@@ -75,6 +75,10 @@ de:
           attributes:
             current_password:
               invalid: 'Falsches Passwort'
+            email:
+              taken: 'Die Emailadresse wird bereits von einem anderen Konto verwendet.'
+            password_confirmation:
+              confirmation: 'Bitte wiederholen Sie Ihr Passwort.'
       messages:
         blank: 'darf nicht leer sein.'
         onlyLetters: 'darf nur Buchstaben enthalten.'

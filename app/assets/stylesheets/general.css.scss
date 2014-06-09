@@ -117,7 +117,10 @@ h3 {
   }
 }
 
-
+.field_with_errors:first-child {
+  display: inline;
+  color: #a60000;
+}
 
 
 

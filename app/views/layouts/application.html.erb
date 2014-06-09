@@ -15,11 +15,13 @@
 </div>
 
 <div id="messages">
-  <% if alert %>
-      <div class="alert"><%= alert %></div>
+  <% if not resource.errors.empty? %>
+      <% resource.errors.full_messages.each do |error| %>
+          <div class="alert-devise"><%= error %></div>
+      <% end %>
   <% end %>
-  <% if notice %>
-      <div class="notice"><%= notice %></div>
+  <% flash.each do |key, value| %>
+      <div class="alert-<%= key %>"><%= value %></div>
   <% end %>
 </div>
 

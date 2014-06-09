@@ -35,12 +35,14 @@
     </div>
     <% unless @project.longitude == 0 %>
         <div>
-          <div class="map-location"
-               data-lon="<%= @project.longitude %>"
-               data-lat="<%= @project.latitude %>"
-               data-map-lon="<%= @project.map_longitude %>"
-               data-map-lat="<%= @project.map_latitude %>"
-               data-map-zoom="<%= @project.map_zoom %>">
+          <div class="map"
+               data-lon="<%= @project.map_longitude %>"
+               data-lat="<%= @project.map_latitude %>"
+               data-zoom="<%= @project.map_zoom %>">
+            <div data-lon="<%= @project.longitude %>"
+                 data-lat="<%= @project.latitude %>"
+                 data-name="<%= @project.title %>">
+            </div>
           </div>
         </div>
     <% end %>

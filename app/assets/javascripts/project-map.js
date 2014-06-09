@@ -14,21 +14,24 @@ $(document).ready(function() {
 
     // the google maps api v3 must be loaded prior to this
     google.maps.visualRefresh = true;
-    $('.map-location').each(function() {
+    $('.map').each(function() {
         createMap($(this));
     });
 
 
     function createMap(c) {
+        var info;
+        var overlays = [];
+        var markerData = c.children().detach();
         var map = new google.maps.Map(c.get(0), {
-            zoom: parseInt(c.data('map-zoom')), maxZoom: 15, minZoom: 9,
+            zoom: parseInt(c.data('zoom')), maxZoom: 17, minZoom: 11,
             center: new google.maps.LatLng(
-                parseFloat(c.data('map-lat')), parseFloat(c.data('map-lon'))
+                parseFloat(c.data('lat')), parseFloat(c.data('lon'))
             ),
             disableDefaultUI: true,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
-        //map.setOptions(mapOptions);
+        map.setOptions(mapOptions);
 
         // limit viewable area
         google.maps.event.addListener(map, 'center_changed', function() {
@@ -41,10 +44,17 @@ $(document).ready(function() {
                 (x < minX) ? minX : (x > maxX) ? maxX : x));
         });
 
-        var info;
-        var overlays = [];
-
-        addMarker('Projektort', '', parseFloat(c.data('lat')), parseFloat(c.data('lon')));
+        var bounds = new google.maps.LatLngBounds();
+        markerData.each(function() {
+            var m = $(this);
+            var pos = new google.maps.LatLng(
+                parseFloat(m.data('lat')), parseFloat(m.data('lon')));
+            addMarker(m.data('name'), m.data('href'),
+                m.text(), pos.lat(), pos.lng());
+            bounds.extend(pos);
+        });
+        if (markerData.size() > 1)
+            map.fitBounds(bounds);
 
         if (c.hasClass('edit')) {
             google.maps.event.addListener(map, 'click', function(e) {
@@ -62,22 +72,22 @@ $(document).ready(function() {
             });
         }
 
-        function addMarker(name, desc, lat, lon) {
+        function addMarker(name, href, desc, lat, lon) {
             var marker = new google.maps.Marker({
                 title: name, map: map,
                 position: new google.maps.LatLng(lat,lon)
             });
             overlays.push(marker);
-            if (desc && (desc.length > 0)) {
-                var infoWindow = new google.maps.InfoWindow(
-                    {content: desc, maxWidth: 300});
-                google.maps.event.addListener(marker, 'click', function() {
-                    if (info) info.close();
-                    infoWindow.open(map, marker);
-                    info = infoWindow;
-                });
-                overlays.push(infoWindow);
-            }
+            desc = (desc && (desc.trim().length > 0))
+                ? (desc.substr(0, 250) + '...') : desc;
+            var infoWindow = new google.maps.InfoWindow({maxWidth: 300,
+                content: '<a href="'+href+'"><h4>'+name+'</h4></a>' + desc});
+             google.maps.event.addListener(marker, 'click', function() {
+                if (info) info.close();
+                infoWindow.open(map, marker);
+                info = infoWindow;
+            });
+            overlays.push(infoWindow);
         }
 
         function removeMarkers() {

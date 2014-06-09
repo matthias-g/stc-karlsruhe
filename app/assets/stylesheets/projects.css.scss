@@ -120,6 +120,11 @@
       margin-top: 4px;
       margin-bottom: 8px;
     }
+    .map {
+      border-radius: 6px;
+      border: 1px solid rgba($border_default,0.5);
+      height: 150px;
+    }
   }
   .rightCol {
     width: 180px;
@@ -167,10 +172,4 @@
   .description img {
     margin-bottom: 0;
   }
-}
-
-.map-location {
-  border-radius: 6px;
-  border: 1px solid rgba($border_default,0.5);
-  height: 150px;
 }

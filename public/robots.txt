@@ -10,3 +10,4 @@ Disallow: /register
 Disallow: /users/
 Disallow: /impressum
 Disallow: /datenschutz
+Disallow: /uploads/

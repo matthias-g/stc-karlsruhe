@@ -2,10 +2,14 @@
 
 <% @page.sections.order(index: :asc).each do |section| %>
   <section <%= ('class="' + section.css_class + '"').html_safe if section.css_class %> >
+    <% unless section.stylesheet.empty? %>
+        <style type="text/css">
+            <%= section.stylesheet %>
+        </style>
+    <% end %>
+    <%= section.content.html_safe %>
     <% unless section.partial_name.empty? %>
-      <%= render section.partial_name %>
-    <% else %>
-      <%= section.content.html_safe %>
+        <%= render section.partial_name %>
     <% end %>
   </section>
 <% end %>

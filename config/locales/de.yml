@@ -64,10 +64,11 @@ de:
         sections: 'Seitenabschnitte'
       page_section:
         title: 'Abschnitt-Name'
-        partial_name: 'Partial-Name'
+        partial_name: 'Partial-Name (optional)'
         index: 'Index (zur Sortierung auf der Seite)'
-        content: 'HTML-Eingabe (falls kein Partial angegeben wurde)'
+        content: 'HTML-Eingabe (zusätzlich oder alternativ zum Partial)'
         css_class: 'CSS-Klasse für den Container'
+        stylesheet: 'Stylesheet (Achtung: CSS-Regeln gelten für die ganze Seite)'
       project_day:
         title: 'Titel'
     errors:

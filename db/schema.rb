@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140710163053) do
     t.string   "css_class"
     t.string   "partial_name"
     t.integer  "index"
+    t.text     "stylesheet",   default: ""
   end
 
   create_table "pages", force: true do |t|

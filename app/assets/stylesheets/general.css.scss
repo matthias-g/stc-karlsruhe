@@ -86,6 +86,25 @@ h4 {
   }
 }
 
+.picture-container {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  .copyright {
+    color: white;
+    font-size: 10px;
+    text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000;
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    white-space: nowrap;
+    padding-left: 10px;
+    transform-origin: 0% 100%;
+    -moz-transform: rotate(-90deg);
+    cursor: default;
+  }
+}
+
 
 .adminPanel {
   ul {

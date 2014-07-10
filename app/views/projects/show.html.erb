@@ -99,12 +99,16 @@
 
   <div class="description">
     <% if @project.show_picture? and @project.picture.file %>
-      <%= image_tag @project.picture_url(:preview),
-        :title => Project.human_attribute_name('picture_source') + ':  ' + @project.picture_source %>
+      <div class="picture-container">
+        <%= image_tag @project.picture_url(:preview) %>
+        <div class="copyright" title="© <%= @project.picture_source %>">
+          © <%= @project.picture_source %>
+        </div>
+      </div>
     <% end %>
-    <div>
+    <p>
       <%= simple_format @project.description %>
-    </div>
+    </p>
   </div>
 
 </section>

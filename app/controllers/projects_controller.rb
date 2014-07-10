@@ -157,7 +157,7 @@ class ProjectsController < ApplicationController
       params.require(:project).permit(:title, :user_id, :status,
         :location, :latitude, :longitude, :map_latitude, :map_longitude, :map_zoom,
         :description, :short_description, :individual_tasks, :material, :requirements,
-        :picture, :desired_team_size,  { :day_ids => [] }, :time)
+        :picture, :picture_source, :desired_team_size,  { :day_ids => [] }, :time)
     end
 
     def redirect_non_leaders

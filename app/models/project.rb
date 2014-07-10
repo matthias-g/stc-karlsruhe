@@ -83,4 +83,8 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def show_picture?
+    picture_source && picture
+  end
+
 end

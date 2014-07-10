@@ -102,16 +102,22 @@
       </div>
 
       <div class="description">
-        <%= image_tag @project.picture_url(:preview) if @project.picture.file %>
-
         <div>
           <h3><%= Project.human_attribute_name('title') %></h3>
           <%= f.text_field :title %>
         </div>
+
         <div>
           <h3><%= t('project.label.uploadImage') %></h3>
           <%= f.file_field :picture %>
         </div>
+        <%= image_tag @project.picture_url(:preview) if @project.picture.file %>
+        <div>
+          <h3><%= Project.human_attribute_name('picture_source') %></h3>
+          <%= f.text_field :picture_source %>
+          <%= t('project.edit.hint.picture_source') %>
+        </div>
+
         <div>
           <h3><%= Project.human_attribute_name('description') %></h3>
           <%= f.text_area :description %>

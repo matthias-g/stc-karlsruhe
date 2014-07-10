@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140605173300) do
+ActiveRecord::Schema.define(version: 20140710163053) do
 
   create_table "page_sections", force: true do |t|
     t.string   "title"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20140605173300) do
     t.float    "map_latitude",                  default: 49.01347014
     t.float    "map_longitude",                 default: 8.40445518
     t.integer  "map_zoom",                      default: 12
+    t.text     "picture_source"
   end
 
   create_table "roles", force: true do |t|

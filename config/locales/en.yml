@@ -42,6 +42,7 @@ en:
         requirements: 'Requirements'
         visible: 'Visible'
         picture: 'Picture'
+        picture_source: 'Picture Source'
         desired_team_size: 'Desired Team Size'
         leaders: 'Leaders'
         volunteers: 'Team'
@@ -150,6 +151,9 @@ en:
       countActive: 'Current Projects'
       projectName: 'Project Name'
       uploadImage: 'Upload Image'
+    edit:
+      hint:
+        picture_source: 'Please enter the source of the uploaded picture. If you leave this field empty the picture will not be shown.'
     message:
       created: 'Project was successfully created.'
       updated: 'Project was successfully updated.'

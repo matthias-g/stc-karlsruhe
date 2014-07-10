@@ -42,6 +42,7 @@ de:
         requirements: 'Voraussetzungen'
         visible: 'Sichtbar'
         picture: 'Bild'
+        picture_source: 'Bildquelle'
         desired_team_size: 'Gewünschte Teamgröße'
         leaders: 'Leitung'
         volunteers: 'Team'
@@ -170,6 +171,9 @@ de:
       countActive: 'Aktuelle Projekte'
       projectName: 'Projektname'
       uploadImage: 'Bild hochladen'
+    edit:
+      hint:
+        picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
     message:
       created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'

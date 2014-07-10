@@ -98,7 +98,10 @@
   </div>
 
   <div class="description">
-    <%= image_tag @project.picture_url(:preview) if @project.picture.file %>
+    <% if @project.show_picture? %>
+      <%= image_tag @project.picture_url(:preview) if @project.picture.file %>
+      <span class="picture-source"> <%= Project.human_attribute_name('picture_source') + ':  ' + @project.picture_source %> </span>
+    <% end %>
     <div>
       <%= simple_format @project.description %>
     </div>

@@ -40,20 +40,18 @@
 <div id="project-list">
   <% @projects.each do |project| %>
       <section>
-        <% if project.show_picture? %>
-          <div class="project-image">
-            <%= link_to project do %>
+        <div class="project-image">
+          <%= link_to project do %>
+            <% if project.show_picture? %>
               <%= image_tag project.picture_url(:listview) if project.picture.file %>
-              <div class="project-status <%= project.status %>">
-                <%= t "project.status.#{project.status}" %>
-              </div>
+            <% else %>
+              <%= image_tag 'placeholder.svg' %>
             <% end %>
-          </div>
-        <% else %>
-          <div class="project-status <%= project.status %>">
-            <%= t "project.status.#{project.status}" %>
-          </div>
-        <% end %>
+            <div class="project-status <%= project.status %>">
+              <%= t "project.status.#{project.status}" %>
+            </div>
+          <% end %>
+        </div>
         <div class="project-title">
             <%= link_to project do %>
                 <h2><%= project.title %></h2>

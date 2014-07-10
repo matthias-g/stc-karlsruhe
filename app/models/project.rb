@@ -84,7 +84,7 @@ class Project < ActiveRecord::Base
   end
 
   def show_picture?
-    picture_source && picture
+    picture_source && !picture_source.empty? && picture
   end
 
 end

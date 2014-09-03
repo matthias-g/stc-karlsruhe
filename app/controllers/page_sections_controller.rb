@@ -1,7 +1,6 @@
 class PageSectionsController < ApplicationController
   before_action :set_page_section, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
-  before_action :check_admin
+  before_action :authenticate_admin_user!
 
   # GET /page_sections
   # GET /page_sections.json

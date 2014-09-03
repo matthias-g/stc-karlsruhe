@@ -1,7 +1,6 @@
 class ProjectStatusesController < ApplicationController
   before_action :set_project_status, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
-  before_action :check_admin
+  before_action :authenticate_admin_user!
 
   # GET /project_statuses
   # GET /project_statuses.json

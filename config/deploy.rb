@@ -1,14 +1,14 @@
 # config valid only for Capistrano 3.2
 lock '3.2.1'
 
-set :application, 'serve_the_city_karlsruhe'
+set :application, 'servethecity-karlsruhe'
 set :repo_url, 'git@github.com:matthias-g/stc-karlsruhe.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/var/www/serve_the_city_karlsruhe'
+set :deploy_to, '/var/www/servethecity-karlsruhe'
 
 # Default value for :scm is :git
 # set :scm, :git

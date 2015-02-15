@@ -23,7 +23,8 @@ production:
   encoding: unicode
   database: servethecity
   pool: 5
-  username: rails
-  password: serve
+  username: servethecity
+  password: <%= ENV['POSTGRES_STC_PASSWORD'] %>
   min_messages: warning
   timeout: 5000
+  host: /home/serve/tmp

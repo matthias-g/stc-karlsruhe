@@ -4,9 +4,9 @@
 # server in each group is considered to be the first
 # unless any hosts have the primary property set.
 # Don't declare `role :all`, it's a meta role
-role :app, %w{uberspace-serve}
-role :web, %w{uberspace-serve}
-role :db,  %w{uberspace-serve}
+role :app, %w{uberspace-stc}
+role :web, %w{uberspace-stc}
+role :db,  %w{uberspace-stc}
 
 # Extended Server Syntax
 # ======================

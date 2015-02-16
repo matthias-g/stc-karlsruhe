@@ -7,7 +7,7 @@ set :branch, 'uberspace'
 
 # Default deploy_to directory is /var/www/my_app
 # set :deploy_to, '/var/www/servethecity-karlsruhe'
-set :deploy_to, '/home/serve/servethecity-karlsruhe'
+set :deploy_to, '/home/stc/servethecity-karlsruhe'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -26,7 +26,7 @@ set :linked_files, %w{.env}
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-set :linked_dirs, %w{public/uploads public/external}
+set :linked_dirs, %w{public/uploads}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

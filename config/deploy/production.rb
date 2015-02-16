@@ -7,9 +7,9 @@
 # role :app, %w{rails@servethecity}
 # role :web, %w{rails@servethecity}
 # role :db,  %w{rails@servethecity}
-role :app, %w{uberspace-serve}
-role :web, %w{uberspace-serve}
-role :db,  %w{uberspace-serve}
+role :app, %w{uberspace-stc}
+role :web, %w{uberspace-stc}
+role :db,  %w{uberspace-stc}
 
 # Extended Server Syntax
 # ======================

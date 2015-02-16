@@ -27,4 +27,4 @@ production:
   password: <%= ENV['POSTGRES_STC_PASSWORD'] %>
   min_messages: warning
   timeout: 5000
-  host: /home/serve/tmp
+  host: /home/stc/tmp

@@ -1,5 +1,6 @@
 log
 .idea
+.capistrano
 db/development.sqlite3
 db/test.sqlite3
 tmp/

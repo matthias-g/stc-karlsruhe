@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_filter :strict_transport_security
 
   protected
 
@@ -35,4 +36,11 @@ class ApplicationController < ActionController::Base
       stored_location_for(resource) || request.referer || root_path
     end
   end
+
+  def strict_transport_security
+    if request.ssl?
+      response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    end
+  end
+
 end

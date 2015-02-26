@@ -82,4 +82,7 @@ StcKarlsruhe::Application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { :host => 'servethecity-karlsruhe.de' }
+
+  # Workaround for https://github.com/rails/rails/issues/1755
+  config.action_mailer.sendmail_settings = { :arguments => '-i' }
 end

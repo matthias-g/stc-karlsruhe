@@ -1,6 +1,5 @@
 set :application, 'servethecity-karlsruhe'
 set :repo_url, 'git@github.com:matthias-g/stc-karlsruhe.git'
-set :branch, 'uberspace'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }

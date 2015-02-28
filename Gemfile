@@ -40,6 +40,8 @@ gem 'devise'
 gem 'rmagick'
 gem 'carrierwave'
 
+gem 'bootstrap-sass'
+
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano'

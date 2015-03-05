@@ -145,7 +145,11 @@ class ProjectsController < ApplicationController
 
     def check_visible
       unless @project.visible or (user_signed_in? and current_user.is_admin?) or (user_signed_in? and current_user.leads_project?(@project))
-        redirect_to projects_path
+        if user_signed_in?
+          redirect_to projects_path
+        else
+          redirect_to new_user_session_path
+        end
       end
     end
 

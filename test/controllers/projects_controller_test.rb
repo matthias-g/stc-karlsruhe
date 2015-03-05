@@ -30,7 +30,7 @@ class ProjectsControllerTest < ActionController::TestCase
     @project = projects(:two)
     assert_not @project.visible
     get :show, id: @project
-    assert_response :redirect
+    assert_redirected_to new_user_session_path
   end
 
   test 'should show invisible project if current user leads it' do
@@ -43,7 +43,18 @@ class ProjectsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test 'should get edit' do
+  test 'should redirect when getting edit with no user logged in' do
+    get :edit, id: @project
+    assert_redirected_to new_user_session_path
+  end
+
+  test "should redirect when getting edit if user doesn't lead project" do
+    sign_in users(:sabine)
+    get :edit, id: @project
+    assert_response :redirect
+  end
+
+  test 'should get edit if user leads project' do
     sign_in users(:rolf)
     get :edit, id: @project
     assert_response :success
@@ -56,6 +67,14 @@ class ProjectsControllerTest < ActionController::TestCase
     assert_redirected_to project_path(assigns(:project))
   end
 
+  test 'should not destroy project if no user logged in' do
+    assert_no_difference('Project.count') do
+      delete :destroy, id: @project
+    end
+
+    assert_redirected_to new_user_session_path
+  end
+
   test 'should destroy project' do
     sign_in users(:rolf)
     assert users(:rolf).leads_project? @project
@@ -65,4 +84,71 @@ class ProjectsControllerTest < ActionController::TestCase
 
     assert_redirected_to projects_path
   end
+
+  test 'volunteer should enter project' do
+    user = users(:sabine)
+    sign_in user
+    assert_not @project.has_volunteer?(user)
+    get :enter, id: @project
+    assert_redirected_to @project
+    assert @project.has_volunteer?(user)
+  end
+
+  test 'volunteer should leave project' do
+    user = users(:sabine)
+    sign_in user
+    @project.add_volunteer(user)
+    assert @project.has_volunteer?(user)
+    get :leave, id: @project
+    assert_redirected_to @project
+    assert_not @project.has_volunteer?(user)
+  end
+
+  test 'admin should make project visible' do
+    sign_in users(:admin)
+    @project = projects(:three)
+    assert_not @project.visible?
+    get :make_visible, id: @project
+    @project = Project.find(@project.id)
+    assert @project.visible?
+  end
+
+  test 'non-admin should not make project visible' do
+    sign_in users(:rolf)
+    @project = projects(:three)
+    assert_not @project.visible?
+    get :make_visible, id: @project
+    assert_not @project.visible?
+  end
+
+  test 'not signed in user should not make project visible' do
+    @project = projects(:three)
+    assert_not @project.visible?
+    get :make_visible, id: @project
+    assert_not @project.visible?
+    assert_redirected_to new_user_session_path
+  end
+
+  test 'admin should make project invisible' do
+    sign_in users(:admin)
+    assert @project.visible?
+    get :make_invisible, id: @project
+    @project = Project.find(@project.id)
+    assert_not @project.visible?
+  end
+
+  test 'non-admin should not make project invisible' do
+    sign_in users(:rolf)
+    assert @project.visible?
+    get :make_invisible, id: @project
+    assert @project.visible?
+  end
+
+  test 'not signed in user should not make project invisible' do
+    assert @project.visible?
+    get :make_invisible, id: @project
+    assert @project.visible?
+    assert_redirected_to new_user_session_path
+  end
+
 end

@@ -5,8 +5,8 @@ class ProjectsController < ApplicationController
   before_action :redirect_non_leaders, only: [:edit, :edit_leaders, :add_leader, :delete_leader, :destroy, :update, :open, :close]
   before_action :check_visible, only: [:show, :edit, :update, :enter, :leave, :edit_leaders, :add_leader, :delete_leader, :destroy]
 
-  # GET /projects
-  # GET /projects.json
+  respond_to :html
+
   def index
     visible = true
     if params[:filter] and params[:filter][:visibility] == 'hidden' and current_user.is_admin?
@@ -15,55 +15,35 @@ class ProjectsController < ApplicationController
     @projects = Project.where(:visible => visible).order(:status)
     @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] and params[:filter][:day] != ''
     @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] and params[:filter][:status] != ''
+    respond_with(@projects)
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
   def show
     #Message for contact_volunteers
     @message = Message.new
+    respond_with(@project)
   end
 
-  # GET /projects/new
   def new
     @project = Project.new
+    respond_with(@project)
   end
 
-  # GET /projects/1/edit
   def edit
+    respond_with(@project)
   end
 
-  # POST /projects
-  # POST /projects.json
   def create
     @project = Project.new(project_params)
     @project.add_leader(current_user)
     @project.visible = false
-
-    respond_to do |format|
-      if @project.save
-        send_notice_mail @project.title, @project.leaders.first.full_name
-        format.html { redirect_to @project, notice: t('project.message.created') }
-        format.json { render action: 'show', status: :created, location: @project }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
-    end
+    @project.save
+    respond_with(@project)
   end
 
-  # PATCH/PUT /projects/1
-  # PATCH/PUT /projects/1.json
   def update
-    respond_to do |format|
-      if @project.update(project_params)
-        format.html { redirect_to @project, notice: t('project.message.updated')}
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
-    end
+    @project.update(project_params)
+    respond_with(@project)
   end
 
   def enter
@@ -80,14 +60,9 @@ class ProjectsController < ApplicationController
     redirect_to project_url(@project)
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
   def destroy
     @project.destroy
-    respond_to do |format|
-      format.html { redirect_to projects_url }
-      format.json { head :no_content }
-    end
+    respond_with(@project)
   end
 
   def edit_leaders

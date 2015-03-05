@@ -34,6 +34,7 @@ de:
       project:
         title: 'Projekttitel'
         description: 'Beschreibung'
+        short_description: 'Kurzbeschreibung'
         location: 'Projektort'
         latitude: 'Breitengrad'
         longitude: 'Längengrad'

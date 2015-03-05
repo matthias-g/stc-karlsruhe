@@ -3,12 +3,7 @@ require 'test_helper'
 class PageSectionsControllerTest < ActionController::TestCase
   setup do
     @page_section = page_sections(:one)
-  end
-
-  test "should get contact" do
-    get :contact
-    assert_response :success
-    assert_not_nil assigns(:page_sections)
+    sign_in users(:admin)
   end
 
   test "should get new" do
@@ -18,7 +13,7 @@ class PageSectionsControllerTest < ActionController::TestCase
 
   test "should create page_section" do
     assert_difference('PageSection.count') do
-      post :create, page_section: { message: @page_section.message, title: @page_section.title }
+      post :create, page_section: { title: @page_section.title, index: 0 }
     end
 
     assert_redirected_to page_section_path(assigns(:page_section))
@@ -35,7 +30,7 @@ class PageSectionsControllerTest < ActionController::TestCase
   end
 
   test "should update page_section" do
-    patch :update, id: @page_section, page_section: { message: @page_section.message, title: @page_section.title }
+    patch :update, id: @page_section, page_section: { title: @page_section.title, index: 0 }
     assert_redirected_to page_section_path(assigns(:page_section))
   end
 

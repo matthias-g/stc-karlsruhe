@@ -5,20 +5,16 @@ class PagesControllerTest < ActionController::TestCase
     @page = pages(:one)
   end
 
-  test "should get contact" do
-    get :contact
-    assert_response :success
-    assert_not_nil assigns(:pages)
-  end
-
   test "should get new" do
+    sign_in users(:admin)
     get :new
     assert_response :success
   end
 
   test "should create page" do
+    sign_in users(:admin)
     assert_difference('Page.count') do
-      post :create, page: { title: @page.title }
+      post :create, page: { title: 'New Page', header_name: 'bigheader' }
     end
 
     assert_redirected_to page_path(assigns(:page))
@@ -30,16 +26,19 @@ class PagesControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
+    sign_in users(:admin)
     get :edit, id: @page
     assert_response :success
   end
 
   test "should update page" do
+    sign_in users(:admin)
     patch :update, id: @page, page: { title: @page.title }
     assert_redirected_to page_path(assigns(:page))
   end
 
   test "should destroy page" do
+    sign_in users(:admin)
     assert_difference('Page.count', -1) do
       delete :destroy, id: @page
     end

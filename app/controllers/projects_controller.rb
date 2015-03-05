@@ -42,7 +42,9 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @project.update(project_params)
+    if @project.update(project_params)
+      flash[:notice] = t('project.message.updated')
+    end
     respond_with(@project)
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710163053) do
+ActiveRecord::Schema.define(version: 20150305092835) do
 
   create_table "page_sections", force: true do |t|
     t.string   "title"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 20140710163053) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_week_id"
+    t.date     "date"
   end
 
   create_table "project_days_projects", id: false, force: true do |t|
@@ -56,6 +58,13 @@ ActiveRecord::Schema.define(version: 20140710163053) do
 
   add_index "project_days_projects", ["project_day_id", "project_id"], name: "index_project_days_projects_on_project_day_id_and_project_id"
   add_index "project_days_projects", ["project_id", "project_day_id"], name: "index_project_days_projects_on_project_id_and_project_day_id"
+
+  create_table "project_weeks", force: true do |t|
+    t.string   "title"
+    t.boolean  "default"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "projects", force: true do |t|
     t.string   "title"
@@ -78,6 +87,7 @@ ActiveRecord::Schema.define(version: 20140710163053) do
     t.float    "map_longitude",                 default: 8.40445518
     t.integer  "map_zoom",                      default: 12
     t.text     "picture_source"
+    t.integer  "project_week_id"
   end
 
   create_table "roles", force: true do |t|

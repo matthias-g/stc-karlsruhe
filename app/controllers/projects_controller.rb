@@ -27,6 +27,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @project.project_week = ProjectWeek.default
   end
 
   # GET /projects/1/edit
@@ -157,7 +158,7 @@ class ProjectsController < ApplicationController
       params.require(:project).permit(:title, :user_id, :status,
         :location, :latitude, :longitude, :map_latitude, :map_longitude, :map_zoom,
         :description, :short_description, :individual_tasks, :material, :requirements,
-        :picture, :picture_source, :desired_team_size,  { :day_ids => [] }, :time)
+        :picture, :picture_source, :desired_team_size,  :project_week_id, { :day_ids => [] }, :time)
     end
 
     def redirect_non_leaders

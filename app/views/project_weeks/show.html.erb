@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<section>
+  <p>
+    <strong>Title:</strong>
+    <%= @project_week.title %>
+  </p>
+
+  <p>
+    <strong>Default:</strong>
+    <%= @project_week.default %>
+  </p>
+
+  <%= link_to 'Edit', edit_project_week_path(@project_week) %> |
+  <%= link_to 'Back', project_weeks_path %>
+</section>

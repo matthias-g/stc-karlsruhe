@@ -47,6 +47,7 @@ en:
         leaders: 'Leaders'
         volunteers: 'Team'
         status: 'Status'
+        week: 'Project Week'
         days: 'Project Days'
         time: Time
       user:

@@ -47,6 +47,7 @@ de:
         leaders: 'Leitung'
         volunteers: 'Team'
         status: 'Status'
+        week: Projektwoche
         days: Projekttage
         time: Zeit
       user:

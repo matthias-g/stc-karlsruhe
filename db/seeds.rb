@@ -8,3 +8,4 @@
 
 Page.create!(header_name: 'bigheader')
 Role.create!(title: :admin)
+ProjectWeek.create!(default: true)

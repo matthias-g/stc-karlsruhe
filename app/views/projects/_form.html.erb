@@ -29,8 +29,13 @@
           <%= f.text_area :material %>
         </div>
         <div>
+          <h3><%= Project.human_attribute_name('week') %></h3>
+          <%= f.collection_select(:project_week_id, ProjectWeek.all, :id, :title,
+                                  {:selected => @project.project_week.id } ) -%>
+        </div>
+        <div>
           <h3><%= Project.human_attribute_name('days') %></h3>
-          <%= f.collection_select(:day_ids, ProjectDay.all, :id, :title,
+          <%= f.collection_select(:day_ids, @project.project_week.days, :id, :title,
              {:selected => @project.days.collect {|t| t.id}}, :multiple => true) -%>
         </div>
         <div>
@@ -65,7 +70,7 @@
           <%= f.text_field :desired_team_size %>
         </div>
 
-        <% if not isNew %>
+        <% unless isNew %>
             <div>
               <h3><%= Project.human_attribute_name('leaders') %></h3>
               <% @project.leaders.each do |leader| %>

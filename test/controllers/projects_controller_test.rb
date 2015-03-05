@@ -21,14 +21,26 @@ class ProjectsControllerTest < ActionController::TestCase
   end
 
   test 'should show visible project' do
+    assert @project.visible
     get :show, id: @project
     assert_response :success
   end
 
   test 'should redirect when trying to show invisible project' do
     @project = projects(:two)
+    assert_not @project.visible
     get :show, id: @project
     assert_response :redirect
+  end
+
+  test 'should show invisible project if current user leads it' do
+    user = users(:rolf)
+    sign_in user
+    @project = projects(:three)
+    assert user.leads_project?(@project)
+    assert_not @project.visible
+    get :show, id: @project
+    assert_response :success
   end
 
   test 'should get edit' do

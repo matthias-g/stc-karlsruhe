@@ -23,3 +23,15 @@ two:
   requirements: MyText
   visible: false
   desired_team_size: 7
+
+three:
+  title: MyString
+  description: MyText
+  location: MyString
+  latitude: 1.5
+  longitude: 1.5
+  individual_tasks: MyText
+  material: MyText
+  requirements: MyText
+  visible: false
+  desired_team_size: 7

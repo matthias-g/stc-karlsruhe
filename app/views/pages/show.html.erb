@@ -1,6 +1,5 @@
 <%= render '/layouts/' + @page.header_name -%>
 
-
 <section>
   <h1><%= @page.title %></h1>
 </section>
@@ -14,15 +13,16 @@
       <% end %>
       <%= section.content.html_safe %>
       <% unless section.partial_name.empty? %>
-        <%= render section.partial_name %>
+          <%= render section.partial_name %>
       <% end %>
     </section>
 <% end %>
 
 <% if user_signed_in? and current_user.is_admin? %>
-<section>
-    <h2><%= t('general.label.adminPanel') %></h2>
-    <%= link_to t('page.action.edit'), edit_page_path(@page) %><br>
-    <%= link_to t('page.action.toOverview'), pages_path %>
-</section>
+    <section>
+      <h2><%= t('general.label.adminPanel') %></h2>
+      <%= link_to t('page.action.edit'), edit_page_path(@page) %><br>
+      <%= link_to t('page.action.toOverview'), pages_path %>
+    </section>
 <% end %>
+

@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<div id="menubar">
+<div class="navbar navbar-default  navbar-fixed-top">
   <%= render '/layouts/menubar' -%>
 </div>
 
@@ -29,7 +29,7 @@
 
 <%= yield :pageHeader %>
 
-<div id="content">
+<div id="container" class="container-fluid">
   <%= yield %>
 </div>
 

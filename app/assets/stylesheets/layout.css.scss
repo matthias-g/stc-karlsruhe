@@ -16,7 +16,7 @@ body {
   position: relative;
 }
 
-#menubar {
+#DEL_menubar {
   position: fixed;
   left: 0; top: 0; right: 0;
   padding: 5px 0;
@@ -39,34 +39,9 @@ body {
       color: $col_primary;
     }
   }
-
-  #metaLinks {
-    float: left;
-  }
-
-  .miniPopup {
-    display: inline-block;
-    & > div {
-      text-align: left;
-      background: rgba(#fff,0.8);
-      border: 1px solid #000;
-      position: fixed;
-      right: 0;
-      top: 30px;
-      padding: 10px 20px 20px;
-      display: none;
-      min-height: 80px;
-    }
-  }
 }
 
-.loginOptions {
-  margin-top: 20px;
-  & > * {
-    margin-right: 10px;
-    float: left;
-  }
-}
+
 
 header {
   margin: 0 auto;
@@ -115,10 +90,10 @@ header {
 }
 
 
-#content {
+#DEL_content {
   padding-bottom: 50px;
   margin: 0 auto 0;
-  width: 900px;
+  max-width: 900px;
   overflow: auto;
 }
 
@@ -131,6 +106,9 @@ section {
   &.restyled {
     background: none;
     padding: 0 0;
+  }
+  &.slim {
+    padding: 10px;
   }
 }
 

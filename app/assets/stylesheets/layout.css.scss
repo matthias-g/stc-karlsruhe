@@ -97,21 +97,6 @@ header {
   overflow: auto;
 }
 
-section {
-  background-color: rgba(#fff, 0.8);
-  margin: 10px 0;
-  padding: 20px 40px;
-  overflow: hidden;
-  position: relative;
-  &.restyled {
-    background: none;
-    padding: 0 0;
-  }
-  &.slim {
-    padding: 10px;
-  }
-}
-
 footer {
   position: absolute;
   bottom: 10px;

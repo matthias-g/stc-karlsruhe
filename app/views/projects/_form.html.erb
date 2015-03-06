@@ -1,142 +1,136 @@
-<%= form_for(@project) do |f| %>
+<%= bootstrap_form_for(@project) do |f| %>
 
-    <% if @project.errors.any? %>
-        <section id="error_explanation">
-          <h2><%= t('project.message.errorList') %></h2>
-          <ul>
-            <% @project.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </section>
-    <% end %>
+<% if @project.errors.any? %>
+    <section id="error_explanation">
+      <h2><%= t('project.message.errorList') %></h2>
+      <ul>
+        <% @project.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </section>
+<% end %>
 
-    <section class="project-view project-edit-view">
-      <h1><%= (isNew ? t('project.label.new') : (t('project.label.edit') % [@project.title])) %></h1>
+<section class="adminPanel">
+  <div class="sectionTag">
+    <%= isNew ? t('project.label.new') : t('project.label.edit') %>
+  </div>
+  <h1><%= @project.title %></h1>
+  <%= f.submit t('general.action.save') %>
+  <%= link_to t('general.action.cancel'), @project, class: 'btn btn-default' %>
+</section>
 
-      <div class="leftCol">
+<div class="row row-sm-eq-height">
 
-        <div>
-          <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
-          <%= f.text_area :individual_tasks %>
-        </div>
-        <div>
-          <h3><%= Project.human_attribute_name('requirements') %></h3>
-          <%= f.text_area :requirements %>
-        </div>
-        <div>
-          <h3><%= Project.human_attribute_name('material') %></h3>
-          <%= f.text_area :material %>
-        </div>
-        <div>
-          <h3><%= Project.human_attribute_name('days') %></h3>
-          <%= f.collection_select(:day_ids, ProjectDay.all, :id, :title,
-             {:selected => @project.days.collect {|t| t.id}}, :multiple => true) -%>
-        </div>
-        <div>
-          <h3><%= Project.human_attribute_name('time') %></h3>
-          <%= f.text_field :time %>
-        </div>
-        <div>
-          <h3><%= Project.human_attribute_name('location') %></h3>
-          <%= f.text_area :location %>
-        </div>
-        <div>
-            <div class="map edit"
-                 data-lon="<%= @project.map_longitude %>"
-                 data-lat="<%= @project.map_latitude %>"
-                 data-zoom="<%= @project.map_zoom %>">
-              <div data-lon="<%= @project.longitude %>"
-                   data-lat="<%= @project.latitude %>"
-                   data-name="<%= @project.title %>">
-              </div>
-            </div>
-            <%= f.text_field :longitude, :type => :hidden %>
-            <%= f.text_field :latitude, :type => :hidden %>
-            <%= f.text_field :map_longitude, :type => :hidden %>
-            <%= f.text_field :map_latitude, :type => :hidden %>
-            <%= f.text_field :map_zoom, :type => :hidden %>
-        </div>
-      </div>
+  <div class="col-sm-8">
+    <section class="description filling">
+      <%= f.text_field :title %>
+      <%= f.file_field :picture %>
+      <%= image_tag @project.picture_url(:preview) if @project.picture.file %>
+      <%= f.text_field :picture_source, help: t('project.help.picture_source') %>
+      <%= f.text_area :description %>
+      <%= f.text_area :short_description, help: t('project.help.short_description') %>
+    </section>
+  </div>
 
-      <div class="rightCol">
-        <div>
-          <h3> <%= Project.human_attribute_name('desired_team_size') %></h3>
-          <%= f.text_field :desired_team_size %>
-        </div>
-
-        <% if not isNew %>
-            <div>
-              <h3><%= Project.human_attribute_name('leaders') %></h3>
-              <% @project.leaders.each do |leader| %>
-                  <div>
-                    <%= leader.full_name %>
-                    <%#= link_to '(X)', delete_leader_project_path(@project,
-                         :user_id => leader.id), :method => 'delete' %>
-                  </div>
-              <% end %>
-              <%#= @project.leaders.collect { |v| v.first_name }.join(', ') %>
-            </div>
-            <div>
-              <h3><%= Project.human_attribute_name('volunteers') %></h3>
-              <% @project.volunteers.each do |volunteer| %>
-                  <div>
-                    <%= volunteer.full_name %>
-                    <%#= link_to '(=> as leader)', add_leader_project_path(@project,
-                         :user_id => volunteer.id), :method => 'post' %>
-                  </div>
-              <% end %>
-              <%#= @project.volunteers.collect { |v| v.first_name }.join(', ') %>
-            </div>
-
-            <% if current_user.is_admin? %>
-                <div class="adminPanel">
-                  <h3><%= t('general.label.adminPanel') %></h3>
-                  <ul>
-                    <li><%= link_to t('project.action.delete'), @project, method: :delete,
-                              data: { confirm: t('general.message.confirmDelete') } %></li>
-                  </ul>
+  <div class="col-xs-12 col-sm-4 col-max300 col-min250">
+    <section class="slim filling">
+      <%= f.text_field :desired_team_size %>
+      <% if not isNew %>
+          <div>
+            <h3><%= Project.human_attribute_name('leaders') %></h3>
+            <% @project.leaders.each do |leader| %>
+                <div>
+                  <%= leader.full_name %>
+                  <%#= link_to '(X)', delete_leader_project_path(@project,
+                     :user_id => leader.id), :method => 'delete' %>
                 </div>
+            <% end %>
+            <%#= @project.leaders.collect { |v| v.first_name }.join(', ') %>
+          </div>
+          <div>
+            <h3><%= Project.human_attribute_name('volunteers') %></h3>
+            <% @project.volunteers.each do |volunteer| %>
+                <div>
+                  <%= volunteer.full_name %>
+                  <%#= link_to '(=> as leader)', add_leader_project_path(@project,
+                     :user_id => volunteer.id), :method => 'post' %>
+                </div>
+            <% end %>
+            <%#= @project.volunteers.collect { |v| v.first_name }.join(', ') %>
+          </div>
+      <% end %>
+      <div class="adminPanel">
+        <h3 style="text-align:left; margin-top: 50px;">Projekt-Optionen</h3>
+        <%= link_to t('project.action.manageTeam'),
+            edit_leaders_project_path(@project), class:'btn btn-default wide' %>
+        <% if not isNew and current_user.is_admin? %>
+            <%= link_to t('project.action.delete'), @project, method: :delete,
+                        data: { confirm: t('general.message.confirmDelete')},
+                        class: 'btn btn-default wide' %>
+        <% end %>
+        <% if @project.closed? %>
+            <%= link_to t('project.action.open'),
+                        open_project_path(@project),
+                        class:'btn btn-default wide' %>
+        <% else %>
+            <%= link_to t('project.action.close'),
+                        close_project_path(@project),
+                        class:'btn btn-default wide' %>
+        <% end %>
+        <% if current_user.is_admin? %>
+            <% if @project.visible %>
+                <%= link_to t('project.action.makeInvisible'),
+                            make_invisible_project_path(@project),
+                            class:'btn btn-default wide' %>
+            <% else %>
+                <%= link_to t('project.action.makeVisible'),
+                            make_visible_project_path(@project),
+                            class:'btn btn-default wide' %>
             <% end %>
         <% end %>
       </div>
+    </section>
+  </div>
 
-      <div class="description">
-        <div>
-          <h3><%= Project.human_attribute_name('title') %></h3>
-          <%= f.text_field :title %>
-        </div>
+</div>
 
-        <div>
-          <h3><%= t('project.label.uploadImage') %></h3>
-          <%= f.file_field :picture %>
-        </div>
-        <%= image_tag @project.picture_url(:preview) if @project.picture.file %>
-        <div>
-          <h3><%= Project.human_attribute_name('picture_source') %></h3>
-          <%= f.text_field :picture_source %>
-          <%= t('project.edit.hint.picture_source') %>
-        </div>
+<div class="row row-sm-eq-height">
 
-        <div>
-          <h3><%= Project.human_attribute_name('description') %></h3>
-          <%= f.text_area :description %>
+  <div class="col-sm-6">
+    <section class="filling">
+      <div>
+        <div class="map edit"
+             data-lon="<%= @project.map_longitude %>"
+             data-lat="<%= @project.map_latitude %>"
+             data-zoom="<%= @project.map_zoom %>">
+          <div data-lon="<%= @project.longitude %>"
+               data-lat="<%= @project.latitude %>"
+               data-name="<%= @project.title %>">
+          </div>
         </div>
-        <div>
-          <h3><%= Project.human_attribute_name('short_description') %></h3>
-          Wenn Du dieses Feld ausfüllst, wird es in der Projektliste statt der ausführlichen Beschreibung angezeigt.
-          <%= f.text_area :short_description %>
-        </div>
+        <%= f.text_field :longitude, type: :hidden, hide_label: true %>
+        <%= f.text_field :latitude, type: :hidden, hide_label: true %>
+        <%= f.text_field :map_longitude, type: :hidden, hide_label: true %>
+        <%= f.text_field :map_latitude, type: :hidden, hide_label: true %>
+        <%= f.text_field :map_zoom, type: :hidden, hide_label: true %>
       </div>
 
-      <%#= f.text_field :latitude %>
-      <%#= f.text_field :longitude %>
+      <%= f.collection_select(:day_ids, ProjectDay.all, :id, :title,
+             {selected: @project.days.collect {|t| t.id}}, multiple: true) -%>
+      <%= f.text_field :time %>
+      <%= f.text_area :location %>
     </section>
+  </div>
 
-    <section>
-      <%= f.submit t('project.action.save') %>
-      <%= link_to t('general.action.show'), @project %> |
-      <%= link_to t('project.action.toOverview'), projects_path %>
+  <div class="col-sm-6">
+    <section class="filling">
+      <%= f.text_area :individual_tasks %>
+      <%= f.text_area :requirements %>
+      <%= f.text_area :material %>
     </section>
+  </div>
+
+</div>
 
 <% end %>

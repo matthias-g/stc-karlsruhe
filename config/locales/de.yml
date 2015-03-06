@@ -104,8 +104,11 @@ de:
   general:
     action:
       show: 'Anzeigen'
+      edit: 'Bearbeiten'
+      save: 'Speichern'
+      cancel: 'Abbrechen'
+      delete: 'Löschen'
     label:
-      adminPanel: 'Admin-Panel'
       error: 'Fehler'
       notDisplayed: 'wird nicht angezeigt'
     message:
@@ -135,46 +138,48 @@ de:
       body: 'Deine Nachricht'
 
   layout:
-    title: 'Serve the City Karlsruhe'
-    meta_links:
+    pageTitle: 'Serve the City Karlsruhe'
+    links:
       projects: 'Projekte'
       home: 'Startseite'
-    pageLinks:
       contact: 'Kontakt'
       aboutUs: 'Impressum'
       privacy: 'Datenschutz'
       disclaimer: 'Haftungsausschluss'
+      stcInternational: 'Serve the City international'
 
   project:
     action:
       new: 'Neues Projekt erstellen'
-      edit: 'Projekt bearbeiten'
-      save: 'Projekt speichern'
-      delete: 'Projekt löschen'
       enter: 'Team beitreten'
       leave: 'Team verlassen'
-      editLeaders: 'Projektleiter ändern'
-      asLeader: '(=> als Leiter)'
-      notAsLeader: '(X)'
-      removeVolunteer: '(X)'
-      toOverview: 'Zurück zur Übersicht'
-      toProject: 'Zurück zum Projekt'
-      makeVisible: 'Sichtbar machen'
-      makeInvisible: 'Unsichtbar machen'
+      delete: 'Projekt löschen'
       open: 'Projekt öffnen'
       close: 'Projekt abschließen'
+      makeVisible: 'Projekt freigeben'
+      makeInvisible: 'Projekt verstecken'
+      manageTeam: 'Team verwalten'
+      addLeader: 'als Leiter hinzufügen'
+      removeLeader: 'Projektleiter entfernen'
+      removeVolunteer: 'Teammitglied entfernen'
+      toOverview: 'zur Projektliste'
+      toProject: 'zurück zum Projekt'
+
     label:
       project: 'Projekt'
       status: 'Projektstatus'
-      new: 'Neues Projekt erstellen'
-      edit: 'Projekt bearbeiten: %s'
-      list: 'Projekte 2014'
+      new: 'Neues Projekt'
+      edit: 'Projekt bearbeiten'
+      manageTeam: 'Team verwalten'
+      leaders: 'Leitung'
+      team: 'Team'
+      list: 'Projekte 2015'
       countActive: 'Aktuelle Projekte'
-      projectName: 'Projektname'
       uploadImage: 'Bild hochladen'
-    edit:
-      hint:
-        picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
+
+    help:
+      picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
+      short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Projektliste statt der ausführlichen Beschreibung angezeigt.'
     message:
       created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'
@@ -191,7 +196,7 @@ de:
       closed: Abgeschlossen
 
   user:
-    link_to_project: 'Zu den Projekten'
+    link_to_project: 'zu den Projekten'
     action:
       login: 'Anmelden'
       logout: 'Abmelden'
@@ -202,6 +207,8 @@ de:
       changePassword: 'Passwort ändern'
     label:
       countActive: 'Teilnehmer'
+      password: 'Passwort'
+      user: 'User'
     message:
       profileUpdated: 'Profil erfolgreich aktualisiert.'
       loggedInAs: 'eingeloggt als %s'

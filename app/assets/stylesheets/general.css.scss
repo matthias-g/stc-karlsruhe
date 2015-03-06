@@ -39,7 +39,7 @@ h4 {
 /* MULTI-USE STYLES */
 
 .wide {
-  width: 100%;
+  display: block;
 }
 
 
@@ -56,39 +56,6 @@ h4 {
     width: 70px;
     height: auto;
     margin: 15px;
-  }
-}
-
-.button {
-  border:1px solid rgba($bg_button, 0.80);
-  display: inline-block;
-  padding: 5px;
-  margin: 0 5px;
-  &.wide {
-    display: block;
-    margin: 5px 0;
-    text-align: center;
-  }
-  &,* {
-    color: $bg_button;
-  }
-}
-
-.two-col-group {
-  overflow: hidden;
-  & > * {
-    float: left;
-    width: 50%;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-  }
-  &.padded {
-    & > *:first-child {
-      padding-right: 20px;
-    }
-    & > *:last-child {
-      padding-left: 20px;
-    }
   }
 }
 
@@ -113,10 +80,10 @@ h4 {
 
 
 .adminPanel {
-  ul {
-    margin: 0;
-    padding-left: 5px;
-    list-style: none;
+  text-align: center;
+  .btn {
+    margin: 3px 5px 2px 5px;
+    min-width: 170px;
   }
 }
 

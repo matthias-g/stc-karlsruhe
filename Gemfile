@@ -40,6 +40,8 @@ gem 'devise'
 gem 'rmagick'
 gem 'carrierwave'
 
+gem 'pg'
+
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano'
@@ -53,7 +55,5 @@ group :development do
 end
 
 group :production do
-  # Use PostgreSQL as the production database
-  gem 'pg'
   gem 'dotenv-rails'
 end

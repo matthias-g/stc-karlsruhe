@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20140710163053) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "picture"
-    t.integer  "desired_team_size", limit: 255
+    t.integer  "desired_team_size"
     t.integer  "status",                        default: 1
     t.string   "time"
     t.text     "short_description",             default: ""

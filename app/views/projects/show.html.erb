@@ -1,50 +1,43 @@
 <%= render '/layouts/smallheader' -%>
 
+<div id="project-view">
 
+<section>
+  <div class="typeHeader">
+    <%= Project.model_name.human %>
+  </div>
+  <h1><%= @project.title %></h1>
+</section>
 
-
-<div class="row project-view">
+<div class="row row-sm-eq-height">
 
   <div class="col-sm-8">
-
-    <section class="description">
-      <div class="adminPanel">
-        <div class="sectionLeftTag header">
-          <%= Project.model_name.human %>
-        </div>
-        <h1><%= @project.title %></h1>
-        <% if user_signed_in? and ( current_user.leads_project?(@project) or current_user.is_admin? ) %>
-            <%= link_to t('general.action.edit'),
-                        edit_project_path(@project),
-                        class:'btn btn-default' %>
-            <%= link_to t('project.action.toOverview'), projects_path, class: 'btn btn-default' %>
-        <% end %>
-      </div>
+    <section class="filling">
       <% if @project.show_picture? and @project.picture.file %>
-          <div class="picture-container">
+          <div class="project-picture picture-container">
             <%= image_tag @project.picture_url(:preview) %>
             <div class="copyright" title="© <%= @project.picture_source %>">
               © <%= @project.picture_source %>
             </div>
           </div>
       <% end %>
-      <p>
+      <div class="description">
         <%= simple_format @project.description %>
-      </p>
+      </div>
       <% unless @project.individual_tasks.empty? %>
-          <div>
+          <div class="individual_tasks">
             <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
             <%= simple_format @project.individual_tasks %>
           </div>
       <% end %>
       <% unless @project.requirements.empty? %>
-          <div>
+          <div class="requirements">
             <h3><%= Project.human_attribute_name('requirements') %></h3>
             <%= simple_format @project.requirements %>
           </div>
       <% end %>
       <% unless @project.material.empty? %>
-          <div>
+          <div class="material">
             <h3><%= Project.human_attribute_name('material') %></h3>
             <%= simple_format @project.material %>
           </div>
@@ -53,6 +46,7 @@
   </div>
 
   <div class="col-sm-4">
+
     <section class="slim">
       <div class="wide infobox <%= @project.status %>">
         <%= t "project.status.#{@project.status}" %>
@@ -63,15 +57,28 @@
                 <p><%= t('project.message.teamMember') %></p>
                 <%= link_to t('project.action.leave'),
                             leave_project_path(@project),
-                            class: "btn btn-default wide" %>
+                            class: 'btn btn-default btn-wide' %>
             <% elsif @project.open? or @project.soon_full? %>
                 <%= link_to t('project.action.enter'),
                             enter_project_path(@project),
-                            class: "btn btn-default wide" %>
+                            class: 'btn btn-default btn-wide' %>
             <% end %>
         <% end %>
       </div>
     </section>
+
+    <% if user_signed_in? and ( current_user.leads_project?(@project) or current_user.is_admin? ) %>
+      <section class="slim">
+        <h3><%= t('project.label.manageProject') %></h3>
+        <%= link_to t('project.action.edit'),
+                    edit_project_path(@project), class:'btn btn-default btn-wide' %>
+        <%= link_to t('project.action.manageTeam'),
+                    edit_leaders_project_path(@project), class:'btn btn-default btn-wide' %>
+        <%= link_to t('project.action.toOverview'),
+                    projects_path, class: 'btn btn-default btn-wide' %>
+      </section>
+    <% end %>
+
     <section class="slim">
       <div>
         <h3><%= Project.human_attribute_name('days') %></h3>
@@ -95,6 +102,7 @@
           </div>
       <% end %>
     </section>
+
     <section class="slim">
       <div>
         <h3><%= Project.human_attribute_name('leaders') %></h3>
@@ -107,47 +115,27 @@
       </div>
     </section>
 
-
   </div>
-
 </div>
 
-<div class="row row-sm-eq-height">
-  <% if @project.has_leader? current_user  %>
-      <div class="col-sm-12">
-        <section class="contact-volunteers-form">
-          <div class="">
+<% if @project.has_leader? current_user  %>
+  <section class="contact-volunteers-form">
+    <% if alert %>
+        <ul id="alert" class="popupTarget">
+          <% alert.each do |msg| %>
+              <li><%= msg[0] %></li>
+          <% end %>
+        </ul>
+    <% end %>
 
-            <% if alert %>
-                <ul id="alert" class="popupTarget">
-                  <% alert.each do |msg| %>
-                      <li><%= msg[0] %></li>
-                  <% end %>
-                </ul>
-            <% end %>
+    <%= bootstrap_form_for(@message, url: {action: 'contact_volunteers'}) do |f| %>
+        <h2><%= t('contact.volunteers.title') %></h2>
+        <p><%= t('contact.volunteers.text') %></p>
+        <%= f.text_field :subject, label: t('contact.field_title.subject') %>
+        <%= f.text_area :body, label: t('contact.field_title.body') %>
+        <%= f.submit t('contact.volunteers.submit') %>
+    <% end %>
+  </section>
+<% end %>
 
-            <%= bootstrap_form_for(@message, url: { action: 'contact_volunteers' }) do |f| %>
-                <h2><%= t('contact.volunteers.title') %></h2>
-                <p>
-                  <%= t('contact.volunteers.text') %>
-                </p>
-                <%= f.text_field :subject, label: t('contact.field_title.subject') %>
-                <%= f.text_area :body, label: t('contact.field_title.body') %>
-                <%= f.submit t('contact.volunteers.submit') %>
-            <% end %>
-          </div>
-        </section>
-      </div>
-  <% end %>
 </div>
-
-
-
-
-
-
-
-
-
-
-<%#= link_to t('project.action.toOverview'), projects_path %>

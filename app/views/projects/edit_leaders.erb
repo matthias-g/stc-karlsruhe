@@ -1,47 +1,60 @@
 <%= render '/layouts/smallheader' -%>
 
-<section class="adminPanel">
-  <div class="sectionLeftTag header">
+<div id="project-team-view">
+
+<section>
+  <div class="typeHeader">
     <%= t('project.label.manageTeam') %>
   </div>
   <h1><%= @project.title %></h1>
+</section>
+
+<div class="row row-sm-eq-height">
+  <div class="col-sm-6">
+    <section class="filling">
+      <h3><%= t('project.label.team') %></h3>
+      <ul>
+        <% @project.volunteers.each do |volunteer| %>
+          <li>
+            <%= volunteer.full_name %>
+            <% if current_user.is_admin? %>
+                <%= link_to delete_volunteer_project_path(@project, :user_id => volunteer.id),
+                            :method => 'delete', title:t('project.action.removeVolunteer') do %>
+                  <span class="glyphicon glyphicon-remove"
+                        aria-label="<%=t('project.action.removeVolunteer')%>"></span>
+                <% end %>
+            <% end %>
+            <%= link_to add_leader_project_path(@project, :user_id => volunteer.id),
+                        :method => 'post', title:t('project.action.addLeader') do %>
+            <span class="glyphicon glyphicon-arrow-right"
+                  aria-label="<%=t('project.action.addLeader')%>"></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  </div>
+  <div class="col-sm-6">
+    <section class="filling">
+      <h3><%= t('project.label.leaders') %></h3>
+      <ul>
+        <% @project.leaders.each do |leader| %>
+          <li>
+            <%= leader.full_name %>
+            <%= link_to delete_leader_project_path(@project, :user_id => leader.id),
+                        :method => 'delete', title:t('project.action.removeLeader') do %>
+              <span class="glyphicon glyphicon-remove"
+                  aria-label="<%=t('project.action.removeLeader')%>"></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<section>
   <%= link_to t('project.action.toProject'), @project, class: 'btn btn-default' %>
 </section>
 
-<section>
-    <p>
-    <h3><%= t('project.label.leaders') %></h3>
-    <% @project.leaders.each do |leader| %>
-      <%= leader.full_name %>
-      <%= link_to delete_leader_project_path(@project, :user_id => leader.id),
-            :method => 'delete', title:t('project.action.removeLeader') do %>
-          <span class="glyphicon glyphicon-remove"
-                aria-label="<%=t('project.action.removeLeader')%>"></span>
-      <% end %>
-          <br />
-    <% end %>
-    </p>
-
-    <p>
-    <h3><%= t('project.label.team') %></h3>
-    <% @project.volunteers.each do |volunteer| %>
-      <%= volunteer.full_name %>
-      <%= link_to add_leader_project_path(@project, :user_id => volunteer.id),
-             :method => 'post', title:t('project.action.addLeader') do %>
-        <span class="glyphicon glyphicon-star"
-            aria-label="<%=t('project.action.addLeader')%>"></span>
-      <% end %>
-      <% if current_user.is_admin? %>
-        <%= link_to delete_volunteer_project_path(@project, :user_id => volunteer.id),
-              :method => 'delete', title:t('project.action.removeVolunteer') do %>
-          <span class="glyphicon glyphicon-remove"
-                aria-label="<%=t('project.action.removeVolunteer')%>"></span>
-        <% end %>
-      <% end %>
-      <br />
-    <% end %>
-    </p>
-
-
-
-</section>
+</div>

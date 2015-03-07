@@ -114,49 +114,59 @@
 
 /* SPECIFIC STYLES: PROJECT PAGE */
 
-.project-view {
+#project-view, #project-edit-view, #project-team-view {
+  h1 {
+    text-align: center;
+  }
+  h3 {
+    margin-top: 5px;
+    margin-bottom: 3px;
+    margin-left: 0px;
+  }
   .map {
     border-radius: 6px;
     border: 1px solid rgba($border_default,0.5);
     height: 150px;
     width: 100%;
   }
-  .description {
+  .project-picture {
+    width: 100%;
     img {
       width: 100%;
       height: auto;
       border: 1px solid rgba($border_default,0.5);
     }
   }
+  .description {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    textarea {
+      min-height: 300px;
+    }
+  }
+  .short_description textarea {
+    min-height: 120px;
+  }
+  .individual_tasks, .requirements, .material {
+    margin-top: 15px;
+    textarea {
+      min-height: 80px;
+    }
+  }
+  .days select {
+    min-height: 90px;
+  }
+  .location textarea {
+    min-height: 80px;
+  }
+
   .contact-volunteers-form {
     #message_subject {
-      width: 550px;
+      max-width: 550px;
     }
-
     #message_body {
-      width: 550px;
-      height: 275px;
+      max-width: 550px;
+      min-height: 150px;
     }
-  }
-}
-
-.project-edit-view {
-  h3 {
-    margin-top: 10px;
-  }
-  input, textarea {
-    width: 98%;
-    max-width: 98%;
-    min-width: 98%;
-  }
-  textarea {
-    min-height: 80px;
-    padding: 5px;
-  }
-  .description textarea {
-    min-height: 300px;
-  }
-  .description img {
-    margin-bottom: 0;
   }
 }

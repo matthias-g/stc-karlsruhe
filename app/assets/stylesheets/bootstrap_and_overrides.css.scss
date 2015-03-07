@@ -10,6 +10,14 @@
   overflow: auto;
 }
 
+.typeHeader {
+  font: 25px CaptionFont;
+  letter-spacing: 0.04em;
+  opacity: 0.5;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 section {
   background-color: rgba(#fff, 0.8);
   margin: 10px 0;
@@ -27,30 +35,14 @@ section {
     -moz-box-sizing: border-box;
     height: calc(100% - 20px);
   }
-  .sectionLeftTag {
-    text-align: left;
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding: 10px;
-    &.header {
-      font: 25px CaptionFont;
-      letter-spacing: 0.04em;
-      opacity: 0.5;
-    }
-  }
-  .sectionRightTag {
-    text-align: right;
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 10px;
-    &.header {
-      font: 25px CaptionFont;
-      letter-spacing: 0.04em;
-      opacity: 0.5;
-    }
-  }
+}
+
+.btn-wide {
+  display: block;
+  margin: 3px;
+}
+input.btn-wide {
+  width: calc(100% - 6px);
 }
 
 .col-narrow {

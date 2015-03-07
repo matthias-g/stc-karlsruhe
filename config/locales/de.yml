@@ -34,6 +34,7 @@ de:
       project:
         title: 'Projekttitel'
         description: 'Beschreibung'
+        short_description: 'Kurzbeschreibung'
         location: 'Projektort'
         latitude: 'Breitengrad'
         longitude: 'Längengrad'
@@ -45,6 +46,7 @@ de:
         picture_source: 'Bildrechte /-quelle'
         desired_team_size: 'Gewünschte Teamgröße'
         leaders: 'Leitung'
+        day_ids: 'Projekttage'
         volunteers: 'Team'
         status: 'Status'
         days: Projekttage
@@ -151,6 +153,7 @@ de:
   project:
     action:
       new: 'Neues Projekt erstellen'
+      edit: 'Projekt bearbeiten'
       enter: 'Team beitreten'
       leave: 'Team verlassen'
       delete: 'Projekt löschen'
@@ -167,6 +170,7 @@ de:
 
     label:
       project: 'Projekt'
+      manageProject: 'Projektverwaltung'
       status: 'Projektstatus'
       new: 'Neues Projekt'
       edit: 'Projekt bearbeiten'

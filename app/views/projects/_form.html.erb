@@ -1,4 +1,7 @@
+<div id="project-edit-view">
 <%= bootstrap_form_for(@project) do |f| %>
+
+
 
 <% if @project.errors.any? %>
     <section id="error_explanation">
@@ -11,30 +14,115 @@
     </section>
 <% end %>
 
-<section class="adminPanel">
-  <div class="sectionLeftTag header">
-    <%= isNew ? t('project.label.new') : t('project.label.edit') %>
+<section>
+  <div class="typeHeader">
+    &nbsp;<%= isNew ? t('project.label.new') : t('project.label.edit') %>&nbsp;
   </div>
   <h1><%= @project.title %></h1>
-  <%= f.submit t('general.action.save') %>
-  <%= link_to t('general.action.cancel'), @project, class: 'btn btn-default' %>
 </section>
 
 <div class="row row-sm-eq-height">
 
   <div class="col-sm-8">
-    <section class="description filling">
+    <section class="filling">
       <%= f.text_field :title %>
-      <%= f.file_field :picture %>
-      <%= image_tag @project.picture_url(:preview) if @project.picture.file %>
-      <%= f.text_field :picture_source, help: t('project.help.picture_source') %>
-      <%= f.text_area :description %>
-      <%= f.text_area :short_description, help: t('project.help.short_description') %>
+      <div class="form-group">
+        <label class="control-label" for="project_picture_source">
+          <%= Project.human_attribute_name('picture') %>
+        </label>
+        <% if @project.picture.file %>
+          <div class="project-picture picture-container">
+            <%= image_tag @project.picture_url(:preview) %>
+          </div>
+        <% end %>
+        <%= f.file_field :picture, hide_label: true %>
+      </div>
+      <%= f.text_field :picture_source,
+            help: t('project.help.picture_source') %>
+      <div class="short_description">
+        <%= f.text_area :short_description,
+                      help: t('project.help.short_description') %>
+      </div>
+      <div class="description">
+        <%= f.text_area :description %>
+      </div>
+      <div class="individual_tasks">
+        <%= f.text_area :individual_tasks %>
+      </div>
+      <div class="requirements">
+        <%= f.text_area :requirements %>
+      </div>
+      <div class="material">
+        <%= f.text_area :material %>
+      </div>
     </section>
   </div>
 
-  <div class="col-xs-12 col-sm-4 col-max300 col-min250">
-    <section class="slim filling">
+  <div class="col-sm-4">
+
+    <section class="slim">
+      <h3>
+        <%= t('project.label.manageProject') %>
+      </h3>
+      <%= f.submit t('general.action.save'), class: 'btn btn-default btn-wide' %>
+      <%= link_to t('general.action.cancel'), @project, class: 'btn btn-default btn-wide' %>
+      <% if not isNew and current_user.is_admin? %>
+          <%= link_to t('project.action.delete'), @project, method: :delete,
+                      data: { confirm: t('general.message.confirmDelete')},
+                      class: 'btn btn-default btn-wide' %>
+      <% end %>
+      <% if @project.closed? %>
+          <%= link_to t('project.action.open'),
+                      open_project_path(@project),
+                      class:'btn btn-default btn-wide' %>
+      <% else %>
+          <%= link_to t('project.action.close'),
+                      close_project_path(@project),
+                      class:'btn btn-default btn-wide' %>
+      <% end %>
+      <% if current_user.is_admin? %>
+          <% if @project.visible %>
+              <%= link_to t('project.action.makeInvisible'),
+                          make_invisible_project_path(@project),
+                          class:'btn btn-default btn-wide' %>
+          <% else %>
+              <%= link_to t('project.action.makeVisible'),
+                          make_visible_project_path(@project),
+                          class:'btn btn-default btn-wide' %>
+          <% end %>
+      <% end %>
+    </section>
+
+    <section class="slim">
+      <div class="days">
+        <%= f.collection_select(:day_ids, ProjectDay.all, :id, :title,
+               {selected: @project.days.collect {|t| t.id}}, multiple: true) -%>
+      </div>
+      <div class="time">
+        <%= f.text_field :time %>
+      </div>
+      <div class="location">
+        <%= f.text_area :location %>
+      </div>
+      <div>
+        <div class="map edit"
+             data-lon="<%= @project.map_longitude %>"
+             data-lat="<%= @project.map_latitude %>"
+             data-zoom="<%= @project.map_zoom %>">
+          <div data-lon="<%= @project.longitude %>"
+               data-lat="<%= @project.latitude %>"
+               data-name="<%= @project.title %>">
+          </div>
+        </div>
+        <%= f.text_field :longitude, type: :hidden, hide_label: true %>
+        <%= f.text_field :latitude, type: :hidden, hide_label: true %>
+        <%= f.text_field :map_longitude, type: :hidden, hide_label: true %>
+        <%= f.text_field :map_latitude, type: :hidden, hide_label: true %>
+        <%= f.text_field :map_zoom, type: :hidden, hide_label: true %>
+      </div>
+    </section>
+
+    <section class="slim">
       <%= f.text_field :desired_team_size %>
       <% if not isNew %>
           <div>
@@ -60,77 +148,11 @@
             <%#= @project.volunteers.collect { |v| v.first_name }.join(', ') %>
           </div>
       <% end %>
-      <div class="adminPanel">
-        <h3 style="text-align:left; margin-top: 50px;">Projekt-Optionen</h3>
-        <%= link_to t('project.action.manageTeam'),
-            edit_leaders_project_path(@project), class:'btn btn-default wide' %>
-        <% if not isNew and current_user.is_admin? %>
-            <%= link_to t('project.action.delete'), @project, method: :delete,
-                        data: { confirm: t('general.message.confirmDelete')},
-                        class: 'btn btn-default wide' %>
-        <% end %>
-        <% if @project.closed? %>
-            <%= link_to t('project.action.open'),
-                        open_project_path(@project),
-                        class:'btn btn-default wide' %>
-        <% else %>
-            <%= link_to t('project.action.close'),
-                        close_project_path(@project),
-                        class:'btn btn-default wide' %>
-        <% end %>
-        <% if current_user.is_admin? %>
-            <% if @project.visible %>
-                <%= link_to t('project.action.makeInvisible'),
-                            make_invisible_project_path(@project),
-                            class:'btn btn-default wide' %>
-            <% else %>
-                <%= link_to t('project.action.makeVisible'),
-                            make_visible_project_path(@project),
-                            class:'btn btn-default wide' %>
-            <% end %>
-        <% end %>
-      </div>
-    </section>
-  </div>
-
-</div>
-
-<div class="row row-sm-eq-height">
-
-  <div class="col-sm-6">
-    <section class="filling">
-      <div>
-        <div class="map edit"
-             data-lon="<%= @project.map_longitude %>"
-             data-lat="<%= @project.map_latitude %>"
-             data-zoom="<%= @project.map_zoom %>">
-          <div data-lon="<%= @project.longitude %>"
-               data-lat="<%= @project.latitude %>"
-               data-name="<%= @project.title %>">
-          </div>
-        </div>
-        <%= f.text_field :longitude, type: :hidden, hide_label: true %>
-        <%= f.text_field :latitude, type: :hidden, hide_label: true %>
-        <%= f.text_field :map_longitude, type: :hidden, hide_label: true %>
-        <%= f.text_field :map_latitude, type: :hidden, hide_label: true %>
-        <%= f.text_field :map_zoom, type: :hidden, hide_label: true %>
-      </div>
-
-      <%= f.collection_select(:day_ids, ProjectDay.all, :id, :title,
-             {selected: @project.days.collect {|t| t.id}}, multiple: true) -%>
-      <%= f.text_field :time %>
-      <%= f.text_area :location %>
-    </section>
-  </div>
-
-  <div class="col-sm-6">
-    <section class="filling">
-      <%= f.text_area :individual_tasks %>
-      <%= f.text_area :requirements %>
-      <%= f.text_area :material %>
     </section>
   </div>
 
 </div>
 
 <% end %>
+
+</div>

@@ -1,13 +1,23 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "definitions";
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "definitions";
 
 #container {
   padding-bottom: 50px;
   margin: 0 auto 0;
   max-width: 900px;
   overflow: auto;
+}
+
+
+.navbar li>a {
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: 1px 1px 1px rgba(8, 39, 37, 0.6);
+  text-transform: uppercase;
+  transition: color 0.3s ease 0s;
 }
 
 .typeHeader {
@@ -36,6 +46,11 @@ section {
     height: calc(100% - 20px);
   }
 }
+@media (min-width: $screen-sm-min) {
+  section {
+    padding: 20px 30px;
+  }
+}
 
 .btn-wide {
   display: block;
@@ -47,14 +62,7 @@ input.btn-wide {
 
 .col-narrow {
   min-width: 250px;
-  max-width: 300px;
-}
-
-.row-xs-eq-height {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  max-width: 350px;
 }
 
 @media (min-width: $screen-sm-min) {
@@ -63,9 +71,6 @@ input.btn-wide {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-  }
-  section {
-    padding: 20px 30px;
   }
 }
 
@@ -76,6 +81,9 @@ input.btn-wide {
     display: -ms-flexbox;
     display: flex;
   }
+  .row-md-diff-height {
+    display: block !important;
+  }
 }
 
 @media (min-width: $screen-lg-min) {
@@ -84,5 +92,8 @@ input.btn-wide {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+  }
+  .row-lg-diff-height {
+    display: auto;
   }
 }

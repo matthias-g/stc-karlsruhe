@@ -1,4 +1,25 @@
+#user-view {
+  h2 {
+    margin-top: 0;
+  }
+  .profile-data {
+    td:first-child {
+      text-align: right;
+      font-weight: bold;
+    }
+    td {
+      padding: 5px !important;
+    }
+    .btn {
+      margin-top: 15px;
+      float: right;
+    }
+  }
+}
+
 .profile-view {
+
+
   .info, .actions {
     margin-right: 5px;
     margin-top: 0;

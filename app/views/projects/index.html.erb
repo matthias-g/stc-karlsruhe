@@ -15,10 +15,10 @@
 <div class="row">
 
   <div class="col-md-3 col-md-push-9">
-    <div class="row">
+    <div class="row row-sm-eq-height row-md-diff-height">
 
       <div class="col-sm-6 col-md-12">
-        <section class="slim">
+        <section class="slim filling">
           <h3>Filtern</h3>
           <%= bootstrap_form_tag(url:'/projects', method:'get', id:'projectFilter') do |f| %>
               <%#= collection_select(:week, ProjectWeek.all, :id, :title,
@@ -33,17 +33,17 @@
                      [['Sichtbar', :visible], ['Versteckt', :hidden]],
                      hide_label: true) %>
               <% end %>
-              <%= f.submit 'Projekte filtern', class:'btn btn-default wide' %>
+              <%= f.submit 'Projekte filtern', class:'btn btn-default btn-wide' %>
               <div id="filterResults"></div>
           <% end %>
         </section>
       </div>
 
       <div class="col-sm-6 col-md-12">
-        <section class="slim">
+        <section class="slim filling">
           <h3>Optionen</h3>
           <%= link_to t('project.action.new'),
-               new_project_path, class:'btn btn-default wide' %>
+               new_project_path, class:'btn btn-default btn-wide' %>
         </section>
       </div>
 
@@ -61,7 +61,7 @@
           <div class="project-image">
             <%= link_to project do %>
                 <% if project.show_picture? %>
-                    <%= image_tag project.picture_url(:listview) if project.picture.file %>
+                    <%= image_tag project.picture_url(:listview), lazy:true if project.picture.file %>
                 <% else %>
                     <%= image_tag 'placeholder.svg' %>
                 <% end %>

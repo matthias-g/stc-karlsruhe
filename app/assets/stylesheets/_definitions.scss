@@ -1,3 +1,5 @@
+/* other values */
+
 $col_positive: lightgrey;
 $bg_positive: #197435;
 
@@ -23,6 +25,26 @@ $col_primary: #fff;
 $textshadow_primary: rgba(8, 39, 37, 0.6);
 
 $bg_button: rgb(44,153,145);
+
+/* bootstrap values */
+
+$screen-sm-min: 550px;
+$screen-md-min: 790px;
+$screen-lg-min: 1300px;
+$navbar-height: 30px;
+$navbar-default-bg: rgba($bg_primary, 0.8);
+$navbar-default-color: rgba($col_primary, 0.7);
+$navbar-default-link-color: rgba($col_primary, 0.7);
+$navbar-default-link-hover-color: #fff;
+$navbar-default-link-active-color: rgba($col_primary, 0.5);
+
+$navbar-default-toggle-hover-bg: $textshadow_primary;
+$navbar-default-toggle-border-color: $textshadow_primary;
+$grid-gutter-width: 16px;
+
+
+
+
 
 
 

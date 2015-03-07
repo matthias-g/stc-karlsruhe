@@ -27,14 +27,29 @@ section {
     -moz-box-sizing: border-box;
     height: calc(100% - 20px);
   }
-  .sectionTag {
+  .sectionLeftTag {
+    text-align: left;
     position: absolute;
     left: 0;
     top: 0;
     padding: 10px;
-    font: 25px CaptionFont;
-    letter-spacing: 0.04em;
-    opacity: 0.5;
+    &.header {
+      font: 25px CaptionFont;
+      letter-spacing: 0.04em;
+      opacity: 0.5;
+    }
+  }
+  .sectionRightTag {
+    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px;
+    &.header {
+      font: 25px CaptionFont;
+      letter-spacing: 0.04em;
+      opacity: 0.5;
+    }
   }
 }
 

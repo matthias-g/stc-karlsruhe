@@ -1,23 +1,25 @@
 <%= render '/layouts/smallheader' -%>
 
 
-<section class="adminPanel">
-  <div class="sectionTag">
-    <%= Project.model_name.human %>
-  </div>
-  <h1><%= @project.title %></h1>
-  <% if user_signed_in? and ( current_user.leads_project?(@project) or current_user.is_admin? ) %>
-      <%= link_to t('general.action.edit'),
-                  edit_project_path(@project),
-                  class:'btn btn-default' %>
-      <%= link_to t('project.action.toOverview'), projects_path, class: 'btn btn-default' %>
-  <% end %>
-</section>
 
-<div class="row row-sm-eq-height">
+
+<div class="row project-view">
 
   <div class="col-sm-8">
-    <section class="description filling">
+
+    <section class="description">
+      <div class="adminPanel">
+        <div class="sectionLeftTag header">
+          <%= Project.model_name.human %>
+        </div>
+        <h1><%= @project.title %></h1>
+        <% if user_signed_in? and ( current_user.leads_project?(@project) or current_user.is_admin? ) %>
+            <%= link_to t('general.action.edit'),
+                        edit_project_path(@project),
+                        class:'btn btn-default' %>
+            <%= link_to t('project.action.toOverview'), projects_path, class: 'btn btn-default' %>
+        <% end %>
+      </div>
       <% if @project.show_picture? and @project.picture.file %>
           <div class="picture-container">
             <%= image_tag @project.picture_url(:preview) %>
@@ -29,75 +31,6 @@
       <p>
         <%= simple_format @project.description %>
       </p>
-    </section>
-  </div>
-
-  <div class="col-xs-12 col-sm-4 col-narrow">
-    <section class="slim filling">
-      <div class="wide infobox <%= @project.status %>">
-        <%= t "project.status.#{@project.status}" %>
-      </div>
-      <div>
-        <% unless @project.closed? %>
-            <% if user_signed_in? and @project.has_volunteer?(current_user) %>
-                <p><%= t('project.message.teamMember') %></p>
-                <%= link_to t('project.action.leave'),
-                            leave_project_path(@project),
-                            class: "btn btn-default wide" %>
-            <% elsif @project.open? or @project.soon_full? %>
-                <%= link_to t('project.action.enter'),
-                            enter_project_path(@project),
-                            class: "btn btn-default wide" %>
-            <% end %>
-        <% end %>
-      </div>
-      <div>
-        <h3><%= Project.human_attribute_name('desired_team_size') %></h3>
-        <%= @project.desired_team_size %> Teilnehmer
-      </div>
-      <div>
-        <h3><%= Project.human_attribute_name('leaders') %></h3>
-        <%= @project.leaders.collect { |v| link_to(v.first_name, user_path(v)) }.join(', ').html_safe %>
-      </div>
-      <div>
-        <h3><%= Project.human_attribute_name('volunteers') %></h3>
-        <%= @project.volunteers.map { |v| link_to(v.first_name , user_path(v)) }.join(', ').html_safe %>
-      </div>
-    </section>
-  </div>
-
-</div>
-
-<div class="row row-sm-eq-height">
-
-  <div class="col-sm-6">
-    <section class="filling">
-      <% unless @project.longitude == 0 %>
-          <div class="map" data-zoom="<%= @project.map_zoom %>"
-               data-lon="<%= @project.map_longitude %>"
-               data-lat="<%= @project.map_latitude %>">
-            <div data-name="<%= @project.title %>"
-                 data-lon="<%= @project.longitude %>"
-                 data-lat="<%= @project.latitude %>">
-            </div>
-          </div>
-      <% end %>
-      <div>
-        <!--<h3><%= Project.human_attribute_name('days') %></h3>-->
-        <%= @project.days.collect { |day| day.title }.join('<br />').html_safe %>
-      </div>
-      <div>
-        <%= simple_format @project.time %>
-      </div>
-      <div>
-        <!--<h3><%= Project.human_attribute_name('location') %></h3>-->
-        <%= simple_format @project.location %>
-      </div>
-    </section>
-  </div>
-
-  <div class="col-sm-6">
-    <section class="filling">
       <% unless @project.individual_tasks.empty? %>
           <div>
             <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
@@ -119,10 +52,67 @@
     </section>
   </div>
 
+  <div class="col-sm-4">
+    <section class="slim">
+      <div class="wide infobox <%= @project.status %>">
+        <%= t "project.status.#{@project.status}" %>
+      </div>
+      <div>
+        <% unless @project.closed? %>
+            <% if user_signed_in? and @project.has_volunteer?(current_user) %>
+                <p><%= t('project.message.teamMember') %></p>
+                <%= link_to t('project.action.leave'),
+                            leave_project_path(@project),
+                            class: "btn btn-default wide" %>
+            <% elsif @project.open? or @project.soon_full? %>
+                <%= link_to t('project.action.enter'),
+                            enter_project_path(@project),
+                            class: "btn btn-default wide" %>
+            <% end %>
+        <% end %>
+      </div>
+    </section>
+    <section class="slim">
+      <div>
+        <h3><%= Project.human_attribute_name('days') %></h3>
+        <%= @project.days.collect { |day| day.title }.join('<br />').html_safe %>
+      </div>
+      <div>
+        <%= simple_format @project.time %>
+      </div>
+      <div>
+        <h3><%= Project.human_attribute_name('location') %></h3>
+        <%= simple_format @project.location %>
+      </div>
+      <% unless @project.longitude == 0 %>
+          <div class="map" data-zoom="<%= @project.map_zoom %>"
+               data-lon="<%= @project.map_longitude %>"
+               data-lat="<%= @project.map_latitude %>">
+            <div data-name="<%= @project.title %>"
+                 data-lon="<%= @project.longitude %>"
+                 data-lat="<%= @project.latitude %>">
+            </div>
+          </div>
+      <% end %>
+    </section>
+    <section class="slim">
+      <div>
+        <h3><%= Project.human_attribute_name('leaders') %></h3>
+        <%= @project.leaders.collect { |v| link_to(v.first_name, user_path(v)) }.join(', ').html_safe %>
+      </div>
+      <div>
+        <h3><%= Project.human_attribute_name('volunteers') %>
+          (<%= @project.volunteers.size %>/<%= @project.desired_team_size %>)</h3>
+        <%= @project.volunteers.map { |v| link_to(v.first_name , user_path(v)) }.join(', ').html_safe %>
+      </div>
+    </section>
+
+
+  </div>
+
 </div>
 
 <div class="row row-sm-eq-height">
-
   <% if @project.has_leader? current_user  %>
       <div class="col-sm-12">
         <section class="contact-volunteers-form">

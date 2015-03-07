@@ -119,11 +119,9 @@
     border-radius: 6px;
     border: 1px solid rgba($border_default,0.5);
     height: 150px;
-    float: right;
-    margin-left: 10px;
+    width: 100%;
   }
   .description {
-    margin: 0 230px;
     img {
       width: 100%;
       height: auto;

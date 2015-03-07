@@ -38,7 +38,7 @@ end
 
 gem 'devise'
 
-gem 'rmagick'
+gem 'mini_magick'
 gem 'carrierwave'
 
 gem 'bootstrap-sass'

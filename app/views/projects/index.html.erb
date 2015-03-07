@@ -20,7 +20,7 @@
       <div class="col-sm-6 col-md-12">
         <section class="slim filling">
           <h3>Filtern</h3>
-          <%= bootstrap_form_tag(url:'/projects', method:'get', id:'projectFilter') do |f| %>
+          <%= bootstrap_form_for(:filter, url:'/projects', method:'get', html:{id:'projectFilter'}) do |f| %>
               <%#= collection_select(:week, ProjectWeek.all, :id, :title,
                  :include_blank => "- - - Aktionswoche egal - - -") %>
               <%= f.collection_select(:day, ProjectDay.all, :id, :title,
@@ -50,7 +50,7 @@
     </div>
   </div>
 
-  <div class="col-md-9 col-md-pull-3">
+  <div class="col-md-9 col-md-pull-3" id="project-list">
     <% @projects.each do |project| %>
         <section class="project">
           <div class="project-title">

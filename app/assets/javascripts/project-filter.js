@@ -6,11 +6,11 @@ $(document).ready(function() {
         }).join('&');
         $('#project-list').load('/projects?' + params + ' #project-list > *', function() {
             clipTexts($('#project-list'));
+            $('#project-list img').lazyload();
             $('#filterResults').text('Gefundene Projekte: ' + $('#project-list > *').size());
         });
     };
     $('#projectFilter').submit(ajaxSubmitter);
     $('#projectFilter select, #projectFilter input').change(ajaxSubmitter);
     $('#projectFilter input[type="submit"]').hide();
-
 });

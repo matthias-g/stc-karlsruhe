@@ -1,41 +1,29 @@
 <%= render '/layouts/smallheader' -%>
 
 <section class="contact-form">
-      <% if alert %>
-          <ul id="alert" class="plopupTarget">
-            <% alert.each do |msg| %>
-                <li><%= msg[0] %></li>
-            <% end %>
-          </ul>
+  <% if alert %>
+    <ul id="alert" class="plopupTarget">
+      <% alert.each do |msg| %>
+        <li><%= msg[0] %></li>
       <% end %>
+    </ul>
+  <% end %>
 
-      <%= form_for @message, :url => contact_path do |form| %>
-        <h1><%= t 'contact.form.title' %></h1>
-        <div class="leftCol">
-          <%= t 'contact.form.text' %>
-        </div>
-        <div class="rightCol">
-          <div>
-            <h3><%= t('contact.field_title.email') %></h3>
-            <% if user_signed_in? %>
-              <%= form.email_field :sender, value: current_user.email %>
-            <% else %>
-              <%= form.email_field :sender %>
-            <% end %>
-      </div>
-          <div>
-            <h3><%= t('contact.field_title.subject') %></h3>
-            <%= form.text_field :subject %>
-          </div>
-          <div>
-            <h3><%= t('contact.field_title.body') %></h3>
-            <%= form.text_area :body %>
-          </div>
-          <div>
-            <br />
-            <%= form.hidden_field :recipient, value: 'default@servethecity-karlsruhe.de' %>
-            <%= form.submit t('contact.form.submit') %>
-          </div>
-        </div>
+  <%= bootstrap_form_for @message, :url => contact_path do |form| %>
+    <h1><%= t 'contact.orga.title' %></h1>
+    <div class="leftCol">
+      <%= t 'contact.orga.text' %>
+    </div>
+    <div class="rightCol">
+      <% if user_signed_in? %>
+        <%= form.email_field :sender, value: current_user.email %>
+      <% else %>
+        <%= form.email_field :sender %>
       <% end %>
+      <%= form.text_field :subject %>
+      <%= form.text_area :body %>
+      <%= form.hidden_field :recipient, value: 'default@servethecity-karlsruhe.de' %>
+      <%= form.submit t('contact.orga.submit') %>
+    </div>
+  <% end %>
 </section>

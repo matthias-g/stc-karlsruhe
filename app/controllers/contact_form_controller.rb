@@ -7,7 +7,7 @@ class ContactFormController < ApplicationController
     @message = Message.new(params[:message])
     if @message.valid?
       Mailer.contact_mail(@message).deliver
-      redirect_to root_path, notice: t('contact.form.success')
+      redirect_to root_path, notice: t('contact.orga.success')
     else
       flash[:alert] = @message.errors.values
       redirect_to contact_path

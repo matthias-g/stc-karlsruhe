@@ -34,8 +34,8 @@
     <% end %>
 
     <% unless @user == current_user  %>
-      <section class="filling contact-user-form">
-        <h2><%= "Kontaktiere #{@user.first_name}" %></h2>
+      <section class="contact-user-form">
+        <h2><%= t('contact.user.title', recipient: @user.first_name) %></h2>
         <% if alert %>
             <ul id="alert" class="popupTarget">
               <% alert.each do |msg| %>
@@ -44,19 +44,10 @@
             </ul>
         <% end %>
 
-        <%= form_for @message, url: { action: 'contact_user' } do |form| %>
-            <div>
-              <h3><%= t('contact.field_title.subject') %></h3>
-              <%= form.text_field :subject %>
-            </div>
-            <div>
-              <h3><%= t('contact.field_title.body') %></h3>
-              <%= form.text_area :body %>
-            </div>
-            <div>
-              <br />
-              <%= form.submit t('contact.user.submit') %>
-            </div>
+        <%= bootstrap_form_for @message, url: { action: 'contact_user' } do |f| %>
+          <%= f.text_field :subject %>
+          <%= f.text_area :body %>
+          <%= f.submit t('contact.user.submit') %>
         <% end %>
       </section>
     <% end %>

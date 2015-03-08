@@ -20,7 +20,36 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 de:
+  activemodel:
+    errors:
+      models:
+        message:
+          attributes:
+            sender:
+             blank: 'Bitte gib deine E-Mail-Adresse an.'
+            recipient:
+             blank: 'Wohin soll die Nachricht gehen? Bitte einen Empfänger angeben.'
+            subject:
+             blank: 'Bitte gib einen kurzen Betreff an.'
+            body:
+             blank: 'Nachricht konnte gesendet werden: Du hast nichts geschrieben.'
+
   activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            current_password:
+              invalid: 'Falsches Passwort'
+            email:
+              taken: ' wird bereits von einem anderen Konto verwendet.'
+            password_confirmation:
+              confirmation: ': Passwörter stimmen nicht überein.'
+            username:
+              taken: ' ist bereits vergeben.'
+      messages:
+        blank: 'darf nicht leer sein.'
+        onlyLetters: 'darf nur Buchstaben enthalten.'
     models:
       project:
         zero: 'Projekt'
@@ -73,35 +102,12 @@ de:
         stylesheet: 'Stylesheet (Achtung: CSS-Regeln gelten für die ganze Seite)'
       project_day:
         title: 'Titel'
-    errors:
-      models:
-        user:
-          attributes:
-            current_password:
-              invalid: 'Falsches Passwort'
-            email:
-              taken: ' wird bereits von einem anderen Konto verwendet.'
-            password_confirmation:
-              confirmation: ': Passwörter stimmen nicht überein.'
-            username:
-              taken: ' ist bereits vergeben.'
-      messages:
-        blank: 'darf nicht leer sein.'
-        onlyLetters: 'darf nur Buchstaben enthalten.'
+      message:
+        sender: 'Sender'
+        recipient: 'Empfänger'
+        subject: 'Betreff'
+        body: 'Nachricht'
 
-  activemodel:
-    errors:
-      models:
-        message:
-          attributes:
-            sender:
-             blank: 'Bitte gib deine E-Mail-Adresse an.'
-            recipient:
-             blank: 'Wohin soll die Nachricht gehen? Bitte einen Empfänger angeben.'
-            subject:
-             blank: 'Bitte gib einen kurzen Betreff an.'
-            body:
-             blank: 'Nachricht konnte gesendet werden: Du hast nichts geschrieben.'
 
   general:
     action:
@@ -116,29 +122,6 @@ de:
     message:
       confirmDelete: 'Wollen Sie das wirklich tun?'
 
-  contact:
-    form:
-      success: 'Vielen Dank für Deine Nachricht! Wir werden sie so schnell wie möglich beantworten.'
-      submit: 'Nachricht senden'
-      title: 'Kontakt aufnehmen'
-      text: 'Du hast die eine oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei Dir.'
-    volunteers:
-      success: 'Die Nachricht wurde an dich und alle Teilnehmer geschickt.'
-      submit: 'Nachricht verteilen'
-      title: 'Teilnehmer des Projektes benachrichtigen'
-      text: 'Hier kannst du den Teilnehmern des Projektes eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
-    user:
-      success: 'Die Nachricht wurde an %{recipient} geschickt.'
-      submit: 'Nachricht senden'
-    placeholder:
-      email: 'E-Mail'
-      subject: 'Betreff'
-      body: 'Nachricht'
-    field_title:
-      email: 'Deine E-Mail-Adresse'
-      subject: "Worum geht's?"
-      body: 'Deine Nachricht'
-
   layout:
     pageTitle: 'Serve the City Karlsruhe'
     links:
@@ -149,6 +132,28 @@ de:
       privacy: 'Datenschutz'
       disclaimer: 'Haftungsausschluss'
       stcInternational: 'Serve the City international'
+
+  contact:
+    orga:
+      title: 'Kontakt aufnehmen'
+      text: 'Du hast die eine oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei Dir.'
+      submit: 'Nachricht senden'
+      success: 'Vielen Dank für Deine Nachricht! Wir werden sie so schnell wie möglich beantworten.'
+    team:
+      title: 'Teilnehmer des Projektes benachrichtigen'
+      text: 'Hier kannst du den Teilnehmern des Projektes eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
+      submit: 'Nachricht verteilen'
+      success: 'Die Nachricht wurde an dich und alle Teilnehmer geschickt.'
+    user:
+      title: 'Kontaktiere %{recipient}'
+      submit: 'Nachricht senden'
+      success: 'Die Nachricht wurde an %{recipient} geschickt.'
+    general:
+      placeholders:
+        sender: 'Deine E-Mail-Adresse'
+        recipient: 'E-Mail-Adresse des Empfängers'
+        subject: "Worum geht's?"
+        body: 'Deine Nachricht'
 
   project:
     action:

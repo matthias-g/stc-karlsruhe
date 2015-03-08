@@ -21,7 +21,7 @@
              url: session_path(resource_name)) do |f| %>
           <%= f.text_field :login, autofocus: true,
                 hide_label: true, placeholder: t('user.label.user') %>
-          <%= f.password_field :password, autofocus: true,
+          <%= f.password_field :password,
                 hide_label: true, placeholder: t('user.label.password') %>
           <% if devise_mapping.rememberable? -%>
             <%= f.check_box :remember_me %>

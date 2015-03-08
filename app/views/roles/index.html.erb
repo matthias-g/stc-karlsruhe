@@ -8,8 +8,8 @@
     <table>
       <thead>
         <tr>
-          <th><%= t('gen.name') %></th>
-          <th><%= t('gen.actions') %></th>
+          <th><%= t('general.label.name') %></th>
+          <th><%= t('general.label.actions') %></th>
         </tr>
       </thead>
 
@@ -18,8 +18,8 @@
           <tr>
             <td><%= link_to role.title, role %></td>
             <td>
-              <%= link_to t('gen.edit'), edit_role_path(role) %> |
-              <%= link_to t('gen.delete'), role, method: :delete,
+              <%= link_to t('general.action.edit'), edit_role_path(role) %> |
+              <%= link_to t('general.action.delete'), role, method: :delete,
                   data: { confirm: t('role.confirmDelete') % [role.title]} %>
             </td>
           </tr>

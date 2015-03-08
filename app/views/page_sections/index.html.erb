@@ -9,8 +9,8 @@
   <table>
     <thead>
     <tr>
-      <th><%= t('gen.name') %></th>
-      <th><%= t('gen.actions') %></th>
+      <th><%= t('general.label.name') %></th>
+      <th><%= t('general.label.actions') %></th>
       <th></th>
       <th></th>
     </tr>
@@ -21,8 +21,8 @@
         <tr>
           <td><%= link_to page_section.title, page_section %></td>
           <td>
-            <%= link_to t('gen.edit'), edit_page_section_path(page_section) %> |
-            <%= link_to t('gen.delete'), page_section, method: :delete,
+            <%= link_to t('general.actions.edit'), edit_page_section_path(page_section) %> |
+            <%= link_to t('general.actions.delete'), page_section, method: :delete,
                  data: { confirm: t('section.confirmDelete') % [page_section.title] } %>
           </td>
         </tr>

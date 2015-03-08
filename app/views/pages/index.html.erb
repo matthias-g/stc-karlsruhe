@@ -13,8 +13,8 @@
         <tr>
           <td><%= link_to page.title, page %></td>
           <td>
-            <%= link_to t('gen.edit'), edit_page_path(page) %> |
-            <%= link_to t('gen.delete'), page, method: :delete,
+            <%= link_to t('general.actions.edit'), edit_page_path(page) %> |
+            <%= link_to t('general.actions.delete'), page, method: :delete,
                    data: { confirm: t('page.confirmDelete') % [page.title] } %>
           </td>
         </tr>

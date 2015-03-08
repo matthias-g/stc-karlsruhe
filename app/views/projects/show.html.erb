@@ -49,7 +49,7 @@
     <div class="row">
 
       <% if user_signed_in? and ( current_user.leads_project?(@project) or current_user.is_admin? ) %>
-        <div class="col-sm-6 col-md-12 col-narrow">
+        <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered">
             <section class="slim">
               <h3><%= t('project.label.manageProject') %></h3>
               <%= link_to t('project.action.edit'),
@@ -62,7 +62,7 @@
         </div>
       <% end %>
 
-      <div class="col-sm-6 col-md-12 col-narrow">
+      <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered">
         <section class="slim">
           <div>
             <h3><%= Project.human_attribute_name('days') %></h3>
@@ -88,7 +88,7 @@
         </section>
       </div>
 
-      <div class="col-sm-6 col-md-12 col-narrow">
+      <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered">
         <section class="slim">
           <div class="wide infobox <%= @project.status %>">
             <%= t "project.status.#{@project.status}" %>
@@ -109,7 +109,7 @@
           </div>
         </section>
       </div>
-      <div class="col-sm-6 col-md-12 col-narrow">
+      <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered">
         <section class="slim">
           <div>
             <h3><%= Project.human_attribute_name('leaders') %></h3>

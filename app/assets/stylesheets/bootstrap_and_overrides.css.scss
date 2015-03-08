@@ -42,7 +42,7 @@ section {
     padding: 10px !important;
   }
   &.filling {
-    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     height: calc(100% - 20px);
   }
 }
@@ -63,6 +63,26 @@ input.btn-wide {
 .col-narrow {
   min-width: 250px;
   max-width: 350px;
+}
+
+.col-medium {
+  min-width: 270px;
+  max-width: 400px;
+}
+@media (max-width: $screen-xs-max) {
+  .col-only-xs-centered {
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  .col-only-sm-centered {
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 }
 
 @media (min-width: $screen-sm-min) {

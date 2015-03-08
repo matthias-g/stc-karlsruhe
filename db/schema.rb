@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710163053) do
+ActiveRecord::Schema.define(version: 20150307181434) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "ckeditor_assets", force: true do |t|
+    t.string   "data_file_name",               null: false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
   create_table "page_sections", force: true do |t|
     t.string   "title"
@@ -41,7 +60,7 @@ ActiveRecord::Schema.define(version: 20140710163053) do
     t.datetime "updated_at"
   end
 
-  add_index "participations", ["user_id", "project_id", "as_leader"], name: "index_participations_on_user_id_and_project_id_and_as_leader", unique: true
+  add_index "participations", ["user_id", "project_id", "as_leader"], name: "index_participations_on_user_id_and_project_id_and_as_leader", unique: true, using: :btree
 
   create_table "project_days", force: true do |t|
     t.string   "title"
@@ -54,8 +73,8 @@ ActiveRecord::Schema.define(version: 20140710163053) do
     t.integer "project_day_id", null: false
   end
 
-  add_index "project_days_projects", ["project_day_id", "project_id"], name: "index_project_days_projects_on_project_day_id_and_project_id"
-  add_index "project_days_projects", ["project_id", "project_day_id"], name: "index_project_days_projects_on_project_id_and_project_day_id"
+  add_index "project_days_projects", ["project_day_id", "project_id"], name: "index_project_days_projects_on_project_day_id_and_project_id", using: :btree
+  add_index "project_days_projects", ["project_id", "project_day_id"], name: "index_project_days_projects_on_project_id_and_project_day_id", using: :btree
 
   create_table "projects", force: true do |t|
     t.string   "title"
@@ -71,12 +90,12 @@ ActiveRecord::Schema.define(version: 20140710163053) do
     t.datetime "updated_at"
     t.string   "picture"
     t.integer  "desired_team_size"
-    t.integer  "status",                        default: 1
+    t.integer  "status",            default: 1
     t.string   "time"
-    t.text     "short_description",             default: ""
-    t.float    "map_latitude",                  default: 49.01347014
-    t.float    "map_longitude",                 default: 8.40445518
-    t.integer  "map_zoom",                      default: 12
+    t.text     "short_description", default: ""
+    t.float    "map_latitude",      default: 49.01347014
+    t.float    "map_longitude",     default: 8.40445518
+    t.integer  "map_zoom",          default: 12
     t.text     "picture_source"
   end
 
@@ -91,7 +110,7 @@ ActiveRecord::Schema.define(version: 20140710163053) do
     t.integer "role_id", null: false
   end
 
-  add_index "roles_users", ["user_id", "role_id"], name: "index_roles_users_on_user_id_and_role_id"
+  add_index "roles_users", ["user_id", "role_id"], name: "index_roles_users_on_user_id_and_role_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"
@@ -111,8 +130,8 @@ ActiveRecord::Schema.define(version: 20140710163053) do
     t.string   "last_sign_in_ip"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

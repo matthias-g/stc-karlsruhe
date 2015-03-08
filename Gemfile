@@ -43,6 +43,7 @@ gem 'carrierwave'
 
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
+gem 'ckeditor'
 
 gem 'pg'
 

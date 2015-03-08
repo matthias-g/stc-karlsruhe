@@ -1,5 +1,7 @@
 StcKarlsruhe::Application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+
   resources :project_days
 
   resources :project_statuses

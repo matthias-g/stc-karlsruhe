@@ -7,15 +7,14 @@
 <% end %>
 
 <section>
-  <div id="-countdown" data-date="05/05/2014 00:00" style="display:none">
-    <!--<div><span></span>Tage</div>
+  <div id="countdown" data-date="08/06/2014 00:00" style="display:none">
+    <div><span></span>Tage</div>
     <div><span></span>Stunden</div>
     <div><span></span>Minuten</div>
-    <div><span></span>Sekunden</div>-->
+    <div><span></span>Sekunden</div>
     <span class="running">verbleiben bis zur Karlsruher Projektwoche</span>
     <span class="finished">Die Karlsruher Projektwoche läuft!</span>
   </div>
-  <h2 style="text-align:center">Die Projektwoche 2014 ist abgeschlossen.<br />Danke für euren Einsatz!</h2>
 </section>
 
 <section>
@@ -64,19 +63,39 @@
 
 <section class="project-map">
   <h1>Aktuelle Projekte</h1>
-  <%= render '/page_partials/project_map' -%>
+  <div class="map"
+       data-lon="8.403869"
+       data-lat="49.011627"
+       data-zoom="12">
+    <% Project.all.each do |project| %>
+        <% if (project.longitude != 0) %>
+            <div data-lon="<%= project.longitude %>"
+                 data-lat="<%= project.latitude %>"
+                 data-name="<%= project.title %>"
+                 data-href="<%= url_for(project) %>">
+              <% if project.short_description.empty? %>
+                  <%= simple_format project.description %>
+              <% else %>
+                  <%= simple_format project.short_description %>
+              <% end %>
+            </div>
+        <% end %>
+    <% end %>
+  </div>
 </section>
 
-<section>
-  <div id="donate" class="two-col-group">
-    <div>
+<div class="row row-sm-eq-height">
+  <div class="col-sm-6">
+    <section class="filling">
       <h2>Serve the City</h2>
       <p>Das erste Mal fand Serve the City in Brüssel vor etwa 10 Jahren statt.
         Inzwischen ist es weltweit verbreitet. Eine Projektwoche, bei der viele Freiwillige Gutes für ihre Stadt tun. Sozial und unverbindlich.</p>
       <p>Jeder kann mitmachen und sich ein Projekt aussuchen oder selbst ein Projekt leiten.</p>
-      <a href="/servethecity">Weitere Infos zu Serve the City</a>
-    </div>
-    <div>
+      <a href="/serve-the-city">Weitere Infos zu Serve the City</a>
+    </section>
+  </div>
+  <div class="col-sm-6">
+    <section class="filling">
       <h2>Finanziell unterstützen</h2>
       <p>Für Materialien bei den Aktionen
         benötigen wir finanzielle Mittel.<br/>Wir sind dir für
@@ -85,6 +104,6 @@
       <p>BIC: GENODEF1EK1<br/>
         IBAN: DE70520604100005010250<br/>
         Betreff: STC Karlsruhe</p>
-    </div>
+    </section>
   </div>
-</section>
+</div>

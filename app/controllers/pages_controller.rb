@@ -44,8 +44,8 @@ class PagesController < ApplicationController
   end
 
   def page
-    @page = Page.find_by(address: params[:page]) || not_found
-    render 'show'
+    @partial_name = params[:page]
+    File.exists?(Rails.root.join('app', 'views', 'pages', "_#{@partial_name}.html.erb")) or not_found
   end
 
   private

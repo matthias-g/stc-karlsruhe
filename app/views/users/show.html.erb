@@ -2,7 +2,7 @@
 
 <div id="user-view">
 
-<section style="text-align: center">
+<section>
   <div class="typeHeader">
     <%= (@user == current_user) ? t('user.label.myProfile') : t('user.label.profile') %>
   </div>
@@ -12,7 +12,7 @@
 <div class="row row-sm-eq-height">
   <div class="col-sm-6">
 
-    <% if current_user == @user or current_user.is_admin? %>
+    <% if (current_user == @user) || current_user.is_admin? %>
       <section class="profile-data">
         <h2>Profildaten</h2>
         <table>
@@ -96,12 +96,12 @@
               <%= link_to project.title, project %>
           <% end %>
       <% end %>
-      <% if @user.projects_as_volunteer.blank? and @user.projects_as_leader.blank? %>
+      <% if @user.projects_as_volunteer.blank? && @user.projects_as_leader.blank? %>
         <% if current_user == @user %>
           <%= t('user.message.youHaveNoProjects') %><br />
           <%= link_to t('project.actions.findProject'), projects_path %>
         <% else %>
-          <%= t('user.message.hasNoProjects', @user.first_name) %>
+          <%= t('user.message.hasNoProjects', user:@user.first_name) %>
         <% end %>
       <% end %>
     </section>

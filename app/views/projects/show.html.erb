@@ -13,7 +13,7 @@
 
   <div class="col-md-8">
     <section class="filling">
-      <% if @project.show_picture? and @project.picture.file %>
+      <% if @project.show_picture? && @project.picture.file %>
           <div class="project-picture picture-container">
             <%= image_tag @project.picture_url(:preview) %>
             <div class="copyright" title="© <%= @project.picture_source %>">
@@ -48,7 +48,7 @@
   <div class="col-md-4">
     <div class="row">
 
-      <% if user_signed_in? and ( current_user.leads_project?(@project) or current_user.is_admin? ) %>
+      <% if user_signed_in? && ( current_user.leads_project?(@project) || current_user.is_admin? ) %>
         <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered">
             <section class="slim">
               <h3><%= t('project.label.manageProject') %></h3>
@@ -95,12 +95,12 @@
           </div>
           <div>
             <% unless @project.closed? %>
-                <% if user_signed_in? and @project.has_volunteer?(current_user) %>
+                <% if user_signed_in? && @project.has_volunteer?(current_user) %>
                     <p><%= t('project.message.teamMember') %></p>
                     <%= link_to t('project.action.leave'),
                                 leave_project_path(@project),
                                 class: 'btn btn-default btn-wide' %>
-                <% elsif @project.open? or @project.soon_full? %>
+                <% elsif @project.open? || @project.soon_full? %>
                     <%= link_to t('project.action.enter'),
                                 enter_project_path(@project),
                                 class: 'btn btn-default btn-wide' %>

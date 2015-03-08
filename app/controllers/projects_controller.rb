@@ -9,12 +9,12 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     visible = true
-    if params[:filter] and params[:filter][:visibility] == 'hidden' and current_user.is_admin?
+    if params[:filter] && (params[:filter][:visibility] == 'hidden') && current_user.is_admin?
         visible = false
     end
     @projects = Project.where(:visible => visible).order(:status)
-    @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] and params[:filter][:day] != ''
-    @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] and params[:filter][:status] != ''
+    @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] && (params[:filter][:day] != '')
+    @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] && (params[:filter][:status] != '')
   end
 
   # GET /projects/1

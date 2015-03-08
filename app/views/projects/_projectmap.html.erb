@@ -5,7 +5,7 @@
      data-lat="49.011627"
      data-zoom="12">
   <% Project.all.each do |project| %>
-      <% if ((project.longitude != 0) and not project.closed?) %>
+      <% if ((project.longitude != 0) && (not project.closed?)) %>
           <div data-lon="<%= project.longitude %>"
                data-lat="<%= project.latitude %>"
                data-name="<%= project.title %>"

@@ -195,10 +195,13 @@ de:
       register: 'Registrieren'
       confirmAccount: 'Account bestätigen'
       unlockAccount: 'Account freischalten'
+      deleteAccount: 'Account löschen'
       resendInstructions: 'Anleitung zur Bestätigung nochmal senden'
       changePassword: 'Passwort ändern'
       edit: 'Profil bearbeiten'
     label:
+      login: 'Anmelden'
+      register: 'Registrieren'
       countActive: 'Teilnehmer'
       password: 'Passwort'
       user: 'User'
@@ -210,8 +213,11 @@ de:
     message:
       profileUpdated: 'Profil erfolgreich aktualisiert.'
       loggedInAs: 'eingeloggt als %s'
-      hasNoProjects: '%s nimmt noch an keinem Projekt teil.'
+      hasNoProjects: '%{user} nimmt noch an keinem Projekt teil.'
       youHaveNoProjects: 'Du nimmst noch an keinem Projekt teil.'
+      confirmDelete: 'Profil wirklich löschen?'
+    help:
+      passwordLength: 'Mindestens 6 Zeichen lang.'
 
   page:
     new: 'Neue Seite'

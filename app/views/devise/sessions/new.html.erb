@@ -5,32 +5,32 @@
   </div>
   <div class="col-md-5 col-medium col-only-xs-centered col-only-sm-centered">
     <section class="filling slim">
-      <h2>Anmelden</h2>
+      <h2><%= t('user.label.login') %></h2>
       <%= bootstrap_form_for(resource, :as => resource_name,
             :url => session_path(resource_name)) do |f| %>
         <%= f.text_field :login, :autofocus => true %>
         <%= f.password_field :password %>
-        <%= render "devise/shared/links" %>
+        <%= render 'devise/shared/links' %>
         <% if devise_mapping.rememberable? -%>
           <%= f.check_box :remember_me %>
         <% end -%>
-        <%= f.submit "Anmelden" %>
+        <%= f.submit t('user.action.login') %>
       <% end %>
     </section>
   </div>
   <div class="col-md-5 col-medium col-only-xs-centered col-only-sm-centered">
     <section class="filling slim">
-      <h2>Registrieren</h2>
+      <h2><%= t('user.label.register') %></h2>
       <%= bootstrap_form_for(resource, :as => resource_name,
             :url => registration_path(resource_name)) do |f| %>
         <%#= devise_error_messages! %>
-        <%= f.email_field :email, :autofocus => true %>
+        <%= f.email_field :email %>
         <%= f.text_field :username %>
         <%= f.text_field :first_name %>
         <%= f.text_field :last_name %>
-        <%= f.password_field :password, help: "Mindestens 6 Zeichen" %>
+        <%= f.password_field :password, help: t('user.help.passwordLength') %>
         <%= f.password_field :password_confirmation %>
-        <%= f.submit "Registrieren" %>
+        <%= f.submit t('user.action.register') %>
       <% end %>
     </section>
   </div>

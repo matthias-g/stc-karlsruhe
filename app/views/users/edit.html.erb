@@ -1,13 +1,15 @@
 <%= render '/layouts/smallheader' -%>
 
-<%= form_for @user do |f| %>
+<%= bootstrap_form_for @user do |f| %>
   <section>
-    <h1>Profil bearbeiten: <%= @user.full_name %></h1> ( <%= link_to "zurück zum Profil", user_path(@user) %> )
+    <div class="typeHeader">Profil bearbeiten</div>
+    <h1><%= @user.full_name %></h1>
+    ( <%= link_to "zurück zum Profil", user_path(@user) %> )
   </section>
 
-  <div class="two-col-group profile-view profile-edit-view">
-    <div>
-      <section class="info">
+  <div class="row row-sm-eq-height">
+    <div class="col-sm-6">
+      <section class="filling">
         <h1>Mein Profil</h1>
         <h3>Benutzername</h3>
         <%= f.text_field :username %>
@@ -16,6 +18,8 @@
         <h3>Nachname</h3>
         <%= f.text_field :last_name %>
       </section>
+    </div>
+    <div class="col-sm-6">
       <section class="info">
         <i>Gib dein aktuelles Passwort ein um die Änderungen zu bestätigen</i>
         <br />
@@ -23,13 +27,10 @@
         <%= f.submit "Daten aktualisieren" %>
       </section>
     </div>
-    <div>
-      <section class="save_edit">
-        <% if @user == current_user  %>
-          ( <%= link_to 'Passwort oder E-Mail ändern', edit_user_registration_path %> )
-        <% end %>
-      </section>
-    </div>
   </div>
-
+  <section class="save_edit">
+    <% if @user == current_user  %>
+        ( <%= link_to 'Passwort oder E-Mail ändern', edit_user_registration_path %> )
+    <% end %>
+  </section>
 <% end %>

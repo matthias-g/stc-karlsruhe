@@ -1,4 +1,7 @@
-#user-view {
+#user-view, #user-edit-view {
+  h1 {
+    text-align: center;
+  }
   h2 {
     margin-top: 0;
   }
@@ -19,48 +22,6 @@
     display: block;
     margin-top: 5px;
     margin-left: 5px;
-  }
-}
-
-.profile-view {
-
-
-  .info, .actions {
-    margin-right: 5px;
-    margin-top: 0;
-    h3 {
-      margin-top: 5px;
-    }
-  }
-  .projects {
-    margin-left: 5px;
-    margin-top: 0;
-    min-height: 300px;
-    .button {
-      margin: 5px 10px;
-    }
-  }
-
-  .contact-user-form {
-    #message_subject {
-      width: 350px;
-    }
-
-    #message_body {
-      width: 350px;
-      height: 200px;
-    }
-  }
-}
-
-.profile-edit-view {
-  input {
-    display: block;
-    min-width: 280px;
-  }
-  .change_password, .save_edit {
-    margin-left: 5px;
-    margin-top: 0;
   }
 }
 

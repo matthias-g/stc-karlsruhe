@@ -4,7 +4,7 @@ de:
   devise:
     basic:
       sign_up: 'Registrieren'
-      sign_in: 'Anmelden'
+      sign_in: 'zur Anmeldung'
       sign_out: 'Logout'
       edit: 'Account bearbeiten'
     confirmations:
@@ -52,9 +52,8 @@ de:
       send_paranoid_instructions: 'Falls Deine E-Mail-Adresse in unserer Datenbank existiert erhältst Du in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Dein Passwort zurücksetzen können.'
       updated: 'Dein Passwort wurde geändert. Du bist jetzt angemeldet.'
       updated_not_active: 'Dein Passwort wurde geändert.'
-      new:
-        forgot_your_password: 'Hast du dein Passwort vergessen?'
-        send_me_reset_password_instructions: 'Schicke mir die Anleitung, mein Passwort zurückzusetzen'
+      forgot_your_password: 'Hast du dein Passwort vergessen?'
+      send_me_reset_password_instructions: 'Zurücksetzen'
     registrations:
       destroyed: 'Dein Account wurde gelöscht.'
       signed_up: 'Du hast dich erfolgreich registriert.'

@@ -66,7 +66,7 @@
       </h3>
       <%= f.submit t('general.action.save'), class: 'btn btn-default btn-wide' %>
       <%= link_to t('general.action.cancel'), @project, class: 'btn btn-default btn-wide' %>
-      <% if not isNew and current_user.is_admin? %>
+      <% if not isNew && current_user.is_admin? %>
           <%= link_to t('project.action.delete'), @project, method: :delete,
                       data: { confirm: t('general.message.confirmDelete')},
                       class: 'btn btn-default btn-wide' %>

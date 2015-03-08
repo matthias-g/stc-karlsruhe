@@ -5,8 +5,14 @@ class ProjectsControllerTest < ActionController::TestCase
     @project = projects(:one)
   end
 
-  test 'should get new' do
+  test 'should get new as user' do
     sign_in users(:sabine)
+    get :new
+    assert_response :success
+  end
+
+  test 'should get new as admin' do
+    sign_in users(:admin)
     get :new
     assert_response :success
   end

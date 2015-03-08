@@ -202,7 +202,7 @@ de:
     label:
       login: 'Anmelden'
       register: 'Registrieren'
-      countActive: 'Teilnehmer'
+      countActive: 'Mitarbeiter'
       password: 'Passwort'
       user: 'User'
       profile: 'Profil'

@@ -14,8 +14,8 @@ class PagesController < ApplicationController
   end
 
   def welcome
-    @page = Page.first
-    respond_with(@page)
+    @partial_name = 'welcome'
+    render 'page'
   end
 
   def new

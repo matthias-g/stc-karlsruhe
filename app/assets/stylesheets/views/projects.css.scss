@@ -79,6 +79,8 @@
 @media(min-width: $screen-sm-min) {
   .project {
     min-height: 200px;
+    margin-left: auto;
+    margin-right: auto;
     .project-image {
       position: absolute;
       left: 0;

@@ -3,6 +3,7 @@ require 'test_helper'
 class ProjectDaysControllerTest < ActionController::TestCase
   setup do
     @project_day = project_days(:one)
+    sign_in users(:admin)
   end
 
   test "should get index" do

@@ -75,15 +75,15 @@
                       data: { confirm: t('general.message.confirmDelete')},
                       class: 'btn btn-default btn-wide' %>
       <% end %>
-      <% unless @project.new_record? %>
+      <% unless isNew %>
         <% if @project.closed? %>
-          <%= link_to t('project.action.open'),
-                      open_project_path(@project),
-                      class:'btn btn-default btn-wide' %>
+            <%= link_to t('project.action.open'),
+                        open_project_path(@project),
+                        class:'btn btn-default btn-wide' %>
         <% else %>
-          <%= link_to t('project.action.close'),
-                      close_project_path(@project),
-                      class:'btn btn-default btn-wide' %>
+            <%= link_to t('project.action.close'),
+                        close_project_path(@project),
+                        class:'btn btn-default btn-wide' %>
         <% end %>
         <% if current_user.is_admin? %>
           <% if @project.visible %>

@@ -1,0 +1,217 @@
+<%= render '/layouts/bigheader' -%>
+
+<% content_for :appendToHeader do %>
+  <style type="text/css">
+      #countdown div {
+        display: inline-block;
+        border: 1px solid #000;
+        font-size: 12px;
+        text-align: center;
+        margin: 5px;
+        padding: 2px;
+        min-width: 50px;
+        vertical-align: middle;
+      }
+      #countdown div span {
+        font-size: 25px;
+        display: block;
+        border-bottom: 1px solid #000;
+        line-height: 1.5em;
+      }
+      #countdown > span {
+        font: 25px CaptionFont;
+        vertical-align: middle;
+        margin-left: 30px;
+      }
+      #countdown .finished {
+        display: none;
+      }
+      #trailer {
+        margin: -50px auto 0;
+        width: 600px;
+        height: 337px;
+        background: #000;
+      }
+      #trailer iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+      #project-link {
+        display: block;
+        margin: 0;
+        padding: 25px 50px 15px;
+        background: url("/images/projectlink_bg.png") left center / cover;
+        font: 45px CaptionFont;
+        color: #FFF;
+        text-decoration: none;
+        transition: text-shadow 0.3s;
+      }
+      #project-link:hover {
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+      }
+      #photo-link {
+        display: block;
+        margin: 0;
+        padding: 35px 50px 25px;
+        background: url("/images/photolink_bg.png") left center / cover;
+        font: 45px CaptionFont;
+        color: #000;
+        text-decoration: none;
+        transition: text-shadow 0.3s;
+      }
+      #photo-link:hover {
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      }
+      #project-map {
+        background: #aaa;
+        height: 300px;
+        margin: 0 auto;
+      }
+      #donate > div:first-child {
+        padding-right: 20px;
+      }
+      #donate > div:last-child {
+        padding-left: 30px;
+        border-left: 1px solid black;
+      }
+      .project-map .map {
+        border-radius: 6px;
+        border: 1px solid rgba(#777,0.5);
+        width: 100%;
+        height: 400px;
+      }
+      #countdown div {
+        display: inline-block;
+        border: 1px solid #000;
+        font-size: 12px;
+        text-align: center;
+        margin: 5px;
+        padding: 2px;
+        min-width: 50px;
+        vertical-align: middle;
+      }
+      #countdown div span {
+        font-size: 25px;
+        display: block;
+        border-bottom: 1px solid #000;
+        line-height: 1.5em;
+      }
+      #countdown > span {
+        font: 25px CaptionFont;
+        vertical-align: middle;
+        margin-left: 30px;
+      }
+      #countdown .finished {
+        display: none;
+      }
+      #project-link {
+        display: block;
+        margin: 0;
+        padding: 25px 50px 15px;
+        font: 45px CaptionFont;
+        color: #FFF;
+        text-decoration: none;
+        transition: text-shadow 0.3s;
+      }
+      #project-link:hover {
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+      }
+      .project-map .map {
+        border: 1px solid rgba(119, 119, 119, 0.5);
+        border-radius: 6px;
+        height: 400px;
+        width: 100%;
+      }
+      #donate > div:first-child {
+        padding-right: 20px;
+      }
+      #donate > div:last-child {
+        padding-left: 30px;
+        border-left: 1px solid black;
+      }
+  </style>
+<% end %>
+
+<section>
+  <div id="-countdown" data-date="05/05/2014 00:00" style="display:none">
+    <!--<div><span></span>Tage</div>
+    <div><span></span>Stunden</div>
+    <div><span></span>Minuten</div>
+    <div><span></span>Sekunden</div>-->
+    <span class="running">verbleiben bis zur Karlsruher Projektwoche</span>
+    <span class="finished">Die Karlsruher Projektwoche läuft!</span>
+  </div>
+  <h2 style="text-align:center">Die Projektwoche 2014 ist abgeschlossen.<br />Danke für euren Einsatz!</h2>
+</section>
+
+<section>
+  <h2>Vision</h2>
+  <div class="spotlights" style="margin-top:-70px">
+    <div>
+      <img src="/images/about_1.png"/>
+      <div>
+        Wir wollen helfen.<br/>
+        Es geht nicht um Geld,<br/>
+        nicht um Anerkennung.<br/>
+        Es geht um den Dienst<br/>
+        an den Menschen in<br/>
+        unserer Stadt.
+      </div>
+    </div>
+    <div>
+      <img src="/images/about_2.png"/>
+      <div>
+        Gemeinsam können wir<br/>
+        etwas bewegen. Wir<br/>
+        können zeigen, dass<br/>
+        Engagement mehr ist<br/>
+        als ein Tropfen auf dem<br/>
+        heißen Stein.
+      </div>
+    </div>
+    <div>
+      <img src="/images/about_3.png"/>
+      <div>
+        Serve the City<br/>
+        vernetzt Menschen.<br/>
+        Hier können Helfer<br/>
+        Projekte in Karlsruhe<br/>
+        kennen lernen und<br/>
+        unterstützen.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="restyled">
+  <a id="project-link" href="/projects" style="text-align:center">
+    &rarr; zu den Projekten der Aktionswoche 2014</a>
+</section>
+
+<section class="project-map">
+  <h1>Aktuelle Projekte</h1>
+  <%= render '/page_partials/project_map' -%>
+</section>
+
+<section>
+  <div id="donate" class="two-col-group">
+    <div>
+      <h2>Serve the City</h2>
+      <p>Das erste Mal fand Serve the City in Brüssel vor etwa 10 Jahren statt.
+        Inzwischen ist es weltweit verbreitet. Eine Projektwoche, bei der viele Freiwillige Gutes für ihre Stadt tun. Sozial und unverbindlich.</p>
+      <p>Jeder kann mitmachen und sich ein Projekt aussuchen oder selbst ein Projekt leiten.</p>
+      <a href="/servethecity">Weitere Infos zu Serve the City</a>
+    </div>
+    <div>
+      <h2>Finanziell unterstützen</h2>
+      <p>Für Materialien bei den Aktionen
+        benötigen wir finanzielle Mittel.<br/>Wir sind dir für
+        jeden Euro dankbar. Serve the City kann auch eine
+        offizielle Spendenbescheinigung ausstellen.</p>
+      <p>BIC: GENODEF1EK1<br/>
+        IBAN: DE70520604100005010250<br/>
+        Betreff: STC Karlsruhe</p>
+    </div>
+  </div>
+</section>

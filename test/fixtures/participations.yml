@@ -1,11 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user: 
-  project: 
-  as_leader: false
+  user: rolf
+  project: one
+  as_leader: true
 
 two:
-  user: 
-  project: 
+  user: sabine
+  project: two
   as_leader: false
+
+three:
+  user: rolf
+  project: three
+  as_leader: true

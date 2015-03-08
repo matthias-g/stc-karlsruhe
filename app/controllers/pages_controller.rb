@@ -45,7 +45,7 @@ class PagesController < ApplicationController
 
   def page
     @partial_name = params[:page].gsub('-', '')
-    File.exists?(Rails.root.join('app', 'views', 'pages', "_#{@partial_name}.html.erb")) or not_found
+    lookup_context.find_all("pages/_#{@partial_name}").any? or not_found
   end
 
   private

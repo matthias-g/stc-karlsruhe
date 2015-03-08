@@ -130,9 +130,17 @@ en:
       countActive: 'Current Projects'
       projectName: 'Project Name'
       uploadImage: 'Upload Image'
-    edit:
-      hint:
-        picture_source: 'Please enter the source of the uploaded picture. If you leave this field empty the picture will not be shown.'
+    placeholder:
+      title: 'Enter the title of the project here.'
+      description: 'Describe your project.'
+      short_description: 'If you enter a short description here it will be shown in the project list instead of the long description. (optional)'
+      location: 'Where will the project take place?'
+      individual_tasks: 'Here you can enumerate individual tasks. (optional)'
+      material: 'Here you can enter material that is needed for the project. (optional)'
+      requirements: 'What requirements should volunteers fulfill? (optional)'
+      picture_source: 'Please enter the source of the uploaded picture. If you leave this field empty the picture will not be shown.'
+      desired_team_size: 'How many volunteers can participate in the project?'
+      time: 'When does the project take place?'
     message:
       created: 'Project was successfully created.'
       updated: 'Project was successfully updated.'

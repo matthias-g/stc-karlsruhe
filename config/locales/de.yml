@@ -170,9 +170,17 @@ de:
       countActive: 'Aktuelle Projekte'
       uploadImage: 'Bild hochladen'
 
-    help:
+    placeholder:
+      title: 'Gib hier den Titel des Projektes ein.'
+      description: 'Beschreibe hier dein Projekt.'
+      short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Projektliste statt der ausführlichen Beschreibung angezeigt. (optional)'
+      location: 'Wo findet das Projekt statt?'
+      individual_tasks: 'Hier kannst du Teilaufgaben aufzählen. (optional)'
+      material: 'Hier kannst du Material eintragen, das für das Projekt benötigt wird. (optional)'
+      requirements: 'Was für Voraussetzungen müssen Teilnehmer dieses Projekts mitbringen? (optional)'
       picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
-      short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Projektliste statt der ausführlichen Beschreibung angezeigt.'
+      desired_team_size: 'Wie viele Teilnehmer können höchstens am Projekt teilnehmen?'
+      time: 'Wann findet das Projekt statt?'
     message:
       created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'

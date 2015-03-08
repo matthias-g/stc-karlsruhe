@@ -12,7 +12,7 @@
       </style>
   <% end %>
   <%= @page_section.content.html_safe %>
-  <% unless @page_section.partial_name.empty? %>
+  <% if @page_section.partial_name && !@page_section.partial_name.empty? %>
       <%= render @page_section.partial_name %>
   <% end %>
 </section>

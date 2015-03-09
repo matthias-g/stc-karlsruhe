@@ -1,8 +1,8 @@
 class PagesController < ApplicationController
   respond_to :html
 
-  def welcome
-    @partial_name = 'welcome'
+  def home
+    @partial_name = 'home'
     render 'page'
   end
 

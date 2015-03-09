@@ -6,7 +6,7 @@ StcKarlsruhe::Application.routes.draw do
 
   resources :roles
 
-  get 'kontakt', to: 'messages#new'
+  get 'kontakt', to: 'messages#new', as: 'contact'
   post 'kontakt', to: 'messages#create'
 
   post 'users/:id', to: 'users#contact_user'
@@ -36,7 +36,7 @@ StcKarlsruhe::Application.routes.draw do
 
   resources :users, except: [:destroy, :new, :create]
 
-  root 'pages#welcome'
+  root 'pages#home'
 
   get '/:page', to: 'pages#page'
 

@@ -1,3 +1,4 @@
+<% content_for :pageTitle do %><%= t('layout.title.userEdit', user:@user.full_name) %><% end %>
 <%= render '/layouts/smallheader' -%>
 
 <%= bootstrap_form_for @user do |f| %>

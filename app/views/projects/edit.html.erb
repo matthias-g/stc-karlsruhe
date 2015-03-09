@@ -1,2 +1,3 @@
+<% content_for :pageTitle do %><%= t('layout.title.projectEdit', project:@project.title) %><% end %>
 <%= render '/layouts/smallheader' -%>
 <%= render :partial => "form", :locals => {:isNew => false} %>

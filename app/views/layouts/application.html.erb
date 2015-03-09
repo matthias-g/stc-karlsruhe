@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= t('layout.pageTitle') %></title>
+  <title>
+    <%= (yield(:pageTitle) + ' - ') if content_for?(:pageTitle) %>
+    <%= t('layout.pageTitle') %>
+  </title>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" %>
   <%= favicon_link_tag 'favicon.ico' %>
-  <%= yield :appendToHeader %>
 </head>
 <body>
 

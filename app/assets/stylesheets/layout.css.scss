@@ -80,7 +80,7 @@ footer {
   font-size: 11px;
   color: #FFF;
   text-shadow: 0 0 1px rgba(#000, 0.5), 1px 1px 1px rgba(#000, 1);
-  a, a:hover {
+  a, a:hover, a:focus {
     color: #FFF;
     text-decoration: none;
     text-shadow: none;

@@ -6,8 +6,8 @@ StcKarlsruhe::Application.routes.draw do
 
   resources :roles
 
-  get 'kontakt', to: 'message#new'
-  post 'kontakt', to: 'message#create'
+  get 'kontakt', to: 'messages#new'
+  post 'kontakt', to: 'messages#create'
 
   post 'users/:id', to: 'users#contact_user'
   post 'projects/:id', to: 'projects#contact_volunteers'

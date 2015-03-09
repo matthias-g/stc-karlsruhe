@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def contact_user
-    @message = Message.new(params[:message])
+    @message = Message.new(params[:messages])
     @message.sender = current_user.email
     @message.recipient = @user.email
     if @message.valid?

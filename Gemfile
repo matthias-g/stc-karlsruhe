@@ -44,6 +44,8 @@ gem 'carrierwave'
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
 
+gem 'actionview-encoded_mail_to'
+
 gem 'pg'
 
 group :development do

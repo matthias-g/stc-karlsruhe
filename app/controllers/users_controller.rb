@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :contact_user]
+  before_action :set_user, only: [:show, :contact_user, :edit]
   before_action :authenticate_user!
-  before_action :authenticate_admin_user!, only: [:index]
+  before_action :authenticate_admin_user!, only: [:index, :edit]
 
   respond_to :html
 
@@ -17,7 +17,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
     respond_with(@user)
   end
 

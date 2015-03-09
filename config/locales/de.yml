@@ -106,8 +106,8 @@ de:
   layout:
     pageTitle: 'Serve the City Karlsruhe'
     links:
-      projects: 'Projekte'
       home: 'Startseite'
+      projects: 'Projekte'
       contact: 'Kontakt'
       aboutUs: 'Impressum'
       privacy: 'Datenschutz'

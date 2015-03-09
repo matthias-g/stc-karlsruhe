@@ -76,6 +76,14 @@ input.btn-wide {
   margin-right: auto !important;
 }
 
+@media (max-width: 700px) {
+  .no-float-below-500px {
+    display: block !important;
+    float: none !important;
+    width: auto !important;
+  }
+}
+
 @media (max-width: $screen-xs-max) {
   .col-only-xs-centered {
     float: none !important;

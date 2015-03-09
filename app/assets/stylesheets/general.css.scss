@@ -37,17 +37,11 @@ h4 {
 }
 
 /* MULTI-USE STYLES */
-
-.spotlights {
+.spotlight {
   text-align: center;
-  & > div {
-    display: inline-block;
-    width: 32%;
-    text-align: center;
-    padding: 20px 0;
-  }
+  padding: 20px 0;
   img {
-    width: 70px;
+    width: 90px;
     height: auto;
     margin: 15px;
   }

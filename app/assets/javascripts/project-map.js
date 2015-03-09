@@ -1,23 +1,30 @@
 $(document).ready(function() {
 
-    // google maps rendering hints
-    var mapOptions = {styles:[
-        {	"featureType": "poi",
+    // google maps settings
+    var mapOptions = {
+        disableDefaultUI: true,
+        zoomControl: true,
+        scrollwheel: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: [{
+            "featureType": "poi",
             "elementType": "labels",
             "stylers": [{"visibility": "off"}]
-        },{	"featureType": "transit",
+        },{
+            "featureType": "transit",
             "stylers": [{"visibility": "off"}]
-        },{	"featureType": "road",
+        },{
+            "featureType": "road",
             "elementType": "labels.icon",
-            "stylers": [{"visibility": "off"}]}
-    ]};
+            "stylers": [{"visibility": "off"}]
+        }]
+    };
 
     // the google maps api v3 must be loaded prior to this
     google.maps.visualRefresh = true;
     $('.map').each(function() {
         createMap($(this));
     });
-
 
     function createMap(c) {
         var info;
@@ -27,9 +34,7 @@ $(document).ready(function() {
             zoom: parseInt(c.data('zoom')), maxZoom: 17, minZoom: 11,
             center: new google.maps.LatLng(
                 parseFloat(c.data('lat')), parseFloat(c.data('lon'))
-            ),
-            disableDefaultUI: true,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            )
         });
         map.setOptions(mapOptions);
 
@@ -53,6 +58,7 @@ $(document).ready(function() {
                 m.text(), pos.lat(), pos.lng());
             bounds.extend(pos);
         });
+
         if (markerData.size() > 1)
             map.fitBounds(bounds);
 
@@ -98,4 +104,3 @@ $(document).ready(function() {
         }
     }
 });
-

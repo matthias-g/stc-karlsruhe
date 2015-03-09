@@ -1,9 +1,0 @@
-<%= render '/layouts/smallheader' -%>
-
-<section>
-    <h1><%= t('section.captionEdit') % [@page_section.title] %></h1>
-    <%= link_to t('section.list'), page_sections_path %>
-</section>
-<section id="pageSectionEdit">
-    <%= render 'form' %>
-</section>

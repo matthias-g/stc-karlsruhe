@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.new(params[:messages])
+    @message = Message.new(params[:message])
     if @message.valid?
       Mailer.contact_mail(@message).deliver
       redirect_to root_path, notice: t('contact.orga.success')

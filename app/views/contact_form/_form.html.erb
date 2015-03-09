@@ -2,7 +2,7 @@
 
 <section class="contact-form">
   <% if alert %>
-    <ul id="alert" class="plopupTarget">
+    <ul id="alert" class="popupTarget">
       <% alert.each do |msg| %>
         <li><%= msg[0] %></li>
       <% end %>
@@ -15,13 +15,9 @@
       <%= t 'contact.orga.text' %>
     </div>
     <div class="rightCol">
-      <% if user_signed_in? %>
-        <%= form.email_field :sender, value: current_user.email %>
-      <% else %>
-        <%= form.email_field :sender %>
-      <% end %>
-      <%= form.text_field :subject %>
-      <%= form.text_area :body %>
+      <%= form.email_field :sender, value: user_signed_in? ? current_user.email : '', label: t('contact.general.placeholders.sender') %>
+      <%= form.text_field :subject, label: t('contact.general.placeholders.subject') %>
+      <%= form.text_area :body, label: t('contact.general.placeholders.body') %>
       <%= form.hidden_field :recipient, value: 'default@servethecity-karlsruhe.de' %>
       <%= form.submit t('contact.orga.submit') %>
     </div>

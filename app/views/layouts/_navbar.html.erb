@@ -1,6 +1,16 @@
 <ul class="nav navbar-nav">
-  <li><%= link_to t('layout.links.home'), root_path %></li>
-  <li><%= link_to t('layout.links.projects'), projects_path %></li>
+  <li>
+    <%= link_to root_path do %>
+        <span class="glyphicon glyphicon-home"></span>
+        <%= t('layout.links.home') %>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to projects_path do %>
+        <span class="glyphicon glyphicon-map-marker"></span>
+        <%= t('layout.links.projects') %>
+    <% end %>
+  </li>
 </ul>
 
 <ul class="nav navbar-nav navbar-right" style="padding-right: 15px;">

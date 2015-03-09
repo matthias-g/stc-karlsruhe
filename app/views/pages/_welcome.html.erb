@@ -1,11 +1,5 @@
 <%= render '/layouts/bigheader' -%>
 
-<% content_for :appendToHeader do %>
-  <style type="text/css">
-
-  </style>
-<% end %>
-
 <section style="text-align: center">
   <div id="countdown" data-date="06/08/2015 00:00">
     <div><span></span>Tage</div>
@@ -18,9 +12,10 @@
 </section>
 
 <section>
-  <h2>Vision</h2>
-  <div class="spotlights" style="margin-top:-70px">
-    <div>
+  <h2 style="margin-bottom: -60px">Vision</h2>
+
+  <div class="row" style="margin: 0 20px">
+    <div class="col-sm-4 spotlight no-float-below-500px">
       <img src="/images/about_1.png"/>
       <div>
         Wir wollen helfen.<br/>
@@ -31,7 +26,7 @@
         unserer Stadt.
       </div>
     </div>
-    <div>
+    <div class="col-sm-4 spotlight no-float-below-500px">
       <img src="/images/about_2.png"/>
       <div>
         Gemeinsam können wir<br/>
@@ -42,7 +37,7 @@
         heißen Stein.
       </div>
     </div>
-    <div>
+    <div class="col-sm-4 spotlight no-float-below-500px">
       <img src="/images/about_3.png"/>
       <div>
         Serve the City<br/>
@@ -61,25 +56,36 @@
     &rarr; zu den Projekten der Aktionswoche 2014</a>
 </section>
 
-<section class="project-map">
-  <h1>Aktuelle Projekte</h1>
-  <div class="map"
-       data-lon="8.403869"
-       data-lat="49.011627"
-       data-zoom="12">
-    <% Project.all.each do |project| %>
-        <% if (project.longitude != 0) %>
-            <div data-lon="<%= project.longitude %>"
-                 data-lat="<%= project.latitude %>"
-                 data-name="<%= project.title %>"
-                 data-href="<%= url_for(project) %>">
-              <% if project.short_description.empty? %>
-                  <%= simple_format project.description %>
-              <% else %>
-                  <%= simple_format project.short_description %>
-              <% end %>
-            </div>
-        <% end %>
+<%#
+  <section>
+    <a id="photo-link" href="https://www.dropbox.com/sh/5yuk5ubbiqwhp1r/5AXIf0bhtd">
+      "Dein Bild für Karlsruhe" &rarr; Link zur Dropbox</a>
+  </section>
+  <section>
+    <h2>Trailer</h2>
+    <div id="trailer">
+      <iframe src="https://player.vimeo.com/video/91524990?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff"></iframe>
+    </div>
+  </section>
+%>
+
+
+
+<section>
+  <h1>Projektkarte 2014</h1>
+  <div id="project-map" class="map"
+       data-lat="49.011627" data-lon="8.403869" data-zoom="12">
+    <% Project.all.each do |p| %>
+      <% if (p.visible && !p.longitude.nil? && !p.latitude.nil?) %>
+        <div data-lon="<%= p.longitude %>" data-lat="<%= p.latitude %>"
+             data-name="<%= p.title %>" data-href="<%= url_for(p) %>">
+          <% if p.short_description.empty? %>
+              <%= simple_format p.description %>
+          <% else %>
+              <%= simple_format p.short_description %>
+          <% end %>
+      </div>
+      <% end %>
     <% end %>
   </div>
 </section>

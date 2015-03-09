@@ -150,8 +150,14 @@
 <% end %>
 
 <section>
-  <%= link_to t('project.action.toOverview'),
-        projects_path, class: 'btn btn-default' %>
+  <% if URI(request.referer).path == '/projects' %>
+    <%= link_to t('project.action.toOverview'),
+          'javascript:history.back()', class: 'btn btn-default' %>
+  <% else %>
+    <%= link_to t('project.action.toOverview'),
+          projects_path, class: 'btn btn-default' %>
+  <% end %>
+
 </section>
 
 </div>

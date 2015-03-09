@@ -3,9 +3,13 @@
 
 /* GENERAL STYLES */
 
-a {
+a, a:hover, a:focus {
   text-decoration: none;
-  color: rgb(44, 153, 145);
+  color: $link-color;
+}
+
+a:hover, a:focus {
+  text-shadow: 1px 1px 1px $link-hover-color;
 }
 
 h1 {

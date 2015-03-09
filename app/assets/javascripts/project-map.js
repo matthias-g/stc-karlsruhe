@@ -54,8 +54,8 @@ $(document).ready(function() {
             var m = $(this);
             var pos = new google.maps.LatLng(
                 parseFloat(m.data('lat')), parseFloat(m.data('lon')));
-            addMarker(m.data('name'), m.data('href'),
-                m.text(), pos.lat(), pos.lng());
+            addMarker(m.data('name') || '', m.data('href') || '',
+                m.text() || '', pos.lat(), pos.lng());
             bounds.extend(pos);
         });
 
@@ -65,7 +65,7 @@ $(document).ready(function() {
         if (c.hasClass('edit')) {
             google.maps.event.addListener(map, 'click', function(e) {
                 removeMarkers();
-                addMarker('Projektort', '', e.latLng.lat(), e.latLng.lng());
+                addMarker('Projektort', '', '', e.latLng.lat(), e.latLng.lng());
                 c.siblings('#project_latitude').val(e.latLng.lat());
                 c.siblings('#project_longitude').val(e.latLng.lng());
             });

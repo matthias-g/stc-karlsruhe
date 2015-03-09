@@ -1,5 +1,7 @@
-<% content_for :pageTitle do %><%= t('layout.title.userProfileEdit', user:@user.full_name) %><% end %>
-<%= render '/layouts/smallheader' -%>
+<% content_for :pageTitle do %>
+    <%= t('layout.title.userProfileEdit', user:@user.full_name) %>
+<% end %>
+
 <%= devise_error_messages! %>
 
 <%= bootstrap_form_for(resource, :as => resource_name,

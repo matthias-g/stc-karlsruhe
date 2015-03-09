@@ -1,5 +1,7 @@
-<% content_for :pageTitle do %><%= t('layout.title.projectDayList') %><% end %>
-<%= render '/layouts/smallheader' -%>
+<% content_for :pageTitle do %>
+    <%= t('layout.title.projectDayList') %>
+<% end %>
+
 <section>
     <h1><%= t('project_day.captionList') %></h1>
     <%= link_to t('project_day.new'), new_project_day_path %>

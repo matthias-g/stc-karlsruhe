@@ -138,6 +138,10 @@ de:
       projectDayView: 'Projekttag'
       messageNew: 'Kontakt'
       manageTeam: 'Team verwalten'
+      pageAbout: 'Was ist "Serve the City"?'
+      pagePressInfo: 'Presseinformationen'
+      pageLegalNotice: 'Impressum'
+      pagePrivacy: 'Datenschutzerklärung'
 
   contact:
     orga:

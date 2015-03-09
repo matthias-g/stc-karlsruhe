@@ -39,7 +39,10 @@
   <% end %>
 </div>
 
-<%= yield :pageHeader %>
+<% if !content_for?(:pageHeader) %>
+  <%= render '/layouts/smallheader' -%>
+<% end %>
+<%= yield(:pageHeader) %>
 
 <div id="container" class="container-fluid">
   <%= yield %>

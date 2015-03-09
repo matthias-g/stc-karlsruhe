@@ -4,13 +4,15 @@
 
 <section id="project-list-header">
   <h1 style="float: left"><%= t('project.label.list') %></h1>
-  <div class="infobox">
-    <div><%= t('project.label.countActive') %></div>
-    <span><%= Project.active.count %></span>
-  </div>
-  <div class="infobox">
-    <div><%= t('user.label.countActive') %></div>
-    <span><%= Participation.active_user_count %></span>
+  <div style="float: right">
+    <div class="infobox">
+      <span><%= Project.active.count %></span>
+      <div><%= t('project.label.countActive') %></div>
+    </div>
+    <div class="infobox">
+      <span><%= Participation.active_user_count %></span>
+      <div><%= t('user.label.countActive') %></div>
+    </div>
   </div>
 </section>
 

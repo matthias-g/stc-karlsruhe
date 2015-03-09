@@ -5,8 +5,7 @@
 <div class="row row-md-eq-height">
   <div class="col-md-1">
   </div>
-  <div class="col-md-5 col-medium col-only-xs-centered col-only-sm-centered">
-    <section class="filling slim">
+  <section class="col-md-5 col-medium col-only-xs-centered col-only-sm-centered slim">
       <h2><%= t('user.label.login') %></h2>
       <%= bootstrap_form_for(resource, :as => resource_name,
             :url => session_path(resource_name)) do |f| %>
@@ -18,10 +17,8 @@
         <% end -%>
         <%= f.submit t('user.action.login') %>
       <% end %>
-    </section>
-  </div>
-  <div class="col-md-5 col-medium col-only-xs-centered col-only-sm-centered">
-    <section class="filling slim">
+  </section>
+  <section class="col-md-5 col-medium col-only-xs-centered col-only-sm-centered slim">
       <h2><%= t('user.label.register') %></h2>
       <%= bootstrap_form_for(resource, :as => resource_name,
             :url => registration_path(resource_name)) do |f| %>
@@ -34,8 +31,7 @@
         <%= f.password_field :password_confirmation %>
         <%= f.submit t('user.action.register') %>
       <% end %>
-    </section>
-  </div>
+  </section>
   <div class="col-md-1">
   </div>
 </div>

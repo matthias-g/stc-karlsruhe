@@ -21,8 +21,7 @@
   <div class="col-md-3 col-md-push-9">
     <div class="row row-sm-eq-height row-md-diff-height">
 
-      <div class="col-sm-6 col-md-12">
-        <section class="slim filling">
+      <section class="col-sm-6 col-md-12 slim">
           <h3>Filtern</h3>
           <%= bootstrap_form_for(:filter, url:'/projects', method:'get', html:{id:'projectFilter'}) do |f| %>
               <%#= collection_select(:week, ProjectWeek.all, :id, :title,
@@ -40,16 +39,13 @@
               <%= f.submit 'Projekte filtern', class:'btn btn-default btn-wide' %>
               <div id="filterResults"></div>
           <% end %>
-        </section>
-      </div>
+      </section>
 
-      <div class="col-sm-6 col-md-12">
-        <section class="slim filling">
+      <section class="col-sm-6 col-md-12 slim">
           <h3>Optionen</h3>
           <%= link_to t('project.action.new'),
                new_project_path, class:'btn btn-default btn-wide' %>
-        </section>
-      </div>
+      </section>
 
     </div>
   </div>

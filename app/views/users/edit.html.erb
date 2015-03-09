@@ -9,15 +9,13 @@
   </section>
 
   <div class="row">
-    <div class="col-sm-12">
-      <section>
+    <section class="col-sm-12">
         <%= f.text_field :username %>
         <%= f.text_field :first_name %>
         <%= f.text_field :last_name %>
         <%= f.submit t('general.action.save'), class:'btn btn-default' %>
         <%= link_to t('general.action.cancel'),
              user_path(@user), class:'btn btn-default' %>
-      </section>
-    </div>
+    </section>
   </div>
 <% end %>

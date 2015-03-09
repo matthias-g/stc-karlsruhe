@@ -3,8 +3,7 @@
 <% end %>
 
 <div class="row">
-  <div class="col-medium col-centered">
-    <section>
+  <section class="col-medium col-centered">
       <h2><%= t('devise.passwords.forgot_your_password') %></h2>
       <%= bootstrap_form_for(resource, :as => resource_name,
               :url => password_path(resource_name),
@@ -14,7 +13,6 @@
           <%= f.submit t('devise.passwords.send_me_reset_password_instructions') %>
           <%= render 'devise/shared/links' %>
       <% end %>
-    </section>
-  </div>
+  </section>
 </div>
 

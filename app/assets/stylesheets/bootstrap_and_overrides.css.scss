@@ -28,30 +28,8 @@
   margin-bottom: 10px;
 }
 
-section {
-  background-color: rgba(#fff, 0.8);
-  margin: 10px 0;
-  padding: 10px;
-  overflow: hidden;
-  position: relative;
-  &.restyled {
-    background: none;
-    padding: 0 0;
-  }
-  &.slim {
-    padding: 10px !important;
-  }
-  &.filling {
-    box-sizing: border-box;
-    height: calc(100% - 20px);
-  }
-}
-@media (min-width: $screen-sm-min) {
-  section {
-    padding: 20px 30px;
-  }
-}
 
+/* buttons with 100% width */
 .btn-wide {
   display: block;
   margin: 3px;
@@ -60,22 +38,61 @@ input.btn-wide {
   width: calc(100% - 6px);
 }
 
+/* sections (standalone and within rows) */
+section {
+  margin: 0 0 $grid-gutter-width;
+  background-color: rgba(#fff, 0.8);
+  padding: 10px !important;
+  overflow: hidden;
+  position: relative;
+  &.restyled {
+    background: none;
+    padding: 0;
+  }
+  &.slim {
+    padding: 10px !important;
+  }
+}
+
+[class*="col-"] {
+  /* replace padding by (invisible) border (still included in width) */
+  margin: 0;
+  padding: 0;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 0 ($grid-gutter-width/2) $grid-gutter-width;
+
+  /* prevent double margin for cols that aren't sections but contain them */
+  & > section:first-child {
+    margin-top: 0px;
+  }
+  & > section:last-child {
+    margin-bottom: 0px;
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  section {
+    padding: 20px 30px !important;
+  }
+}
+
+/* column modifiers */
 .col-narrow {
   min-width: 250px;
   max-width: 350px;
 }
-
 .col-medium {
   min-width: 270px;
   max-width: 400px;
 }
-
 .col-centered {
   float: none !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
-
 @media (max-width: 700px) {
   .no-float-below-500px {
     display: block !important;
@@ -83,7 +100,6 @@ input.btn-wide {
     width: auto !important;
   }
 }
-
 @media (max-width: $screen-xs-max) {
   .col-only-xs-centered {
     float: none !important;
@@ -91,7 +107,6 @@ input.btn-wide {
     margin-right: auto !important;
   }
 }
-
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
   .col-only-sm-centered {
     float: none !important;
@@ -100,6 +115,9 @@ input.btn-wide {
   }
 }
 
+
+
+/* row modifiers (equal height columns) */
 @media (min-width: $screen-sm-min) {
   .row-sm-eq-height {
     display: -webkit-box;
@@ -108,7 +126,6 @@ input.btn-wide {
     display: flex;
   }
 }
-
 @media (min-width: $screen-md-min) {
   .row-md-eq-height {
     display: -webkit-box;
@@ -120,7 +137,6 @@ input.btn-wide {
     display: block !important;
   }
 }
-
 @media (min-width: $screen-lg-min) {
   .row-lg-eq-height {
     display: -webkit-box;
@@ -132,3 +148,5 @@ input.btn-wide {
     display: auto;
   }
 }
+
+

@@ -12,10 +12,10 @@
 </section>
 
 <div class="row row-sm-eq-height">
-  <div class="col-sm-6">
+  <section class="col-sm-6">
 
     <% if (current_user == @user) || current_user.is_admin? %>
-      <section class="profile-data">
+      <div class="profile-data">
         <h2>Profildaten</h2>
         <table>
           <tr>
@@ -33,11 +33,11 @@
                 <span class="glyphicon glyphicon-pencil"></span> Profil bearbeiten
             <% end %>
         <% end %>
-      </section>
+      </div>
     <% end %>
 
     <% unless @user == current_user  %>
-      <section class="contact-user-form">
+      <div class="contact-user-form">
         <h2><%= t('contact.user.title', recipient: @user.first_name) %></h2>
         <% if alert %>
             <ul id="alert" class="popupTarget">
@@ -52,11 +52,11 @@
           <%= f.text_area :body %>
           <%= f.submit t('contact.user.submit') %>
         <% end %>
-      </section>
+      </div>
     <% end %>
 
     <% if @user == current_user  %>
-      <section class="actions">
+      <div class="actions">
         <h2>Aufgaben</h2>
         <%= link_to t('contact.orga.link'), kontakt_path,
                  class:'btn btn-default btn-wide' %>
@@ -64,12 +64,11 @@
                  class:'btn btn-default btn-wide' %>
         <%= link_to t('project.action.new'), new_project_path,
                  class:'btn btn-default btn-wide' %>
-      </section>
+      </div>
     <% end %>
-  </div>
+  </section>
 
-  <div class="col-sm-6">
-    <section class="projects filling">
+  <section class="col-sm-6 projects filling">
       <h2><%= Project.model_name.human(count:2) %></h2>
       <%
          @pastProjects = (@user.projects_as_volunteer | @user.projects_as_leader)
@@ -106,8 +105,7 @@
           <%= t('user.message.hasNoProjects', user:@user.first_name) %>
         <% end %>
       <% end %>
-    </section>
-  </div>
+  </section>
 </div>
 
 </div>

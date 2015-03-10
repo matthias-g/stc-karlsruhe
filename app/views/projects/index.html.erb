@@ -41,7 +41,7 @@
           <% end %>
       </section>
 
-      <section class="col-sm-6 col-md-12 slim">
+      <section class="col-sm-6 col-md-12 slim hidden-xs hidden-sm">
           <h3>Optionen</h3>
           <%= link_to t('project.action.new'),
                new_project_path, class:'btn btn-default btn-wide' %>
@@ -82,3 +82,9 @@
   </div>
 
 </div>
+
+<section class="visible-xs visible-sm slim">
+  <h3>Optionen</h3>
+  <%= link_to t('project.action.new'),
+              new_project_path, class:'btn btn-default btn-wide' %>
+</section>

@@ -5,4 +5,5 @@ db/development.sqlite3
 db/test.sqlite3
 tmp/
 public/uploads/project
+public/downloads
 .ruby-gemset

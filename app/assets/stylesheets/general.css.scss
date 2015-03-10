@@ -3,8 +3,8 @@
 
 /* GENERAL STYLES */
 
-a:hover, a:focus {
-  text-shadow: 1px 1px 1px $link-hover-color;
+a:focus {
+  text-shadow: 0 0 1px $link-hover-color;
 }
 
 h3, h4 {

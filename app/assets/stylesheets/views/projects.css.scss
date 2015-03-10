@@ -26,20 +26,21 @@
 /* PROJECT LIST ENTRY SLIM & DEFAULT */
 .project {
   max-width: 620px;
-  padding: 7px;
-
+  padding: 12px !important;
   .project-title {
     * {line-height: 1.05em;}
+    h2 {margin-top: 10px;}
   }
   .project-image {
     position: relative;
     float: right;
     margin-left: 7px;
-    background: $bg_default;
+    background: $img_bg_default;
     width: 50%;
     max-width: 200px;
+    overflow: hidden;
     img {
-      width: 100%;
+      height: 100%;
     }
   }
   .project-status {
@@ -95,16 +96,10 @@
       border-width: 0 0 1px 0;
     }
     .project-title {
-      position: absolute;
-      top: 0;
-      left: 210px;
+      margin-left: 200px;
     }
     .project-description {
-      position: absolute;
-      top: 70px;
-      right: 5px;
-      bottom: 5px;
-      left: 210px;
+      margin-left: 200px;
       overflow: hidden;
     }
   }

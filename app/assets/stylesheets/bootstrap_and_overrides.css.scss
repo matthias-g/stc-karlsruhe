@@ -3,57 +3,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-#container {
-  padding-bottom: 50px;
-  margin: 0 auto 0;
-  max-width: 900px;
-  overflow: auto;
-}
 
-
-.navbar li>a {
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: none;
-  text-shadow: 1px 1px 1px rgba(8, 39, 37, 0.6);
-  text-transform: uppercase;
-  transition: color 0.3s ease 0s;
-}
-
-.typeHeader {
-  font: 25px CaptionFont;
-  letter-spacing: 0.04em;
-  opacity: 0.5;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-
-/* buttons with 100% width */
-.btn-wide {
-  display: block;
-  margin: 3px;
-}
-input.btn-wide {
-  width: calc(100% - 6px);
-}
-
-/* sections (standalone and within rows) */
-section {
-  margin: 0 0 $grid-gutter-width;
-  background-color: rgba(#fff, 0.8);
-  padding: 10px !important;
-  overflow: hidden;
-  position: relative;
-  &.restyled {
-    background: none;
-    padding: 0;
-  }
-  &.slim {
-    padding: 10px !important;
-  }
-}
-
+/* change cols so they can be sections at the same time */
 [class*="col-"] {
   /* replace padding by (invisible) border (still included in width) */
   margin: 0;
@@ -63,7 +14,6 @@ section {
   border-style: solid;
   border-color: transparent;
   border-width: 0 ($grid-gutter-width/2) $grid-gutter-width;
-
   /* prevent double margin for cols that aren't sections but contain them */
   & > section:first-child {
     margin-top: 0px;
@@ -73,11 +23,6 @@ section {
   }
 }
 
-@media (min-width: $screen-sm-min) {
-  section {
-    padding: 20px 30px !important;
-  }
-}
 
 /* column modifiers */
 .col-narrow {
@@ -94,7 +39,7 @@ section {
   margin-right: auto !important;
 }
 @media (max-width: 700px) {
-  .no-float-below-500px {
+  .no-float-below-700px {
     display: block !important;
     float: none !important;
     width: auto !important;
@@ -149,4 +94,15 @@ section {
   }
 }
 
-
+/* responsive utility helper classes */
+.visible-hamburger-block {
+  display: none !important;
+}
+@media (max-width: $grid-float-breakpoint) {
+  .visible-hamburger-block {
+    display: block !important;
+  }
+  .hidden-hamburger {
+    display: none !important;
+  }
+}

@@ -12,10 +12,10 @@
 </section>
 
 <section>
-  <h2 style="margin-bottom: -60px">Vision</h2>
+  <h2 style="margin-bottom: -45px">Vision</h2>
 
   <div class="row">
-    <div class="col-sm-4 spotlight no-float-below-500px">
+    <div class="col-sm-4 spotlight no-float-below-700px">
       <img src="/images/about_1.png"/>
       <div>
         Wir wollen helfen.<br/>
@@ -26,7 +26,7 @@
         unserer Stadt.
       </div>
     </div>
-    <div class="col-sm-4 spotlight no-float-below-500px">
+    <div class="col-sm-4 spotlight no-float-below-700px">
       <img src="/images/about_2.png"/>
       <div>
         Gemeinsam können wir<br/>
@@ -37,7 +37,7 @@
         heißen Stein.
       </div>
     </div>
-    <div class="col-sm-4 spotlight no-float-below-500px">
+    <div class="col-sm-4 spotlight no-float-below-700px">
       <img src="/images/about_3.png"/>
       <div>
         Serve the City<br/>
@@ -80,20 +80,22 @@
 
 <section>
   <h1>Projektkarte 2014</h1>
-  <div id="project-map" class="map"
-       data-lat="49.011627" data-lon="8.403869" data-zoom="12">
-    <% Project.all.each do |p| %>
-      <% if (p.visible && !p.longitude.nil? && !p.latitude.nil?) %>
-        <div data-lon="<%= p.longitude %>" data-lat="<%= p.latitude %>"
-             data-name="<%= p.title %>" data-href="<%= url_for(p) %>">
-          <% if p.short_description.empty? %>
-              <%= simple_format p.description %>
-          <% else %>
-              <%= simple_format p.short_description %>
+  <div class="box ratio-5_2" style="min-height:200px;">
+    <div id="project-map" class="map"
+         data-lat="49.011627" data-lon="8.403869" data-zoom="12">
+      <% Project.all.each do |p| %>
+          <% if (p.visible && !p.longitude.nil? && !p.latitude.nil?) %>
+              <div data-lon="<%= p.longitude %>" data-lat="<%= p.latitude %>"
+                   data-name="<%= p.title %>" data-href="<%= url_for(p) %>">
+                <% if p.short_description.empty? %>
+                    <%= simple_format p.description %>
+                <% else %>
+                    <%= simple_format p.short_description %>
+                <% end %>
+              </div>
           <% end %>
-      </div>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </section>
 

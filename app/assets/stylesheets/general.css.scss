@@ -3,16 +3,11 @@
 
 /* GENERAL STYLES */
 
-a, a:hover, a:focus {
-  text-decoration: none;
-  color: $link-color;
-}
-
 a:hover, a:focus {
   text-shadow: 1px 1px 1px $link-hover-color;
 }
 
-h1 {
+/*h1 {
   font: 35px CaptionFont;
   margin: 10px 0 10px;
   padding: 0;
@@ -38,14 +33,14 @@ h4 {
   font: 17px BoldFont;
   margin: 10px 0 5px;
   padding: 0;
-}
+}*/
 
 /* MULTI-USE STYLES */
 .spotlight {
   text-align: center;
-  padding: 20px 0;
+  padding: 5px;
   img {
-    width: 90px;
+    width: 100px;
     height: auto;
     margin: 15px;
   }
@@ -98,12 +93,64 @@ h4 {
   }
 }
 
-.field_with_errors:first-child {
-  display: inline;
-  color: #a60000;
+/* sections (standalone and within rows) */
+section {
+  margin: 0 0 $grid-gutter-width;
+  background-color: rgba(#fff, 0.8);
+  padding: 10px !important;
+  overflow: hidden;
+  position: relative;
+  &.slim {
+    padding: 10px !important;
+  }
+  .typeHeader {
+    font: 25px CaptionFont;
+    letter-spacing: 0.04em;
+    opacity: 0.5;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+@media (min-width: $screen-sm-min) {
+  section {
+    padding: 20px 30px !important;
+  }
 }
 
+/* buttons with 100% width (for use with .btn class) */
+.btn-wide {
+  display: block;
+  margin: 3px;
+}
+input.btn-wide {
+  width: calc(100% - 6px);
+}
 
+/* aspect ratio keeping boxes (the box must have a single child) */
+.box {
+  position: relative;
+  width: 100%;
+}
+.box:before{
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+.box > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
 
-
-
+/* possible aspect ratios */
+.ratio-4_3:before{
+  padding-top: 75%;
+}
+.ratio-16_9:before{
+  padding-top: 56.25%;
+}
+.ratio-5_2:before{
+  padding-top: 40%;
+}

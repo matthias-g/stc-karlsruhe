@@ -10,15 +10,14 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" %>
   <%= favicon_link_tag 'favicon.ico' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-<div class="background-holder"></div>
-
-<div class="navbar navbar-default  navbar-fixed-top">
+<div id="navigation" class="navbar navbar-default navbar-fixed-top">
   <button type="button" class="navbar-toggle"
       data-toggle="collapse" data-target="#navbar-collapse">
-    <span class="sr-only">Toggle navigation</span>
+    <span class="sr-only">Navigation</span>
     <span class="glyphicon glyphicon-menu-hamburger"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbar-collapse">

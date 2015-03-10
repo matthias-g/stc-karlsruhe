@@ -1,64 +1,72 @@
-/* other values */
-
-$col_positive: lightgrey;
-$bg_positive: #197435;
-
-$col_neutral: lightgrey;
-$bg_neutral: #d49203;
-
-$col_negative: lightgrey;
-$bg_negative: #a60000;
-
-$color_inactive: black;
-$bg_inactive: #aaa;
-
-$bg_notice: rgb(200,255,200);
-$bg_alert: rgb(255,141,130);
-
-$color_default: #000;
-$bg_default: #aaa;
-$border_default: #000;
-
-
-$bg_primary: rgb(40,183,175);
-$col_primary: #fff;
-$textshadow_primary: rgba(8, 39, 37, 0.6);
-
-$bg_button: rgb(44,153,145);
-
-/* bootstrap values */
-
-$screen-sm-min: 550px;
-$screen-md-min: 790px;
-$screen-lg-min: 1300px;
-$navbar-height: 30px;
-$navbar-default-bg: rgba($bg_primary, 0.9);
-$navbar-default-color: rgba($col_primary, 0.7);
-$navbar-default-link-color: rgba($col_primary, 0.7);
-$navbar-default-link-hover-color: #fff;
-$navbar-default-link-active-color: rgba($col_primary, 0.5);
-
-$navbar-default-toggle-hover-bg: $textshadow_primary;
-$navbar-default-toggle-border-color: $textshadow_primary;
-$grid-gutter-width: 16px;
-
-$link-color: rgb(44,153,145);
-$link-hover-color: rgba($link_color, 0.25);
-
-
-
-
+/* fonts */
 @font-face {
   font-family: CaptionFont;
   src: asset-url("libelsuit.ttf");
 }
-
 @font-face {
   font-family: NormalFont;
   src: asset-url("lato-regular.ttf");
 }
-
 @font-face {
   font-family: BoldFont;
   src: asset-url("lato-bold.ttf");
 }
+
+/* message / infobox colors */
+$col_positive: lightgrey;
+$bg_positive: #197435;
+$col_neutral: lightgrey;
+$bg_neutral: #d49203;
+$col_negative: lightgrey;
+$bg_negative: #a60000;
+$color_inactive: black;
+$bg_inactive: #aaa;
+
+/* flash message colors */
+$bg_notice: rgb(200,255,200);
+$bg_alert: rgb(255,141,130);
+$border_default: #000;
+$img_bg_default: #aaa;
+$footer_color: #fff;
+$footer_shadow_color: #000;
+
+
+$bg_primary: rgb(40,183,175);
+$textshadow_primary: rgba(8, 39, 37, 0.6);
+$bg_button: rgb(44,153,145);
+
+
+/* bootstrap general */
+$body-bg: #929d9b;
+$grid-gutter-width: 16px;
+$screen-sm-min: 550px;
+$screen-md-min: 790px;
+$screen-lg-min: 1300px;
+$grid-float-breakpoint: $screen-sm-min;
+
+/*$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;*/
+
+/* bootstrap navbar */
+$navbar-height: 30px;
+$navbar-default-bg: rgba($bg_primary, 0.9);
+$navbar-default-color: rgba(#fff, 0.7);
+$navbar-default-link-color: $navbar-default-color;
+$navbar-default-link-hover-color: #fff;
+$navbar-default-link-active-color: rgba(#fff, 0.5);
+$navbar-default-toggle-hover-bg: $navbar-default-color;
+$navbar-default-toggle-border-color: transparent;
+
+/* bootstrap text and headings */
+$font-family-sans-serif: NormalFont, Helvetica, Arial, sans-serif;
+$headings-font-family: CaptionFont, Helvetica, Arial, sans-serif;
+$font-size-base: 16px;
+$font-size-h1: 35px;
+$font-size-h2: 25px;
+$font-size-h3: 17px;
+$font-size-h4: 17px;
+$text-color: #000;
+$link-color: rgb(44,153,145);
+$link-hover-color: rgba($link_color, 0.25);
+$link-hover-decoration: none;

@@ -40,11 +40,11 @@
 
 #project-link {
   background: rgba(40,183,175, 0.8)
-      url("/images/projectlink_bg.png")
-      left center / contain no-repeat padding-box;
+  url("/images/projectlink_bg.png")
+  left center / contain no-repeat padding-box;
   text-align: center;
   a {
-    font: 45px CaptionFont;
+    font: 40px CaptionFont;
     color: #fff;
     text-decoration: none;
     transition: text-shadow 0.3s;
@@ -76,5 +76,4 @@
   border-radius: 6px;
   border: 1px solid rgba(#777,0.5);
   width: 100%;
-  height: 400px;
 }

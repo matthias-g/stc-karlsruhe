@@ -1,0 +1,28 @@
+#user-view, #user-edit-view {
+  h1 {
+    text-align: center;
+  }
+  h2 {
+    margin-top: 0;
+  }
+  .profile-data {
+    td:first-child {
+      text-align: right;
+      font-weight: bold;
+    }
+    td {
+      padding: 5px !important;
+    }
+    .btn {
+      margin-top: 15px;
+      float: right;
+    }
+  }
+  .projects a {
+    display: block;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+}
+
+

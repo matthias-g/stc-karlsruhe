@@ -1,0 +1,64 @@
+<% content_for :pageTitle do %>
+    <%= t('layout.title.pagePressInfo') %>
+<% end %>
+
+<section>
+  <h1>Presseinformationen</h1>
+</section>
+
+<div class="row row-sm-eq-height">
+  <section class="col-sm-8">
+    <p>
+      Serve the City ist eine Initiative, die Menschen jedes Jahr eine Woche lang mit Projekten
+      zusammenbringt, bei denen sie sich freiwillig engagieren können. Viele Leute wollen gerne
+      etwas Gutes tun, wissen aber nicht wo und können sich nicht langfristig verpflichten. Serve
+      the City schafft Gelegenheiten, mit kleinen Beiträgen sinnvoll den sozialen
+      Zusammenhalt in unserer Stadt zu stärken und dabei wertvolle Erfahrungen zu sammeln.
+      Die Mitarbeiter engagieren sich ehrenamtlich, finanziert wird Serve the City über Spenden.
+    </p>
+    <p>
+      Über die Dateien und Links rechts finden Sie Informationen zu Serve the City in Karlsruhe.
+      Weitere Informationen finden Sie auch auf unserer
+      <%= link_to 'Facebook-Seite', 'https://de-de.facebook.com/pages/Serve-the-City-Karlsruhe/585012781526303', target: '_blank' %>.
+    </p>
+    <p>
+      Bei Fragen stehen wir Ihnen jederzeit gerne zur Verfügung – kontaktieren Sie uns einfach!
+    </p>
+    <div id="presse-contact" class="row">
+      <div class="col-sm-6">
+        <strong>Tabea Lange</strong><br />
+        PR & Kommunikation<br />
+        0151 1960 1214<br />
+        <%= mail_to 'tabea@servethecity-karlsruhe.de', nil, encode: :hex %>
+      </div>
+      <div class="col-sm-6">
+        <strong>Friedrich Ellmer</strong><br />
+        PR & Kommunikation<br />
+        0151 522 70 396<br />
+        <%= mail_to 'fiete@servethecity-karlsruhe.de', nil, encode: :hex %>
+      </div>
+    </div>
+  </section>
+  <div class="col-sm-4">
+    <div class="row">
+       <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
+        <h2>Downloads</h2>
+        <ul>
+          <li><%= link_to 'Allgemeine Informationen (pdf)', '/downloads/Allgemeine Informationen.pdf' %></li>
+          <li><i style="color: gray;">Bilder der Projektwoche 2014 (niedrige Auflösung, zip)</i></li>
+          <li><i style="color: gray;">Bilder der Projektwoche 2014 (hohe Auflösung, zip)</i></li>
+          <li><i style="color: gray;">Logos (zip)</i></li>
+          <li><%= link_to 'Artikel der Badischen Neuesten Nachrichten vom 10.05.2014 (pdf)', '/downloads/Artikel der Badischen Neuesten Nachrichten vom 10.05.2014.pdf' %></li>
+        </ul>
+      </section>
+      <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
+        <h2>Links</h2>
+        <ul>
+          <li><%= link_to 'Über Serve the City', '/serve-the-city' %></li>
+          <li><%= link_to 'Serve the City International', 'http://www.servethecity.net', target: '_blank' %></li>
+          <li><%= link_to 'Serve the City Deutschland', 'http://www.servethecity.de', target: '_blank' %></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>

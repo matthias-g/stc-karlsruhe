@@ -1,35 +1,21 @@
-<%= render '/layouts/smallheader' -%>
+<% content_for :pageTitle do %>
+    <%= t('layout.title.userEdit', user:@user.full_name) %>
+<% end %>
 
-<%= form_for @user do |f| %>
+<%= bootstrap_form_for @user do |f| %>
   <section>
-    <h1>Profil bearbeiten: <%= @user.full_name %></h1> ( <%= link_to "zurück zum Profil", user_path(@user) %> )
+    <div class="typeHeader">Profil bearbeiten</div>
+    <h1><%= @user.full_name %></h1>
   </section>
 
-  <div class="two-col-group profile-view profile-edit-view">
-    <div>
-      <section class="info">
-        <h1>Mein Profil</h1>
-        <h3>Benutzername</h3>
+  <div class="row">
+    <section class="col-sm-12">
         <%= f.text_field :username %>
-        <h3>Vorname</h3>
         <%= f.text_field :first_name %>
-        <h3>Nachname</h3>
         <%= f.text_field :last_name %>
-      </section>
-      <section class="info">
-        <i>Gib dein aktuelles Passwort ein um die Änderungen zu bestätigen</i>
-        <br />
-        <%= f.password_field :current_password, placeholder: 'Aktuelles Passwort' %>
-        <%= f.submit "Daten aktualisieren" %>
-      </section>
-    </div>
-    <div>
-      <section class="save_edit">
-        <% if @user == current_user  %>
-          ( <%= link_to 'Passwort oder E-Mail ändern', edit_user_registration_path %> )
-        <% end %>
-      </section>
-    </div>
+        <%= f.submit t('general.action.save'), class:'btn btn-default' %>
+        <%= link_to t('general.action.cancel'),
+             user_path(@user), class:'btn btn-default' %>
+    </section>
   </div>
-
 <% end %>

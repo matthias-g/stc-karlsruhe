@@ -1,0 +1,27 @@
+<% content_for :pageTitle do %>
+    <%= t('layout.title.messageNew') %>
+<% end %>
+
+<section class="contact-form">
+  <% if alert %>
+      <ul id="alert" class="popupTarget">
+        <% alert.each do |msg| %>
+            <li><%= msg[0] %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
+  <%= bootstrap_form_for @message, :url => kontakt_path do |form| %>
+      <h1><%= t 'contact.orga.title' %></h1>
+      <div class="leftCol">
+        <%= t 'contact.orga.text' %>
+      </div>
+      <div class="rightCol">
+        <%= form.email_field :sender, value: user_signed_in? ? current_user.email : '', label: t('contact.general.placeholders.sender') %>
+        <%= form.text_field :subject, label: t('contact.general.placeholders.subject') %>
+        <%= form.text_area :body, label: t('contact.general.placeholders.body') %>
+        <%= form.hidden_field :recipient, value: 'default@servethecity-karlsruhe.de' %>
+        <%= form.submit t('contact.orga.submit') %>
+      </div>
+  <% end %>
+</section>

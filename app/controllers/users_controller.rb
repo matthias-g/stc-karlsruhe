@@ -1,40 +1,33 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :contact_user]
+  before_action :set_user, only: [:show, :contact_user, :edit]
   before_action :authenticate_user!
-  before_action :authenticate_admin_user!, only: [:index]
+  before_action :authenticate_admin_user!, only: [:index, :edit]
 
-  # GET /users
-  # GET /users.json
+  respond_to :html
+
   def index
     @users = User.all
+    respond_with(@user)
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
-    #Message for contac_user
+    #Message for contact_user
     @message = Message.new
+    respond_with(@user)
   end
 
   def edit
-    @user = current_user
+    respond_with(@user)
   end
 
   def update
     @user = User.find(current_user.id)
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to action: :show, notice: t('user.message.profileUpdated') }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    @user.update(user_params)
+    respond_with(@user)
   end
 
   def contact_user
-    @message = Message.new(params[:message])
+    @message = Message.new(params[:messages])
     @message.sender = current_user.email
     @message.recipient = @user.email
     if @message.valid?

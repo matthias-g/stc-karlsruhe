@@ -1,4 +1,7 @@
-<%= render '/layouts/smallheader' -%>
+<% content_for :pageTitle do %>
+    <%= t('layout.title.projectDayList') %>
+<% end %>
+
 <section>
     <h1><%= t('project_day.captionList') %></h1>
     <%= link_to t('project_day.new'), new_project_day_path %>
@@ -7,8 +10,8 @@
     <table>
       <thead>
         <tr>
-          <th><%= t('gen.name') %></th>
-          <th><%= t('gen.actions') %></th>
+          <th><%= t('general.label.name') %></th>
+          <th><%= t('general.label.actions') %></th>
         </tr>
       </thead>
 
@@ -17,8 +20,8 @@
           <tr>
             <td><%= link_to project_day.title, project_day %></td>
             <td>
-              <%= link_to t('gen.edit'), edit_project_day_path(project_day) %> |
-              <%= link_to t('gen.delete'), project_day, method: :delete,
+              <%= link_to t('general.action.edit'), edit_project_day_path(project_day) %> |
+              <%= link_to t('general.action.delete'), project_day, method: :delete,
                   data: { confirm: t('project_day.confirmDelete') % [project_day.title]} %>
             </td>
           </tr>

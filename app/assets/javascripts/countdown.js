@@ -16,9 +16,9 @@ $(document).ready(function () {
             return;
         }
         fields.eq(0).text(Math.floor(d / _day));
-        fields.eq(1).text(Math.floor((d % _day) / _hour));
-        fields.eq(2).text(Math.floor((d % _hour) / _minute));
-        fields.eq(3).text(Math.floor((d % _minute) / _second));
+        fields.eq(1).text(('0' + Math.floor((d % _day) / _hour)).slice(-2));
+        fields.eq(2).text(('0' + Math.floor((d % _hour) / _minute)).slice(-2));
+        fields.eq(3).text(('0' + Math.floor((d % _minute) / _second)).slice(-2));
     }
     timer = setInterval(update, 1000);
     update();

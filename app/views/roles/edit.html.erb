@@ -1,4 +1,6 @@
-<%= render '/layouts/smallheader' -%>
+<% content_for :pageTitle do %>
+    <%= t('layout.title.editRole') %>
+<% end %>
 
 <section>
   <h1><%= t('role.captionEdit') % [@role.title] %></h1>

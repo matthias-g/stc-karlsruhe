@@ -1,0 +1,84 @@
+<ul class="nav navbar-nav">
+  <li>
+    <%= link_to root_path do %>
+        <span class="glyphicon glyphicon-home"></span>
+        <%= t('layout.links.home') %>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to projects_path do %>
+        <span class="glyphicon glyphicon-tasks"></span>
+        <%= t('layout.links.projects') %>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to contact_path do %>
+      <span class="glyphicon glyphicon-envelope"></span>
+      <%= t('layout.links.contact') %>
+    <% end %>
+  </li>
+</ul>
+
+<ul class="nav navbar-nav navbar-right" style="padding-right: 15px;">
+
+  <% if user_signed_in? %>
+
+    <li><%= link_to current_user.full_name, user_path(current_user) %></li>
+    <li><%= link_to t('user.action.logout'), destroy_user_session_path, :method => :delete %></li>
+
+  <% else %>
+
+    <li class="dropdown hidden-hamburger">
+      <%= link_to new_user_session_path, data:{toggle:'dropdown'}, class:'dropdown-toggle' do %>
+        <span class="glyphicon glyphicon-log-in"></span> <%= t('user.action.login') %>
+      <% end %>
+      <div class="dropdown-menu">
+        <%= bootstrap_form_for(resource, as: resource_name,
+             url: session_path(resource_name)) do |f| %>
+          <%= f.text_field :login, autofocus: true,
+                hide_label: true, placeholder: t('user.label.user') %>
+          <%= f.password_field :password,
+                hide_label: true, placeholder: t('user.label.password') %>
+          <% if devise_mapping.rememberable? -%>
+            <%= f.check_box :remember_me %>
+          <% end -%>
+          <%= f.submit t('user.action.login'), class:'btn btn-default btn-wide' %>
+        <% end %>
+      </div>
+    </li>
+
+    <li class="dropdown hidden-hamburger">
+      <%= link_to register_path, data:{toggle:'dropdown'}, class:'dropdown-toggle' do %>
+          <span class="glyphicon glyphicon-user"></span> <%= t('user.action.register') %>
+      <% end %>
+      <div class="dropdown-menu">
+        <%= bootstrap_form_for(resource, as: resource_name,
+             url: registration_path(resource_name)) do |f| %>
+          <%#= devise_error_messages! %>
+          <%= f.text_field :email, autofocus: true,
+                hide_label: true, placeholder: 'Email' %>
+          <%= f.text_field :first_name,
+                hide_label: true, placeholder: 'Vorname' %>
+          <%= f.text_field :last_name,
+                hide_label: true, placeholder: 'Nachname' %>
+          <%= f.password_field :password,
+                hide_label: true, placeholder: 'Passwort'%>
+          <%= f.password_field :password_confirmation,
+                hide_label: true, placeholder: 'Passwort wiederholen'%>
+          <%= f.submit t('user.action.register'), class:'btn btn-default btn-wide' %>
+        <% end %>
+      </div>
+    </li>
+
+    <li class="visible-hamburger-block">
+      <%= link_to new_user_session_path do %>
+          <span class="glyphicon glyphicon-log-in"></span> <%= t('user.action.login') %>
+      <% end %>
+    </li>
+    <li class="visible-hamburger-block">
+      <%= link_to register_path do %>
+          <span class="glyphicon glyphicon-user"></span> <%= t('user.action.register') %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

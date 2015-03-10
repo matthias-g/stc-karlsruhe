@@ -1,4 +1,6 @@
-<%= render '/layouts/smallheader' -%>
+<% content_for :pageTitle do %>
+    <%= t('layout.title.projectDayNew') %>
+<% end %>
 
 <section>
   <h1><%= t('project_day.captionNew') %></h1>

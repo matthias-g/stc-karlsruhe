@@ -2,13 +2,8 @@ require 'test_helper'
 
 class RolesControllerTest < ActionController::TestCase
   setup do
-    @role = roles(:one)
-  end
-
-  test "should get contact" do
-    get :contact
-    assert_response :success
-    assert_not_nil assigns(:roles)
+    @role = roles(:default)
+    sign_in users(:admin)
   end
 
   test "should get new" do

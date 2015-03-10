@@ -1,77 +1,19 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 de:
+  activemodel:
+    errors:
+      models:
+        message:
+          attributes:
+            sender:
+             blank: 'Bitte gib deine E-Mail-Adresse an.'
+            recipient:
+             blank: 'Wohin soll die Nachricht gehen? Bitte einen Empfänger angeben.'
+            subject:
+             blank: 'Bitte gib einen kurzen Betreff an.'
+            body:
+             blank: 'Nachricht konnte gesendet werden: Du hast nichts geschrieben.'
+
   activerecord:
-    models:
-      project:
-        zero: 'Projekt'
-        one: 'Projekt'
-        other: 'Projekte'
-      user:
-        zero: 'Benutzer'
-        one: 'Benutzer'
-        other: 'Benutzer'
-    attributes:
-      project:
-        title: 'Projekttitel'
-        description: 'Beschreibung'
-        location: 'Projektort'
-        latitude: 'Breitengrad'
-        longitude: 'Längengrad'
-        individual_tasks: 'Einzelne Arbeiten'
-        material: 'Benötigtes Material'
-        requirements: 'Voraussetzungen'
-        visible: 'Sichtbar'
-        picture: 'Bild'
-        picture_source: 'Bildrechte /-quelle'
-        desired_team_size: 'Gewünschte Teamgröße'
-        leaders: 'Leitung'
-        volunteers: 'Team'
-        status: 'Status'
-        week: Projektwoche
-        days: Projekttage
-        time: Zeit
-      user:
-        username: 'Benutzername'
-        first_name: 'Vorname'
-        last_name: 'Nachname'
-        email: 'E-Mail'
-        password: 'Passwort'
-        password_confirmation: 'Passwort bestätigen'
-        remember_me: "Angemeldet bleiben"
-      page:
-        title: 'Seitentitel'
-        header_name: 'Partial-Name des Headers'
-        address: 'URL-Pfad der Seite'
-        sections: 'Seitenabschnitte'
-      page_section:
-        title: 'Abschnitt-Name'
-        partial_name: 'Partial-Name (optional)'
-        index: 'Index (zur Sortierung auf der Seite)'
-        content: 'HTML-Eingabe (zusätzlich oder alternativ zum Partial)'
-        css_class: 'CSS-Klasse für den Container'
-        stylesheet: 'Stylesheet (Achtung: CSS-Regeln gelten für die ganze Seite)'
-      project_day:
-        title: 'Titel'
     errors:
       models:
         user:
@@ -87,95 +29,180 @@ de:
       messages:
         blank: 'darf nicht leer sein.'
         onlyLetters: 'darf nur Buchstaben enthalten.'
+    models:
+      project:
+        zero: 'Projekt'
+        one: 'Projekt'
+        other: 'Projekte'
+      user:
+        zero: 'Benutzer'
+        one: 'Benutzer'
+        other: 'Benutzer'
+    attributes:
+      project:
+        title: 'Projekttitel'
+        description: 'Beschreibung'
+        short_description: 'Kurzbeschreibung'
+        location: 'Projektort'
+        latitude: 'Breitengrad'
+        longitude: 'Längengrad'
+        individual_tasks: 'Einzelne Arbeiten'
+        material: 'Benötigtes Material'
+        requirements: 'Voraussetzungen'
+        visible: 'Sichtbar'
+        picture: 'Bild'
+        picture_source: 'Bildrechte /-quelle'
+        desired_team_size: 'Gewünschte Teamgröße'
+        leaders: 'Leitung'
+        day_ids: 'Projekttage'
+        volunteers: 'Team'
+        status: 'Status'
+        week: Projektwoche
+        days: Projekttage
+        time: Zeit
+      user:
+        username: 'Benutzername'
+        first_name: 'Vorname'
+        last_name: 'Nachname'
+        email: 'E-Mail'
+        password: 'Passwort'
+        password_confirmation: 'Passwort bestätigen'
+        remember_me: 'merken'
+      page:
+        title: 'Seitentitel'
+        header_name: 'Partial-Name des Headers'
+        address: 'URL-Pfad der Seite'
+        sections: 'Seitenabschnitte'
+      page_section:
+        title: 'Abschnitt-Name'
+        partial_name: 'Partial-Name (optional)'
+        index: 'Index (zur Sortierung auf der Seite)'
+        content: 'HTML-Eingabe (zusätzlich oder alternativ zum Partial)'
+        css_class: 'CSS-Klasse für den Container'
+        stylesheet: 'Stylesheet (Achtung: CSS-Regeln gelten für die ganze Seite)'
+      project_day:
+        title: 'Titel'
+      message:
+        sender: 'Sender'
+        recipient: 'Empfänger'
+        subject: 'Betreff'
+        body: 'Nachricht'
 
-  activemodel:
-    errors:
-      models:
-        message:
-          attributes:
-            sender:
-             blank: 'Bitte gib deine E-Mail-Adresse an.'
-            recipient:
-             blank: 'Wohin soll die Nachricht gehen? Bitte einen Empfänger angeben.'
-            subject:
-             blank: 'Bitte gib einen kurzen Betreff an.'
-            body:
-             blank: 'Nachricht konnte gesendet werden: Du hast nichts geschrieben.'
 
   general:
     action:
       show: 'Anzeigen'
+      edit: 'Bearbeiten'
+      save: 'Speichern'
+      cancel: 'Abbrechen'
+      delete: 'Löschen'
     label:
-      adminPanel: 'Admin-Panel'
+      actions: 'Aktionen'
+      name: 'Name'
       error: 'Fehler'
       notDisplayed: 'wird nicht angezeigt'
     message:
       confirmDelete: 'Wollen Sie das wirklich tun?'
 
-  contact:
-    form:
-      success: 'Vielen Dank für Deine Nachricht! Wir werden sie so schnell wie möglich beantworten.'
-      submit: 'Nachricht senden'
-      title: 'Kontakt aufnehmen'
-      text: 'Du hast die eine oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei Dir.'
-    volunteers:
-      success: 'Die Nachricht wurde an dich und alle Teilnehmer geschickt.'
-      submit: 'Nachricht verteilen'
-      title: 'Teilnehmer des Projektes benachrichtigen'
-      text: 'Hier kannst du den Teilnehmern des Projektes eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
-    user:
-      success: 'Die Nachricht wurde an %{recipient} geschickt.'
-      submit: 'Nachricht senden'
-    placeholder:
-      email: 'E-Mail'
-      subject: 'Betreff'
-      body: 'Nachricht'
-    field_title:
-      email: 'Deine E-Mail-Adresse'
-      subject: "Worum geht's?"
-      body: 'Deine Nachricht'
-
   layout:
-    title: 'Serve the City Karlsruhe'
-    meta_links:
-      projects: 'Projekte'
+    pageTitle: 'Serve the City Karlsruhe'
+    links:
       home: 'Startseite'
-    pageLinks:
+      projects: 'Projekte'
       contact: 'Kontakt'
       aboutUs: 'Impressum'
       privacy: 'Datenschutz'
       disclaimer: 'Haftungsausschluss'
+      press: 'Presseinformationen'
+      stcInternational: 'Serve the City international'
+    title:
+      projectList: 'Projekte 2014'
+      projectNew: 'Neues Projekt'
+      projectEdit: 'Projekt bearbeiten: "%{project}"'
+      projectView: 'Projekt "%{project}"'
+      roleList: 'Rollen'
+      roleNew: 'Neue Benutzerrolle'
+      roleEdit: 'Rolle bearbeiten'
+      roleView: 'Benutzerrolle'
+      userEdit: 'User bearbeiten: "%{user}"'
+      userList: 'Registrierte Benutzer'
+      userView: 'Profil "%{user}"'
+      userLogin: 'Login'
+      userRegister: 'Registrierung'
+      userProfileEdit: 'Profil bearbeiten: "%{user}"'
+      userPasswordReset: 'Passwort zurücksetzen'
+      userEmailConfirmation: 'E-Mail-Adressen-Bestätigung'
+      userUnlocking: 'Account-Freischaltung'
+      projectDayEdit: 'Projekttag bearbeiten'
+      projectDayList: 'Projekttage'
+      projectDayNew: 'Neuer Projekttag'
+      projectDayView: 'Projekttag'
+      messageNew: 'Kontakt'
+      manageTeam: 'Team verwalten'
+      pageAbout: 'Was ist "Serve the City"?'
+      pagePressInfo: 'Presseinformationen'
+      pageLegalNotice: 'Impressum'
+      pagePrivacy: 'Datenschutzerklärung'
+
+  contact:
+    orga:
+      link: 'Serve the City kontaktieren'
+      title: 'Kontakt aufnehmen'
+      text: 'Du hast die eine oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei Dir.'
+      submit: 'Nachricht senden'
+      success: 'Vielen Dank für Deine Nachricht! Wir werden sie so schnell wie möglich beantworten.'
+    team:
+      title: 'Teilnehmer des Projektes benachrichtigen'
+      text: 'Hier kannst du den Teilnehmern des Projektes eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
+      submit: 'Nachricht verteilen'
+      success: 'Die Nachricht wurde an dich und alle Teilnehmer geschickt.'
+    user:
+      title: 'Kontaktiere %{recipient}'
+      submit: 'Nachricht senden'
+      success: 'Die Nachricht wurde an %{recipient} geschickt.'
+    general:
+      placeholders:
+        sender: 'Deine E-Mail-Adresse'
+        recipient: 'E-Mail-Adresse des Empfängers'
+        subject: "Worum geht's?"
+        body: 'Deine Nachricht'
 
   project:
     action:
       new: 'Neues Projekt erstellen'
       edit: 'Projekt bearbeiten'
-      save: 'Projekt speichern'
-      delete: 'Projekt löschen'
       enter: 'Team beitreten'
       leave: 'Team verlassen'
-      editLeaders: 'Projektleiter ändern'
-      asLeader: '(=> als Leiter)'
-      notAsLeader: '(X)'
-      removeVolunteer: '(X)'
-      toOverview: 'Zurück zur Übersicht'
-      toProject: 'Zurück zum Projekt'
-      makeVisible: 'Sichtbar machen'
-      makeInvisible: 'Unsichtbar machen'
+      delete: 'Projekt löschen'
       open: 'Projekt öffnen'
       close: 'Projekt abschließen'
+      makeVisible: 'Projekt freigeben'
+      makeInvisible: 'Projekt verstecken'
+      manageTeam: 'Team verwalten'
+      addLeader: 'als Leiter hinzufügen'
+      removeLeader: 'Projektleiter entfernen'
+      removeVolunteer: 'Teammitglied entfernen'
+      toOverview: 'zur Projektliste'
+      toProject: 'zurück zum Projekt'
+      searchProjects: 'Projekte suchen'
+      findProject: 'Projekt finden'
+
     label:
       project: 'Projekt'
+      manageProject: 'Projektverwaltung'
       status: 'Projektstatus'
-      new: 'Neues Projekt erstellen'
-      edit: 'Projekt bearbeiten: %s'
+      new: 'Neues Projekt'
+      edit: 'Projekt bearbeiten'
+      manageTeam: 'Team verwalten'
+      leaders: 'Leitung'
+      team: 'Team'
       list: 'Projekte 2014'
-      countActive: 'Aktuelle Projekte'
-      projectName: 'Projektname'
+      countActive: 'Projekte'
       uploadImage: 'Bild hochladen'
-    edit:
-      hint:
-        picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
+
+    help:
+      picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
+      short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Projektliste statt der ausführlichen Beschreibung angezeigt.'
     message:
       created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'
@@ -192,26 +219,35 @@ de:
       closed: Abgeschlossen
 
   user:
-    link_to_project: 'Zu den Projekten'
     action:
       login: 'Anmelden'
       logout: 'Abmelden'
       register: 'Registrieren'
       confirmAccount: 'Account bestätigen'
       unlockAccount: 'Account freischalten'
+      deleteAccount: 'Account löschen'
       resendInstructions: 'Anleitung zur Bestätigung nochmal senden'
       changePassword: 'Passwort ändern'
+      edit: 'Profil bearbeiten'
     label:
-      countActive: 'Teilnehmer'
+      login: 'Anmelden'
+      register: 'Registrieren'
+      countActive: 'Mitarbeiter'
+      password: 'Passwort'
+      user: 'User'
+      profile: 'Profil'
+      myProfile: 'Mein Profil'
+      projectsAsLeader: 'Leitung'
+      projectsAsVolunteer: 'Teilnahme'
+      pastProjects: 'Abgeschlossen'
     message:
       profileUpdated: 'Profil erfolgreich aktualisiert.'
       loggedInAs: 'eingeloggt als %s'
-
-  gen:
-    name: 'Name'
-    actions: 'Aktionen'
-    edit: 'Bearbeiten'
-    delete: 'Löschen'
+      hasNoProjects: '%{user} nimmt noch an keinem Projekt teil.'
+      youHaveNoProjects: 'Du nimmst noch an keinem Projekt teil.'
+      confirmDelete: 'Profil wirklich löschen?'
+    help:
+      passwordLength: 'Mindestens 6 Zeichen lang.'
 
   page:
     new: 'Neue Seite'

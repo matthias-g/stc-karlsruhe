@@ -1,6 +1,6 @@
 @import "definitions";
 
-/* LAYOUT */
+/* static layout */
 
 html {
   height: 100%;
@@ -9,86 +9,73 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: #929d9b image-url("bg.jpg") center / cover no-repeat fixed;
-  font: 16px NormalFont;
-  color: #000;
   min-height: 100%;
   position: relative;
+  background-image: image-url("bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-#menubar {
-  position: fixed;
-  left: 0; top: 0; right: 0;
-  padding: 5px 0;
-  background: rgba($bg_primary, 0.8);
-  box-shadow: 0 0 2px rgba(#000, 1);
-  text-align: right;
-  z-index: 100;
-  vertical-align: center;
-  & > a, & > * > a {
-    color: rgba($col_primary, 0.7);
+#navigation {
+  .navbar-toggle {
+    color: $navbar-default-color;
+    font-size: 30px;
+    &:hover {
+      color: $navbar-default-bg !important;
+    }
+  }
+  li>a {
     font-size: 14px;
     font-weight: bold;
-    padding: 0 10px;
-    text-shadow: 1px 1px 1px $textshadow_primary;
-    text-transform: uppercase;
-    transition: color 0.25s ease 0s;
     text-decoration: none;
-    transition: color 0.3s;
-    &:hover {
-      color: $col_primary;
-    }
+    text-shadow: 1px 1px 1px rgba(8, 39, 37, 0.6);
+    text-transform: uppercase;
+    transition: color 0.3s ease 0s;
   }
-
-  #metaLinks {
-    float: left;
-  }
-
-  .miniPopup {
-    display: inline-block;
-    & > div {
-      text-align: left;
-      background: rgba(#fff,0.8);
-      border: 1px solid #000;
-      position: fixed;
-      right: 0;
-      top: 30px;
-      padding: 10px 20px 20px;
-      display: none;
-      min-height: 80px;
-    }
-  }
-}
-
-.loginOptions {
-  margin-top: 20px;
-  & > * {
-    margin-right: 10px;
-    float: left;
+  .dropdown-menu {
+    padding: 10px;
+    min-width: 230px;
+    background-color: rgba(#fff, 0.8);
   }
 }
 
 header {
   margin: 0 auto;
+  padding: 70px 0 40px;
   background: image-url("logo_bg.png") center top / auto 100% no-repeat;
-  padding: 70px 0;
+  text-align: center;
 
-  .logo {
-    display: block;
-    width: 400px;
-    height: 443px;
-    margin: 0 auto;
-    background: image-url("logo.png") center top no-repeat;
+  .logo img {
+    max-width: 90%;
   }
 
   &.smallheader {
     background-image: image-url("logo_bg_small.png");
-    padding: 50px 0 20px;
-    .logo {
-      width: 200px;
-      height: 206px;
-      background-image: image-url("logo_small.png");
-    }
+    padding-bottom: 30px;
+  }
+}
+
+#container {
+  padding-bottom: 50px;
+  margin: 0 auto 0;
+  max-width: 900px;
+  overflow: auto;
+}
+
+footer {
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+  font-size: 0.7em;
+  color: $footer_color;
+  padding: 5px;
+  text-shadow:
+      0 0 1px rgba($footer_shadow_color, 0.5),
+      1px 1px 1px rgba($footer_shadow_color, 1);
+  a, a:hover, a:focus {
+    color: $footer_color;
+    text-shadow: none;
   }
 }
 
@@ -105,7 +92,7 @@ header {
   }
   .alert-notice {
     background: rgba($bg_notice, 0.85);
-   }
+  }
   .alert-alert {
     background: rgba($bg_alert, 0.85);
   }
@@ -113,75 +100,3 @@ header {
     background: rgba($bg_alert, 0.85);
   }
 }
-
-
-#content {
-  padding-bottom: 50px;
-  margin: 0 auto 0;
-  width: 900px;
-  overflow: auto;
-}
-
-section {
-  background-color: rgba(#fff, 0.8);
-  margin: 10px 0;
-  padding: 20px 40px;
-  overflow: hidden;
-  position: relative;
-  &.restyled {
-    background: none;
-    padding: 0 0;
-  }
-}
-
-footer {
-  position: absolute;
-  bottom: 10px;
-  right: 5px;
-  font-size: 11px;
-  color: #FFF;
-  text-shadow: 0 0 1px rgba(#000, 0.5), 1px 1px 1px rgba(#000, 1);
-}
-
-footer a {
-  color: #FFF;
-  text-decoration: none;
-}
-
-#popup {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(#000,0.3);
-  z-index: 100;
-  display: table;
-  #popupMiddle {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-  }
-  #popupInner {
-    position: relative;
-    display: inline-block;
-    background: rgba(#fff, 1.0);
-    min-width: 300px;
-    min-height: 200px;
-    padding: 35px;
-    box-shadow: 3px 3px 15px rgba(#000, 0.8);
-    text-align: left;
-    section {
-      background: none;
-    }
-  }
-  #popupClose {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    width: 32px;
-    height: 32px;
-    background: image-url("close.png");
-  }
-}
-

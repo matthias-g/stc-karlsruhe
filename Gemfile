@@ -25,6 +25,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
+gem 'lazyload-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -39,8 +40,15 @@ end
 
 gem 'devise'
 
-gem 'rmagick'
+gem 'mini_magick'
 gem 'carrierwave'
+
+gem 'bootstrap-sass'
+gem 'bootstrap_form'
+
+gem 'actionview-encoded_mail_to'
+
+gem 'pg'
 
 group :development do
   # Use Capistrano for deployment
@@ -55,7 +63,5 @@ group :development do
 end
 
 group :production do
-  # Use PostgreSQL as the production database
-  gem 'pg'
   gem 'dotenv-rails'
 end

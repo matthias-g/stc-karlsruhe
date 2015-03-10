@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= t('layout.title') %></title>
+  <title>
+    <%= (yield(:pageTitle) + ' - ') if content_for?(:pageTitle) %>
+    <%= t('layout.pageTitle') %>
+  </title>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" %>
   <%= favicon_link_tag 'favicon.ico' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-<div id="menubar">
-  <%= render '/layouts/menubar' -%>
+<div id="navigation" class="navbar navbar-default navbar-fixed-top">
+  <button type="button" class="navbar-toggle"
+      data-toggle="collapse" data-target="#navbar-collapse">
+    <span class="sr-only">Navigation</span>
+    <span class="glyphicon glyphicon-menu-hamburger"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbar-collapse">
+    <%= render '/layouts/navbar' -%>
+  </div>
 </div>
 
 <div id="messages">
@@ -27,9 +38,12 @@
   <% end %>
 </div>
 
-<%= yield :pageHeader %>
+<% if !content_for?(:pageHeader) %>
+  <%= render '/layouts/smallheader' -%>
+<% end %>
+<%= yield(:pageHeader) %>
 
-<div id="content">
+<div id="container" class="container-fluid">
   <%= yield %>
 </div>
 

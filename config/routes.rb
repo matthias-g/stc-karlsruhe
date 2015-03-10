@@ -8,8 +8,8 @@ StcKarlsruhe::Application.routes.draw do
 
   resources :roles
 
-  get 'contact', to: 'contact_form#new'
-  post 'contact', to: 'contact_form#create'
+  get 'kontakt', to: 'messages#new', as: 'contact'
+  post 'kontakt', to: 'messages#create'
 
   post 'users/:id', to: 'users#contact_user'
   post 'projects/:id', to: 'projects#contact_volunteers'
@@ -36,14 +36,9 @@ StcKarlsruhe::Application.routes.draw do
     get 'register', :to => 'devise/registrations#new'
   end
 
-  resources :page_sections
-
-  resources :pages
-
   resources :users, except: [:destroy, :new, :create]
 
-  # root 'pages#show', id: 1
-  root 'pages#welcome'
+  root 'pages#home'
 
   get '/:page', to: 'pages#page'
 

@@ -23,8 +23,16 @@
 
   <% if user_signed_in? %>
 
-    <li><%= link_to current_user.full_name, user_path(current_user) %></li>
-    <li><%= link_to t('user.action.logout'), destroy_user_session_path, :method => :delete %></li>
+    <li>
+      <%= link_to user_path(current_user) do %>
+        <span class="glyphicon glyphicon-log-user"></span> <%= current_user.full_name %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to destroy_user_session_path, :method => :delete do %>
+        <span class="glyphicon glyphicon-log-out"></span> <%= t('user.action.logout') %>
+      <% end %>
+    </li>
 
   <% else %>
 
@@ -33,7 +41,7 @@
         <span class="glyphicon glyphicon-log-in"></span> <%= t('user.action.login') %>
       <% end %>
       <div class="dropdown-menu">
-        <%= bootstrap_form_for(resource, as: resource_name,
+        <%= bootstrap_form_for(resource, as: resource_name, namespace: :navbar,
              url: session_path(resource_name)) do |f| %>
           <%= f.text_field :login, autofocus: true,
                 hide_label: true, placeholder: t('user.label.user') %>
@@ -52,7 +60,7 @@
           <span class="glyphicon glyphicon-user"></span> <%= t('user.action.register') %>
       <% end %>
       <div class="dropdown-menu">
-        <%= bootstrap_form_for(resource, as: resource_name,
+        <%= bootstrap_form_for(resource, as: resource_name, namespace: :navbar,
              url: registration_path(resource_name)) do |f| %>
           <%#= devise_error_messages! %>
           <%= f.text_field :email, autofocus: true,

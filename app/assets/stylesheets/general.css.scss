@@ -93,7 +93,11 @@ section {
   }
 }
 
-/* buttons with 100% width (for use with .btn class) */
+
+/* buttons widths */
+.btn {
+  min-width: 150px;
+}
 .btn-wide {
   display: block;
   margin: 3px;

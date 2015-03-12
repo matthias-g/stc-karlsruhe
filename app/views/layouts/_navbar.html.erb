@@ -41,7 +41,7 @@
         <span class="glyphicon glyphicon-log-in"></span> <%= t('user.action.login') %>
       <% end %>
       <div class="dropdown-menu">
-        <%= bootstrap_form_for(resource, as: resource_name, namespace: :navbar,
+        <%= bootstrap_form_for(resource, as: resource_name, namespace: 'navbar_login',
              url: session_path(resource_name)) do |f| %>
           <%= f.text_field :login, autofocus: true,
                 hide_label: true, placeholder: t('user.label.user') %>
@@ -60,7 +60,7 @@
           <span class="glyphicon glyphicon-user"></span> <%= t('user.action.register') %>
       <% end %>
       <div class="dropdown-menu">
-        <%= bootstrap_form_for(resource, as: resource_name, namespace: :navbar,
+        <%= bootstrap_form_for(resource, as: resource_name, namespace: 'navbar_reg',
              url: registration_path(resource_name)) do |f| %>
           <%#= devise_error_messages! %>
           <%= f.text_field :email, autofocus: true,

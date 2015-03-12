@@ -60,8 +60,8 @@
           </div>
           <div class="project-image">
             <%= link_to project do %>
-                <% if project.show_picture? %>
-                    <%= image_tag project.picture_url(:listview), lazy:true if project.picture.file %>
+                <% if project.show_picture? && project.picture.file %>
+                    <%= image_tag project.picture_url(:listview), lazy:true %>
                 <% else %>
                     <%= image_tag 'placeholder.svg' %>
                 <% end %>
@@ -70,7 +70,7 @@
                 </div>
             <% end %>
           </div>
-          <div class="project-description clipText">
+          <div class="project-description">
             <% if project.short_description.empty? %>
                 <div><%= project.description %></div>
             <% else %>

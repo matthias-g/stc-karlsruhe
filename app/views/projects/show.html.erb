@@ -2,6 +2,16 @@
     <%= t('layout.title.projectView', project:@project.title) %>
 <% end %>
 
+<% content_for :appendToHeader do %>
+  <meta property="og:title" content="<%= @project.title %>" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="<%= image_url(@project.picture_url(:preview)) %>" />
+  <meta property="og:url" content="<%= request.original_url %>" />
+  <meta property="og:description" content="<%= @project.short_description %>" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:site_name" content="Serve the City Karlsruhe" />
+<% end %>
+
 <div id="project-view">
 
 <section>

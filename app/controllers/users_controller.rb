@@ -38,7 +38,9 @@ class UsersController < ApplicationController
       flash[:alert] = @message.errors.values
       render action: :show
     end
+  end
 
+  def login_or_register
   end
 
   private

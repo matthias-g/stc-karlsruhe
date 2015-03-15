@@ -100,7 +100,7 @@
       <% if @user.projects_as_volunteer.blank? && @user.projects_as_leader.blank? %>
         <% if current_user == @user %>
           <%= t('user.message.youHaveNoProjects') %><br />
-          <%= link_to t('project.actions.findProject'), projects_path %>
+          <%= link_to t('project.action.findProject'), projects_path %>
         <% else %>
           <%= t('user.message.hasNoProjects', user:@user.first_name) %>
         <% end %>

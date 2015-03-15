@@ -27,7 +27,7 @@ en:
         leaders: 'Leaders'
         volunteers: 'Team'
         status: 'Status'
-        week: 'Project Week'
+        project_week_id: 'Project Week'
         days: 'Project Days'
         time: Time
       user:
@@ -128,8 +128,7 @@ en:
       status: 'Status'
       new: 'Create new Project'
       edit: 'Edit Project: %s'
-      list: 'Projects in 2014'
-      countActive: 'Current Projects'
+      list: 'Projects in %{year}'
       projectName: 'Project Name'
       uploadImage: 'Upload Image'
     edit:

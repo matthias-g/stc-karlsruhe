@@ -94,8 +94,13 @@
     </section>
 
     <section class="slim">
+      <div class="week">
+        <%= f.collection_select(:project_week_id, ProjectWeek.all, :id, :title,
+                                {:selected => @project.project_week.id } ) -%>
+        <%# TODO reload project day list on change %>
+      </div>
       <div class="days">
-        <%= f.collection_select(:day_ids, ProjectDay.all, :id, :title,
+        <%= f.collection_select(:day_ids, @project.project_week.days, :id, :title,
                {selected: @project.days.collect {|t| t.id}}, multiple: true) -%>
       </div>
       <div class="time">

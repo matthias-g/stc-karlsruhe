@@ -5,11 +5,18 @@
         <%= t('layout.links.home') %>
     <% end %>
   </li>
-  <li>
+  <li class="dropdown">
     <%= link_to projects_path do %>
         <span class="glyphicon glyphicon-tasks"></span>
         <%= t('layout.links.projects') %>
     <% end %>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="projectsDropdownMenu">
+      <% ProjectWeek.all.order(title: :desc).each do |project_week| %>
+      <li role="presentation">
+        <%= link_to project_week.title, projects_path(year: project_week.title) %>
+      </li>
+      <% end %>
+    </ul>
   </li>
   <li>
     <%= link_to contact_path do %>

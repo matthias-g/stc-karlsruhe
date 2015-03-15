@@ -4,8 +4,6 @@ StcKarlsruhe::Application.routes.draw do
 
   resources :project_days
 
-  resources :project_statuses
-
   resources :roles
 
   get 'kontakt', to: 'messages#new', as: 'contact'
@@ -14,7 +12,7 @@ StcKarlsruhe::Application.routes.draw do
   post 'users/:id', to: 'users#contact_user'
   post 'projects/:id', to: 'projects#contact_volunteers'
 
-  resources :projects do
+  resources :projects, path: 'projekte' do
     member do
       get :enter
       get :leave
@@ -28,6 +26,7 @@ StcKarlsruhe::Application.routes.draw do
       get :close
     end
   end
+  get 'projekte-:year', to: 'projects#index'
 
   devise_for :users, path: :profile, path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register'}
   devise_scope :user do

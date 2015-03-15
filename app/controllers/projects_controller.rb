@@ -12,7 +12,9 @@ class ProjectsController < ApplicationController
     if params[:filter] && (params[:filter][:visibility] == 'hidden') && current_user.is_admin?
         visible = false
     end
-    @projects = Project.where(:visible => visible).order(:status)
+    year = params[:year] || (params[:filter] && params[:filter][:year])
+    @project_week = ProjectWeek.find_by_title(year) || ProjectWeek.default
+    @projects = @project_week.projects.where(:visible => visible).order(:status)
     @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] && (params[:filter][:day] != '')
     @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] && (params[:filter][:status] != '')
     respond_with(@projects)

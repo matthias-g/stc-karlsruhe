@@ -6,7 +6,7 @@ $(document).ready(function() {
     var params = $.map($(":input", obj).serializeArray(), function(a) {
       return a.name + '=' + a.value;
     }).join('&');
-    $('#project-list').load('/projects?' + params + ' #project-list > *', function() {
+    $('#project-list').load('/projekte?' + params + ' #project-list > *', function() {
       clipTexts($('#project-list'));
       $('#project-list img').lazyload();
       $('#filterResults').text('Gefundene Projekte: ' + $('#project-list > *').size());

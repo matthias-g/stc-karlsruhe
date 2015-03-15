@@ -57,7 +57,7 @@ de:
         day_ids: 'Projekttage'
         volunteers: 'Team'
         status: 'Status'
-        week: Projektwoche
+        project_week_id: Projektwoche
         days: Projekttage
         time: Zeit
       user:
@@ -116,7 +116,7 @@ de:
       press: 'Presseinformationen'
       stcInternational: 'Serve the City international'
     title:
-      projectList: 'Projekte 2014'
+      projectList: 'Projekte %{year}'
       projectNew: 'Neues Projekt'
       projectEdit: 'Projekt bearbeiten: "%{project}"'
       projectView: 'Projekt "%{project}"'
@@ -196,8 +196,7 @@ de:
       manageTeam: 'Team verwalten'
       leaders: 'Leitung'
       team: 'Team'
-      list: 'Projekte 2014'
-      countActive: 'Projekte'
+      list: 'Projekte %{year}'
       uploadImage: 'Bild hochladen'
 
     help:

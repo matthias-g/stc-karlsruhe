@@ -21,17 +21,20 @@
   & > section:last-child {
     margin-bottom: 0px;
   }
+  .col-lastfix {
+    border-bottom-width: 0;
+  }
 }
 
 
 /* column modifiers */
 .col-narrow {
   min-width: 250px;
-  max-width: 350px;
+  max-width: 380px;
 }
 .col-medium {
   min-width: 270px;
-  max-width: 400px;
+  max-width: 440px;
 }
 .col-centered {
   float: none !important;

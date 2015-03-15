@@ -1,0 +1,17 @@
+<% content_for :pageTitle do %>
+    <%= t('layout.title.userLogin') %>
+<% end %>
+
+<div class="row row-md-eq-height">
+  <div class="col-md-1"></div>
+
+  <section class="col-md-5 col-only-xs-centered col-only-sm-centered slim col-medium">
+    <%= render 'login_form' -%>
+  </section>
+
+  <section class="col-md-5 col-medium col-only-xs-centered col-only-sm-centered slim">
+    <%= render 'register_form' -%>
+  </section>
+
+  <div class="col-md-1"></div>
+</div>

@@ -1,0 +1,11 @@
+<h2><%= t('user.label.login') %></h2>
+<%= bootstrap_form_for(resource, as: resource_name, namespace: 'page_login',
+       url: session_path(resource_name)) do |f| %>
+    <%= f.text_field :login, :autofocus => true %>
+    <%= f.password_field :password %>
+    <% if devise_mapping.rememberable? -%>
+        <%= f.check_box :remember_me %>
+    <% end -%>
+    <%= f.submit t('user.action.login') %>
+    <%= render 'devise/shared/links' %>
+<% end %>

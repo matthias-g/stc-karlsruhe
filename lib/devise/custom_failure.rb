@@ -1,7 +1,7 @@
 class Devise::CustomFailure < Devise::FailureApp
 
-  def route(scope)
-    login_or_register_user_url()
+  def redirect_url
+    login_or_register_url
   end
 
   # You need to override respond to eliminate recall

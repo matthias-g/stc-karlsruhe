@@ -36,11 +36,8 @@ StcKarlsruhe::Application.routes.draw do
     get 'register', :to => 'devise/registrations#new'
   end
 
-  resources :users, except: [:destroy, :new, :create] do
-    member do
-      get :login_or_register
-    end
-  end
+  resources :users, except: [:destroy, :new, :create]
+  get :login_or_register, to: 'users#login_or_register'
 
   resources :users, except: [:destroy, :new, :create]
 

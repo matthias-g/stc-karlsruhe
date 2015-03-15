@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :contact_user, :edit]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:login_or_register]
   before_action :authenticate_admin_user!, only: [:index, :edit]
 
   respond_to :html

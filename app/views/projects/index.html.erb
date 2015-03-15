@@ -10,7 +10,7 @@
       <div><%= Project.model_name.human(count: @project_week.projects.active.count) %></div>
     </div>
     <div class="infobox">
-      <span><%= Participation.active_user_count %></span> <%# TODO per project week %>
+      <span><%= @project_week.active_user_count %></span>
       <div><%= t('user.label.countActive') %></div>
     </div>
   </div>

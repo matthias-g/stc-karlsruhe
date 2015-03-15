@@ -26,5 +26,7 @@ module StcKarlsruhe
     CONTACT_FORM_RECIPIENT = 'contact@servethecity-karlsruhe.de'
     NO_REPLY_SENDER = 'no-reply@servethecity-karlsruhe.de'
 
+    # autoload lib directory (for CustomFailureApp)
+    config.autoload_paths << Rails.root.join('lib')
   end
 end

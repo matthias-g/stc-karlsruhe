@@ -1,4 +1,4 @@
-class CustomFailure < Devise::FailureApp
+class Devise::CustomFailure < Devise::FailureApp
 
   def route(scope)
     login_or_register_user_url()

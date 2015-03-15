@@ -21,14 +21,14 @@ de:
             current_password:
               invalid: 'Falsches Passwort'
             email:
-              taken: ' wird bereits von einem anderen Konto verwendet.'
+              taken: ' wird bereits von einem anderen Konto verwendet'
             password_confirmation:
-              confirmation: ': Passwörter stimmen nicht überein.'
+              confirmation: 'Passwörter stimmen nicht überein'
             username:
-              taken: ' ist bereits vergeben.'
+              taken: ' ist bereits vergeben'
       messages:
-        blank: 'darf nicht leer sein.'
-        onlyLetters: 'darf nur Buchstaben enthalten.'
+        blank: 'darf nicht leer sein'
+        onlyLetters: 'darf nur Buchstaben enthalten'
     models:
       project:
         zero: 'Projekt'

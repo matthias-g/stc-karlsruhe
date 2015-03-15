@@ -2,6 +2,16 @@
     <%= t('layout.title.projectView', project:@project.title) %>
 <% end %>
 
+<% content_for :appendToHeader do %>
+  <meta property="og:title" content="<%= Project.model_name.human %>: <%= @project.title %>" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="<%= image_url(@project.picture_url) %>" />
+  <meta property="og:url" content="<%= request.original_url %>" />
+  <meta property="og:description" content="<%= @project.short_description %>" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:site_name" content="Serve the City Karlsruhe" />
+<% end %>
+
 <div id="project-view">
 
 <section>
@@ -103,7 +113,7 @@
             <% end %>
           </div>
       </section>
-      <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
+      <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim col-lastfix">
           <div>
             <h3><%= Project.human_attribute_name('leaders') %></h3>
             <%= @project.leaders.collect { |v| link_to(v.first_name, user_path(v)) }.join(', ').html_safe %>
@@ -140,6 +150,7 @@
 <% end %>
 
 <section>
+  <%= render '/layouts/share' -%>
   <% if request.referer && URI(request.referer).path == '/projects' %>
     <%= link_to t('project.action.toOverview'),
           'javascript:history.back()', class: 'btn btn-default' %>

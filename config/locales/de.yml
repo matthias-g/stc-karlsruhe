@@ -21,14 +21,14 @@ de:
             current_password:
               invalid: 'Falsches Passwort'
             email:
-              taken: ' wird bereits von einem anderen Konto verwendet.'
+              taken: ' wird bereits von einem anderen Konto verwendet'
             password_confirmation:
-              confirmation: ': Passwörter stimmen nicht überein.'
+              confirmation: 'Passwörter stimmen nicht überein'
             username:
-              taken: ' ist bereits vergeben.'
+              taken: ' ist bereits vergeben'
       messages:
-        blank: 'darf nicht leer sein.'
-        onlyLetters: 'darf nur Buchstaben enthalten.'
+        blank: 'darf nicht leer sein'
+        onlyLetters: 'darf nur Buchstaben enthalten'
     models:
       project:
         zero: 'Projekt'
@@ -66,7 +66,7 @@ de:
         last_name: 'Nachname'
         email: 'E-Mail'
         password: 'Passwort'
-        password_confirmation: 'Passwort bestätigen'
+        password_confirmation: 'Passwort wiederholen'
         remember_me: 'merken'
       page:
         title: 'Seitentitel'
@@ -115,6 +115,7 @@ de:
       disclaimer: 'Haftungsausschluss'
       press: 'Presseinformationen'
       stcInternational: 'Serve the City international'
+      shareOnFacebook: 'auf Facebook teilen'
     title:
       projectList: 'Projekte %{year}'
       projectNew: 'Neues Projekt'
@@ -232,7 +233,6 @@ de:
       login: 'Anmelden'
       register: 'Registrieren'
       countActive: 'Mitarbeiter'
-      password: 'Passwort'
       user: 'User'
       profile: 'Profil'
       myProfile: 'Mein Profil'

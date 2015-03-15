@@ -28,7 +28,7 @@ StcKarlsruhe::Application.routes.draw do
   end
   get 'projekte-:year', to: 'projects#index'
 
-  devise_for :users, path: :profile, path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register'}
+  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register'}
   devise_scope :user do
     get 'login', to: 'devise/sessions#new' #, :as => :login_user
     get 'logout', :to => 'devise/sessions#destroy' #, :as => :logout_user

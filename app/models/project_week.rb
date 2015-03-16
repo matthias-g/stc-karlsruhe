@@ -1,4 +1,6 @@
 class ProjectWeek < ActiveRecord::Base
+  validates_uniqueness_of :title
+
   has_many :days, class_name: 'ProjectDay'
   has_many :projects
 

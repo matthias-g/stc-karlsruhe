@@ -18,7 +18,8 @@
           <li role="presentation" class="dropdown-header">Andere Projektwochen</li>
           <% @weeks.each do |project_week| %>
               <li role="presentation">
-                <%= link_to project_week.title, projects_path(year: project_week.title) %>
+                <%= link_to project_week.title,
+                     projects_path + '-' + project_week.title.parameterize %>
               </li>
           <% end %>
         </ul>

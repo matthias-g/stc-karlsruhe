@@ -3,6 +3,27 @@
 /* SPECIFIC STYLES: PROJECT LIST PAGE */
 
 #project-list-header {
+  .select-year > * {
+    float: left;
+    .dropdown-toggle {
+      color: rgba(#777, 0.4);
+      font-size: 0.7em;
+      margin-left: 15px;
+      vertical-align: 8%;
+      &:hover {
+        color: $link-hover-color;
+        cursor: pointer;
+      }
+    }
+    .dropdown-menu {
+      font-size: 0.7em;
+      .dropdown-header {
+        font-family: BoldFont;
+        font-size: 14px;
+      }
+    }
+  }
+
   padding: 10px 20px;
   h2 {
     padding: 0;

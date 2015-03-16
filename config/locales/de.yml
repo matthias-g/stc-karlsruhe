@@ -197,7 +197,6 @@ de:
       manageTeam: 'Team verwalten'
       leaders: 'Leitung'
       team: 'Team'
-      list: 'Projekte %{year}'
       uploadImage: 'Bild hochladen'
 
     help:

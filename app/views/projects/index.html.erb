@@ -2,9 +2,31 @@
     <%= t('layout.title.projectList', year: @project_week.title) %>
 <% end %>
 
-<section id="project-list-header">
-  <h1 style="float: left"><%= t('project.label.list', year: @project_week.title) %></h1>
-  <div style="float: right">
+<section id="project-list-header" class="showOverflow">
+
+  <div class="select-year">
+    <h1><%= @project_week.title %></h1>
+    <% @weeks = (ProjectWeek.all.order(title: :desc) - [@project_week]) %>
+    <% if !@weeks.blank? %>
+      <div class="dropdown h1">
+        <a class="dropdown-toggle" id="yearDropdown" title="Andere Projektwochen"
+           data-toggle="dropdown" aria-expanded="true">
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu"
+            aria-labelledby="yearDropdown">
+          <li role="presentation" class="dropdown-header">Andere Projektwochen</li>
+          <% @weeks.each do |project_week| %>
+              <li role="presentation">
+                <%= link_to project_week.title, projects_path(year: project_week.title) %>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <div style="text-align: right">
     <div class="infobox">
       <span><%= @project_week.projects.active.count %></span>
       <div><%= Project.model_name.human(count: @project_week.projects.active.count) %></div>
@@ -14,6 +36,8 @@
       <div><%= t('user.label.countActive') %></div>
     </div>
   </div>
+
+  <div class="clearfix"></div>
 </section>
 
 <div class="row">

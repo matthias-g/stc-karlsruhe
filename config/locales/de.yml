@@ -132,6 +132,7 @@ de:
       userRegister: 'Registrierung'
       userProfileEdit: 'Profil bearbeiten: "%{user}"'
       userPasswordReset: 'Passwort zurücksetzen'
+      userPasswordChange: 'Passwort ändern: "%{user}"'
       userEmailConfirmation: 'E-Mail-Adressen-Bestätigung'
       userUnlocking: 'Account-Freischaltung'
       projectDayEdit: 'Projekttag bearbeiten'

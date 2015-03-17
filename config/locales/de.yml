@@ -280,16 +280,6 @@ de:
     errorsExist: 'Der Tag konnte wegen folgenden Fehlern nicht gespeichert werden:'
     confirmDelete: 'Wollen Sie den Projekttag "%s" wirklich löschen?'
 
-  #project_status:
-  #  new: 'Neuer Projekt-Status'
-  #  save: 'Status speichern'
-  #  list: 'Projekt-Statusse verwalten'
-  #  captionList: 'Projekt-Statusse'
-  #  captionNew: 'Neuer Projekt-Status'
-  #  captionEdit: 'Projekt-Status bearbeiten: "%s"'
-  #  errorsExist: 'Der Status konnte wegen folgenden Fehlern nicht gespeichert werden:'
-  #  confirmDelete: 'Wollen Sie den Projekt-Status "%s" wirklich löschen?'
-
   role:
     new: 'Neue User-Rolle'
     save: 'Rolle speichern'

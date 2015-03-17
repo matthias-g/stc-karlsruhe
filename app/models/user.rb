@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
       message: I18n.t('activerecord.errors.messages.onlyLetters') }
   attr_accessor :login
 
+  before_validation :set_default_username_if_blank!, on: :create
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
@@ -54,6 +56,28 @@ class User < ActiveRecord::Base
 
   def is_admin?
     has_role?(:admin)
+  end
+
+  private
+
+  def set_default_username_if_blank!
+    if username.blank?
+      possible_usernames = [first_name, "#{first_name}#{last_name.first}", "#{first_name}#{last_name}"]
+      possible_usernames.each { |new_name|
+        unless User.find_by_username(new_name)
+          self.username = new_name
+          return
+        end
+      }
+      max_num = 10 * User.count
+      while username.blank?
+        new_name = "user#{rand(max_num)}"
+        unless User.find_by_username(new_name)
+          self.username = new_name
+          return
+        end
+      end
+    end
   end
 
 end

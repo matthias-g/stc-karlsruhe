@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :contact_user, :edit, :update]
   before_action :authenticate_user!, except: [:login_or_register]
-  before_action :authenticate_admin_user!, only: [:index, :edit, :update]
+  before_action :authenticate_admin_user!, only: [:index]
+  before_action :own_user_or_authenticate_admin_user!, only: [:edit, :update]
 
   respond_to :html
 
@@ -51,6 +52,12 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:username, :first_name, :last_name, :email, :phone)
+    end
+
+    def own_user_or_authenticate_admin_user!
+      unless @user == current_user
+        authenticate_admin_user!
+      end
     end
 
 end

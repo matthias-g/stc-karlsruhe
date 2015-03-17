@@ -5,7 +5,7 @@
 <section id="project-list-header" class="showOverflow">
 
   <div class="select-year">
-    <h1><%= @project_week.title %></h1>
+    <h1>Projekte <%= @project_week.title %></h1>
     <% @weeks = (ProjectWeek.all.order(title: :desc) - [@project_week]) %>
     <% if !@weeks.blank? %>
       <div class="dropdown h1">
@@ -15,7 +15,7 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-right" role="menu"
             aria-labelledby="yearDropdown">
-          <li role="presentation" class="dropdown-header">Andere Projektwochen</li>
+          <li role="presentation" class="dropdown-header">Projektwochen</li>
           <% @weeks.each do |project_week| %>
               <li role="presentation">
                 <%= link_to project_week.title,

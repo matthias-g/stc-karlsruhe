@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309100432) do
+ActiveRecord::Schema.define(version: 20150317000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 20150309100432) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_week_id"
+    t.date     "date"
   end
 
   create_table "project_days_projects", id: false, force: true do |t|
@@ -55,6 +57,13 @@ ActiveRecord::Schema.define(version: 20150309100432) do
 
   add_index "project_days_projects", ["project_day_id", "project_id"], name: "index_project_days_projects_on_project_day_id_and_project_id", using: :btree
   add_index "project_days_projects", ["project_id", "project_day_id"], name: "index_project_days_projects_on_project_id_and_project_day_id", using: :btree
+
+  create_table "project_weeks", force: true do |t|
+    t.string   "title"
+    t.boolean  "default"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "projects", force: true do |t|
     t.string   "title"
@@ -77,6 +86,7 @@ ActiveRecord::Schema.define(version: 20150309100432) do
     t.float    "map_longitude",     default: 8.40445518
     t.integer  "map_zoom",          default: 12
     t.text     "picture_source"
+    t.integer  "project_week_id"
   end
 
   create_table "roles", force: true do |t|
@@ -108,6 +118,7 @@ ActiveRecord::Schema.define(version: 20150309100432) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "phone",                  default: ""
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

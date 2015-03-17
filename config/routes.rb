@@ -39,10 +39,7 @@ StcKarlsruhe::Application.routes.draw do
   resources :users, except: [:destroy, :new, :create]
   get :login_or_register, to: 'users#login_or_register'
 
-  resources :users, except: [:destroy, :new, :create]
-
   root 'pages#home'
-
   get '/:page', to: 'pages#page'
 
   # The priority is based upon order of creation: first created -> highest priority.

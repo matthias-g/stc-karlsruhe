@@ -64,6 +64,7 @@ de:
         first_name: 'Vorname'
         last_name: 'Nachname'
         email: 'E-Mail'
+        cellphone: 'Handy'
         password: 'Passwort'
         password_confirmation: 'Passwort wiederholen'
         remember_me: 'merken'

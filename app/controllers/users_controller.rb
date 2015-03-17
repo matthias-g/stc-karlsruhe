@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :contact_user, :edit]
+  before_action :set_user, only: [:show, :contact_user, :edit, :update]
   before_action :authenticate_user!, except: [:login_or_register]
-  before_action :authenticate_admin_user!, only: [:index, :edit]
+  before_action :authenticate_admin_user!, only: [:index, :edit, :update]
 
   respond_to :html
 
@@ -21,7 +21,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(current_user.id)
     @user.update(user_params)
     respond_with(@user)
   end
@@ -51,7 +50,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :first_name, :last_name, :email)
+      params.require(:user).permit(:username, :first_name, :last_name, :email, :phone)
     end
 
 end

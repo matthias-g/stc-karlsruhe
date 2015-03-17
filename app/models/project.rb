@@ -5,7 +5,8 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :days, :class_name => 'ProjectDay'
 
   before_save :adjust_status
-  validates_presence_of :desired_team_size
+  validates_presence_of :title, :desired_team_size, :location, :time
+  validate :desired_team_size, numericality: {only_integer: true, greater_than: 0}
 
   scope :active, -> { where.not(status: 'closed').where(projects: {visible: true}) }
 

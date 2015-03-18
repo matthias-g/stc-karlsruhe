@@ -72,8 +72,6 @@
                 placeholder: t('activerecord.attributes.user.email') %>
           <%= f.password_field :password, hide_label: true,
                 placeholder: t('activerecord.attributes.user.password') %>
-          <%= f.password_field :password_confirmation, hide_label: true,
-                placeholder: t('activerecord.attributes.user.password_confirmation') %>
           <%= f.submit t('user.action.register'), class:'btn btn-default btn-wide' %>
         <% end %>
       </div>

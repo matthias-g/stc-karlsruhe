@@ -57,7 +57,7 @@
     </li>
 
     <li class="dropdown hidden-hamburger">
-      <%= link_to register_path, data:{toggle:'dropdown'}, class:'dropdown-toggle' do %>
+      <%= link_to new_user_registration_path, data:{toggle:'dropdown'}, class:'dropdown-toggle' do %>
           <span class="glyphicon glyphicon-user"></span> <%= t('user.action.register') %>
       <% end %>
       <div class="dropdown-menu">
@@ -83,7 +83,7 @@
       <% end %>
     </li>
     <li class="visible-hamburger-block">
-      <%= link_to register_path do %>
+      <%= link_to new_user_registration_path do %>
           <span class="glyphicon glyphicon-user"></span> <%= t('user.action.register') %>
       <% end %>
     </li>

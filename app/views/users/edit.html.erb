@@ -35,8 +35,10 @@
           <p>...coming soon<br><br></p>-->
 
           <h2><%= t('user.label.otherActions') %></h2>
-          <%= link_to t('user.action.changePassword'), edit_user_registration_path,
-                      class:'btn btn-default btn-wide' %>
+          <% if (current_user == @user) %>
+            <%= link_to t('user.action.changePassword'), edit_user_registration_path,
+                        class:'btn btn-default btn-wide' %>
+          <% end %>
           <%= link_to t('user.action.deleteAccount'), confirm_delete_user_path,
                       class:'btn btn-default btn-wide' %>
         </section>

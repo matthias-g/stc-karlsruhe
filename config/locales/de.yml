@@ -60,13 +60,14 @@ de:
         days: Projekttage
         time: Zeit
       user:
-        username: 'Benutzername'
+        username: 'Username'
         first_name: 'Vorname'
         last_name: 'Nachname'
         email: 'E-Mail'
-        cellphone: 'Handy'
+        phone: 'Telefon'
         password: 'Passwort'
         password_confirmation: 'Passwort wiederholen'
+        current_password: 'Aktuelles Passwort'
         remember_me: 'merken'
       page:
         title: 'Seitentitel'
@@ -136,7 +137,7 @@ de:
       userPasswordChange: 'Passwort ändern: "%{user}"'
       userEmailConfirmation: 'E-Mail-Adressen-Bestätigung'
       userUnlocking: 'Account-Freischaltung'
-      userDeleteAccount: 'Account von "%{user}" löschen'
+      userDeleteAccount: 'Account löschen: "%{user}"'
       projectDayEdit: 'Projekttag bearbeiten'
       projectDayList: 'Projekttage'
       projectDayNew: 'Neuer Projekttag'

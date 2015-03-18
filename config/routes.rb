@@ -28,12 +28,13 @@ StcKarlsruhe::Application.routes.draw do
   end
 
   devise_for :users,
-    path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register'}
-
+    path: '', path_names: { sign_in: 'login', sign_out: 'logout',
+                            sign_up: 'register', edit: 'edit_password'}
   devise_scope :user do
     get 'login', to: 'devise/sessions#new' #, :as => :login_user
     get 'logout', :to => 'devise/sessions#destroy' #, :as => :logout_user
     get 'register', :to => 'devise/registrations#new'
+    get 'edit_password', :to => 'devise/registrations#edit'
   end
 
   resources :users, except: [:new, :create] do

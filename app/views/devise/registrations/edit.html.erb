@@ -11,9 +11,9 @@
   <div class="row row-sm-eq-height">
     <section class="col-middle col-centered">
       <h1>Passwort ändern</h1>
-      <%= f.password_field :current_password, placeholder: 'Aktuelles Passwort' %>
-      <%= f.password_field :password, placeholder: 'Neues Passwort' %>
-      <%= f.password_field :password_confirmation, placeholder: 'Passwort bestätigen' %>
+      <%= f.password_field :current_password %>
+      <%= f.password_field :password %>
+      <%= f.password_field :password_confirmation %>
 
       <%= f.submit t('general.action.save') %>
       <%= link_to t('general.action.cancel'), edit_user_path(@user), class:'btn btn-default' %>

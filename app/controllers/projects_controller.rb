@@ -50,11 +50,11 @@ class ProjectsController < ApplicationController
 
   def enter
     if @project.full? or @project.closed?
-      redirect_to project_url(@project), :notice => 'Dieses Projekt ist schon vollbesetzt.'
+      redirect_to project_url(@project), :notice => t('project.message.isFull')
       return
     end
     @project.add_volunteer(current_user)
-    redirect_to project_url(@project), :notice => 'Du nimmst jetzt an diesem Projekt teil. Der Teamleiter wird sich mit Dir in Verbindung setzen.'
+    redirect_to project_url(@project), :notice => t('project.message.participationSuccess')
   end
 
   def leave
@@ -90,22 +90,22 @@ class ProjectsController < ApplicationController
 
   def make_visible
     @project.make_visible!
-    redirect_to @project, notice: 'Projekt wurde sichtbar gemacht.'
+    redirect_to @project, notice: t('project.message.madeVisible')
   end
 
   def make_invisible
     @project.make_invisible!
-    redirect_to @project, notice: 'Projekt wurde unsichtbar gemacht.'
+    redirect_to @project, notice: t('project.message.madeInvisible')
   end
 
   def open
     @project.open!
-    redirect_to @project, notice: 'Projekt wurde geöffnet.'
+    redirect_to @project, notice: t('project.message.opened')
   end
 
   def close
     @project.close!
-    redirect_to @project, notice: 'Projekt wurde geschlossen.'
+    redirect_to @project, notice: t('project.message.closed')
   end
 
   def contact_volunteers
@@ -154,13 +154,9 @@ class ProjectsController < ApplicationController
     end
 
     def send_notice_mail(title, leader)
-      message = Message.new(:sender => 'no-reply@servethecity-karlsruhe.de', :subject => 'Ein neues Projekt wurde erstellt',
-                            :body => "Hallo,
-
-soeben wurde ein neues Projekt für Serve the City erstellt.
-
-Projekttitel: #{title}
-Leiter: #{leader}")
+      message = Message.new(:sender => 'no-reply@servethecity-karlsruhe.de',
+         :subject => t('project.message.mailNewProjectSubject'),
+         :body => t('project.message.mailNewProjectBody', title: title, leader: leader))
       Mailer.contact_mail(message).deliver
     end
 

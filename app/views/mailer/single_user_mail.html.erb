@@ -4,9 +4,7 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-<%= simple_format "Hallo #{@to_name},
-
-du hast über Serve the City Karlsruhe eine Nachricht von #{@from_name} bekommen:" %>
+<%= simple_format t('contact.user.body', to_name: @to_name, from_name: @from_name) %>
 
 <%= simple_format @message %>
 </body>

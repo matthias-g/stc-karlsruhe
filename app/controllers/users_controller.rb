@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :contact_user, :edit, :update]
+  before_action :set_user, only: [:show, :contact_user, :edit, :update, :confirm_delete, :destroy]
   before_action :authenticate_user!, except: [:login_or_register]
   before_action :authenticate_admin_user!, only: [:index]
   before_action :own_user_or_authenticate_admin_user!, only: [:edit, :update]
@@ -26,14 +26,26 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
+  def confirm_delete
+    respond_with(@user)
+  end
+
+  def destroy
+    if @user.valid_password?(params[:confirm_delete_password]) || current_user.is_admin?
+      @user.destroy
+      redirect_to root_path, notice: t('user.message.accountDeleted')
+    else
+      redirect_to action: :confirm_delete, alert: t('user.message.invalidPassword')
+    end
+  end
+
   def contact_user
     @message = Message.new(params[:messages])
     @message.sender = current_user.email
     @message.recipient = @user.email
     if @message.valid?
       Mailer.single_user_mail(@message, current_user.first_name, @user.first_name).deliver
-      flash[:notice] = t('contact.user.success', recipient: @user.full_name)
-      redirect_to action: :show
+      redirect_to action: :show, notice: t('contact.user.success', recipient: @user.full_name)
     else
       flash[:alert] = @message.errors.values
       render action: :show

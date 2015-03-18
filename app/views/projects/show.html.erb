@@ -131,14 +131,6 @@
 
 <% if @project.has_leader? current_user  %>
   <section class="contact-volunteers-form">
-    <% if alert %>
-        <ul id="alert" class="popupTarget">
-          <% alert.each do |msg| %>
-              <li><%= msg[0] %></li>
-          <% end %>
-        </ul>
-    <% end %>
-
     <%= bootstrap_form_for(@message, url: {action: 'contact_volunteers'}) do |f| %>
         <h2><%= t('contact.team.title') %></h2>
         <p><%= t('contact.team.text') %></p>

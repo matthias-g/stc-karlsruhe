@@ -9,13 +9,13 @@
     <%= f.submit t('user.action.login') %>
 
     <%- if devise_mapping.recoverable? %>
-        <%= link_to "Passwort vergessen?",
-                    new_password_path(resource_name), class:'btn btn-default' %><br />
+        <%= link_to t('user.action.recoverPassword'),
+              new_password_path(resource_name), class:'btn btn-default' %><br />
     <% end -%>
 
     <%- if devise_mapping.omniauthable? %>
         <%- resource_class.omniauth_providers.each do |provider| %>
-            <%= link_to "Anmelden via #{provider.to_s.titleize}",
+            <%= link_to t('user.action.loginWithProvider', provider: provider.to_s.titleize),
                         omniauth_authorize_path(resource_name, provider),
                         class:'btn btn-default' %><br />
         <% end -%>

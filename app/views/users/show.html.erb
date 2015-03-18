@@ -16,25 +16,26 @@
 
     <% if (current_user == @user) || current_user.is_admin? %>
       <section class="profile-data">
-        <h2>Profildaten</h2>
+        <h2><%= t('user.label.userData') %></h2>
         <table>
           <tr>
-            <td>Benutzername:</td>
+            <td><%= t('activerecord.attributes.user.username') %>:</td>
             <td><%= @user.username %></td>
           </tr>
           <tr>
-            <td>Email:</td>
+            <td><%= t('activerecord.attributes.user.email') %>:</td>
             <td><%= @user.email %></td>
           </tr>
           <tr>
-            <td>Handy:</td>
+            <td><%= t('activerecord.attributes.user.phone') %>:</td>
             <td><%= @user.phone %></td>
           </tr>
         </table>
         <% if (@user == current_user) || current_user.is_admin?  %>
             <%= link_to edit_user_path, title: t('user.action.edit'),
                    class:'btn btn-default' do %>
-                <span class="glyphicon glyphicon-pencil"></span> Profil bearbeiten
+                <span class="glyphicon glyphicon-pencil"></span>
+                <%= t('user.action.edit') %>
             <% end %>
         <% end %>
       </section>
@@ -43,14 +44,6 @@
     <% unless @user == current_user  %>
       <section class="contact-user-form">
         <h2><%= t('contact.user.title', recipient: @user.first_name) %></h2>
-        <% if alert %>
-            <ul id="alert" class="popupTarget">
-              <% alert.each do |msg| %>
-                  <li><%= msg[0] %></li>
-              <% end %>
-            </ul>
-        <% end %>
-
         <%= bootstrap_form_for @message, url: { action: 'contact_user' } do |f| %>
           <%= f.text_field :subject %>
           <%= f.text_area :body %>

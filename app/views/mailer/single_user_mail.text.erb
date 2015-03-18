@@ -1,5 +1,3 @@
-<%= "Hallo #{@to_name},
-
-du hast über Serve the City Karlsruhe eine Nachricht von #{@from_name} bekommen:" %>
+<%= t('contact.user.body', to_name: @to_name, from_name: @from_name) %>
 
 <%= @message %>

@@ -95,6 +95,7 @@ de:
       edit: 'Bearbeiten'
       save: 'Speichern'
       cancel: 'Abbrechen'
+      back: 'Zurück'
       delete: 'Löschen'
     label:
       actions: 'Aktionen'
@@ -135,6 +136,7 @@ de:
       userPasswordChange: 'Passwort ändern: "%{user}"'
       userEmailConfirmation: 'E-Mail-Adressen-Bestätigung'
       userUnlocking: 'Account-Freischaltung'
+      userDeleteAccount: 'Account von "%{user}" löschen'
       projectDayEdit: 'Projekttag bearbeiten'
       projectDayList: 'Projekttage'
       projectDayNew: 'Neuer Projekttag'
@@ -158,10 +160,16 @@ de:
       text: 'Hier kannst du den Teilnehmern des Projektes eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
       submit: 'Nachricht verteilen'
       success: 'Die Nachricht wurde an dich und alle Teilnehmer geschickt.'
+      body: "Hallo,
+
+du hast über Serve the City Karlsruhe eine Nachricht von einem Projektleiter des Projektes '%{title}' bekommen:"
     user:
       title: 'Kontaktiere %{recipient}'
       submit: 'Nachricht senden'
       success: 'Die Nachricht wurde an %{recipient} geschickt.'
+      body: "Hallo %{to_name},
+
+du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:"
     general:
       placeholders:
         sender: 'Deine E-Mail-Adresse'
@@ -188,7 +196,6 @@ de:
       toProject: 'zurück zum Projekt'
       searchProjects: 'Projekte suchen'
       findProject: 'Projekt finden'
-
     label:
       project: 'Projekt'
       manageProject: 'Projektverwaltung'
@@ -201,7 +208,6 @@ de:
       list: 'Projekte 2014'
       countActive: 'Projekte'
       uploadImage: 'Bild hochladen'
-
     help:
       picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
       short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Projektliste statt der ausführlichen Beschreibung angezeigt.'
@@ -214,6 +220,18 @@ de:
       errorList: 'Wegen folgender Fehler konnte das Projekt nicht gespeichert werden:'
       remainingVacancy: '%s freie Plätze'
       teamMember: 'Du bist im Projektteam.'
+      isFull: 'Dieses Projekt ist schon vollbesetzt.'
+      participationSuccess: 'Du nimmst jetzt an diesem Projekt teil. Der Teamleiter wird sich mit Dir in Verbindung setzen.'
+      madeVisible: 'Projekt wurde sichtbar gemacht.'
+      madeInvisible: 'Projekt wurde unsichtbar gemacht.'
+      opened: 'Projekt wurde geöffnet.'
+      closed: 'Projekt wurde geschlossen.'
+      mailNewProjectSubject: 'Ein neues Projekt wurde erstellt'
+      mailNewProjectBody: 'Hallo,
+soeben wurde ein neues Projekt für Serve the City erstellt.
+
+Projekttitel: %{title}
+Leiter: %{leader}'
     status:
       open: Offen
       soon_full: Wenige Plätze
@@ -231,6 +249,8 @@ de:
       resendInstructions: 'Anleitung zur Bestätigung nochmal senden'
       changePassword: 'Passwort ändern'
       edit: 'Profil bearbeiten'
+      recoverPassword: 'Passwort vergessen?'
+      loginWithProvider: 'Anmelden via %{provider}'
     label:
       login: 'Anmelden'
       register: 'Registrieren'
@@ -238,37 +258,25 @@ de:
       user: 'User'
       profile: 'Profil'
       myProfile: 'Mein Profil'
+      userData: 'Profildaten'
       projectsAsLeader: 'Leitung'
       projectsAsVolunteer: 'Teilnahme'
       pastProjects: 'Abgeschlossen'
+      confirmDeletePassword: 'Dein Passwort, zur Bestätigung'
+      userList: 'Userliste'
+      edit: 'Profil bearbeiten'
+      waitingForEmailConfirmation: 'Ihre Emailadresse %{email} ist noch nicht bestätigt.'
+      image: 'Profilbild'
+      otherActions: 'Weitere Aktionen'
     message:
       profileUpdated: 'Profil erfolgreich aktualisiert.'
       loggedInAs: 'eingeloggt als %s'
       hasNoProjects: '%{user} nimmt noch an keinem Projekt teil.'
       youHaveNoProjects: 'Du nimmst noch an keinem Projekt teil.'
-      confirmDelete: 'Profil wirklich löschen?'
+      invalidPassword: 'Das Passwort ist falsch'
+      accountDeleted: 'Dein Account ist gelöscht.'
     help:
       passwordLength: 'Mindestens 6 Zeichen lang.'
-
-  page:
-    new: 'Neue Seite'
-    save: 'Seite speichern'
-    list: 'Seiten verwalten'
-    captionList: 'Seitenindex'
-    captionNew: 'Neue Seite erstellen'
-    captionEdit: 'Seite bearbeiten: "%s"'
-    errorsExist: 'Die Seite konnte wegen folgenden Fehlern nicht gespeichert werden:'
-    confirmDelete: 'Wollen Sie die Seite "%s" wirklich löschen?'
-
-  section:
-    new: 'Neuer Abschnitt'
-    save: 'Abschnitt speichern'
-    list: 'Seitenabschnitte verwalten'
-    captionList: 'Seitenabschnitte'
-    captionNew: 'Neuer Seitenabschnitt'
-    captionEdit: 'Seitenabschnitt bearbeiten: "%s"'
-    errorsExist: 'Der Abschnitt konnte wegen folgenden Fehlern nicht gespeichert werden:'
-    confirmDelete: 'Wollen Sie den Abschnitt "%s" wirklich löschen?'
 
   project_day:
     new: 'Neuer Projekttag'
@@ -284,6 +292,7 @@ de:
     new: 'Neue User-Rolle'
     save: 'Rolle speichern'
     list: 'User-Rollen verwalten'
+    role: 'Titel'
     captionList: 'User-Rollen'
     captionNew: 'Neue User-Rolle'
     captionEdit: 'User-Rolle bearbeiten: "%s"'

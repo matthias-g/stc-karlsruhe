@@ -4,10 +4,10 @@
 
 <section>
     <p>
-      <strong>Title:</strong>
+      <strong><%= t('role.title') %></strong>
       <%= @role.title %>
     </p>
 
-    <%= link_to 'Edit', edit_role_path(@role) %> |
-    <%= link_to 'Back', roles_path %>
+    <%= link_to t('general.action.edit'), edit_role_path(@role) %> |
+    <%= link_to t('general.action.back'), roles_path %>
 </section>

@@ -3,14 +3,6 @@
 <% end %>
 
 <section class="contact-form">
-  <% if alert %>
-      <ul id="alert" class="popupTarget">
-        <% alert.each do |msg| %>
-            <li><%= msg[0] %></li>
-        <% end %>
-      </ul>
-  <% end %>
-
   <%= bootstrap_form_for @message, :url => kontakt_path do |form| %>
       <h1><%= t 'contact.orga.title' %></h1>
       <div class="leftCol">

@@ -4,9 +4,7 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-<%= simple_format "Hallo,
-
-du hast über Serve the City Karlsruhe eine Nachricht von einem Projektleiter des Projektes '#{@project_title}' bekommen:" %>
+<%= simple_format t('contact.team.body', title: @project_title) %>
 
 <%= simple_format @message %>
 </body>

@@ -36,7 +36,11 @@ StcKarlsruhe::Application.routes.draw do
     get 'register', :to => 'devise/registrations#new'
   end
 
-  resources :users, except: [:destroy, :new, :create]
+  resources :users, except: [:new, :create] do
+    member do
+      get :confirm_delete
+    end
+  end
   get :login_or_register, to: 'users#login_or_register'
 
   root 'pages#home'

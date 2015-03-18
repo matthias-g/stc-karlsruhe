@@ -27,6 +27,7 @@ StcKarlsruhe::Application.routes.draw do
     end
   end
   get 'projekte-:year', to: 'projects#index'
+  get 'projektwoche-:title', to: 'project_weeks#show', as: 'show_project_week'
 
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register'}
   devise_scope :user do

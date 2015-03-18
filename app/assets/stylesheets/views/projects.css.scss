@@ -16,7 +16,14 @@
       }
     }
     .dropdown-menu {
-      font-size: 0.7em;
+      font-size: 1em;
+      right: 34px;
+      top: -73px; // -17
+      position: absolute;
+      min-width: 30px;
+      > li > a {
+        padding: 3px 5px;
+      }
       .dropdown-header {
         font-family: BoldFont;
         font-size: 14px;

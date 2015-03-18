@@ -5,35 +5,16 @@
 <section id="project-list-header" class="showOverflow">
 
   <div class="select-year">
-    <h1>Projekte <%= @project_week.title %></h1>
-    <% @weeks = (ProjectWeek.all.order(title: :desc) - [@project_week]) %>
-    <% if !@weeks.blank? %>
-      <div class="dropdown h1">
-        <a class="dropdown-toggle" id="yearDropdown" title="Andere Projektwochen"
-           data-toggle="dropdown" aria-expanded="true">
-          <span class="glyphicon glyphicon-chevron-down"></span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-right" role="menu"
-            aria-labelledby="yearDropdown">
-          <li role="presentation" class="dropdown-header">Projektwochen</li>
-          <% @weeks.each do |project_week| %>
-              <li role="presentation">
-                <%= link_to project_week.title,
-                     projects_path + '-' + project_week.title.parameterize %>
-              </li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <h1>Alle Projekte</h1>
   </div>
 
   <div style="text-align: right">
     <div class="infobox">
-      <span><%= @project_week.projects.active.count %></span>
+      <span><%= Project.active.count %></span>
       <div><%= Project.model_name.human(count: @project_week.projects.active.count) %></div>
     </div>
     <div class="infobox">
-      <span><%= @project_week.active_user_count %></span>
+      <span><%= Participation.active_user_count %></span>
       <div><%= t('user.label.countActive') %></div>
     </div>
   </div>

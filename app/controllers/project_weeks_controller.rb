@@ -1,6 +1,6 @@
 class ProjectWeeksController < ApplicationController
-  before_action :set_project_week, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin_user!
+  before_action :set_project_week, only: [:edit, :update, :destroy]
+  before_action :authenticate_admin_user!, except: [:show]
 
   respond_to :html
 
@@ -10,6 +10,11 @@ class ProjectWeeksController < ApplicationController
   end
 
   def show
+    if params[:title]
+      @project_week = ProjectWeek.find_by_title(params[:title])
+    else
+      @project_week = ProjectWeek.find(params[:id])
+    end
     respond_with(@project_week)
   end
 

@@ -8,10 +8,12 @@ class User < ActiveRecord::Base
   has_many :projects, through: :participations
   has_and_belongs_to_many :roles
 
+  USERNAME_FORMAT = /\A[\w]+\z/
+
   validates_presence_of :username, :first_name, :last_name
   validates :username,
       uniqueness: {case_sensitive: false},
-      format: {with: /\A[\w]+\z/,
+      format: {with: USERNAME_FORMAT,
       message: I18n.t('activerecord.errors.messages.onlyLetters') }
   attr_accessor :login
 
@@ -64,17 +66,23 @@ class User < ActiveRecord::Base
     if username.blank?
       possible_usernames = [first_name, "#{first_name}#{last_name.first}", "#{first_name}#{last_name}"]
       possible_usernames.each { |new_name|
-        unless User.find_by_username(new_name)
+        unless User.where('lower(username) = ?', new_name.downcase).count > 0 || !USERNAME_FORMAT.match(new_name)
           self.username = new_name
           return
         end
       }
       max_num = 10 * User.count
+      tries = 0
       while username.blank?
         new_name = "user#{rand(max_num)}"
-        unless User.find_by_username(new_name)
+        unless User.where('lower(username) = ?', new_name.downcase).count > 0 || !USERNAME_FORMAT.match(new_name)
           self.username = new_name
           return
+        end
+        tries += 1
+        if tries > 1000
+          logger.error "No username could be generated within #{tries} tries. Returning #{new_name}. First name: #{first_name}, last name: #{last_name}, max_num: #{max_num}"
+          return new_name
         end
       end
     end

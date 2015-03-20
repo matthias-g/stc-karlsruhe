@@ -2,6 +2,7 @@ require 'test_helper'
 
 class ProjectWeeksControllerTest < ActionController::TestCase
   setup do
+    sign_in(:admin)
     @project_week = project_weeks(:one)
   end
 

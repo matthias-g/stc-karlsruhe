@@ -11,6 +11,7 @@ one:
   requirements: MyText
   visible: true
   desired_team_size: 4
+  project_week: one
 
 two:
   title: MyString
@@ -23,6 +24,7 @@ two:
   requirements: MyText
   visible: false
   desired_team_size: 7
+  project_week: one
 
 three:
   title: MyString
@@ -35,3 +37,4 @@ three:
   requirements: MyText
   visible: false
   desired_team_size: 7
+  project_week: one

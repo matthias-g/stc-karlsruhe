@@ -51,7 +51,7 @@ class ProjectsControllerTest < ActionController::TestCase
 
   test 'should redirect when getting edit with no user logged in' do
     get :edit, id: @project
-    assert_redirected_to new_user_session_path
+    assert_redirected_to login_or_register_path
   end
 
   test "should redirect when getting edit if user doesn't lead project" do
@@ -78,7 +78,7 @@ class ProjectsControllerTest < ActionController::TestCase
       delete :destroy, id: @project
     end
 
-    assert_redirected_to new_user_session_path
+    assert_redirected_to login_or_register_path
   end
 
   test 'should destroy project' do
@@ -132,7 +132,7 @@ class ProjectsControllerTest < ActionController::TestCase
     assert_not @project.visible?
     get :make_visible, id: @project
     assert_not @project.visible?
-    assert_redirected_to new_user_session_path
+    assert_redirected_to login_or_register_path
   end
 
   test 'admin should make project invisible' do
@@ -154,7 +154,7 @@ class ProjectsControllerTest < ActionController::TestCase
     assert @project.visible?
     get :make_invisible, id: @project
     assert @project.visible?
-    assert_redirected_to new_user_session_path
+    assert_redirected_to login_or_register_path
   end
 
 end

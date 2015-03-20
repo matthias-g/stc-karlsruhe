@@ -1,8 +1,8 @@
 StcKarlsruhe::Application.routes.draw do
 
-  resources :project_days
+  resources :project_weeks
 
-  resources :project_statuses
+  resources :project_days
 
   resources :roles
 
@@ -12,7 +12,7 @@ StcKarlsruhe::Application.routes.draw do
   post 'users/:id', to: 'users#contact_user'
   post 'projects/:id', to: 'projects#contact_volunteers'
 
-  resources :projects do
+  resources :projects, path: 'projekte' do
     member do
       get :enter
       get :leave
@@ -26,6 +26,8 @@ StcKarlsruhe::Application.routes.draw do
       get :close
     end
   end
+  get 'projekte-:year', to: 'projects#index'
+  get 'projektwoche-:title', to: 'project_weeks#show', as: 'show_project_week'
 
   devise_for :users,
     path: '', path_names: { sign_in: 'login', sign_out: 'logout',

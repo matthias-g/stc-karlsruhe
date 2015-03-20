@@ -36,7 +36,7 @@ body {
   .dropdown-menu {
     padding: 10px;
     min-width: 230px;
-    background-color: rgba(#fff, 0.8);
+    background-color: rgba($dropdown-bg, 0.8);
   }
 }
 
@@ -60,7 +60,6 @@ header {
   padding-bottom: 50px;
   margin: 0 auto 0;
   max-width: 900px;
-  overflow: auto;
 }
 
 footer {

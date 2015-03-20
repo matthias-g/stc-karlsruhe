@@ -57,6 +57,7 @@ de:
         day_ids: 'Projekttage'
         volunteers: 'Team'
         status: 'Status'
+        project_week_id: Projektwoche
         days: Projekttage
         time: Zeit
       user:
@@ -119,7 +120,7 @@ de:
       stcInternational: 'Serve the City international'
       shareOnFacebook: 'auf Facebook teilen'
     title:
-      projectList: 'Projekte 2014'
+      projectList: 'Projekte %{year}'
       projectNew: 'Neues Projekt'
       projectEdit: 'Projekt bearbeiten: "%{project}"'
       projectView: 'Projekt "%{project}"'
@@ -206,8 +207,6 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       manageTeam: 'Team verwalten'
       leaders: 'Leitung'
       team: 'Team'
-      list: 'Projekte 2014'
-      countActive: 'Projekte'
       uploadImage: 'Bild hochladen'
     help:
       picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'

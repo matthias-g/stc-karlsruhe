@@ -72,12 +72,15 @@ h3, h4 {
 /* sections (standalone and within rows) */
 section {
   margin: 0 0 $grid-gutter-width;
-  background-color: rgba(#fff, 0.8);
+  background-color: $bg_section;
   padding: 10px !important;
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
   &.slim {
     padding: 10px !important;
+  }
+  &.showOverflow {
+    overflow: visible;
   }
   .typeHeader {
     font: 25px CaptionFont;

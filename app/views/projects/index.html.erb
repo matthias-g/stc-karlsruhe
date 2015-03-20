@@ -2,18 +2,24 @@
     <%= t('layout.title.projectList') %>
 <% end %>
 
-<section id="project-list-header">
-  <h1 style="float: left"><%= t('project.label.list') %></h1>
-  <div style="float: right">
+<section id="project-list-header" class="showOverflow">
+
+  <div class="select-year">
+    <h1>Alle Projekte</h1>
+  </div>
+
+  <div style="text-align: right">
     <div class="infobox">
       <span><%= Project.active.count %></span>
-      <div><%= t('project.label.countActive') %></div>
+      <div><%= Project.model_name.human(count: Project.active.count) %></div>
     </div>
     <div class="infobox">
       <span><%= Participation.active_user_count %></span>
       <div><%= t('user.label.countActive') %></div>
     </div>
   </div>
+
+  <div class="clearfix"></div>
 </section>
 
 <div class="row">
@@ -23,7 +29,7 @@
 
       <section class="col-sm-6 col-md-12 slim">
           <h3>Filtern</h3>
-          <%= bootstrap_form_for(:filter, url:'/projects', method:'get', html:{id:'projectFilter'}) do |f| %>
+          <%= bootstrap_form_for(:filter, url: projects_path, method:'get', html:{id:'projectFilter'}) do |f| %>
               <%#= collection_select(:week, ProjectWeek.all, :id, :title,
                  :include_blank => "- - - Aktionswoche egal - - -") %>
               <%= f.collection_select(:day, ProjectDay.all, :id, :title,

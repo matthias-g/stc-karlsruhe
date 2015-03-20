@@ -2,7 +2,8 @@ class Project < ActiveRecord::Base
 
   has_many :participations
   has_many :users, through: :participations
-  has_and_belongs_to_many :days, :class_name => 'ProjectDay'
+  has_and_belongs_to_many :days, class_name: 'ProjectDay'
+  belongs_to :project_week
 
   before_save :adjust_status
   validates_presence_of :title, :desired_team_size

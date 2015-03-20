@@ -15,6 +15,7 @@ class ProjectDaysController < ApplicationController
 
   def new
     @project_day = ProjectDay.new
+    @project_day.project_week = ProjectWeek.default
     respond_with(@project_day)
   end
 
@@ -46,6 +47,6 @@ class ProjectDaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_day_params
-      params.require(:project_day).permit(:title)
+      params.require(:project_day).permit(:title, :date, :project_week_id)
     end
 end

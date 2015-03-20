@@ -59,7 +59,6 @@
                          [['Sichtbar', :visible], ['Versteckt', :hidden]],
                          hide_label: true) %>
           <% end %>
-          <%= f.hidden_field :year, value: @project_week.title %>
           <%= f.submit 'Projekte filtern', class:'btn btn-default btn-wide' %>
           <div id="filterResults"></div>
         <% end %>
@@ -75,7 +74,16 @@
   </div>
 
   <div class="col-md-9 col-md-pull-3" id="project-list">
-    <% @project_week.projects.each do |project| %>
+    <%
+       visible = true
+       if params[:filter] && (params[:filter][:visibility] == 'hidden') && current_user.is_admin?
+         visible = false
+       end
+       projects = @project_week.projects.where(visible: visible).order(:status)
+       projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] && (params[:filter][:day] != '')
+       projects &= @project_week.projects.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] && (params[:filter][:status] != '')
+    %>
+    <% projects.each do |project| %>
       <section class="project">
         <div class="project-title">
           <%= link_to project do %>

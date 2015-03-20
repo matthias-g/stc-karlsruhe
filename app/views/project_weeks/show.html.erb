@@ -30,10 +30,12 @@
       <span><%= @project_week.projects.active.count %></span>
       <div><%= Project.model_name.human(count: @project_week.projects.active.count) %></div>
     </div>
-    <div class="infobox">
-      <span><%= @project_week.active_user_count %></span>
-      <div><%= t('user.label.countActive') %></div>
-    </div>
+    <% if @project_week.active_user_count %>
+      <div class="infobox">
+        <span><%= @project_week.active_user_count %></span>
+        <div><%= t('user.label.countActive') %></div>
+      </div>
+    <% end %>
   </div>
 
   <div class="clearfix"></div>

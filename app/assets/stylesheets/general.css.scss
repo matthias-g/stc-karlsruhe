@@ -109,32 +109,41 @@ input.btn-wide {
   width: calc(100% - 6px);
 }
 
-/* aspect ratio keeping boxes (the box must have a single child) */
+/*
+  aspect ratio keeping boxes (the box must have a single child)
+    the similar bootstrap solution .embed-responsive
+    doesn't support width/height settings/constraints on the container.
+*/
 .box {
   position: relative;
   width: 100%;
 }
-.box:before{
+.box:before {
   content: "";
   display: block;
-  padding-top: 100%;
 }
 .box > * {
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
+  height: 100%;
+  width: 100%;
 }
 
 /* possible aspect ratios */
-.ratio-4_3:before{
+.box-1by1:before {
+  padding-top: 100%;
+}
+.box-4by3:before {
   padding-top: 75%;
 }
-.ratio-16_9:before{
+.box-16by9:before {
   padding-top: 56.25%;
 }
-.ratio-5_2:before{
+.box-5by2:before {
   padding-top: 40%;
 }
 

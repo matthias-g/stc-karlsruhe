@@ -52,10 +52,12 @@
       top: 0;
       right: 0;
       bottom: 0;
-      width: 100px;
+      width: 150px;
       height: 100px;
-      margin: auto;
-      vertical-align: middle;
+      margin: auto auto;
+      * {
+        vertical-align: top;
+      }
     }
   }
 }

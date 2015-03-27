@@ -1,6 +1,6 @@
 $(document).ready(function() {
     /* lazyload images (must be activated with lazy:true in image_tag helper) */
-    $('img').lazyload();
+    $('img').lazyload({threshold: 150});
 
     /* clip preview texts */
     clipTexts();

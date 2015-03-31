@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
   mount_uploader :picture, ImageUploader
 
   extend FriendlyId
-  friendly_id :title, use: :slugged
+  friendly_id :slug_candidates, use: :slugged
 
   def volunteers
     users.where(participations: {as_leader: false})
@@ -94,6 +94,15 @@ class Project < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     title_changed? || super
+  end
+
+  # Try building a slug based on the following fields in
+  # increasing order of specificity.
+  def slug_candidates
+    candidates = []
+    candidates << :title
+    candidates << [:title, project_week.title] if project_week
+    candidates
   end
 
 end

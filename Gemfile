@@ -50,6 +50,8 @@ gem 'actionview-encoded_mail_to'
 
 gem 'pg'
 
+gem 'friendly_id'
+
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano'

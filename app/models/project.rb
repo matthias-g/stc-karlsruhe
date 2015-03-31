@@ -15,6 +15,9 @@ class Project < ActiveRecord::Base
 
   mount_uploader :picture, ImageUploader
 
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   def volunteers
     users.where(participations: {as_leader: false})
   end

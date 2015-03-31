@@ -92,4 +92,8 @@ class Project < ActiveRecord::Base
     picture_source && !picture_source.empty? && picture
   end
 
+  def should_generate_new_friendly_id?
+    title_changed? || super
+  end
+
 end

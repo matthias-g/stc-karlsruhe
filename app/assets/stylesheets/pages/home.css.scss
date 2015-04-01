@@ -66,14 +66,11 @@
   background: rgba(40,183,175, 0.8)
     url("/images/projectlink_bg.png")
     left center / contain no-repeat padding-box;
-  text-align: center;
   a {
     font: 40px CaptionFont;
     color: #fff;
     text-decoration: none;
     transition: text-shadow 0.3s;
-    display: block;
-    padding: 50px 15px
   }
   a:hover {
     text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);

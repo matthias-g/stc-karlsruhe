@@ -124,20 +124,20 @@ input.btn-wide {
 .box {
   position: relative;
   width: 100%;
-}
-.box:before {
-  content: "";
-  display: block;
-}
-.box > * {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
+  &:before {
+    content: "";
+    display: block;
+  }
+  & > * {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+  }
 }
 
 /* possible aspect ratios */
@@ -154,6 +154,18 @@ input.btn-wide {
   padding-top: 40%;
 }
 
+/* Centers the wrapped child. */
+.center-wrap {
+  display: table;
+  height: 100%;
+  width: 100%;
+  & > * {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0 auto;
+  }
+}
 
 
 .locked-iframe {

@@ -1,5 +1,10 @@
 <%= render '/layouts/bigheader' -%>
 
+<% content_for :appendToHeader do %>
+  <meta name="description" content="Du willst Menschen in Karlsruhe begegnen, ihnen Gutes tun?
+  Engagiere dich, unkompliziert und ohne lange Verpflichtungen." />
+<% end %>
+
 <section style="text-align: center">
   <div id="countdown" data-date="06/08/2015 01:00">
     <div><span></span>Tage</div>
@@ -11,6 +16,7 @@
   </div>
 </section>
 
+<%#
 <section>
   <div id="trailer" class="box box-16by9" style="max-width: 600px">
     <iframe id="trailerFrame" class="locked-iframe" allowfullscreen
@@ -23,6 +29,7 @@
     </div>
   </div>
 </section>
+%>
 
 <section>
   <h2 style="margin-bottom: -45px">Vision</h2>

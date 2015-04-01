@@ -3,6 +3,7 @@
 <% end %>
 
 <% content_for :appendToHeader do %>
+  <meta name="description" content="<%= @project.short_description %>" />
   <meta property="og:title" content="<%= Project.model_name.human %>: <%= @project.title %>" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="<%= image_url(@project.picture_url) %>" />

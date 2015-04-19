@@ -43,6 +43,15 @@ StcKarlsruhe::Application.routes.draw do
   root 'pages#home'
   get '/:page', to: 'pages#page'
 
+  namespace :api do
+    resources :projects, only: :show
+    resources :project_weeks, only: [:index] do
+      member do
+        get :projects
+      end
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

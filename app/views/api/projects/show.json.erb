@@ -1,0 +1,30 @@
+{
+  "id": "<%= @project.id %>",
+  "title": "<%= @project.title.to_json %>",
+  "description": "<%= @project.description.to_json %>",
+  "location": "<%= @project.location.to_json %>",
+  "latitude": "<%= @project.latitude %>",
+  "longitude": "<%= @project.longitude %>",
+  "individual_tasks": "<%= @project.individual_tasks.to_json %>",
+  "material": "<%= @project.material.to_json %>",
+  "requirements": "<%= @project.requirements.to_json %>",
+  <% unless @project.picture_source.blank? %>
+  "picture": {
+    "url": "<%= @project.picture.url %>",
+    "thumb": {"url": "<%= @project.picture.thumb.url %>"},
+    "listview": {"url": "<%= @project.picture.listview.url %>"},
+    "preview": {"url": "<%= @project.picture.preview.url%>"}
+  },
+  <% end %>
+  "desired_team_size": "<%= @project.desired_team_size %>",
+  "status": "<%= @project.status %>",
+  "time": "<%= @project.time.to_json %>",
+  "short_description": "<%= @project.short_description.to_json %>",
+  "map_latitude": "<%= @project.map_latitude %>",
+  "map_longitude": "<%= @project.map_longitude %>",
+  "map_zoom": "<%= @project.map_zoom %>",
+  "picture_source": "<%= @project.picture_source.to_json %>",
+  "project_week_id": "<%= @project.project_week_id %>",
+  "volunteers": "<%= @project.volunteers.collect { |volunteer| volunteer.first_name }.join(', ') %>",
+  "leaders": "<%= @project.leaders.collect { |leader| leader.first_name }.join(', ') %>"
+}

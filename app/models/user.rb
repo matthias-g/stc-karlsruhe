@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
 
   private
 
-  def set_default_username_if_blank!
+  def set_default_username_if_blank!  # not thread safe
     if username.blank?
       possible_usernames = [first_name, "#{first_name}#{last_name.first}", "#{first_name}#{last_name}"]
       possible_usernames.each { |new_name|

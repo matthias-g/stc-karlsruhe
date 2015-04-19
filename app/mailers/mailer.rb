@@ -18,9 +18,4 @@ class Mailer < ActionMailer::Base
     @to_name = to_name
     mail from: "#{from_name} <no-reply@servethecity-karlsruhe.de>", to: message.recipient, reply_to: message.sender, subject: message.subject
   end
-
-  def notification_mail(message)
-    @message = message.body
-    mail from: StcKarlsruhe::Application::NO_REPLY_SENDER, to: message.recipient, reply_to: message.sender, subject: message.subject
-  end
 end

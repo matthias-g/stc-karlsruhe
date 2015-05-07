@@ -188,7 +188,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       delete: 'Projekt löschen'
       open: 'Projekt öffnen'
       close: 'Projekt abschließen'
-      makeVisible: 'Projekt freigeben'
+      makeVisible: 'Sichtbar machen'
       makeInvisible: 'Projekt verstecken'
       manageTeam: 'Team verwalten'
       addLeader: 'als Leiter hinzufügen'

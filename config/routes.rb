@@ -48,6 +48,7 @@ StcKarlsruhe::Application.routes.draw do
     resources :project_weeks, only: [:index] do
       member do
         get :projects
+        get :project_days
       end
     end
   end

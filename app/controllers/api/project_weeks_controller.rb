@@ -1,5 +1,5 @@
 class Api::ProjectWeeksController < ApplicationController
-  before_action :set_project_week, only: [:projects]
+  before_action :set_project_week, only: [:projects, :project_days]
 
   respond_to :json
 
@@ -11,6 +11,11 @@ class Api::ProjectWeeksController < ApplicationController
   def projects
     projects = @project_week.projects.where(visible: true)
     respond_with(projects.to_json(only: [:id, :title, :description, :short_description]))
+  end
+
+  def project_days
+    project_days = @project_week.days
+    respond_with(project_days.to_json(only: [:id, :title, :date, :project_week_id]))
   end
 
   private

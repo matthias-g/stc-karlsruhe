@@ -96,7 +96,8 @@
     <section class="slim">
       <div class="week">
         <%= f.collection_select(:project_week_id, ProjectWeek.all, :id, :title,
-                                {:selected => @project.project_week.id } ) -%>
+                                {:selected => @project.project_week.id},
+                                :onChange => "javascript:updateWeekDays()" ) -%>
         <%# TODO reload project day list on change %>
       </div>
       <div class="days">

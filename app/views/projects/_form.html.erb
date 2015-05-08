@@ -95,10 +95,9 @@
 
     <section class="slim">
       <div class="week">
-        <%= f.collection_select(:project_week_id, ProjectWeek.all, :id, :title,
+        <%= f.collection_select(:project_week_id, ProjectWeek.all.order(title: :desc), :id, :title,
                                 {:selected => @project.project_week.id},
                                 :onChange => "javascript:updateWeekDays()" ) -%>
-        <%# TODO reload project day list on change %>
       </div>
       <div class="days">
         <%= f.collection_select(:day_ids, @project.project_week.days, :id, :title,

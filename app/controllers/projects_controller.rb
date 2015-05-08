@@ -26,7 +26,7 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-    @project.project_week = ProjectWeek.default
+    @project.project_week = ProjectWeek.all.order(title: :desc).first
     respond_with(@project)
   end
 

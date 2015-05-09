@@ -90,7 +90,9 @@
 <div class="row row-sm-eq-height">
   <section class="col-sm-12" id="project-link">
     <div class="center-wrap" style="padding: 20px 20px 20px 30px;">
-      <a href="/projektwoche-2015"><i class="fa fa-arrow-right" style="position:relative;bottom:3px"></i> &nbsp;zu den Projekten</a>
+      <%= link_to show_project_week_path(ProjectWeek.default.title) do %>
+          <i class="fa fa-arrow-right" style="position:relative;bottom:3px"></i> &nbsp;zu den Projekten
+      <% end %>
     </div>
   </section>
 </div>

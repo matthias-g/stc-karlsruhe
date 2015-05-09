@@ -100,7 +100,7 @@
                                 :onChange => "javascript:updateWeekDays()" ) -%>
       </div>
       <div class="days">
-        <%= f.collection_select(:day_ids, @project.project_week.days, :id, :title,
+        <%= f.collection_select(:day_ids, @project.project_week.days.order(date: :asc), :id, :title,
                {selected: @project.days.collect {|t| t.id}}, multiple: true) -%>
       </div>
       <div class="time">

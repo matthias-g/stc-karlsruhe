@@ -51,7 +51,7 @@
         <%= bootstrap_form_for(:filter, url: projects_path, method:'get', html:{id:'projectFilter'}) do |f| %>
           <%#= collection_select(:week, ProjectWeek.all, :id, :title,
                  :include_blank => "- - - Aktionswoche egal - - -") %>
-          <%= f.collection_select(:day, @project_week.days, :id, :title,
+          <%= f.collection_select(:day, @project_week.days.order(date: :asc), :id, :title,
                                   include_blank: "- - - Alle Tage - - -", hide_label: true) %>
           <%= f.select(:status,
                        Project.statuses.keys.map { |s| [t("project.status.#{s}"), s] },

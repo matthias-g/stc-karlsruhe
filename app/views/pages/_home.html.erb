@@ -68,14 +68,7 @@
   </div>
 </section>
 
-<div class="row row-sm-eq-height">
-  <section class="col-sm-12" id="project-link">
-    <div class="center-wrap" style="padding: 20px 20px 20px 30px;">
-      <a href="/projektwoche-2014">Die Anmeldung für Projekte 2015 ist ab dem <strong>10. Mai</strong> hier möglich.</a>
-    </div>
-  </section>
-</div>
-
+<%#
 <div class="row row-sm-eq-height">
   <section class="col-sm-12">
     <div class="row">
@@ -92,6 +85,15 @@
     </div>
   </section>
 </div>
+%>
+
+<div class="row row-sm-eq-height">
+  <section class="col-sm-12" id="project-link">
+    <div class="center-wrap" style="padding: 20px 20px 20px 30px;">
+      <a href="/projektwoche-2015"><i class="fa fa-arrow-right" style="position:relative;bottom:3px"></i> &nbsp;zu den Projekten</a>
+    </div>
+  </section>
+</div>
 
 
 <%#
@@ -102,11 +104,11 @@
 %>
 
 <section>
-  <h2>Projektkarte 2014</h2>
+  <h2>Projektkarte <%= ProjectWeek.default.title %></h2>
   <div class="box box-5by2" style="min-height:200px;">
     <div id="project-map" class="map"
          data-lat="49.011627" data-lon="8.403869" data-zoom="12">
-      <% Project.all.each do |p| %>
+      <% ProjectWeek.default.projects.each do |p| %>
           <% if (p.visible && !p.longitude.nil? && !p.latitude.nil?) %>
               <div data-lon="<%= p.longitude %>" data-lat="<%= p.latitude %>"
                    data-name="<%= p.title %>" data-href="<%= url_for(p) %>">

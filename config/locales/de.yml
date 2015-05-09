@@ -70,18 +70,6 @@ de:
         password_confirmation: 'Passwort wiederholen'
         current_password: 'Aktuelles Passwort'
         remember_me: 'merken'
-      page:
-        title: 'Seitentitel'
-        header_name: 'Partial-Name des Headers'
-        address: 'URL-Pfad der Seite'
-        sections: 'Seitenabschnitte'
-      page_section:
-        title: 'Abschnitt-Name'
-        partial_name: 'Partial-Name (optional)'
-        index: 'Index (zur Sortierung auf der Seite)'
-        content: 'HTML-Eingabe (zusätzlich oder alternativ zum Partial)'
-        css_class: 'CSS-Klasse für den Container'
-        stylesheet: 'Stylesheet (Achtung: CSS-Regeln gelten für die ganze Seite)'
       project_day:
         title: 'Titel'
       message:
@@ -282,6 +270,7 @@ Leiter: %{leader}'
     new: 'Neuer Projekttag'
     save: 'Projekttag speichern'
     list: 'Projekttage verwalten'
+    projectWeek: 'Projektwoche'
     captionList: 'Projekttage'
     captionNew: 'Neuer Projekttag'
     captionEdit: 'Projekttag bearbeiten: "%s"'

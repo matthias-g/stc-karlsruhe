@@ -11,6 +11,7 @@
       <thead>
         <tr>
           <th><%= t('general.label.name') %></th>
+          <th><%= t('project_day.projectWeek') %></th>
           <th><%= t('general.label.actions') %></th>
         </tr>
       </thead>
@@ -19,6 +20,7 @@
         <% @project_days.each do |project_day| %>
           <tr>
             <td><%= link_to project_day.title, project_day %></td>
+            <td><%= project_day.project_week.title %></td>
             <td>
               <%= link_to t('general.action.edit'), edit_project_day_path(project_day) %> |
               <%= link_to t('general.action.delete'), project_day, method: :delete,

@@ -67,7 +67,7 @@
               <%= link_to t('project.action.manageTeam'),
                           edit_leaders_project_path(@project), class:'btn btn-default btn-wide' %>
               <%= link_to t('project.action.toOverview'),
-                          projects_path, class: 'btn btn-default btn-wide' %>
+                          show_project_week_path(@project.project_week.title), class: 'btn btn-default btn-wide' %>
         </section>
       <% end %>
 

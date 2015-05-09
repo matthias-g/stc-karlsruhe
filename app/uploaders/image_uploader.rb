@@ -37,7 +37,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :listview do
-    process :resize_to_fill => [200, 200]
+    process :resize_to_fill => [200, 165]
   end
 
   version :preview do

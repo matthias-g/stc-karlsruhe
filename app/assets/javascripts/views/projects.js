@@ -23,7 +23,7 @@ function updateWeekDays() {
     $.getJSON('/api/project_weeks/' + week + '/project_days.json', function(res) {
         var daySelect = $('.days select').empty();
         $.each(res, function(idx, day) {
-            daySelect.append($('<option value="'+day.id+'">'+day.title+'</option>'));
+            $('<option>').attr({value: day.id}).text(day.title).appendTo(daySelect);
         });
     });
 }

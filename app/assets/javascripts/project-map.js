@@ -66,15 +66,15 @@ $(document).ready(function() {
             google.maps.event.addListener(map, 'click', function(e) {
                 removeMarkers();
                 addMarker('Projektort', '', '', e.latLng.lat(), e.latLng.lng());
-                c.siblings('#project_latitude').val(e.latLng.lat());
-                c.siblings('#project_longitude').val(e.latLng.lng());
+                c.siblings().find('#project_latitude').val(e.latLng.lat());
+                c.siblings().find('#project_longitude').val(e.latLng.lng());
             });
             google.maps.event.addListener(map, 'center_changed', function(e) {
-                c.siblings('#project_map_latitude').val(map.getCenter().lat());
-                c.siblings('#project_map_longitude').val(map.getCenter().lng());
+                c.siblings().find('#project_map_latitude').val(map.getCenter().lat());
+                c.siblings().find('#project_map_longitude').val(map.getCenter().lng());
             });
             google.maps.event.addListener(map, 'zoom_changed', function() {
-                c.siblings('#project_map_zoom').val(map.getZoom());
+                c.siblings().find('#project_map_zoom').val(map.getZoom());
             });
         }
 

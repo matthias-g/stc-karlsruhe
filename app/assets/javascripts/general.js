@@ -17,6 +17,15 @@ $(document).ready(function() {
             $('html, body').scrollTop(target.offset().top - 100);
         }
     }
+
+    /* Retrieve Facebook likes with the graph API */
+    $('.get-likes').each(function() {
+        var dst = $(this);
+        $.getJSON('https://graph.facebook.com/' + dst.data('fb-page'), function(res) {
+            dst.text(res.likes);
+        });
+    });
+
 });
 
 /* clip overflowing text in all .clipText areas within {parent}. */

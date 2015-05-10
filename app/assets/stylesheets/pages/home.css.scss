@@ -98,3 +98,27 @@
   border: 1px solid rgba(#777,0.5);
   width: 100%;
 }
+
+#facebook-box {
+  background: rgba(#3A5795, 0.8)
+    //url("/images/projectlink_bg.png")
+    left center / contain no-repeat padding-box;
+  font: 20px NormalFont;
+  color: #fff;
+  a {
+    color: #fff;
+    text-decoration: none;
+    transition: text-shadow 0.3s;
+  }
+  a:hover {
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+  }
+  h1 {
+    margin-top: 5px;
+  }
+  .get-likes {
+    font-weight: bold;
+    padding-right: 5px;
+    padding-left: 10px;
+  }
+}

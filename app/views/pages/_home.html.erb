@@ -88,7 +88,17 @@
 %>
 
 <div class="row row-sm-eq-height">
-  <section class="col-sm-12" id="project-link">
+  <section class="col-sm-6" id="facebook-box">
+    <h1>
+      <%= link_to 'https://www.facebook.com/servethecity.karlsruhe', :target => "_blank" do %>
+          <i class="fa fa-facebook-square" style="font-size: 1.3em;padding-right: 10px;"></i> Serve the City auf Facebook
+      <% end %>
+    </h1>
+    <div>
+      <span class="get-likes" data-fb-page="servethecity.karlsruhe"></span> &#132;Gefällt mir&#148;-Angaben
+    </div>
+  </section>
+  <section class="col-sm-6" id="project-link">
     <div class="center-wrap" style="padding: 20px 20px 20px 30px;">
       <%= link_to show_project_week_path(ProjectWeek.default.title) do %>
           <i class="fa fa-arrow-right" style="position:relative;bottom:3px"></i> &nbsp;zu den Projekten

@@ -69,7 +69,6 @@
     overflow: hidden;
     img {
       width: 100%;
-      margin-top: 35px;
     }
   }
   .project-status {
@@ -117,8 +116,11 @@
       width: 200px;
       margin: 0;
       img {
-        height: 100%;
+        box-sizing: border-box;
+        border-top: 35px solid transparent;
+        min-height: 100%;
         width: auto;
+        min-width: 100%;
       }
     }
     .project-title {

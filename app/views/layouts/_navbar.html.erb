@@ -44,14 +44,20 @@
       <div class="dropdown-menu">
         <%= bootstrap_form_for(resource, as: resource_name, namespace: 'navbar_login',
              url: session_path(resource_name)) do |f| %>
-          <%= f.text_field :login, autofocus: true, hide_label: true,
-                placeholder: t('user.label.user') %>
+          <%= f.text_field :login, hide_label: true,
+                placeholder: t('user.label.user_or_email') %>
           <%= f.password_field :password, hide_label: true,
                 placeholder: t('activerecord.attributes.user.password') %>
           <% if devise_mapping.rememberable? -%>
             <%= f.check_box :remember_me %>
           <% end -%>
           <%= f.submit t('user.action.login'), class:'btn btn-default btn-wide' %>
+          <div style="padding:5px;">
+              <%- if devise_mapping.recoverable? %>
+                <%= link_to t('user.action.recoverPassword'),
+                    new_password_path(resource_name) %><br />
+              <% end -%>
+          </div>
         <% end %>
       </div>
     </li>

@@ -5,13 +5,17 @@
 <div class="row">
   <section class="col-medium col-centered">
       <h2><%= t('devise.passwords.forgot_your_password') %></h2>
+      <p>
+        Gib deine Emailadresse an, mit der du registriert bist.
+        Wir schicken dir dann Anweisungen, wie du dein Passwort zurücksetzen kannst.
+      </p>
       <%= bootstrap_form_for(resource, :as => resource_name,
               :url => password_path(resource_name),
               :html => { :method => :post }) do |f| %>
           <%#= devise_error_messages! %>
           <%= f.email_field :email, :autofocus => true %>
           <%= f.submit t('devise.passwords.send_me_reset_password_instructions') %>
-          <%= render 'devise/shared/links' %>
+          <%#= render 'devise/shared/links' %>
       <% end %>
   </section>
 </div>

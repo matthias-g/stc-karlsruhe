@@ -35,9 +35,9 @@ de:
         one: 'Projekt'
         other: 'Projekte'
       user:
-        zero: 'Benutzer'
-        one: 'Benutzer'
-        other: 'Benutzer'
+        zero: 'Mitarbeiter'
+        one: 'Mitarbeiter'
+        other: 'Mitarbeiter'
     attributes:
       project:
         title: 'Projekttitel'
@@ -265,7 +265,7 @@ Leiter: %{leader}'
       hasNoProjects: '%{user} nimmt noch an keinem Projekt teil.'
       youHaveNoProjects: 'Du nimmst noch an keinem Projekt teil.'
       invalidPassword: 'Das Passwort ist falsch'
-      accountDeleted: 'Dein Account ist gelöscht.'
+      accountDeleted: 'Dein Account wurde gelöscht.'
     help:
       passwordLength: 'Mindestens 6 Zeichen lang.'
 

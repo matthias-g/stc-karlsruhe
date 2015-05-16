@@ -59,6 +59,16 @@ class User < ActiveRecord::Base
     has_role?(:admin)
   end
 
+  def clear!
+    self.first_name = 'cleared'
+    self.last_name = 'cleared'
+    self.phone = ''
+    self.username = ''
+    set_default_username_if_blank!
+    self.email = self.username + '@cleared.servethecity-karlsruhe.de'
+    self.cleared = true
+  end
+
   private
 
   def set_default_username_if_blank!  # not thread safe

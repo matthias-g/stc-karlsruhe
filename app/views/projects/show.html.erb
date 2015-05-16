@@ -117,12 +117,12 @@
       <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim col-lastfix">
           <div>
             <h3><%= Project.human_attribute_name('leaders') %></h3>
-            <%= @project.leaders.collect { |v| link_to(v.first_name, user_path(v)) }.join(', ').html_safe %>
+            <%= list_users(@project.leaders) %>
           </div>
           <div>
             <h3><%= Project.human_attribute_name('volunteers') %>
               (<%= @project.volunteers.size %>/<%= @project.desired_team_size %>)</h3>
-            <%= @project.volunteers.map { |v| link_to(v.first_name , user_path(v)) }.join(', ').html_safe %>
+            <%= list_users(@project.volunteers) %>
           </div>
       </section>
 

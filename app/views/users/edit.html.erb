@@ -38,9 +38,9 @@
           <% if (current_user == @user) %>
             <%= link_to t('user.action.changePassword'), edit_user_registration_path,
                         class:'btn btn-default btn-wide' %>
-          <% end %>
-          <%#= link_to t('user.action.deleteAccount'), confirm_delete_user_path,
-                      class:'btn btn-default btn-wide' %>
+            <%= link_to t('user.action.deleteAccount'), confirm_delete_user_path,
+                        class:'btn btn-default btn-wide' %>
+        <% end %>
         </section>
       </div>
     </div>

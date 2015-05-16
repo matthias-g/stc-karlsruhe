@@ -152,6 +152,7 @@ en:
       register: 'Sign Up'
       confirmAccount: 'Confirm my account'
       unlockAccount: 'Unlock my account'
+      deleteAccount: 'Delete account'
       resendInstructions: 'Resend confirmation instructions'
       changePassword: 'Change my password'
     label:

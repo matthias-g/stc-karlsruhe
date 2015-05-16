@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :contact_user, :edit, :update, :confirm_delete, :destroy]
   before_action :authenticate_user!, except: [:login_or_register]
   before_action :authenticate_admin_user!, only: [:index]
-  before_action :own_user_or_authenticate_admin_user!, only: [:edit, :update]
+  before_action :own_user_or_authenticate_admin_user!, only: [:edit, :update, :destroy]
 
   respond_to :html
 
@@ -32,7 +32,9 @@ class UsersController < ApplicationController
 
   def destroy
     if @user.valid_password?(params[:confirm_delete_password]) || current_user.is_admin?
-      @user.destroy
+      @user.clear!
+      @user.save!
+      sign_out
       redirect_to root_path, notice: t('user.message.accountDeleted')
     else
       redirect_to action: :confirm_delete, alert: t('user.message.invalidPassword')

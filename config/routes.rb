@@ -1,5 +1,9 @@
 StcKarlsruhe::Application.routes.draw do
 
+  resources :gallery_pictures
+
+  resources :galleries
+
   resources :project_weeks
 
   resources :project_days

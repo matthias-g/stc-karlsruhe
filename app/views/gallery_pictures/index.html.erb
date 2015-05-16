@@ -1,0 +1,27 @@
+<h1>Listing gallery_pictures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Gallery</th>
+      <th>Picture</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @gallery_pictures.each do |gallery_picture| %>
+      <tr>
+        <td><%= gallery_picture.gallery_id %></td>
+        <td><%= gallery_picture.picture %></td>
+        <td><%= link_to 'Show', gallery_picture %></td>
+        <td><%= link_to 'Edit', edit_gallery_picture_path(gallery_picture) %></td>
+        <td><%= link_to 'Destroy', gallery_picture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Gallery picture', new_gallery_picture_path %>

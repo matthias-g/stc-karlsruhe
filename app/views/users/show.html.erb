@@ -45,8 +45,8 @@
       <section class="contact-user-form">
         <h2><%= t('contact.user.title', recipient: @user.first_name) %></h2>
         <%= bootstrap_form_for @message, url: { action: 'contact_user' } do |f| %>
-          <%= f.text_field :subject %>
-          <%= f.text_area :body %>
+          <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
+          <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
           <%= f.submit t('contact.user.submit') %>
         <% end %>
       </section>

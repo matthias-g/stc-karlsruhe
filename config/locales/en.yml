@@ -9,6 +9,10 @@ en:
         zero: 'User'
         one: 'User'
         other: 'Users'
+      message:
+        zero: Messages
+        one: Message
+        other: Messages
     attributes:
       project:
         title: 'Project Title'
@@ -38,6 +42,11 @@ en:
         password: 'Password'
         password_confirmation: 'Confirm password'
         remember_me: "Remember me"
+      message:
+        sender: Sender
+        recipient: Recipient
+        subject: Subject
+        body: Message
     errors:
       messages:
         blank: 'may not be blank.'

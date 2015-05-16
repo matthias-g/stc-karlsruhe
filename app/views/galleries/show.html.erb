@@ -5,10 +5,12 @@
   <%= @gallery.title %>
 </p>
 
-<% @gallery_pictures.each do |p| %>
-  <%= image_tag p.picture_url %>
-  <%= link_to 'Edit picture', edit_gallery_picture_path(p) %>
-<% end %>
+<%# @gallery_pictures.each do |p| %>
+  <%#= image_tag p.picture_url %>
+  <%#= link_to 'Edit picture', edit_gallery_picture_path(p) %>
+<%# end %>
+
+<%= render_gallery_for @gallery_pictures %>
 
 <%= link_to 'Edit', edit_gallery_path(@gallery) %> |
 <%= link_to 'Back', galleries_path %>

@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require hermitage
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks

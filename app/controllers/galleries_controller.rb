@@ -24,9 +24,9 @@ class GalleriesController < ApplicationController
 
   def create
     @gallery = Gallery.new(gallery_params)
-    if @gallery.save
+    if @gallery.save && params[:gallery_pictures]
       params[:gallery_pictures][:picture].each do |picture|
-        gallery_picture = @gallery.gallery_pictures.create!(picture: picture, gallery_id: @gallery.id)
+        @gallery.gallery_pictures.create!(picture: picture, gallery_id: @gallery.id)
       end
     end
     respond_with(@gallery)

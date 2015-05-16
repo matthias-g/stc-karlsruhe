@@ -42,6 +42,7 @@ gem 'devise'
 
 gem 'mini_magick'
 gem 'carrierwave'
+gem 'hermitage'
 
 gem 'bootstrap-sass'
 gem 'bootstrap_form'

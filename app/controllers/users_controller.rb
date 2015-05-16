@@ -12,6 +12,9 @@ class UsersController < ApplicationController
   end
 
   def show
+    if @user.cleared && !current_user.is_admin?
+      not_found
+    end
     #Message for contact_user
     @message = Message.new
     respond_with(@user)

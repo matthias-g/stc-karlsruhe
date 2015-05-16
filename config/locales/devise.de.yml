@@ -53,7 +53,7 @@ de:
       updated: 'Dein Passwort wurde geändert. Du bist jetzt angemeldet.'
       updated_not_active: 'Dein Passwort wurde geändert.'
       forgot_your_password: 'Hast du dein Passwort vergessen?'
-      send_me_reset_password_instructions: 'Zurücksetzen'
+      send_me_reset_password_instructions: 'Passwort zurücksetzen'
     registrations:
       destroyed: 'Dein Account wurde gelöscht.'
       signed_up: 'Du hast dich erfolgreich registriert.'

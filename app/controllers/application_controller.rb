@@ -30,11 +30,15 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     sign_in_url = new_user_session_url
-    if request.referer == sign_in_url
+    if request.referer == sign_in_url || request.referer == login_or_register_url || request.referer =~ /.*\/password\/.*/
       super
     else
-      stored_location_for(resource) || request.referer || root_path
+      stored_location_for(resource) || request.referer || signed_in_root_path(resource)
     end
+  end
+
+  def signed_in_root_path(resource_or_scope)
+    user_path(current_user)
   end
 
 end

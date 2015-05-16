@@ -61,7 +61,7 @@ de:
         days: Projekttage
         time: Zeit
       user:
-        username: 'Username'
+        username: 'Benutzername'
         first_name: 'Vorname'
         last_name: 'Nachname'
         email: 'E-Mail'
@@ -245,7 +245,7 @@ Leiter: %{leader}'
       register: 'Registrieren'
       countActive: 'Mitarbeiter'
       user: 'User'
-      user_or_email: 'Username / Email'
+      user_or_email: 'Benutzername / Email'
       profile: 'Profil'
       myProfile: 'Mein Profil'
       userData: 'Profildaten'

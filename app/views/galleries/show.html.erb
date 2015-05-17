@@ -12,5 +12,17 @@
 
 <%= render_gallery_for @gallery_pictures %>
 
+<%= form_for(@gallery, html: { multipart: true}) do |f| %>
+  <%= f.hidden_field :title %>
+  <div class="field">
+    <%= f.label :picture %><br>
+    <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
 <%= link_to 'Edit', edit_gallery_path(@gallery) %> |
 <%= link_to 'Back', galleries_path %>

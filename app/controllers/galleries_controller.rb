@@ -10,12 +10,15 @@ class GalleriesController < ApplicationController
 
   def show
     @gallery_pictures = @gallery.gallery_pictures.all
+    if @gallery_pictures.count == 0
+      @gallery.gallery_pictures.build
+    end
     respond_with(@gallery)
   end
 
   def new
     @gallery = Gallery.new
-    @gallery_picture = @gallery.gallery_pictures.build
+    @gallery.gallery_pictures.build
     respond_with(@gallery)
   end
 
@@ -33,7 +36,11 @@ class GalleriesController < ApplicationController
   end
 
   def update
-    @gallery.update(gallery_params)
+    if @gallery.update(gallery_params) && params[:gallery_pictures]
+      params[:gallery_pictures][:picture].each do |picture|
+        @gallery.gallery_pictures.create!(picture: picture, gallery_id: @gallery.id)
+      end
+    end
     respond_with(@gallery)
   end
 

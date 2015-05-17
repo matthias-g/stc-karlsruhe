@@ -29,7 +29,7 @@ class GalleriesController < ApplicationController
     @gallery = Gallery.new(gallery_params)
     if @gallery.save && params[:gallery_pictures]
       params[:gallery_pictures][:picture].each do |picture|
-        @gallery.gallery_pictures.create!(picture: picture, gallery_id: @gallery.id)
+        @gallery.gallery_pictures.create!(picture: picture, gallery: @gallery, uploader: current_user)
       end
     end
     respond_with(@gallery)
@@ -38,7 +38,7 @@ class GalleriesController < ApplicationController
   def update
     if @gallery.update(gallery_params) && params[:gallery_pictures]
       params[:gallery_pictures][:picture].each do |picture|
-        @gallery.gallery_pictures.create!(picture: picture, gallery_id: @gallery.id)
+        @gallery.gallery_pictures.create!(picture: picture, gallery: @gallery, uploader: current_user)
       end
     end
     respond_with(@gallery)

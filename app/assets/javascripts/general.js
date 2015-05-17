@@ -52,3 +52,5 @@ function showMessage(htmlstr) {
     }, 5000);
     $('#messages').append(msg);
 }
+
+hermitage.slideshowEffect = 'fade';

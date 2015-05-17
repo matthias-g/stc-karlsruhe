@@ -167,6 +167,8 @@
 
 .schirmherr-ribbon-top-right .schirmherr-ribbon-text {
   padding-left: 95px;
+  width: 550px;
+  display: inline-block;
 }
 
 .schirmherr-ribbon-text {
@@ -176,10 +178,8 @@
   text-align: center;
   font: 700 17px NormalFont, Helvetica, Arial, sans-serif;
 
-  width: 550px;
   line-height: 24px;
-  padding: 5px 0 5px;
-  display: inline-block;
+  padding: 5px;
 
   border-width: 1px 0;
   border-style: dotted;

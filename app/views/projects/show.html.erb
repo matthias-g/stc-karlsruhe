@@ -54,6 +54,20 @@
           <%= simple_format @project.material %>
         </div>
       <% end %>
+      <% if @project.subprojects && @project.subprojects.count > 0 %>
+        <div class="subprojects">
+          <h3><%= Project.human_attribute_name('subproject_ids') %></h3>
+          <ul>
+            <% @project.subprojects.each do |subproject| %>
+              <li><%= link_to subproject.title, project_path(subproject) %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% elsif @project.parent_project %>
+          <div class="parent-project">
+            <%= t('project.label.parent_project', parent_project_link: link_to(@project.parent_project.title, project_path(@project.parent_project))).html_safe %>
+          </div>
+      <% end %>
     </section>
 
     <div class="col-md-4">
@@ -126,10 +140,13 @@
                 <%= link_to t('project.action.leave'),
                             leave_project_path(@project),
                             class: 'btn btn-default btn-wide' %>
-              <% elsif @project.open? || @project.soon_full? %>
+              <% elsif @project.has_free_places? %>
                 <%= link_to t('project.action.enter'),
                             enter_project_path(@project),
                             class: 'btn btn-default btn-wide' %>
+              <% end %>
+              <% if user_signed_in? && @project.has_volunteer_in_subproject?(current_user) %>
+                <p><%= t('project.message.subprojectTeamMember') %></p>
               <% end %>
             <% end %>
           </div>
@@ -141,8 +158,8 @@
           </div>
           <div>
             <h3><%= Project.human_attribute_name('volunteers') %>
-              (<%= @project.volunteers.size %>/<%= @project.desired_team_size %>)</h3>
-            <%= list_users(@project.volunteers) %>
+              (<%= @project.aggregated_volunteers.size %>/<%= @project.aggregated_desired_team_size %>)</h3>
+            <%= list_users(@project.aggregated_volunteers) %>
           </div>
         </section>
 

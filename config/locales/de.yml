@@ -61,6 +61,8 @@ de:
         project_week_id: Projektwoche
         days: Projekttage
         time: Zeit
+        subproject_ids: Teilprojekte
+        parent_project_id: Überprojekt
       user:
         username: 'Benutzername'
         first_name: 'Vorname'
@@ -188,6 +190,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       findProject: 'Projekt finden'
     label:
       project: 'Projekt'
+      subproject: Teilprojekt
       manageProject: 'Projektverwaltung'
       status: 'Projektstatus'
       new: 'Neues Projekt'
@@ -196,6 +199,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       leaders: 'Leitung'
       team: 'Team'
       uploadImage: 'Bild hochladen'
+      parent_project: Dieses Projekt ist Teil von %{parent_project_link}.
     help:
       picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
       short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Projektliste statt der ausführlichen Beschreibung angezeigt.'
@@ -208,6 +212,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       errorList: 'Wegen folgender Fehler konnte das Projekt nicht gespeichert werden:'
       remainingVacancy: '%s freie Plätze'
       teamMember: 'Du bist im Projektteam.'
+      subprojectTeamMember: 'Du bist bei einem Teilprojekt dabei.'
       isFull: 'Dieses Projekt ist schon vollbesetzt.'
       participationSuccess: 'Du nimmst jetzt an diesem Projekt teil. Der Teamleiter wird sich mit Dir in Verbindung setzen.'
       madeVisible: 'Projekt wurde sichtbar gemacht.'

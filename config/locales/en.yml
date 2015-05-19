@@ -34,6 +34,7 @@ en:
         project_week_id: 'Project Week'
         days: 'Project Days'
         time: Time
+        subproject_ids: Subprojects
       user:
         username: 'Username'
         first_name: 'First Name'

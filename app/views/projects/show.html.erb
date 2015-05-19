@@ -108,7 +108,7 @@
         <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
           <div>
             <h3><%= Project.human_attribute_name('days') %></h3>
-            <%= @project.days.collect { |day| day.title }.join('<br />').html_safe %>
+            <%= @project.days.order(date: :asc).collect { |day| day.title }.join('<br />').html_safe %>
           </div>
           <div>
             <%= simple_format @project.time %>

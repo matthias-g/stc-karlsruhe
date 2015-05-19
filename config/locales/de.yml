@@ -62,6 +62,7 @@ de:
         days: Projekttage
         time: Zeit
         subproject_ids: Teilprojekte
+        parent_project_id: Überprojekt
       user:
         username: 'Benutzername'
         first_name: 'Vorname'

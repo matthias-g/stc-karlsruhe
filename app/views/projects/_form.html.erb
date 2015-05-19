@@ -134,9 +134,8 @@
     </section>
 
     <section class="slim">
-      <div class="subprojects">
-        <%= f.collection_select(:subproject_ids, @project.project_week.projects, :id, :title,
-                                {selected: @project.subprojects.collect {|t| t.id}}, multiple: true) -%>
+      <div class="parent_project">
+        <%= f.select(:parent_project_id, @project.project_week.projects.collect{ |p| [p.title, p.id]}, {include_blank: true}) -%>
       </div>
     </section>
 

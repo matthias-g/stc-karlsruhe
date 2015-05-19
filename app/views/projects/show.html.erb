@@ -17,7 +17,7 @@
 
   <section>
     <div class="typeHeader">
-      <%= Project.model_name.human %>
+      <%= @project.is_subproject? ? t('project.label.subproject') : Project.model_name.human %>
     </div>
     <h1><%= @project.title %></h1>
   </section>

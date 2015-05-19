@@ -190,6 +190,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       findProject: 'Projekt finden'
     label:
       project: 'Projekt'
+      subproject: Teilprojekt
       manageProject: 'Projektverwaltung'
       status: 'Projektstatus'
       new: 'Neues Projekt'

@@ -118,6 +118,10 @@ class Project < ActiveRecord::Base
     desired_team_size
   end
 
+  def is_subproject?
+    parent_project != nil
+  end
+
   def show_picture?
     picture_source && !picture_source.empty? && picture
   end

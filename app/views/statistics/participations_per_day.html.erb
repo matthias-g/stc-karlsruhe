@@ -1,0 +1,32 @@
+<% content_for :pageTitle do %>
+  <%= t('layout.title.statistics') %>
+<% end %>
+
+<section>
+  <h1>Neue Projektteilnahmen am <%= l @date, format: :default %></h1>
+</section>
+
+<div class="row row-md-eq-height">
+
+  <section class="col-md-12">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Projekt</th>
+        <th>Neue Teilnahmen</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% ProjectWeek.default.projects.each do |project| %>
+        <tr>
+          <% if @participations.where(project: project).count > 0 %>
+            <td><%= project.title %></td>
+            <td><%= @participations.where(project: project).count %></td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </section>
+
+</div>

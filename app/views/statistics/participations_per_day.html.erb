@@ -20,7 +20,7 @@
       <% ProjectWeek.default.projects.each do |project| %>
         <tr>
           <% if @participations.where(project: project).count > 0 %>
-            <td><%= project.title %></td>
+            <td><%= link_to project.title, project_path(project) %></td>
             <td><%= @participations.where(project: project).count %></td>
           <% end %>
         </tr>

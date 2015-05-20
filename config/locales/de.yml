@@ -111,6 +111,7 @@ de:
       projectList: 'Projekte %{year}'
       projectNew: 'Neues Projekt'
       projectEdit: 'Projekt bearbeiten: "%{project}"'
+      projectCropPicture: 'Bildausschnitte festlegen: "%{project}"'
       projectView: 'Projekt "%{project}"'
       roleList: 'Rollen'
       roleNew: 'Neue Benutzerrolle'

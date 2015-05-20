@@ -1,0 +1,14 @@
+<section>
+    <h1>Crop Project Picture</h1>
+    <%= image_tag @project.picture_url(:precrop), id: "cropbox",
+                  :data => { :aspect => 2} %>
+
+    <%= form_tag({controller: "projects", action: "crop_picture"}, method: "get") do %>
+        <div class="actions">
+          <% %w[x y w h].each do |a| %>
+              <%= hidden_field_tag "crop_#{a}", id: "crop_#{a}" %>
+          <% end %>
+          <%= submit_tag "Crop" %>
+        </div>
+    <% end %>
+</section>

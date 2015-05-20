@@ -37,11 +37,16 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :listview do
+    process :crop
     process :resize_to_fill => [200, 165]
   end
 
   version :preview do
     process :resize_to_fill => [522, 261]
+  end
+
+  version :precrop do
+    process :resize_to_limit => [500, 500]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
@@ -55,5 +60,19 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  def crop
+    if model.crop_x.present?
+      #process :resize_to_limit => [500, 500]
+      resize_to_limit(500, 500)
+      manipulate! do |img|
+        x = model.crop_x.to_i
+        y = model.crop_y.to_i
+        w = model.crop_w.to_i
+        h = model.crop_h.to_i
+        img.crop!(x, y, w, h)
+      end
+    end
+  end
 
 end

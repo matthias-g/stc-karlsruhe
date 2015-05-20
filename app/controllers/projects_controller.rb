@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :enter, :leave, :edit_leaders, :add_leader, :delete_leader, :make_visible, :make_invisible, :contact_volunteers, :delete_volunteer, :open, :close]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :enter, :leave, :edit_leaders, :add_leader, :delete_leader, :make_visible, :make_invisible, :contact_volunteers, :delete_volunteer, :open, :close, :crop_picture]
   before_action :authenticate_user!, only: [:edit, :update, :enter, :leave, :destroy, :new, :edit_leaders, :add_leader, :delete_leader, :open, :close]
   before_action :authenticate_admin_user!, only: [:index, :make_visible, :make_invisible, :delete_volunteer]
   before_action :redirect_non_leaders, only: [:edit, :edit_leaders, :add_leader, :delete_leader, :destroy, :update, :open, :close]
@@ -107,6 +107,16 @@ class ProjectsController < ApplicationController
   def close
     @project.close!
     redirect_to @project, notice: t('project.message.closed')
+  end
+
+  def crop_picture
+    if params.has_key?(:crop_x)
+      @project.crop_picture(params[:crop_x].to_i, params[:crop_y].to_i,
+                            params[:crop_w].to_i, params[:crop_h].to_i)
+      redirect_to @project, notice: "Pic cropped"
+    else
+      respond_with(@project)
+    end
   end
 
   def contact_volunteers

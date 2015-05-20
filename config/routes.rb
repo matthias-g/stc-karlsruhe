@@ -24,6 +24,7 @@ StcKarlsruhe::Application.routes.draw do
       get :make_invisible
       get :open
       get :close
+      get :crop_picture
     end
   end
   get 'projekte-:year', to: 'projects#index'

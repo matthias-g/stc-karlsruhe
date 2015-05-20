@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require jquery.lazyload
+//= require jquery.Jcrop
 //= require_tree .

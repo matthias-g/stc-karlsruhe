@@ -14,6 +14,8 @@ class Project < ActiveRecord::Base
   enum status: { open: 1, soon_full: 2, full: 3, closed: 4 }
 
   mount_uploader :picture, ImageUploader
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  #after_update :crop_picture
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
@@ -90,6 +92,14 @@ class Project < ActiveRecord::Base
 
   def show_picture?
     picture_source && !picture_source.empty? && picture
+  end
+
+  def crop_picture(x,y,w,h)
+    crop_x = x
+    crop_y = y
+    crop_w = w
+    crop_h = h
+    picture.recreate_versions!
   end
 
   def should_generate_new_friendly_id?

@@ -81,10 +81,9 @@
        if params[:filter] && (params[:filter][:visibility] == 'hidden') && current_user.is_admin?
          visible = false
        end
-       projects = @project_week.projects.where(visible: visible).order(:status, picture_source: :desc)
+       projects = @project_week.projects.toplevel.where(visible: visible).order(:status, picture_source: :desc)
        projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] && (params[:filter][:day] != '')
        projects &= @project_week.projects.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] && (params[:filter][:status] != '')
-       projects = projects.toplevel
     %>
     <% projects.each do |project| %>
       <section class="project">

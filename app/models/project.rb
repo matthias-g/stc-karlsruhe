@@ -29,11 +29,11 @@ class Project < ActiveRecord::Base
     if !subprojects || subprojects.count == 0
       return volunteers
     end
-    User.joins(:participations).joins(:projects).where("(participations.project_id = #{self.id} or parent_project_id = #{self.id}) and participations.as_leader = 'f'").uniq
+    User.joins(:projects).where("(participations.project_id = #{self.id} or parent_project_id = #{self.id}) and participations.as_leader = false").uniq
   end
 
   def volunteers_in_subprojects
-    User.joins(:participations).joins(:projects).where('projects.parent_project_id' => self.id).where('participations.as_leader' => false)
+    User.joins(:projects).where('projects.parent_project_id' => self.id).where('participations.as_leader' => false)
   end
 
   def add_volunteer user

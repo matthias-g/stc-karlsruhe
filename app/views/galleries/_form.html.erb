@@ -4,9 +4,9 @@
       <h2><%= pluralize(@gallery.errors.count, "error") %> prohibited this gallery from being saved:</h2>
 
       <ul>
-      <% @gallery.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @gallery.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -16,14 +16,19 @@
     <%= f.text_field :title %>
   </div>
 
-  <%= f.fields_for :gallery_pictures do |p| %>
+  <% @gallery.gallery_pictures.each do |p| %>
     <div class="field">
-      <%= p.label :picture %><br>
-      <%= p.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+      <%= image_tag p.picture_url(:thumb) %>
+      <%= link_to 'Bild entfernen', gallery_picture_path(p), method: :delete %>
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.label :picture %><br>
+    <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+  </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Hochladen' %>
   </div>
 <% end %>

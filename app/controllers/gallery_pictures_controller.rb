@@ -34,7 +34,7 @@ class GalleryPicturesController < ApplicationController
 
   def destroy
     @gallery_picture.destroy
-    respond_with(@gallery_picture)
+    redirect_to request.referer
   end
 
   private

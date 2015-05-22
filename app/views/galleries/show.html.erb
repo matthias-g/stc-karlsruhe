@@ -5,11 +5,6 @@
   <%= @gallery.title %>
 </p>
 
-<%# @gallery_pictures.each do |p| %>
-  <%#= image_tag p.picture_url %>
-  <%#= link_to 'Edit picture', edit_gallery_picture_path(p) %>
-<%# end %>
-
 <%= render_gallery_for @gallery_pictures %>
 
 <%= form_for(@gallery, html: { multipart: true}) do |f| %>
@@ -20,7 +15,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Hochladen' %>
   </div>
 <% end %>
 

@@ -22,9 +22,13 @@
       <% @projects.each do |project| %>
         <tr>
           <% volunteers = project.volunteers.size; team_size = project.desired_team_size %>
-          <td><%= project.title %></td>
+          <td><%= link_to project.title, project_path(project) %></td>
           <td><%= volunteers %>/<%= team_size %></td>
-          <td><%= 100 * volunteers / team_size  %> %</td>
+          <% if team_size > 0 %>
+            <td><%= 100 * volunteers / team_size %> %</td>
+          <% else %>
+            <td>-</td>
+          <% end %>
           <td><%= team_size - volunteers %></td>
         </tr>
         <% all_volunteers += volunteers; all_team_size += team_size %>

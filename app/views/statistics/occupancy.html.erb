@@ -8,13 +8,14 @@
 
 <div class="row row-md-eq-height">
   <section class="col-md-12">
-    <table class="table table-hover">
+    <table class="table table-hover statistics-table">
       <thead>
       <tr>
-        <th>Projekt</th>
-        <th>Plätze (belegt / gesamt)</th>
-        <th>Auslastung</th>
-        <th>Freie Plätze</th>
+        <th><%= sortable_column 'title', 'Projekt'%></th>
+        <th><%= sortable_column 'volunteer_count', 'Belegte Plätze'%></th>
+        <th><%= sortable_column 'free_places', 'Freie Plätze'%></th>
+        <th><%= sortable_column 'desired_team_size', 'Gesamt Plätze'%></th>
+        <th><%= sortable_column 'occupancy', 'Auslastung'%></th>
       </tr>
       </thead>
       <tbody>
@@ -23,21 +24,23 @@
         <tr>
           <% volunteers = project.volunteers.size; team_size = project.desired_team_size %>
           <td><%= link_to project.title, project_path(project) %></td>
-          <td><%= volunteers %>/<%= team_size %></td>
+          <td><%= volunteers %></td>
+          <td><%= team_size - volunteers %></td>
+          <td><%= team_size %></td>
           <% if team_size > 0 %>
             <td><%= 100 * volunteers / team_size %> %</td>
           <% else %>
             <td>-</td>
           <% end %>
-          <td><%= team_size - volunteers %></td>
         </tr>
         <% all_volunteers += volunteers; all_team_size += team_size %>
       <% end %>
       <tr>
         <td><strong>Gesamt</strong></td>
-        <td><strong><%= all_volunteers %>/<%= all_team_size %></strong></td>
-        <td><strong><%= 100 * all_volunteers / all_team_size  %> %</strong></td>
+        <td><strong><%= all_volunteers %></strong></td>
         <td><strong><%= all_team_size - all_volunteers %></strong></td>
+        <td><strong><%= all_team_size %></strong></td>
+        <td><strong><%= 100 * all_volunteers / all_team_size  %> %</strong></td>
       </tr>
       </tbody>
     </table>

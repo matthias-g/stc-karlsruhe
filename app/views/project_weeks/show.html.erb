@@ -27,8 +27,8 @@
 
   <div style="text-align: right">
     <div class="infobox">
-      <span><%= @project_week.projects.active.toplevel.count %></span>
-      <div><%= Project.model_name.human(count: @project_week.projects.active.count) %></div>
+      <span><%= @project_week.projects.visible.toplevel.count %></span>
+      <div><%= Project.model_name.human(count: @project_week.projects.visible.count) %></div>
     </div>
     <% if @project_week.active_user_count > 0 %>
       <div class="infobox">

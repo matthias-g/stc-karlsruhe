@@ -11,7 +11,7 @@ class StatisticsController < ApplicationController
   end
 
   def occupancy
-    @projects = ProjectWeek.default.projects.active
+    @projects = ProjectWeek.default.projects.visible
   end
 
 end

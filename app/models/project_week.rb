@@ -7,7 +7,7 @@ class ProjectWeek < ActiveRecord::Base
   scope :default, -> { where(default: true).first }
 
   def active_user_count
-    projects.active.joins(:users).select(:user_id).uniq.count
+    projects.visible.joins(:users).select(:user_id).uniq.count
   end
 
 end

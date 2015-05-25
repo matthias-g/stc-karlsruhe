@@ -11,7 +11,7 @@ class Project < ActiveRecord::Base
   validates_presence_of :title, :desired_team_size
   validate :desired_team_size, numericality: {only_integer: true, greater_than: 0}
 
-  scope :active, -> { where.not(status: 'closed').where(projects: {visible: true}) }
+  scope :visible, -> { where(projects: {visible: true}) }
   scope :toplevel, -> { where(parent_project_id: nil) }
 
   enum status: { open: 1, soon_full: 2, full: 3, closed: 4 }

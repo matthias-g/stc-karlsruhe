@@ -1,0 +1,41 @@
+<% content_for :pageTitle do %>
+  <%= t('layout.title.statistics') %>
+<% end %>
+
+<section>
+  <h1>Projektauslastung</h1>
+</section>
+
+<div class="row row-md-eq-height">
+  <section class="col-md-12">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Projekt</th>
+        <th>Plätze (belegt / gesamt)</th>
+        <th>Auslastung</th>
+        <th>Freie Plätze</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% all_volunteers = 0; all_team_size = 0 %>
+      <% @projects.each do |project| %>
+        <tr>
+          <% volunteers = project.volunteers.size; team_size = project.desired_team_size %>
+          <td><%= project.title %></td>
+          <td><%= volunteers %>/<%= team_size %></td>
+          <td><%= 100 * volunteers / team_size  %> %</td>
+          <td><%= team_size - volunteers %></td>
+        </tr>
+        <% all_volunteers += volunteers; all_team_size += team_size %>
+      <% end %>
+      <tr>
+        <td><strong>Gesamt</strong></td>
+        <td><strong><%= all_volunteers %>/<%= all_team_size %></strong></td>
+        <td><strong><%= 100 * all_volunteers / all_team_size  %> %</strong></td>
+        <td><strong><%= all_team_size - all_volunteers %></strong></td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</div>

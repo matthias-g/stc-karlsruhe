@@ -69,28 +69,6 @@
                       data: { confirm: t('general.message.confirmDelete')},
                       class: 'btn btn-default btn-wide' %>
       <% end %>
-      <% unless isNew %>
-        <% if @project.closed? %>
-            <%= link_to t('project.action.open'),
-                        open_project_path(@project),
-                        class:'btn btn-default btn-wide' %>
-        <% else %>
-            <%= link_to t('project.action.close'),
-                        close_project_path(@project),
-                        class:'btn btn-default btn-wide' %>
-        <% end %>
-        <% if current_user.is_admin? %>
-          <% if @project.visible %>
-            <%= link_to t('project.action.makeInvisible'),
-                        make_invisible_project_path(@project),
-                        class:'btn btn-default btn-wide' %>
-          <% else %>
-            <%= link_to t('project.action.makeVisible'),
-                        make_visible_project_path(@project),
-                        class:'btn btn-default btn-wide' %>
-          <% end %>
-        <% end %>
-    <% end %>
     </section>
 
     <section class="slim">
@@ -154,6 +132,13 @@
           </div>
       <% end %>
     </section>
+
+    <section class="slim">
+      <div class="parent_project">
+        <%= f.select(:parent_project_id, @project.project_week.projects.collect{ |p| [p.title, p.id]}, {include_blank: true}) -%>
+      </div>
+    </section>
+
   </div>
 
 </div>

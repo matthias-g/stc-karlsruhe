@@ -10,8 +10,8 @@
 
   <div style="text-align: right">
     <div class="infobox">
-      <span><%= Project.active.count %></span>
-      <div><%= Project.model_name.human(count: Project.active.count) %></div>
+      <span><%= Project.visible.count %></span>
+      <div><%= Project.model_name.human(count: Project.visible.count) %></div>
     </div>
     <div class="infobox">
       <span><%= Participation.active_user_count %></span>

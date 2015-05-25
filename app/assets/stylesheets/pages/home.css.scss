@@ -124,11 +124,6 @@
 }
 
 .schirmherr-ribbon {
-  position: absolute;
-  top: 90px;
-  right: -100px;
-  z-index: 99;
-
   padding: 2px 0;
 
   pointer-events: auto;
@@ -144,6 +139,13 @@
   -webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+}
+
+.schirmherr-ribbon-top-right {
+  position: absolute;
+  top: 90px;
+  right: -100px;
+  z-index: 99;
 
   -webkit-transform: rotate(40deg);
   -moz-transform: rotate(40deg);
@@ -163,6 +165,12 @@
   right: 0;
 }
 
+.schirmherr-ribbon-top-right .schirmherr-ribbon-text {
+  padding-left: 95px;
+  width: 550px;
+  display: inline-block;
+}
+
 .schirmherr-ribbon-text {
   color: #fff;
   text-decoration: none;
@@ -170,10 +178,8 @@
   text-align: center;
   font: 700 17px NormalFont, Helvetica, Arial, sans-serif;
 
-  width: 550px;
   line-height: 24px;
-  padding: 5px 0 5px 95px;
-  display: inline-block;
+  padding: 5px;
 
   border-width: 1px 0;
   border-style: dotted;
@@ -185,4 +191,8 @@
   font-size: 200%;
   vertical-align: middle;
   padding-right: 5px;
+}
+
+.schirmherr-ribbon-middle {
+  margin: 5px -10px 40px;
 }

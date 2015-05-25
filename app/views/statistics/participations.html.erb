@@ -1,0 +1,32 @@
+<% content_for :pageTitle do %>
+  <%= t('layout.title.statistics') %>
+<% end %>
+
+<section>
+  <h1>Neue Projektteilnahmen</h1>
+</section>
+
+<div class="row row-md-eq-height">
+
+  <section class="col-md-12">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Datum</th>
+        <th>Neue Teilnahmen</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% (0...30).each do |x| %>
+        <tr>
+          <% date = x.days.ago.to_date %>
+          <td><%= l date, format: :default %></td>
+          <td><%= @participations.where(created_at: date.beginning_of_day..date.end_of_day).count %></td>
+          <td><%= link_to 'Details', participations_per_day_path(date: date)  %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </section>
+
+</div>

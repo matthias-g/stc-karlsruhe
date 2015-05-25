@@ -4,10 +4,10 @@ class Participation < ActiveRecord::Base
 
   validates_presence_of :user, :project
 
-  scope :active_projects, -> { joins(:project).where.not(projects: {status: 'closed'}).where(projects: {visible: true}) }
+  scope :visible_projects, -> { joins(:project).where(projects: {visible: true}) }
 
   def self.active_user_count
-    active_projects.select(:user_id).uniq.count
+    visible_projects.select(:user_id).uniq.count
   end
 
 end

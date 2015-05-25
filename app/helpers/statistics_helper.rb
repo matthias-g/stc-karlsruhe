@@ -3,8 +3,13 @@ module StatisticsHelper
   def sortable_column(column, title = nil)
     title ||= column.titleize
     direction = (column == params[:sort] && params[:direction] == 'asc') ? 'desc' : 'asc'
+    css_class = (column == params[:sort]) ? "current #{params[:direction]}" : nil
     link_to sort: column, direction: direction do
-      (title + " <i class='fa fa-sort'></i>").html_safe
+      icon = "<i class='fa fa-sort' style='color: grey'></i>"
+      if column == params[:sort]
+        icon = "<i class='fa fa-sort-#{params[:direction]}'></i>"
+      end
+      (title + " #{icon}").html_safe
     end
   end
 

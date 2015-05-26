@@ -8,6 +8,7 @@ class Project < ActiveRecord::Base
   belongs_to :parent_project, class_name: 'Project', foreign_key: :parent_project_id
 
   before_save :adjust_status
+  after_save :adjust_parent_status
   validates_presence_of :title, :desired_team_size
   validate :desired_team_size, numericality: {only_integer: true, greater_than: 0}
 
@@ -29,7 +30,7 @@ class Project < ActiveRecord::Base
     if !subprojects || subprojects.count == 0
       return volunteers
     end
-    User.joins(:projects).where("(participations.project_id = #{self.id} or parent_project_id = #{self.id}) and participations.as_leader = false").uniq
+    User.joins(:projects).where("(participations.project_id = #{self.id} or parent_project_id = #{self.id}) and participations.as_leader = false")
   end
 
   def volunteers_in_subprojects
@@ -108,6 +109,10 @@ class Project < ActiveRecord::Base
     else
       self.status = :full
     end
+  end
+
+  def adjust_parent_status
+    parent_project.save if parent_project # adjusts status
   end
 
   def aggregated_desired_team_size

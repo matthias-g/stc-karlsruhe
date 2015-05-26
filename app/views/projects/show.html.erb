@@ -159,7 +159,7 @@
           <div>
             <h3><%= Project.human_attribute_name('volunteers') %>
               (<%= @project.aggregated_volunteers.size %>/<%= @project.aggregated_desired_team_size %>)</h3>
-            <%= list_users(@project.aggregated_volunteers) %>
+            <%= list_users(@project.aggregated_volunteers.uniq) %>
           </div>
         </section>
 

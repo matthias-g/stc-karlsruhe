@@ -22,7 +22,7 @@
           <% date = x.days.ago.to_date %>
           <td><%= l date, format: :default %></td>
           <td><%= @participations.where(created_at: date.beginning_of_day..date.end_of_day).count %></td>
-          <td><%= link_to 'Details', participations_per_day_path(date: date)  %></td>
+          <td><%= link_to 'Details', participations_on_day_path(date: date)  %></td>
         </tr>
       <% end %>
       </tbody>

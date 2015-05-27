@@ -45,7 +45,7 @@ StcKarlsruhe::Application.routes.draw do
   get :login_or_register, to: 'users#login_or_register'
 
   root 'pages#home'
-  get '/:page', to: 'pages#page'
+  get '/:page', to: 'pages#page', as: :show_page
 
   namespace :api do
     resources :projects, only: :show

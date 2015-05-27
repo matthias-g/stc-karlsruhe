@@ -110,7 +110,7 @@ de:
       stcInternational: 'Serve the City international'
       shareOnFacebook: 'auf Facebook teilen'
     title:
-      projectList: 'Projekte %{year}'
+      projectList: 'Projektwoche %{year}'
       projectNew: 'Neues Projekt'
       projectEdit: 'Projekt bearbeiten: "%{project}"'
       projectView: 'Projekt "%{project}"'

@@ -5,7 +5,7 @@
   <%= @gallery.title %>
 </p>
 
-<%= render_gallery_for @gallery_pictures %>
+<%= render 'gallery', gallery: @gallery %>
 
 <%= form_for(@gallery, html: { multipart: true}) do |f| %>
   <%= f.hidden_field :title %>

@@ -41,6 +41,7 @@ class GalleriesController < ApplicationController
         @gallery.gallery_pictures.create!(picture: picture, gallery: @gallery, uploader: current_user)
       end
     end
+    return redirect_to request.referer if request.referer
     respond_with(@gallery)
   end
 

@@ -68,6 +68,22 @@
             <%= t('project.label.parent_project', parent_project_link: link_to(@project.parent_project.title, project_path(@project.parent_project))).html_safe %>
           </div>
       <% end %>
+      <div class="gallery">
+        <%= render 'galleries/gallery', gallery: @project.gallery %>
+      </div>
+      <% if @project.has_volunteer?(current_user) || @project.has_leader?(current_user) %>
+        <%= form_for(@project.gallery, html: { multipart: true}) do |f| %>
+          <%= f.hidden_field :title %>
+          <div class="field">
+            <%= f.label :picture %><br>
+            <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit 'Hochladen' %>
+          </div>
+        <% end %>
+      <% end %>
     </section>
 
     <div class="col-md-4">

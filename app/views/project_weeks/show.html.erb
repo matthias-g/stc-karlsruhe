@@ -4,14 +4,14 @@
 
 <% content_for :appendToHeader do %>
   <meta name="description" content="Alle Projekte der Projektwoche <%= @project_week.title %> findest du hier.
-  Finde ein Projekt, das zu dir passt!" />
+  Welches Projekt passt zu dir?" />
 
   <meta property="og:title" content="<%= t('layout.title.projectList', year: @project_week.title) %>" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https//www.servethecity-karlsruhe.de/images/logo.png" />
   <meta property="og:url" content="<%= show_project_week_url(@project_week.title) %>" />
   <meta property="og:description" content="Alle Projekte der Projektwoche <%= @project_week.title %> findest du hier.
-  Finde ein Projekt, das zu dir passt!" />
+  Welches Projekt passt zu dir?" />
   <meta property="og:locale" content="de_DE" />
   <meta property="og:site_name" content="Serve the City Karlsruhe" />
 <% end %>

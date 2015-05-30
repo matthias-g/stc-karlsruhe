@@ -9,7 +9,7 @@ class GalleriesController < ApplicationController
   end
 
   def show
-    @gallery_pictures = @gallery.gallery_pictures.all
+    @gallery_pictures = @gallery.gallery_pictures
     if @gallery_pictures.count == 0
       @gallery.gallery_pictures.build
     end

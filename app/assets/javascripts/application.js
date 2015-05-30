@@ -17,4 +17,5 @@
 //= require bootstrap-sprockets
 //= require jquery.lazyload
 //= require jssor.slider.mini
+//= require photoswipe
 //= require_tree .

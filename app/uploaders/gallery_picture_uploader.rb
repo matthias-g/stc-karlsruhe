@@ -33,7 +33,11 @@ class GalleryPictureUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :thumb do
-    process :resize_to_fill => [100, 100]
+    process :resize_to_fill => [75, 75]
+  end
+
+  version :preview do
+    process :resize_to_fill => [516, 345]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
@@ -47,5 +51,17 @@ class GalleryPictureUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  process :store_dimensions
+
+
+  private
+
+  def store_dimensions
+    if file && model
+      model.width, model.height = ::MiniMagick::Image.open(file.file)[:dimensions]
+    end
+  end
+
 
 end

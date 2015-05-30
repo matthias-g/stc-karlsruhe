@@ -80,6 +80,9 @@ de:
         recipient: 'Empfänger'
         subject: 'Betreff'
         body: 'Nachricht'
+      gallery:
+        picture: Bilder
+        title: Titel
 
   general:
     action:
@@ -189,6 +192,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       toProject: 'zurück zum Projekt'
       searchProjects: 'Projekte suchen'
       findProject: 'Projekt finden'
+      uploadPictures: Ausgewählte Bilder hochladen
     label:
       project: 'Projekt'
       subproject: Teilprojekt

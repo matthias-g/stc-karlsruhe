@@ -1,13 +1,52 @@
-/* jssor slider arrow navigator skin 05 css */
-/*
-.jssora05l                  (normal)
-.jssora05r                  (normal)
-.jssora05l:hover            (normal mouseover)
-.jssora05r:hover            (normal mouseover)
-.jssora05l.jssora05ldn      (mousedown)
-.jssora05r.jssora05rdn      (mousedown)
-*/
-.jssora05l, .jssora05r {
+.gallery-container {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 408px;
+  background: #191919;
+  overflow: hidden;
+}
+
+.gallery-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.gallery-loading-background {
+  filter: alpha(opacity=70);
+  opacity: 0.7;
+  position: absolute;
+  display: block;
+  background-color: #000000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery-loading-animation {
+  position: absolute;
+  display: block;
+  background: asset-url("loading.gif") no-repeat center center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery-slides {
+  cursor: move;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 500px;
+  height: 334px;
+  overflow: hidden;
+}
+
+.gallery-arrow-left, .gallery-arrow-right {
   display: block;
   position: absolute;
   /* size of arrow element */
@@ -16,87 +55,105 @@
   cursor: pointer;
   background: asset-url("a17.png") no-repeat;
   overflow: hidden;
+  top: 158px;
 }
-.jssora05l { background-position: -10px -40px; }
-.jssora05r { background-position: -70px -40px; }
-.jssora05l:hover { background-position: -130px -40px; }
-.jssora05r:hover { background-position: -190px -40px; }
-.jssora05l.jssora05ldn { background-position: -250px -40px; }
-.jssora05r.jssora05rdn { background-position: -310px -40px; }
 
+.gallery-arrow-left {
+  left: 8px;
+  background-position: -10px -40px;
+  :hover {
+    background-position: -130px -40px;
+  }
+  .gallery-arrow-leftdn {
+    background-position: -250px -40px;
+  }
+}
 
- /* jssor slider thumbnail navigator skin 01 css */
- /*
- .jssort01 .p            (normal)
- .jssort01 .p:hover      (normal mouseover)
- .jssort01 .p.pav        (active)
- .jssort01 .p.pdn        (mousedown)
- */
-.jssort01 {
-   position: absolute;
-   /* size of thumbnail navigator container */
-   width: 500px;
-   height: 100px;
- }
-.jssort01 .p {
+.gallery-arrow-right {
+  right: 8px;
+  background-position: -70px -40px;
+  :hover {
+    background-position: -190px -40px;
+  }
+  .gallery-arrow-rightdn {
+    background-position: -310px -40px;
+  }
+}
+
+/* jssor slider thumbnail navigator skin 01 css */
+/*
+.jssort01 .p            (normal)
+.jssort01 .p:hover      (normal mouseover)
+.jssort01 .p.pav        (active)
+.jssort01 .p.pdn        (mousedown)
+*/
+.gallery-thumbnavigator {
   position: absolute;
-  top: 0;
+  width: 500px;
+  height: 74px;
   left: 0;
-  width: 72px;
-  height: 72px;
+  bottom: 0;
+  .gallery-prototype {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 72px;
+    height: 72px;
+  }
+  .gallery-thumbnailtemplate {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  .w {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .c {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 68px;
+    height: 68px;
+    border: #000 2px solid;
+    box-sizing: content-box;
+    background: asset-url("t01.png") -500 -500 no-repeat;
+    _background: none;
+  }
+  .pav .c {
+    top: 2px;
+    _top: 0;
+    left: 2px;
+    _left: 0;
+    width: 68px;
+    height: 68px;
+    border: #000 0 solid;
+    _border: #fff 2px solid;
+    background-position: 50% 50%;
+  }
+  .gallery-prototype:hover .c {
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 70px;
+    border: #fff 1px solid;
+    background-position: 50% 50%;
+  }
+  .gallery-prototype.pdn .c {
+    background-position: 50% 50%;
+    width: 68px;
+    height: 68px;
+    border: #000 2px solid;
+  }
 }
-.jssort01 .t {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-.jssort01 .w {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-}
-.jssort01 .c {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 68px;
-  height: 68px;
-  border: #000 2px solid;
-  box-sizing: content-box;
-  background: url(../img/t01.png) -500px -500px no-repeat;
-  _background: none;
-}
-.jssort01 .pav .c {
-  top: 2px;
-  _top: 0px;
-  left: 2px;
-  _left: 0px;
-  width: 68px;
-  height: 68px;
-  border: #000 0px solid;
-  _border: #fff 2px solid;
-  background-position: 50% 50%;
-}
-.jssort01 .p:hover .c {
-  top: 0px;
-  left: 0px;
-  width: 70px;
-  height: 70px;
-  border: #fff 1px solid;
-  background-position: 50% 50%;
-}
-.jssort01 .p.pdn .c {
-  background-position: 50% 50%;
-  width: 68px;
-  height: 68px;
-  border: #000 2px solid;
-}
-* html .jssort01 .c, * html .jssort01 .pdn .c, * html .jssort01 .pav .c {
+
+* html .gallery-thumbnavigator .c, * html .gallery-thumbnavigator .pdn .c, * html .gallery-thumbnavigator .pav .c {
   /* ie quirks mode adjust */
   width /**/: 72px;
   height /**/: 72px;

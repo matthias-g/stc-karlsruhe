@@ -73,13 +73,16 @@ $(document).ready(function ($) {
         },
         $FillMode: 1
     };
+    if ( $('#slider1_container').length == 0) {
+        return;
+    }
     var jssor_slider1 = new $JssorSlider$("slider1_container", options);
     //responsive code begin
     //you can remove responsive code if you don't want the slider scales while window resizes
     function ScaleSlider() {
         var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
         if (parentWidth)
-            jssor_slider1.$ScaleWidth(Math.max(Math.min(parentWidth, 500), 300));
+            jssor_slider1.$ScaleWidth(Math.max(Math.min(parentWidth, 1200), 300));
         else
             window.setTimeout(ScaleSlider, 30);
     }

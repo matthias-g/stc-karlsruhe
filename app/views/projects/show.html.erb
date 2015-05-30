@@ -71,7 +71,7 @@
       <div class="gallery">
         <%= render 'galleries/gallery', gallery: @project.gallery %>
       </div>
-      <% if @project.has_volunteer?(current_user) || @project.has_leader?(current_user) %>
+      <% if @project.has_volunteer?(current_user) || @project.has_leader?(current_user) || (current_user && current_user.is_admin?) %>
         <%= form_for(@project.gallery, html: { multipart: true}) do |f| %>
           <%= f.hidden_field :title %>
           <div class="field">
@@ -80,7 +80,7 @@
           </div>
 
           <div class="actions">
-            <%= f.submit 'Hochladen' %>
+            <%= f.submit t('project.action.uploadPictures') %>
           </div>
         <% end %>
       <% end %>

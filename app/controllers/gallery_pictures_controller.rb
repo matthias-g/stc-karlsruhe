@@ -1,5 +1,6 @@
 class GalleryPicturesController < ApplicationController
   before_action :set_gallery_picture, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin_user!
 
   respond_to :html
 

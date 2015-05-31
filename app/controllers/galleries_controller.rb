@@ -1,5 +1,8 @@
 class GalleriesController < ApplicationController
   before_action :set_gallery, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin_user!, except: [:update]
+  before_action :authenticate_user!, only: [:update]
+  before_action :check_if_user_can_upload, only: [:update]
 
   respond_to :html
 
@@ -57,5 +60,12 @@ class GalleriesController < ApplicationController
 
     def gallery_params
       params.require(:gallery).permit(:title, gallery_pictures_attributes: [:id, :gallery_id, :picture])
+    end
+
+    def check_if_user_can_upload
+      not_found unless current_user
+      @gallery.projects.each do |project|
+        not_found unless project.has_leader?(current_user) || project.has_volunteer?(current_user)
+      end
     end
 end

@@ -202,3 +202,13 @@ en:
       content: 'Content'
     message:
       errorList: 'Errors prohibited this page section from being saved:'
+
+  gallery:
+    action:
+      goto:
+        previous: "Previous (arrow left)"
+        next: "Next (arrow right)"
+      close: "Close (Esc)"
+      share: "Share"
+      toggleFullscreen: "Toggle fullscreen"
+      zoom: "Zoom in/out"

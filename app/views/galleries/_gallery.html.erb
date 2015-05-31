@@ -62,13 +62,13 @@
 
         <div class="pswp__counter"></div>
 
-        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>>
+        <button class="pswp__button pswp__button--close" title="<%= t('gallery.action.close') %>"></button>
 
-        <button class="pswp__button pswp__button--share" title="Share"></button>
+        <button class="pswp__button pswp__button--share" title="<%= t('gallery.action.share') %>"></button>
 
-        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--fs" title="<%= t('gallery.action.toggleFullscreen') %>"></button>
 
-        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <button class="pswp__button pswp__button--zoom" title="<%= t('gallery.action.zoom') %>"></button>
 
         <%# Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR %>
         <%# element will get class pswp__preloader--active when preloader is running %>
@@ -85,10 +85,10 @@
         <div class="pswp__share-tooltip"></div>
       </div>
 
-      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      <button class="pswp__button pswp__button--arrow--left" title="<%= t('gallery.action.goto.previous') %>">
       </button>
 
-      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      <button class="pswp__button pswp__button--arrow--right" title="<%= t('gallery.action.goto.next') %>">
       </button>
 
       <div class="pswp__caption">

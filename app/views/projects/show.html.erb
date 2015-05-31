@@ -69,20 +69,26 @@
           </div>
       <% end %>
       <div class="gallery">
+        <h3><%= t('project.label.gallery') %></h3>
         <%= render 'galleries/gallery', gallery: @project.gallery %>
       </div>
       <% if @project.has_volunteer?(current_user) || @project.has_leader?(current_user) || (current_user && current_user.is_admin?) %>
-        <%= form_for(@project.gallery, html: { multipart: true}) do |f| %>
-          <%= f.hidden_field :title %>
-          <div class="field">
-            <%= f.label :picture %><br>
-            <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
-          </div>
+        <div class="picture-upload">
+          <%= form_for(@project.gallery, html: { multipart: true}) do |f| %>
+            <%= f.hidden_field :title %>
+            <div class="field">
+              <%= f.label t('project.action.uploadPictures') %><br>
+              <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+            </div>
 
-          <div class="actions">
-            <%= f.submit t('project.action.uploadPictures') %>
-          </div>
-        <% end %>
+            <div class="actions">
+              <%= f.submit t('project.action.uploadSelectedPictures') %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <% if (current_user && current_user.is_admin?) %>
+        <%= link_to 'Gallerie bearbeiten', edit_gallery_path(@project.gallery) %>
       <% end %>
     </section>
 

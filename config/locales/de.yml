@@ -192,7 +192,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       toProject: 'zurück zum Projekt'
       searchProjects: 'Projekte suchen'
       findProject: 'Projekt finden'
-      uploadPictures: Ausgewählte Bilder hochladen
+      uploadPictures: Bilder hochladen
+      uploadSelectedPictures: Ausgewählte Bilder hochladen
     label:
       project: 'Projekt'
       subproject: Teilprojekt
@@ -203,6 +204,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       manageTeam: 'Team verwalten'
       leaders: 'Leitung'
       team: 'Team'
+      gallery: Fotogallerie
       uploadImage: 'Bild hochladen'
       parent_project: Dieses Projekt ist Teil von %{parent_project_link}.
     help:
@@ -300,3 +302,13 @@ Leiter: %{leader}'
     captionEdit: 'User-Rolle bearbeiten: "%s"'
     errorsExist: 'Die Rolle konnte wegen folgenden Fehlern nicht gespeichert werden:'
     confirmDelete: 'Wollen Sie die User-Rolle "%s" wirklich löschen?'
+
+  gallery:
+    action:
+      goto:
+        previous: "Vorheriges Bild"
+        next: "Nächstes Bild (Pfeil rechts)"
+      close: "Schließen (Esc)"
+      share: "Share"
+      toggleFullscreen: "Vollbild an/aus"
+      zoom: "Vergrößern / Verkleinern"

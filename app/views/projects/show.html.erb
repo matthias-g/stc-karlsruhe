@@ -72,15 +72,16 @@
           <% end %>
         </section>
       </div>
+      <% if show_gallery?(@project) || show_upload?(@project) %>
       <div class="row">
         <section class="col-md-12">
           <div class="gallery">
-            <% if @project.gallery.gallery_pictures.count > 0 %>
+            <% if show_gallery?(@project) %>
               <h3><%= t('project.label.gallery') %></h3>
               <%= render 'galleries/gallery', gallery: @project.gallery %>
             <% end %>
           </div>
-          <% if @project.has_volunteer?(current_user) || @project.has_leader?(current_user) || (current_user && current_user.is_admin?) %>
+          <% if show_upload?(@project) %>
             <div class="picture-upload">
               <%= form_for(@project.gallery, html: { multipart: true}) do |f| %>
                 <%= f.hidden_field :title %>
@@ -101,6 +102,7 @@
           <% end %>
         </section>
       </div>
+      <% end %>
     </div>
 
     <div class="col-md-4">

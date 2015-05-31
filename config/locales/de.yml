@@ -200,7 +200,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       leaders: 'Leitung'
       team: 'Team'
       uploadImage: 'Bild hochladen'
-      parent_project: Dieses Projekt ist Teil von %{parent_project_link}.
+      parent_project: 'Dieses Projekt ist Teil von:'
     help:
       picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
       short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Projektliste statt der ausführlichen Beschreibung angezeigt.'

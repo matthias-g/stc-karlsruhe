@@ -54,20 +54,6 @@
           <%= simple_format @project.material %>
         </div>
       <% end %>
-      <% if @project.subprojects && @project.subprojects.count > 0 %>
-        <div class="subprojects">
-          <h3><%= Project.human_attribute_name('subproject_ids') %></h3>
-          <ul>
-            <% @project.subprojects.each do |subproject| %>
-              <li><%= link_to subproject.title, project_path(subproject) %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% elsif @project.parent_project %>
-          <div class="parent-project">
-            <%= t('project.label.parent_project', parent_project_link: link_to(@project.parent_project.title, project_path(@project.parent_project))).html_safe %>
-          </div>
-      <% end %>
     </section>
 
     <div class="col-md-4">
@@ -127,6 +113,40 @@
               </div>
             </div>
           <% end %>
+        </section>
+
+        <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
+        <% if @project.subprojects && @project.subprojects.count > 0 %>
+          <div class="subprojects">
+            <h3><%= Project.human_attribute_name('subproject_ids') %></h3>
+            <% @project.subprojects.each do |subproject| %>
+              <%= link_to project_path(subproject) do %>
+                <div class="row subproject">
+                  <div class="col-md-6 image" >
+                    <%= image_tag subproject.picture.thumb.url, class: 'img-responsive' %>
+                  </div>
+                  <div class="col-md-6 title">
+                    <%= subproject.title %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        <% elsif @project.parent_project %>
+          <div class="parent-project">
+            <h3><%= t('project.label.parent_project') %></h3>
+            <%= link_to project_path(@project.parent_project) do %>
+              <div class="row subproject">
+                <div class="col-md-6 image" >
+                  <%= image_tag @project.parent_project.picture.thumb.url, class: 'img-responsive' %>
+                </div>
+                <div class="col-md-6 title">
+                  <%= @project.parent_project.title %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
         </section>
 
         <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">

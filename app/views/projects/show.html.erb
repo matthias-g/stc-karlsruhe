@@ -132,8 +132,8 @@
           <% end %>
         </section>
 
-        <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
-          <% if @project.parent_project %>
+        <% if @project.parent_project %>
+          <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
             <div class="parent-project">
               <h3><%= t('project.label.parent_project') %></h3>
               <%= link_to project_path(@project.parent_project) do %>
@@ -147,8 +147,8 @@
                 </div>
               <% end %>
             </div>
-          <% end %>
-        </section>
+          </section>
+        <% end %>
 
         <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
           <div class="wide infobox <%= @project.status %>">

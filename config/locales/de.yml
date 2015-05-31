@@ -204,7 +204,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       manageTeam: 'Team verwalten'
       leaders: 'Leitung'
       team: 'Team'
-      gallery: Bilder des Projekts
+      gallery: Bilder des Projektes
       uploadImage: 'Bild hochladen'
       parent_project: Dieses Projekt ist Teil von %{parent_project_link}.
     help:

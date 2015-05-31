@@ -1,25 +1,37 @@
-<h1>Listing galleries</h1>
+<div class="row">
+  <section class="col-md-12">
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <h1>Gallerieübersicht</h1>
 
-  <tbody>
-    <% @galleries.each do |gallery| %>
+    <table class="table">
+      <thead>
       <tr>
-        <td><%= gallery.title %></td>
-        <td><%= link_to 'Show', gallery %></td>
-        <td><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
-        <td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Title</th>
+        <th>Anzahl Bilder</th>
+        <th colspan="3"></th>
+        <th>Benutzt in</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<br>
+      <tbody>
+      <% @galleries.each do |gallery| %>
+        <tr>
+          <td><%= gallery.title %></td>
+          <td><%= gallery.gallery_pictures.count %></td>
+          <td><%= link_to 'Show', gallery %></td>
+          <td><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
+          <td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% gallery.projects.each do |project| %>
+            <td><%= link_to project.title, show_project_week_path(project) %></td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
 
-<%= link_to 'New Gallery', new_gallery_path %>
+    <br>
+
+    <%= link_to 'New Gallery', new_gallery_path %>
+
+  </section>
+</div>

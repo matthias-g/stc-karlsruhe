@@ -6,13 +6,13 @@ class Project < ActiveRecord::Base
   belongs_to :project_week
   has_many :subprojects, class_name: 'Project', foreign_key: :parent_project_id
   belongs_to :parent_project, class_name: 'Project', foreign_key: :parent_project_id
-  belongs_to :gallery
+  belongs_to :gallery, dependent: :destroy
 
   validates_presence_of :title, :desired_team_size
   validate :desired_team_size, numericality: {only_integer: true, greater_than: 0}
   before_save :adjust_status
   after_save :adjust_parent_status
-  before_create :create_gallery
+  before_create :create_gallery!
 
   scope :visible, -> { where(projects: {visible: true}) }
   scope :toplevel, -> { where(parent_project_id: nil) }

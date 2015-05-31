@@ -69,8 +69,10 @@
           </div>
       <% end %>
       <div class="gallery">
-        <h3><%= t('project.label.gallery') %></h3>
-        <%= render 'galleries/gallery', gallery: @project.gallery %>
+        <% if @project.gallery.gallery_pictures.count > 0 %>
+          <h3><%= t('project.label.gallery') %></h3>
+          <%= render 'galleries/gallery', gallery: @project.gallery %>
+        <% end %>
       </div>
       <% if @project.has_volunteer?(current_user) || @project.has_leader?(current_user) || (current_user && current_user.is_admin?) %>
         <div class="picture-upload">

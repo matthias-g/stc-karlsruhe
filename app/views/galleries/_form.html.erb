@@ -1,3 +1,4 @@
+
 <%= form_for(@gallery, html: { multipart: true}) do |f| %>
   <% if @gallery.errors.any? %>
     <div id="error_explanation">
@@ -16,19 +17,30 @@
     <%= f.text_field :title %>
   </div>
 
-  <% @gallery.gallery_pictures.each do |p| %>
-    <div class="field">
-      <%= image_tag p.picture_url(:thumb) %>
-      <%= link_to 'Bild entfernen', gallery_picture_path(p), method: :delete %>
-    </div>
-  <% end %>
+  <table class="table">
+    <thead>
+    <tr>
+      <th><%= f.label :picture %></th>
+      <th colspan="1"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @gallery.gallery_pictures.each do |p| %>
+      <tr>
+        <td><%= image_tag p.picture_url(:preview), class: 'img-responsive' %></td>
+        <td><%= link_to 'Bild entfernen', gallery_picture_path(p), method: :delete %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 
   <div class="field">
-    <%= f.label :picture %><br>
     <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
   </div>
 
   <div class="actions">
-    <%= f.submit 'Hochladen' %>
+    <%= f.submit 'Speichern und Bilder hochladen' %>
   </div>
 <% end %>
+

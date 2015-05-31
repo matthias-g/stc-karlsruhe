@@ -1,23 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <section class="col-md-12">
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @gallery.title %>
-</p>
+    <p>
+      <strong>Title:</strong>
+      <%= @gallery.title %>
+    </p>
 
-<%= render 'gallery', gallery: @gallery %>
+    <%= render 'gallery', gallery: @gallery %>
 
-<%= form_for(@gallery, html: { multipart: true}) do |f| %>
-  <%= f.hidden_field :title %>
-  <div class="field">
-    <%= f.label :picture %><br>
-    <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
-  </div>
+    <%= form_for(@gallery, html: { multipart: true}) do |f| %>
+      <%= f.hidden_field :title %>
+      <div class="field">
+        <%= f.label :picture %><br>
+        <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit 'Hochladen' %>
-  </div>
-<% end %>
+      <div class="actions">
+        <%= f.submit 'Hochladen' %>
+      </div>
+    <% end %>
 
-<%= link_to 'Edit', edit_gallery_path(@gallery) %> |
-<%= link_to 'Back', galleries_path %>
+    <%= link_to 'Bearbeiten', edit_gallery_path(@gallery) %> |
+    <%= link_to 'Zur Gallerieübersicht', galleries_path %> |
+    <% @gallery.projects.each do |project| %>
+      <%= link_to 'Zum Projekt', show_project_week_path(project) %>
+    <% end %>
+
+  </section>
+</div>

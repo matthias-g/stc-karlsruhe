@@ -24,75 +24,84 @@
 
   <div class="row row-md-eq-height">
 
-    <section class="col-md-8">
-      <% if @project.show_picture? && @project.picture.file %>
-        <div class="project-picture picture-container">
-          <%= image_tag @project.picture_url(:preview) %>
-          <div class="copyright" title="© <%= @project.picture_source %>">
-            © <%= @project.picture_source %>
-          </div>
-        </div>
-      <% end %>
-      <div class="description">
-        <%= simple_format @project.description %>
-      </div>
-      <% unless @project.individual_tasks.empty? %>
-        <div class="individual_tasks">
-          <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
-          <%= simple_format @project.individual_tasks %>
-        </div>
-      <% end %>
-      <% unless @project.requirements.empty? %>
-        <div class="requirements">
-          <h3><%= Project.human_attribute_name('requirements') %></h3>
-          <%= simple_format @project.requirements %>
-        </div>
-      <% end %>
-      <% unless @project.material.empty? %>
-        <div class="material">
-          <h3><%= Project.human_attribute_name('material') %></h3>
-          <%= simple_format @project.material %>
-        </div>
-      <% end %>
-      <% if @project.subprojects && @project.subprojects.count > 0 %>
-        <div class="subprojects">
-          <h3><%= Project.human_attribute_name('subproject_ids') %></h3>
-          <ul>
-            <% @project.subprojects.each do |subproject| %>
-              <li><%= link_to subproject.title, project_path(subproject) %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% elsif @project.parent_project %>
-          <div class="parent-project">
-            <%= t('project.label.parent_project', parent_project_link: link_to(@project.parent_project.title, project_path(@project.parent_project))).html_safe %>
-          </div>
-      <% end %>
-      <div class="gallery">
-        <% if @project.gallery.gallery_pictures.count > 0 %>
-          <h3><%= t('project.label.gallery') %></h3>
-          <%= render 'galleries/gallery', gallery: @project.gallery %>
-        <% end %>
-      </div>
-      <% if @project.has_volunteer?(current_user) || @project.has_leader?(current_user) || (current_user && current_user.is_admin?) %>
-        <div class="picture-upload">
-          <%= form_for(@project.gallery, html: { multipart: true}) do |f| %>
-            <%= f.hidden_field :title %>
-            <div class="field">
-              <%= f.label t('project.action.uploadPictures') %><br>
-              <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
-            </div>
-
-            <div class="actions">
-              <%= f.submit t('project.action.uploadSelectedPictures') %>
+    <div class="col-md-8">
+      <div class="row">
+        <section class="col-md-12">
+          <% if @project.show_picture? && @project.picture.file %>
+            <div class="project-picture picture-container">
+              <%= image_tag @project.picture_url(:preview) %>
+              <div class="copyright" title="© <%= @project.picture_source %>">
+                © <%= @project.picture_source %>
+              </div>
             </div>
           <% end %>
-        </div>
-      <% end %>
-      <% if (current_user && current_user.is_admin?) %>
-        <%= link_to 'Gallerie bearbeiten', edit_gallery_path(@project.gallery) %>
-      <% end %>
-    </section>
+          <div class="description">
+            <%= simple_format @project.description %>
+          </div>
+          <% unless @project.individual_tasks.empty? %>
+            <div class="individual_tasks">
+              <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
+              <%= simple_format @project.individual_tasks %>
+            </div>
+          <% end %>
+          <% unless @project.requirements.empty? %>
+            <div class="requirements">
+              <h3><%= Project.human_attribute_name('requirements') %></h3>
+              <%= simple_format @project.requirements %>
+            </div>
+          <% end %>
+          <% unless @project.material.empty? %>
+            <div class="material">
+              <h3><%= Project.human_attribute_name('material') %></h3>
+              <%= simple_format @project.material %>
+            </div>
+          <% end %>
+          <% if @project.subprojects && @project.subprojects.count > 0 %>
+            <div class="subprojects">
+              <h3><%= Project.human_attribute_name('subproject_ids') %></h3>
+              <ul>
+                <% @project.subprojects.each do |subproject| %>
+                  <li><%= link_to subproject.title, project_path(subproject) %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% elsif @project.parent_project %>
+            <div class="parent-project">
+              <%= t('project.label.parent_project', parent_project_link: link_to(@project.parent_project.title, project_path(@project.parent_project))).html_safe %>
+            </div>
+          <% end %>
+        </section>
+      </div>
+      <div class="row">
+        <section class="col-md-12">
+          <div class="gallery">
+            <% if @project.gallery.gallery_pictures.count > 0 %>
+              <h3><%= t('project.label.gallery') %></h3>
+              <%= render 'galleries/gallery', gallery: @project.gallery %>
+            <% end %>
+          </div>
+          <% if @project.has_volunteer?(current_user) || @project.has_leader?(current_user) || (current_user && current_user.is_admin?) %>
+            <div class="picture-upload">
+              <%= form_for(@project.gallery, html: { multipart: true}) do |f| %>
+                <%= f.hidden_field :title %>
+                <div class="field">
+                  <%= f.label t('project.action.uploadPictures') %><br>
+                  <%= t('project.help.uploadPictures') %>
+                  <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+                </div>
+
+                <div class="actions">
+                  <%= f.submit t('project.action.uploadSelectedPictures') %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+          <% if (current_user && current_user.is_admin?) %>
+            <%= link_to 'Gallerie bearbeiten', edit_gallery_path(@project.gallery) %>
+          <% end %>
+        </section>
+      </div>
+    </div>
 
     <div class="col-md-4">
       <div class="row">

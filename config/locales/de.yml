@@ -204,12 +204,14 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       manageTeam: 'Team verwalten'
       leaders: 'Leitung'
       team: 'Team'
-      gallery: Fotogallerie
+      gallery: Bilder des Projekts
       uploadImage: 'Bild hochladen'
       parent_project: Dieses Projekt ist Teil von %{parent_project_link}.
     help:
       picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
       short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Projektliste statt der ausführlichen Beschreibung angezeigt.'
+      uploadPictures: "Hast Du während des Projektes Bilder gemacht, die Du gerne veröffentlichen möchtest? Dann kannst Du sie hier hochladen.
+      Hast Du andere Personen fotografiert, stelle bitte sicher, dass Du ihr Einverständnis für das Veröffentlichen der Bilder hast."
     message:
       created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'

@@ -61,15 +61,17 @@ $(document).ready(function ($) {
         },
         $ArrowNavigatorOptions: {                       //[Optional] Options to specify and enable arrow navigator or not
             $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
-            $ChanceToShow: 1                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+            $ChanceToShow: 1,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+            $Scale: false,
+            $AutoCenter: 2
         },
         $ThumbnailNavigatorOptions: {                       //[Optional] Options to specify and enable thumbnail navigator or not
             $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
             $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
             $ActionMode: 1,                                 //[Optional] 0 None, 1 act by click, 2 act by mouse hover, 3 both, default value is 1
-            $SpacingX: 8,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
-            $DisplayPieces: 10,                             //[Optional] Number of pieces to display, default value is 1
-            $ParkingPosition: 360                          //[Optional] The offset position to park thumbnail
+            $SpacingX: 6,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
+            $DisplayPieces: 7,                             //[Optional] Number of pieces to display, default value is 1
+            $ParkingPosition: 247                          //[Optional] The offset position to park thumbnail
         },
         $FillMode: 1
     };
@@ -102,7 +104,8 @@ $(document).ready(function ($) {
     $.getJSON('/api/galleries/' + galleryId + '.json', function( data ) {
         $.each(data.gallery_pictures, function(index, item) {
             galleryItems.push({
-                src: item.picture.url,
+                src: item.picture.desktop.url,
+                raw_src: item.picture.url,
                 w: item.width,
                 h: item.height
             });
@@ -117,10 +120,13 @@ $(document).ready(function ($) {
             index: slideIndex,
             getThumbBoundsFn: function(index) {
                 var pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
-                var slider_container = $('.gallery-slides')[index].getBoundingClientRect();
+                var slider_container = $('.gallery-slides')[0].getBoundingClientRect();
                 return {x: slider_container.left, y: slider_container.top + pageYScroll, w: slider_container.width};
             },
-            history: false
+            history: false,
+            getImageURLForShare: function( shareButtonData ) {
+                return gallery.currItem.raw_src || gallery.currItem.src || '';
+            }
         };
 
         // Initializes and opens PhotoSwipe

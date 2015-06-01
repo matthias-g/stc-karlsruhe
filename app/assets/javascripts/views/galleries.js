@@ -1,5 +1,15 @@
 
 $(document).ready(function ($) {
+    // auto submit uploaded images
+    $('form.edit_gallery').each(function(i, f) {
+        $('#gallery_picture', f).change(function() {
+            $('.waitinfo', f).show();
+            $(f).submit();
+        });
+        $('input[type="submit"]', f).css({visibility: 'hidden'});
+    });
+
+    // Slideshow
     var _SlideshowTransitions = [
         //Fade in L
         {$Duration: 1200, x: 0.3, $During: { $Left: [0.3, 0.7] }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
@@ -136,16 +146,5 @@ $(document).ready(function ($) {
             jssor_slider.$GoTo(gallery.getCurrentIndex());
         });
     });
-
-
-    // auto submit uploaded images
-    $('form.edit_gallery').each(function(i, f) {
-        $('#gallery_picture', f).change(function() {
-            $('.waitinfo', f).show();
-            $(f).submit();
-        });
-        $('input[type="submit"]', f).css({visibility: 'hidden'});
-    });
-
 
 });

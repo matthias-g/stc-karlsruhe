@@ -76,8 +76,8 @@
       <div class="row">
         <section class="col-md-12">
           <div class="gallery">
+            <h3><%= t('project.label.gallery') %></h3>
             <% if show_gallery?(@project) %>
-              <h3><%= t('project.label.gallery') %></h3>
               <%= render 'galleries/gallery', gallery: @project.gallery %>
             <% end %>
           </div>

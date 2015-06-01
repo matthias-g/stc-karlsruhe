@@ -86,9 +86,9 @@
               <%= form_for(@project.gallery, html: { multipart: true}) do |f| %>
                 <%= f.hidden_field :title %>
                 <div class="field">
-                  <%= f.label t('project.action.uploadPictures') %><br>
                   <%= t('project.help.uploadPictures') %>
                   <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+                  <p class="waitinfo">Bitte warten, die Bilder werden hochgeladen...</p>
                 </div>
 
                 <div class="actions">

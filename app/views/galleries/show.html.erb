@@ -1,13 +1,13 @@
 <div class="row">
   <section class="col-md-12">
-    <p id="notice"><%= notice %></p>
-
     <p>
       <strong>Title:</strong>
       <%= @gallery.title %>
     </p>
 
-    <%= render 'gallery', gallery: @gallery %>
+    <div style='max-width: 600px;'>
+      <%= render 'gallery', gallery: @gallery %>
+    </div>
 
     <%= form_for(@gallery, html: { multipart: true}) do |f| %>
       <%= f.hidden_field :title %>
@@ -24,7 +24,7 @@
     <%= link_to 'Bearbeiten', edit_gallery_path(@gallery) %> |
     <%= link_to 'Zur Gallerieübersicht', galleries_path %> |
     <% @gallery.projects.each do |project| %>
-      <%= link_to 'Zum Projekt', show_project_path(project) %>
+      <%= link_to 'Zum Projekt', project %>
     <% end %>
 
   </section>

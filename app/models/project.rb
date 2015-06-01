@@ -94,12 +94,12 @@ class Project < ActiveRecord::Base
     picture_source && !picture_source.empty? && picture
   end
 
-  def crop_picture(x,y,w,h)
-    crop_x = x
-    crop_y = y
-    crop_w = w
-    crop_h = h
-    picture.recreate_versions!
+  def crop_picture(x,y,w,h,version)
+    self.crop_x = x
+    self.crop_y = y
+    self.crop_w = w
+    self.crop_h = h
+    picture.recreate_versions!(version)
   end
 
   def should_generate_new_friendly_id?

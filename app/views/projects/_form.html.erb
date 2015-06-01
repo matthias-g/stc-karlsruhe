@@ -33,6 +33,18 @@
           <div class="project-picture picture-container">
             <%= image_tag @project.picture_url(:preview) %>
           </div>
+          <%= link_to t('project.action.crop_listview_image'),
+                  crop_picture_project_path(@project, crop_target: 'listview'),
+                  class: 'btn btn-default',
+                  data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+          <%= link_to t('project.action.crop_preview_image'),
+                  crop_picture_project_path(@project, crop_target: 'preview'),
+                  class: 'btn btn-default',
+                  data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+          <%= link_to t('project.action.crop_thumbnail_image'),
+                  crop_picture_project_path(@project, crop_target: 'thumbnail'),
+                  class: 'btn btn-default',
+                  data: {toggle: 'modal', target: '#image_crop_modal'}  %>
         <% end %>
         <%= f.file_field :picture, hide_label: true %>
       </div>
@@ -74,6 +86,7 @@
             <%= link_to t('project.action.open'),
                         open_project_path(@project),
                         class:'btn btn-default btn-wide' %>
+
         <% else %>
             <%= link_to t('project.action.close'),
                         close_project_path(@project),
@@ -159,5 +172,13 @@
 </div>
 
 <% end %>
+
+
+<div class="modal fade" id="image_crop_modal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
 
 </div>

@@ -197,10 +197,15 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       leaders: 'Leitung'
       team: 'Team'
       uploadImage: 'Bild hochladen'
+      listview_image: 'Vorschau'
+      preview_image: 'Projektansicht'
+      thumbnail_image: 'Thumbnail'
+      crop_image: 'Bildausschnitt für %{crop_target} anpassen'
     help:
       picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
       short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Projektliste statt der ausführlichen Beschreibung angezeigt.'
     message:
+      image_cropped: 'Der Bildausschnitt wurde angepasst.'
       created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'
       leaderAdded: 'Projektleiter erfolgreich hinzugefügt.'

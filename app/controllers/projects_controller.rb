@@ -112,10 +112,25 @@ class ProjectsController < ApplicationController
   def crop_picture
     if params.has_key?(:crop_x)
       @project.crop_picture(params[:crop_x].to_i, params[:crop_y].to_i,
-                            params[:crop_w].to_i, params[:crop_h].to_i)
-      redirect_to @project, notice: "Pic cropped"
+                            params[:crop_w].to_i, params[:crop_h].to_i,
+                            params[:crop_target].to_sym)
+      redirect_to @project, notice: t('project.message.image_cropped')
     else
-      respond_with(@project)
+      @crop_target_symbol = params[:crop_target].to_sym
+      case @crop_target_symbol
+        when :listview
+          @crop_target_title = t('project.label.listview_image')
+          @crop_target_ratio = 200.0/165
+        when :preview
+          @crop_target_title = t('project.label.preview_image')
+          @crop_target_ratio = 522.0/261
+        when :thumbnail
+          @crop_target_title = t('project.label.thumbnail_image')
+          @crop_target_ratio = 100.0/100
+      end
+      respond_with @project do |format|
+        format.html { render :layout => false}
+      end
     end
   end
 

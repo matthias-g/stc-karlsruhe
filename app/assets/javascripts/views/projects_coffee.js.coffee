@@ -1,7 +1,9 @@
 jQuery ->
-  new AvatarCropper()
+  new ImageCropper()
+  $('.modal').on 'shown.bs.modal': ->
+    new ImageCropper()
 
-class AvatarCropper
+class ImageCropper
   constructor: ->
     $('#cropbox').Jcrop
       aspectRatio: $('#cropbox').data('aspect')

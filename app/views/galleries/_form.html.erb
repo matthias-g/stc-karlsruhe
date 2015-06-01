@@ -26,10 +26,15 @@
     </thead>
 
     <tbody>
-    <% @gallery.gallery_pictures.each do |p| %>
+    <% @gallery.gallery_pictures.each do |picture| %>
       <tr>
-        <td><%= image_tag p.picture_url(:preview), class: 'img-responsive' %></td>
-        <td><%= link_to 'Bild entfernen', gallery_picture_path(p), method: :delete %></td>
+        <td><%= image_tag picture.picture_url(:preview), class: 'img-responsive' %></td>
+        <td><%= if picture.visible
+                  link_to 'Unsichtbar machen', make_invisible_gallery_picture_path(picture)
+                else
+                  link_to 'Sichtbar machen', make_visible_gallery_picture_path(picture)
+                end %></td>
+        <td><%= link_to 'Bild entfernen', gallery_picture_path(picture), method: :delete %></td>
       </tr>
     <% end %>
     </tbody>

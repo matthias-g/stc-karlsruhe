@@ -157,11 +157,4 @@ class ProjectsController < ApplicationController
       end
     end
 
-    def send_notice_mail(title, leader)
-      message = Message.new(:sender => 'no-reply@servethecity-karlsruhe.de',
-         :subject => t('project.message.mailNewProjectSubject'),
-         :body => t('project.message.mailNewProjectBody', title: title, leader: leader))
-      Mailer.contact_mail(message).deliver
-    end
-
 end

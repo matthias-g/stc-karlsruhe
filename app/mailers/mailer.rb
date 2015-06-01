@@ -18,4 +18,9 @@ class Mailer < ActionMailer::Base
     @to_name = to_name
     mail from: "#{from_name} <no-reply@servethecity-karlsruhe.de>", to: message.recipient, reply_to: message.sender, subject: message.subject
   end
+
+  def generic_mail(message)
+    @message = message.body
+    mail from: message.sender, to: message.recipient, subject: message.subject
+  end
 end

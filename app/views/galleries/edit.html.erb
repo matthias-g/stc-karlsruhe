@@ -5,6 +5,8 @@
     <%= render 'form' %>
 
     <%= link_to 'Anzeigen', @gallery %> |
+    <%= link_to 'Alle Bilder sichtbar machen', make_all_visible_gallery_path(@gallery) %> |
+    <%= link_to 'Alle Bilder unsichtbar machen', make_all_invisible_gallery_path(@gallery) %> |
     <%= link_to 'Zur Gallerieübersicht', galleries_path %> |
     <% @gallery.projects.each do |project| %>
       <%= link_to 'Zum Projekt', show_project_week_path(project) %>

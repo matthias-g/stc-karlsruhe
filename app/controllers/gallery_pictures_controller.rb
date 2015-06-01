@@ -1,5 +1,5 @@
 class GalleryPicturesController < ApplicationController
-  before_action :set_gallery_picture, only: [:show, :edit, :update, :destroy]
+  before_action :set_gallery_picture, only: [:show, :edit, :update, :destroy, :make_visible, :make_invisible]
   before_action :authenticate_admin_user!
 
   respond_to :html
@@ -36,6 +36,18 @@ class GalleryPicturesController < ApplicationController
   def destroy
     @gallery_picture.destroy
     redirect_to request.referer
+  end
+
+  def make_visible
+    @gallery_picture.make_visible!
+    return redirect_to request.referer if request.referer
+    redirect_to @gallery_picture.gallery
+  end
+
+  def make_invisible
+    @gallery_picture.make_visible!
+    return redirect_to request.referer if request.referer
+    redirect_to @gallery_picture.gallery
   end
 
   private

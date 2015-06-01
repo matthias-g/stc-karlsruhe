@@ -4,7 +4,7 @@ class Api::GalleriesController < ApplicationController
   respond_to :json
 
   def show
-    @gallery_pictures = @gallery.gallery_pictures.to_json(only: [:width, :height, :picture])
+    @gallery_pictures = @gallery.gallery_pictures.visible_for_user(current_user).to_json(only: [:width, :height, :picture])
     respond_with(@gallery)
   end
 

@@ -210,8 +210,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
     help:
       picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
       short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Projektliste statt der ausführlichen Beschreibung angezeigt.'
-      uploadPictures: "Hast Du während des Projektes Bilder gemacht, die Du gerne veröffentlichen möchtest? Dann kannst Du sie hier hochladen.
-      Hast Du andere Personen fotografiert, stelle bitte sicher, dass Du ihr Einverständnis für das Veröffentlichen der Bilder hast."
+      uploadPictures: "Hast du während des Projektes Bilder gemacht, die du veröffentlichen möchtest? Dann kannst du sie hier hochladen.
+        Hast du andere Personen fotografiert, stelle bitte sicher, dass du ihr Einverständnis für das Veröffentlichen der Bilder hast."
     message:
       created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'
@@ -228,12 +228,18 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       madeInvisible: 'Projekt wurde unsichtbar gemacht.'
       opened: 'Projekt wurde geöffnet.'
       closed: 'Projekt wurde geschlossen.'
-      mailNewProjectSubject: 'Ein neues Projekt wurde erstellt'
-      mailNewProjectBody: 'Hallo,
-soeben wurde ein neues Projekt für Serve the City erstellt.
-
-Projekttitel: %{title}
-Leiter: %{leader}'
+      galleryPicturesUploaded: 'Vielen Dank für das Hochladen deiner Bilder! Sobald sie jemand aus dem Orgateam freigeschaltet hat,
+        sind sie öffentlich sichtbar.'
+      galleryContainsInvisiblePictures: 'Einige der Bilder in dieser Gallerie wurden noch nicht von jemandem aus dem Orgateam freigeschaltet
+        und sind daher noch nicht öffentlich sichtbar.'
+      mailNewPictures:
+        subject: '%{pictureCount} neue Bilder hochgeladen'
+        body: "Hallo,\n
+        soeben wurden neue Bilder zur Fotogallerie eines Projekts hinzugefügt:\n\n
+        Projekttitel: %{title}\n
+        Anzahl Bilder: %{pictureCount}\n
+        Benutzer: %{uploader}\n\n
+        Bitte überprüfe die Bilder und schalte sie gegebenenfalls frei."
     status:
       open: Offen
       soon_full: Wenige Plätze

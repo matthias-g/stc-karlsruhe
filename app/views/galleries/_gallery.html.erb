@@ -9,7 +9,7 @@
   </div>
 
   <div u="slides" class="gallery-slides">
-    <% gallery.gallery_pictures.each do |picture| %>
+    <% gallery.gallery_pictures.visible_for_user(current_user).each do |picture| %>
       <div>
         <img u="image" src="<%= picture.picture.preview.url %>" />
         <img u="thumb" src="<%= picture.picture.thumb.url %>" />

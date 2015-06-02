@@ -150,3 +150,12 @@
   width /**/: 75px;
   height /**/: 50px;
 }
+
+.pswp__button--delete {
+  display: block;
+  background-image: none !important;
+  color: white;
+  font-size: 18px;
+  padding-left: 15px;
+  padding-top: 8px;
+}

@@ -16,7 +16,7 @@ module ProjectsHelper
   end
 
   def show_upload?(project)
-    project.has_volunteer?(current_user) || project.has_leader?(current_user) || (current_user && current_user.is_admin?)
+    project.has_volunteer?(current_user) || project.has_leader?(current_user) || (current_user && (current_user.is_admin? || current_user.is_photographer?))
   end
 
 end

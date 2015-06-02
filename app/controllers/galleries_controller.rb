@@ -71,7 +71,7 @@ class GalleriesController < ApplicationController
   def check_if_user_can_upload
     not_found unless current_user
     @gallery.projects.each do |project|
-      not_found unless project.has_leader?(current_user) || project.has_volunteer?(current_user) || current_user.is_admin?
+      not_found unless project.has_leader?(current_user) || project.has_volunteer?(current_user) || current_user.is_admin? || current_user.is_photographer?
     end
   end
 

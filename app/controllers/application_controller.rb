@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError.new('Not Found')
   end
 
+  def not_authorized
+    raise ActionController::RoutingError.new('Not Authorized')
+  end
+
   def authenticate_admin_user!
     authenticate_user!
     unless current_user.is_admin?

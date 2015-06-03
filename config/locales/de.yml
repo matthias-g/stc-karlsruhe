@@ -204,7 +204,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       manageTeam: 'Team verwalten'
       leaders: 'Leitung'
       team: 'Team'
-      gallery: Fotogallerie
+      gallery: Fotogalerie
       uploadImage: 'Bild hochladen'
       parent_project: 'Dieses Projekt ist Teil von'
     help:
@@ -230,12 +230,12 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:
       closed: 'Projekt wurde geschlossen.'
       galleryPicturesUploaded: 'Vielen Dank für das Hochladen deiner Bilder! Sobald sie jemand aus dem Orgateam freigeschaltet hat,
         sind sie öffentlich sichtbar.'
-      galleryContainsInvisiblePictures: 'Einige der Bilder in dieser Gallerie wurden noch nicht von jemandem aus dem Orgateam freigeschaltet
+      galleryContainsInvisiblePictures: 'Einige der Bilder in dieser Galerie wurden noch nicht von jemandem aus dem Orgateam freigeschaltet
         und sind daher noch nicht öffentlich sichtbar.'
       mailNewPictures:
         subject: '%{pictureCount} neue Bilder hochgeladen'
         body: "Hallo,\n
-        soeben wurden neue Bilder zur Fotogallerie eines Projekts hinzugefügt:\n\n
+        soeben wurden neue Bilder zur Fotogalerie eines Projekts hinzugefügt:\n\n
         Projekttitel: %{title}\n
         Anzahl Bilder: %{pictureCount}\n
         Benutzer: %{uploader}\n\n

@@ -167,6 +167,11 @@ $(document).ready(function ($) {
         var idx = gallery.getCurrentIndex();
         var id = galleryItems[idx].id;
 
+        var confirmation = confirm("Möchtest Du dieses Bild wirklich löschen?")
+        if (!confirmation) {
+            return;
+        }
+
         $.ajax({
             url: "/api/gallery_pictures/" + id,
             dataType: "json",

@@ -103,7 +103,8 @@ $(document).ready(function ($) {
                 raw_src: item.picture.url,
                 w: item.width,
                 h: item.height,
-                id: item.id
+                id: item.id,
+                editable: item.editable
             });
         });
     }).fail(function( jqxhr, textStatus, error ) {
@@ -153,19 +154,27 @@ $(document).ready(function ($) {
         };
 
         // Initializes and opens PhotoSwipe
+        galleryItems[1].editable = false;
         gallery = new PhotoSwipe(pswp.get(0), PhotoSwipeUI_Default, galleryItems, options);
         gallery.init();
         gallery.listen('close', function() {
             slider.$GoTo(gallery.getCurrentIndex());
         });
-        $('.pswp__button--delete').unbind('click').click(function() {
-            deleteCurrentImage();
-        });
+
+        var deleteButton = $('.pswp__button--delete')
+            .unbind('click').click(function() {
+                deleteCurrentImage();
+            });
+        function toggleDeleteButton() {
+            deleteButton.toggle(gallery.currItem.editable);
+        }
+        gallery.listen('beforeChange', toggleDeleteButton);
+        toggleDeleteButton();
     }
 
     function deleteCurrentImage() {
         var idx = gallery.getCurrentIndex();
-        var id = galleryItems[idx].id;
+        var item = galleryItems[idx];
 
         var confirmation = confirm("Möchtest Du dieses Bild wirklich löschen?")
         if (!confirmation) {
@@ -173,7 +182,7 @@ $(document).ready(function ($) {
         }
 
         $.ajax({
-            url: "/api/gallery_pictures/" + id,
+            url: "/api/gallery_pictures/" + item.id,
             dataType: "json",
             type: "POST",
             processData: false,

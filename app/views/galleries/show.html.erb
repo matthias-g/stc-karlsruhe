@@ -1,0 +1,31 @@
+<div class="row">
+  <section class="col-md-12">
+    <p>
+      <strong>Title:</strong>
+      <%= @gallery.title %>
+    </p>
+
+    <div style='max-width: 600px;'>
+      <%= render 'gallery', gallery: @gallery %>
+    </div>
+
+    <%= form_for(@gallery, html: { multipart: true}) do |f| %>
+      <%= f.hidden_field :title %>
+      <div class="field">
+        <%= f.label :picture %><br>
+        <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit 'Hochladen' %>
+      </div>
+    <% end %>
+
+    <%= link_to 'Bearbeiten', edit_gallery_path(@gallery) %> |
+    <%= link_to 'Zur Gallerieübersicht', galleries_path %> |
+    <% @gallery.projects.each do |project| %>
+      <%= link_to 'Zum Projekt', project %>
+    <% end %>
+
+  </section>
+</div>

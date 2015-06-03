@@ -1,0 +1,51 @@
+
+<%= form_for(@gallery, html: { multipart: true}) do |f| %>
+  <% if @gallery.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gallery.errors.count, "error") %> prohibited this gallery from being saved:</h2>
+
+      <ul>
+        <% @gallery.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th><%= f.label :picture %></th>
+      <th colspan="1"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @gallery.gallery_pictures.each do |picture| %>
+      <tr>
+        <td><%= image_tag picture.picture_url(:preview), class: 'img-responsive' %></td>
+        <td><%= if picture.visible
+                  link_to 'Unsichtbar machen', make_invisible_gallery_picture_path(picture)
+                else
+                  link_to 'Sichtbar machen', make_visible_gallery_picture_path(picture)
+                end %></td>
+        <td><%= link_to 'Bild entfernen', gallery_picture_path(picture), method: :delete %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <div class="field">
+    <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Speichern und Bilder hochladen' %>
+  </div>
+<% end %>
+

@@ -42,6 +42,8 @@ gem 'devise'
 
 gem 'mini_magick'
 gem 'carrierwave'
+gem 'jssorslider-rails', github: 'matthias-g/jssorslider-rails'
+gem 'photoswipe-rails'
 
 gem 'bootstrap-sass'
 gem 'bootstrap_form'

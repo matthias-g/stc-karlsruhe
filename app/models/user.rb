@@ -59,6 +59,10 @@ class User < ActiveRecord::Base
     has_role?(:admin)
   end
 
+  def is_photographer?
+    has_role?(:photographer)
+  end
+
   def clear!
     self.first_name = 'cleared'
     self.last_name = 'cleared'

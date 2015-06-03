@@ -11,4 +11,12 @@ module ProjectsHelper
     output.html_safe
   end
 
+  def show_gallery?(project)
+    project.gallery.gallery_pictures.visible_for_user(current_user).count > 0
+  end
+
+  def show_upload?(project)
+    project.has_volunteer?(current_user) || project.has_leader?(current_user) || (current_user && (current_user.is_admin? || current_user.is_photographer?))
+  end
+
 end

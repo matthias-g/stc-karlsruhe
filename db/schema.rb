@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531175701) do
+ActiveRecord::Schema.define(version: 20150601131358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,25 @@ ActiveRecord::Schema.define(version: 20150531175701) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "galleries", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "gallery_pictures", force: true do |t|
+    t.integer  "gallery_id"
+    t.string   "picture"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "uploader_id"
+    t.integer  "width"
+    t.integer  "height"
+    t.boolean  "visible",     default: false
+  end
+
+  add_index "gallery_pictures", ["visible"], name: "index_gallery_pictures_on_visible", using: :btree
 
   create_table "participations", force: true do |t|
     t.integer  "user_id"
@@ -102,8 +121,10 @@ ActiveRecord::Schema.define(version: 20150531175701) do
     t.integer  "project_week_id"
     t.string   "slug"
     t.integer  "parent_project_id"
+    t.integer  "gallery_id"
   end
 
+  add_index "projects", ["gallery_id"], name: "index_projects_on_gallery_id", using: :btree
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
 
   create_table "roles", force: true do |t|

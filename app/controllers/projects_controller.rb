@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
     if params[:filter] && (params[:filter][:visibility] == 'hidden') && current_user.is_admin?
         visible = false
     end
-    @projects = Project.where(:visible => visible).order(:status)
+    @projects = Project.visible.order(:status)
     @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] && (params[:filter][:day] != '')
     @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] && (params[:filter][:status] != '')
     respond_with(@projects)
@@ -21,6 +21,9 @@ class ProjectsController < ApplicationController
   def show
     #Message for contact_volunteers
     @message = Message.new
+    if @project.gallery.gallery_pictures.count == 0
+      @project.gallery.gallery_pictures.build
+    end
     respond_with(@project)
   end
 
@@ -152,13 +155,6 @@ class ProjectsController < ApplicationController
           redirect_to new_user_session_path
         end
       end
-    end
-
-    def send_notice_mail(title, leader)
-      message = Message.new(:sender => 'no-reply@servethecity-karlsruhe.de',
-         :subject => t('project.message.mailNewProjectSubject'),
-         :body => t('project.message.mailNewProjectBody', title: title, leader: leader))
-      Mailer.contact_mail(message).deliver
     end
 
 end

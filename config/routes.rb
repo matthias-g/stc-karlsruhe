@@ -1,5 +1,19 @@
 StcKarlsruhe::Application.routes.draw do
 
+  resources :gallery_pictures do
+    member do
+      get :make_visible
+      get :make_invisible
+    end
+  end
+
+  resources :galleries do
+    member do
+      get :make_all_visible
+      get :make_all_invisible
+    end
+  end
+
   get 'statistiken/teilnahmen', to: 'statistics#participations'
   get 'statistiken/teilnahmen/:date', to: 'statistics#participations_on_day', as: :participations_on_day
   get 'statistiken/auslastung', to: 'statistics#occupancy'
@@ -55,6 +69,8 @@ StcKarlsruhe::Application.routes.draw do
         get :project_days
       end
     end
+    resources :galleries, only: :show
+    resources :gallery_pictures, only: :destroy
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

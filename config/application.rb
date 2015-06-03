@@ -25,6 +25,7 @@ module StcKarlsruhe
     config.assets.initialize_on_precompile = false
 
     CONTACT_FORM_RECIPIENT = 'contact@servethecity-karlsruhe.de'
+    NOTIFICATION_RECIPIENT = 'notifications@servethecity-karlsruhe.de'
     NO_REPLY_SENDER = 'no-reply@servethecity-karlsruhe.de'
 
     # autoload lib directory (for CustomFailureApp)

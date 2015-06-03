@@ -9,7 +9,8 @@ $(document).ready(function ($) {
         $('input[type="submit"]', f).css({visibility: 'hidden'});
     });
 
-    // Slideshow
+
+    // set slideshow options
     var _SlideshowTransitions = [
         //Fade in L
         {$Duration: 1200, x: 0.3, $During: { $Left: [0.3, 0.7] }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
@@ -85,39 +86,24 @@ $(document).ready(function ($) {
         },
         $FillMode: 1
     };
-    var slider_container = $('#slider_container');
-    if ( slider_container.length == 0) {
-        return;
-    }
-    var jssor_slider = new $JssorSlider$("slider_container", options);
-    //responsive code begin
-    //you can remove responsive code if you don't want the slider scales while window resizes
-    function ScaleSlider() {
-        var parentWidth = jssor_slider.$Elmt.parentNode.clientWidth;
-        if (parentWidth)
-            jssor_slider.$ScaleWidth(Math.max(Math.min(parentWidth, 1200), 300));
-        else
-            window.setTimeout(ScaleSlider, 30);
-    }
-    ScaleSlider();
-    $(window).bind("load", ScaleSlider);
-    $(window).bind("resize", ScaleSlider);
-    $(window).bind("orientationchange", ScaleSlider);
-    //responsive code end
+    var container = $('#slider_container');
+    if (container.length == 0) return;
+    var container_copy = container.clone();
+    var pswp = $('.pswp');
+    var slider, gallery;
 
-    var pswpElement = document.querySelectorAll('.pswp')[0];
 
-    // build items array
+    // build gallery item array
     var galleryItems = [];
-
-    var galleryId = slider_container.data('gallery-id');
+    var galleryId = container.data('gallery-id');
     $.getJSON('/api/galleries/' + galleryId + '.json', function( data ) {
         $.each(data.gallery_pictures, function(index, item) {
             galleryItems.push({
                 src: item.picture.desktop.url,
                 raw_src: item.picture.url,
                 w: item.width,
-                h: item.height
+                h: item.height,
+                id: item.id
             });
         });
     }).fail(function( jqxhr, textStatus, error ) {
@@ -125,26 +111,94 @@ $(document).ready(function ($) {
         console.log( "Request Failed: " + err );
     });
 
-    jssor_slider.$On($JssorSlider$.$EVT_CLICK, function (slideIndex) {
+
+    function createSlider() {
+        slider = new $JssorSlider$("slider_container", options);
+
+        //responsive code begin
+        //you can remove responsive code if you don't want the slider scales while window resizes
+        function ScaleSlider() {
+            var parentWidth = slider.$Elmt.parentNode.clientWidth;
+            if (parentWidth)
+                slider.$ScaleWidth(Math.max(Math.min(parentWidth, 1200), 300));
+            else
+                window.setTimeout(ScaleSlider, 30);
+        }
+
+        ScaleSlider();
+        $(window).bind("load", ScaleSlider);
+        $(window).bind("resize", ScaleSlider);
+        $(window).bind("orientationchange", ScaleSlider);
+        //responsive code end
+
+        slider.$On($JssorSlider$.$EVT_CLICK, function (slideIndex) {
+            createGallery(slideIndex);
+        });
+    }
+
+    function createGallery(slideIndex) {
         var options = {
             index: slideIndex,
+            history: false,
             getThumbBoundsFn: function(index) {
                 var pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
                 var slider_container = $('.gallery-slides')[0].getBoundingClientRect();
-                return {x: slider_container.left, y: slider_container.top + pageYScroll, w: slider_container.width};
+                return {x: container.left,
+                        y: container.top + pageYScroll,
+                        w: container.width};
             },
-            history: false,
             getImageURLForShare: function( shareButtonData ) {
                 return gallery.currItem.raw_src || gallery.currItem.src || '';
             }
         };
 
         // Initializes and opens PhotoSwipe
-        var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, galleryItems, options);
+        gallery = new PhotoSwipe(pswp.get(0), PhotoSwipeUI_Default, galleryItems, options);
         gallery.init();
         gallery.listen('close', function() {
-            jssor_slider.$GoTo(gallery.getCurrentIndex());
+            slider.$GoTo(gallery.getCurrentIndex());
         });
-    });
+        $('.pswp__button--delete').unbind('click').click(function() {
+            deleteCurrentImage();
+        });
+    }
+
+    function deleteCurrentImage() {
+        var idx = gallery.getCurrentIndex();
+        var id = galleryItems[idx].id;
+
+        $.ajax({
+            url: "/api/gallery_pictures/" + id,
+            dataType: "json",
+            type: "POST",
+            processData: false,
+            contentType: "application/json",
+            beforeSend: function(xhr)
+            {
+                xhr.setRequestHeader("X-Http-Method-Override", "DELETE");
+            }
+        }).done(function(data) {
+            //TODO: show flash message
+        });
+
+        // remove from gallery
+        galleryItems.splice(idx, 1);
+        if (galleryItems.length <= 0) {
+            pswp.remove();
+            container.remove();
+            return;
+        }
+        if (idx >= gallery.items.length - 1)
+            gallery.goTo(0);
+        gallery.invalidateCurrItems();
+        gallery.updateSize(true);
+
+        // remove from slider
+        container_copy.find('.gallery-slides').children().eq(idx).remove();
+        container.html(container_copy.children().clone());
+        createSlider();
+    }
+
+    createSlider();
 
 });

@@ -154,7 +154,6 @@ $(document).ready(function ($) {
         };
 
         // Initializes and opens PhotoSwipe
-        galleryItems[1].editable = false;
         gallery = new PhotoSwipe(pswp.get(0), PhotoSwipeUI_Default, galleryItems, options);
         gallery.init();
         gallery.listen('close', function() {
@@ -176,7 +175,7 @@ $(document).ready(function ($) {
         var idx = gallery.getCurrentIndex();
         var item = galleryItems[idx];
 
-        var confirmation = confirm("Möchtest Du dieses Bild wirklich löschen?")
+        var confirmation = confirm("Möchtest Du dieses Bild wirklich löschen?");
         if (!confirmation) {
             return;
         }

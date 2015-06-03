@@ -29,24 +29,26 @@
         <label class="control-label" for="project_picture_source">
           <%= Project.human_attribute_name('picture') %>
         </label>
-        <% if @project.picture.file %>
-          <div class="project-picture picture-container">
-            <%= image_tag @project.picture_url(:preview) %>
-          </div>
-          <%= link_to t('project.action.crop_listview_image'),
-                  crop_picture_project_path(@project, crop_target: 'listview'),
-                  class: 'btn btn-default',
-                  data: {toggle: 'modal', target: '#image_crop_modal'}  %>
-          <%= link_to t('project.action.crop_preview_image'),
-                  crop_picture_project_path(@project, crop_target: 'preview'),
-                  class: 'btn btn-default',
-                  data: {toggle: 'modal', target: '#image_crop_modal'}  %>
-          <%= link_to t('project.action.crop_thumbnail_image'),
-                  crop_picture_project_path(@project, crop_target: 'thumbnail'),
-                  class: 'btn btn-default',
-                  data: {toggle: 'modal', target: '#image_crop_modal'}  %>
-        <% end %>
         <%= f.file_field :picture, hide_label: true %>
+
+        <% if @project.picture.file %>
+            <div class="project-picture picture-container">
+              <%= image_tag @project.picture_url(:preview) %>
+            </div>
+            <%= link_to t('project.action.crop_listview_image'),
+                        crop_picture_project_path(@project, crop_target: 'listview'),
+                        class: 'btn btn-default',
+                        data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+            <%= link_to t('project.action.crop_preview_image'),
+                        crop_picture_project_path(@project, crop_target: 'preview'),
+                        class: 'btn btn-default',
+                        data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+            <%= link_to t('project.action.crop_thumbnail_image'),
+                        crop_picture_project_path(@project, crop_target: 'thumbnail'),
+                        class: 'btn btn-default',
+                        data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+        <% end %>
+
       </div>
       <%= f.text_field :picture_source,
             help: t('project.help.picture_source') %>

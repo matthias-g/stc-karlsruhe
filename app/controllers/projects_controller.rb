@@ -113,7 +113,7 @@ class ProjectsController < ApplicationController
   end
 
   def contact_volunteers
-    @message = Message.new(params[:messages])
+    @message = Message.new(params[:message])
     @message.sender = current_user.email
     @message.recipient = @project.volunteers.map { |v| v.email}.join(',') + ',' + current_user.email
     if @message.valid?

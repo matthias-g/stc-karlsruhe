@@ -114,17 +114,17 @@ class ProjectsController < ApplicationController
 
   def contact_volunteers
     # TODO: make it work with just one email:
-    #@message = Message.new(params[:message])
-    #Mailer.project_mail(@message, current_user, @project).deliver
+    @message = Message.new(params[:message])
+    Mailer.project_mail(@message, current_user, @project).deliver
 
-    recipients = (@project.aggregated_volunteers + @project.aggregated_leaders).uniq
-    recipients.each do |r|
-      @message = Message.new(params[:message])
-      @message.sender = current_user.email
-      @message.recipient = r.email
-      #Mailer.generic_mail(@message, true).deliver
-      Mailer.user_mail(@message, current_user, r).deliver
-    end
+    #recipients = (@project.aggregated_volunteers + @project.aggregated_leaders).uniq
+    #recipients.each do |r|
+    #  @message = Message.new(params[:message])
+    #  @message.sender = current_user.email
+    #  @message.recipient = r.email
+    #  Mailer.generic_mail(@message, true).deliver
+    #  #Mailer.user_mail(@message, current_user, r).deliver
+    #end
 
     flash[:notice] = t('contact.team.success')
     redirect_to action: :show

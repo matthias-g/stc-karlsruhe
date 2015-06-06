@@ -227,6 +227,18 @@
     </div>
   </div>
 
+  <% if @project.has_leader? current_user  %>
+    <section class="contact-volunteers-form">
+      Wegen einem Bug können wir leider gerade kein Formular anbieten,
+      mit dem du dein Team kontaktieren kannst. Bis das behoben ist,
+      empfehlen wir die Kontaktaufnahme direkt über E-Mail (am besten BCC verwenden):
+
+      <div style="background: #eee; border: 1px solid #aaa; padding: 5px; margin: 10px;">
+        <%= (@project.aggregated_volunteers + @project.aggregated_leaders).uniq.map { |v| v.email}.join(', ') %>
+      </div>
+    </section>
+  <% end %>
+
   <%# if @project.has_leader? current_user  %>
   <% if user_signed_in? && current_user.is_admin? %>
     <section class="contact-volunteers-form">

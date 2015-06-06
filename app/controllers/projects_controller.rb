@@ -113,17 +113,20 @@ class ProjectsController < ApplicationController
   end
 
   def contact_volunteers
-    @message = Message.new(params[:message])
-    @message.sender = current_user.email
-    @message.recipient = @project.volunteers.map { |v| v.email}.join(',') + ',' + current_user.email
-    if @message.valid?
-      Mailer.multi_user_bcc_mail(@message, current_user.full_name, @project.title)
-      flash[:notice] = t('contact.team.success')
-      redirect_to action: :show
-    else
-      flash[:alert] = @message.errors.values
-      render action: :show
+    # TODO: make it work with just one email:
+    #@message = Message.new(params[:message])
+    #Mailer.project_mail(@message, current_user, @project).deliver
+
+    recipients = (@project.aggregated_volunteers + @project.aggregated_leaders).uniq
+    recipients.each do |r|
+      @message = Message.new(params[:message])
+      @message.sender = current_user.email
+      @message.recipient = r.email
+      Mailer.generic_mail(@message, true).deliver
     end
+
+    flash[:notice] = t('contact.team.success')
+    redirect_to action: :show
   end
 
   private

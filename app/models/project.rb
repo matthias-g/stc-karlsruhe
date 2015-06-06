@@ -35,6 +35,13 @@ class Project < ActiveRecord::Base
     User.joins(:projects).where("(participations.project_id = #{self.id} or parent_project_id = #{self.id}) and participations.as_leader = false")
   end
 
+  def aggregated_leaders
+    if !subprojects || subprojects.count == 0
+      return leaders
+    end
+    User.joins(:projects).where("(participations.project_id = #{self.id} or parent_project_id = #{self.id}) and participations.as_leader = true")
+  end
+
   def volunteers_in_subprojects
     User.joins(:projects).where('projects.parent_project_id' => self.id).where('participations.as_leader' => false)
   end

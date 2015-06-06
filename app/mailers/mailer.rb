@@ -3,24 +3,34 @@ class Mailer < ActionMailer::Base
 
   def contact_mail(message)
     @message = message.body
-    mail from: message.sender, to: StcKarlsruhe::Application::CONTACT_FORM_RECIPIENT, reply_to: message.sender, subject: message.subject
+    recipient = StcKarlsruhe::Application::CONTACT_FORM_RECIPIENT
+    mail from: message.sender, to: recipient, reply_to: message.sender, subject: message.subject
   end
 
-  def multi_user_bcc_mail(message, from_name, project_title)
+  def project_mail(message, sender, project)
     @message = message.body
-    @project_title = project_title
-    mail from: "#{from_name} <no-reply@servethecity-karlsruhe.de>", bcc: message.recipient, reply_to: message.sender, subject: message.subject
+    @project_title = project.title
+    @sender_name = sender.full_name
+    recipients = project.volunteers.map { |v| v.email}.join(',') + ',' + sender.email
+    mail from: "Serve the City Karlsruhe <no-reply@servethecity-karlsruhe.de>",
+         bcc: recipients, reply_to: sender.email, subject: message.subject
   end
 
-  def single_user_mail(message, from_name, to_name)
+  def user_mail(message, sender, recipient)
     @message = message.body
-    @from_name = from_name
-    @to_name = to_name
-    mail from: "#{from_name} <no-reply@servethecity-karlsruhe.de>", to: message.recipient, reply_to: message.sender, subject: message.subject
+    @sender_name = sender.full_name
+    @recipient_name = recipient.first_name
+    mail from: "Serve the City Karlsruhe <no-reply@servethecity-karlsruhe.de>",
+         to: recipient.email, reply_to: sender.email, subject: message.subject
   end
 
-  def generic_mail(message)
+  def generic_mail(message, bcc)
     @message = message.body
-    mail from: message.sender, to: message.recipient, subject: message.subject
+    if bcc
+      mail from: message.sender, bcc: message.recipient, subject: message.subject
+    else
+      mail from: message.sender, to: message.recipient, subject: message.subject
+    end
   end
+
 end

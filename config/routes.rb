@@ -25,7 +25,7 @@ StcKarlsruhe::Application.routes.draw do
   resources :roles
 
   get 'kontakt', to: 'messages#new', as: 'contact'
-  post 'kontakt', to: 'messages#create'
+  post 'kontakt', to: 'messages#send_to_orga'
 
   post 'users/:id', to: 'users#contact_user'
   post 'projects/:id', to: 'projects#contact_volunteers'

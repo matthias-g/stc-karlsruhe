@@ -227,7 +227,8 @@
     </div>
   </div>
 
-  <% if @project.has_leader? current_user  %>
+  <%# if @project.has_leader? current_user  %>
+  <% if user_signed_in? && current_user.is_admin? %>
     <section class="contact-volunteers-form">
       <%= bootstrap_form_for(@message, url: {action: 'contact_volunteers'}) do |f| %>
         <h2><%= t('contact.team.title') %></h2>

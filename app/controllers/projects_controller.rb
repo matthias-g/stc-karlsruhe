@@ -122,7 +122,8 @@ class ProjectsController < ApplicationController
       @message = Message.new(params[:message])
       @message.sender = current_user.email
       @message.recipient = r.email
-      Mailer.generic_mail(@message, true).deliver
+      #Mailer.generic_mail(@message, true).deliver
+      Mailer.user_mail(@message, current_user, r).deliver
     end
 
     flash[:notice] = t('contact.team.success')

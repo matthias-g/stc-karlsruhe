@@ -10,7 +10,7 @@ class Mailer < ActionMailer::Base
   def project_mail(message, sender, project)
     @message = message.body
     @project_title = project.title
-    @sender_name = sender.full_name
+    @sender = sender
     recipients = project.volunteers.map { |v| v.email}.join(',') + ',' + sender.email
     mail from: "Serve the City Karlsruhe <no-reply@servethecity-karlsruhe.de>",
          bcc: recipients, reply_to: sender.email, subject: message.subject
@@ -18,8 +18,8 @@ class Mailer < ActionMailer::Base
 
   def user_mail(message, sender, recipient)
     @message = message.body
-    @sender_name = sender.full_name
-    @recipient_name = recipient.first_name
+    @sender = sender
+    @recipient = recipient
     mail from: "Serve the City Karlsruhe <no-reply@servethecity-karlsruhe.de>",
          to: recipient.email, reply_to: sender.email, subject: message.subject
   end

@@ -160,14 +160,14 @@ de:
       success: 'Die Nachricht wurde an dich und alle Teilnehmer geschickt.'
       body: "Hallo,
 
-du hast über Serve the City Karlsruhe eine Nachricht von einem Projektleiter des Projektes '%{title}' bekommen:"
+du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{sender_email}, Projektleiter von '%{title}') bekommen:"
     user:
       title: 'Kontaktiere %{recipient}'
       submit: 'Nachricht senden'
       success: 'Die Nachricht wurde an %{recipient} geschickt.'
-      body: "Hallo %{to_name},
+      body: "Hallo %{recipient_name},
 
-du hast über Serve the City Karlsruhe eine Nachricht von %{from_name} bekommen:"
+du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{sender_email}) bekommen:"
     general:
       placeholders:
         sender: 'Deine E-Mail-Adresse'

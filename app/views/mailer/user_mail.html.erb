@@ -4,7 +4,8 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-<%= simple_format t('contact.user.body', to_name: @recipient_name, from_name: @sender_name) %>
+<%= simple_format t('contact.user.body', recipient_name: @recipient.first_name,
+      sender_name: @sender.full_name, sender_email: @sender.email) %>
 
 <%= simple_format @message %>
 </body>

@@ -177,7 +177,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         body: 'Deine Nachricht'
     adminMail:
       title: 'Admin-Mailer'
-      text: 'Hier kannst du projektübergreifenden Empfängergruppen eine Email schreiben. Du selbst erhätst auch immer eine Kopie.'
+      text: 'Hier kannst du projektübergreifenden Empfängergruppen eine Email schreiben. Du selbst erhältst auch immer eine Kopie.'
       success: 'Die Nachricht wurde erfolgreich gesendet.'
       groups:
         current_volunteers_and_leaders: 'Aktuelle Projektleiter und Mitarbeiter'

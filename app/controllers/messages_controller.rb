@@ -24,7 +24,7 @@ class MessagesController < ApplicationController
                 'Serve the City Karlsruhe <no-reply@servethecity-karlsruhe.de>',
                 current_user.full_name+ ' <' + current_user.email + '>']
     @recipients = ['current_volunteers_and_leaders', 'current_volunteers',
-                   'current_leaders', 'all_users', 'active_users']
+                   'current_leaders', 'all_users', 'active_users', 'baddies']
   end
 
   def send_admin_mail
@@ -40,11 +40,12 @@ class MessagesController < ApplicationController
       when 'all_users'
         to = User.all.pluck(:email)
       when 'active_users'
-        to = User.where('created_at > ?', 6.months.ago).pluck(:email)
-           + User.joins(:projects).where('participations.created_at > ?', 18.months.ago).pluck(:email)
+        to = User.where('created_at > ?', 6.months.ago).pluck(:email) +
+             User.joins(:projects).where('participations.created_at > ?', 18.months.ago).pluck(:email)
       else
         to = @message.recipient.split(/\s*,\s*/)
     end
+    test = to.uniq
     @message.recipient = (to + [current_user.email]).uniq.join(',')
     if @message.valid?
       Mailer.generic_mail(@message, true).deliver

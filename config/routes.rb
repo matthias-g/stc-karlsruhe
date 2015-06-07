@@ -27,9 +27,6 @@ StcKarlsruhe::Application.routes.draw do
   get 'kontakt', to: 'messages#new', as: 'contact'
   post 'kontakt', to: 'messages#send_to_orga'
 
-  post 'users/:id', to: 'users#contact_user'
-  post 'projects/:id', to: 'projects#contact_volunteers'
-
   resources :projects, path: 'projekte' do
     member do
       get :enter
@@ -42,6 +39,7 @@ StcKarlsruhe::Application.routes.draw do
       get :make_invisible
       get :open
       get :close
+      post :contact_volunteers
     end
   end
   get 'projekte-:year', to: 'projects#index'
@@ -54,6 +52,7 @@ StcKarlsruhe::Application.routes.draw do
   resources :users, except: [:new, :create] do
     member do
       get :confirm_delete
+      post :contact_user
     end
   end
   get :login_or_register, to: 'users#login_or_register'

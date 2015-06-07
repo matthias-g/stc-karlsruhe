@@ -137,7 +137,8 @@ de:
       projectDayList: 'Projekttage'
       projectDayNew: 'Neuer Projekttag'
       projectDayView: 'Projekttag'
-      messageNew: 'Kontakt'
+      messageContactForm: 'Kontakt'
+      messageAdminMailForm: 'Admin-Mailer'
       manageTeam: 'Team verwalten'
       pageAbout: 'Was ist "Serve the City"?'
       pagePressInfo: 'Presseinformationen'
@@ -174,8 +175,22 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         recipient: 'E-Mail-Adresse des Empfängers'
         subject: "Worum geht's?"
         body: 'Deine Nachricht'
-    allActive:
-      success: 'Die Nachricht wurde an dich und alle aktiven Mitarbeiter geschickt.'
+    adminMail:
+      title: 'Admin-Mailer'
+      text: 'Hier kannst du projektübergreifenden Empfängergruppen eine Email schreiben. Du selbst erhätst auch immer eine Kopie.'
+      success: 'Die Nachricht wurde erfolgreich gesendet.'
+      groups:
+        current_volunteers_and_leaders: 'Aktuelle Projektleiter und Mitarbeiter'
+        current_volunteers: 'Aktuelle Mitarbeiter'
+        current_leaders: 'Aktuelle Projektleiter'
+        all_users: 'Alle angemeldeten Benutzer'
+        active_users: 'Aktive Benutzer (Registrierung < 6m oder Projektteilnahme < 18m)'
+      placeholders:
+        sender: 'Absender-Adresse'
+        recipient: 'Empfängergruppe'
+        subject: 'Betreff'
+        body: 'Nachricht'
+      submit: 'Nachricht schicken'
 
   project:
     action:

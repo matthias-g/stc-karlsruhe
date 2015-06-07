@@ -11,17 +11,15 @@ class Mailer < ActionMailer::Base
     @message = message.body
     @project_title = project.title
     @sender = sender
-    recipients = project.volunteers.map { |v| v.email}.join(',') + ',' + sender.email
-    mail from: "Serve the City Karlsruhe <no-reply@servethecity-karlsruhe.de>",
-         bcc: recipients, reply_to: sender.email, subject: message.subject
+    recipients = (project.volunteers + project.leaders + [sender]).map{|v| v.email}.uniq.join(',')
+    mail bcc: recipients, reply_to: sender.email, subject: message.subject
   end
 
   def user_mail(message, sender, recipient)
     @message = message.body
     @sender = sender
     @recipient = recipient
-    mail from: "Serve the City Karlsruhe <no-reply@servethecity-karlsruhe.de>",
-         to: recipient.email, reply_to: sender.email, subject: message.subject
+    mail to: recipient.email, reply_to: sender.email, subject: message.subject
   end
 
   def generic_mail(message, bcc = nil)

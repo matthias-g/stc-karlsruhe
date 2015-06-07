@@ -1,0 +1,21 @@
+<% content_for :pageTitle do %>
+    <%= t('layout.title.messageAdminMailForm') %>
+<% end %>
+
+<section class="contact-form">
+  <%= bootstrap_form_for @message, :url => admin_mail_path do |form| %>
+      <h1><%= t 'contact.adminMail.title' %></h1>
+      <div class="leftCol">
+        <%= t 'contact.adminMail.text' %>
+      </div>
+      <div class="rightCol">
+        <%= form.select(:sender, @senders.map{|g| [g, g]},
+                 {label: t('contact.adminMail.placeholders.sender')}) %>
+        <%= form.select(:recipient, @recipients.map{|g| [t('contact.adminMail.groups.' + g), g]},
+                 {label: t('contact.adminMail.placeholders.recipient')}) %>
+        <%= form.text_field :subject, label: t('contact.adminMail.placeholders.subject') %>
+        <%= form.text_area :body, label: t('contact.adminMail.placeholders.body') %>
+        <%= form.submit t('contact.adminMail.submit') %>
+      </div>
+  <% end %>
+</section>

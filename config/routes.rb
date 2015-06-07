@@ -24,8 +24,11 @@ StcKarlsruhe::Application.routes.draw do
 
   resources :roles
 
-  get 'kontakt', to: 'messages#new', as: 'contact'
-  post 'kontakt', to: 'messages#send_to_orga'
+  get 'kontakt', to: 'messages#contact_form', as: 'contact'
+  post 'kontakt', to: 'messages#send_contact_mail'
+
+  get 'admin_mail', to: 'messages#admin_mail_form'
+  post 'admin_mail', to: 'messages#send_admin_mail'
 
   resources :projects, path: 'projekte' do
     member do

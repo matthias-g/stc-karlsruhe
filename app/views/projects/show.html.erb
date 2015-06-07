@@ -227,26 +227,13 @@
     </div>
   </div>
 
-  <% if @project.has_leader? current_user  %>
-    <section class="contact-volunteers-form">
-      Wegen einem Bug können wir leider gerade kein Formular anbieten,
-      mit dem du dein Team kontaktieren kannst. Bis das behoben ist,
-      empfehlen wir die Kontaktaufnahme direkt über E-Mail (am besten BCC verwenden):
-
-      <div style="background: #eee; border: 1px solid #aaa; padding: 5px; margin: 10px;">
-        <%= (@project.aggregated_volunteers + @project.aggregated_leaders).uniq.map { |v| v.email}.join(', ') %>
-      </div>
-    </section>
-  <% end %>
-
-  <%# if @project.has_leader? current_user  %>
-  <% if user_signed_in? && current_user.is_admin? %>
+  <% if user_signed_in? && (@project.has_leader?(current_user) || current_user.is_admin?)  %>
     <section class="contact-volunteers-form">
       <%= bootstrap_form_for(@message, url: {action: 'contact_volunteers'}) do |f| %>
         <h2><%= t('contact.team.title') %></h2>
         <p><%= t('contact.team.text') %></p>
-        <%= f.text_field :subject %>
-        <%= f.text_area :body %>
+        <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
+        <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
         <%= f.submit t('contact.team.submit') %>
       <% end %>
     </section>

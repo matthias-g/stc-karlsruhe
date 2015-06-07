@@ -12,8 +12,7 @@
     </p>
 
     <p>
-      <strong>Galerie:</strong>
-      <%= link_to @gallery_picture.gallery.title, @gallery_picture.gallery %>
+      <%= link_to 'Zur Gallerie', @gallery_picture.gallery %>
     </p>
 
     <%= link_to 'Edit', edit_gallery_picture_path(@gallery_picture) %> |

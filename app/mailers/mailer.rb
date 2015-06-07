@@ -24,7 +24,7 @@ class Mailer < ActionMailer::Base
          to: recipient.email, reply_to: sender.email, subject: message.subject
   end
 
-  def generic_mail(message, bcc)
+  def generic_mail(message, bcc = nil)
     @message = message.body
     if bcc
       mail from: message.sender, bcc: message.recipient, subject: message.subject

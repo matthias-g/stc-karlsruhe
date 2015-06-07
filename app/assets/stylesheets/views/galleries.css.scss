@@ -33,7 +33,7 @@
 .gallery-loading-animation {
   position: absolute;
   display: block;
-  background: asset-url("loading.gif") no-repeat center center;
+  background: image-url("loading.gif") no-repeat center center;
   top: 0;
   left: 0;
   width: 100%;
@@ -57,7 +57,7 @@
   width: 40px;
   height: 40px;
   cursor: pointer;
-  background: asset-url("a17.png") no-repeat;
+  background: image-url("a17.png") no-repeat;
   overflow: hidden;
   top: 158px;
 }

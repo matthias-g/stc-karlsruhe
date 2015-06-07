@@ -21,6 +21,7 @@
     <thead>
     <tr>
       <th><%= f.label :picture %></th>
+      <th><%= f.label 'Uploader' %></th>
       <th colspan="1"></th>
     </tr>
     </thead>
@@ -34,6 +35,7 @@
                 else
                   link_to 'Sichtbar machen', make_visible_gallery_picture_path(picture)
                 end %></td>
+        <td><%= picture.uploader.full_name %></td>
         <td><%= link_to 'Bild entfernen', gallery_picture_path(picture), method: :delete %></td>
       </tr>
     <% end %>

@@ -94,7 +94,7 @@ class GalleriesController < ApplicationController
                           body: t('project.message.mailNewPictures.body',
                                   title: title,
                                   pictureCount: params[:gallery_pictures][:picture].size,
-                                  uploader: current_user.first_name + '' + current_user.last_name))
+                                  uploader: current_user.full_name))
     Mailer.generic_mail(message).deliver
   end
 end

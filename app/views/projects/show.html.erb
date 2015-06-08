@@ -174,7 +174,7 @@
             <div class="parent-project">
               <h3><%= t('project.label.parent_project') %></h3>
               <%= link_to project_path(@project.parent_project) do %>
-                <div class="row subproject">
+                <div class="row parent-project">
                   <div class="col-md-6 col-sm-6 col-xs-6 image" >
                     <%= image_tag @project.parent_project.picture.thumb.url, class: 'img-responsive' %>
                   </div>

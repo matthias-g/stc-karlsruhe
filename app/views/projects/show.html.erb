@@ -1,5 +1,5 @@
 <% content_for :pageTitle do %>
-    <%= t('layout.title.projectView', project:@project.title) %>
+  <%= t('layout.title.projectView', project:@project.title) %>
 <% end %>
 
 <% content_for :appendToHeader do %>
@@ -59,18 +59,16 @@
           <% if @project.subprojects && @project.subprojects.count > 0 %>
             <div class="subprojects">
               <h3><%= Project.human_attribute_name('subproject_ids') %></h3>
-              <% @project.subprojects.each do |subproject| %>
-                <%= link_to project_path(subproject) do %>
-                  <div class="row subproject">
-                    <div class="col-md-3 col-sm-3 col-xs-5 image" >
+              <div class="row">
+                <% @project.subprojects.each do |subproject| %>
+                  <%= link_to project_path(subproject) do %>
+                    <div class="col-md-4 col-sm-6 subproject" >
                       <%= image_tag subproject.picture.thumb.url, class: 'img-responsive' %>
-                    </div>
-                    <div class="col-md-9 col-sm-9 col-xs-7 title">
                       <%= subproject.title %>
                     </div>
-                  </div>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
             </div>
           <% end %>
         </section>
@@ -230,24 +228,24 @@
   <% if user_signed_in? && (@project.has_leader?(current_user) || current_user.is_admin?)  %>
     <section class="contact-volunteers-form">
       <%= bootstrap_form_for(@message, url: {action: 'contact_volunteers'}) do |f| %>
-          <h2><%= t('contact.team.title') %></h2>
-          <p><%= t('contact.team.text') %></p>
-          <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
-          <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
-          <%= f.submit t('contact.team.submit') %>
+        <h2><%= t('contact.team.title') %></h2>
+        <p><%= t('contact.team.text') %></p>
+        <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
+        <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
+        <%= f.submit t('contact.team.submit') %>
       <% end %>
     </section>
-<% end %>
+  <% end %>
 
-<section>
-  <%= render '/layouts/share' -%>
-  <% if request.referer && URI(request.referer).path == show_project_week_path(@project.project_week.title) %>
+  <section>
+    <%= render '/layouts/share' -%>
+    <% if request.referer && URI(request.referer).path == show_project_week_path(@project.project_week.title) %>
       <%= link_to t('project.action.toOverview'),
                   'javascript:history.back()', class: 'btn btn-default' %>
-  <% else %>
+    <% else %>
       <%= link_to t('project.action.toOverview'),
                   show_project_week_path(@project.project_week.title), class: 'btn btn-default' %>
-  <% end %>
-</section>
+    <% end %>
+  </section>
 
 </div>

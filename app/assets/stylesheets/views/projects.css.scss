@@ -59,20 +59,21 @@
     }
   }
 
+  .subprojects h3 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
   .subproject {
-    div.image {
-      border-right-width: 4px;
-      border-bottom-width: 6px;
-      border-top-width: 6px;
-      width: 110px;
-    }
-    div.title {
-      border-left-width: 4px;
-      border-bottom-width: 6px;
-      border-top-width: 6px;
-      line-height: normal;
+    text-align: center;
+    min-height: 165px;
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
+
   .gallery h3 {
     margin-bottom: 10px;
   }

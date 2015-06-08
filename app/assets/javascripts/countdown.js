@@ -10,7 +10,7 @@ $(document).ready(function () {
         var d = end - new Date();
         if (d < 0) {
             clearInterval(timer);
-            fields.text('0');
+            counter.find('div').hide();
             counter.find('.running').hide();
             counter.find('.finished').show();
             return;

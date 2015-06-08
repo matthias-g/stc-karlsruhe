@@ -5,7 +5,7 @@
   <%= @survey.title %>
 
 <ol>
-  <% for question in @survey.questions %>
+  <% @survey.questions.each do |question| %>
     <li><%= question.text %></li>
   <% end %>
 </ol>

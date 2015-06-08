@@ -10,3 +10,5 @@ $ ->
     new_id = new Date().getTime()
     regexp = new RegExp("new_question", "g")
     $(this).parent().before($('#question-prototype').html().replace(regexp, new_id))
+  $('#question-prototype').closest('form').submit ->
+    $('#question-prototype').remove()

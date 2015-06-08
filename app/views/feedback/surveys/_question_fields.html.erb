@@ -1,0 +1,20 @@
+<div class="question-fields">
+  <div class="field">
+    <%= f.label :text %><br>
+    <%= f.text_area :text %>
+  </div>
+  <div class="field">
+    <%= f.label :answer_options %><br>
+    <%= f.text_area :answer_options %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.number_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :position %><br>
+    <%= f.number_field :position %>
+  </div>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "remove", "javascript:void(0);", class: 'remove-link' %>
+</div>

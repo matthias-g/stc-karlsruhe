@@ -11,26 +11,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601131358) do
+ActiveRecord::Schema.define(version: 20150608135305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "ckeditor_assets", force: true do |t|
-    t.string   "data_file_name",               null: false
-    t.string   "data_content_type"
-    t.integer  "data_file_size"
-    t.integer  "assetable_id"
-    t.string   "assetable_type",    limit: 30
-    t.string   "type",              limit: 30
-    t.integer  "width"
-    t.integer  "height"
+  create_table "feedback_answers", force: true do |t|
+    t.integer  "survey_answer_id"
+    t.integer  "question_id"
+    t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
-  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+  add_index "feedback_answers", ["question_id"], name: "index_feedback_answers_on_question_id", using: :btree
+  add_index "feedback_answers", ["survey_answer_id"], name: "index_feedback_answers_on_survey_answer_id", using: :btree
+
+  create_table "feedback_questions", force: true do |t|
+    t.integer  "survey_id"
+    t.text     "text"
+    t.text     "answer_options"
+    t.integer  "type"
+    t.integer  "position"
+    t.integer  "parent_question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "feedback_questions", ["parent_question_id"], name: "index_feedback_questions_on_parent_question_id", using: :btree
+  add_index "feedback_questions", ["survey_id"], name: "index_feedback_questions_on_survey_id", using: :btree
+
+  create_table "feedback_survey_answers", force: true do |t|
+    t.integer  "survey_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "feedback_survey_answers", ["survey_id"], name: "index_feedback_survey_answers_on_survey_id", using: :btree
+
+  create_table "feedback_surveys", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -157,5 +180,6 @@ ActiveRecord::Schema.define(version: 20150601131358) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

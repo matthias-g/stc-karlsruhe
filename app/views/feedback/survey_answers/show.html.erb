@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Survey:</strong>
+  <%= @feedback_survey_answer.survey_id %>
+</p>
+
+<%= link_to 'Edit', edit_feedback_survey_answer_path(@feedback_survey_answer) %> |
+<%= link_to 'Back', feedback_survey_answers_path %>

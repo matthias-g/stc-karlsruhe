@@ -1,0 +1,34 @@
+<%= form_for(@feedback_survey) do |f| %>
+  <% if @feedback_survey.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@feedback_survey.errors.count, "error") %> prohibited this feedback_survey from being saved:</h2>
+
+      <ul>
+      <% @feedback_survey.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <%= f.fields_for :questions do |builder| %>
+    <%= render 'question_fields', f: builder %>
+  <% end %>
+
+  <% new_object = f.object.class.reflect_on_association(:questions).klass.new %>
+  <div id="question-prototype" style="display: none;">
+    <%= f.fields_for(:questions, new_object, :child_index => :new_questions) do |builder|
+      render('question_fields', :f => builder)
+    end %>
+  </div>
+  <%= link_to "add question", "javascript:void(0);", class: 'add-link' %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

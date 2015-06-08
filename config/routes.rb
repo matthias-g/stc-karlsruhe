@@ -1,5 +1,12 @@
 StcKarlsruhe::Application.routes.draw do
 
+  namespace :feedback do
+    resources :questions
+    resources :answers
+    resources :survey_answers
+    resources :surveys
+  end
+
   resources :gallery_pictures do
     member do
       get :make_visible

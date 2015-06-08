@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Survey:</strong>
+  <%= @feedback_question.survey_id %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @feedback_question.text %>
+</p>
+
+<p>
+  <strong>Answer options:</strong>
+  <%= @feedback_question.answer_options %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @feedback_question.type %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @feedback_question.position %>
+</p>
+
+<p>
+  <strong>Parent question:</strong>
+  <%= @feedback_question.parent_question_id %>
+</p>
+
+<%= link_to 'Edit', edit_feedback_question_path(@feedback_question) %> |
+<%= link_to 'Back', feedback_questions_path %>

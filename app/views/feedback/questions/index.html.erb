@@ -1,0 +1,35 @@
+<h1>Listing feedback_questions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Survey</th>
+      <th>Text</th>
+      <th>Answer options</th>
+      <th>Type</th>
+      <th>Position</th>
+      <th>Parent question</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @feedback_questions.each do |feedback_question| %>
+      <tr>
+        <td><%= feedback_question.survey_id %></td>
+        <td><%= feedback_question.text %></td>
+        <td><%= feedback_question.answer_options %></td>
+        <td><%= feedback_question.type %></td>
+        <td><%= feedback_question.position %></td>
+        <td><%= feedback_question.parent_question_id %></td>
+        <td><%= link_to 'Show', feedback_question %></td>
+        <td><%= link_to 'Edit', edit_feedback_question_path(feedback_question) %></td>
+        <td><%= link_to 'Destroy', feedback_question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Question', new_feedback_question_path %>

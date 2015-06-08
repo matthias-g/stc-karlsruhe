@@ -350,6 +350,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
     action:
       newSurvey: 'Neue Umfrage erstellen'
       addQuestion: 'Frage hinzufügen'
+      removeQuestion: 'Frage entfernen'
     label:
       surveyList: 'Umfragen'
       newSurvey: 'Neue Umfrage'

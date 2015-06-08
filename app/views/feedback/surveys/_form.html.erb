@@ -52,11 +52,9 @@
 
 <% new_object = f.object.class.reflect_on_association(:questions).klass.new %>
 <div id="question-prototype" style="display: none;">
-  <section>
     <%= f.fields_for(:questions, new_object, :child_index => :new_question) do |builder|
       render('question_fields', :f => builder)
     end %>
-  </section>
 </div>
 
 <% end %>

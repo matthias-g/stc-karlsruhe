@@ -1,8 +1,9 @@
-<div class="question-fields">
+<section class="question-fields">
   <%= f.text_area :text %>
   <%= f.number_field :type %>
   <%= f.text_area :answer_options %>
   <%= f.number_field :position %>
   <%= f.hidden_field :_destroy %>
-  <%= link_to "remove", "javascript:void(0);", class: 'remove-link btn btn-default' %>
-</div>
+  <%= link_to t('feedback.action.removeQuestion'), "javascript:void(0);",
+              class: 'remove-link btn btn-default' %>
+</section>

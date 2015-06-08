@@ -1,7 +1,4 @@
 <%= bootstrap_form_for(@survey_answer) do |f| %>
-<%#= form_for(@feedback_survey_answer) do |f| %>
-
-<% survey = @survey_answer.survey %>
 
 <% if @survey_answer.errors.any? %>
   <section id="error_explanation">
@@ -18,22 +15,19 @@
   <div class="typeHeader">
     &nbsp;<%= Feedback::SurveyAnswer.model_name.human %>&nbsp;
   </div>
-  <h1><%= survey.title %></h1>
+  <h1><%= @survey.title %></h1>
 </section>
 
-<%= f.hidden_field :survey_id, value: survey.id %>
+<%= f.hidden_field :survey_id, value: @survey.id %>
 
-<% new_object = f.object.class.reflect_on_association(:answers).klass.new %>
-<% survey.questions.each_with_index do |question, i| %>
-  <section>
-    <%= f.fields_for(:answers, new_object, :child_index => :new_answer) do |q| %>
-      <%= q.hidden_field :survey_answer_id %>
-      <%= q.hidden_field :question_id %>
-      <%= q.text_area :text, label: ((i+1).to_s + '.) ' + question.text) %>
-      <%= question.answer_options %>
-    <% end %>
-  </section>
-<% end %>
+<section>
+  <% i = 0 %>
+  <%= f.fields_for :answers do |builder| %>
+    <%= builder.hidden_field :question_id %>
+    <%= builder.text_area :text, label: ((i+1).to_s + '.) ') + @survey.questions[i].text %>
+    <% i = i + 1 %>
+  <% end %>
+</section>
 
 <section>
   <%= f.submit %>

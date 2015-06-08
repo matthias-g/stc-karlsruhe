@@ -13,8 +13,11 @@ class Feedback::SurveyAnswersController < ApplicationController
   end
 
   def new
-    for_survey = Feedback::Survey.find(params[:survey_id])
-    @survey_answer = Feedback::SurveyAnswer.new(survey: for_survey)
+    @survey = Feedback::Survey.find(params[:survey_id])
+    @survey_answer = Feedback::SurveyAnswer.new(survey: @survey)
+    @survey.questions.each do |question|
+      @survey_answer.answers.build(question: question)
+    end
     respond_with(@survey_answer)
   end
 
@@ -43,6 +46,6 @@ class Feedback::SurveyAnswersController < ApplicationController
     end
 
     def survey_answer_params
-      params.require(:feedback_survey_answer).permit(:survey_id)
+      params.require(:feedback_survey_answer).permit(:survey_id, answers_attributes: [:id, :question_id, :text])
     end
 end

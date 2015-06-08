@@ -13,7 +13,7 @@ class Feedback::SurveyAnswersController < ApplicationController
   end
 
   def new
-    for_survey = Feedback::Survey.find(params.require(:survey_id)[:survey_id])
+    for_survey = Feedback::Survey.find(params[:survey_id])
     @survey_answer = Feedback::SurveyAnswer.new(survey: for_survey)
     respond_with(@survey_answer)
   end

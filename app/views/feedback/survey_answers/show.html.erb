@@ -1,15 +1,9 @@
 <% survey = @survey_answer.survey %>
-<% answers = @survey_answer.answers.joins(:questions) %>
-
+<%# answers = @survey_answer.answers.joins(:questions).order(:position) %>
+<% answers = @survey_answer.answers %>
 <div class="feedback survey_answer view">
 
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Survey:</strong>
-  <%= @survey_answer.survey_id %>
-</p>
-
 
 <section>
   <div class="typeHeader">

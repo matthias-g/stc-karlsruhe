@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Feedback::SurveysControllerTest < ActionController::TestCase
   setup do
-    @feedback_survey = feedback_surveys(:one)
+    @survey = feedback_surveys(:one)
   end
 
   test "should get index" do
@@ -18,25 +18,25 @@ class Feedback::SurveysControllerTest < ActionController::TestCase
 
   test "should create feedback_survey" do
     assert_difference('Feedback::Survey.count') do
-      post :create, feedback_survey: { title: @feedback_survey.title }
+      post :create, feedback_survey: { title: @survey.title }
     end
 
-    assert_redirected_to feedback_survey_path(assigns(:feedback_survey))
+    assert_redirected_to feedback_survey_path(assigns(:@survey))
   end
 
   test "should show feedback_survey" do
-    get :show, id: @feedback_survey
+    get :show, id: @survey
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @feedback_survey
+    get :edit, id: @survey
     assert_response :success
   end
 
   test "should update feedback_survey" do
-    patch :update, id: @feedback_survey, feedback_survey: { title: @feedback_survey.title }
-    assert_redirected_to feedback_survey_path(assigns(:feedback_survey))
+    patch :update, id: @survey, feedback_survey: { title: @feedback_survey.title }
+    assert_redirected_to feedback_survey_path(assigns(:@survey))
   end
 
   test "should destroy feedback_survey" do

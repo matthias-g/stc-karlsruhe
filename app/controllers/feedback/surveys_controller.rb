@@ -1,48 +1,48 @@
 class Feedback::SurveysController < ApplicationController
-  before_action :set_feedback_survey, only: [:show, :edit, :update, :destroy]
+  before_action :set_survey, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
 
   def index
-    @feedback_surveys = Feedback::Survey.all
-    respond_with(@feedback_surveys)
+    @surveys = Feedback::Survey.all
+    respond_with(@surveys)
   end
 
   def show
-    respond_with(@feedback_survey)
+    respond_with(@survey)
   end
 
   def new
-    @feedback_survey = Feedback::Survey.new
-    @feedback_survey.questions.build
-    respond_with(@feedback_survey)
+    @survey = Feedback::Survey.new
+    @survey.questions.build
+    respond_with(@survey)
   end
 
   def edit
   end
 
   def create
-    @feedback_survey = Feedback::Survey.new(survey_params)
-    @feedback_survey.save
-    respond_with(@feedback_survey)
+    @survey = Feedback::Survey.new(survey_params)
+    @survey.save
+    respond_with(@survey)
   end
 
   def update
-    @feedback_survey.update(survey_params)
-    respond_with(@feedback_survey)
+    @survey.update(survey_params)
+    respond_with(@survey)
   end
 
   def destroy
-    @feedback_survey.destroy
-    respond_with(@feedback_survey)
+    @survey.destroy
+    respond_with(@survey)
   end
 
   private
-    def set_feedback_survey
-      @feedback_survey = Feedback::Survey.find(params[:id])
+    def set_survey
+      @survey = Feedback::Survey.find(params[:id])
     end
 
-    def feedback_survey_params
-      params.require(:feedback_survey).permit(:title)
+    def survey_params
+      params.require(:@survey).permit(:title)
     end
 end

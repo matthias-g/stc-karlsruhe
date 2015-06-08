@@ -2,14 +2,14 @@
 
 <p>
   <strong>Title:</strong>
-  <%= @feedback_survey.title %>
+  <%= @survey.title %>
 
 <ol>
-  <% for question in @feedback_survey.questions %>
+  <% for question in @survey.questions %>
     <li><%= question.text %></li>
   <% end %>
 </ol>
 </p>
 
-<%= link_to 'Edit', edit_feedback_survey_path(@feedback_survey) %> |
+<%= link_to 'Edit', edit_feedback_survey_path(@survey) %> |
 <%= link_to 'Back', feedback_surveys_path %>

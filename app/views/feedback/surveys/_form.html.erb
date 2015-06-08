@@ -1,10 +1,10 @@
-<%= form_for(@feedback_survey) do |f| %>
-  <% if @feedback_survey.errors.any? %>
+<%= form_for(@survey) do |f| %>
+  <% if @survey.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@feedback_survey.errors.count, "error") %> prohibited this feedback_survey from being saved:</h2>
+      <h2><%= pluralize(@survey.errors.count, "error") %> prohibited this feedback_survey from being saved:</h2>
 
       <ul>
-      <% @feedback_survey.errors.full_messages.each do |message| %>
+      <% @survey.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

@@ -95,7 +95,7 @@
         <div class="project-image">
           <%= link_to project do %>
             <% if project.show_picture? && project.picture.file %>
-              <%= image_tag project.picture_url(:listview), lazy:true %>
+              <%= image_tag project.picture_url(:project_list), lazy:true %>
             <% else %>
               <%= image_tag 'placeholder.svg' %>
             <% end %>

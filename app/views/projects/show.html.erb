@@ -27,7 +27,7 @@
   <section class="col-md-8">
       <% if @project.show_picture? && @project.picture.file %>
           <div class="project-picture picture-container">
-            <%= image_tag @project.picture_url(:preview) %>
+            <%= image_tag @project.picture_url(:project_view) %>
             <div class="copyright" title="© <%= @project.picture_source %>">
               © <%= @project.picture_source %>
             </div>

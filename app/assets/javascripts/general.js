@@ -58,10 +58,10 @@ function showMessage(htmlstr) {
 }
 
 function sendWithAjax(form) {
-    $.get($(form).attr('action') +'?'+ $(form).serialize()).done(function(c) {
-        // todo
-        $('#messages > *', c).detach().each(function() {
-            alert($(this));
+    var url = $(form).attr('action') +'?'+ $(form).serialize();
+    var res = $('<div>').load(url + ' #messages > *', function() {
+        res.children().each(function(i, e) {
+            showMessage($(e));
         });
     });
     return false;

@@ -33,17 +33,17 @@
 
         <% if @project.picture.file %>
             <div class="project-picture picture-container">
-              <%= image_tag @project.picture_url(:preview) %>
+              <%= image_tag @project.picture_url(:project_view) %>
             </div>
-            <%= link_to t('project.action.crop_listview_image'),
-                        crop_picture_project_path(@project, crop_target: 'listview'),
+            <%= link_to t('project.action.cropListviewImage'),
+                        crop_picture_project_path(@project, crop_target: 'project_list'),
                         class: 'btn btn-default',
                         data: {toggle: 'modal', target: '#image_crop_modal'}  %>
-            <%= link_to t('project.action.crop_preview_image'),
-                        crop_picture_project_path(@project, crop_target: 'preview'),
+            <%= link_to t('project.action.cropProjectImage'),
+                        crop_picture_project_path(@project, crop_target: 'project_view'),
                         class: 'btn btn-default',
                         data: {toggle: 'modal', target: '#image_crop_modal'}  %>
-            <%= link_to t('project.action.crop_thumbnail_image'),
+            <%= link_to t('project.action.cropThumbnailImage'),
                         crop_picture_project_path(@project, crop_target: 'thumbnail'),
                         class: 'btn btn-default',
                         data: {toggle: 'modal', target: '#image_crop_modal'}  %>

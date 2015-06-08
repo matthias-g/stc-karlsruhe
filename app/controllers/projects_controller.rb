@@ -114,18 +114,18 @@ class ProjectsController < ApplicationController
       @project.crop_picture(params[:crop_x].to_i, params[:crop_y].to_i,
                             params[:crop_w].to_i, params[:crop_h].to_i,
                             params[:crop_target].to_sym)
-      redirect_to @project, notice: t('project.message.image_cropped')
+      redirect_to @project, notice: t('project.message.imageCropped')
     else
       @crop_target_symbol = params[:crop_target].to_sym
       case @crop_target_symbol
-        when :listview
-          @crop_target_title = t('project.label.listview_image')
+        when :project_list
+          @crop_target_title = t('project.label.listviewImage')
           @crop_target_ratio = 200.0/165
-        when :preview
-          @crop_target_title = t('project.label.preview_image')
+        when :project_view
+          @crop_target_title = t('project.label.projectImage')
           @crop_target_ratio = 522.0/261
         when :thumbnail
-          @crop_target_title = t('project.label.thumbnail_image')
+          @crop_target_title = t('project.label.thumbnailImage')
           @crop_target_ratio = 100.0/100
       end
       respond_with @project do |format|

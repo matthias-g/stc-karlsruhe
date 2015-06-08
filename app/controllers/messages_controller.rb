@@ -24,7 +24,7 @@ class MessagesController < ApplicationController
                 'Serve the City Karlsruhe <no-reply@servethecity-karlsruhe.de>',
                 current_user.full_name+ ' <' + current_user.email + '>']
     @recipients = ['current_volunteers_and_leaders', 'current_volunteers',
-                   'current_leaders', 'all_users', 'active_users', 'baddies']
+                   'current_leaders', 'all_users', 'active_users']
   end
 
   def send_admin_mail

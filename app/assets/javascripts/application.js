@@ -18,4 +18,5 @@
 //= require jquery.lazyload
 //= require jssor.slider.mini
 //= require photoswipe
+//= require jquery.Jcrop
 //= require_tree .

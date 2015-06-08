@@ -7,7 +7,7 @@ $(document).ready(function() {
       return a.name + '=' + a.value;
     }).join('&');
     $('#project-list').load('?' + params + ' #project-list > *', function() {
-      clipTexts($('#project-list'));
+      //clipTexts($('#project-list'));
       $('#project-list img').lazyload();
       $('#filterResults').text('Gefundene Projekte: ' + $('#project-list > *').size());
     });

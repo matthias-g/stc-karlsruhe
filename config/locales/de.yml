@@ -80,9 +80,6 @@ de:
         recipient: 'Empfänger'
         subject: 'Betreff'
         body: 'Nachricht'
-      gallery:
-        picture: Bilder
-        title: Titel
 
   general:
     action:
@@ -117,6 +114,7 @@ de:
       projectList: 'Projektwoche %{year}'
       projectNew: 'Neues Projekt'
       projectEdit: 'Projekt bearbeiten: "%{project}"'
+      projectCropPicture: 'Bildausschnitte festlegen: "%{project}"'
       projectView: 'Projekt "%{project}"'
       roleList: 'Rollen'
       roleNew: 'Neue Benutzerrolle'
@@ -137,8 +135,7 @@ de:
       projectDayList: 'Projekttage'
       projectDayNew: 'Neuer Projekttag'
       projectDayView: 'Projekttag'
-      messageContactForm: 'Kontakt'
-      messageAdminMailForm: 'Admin-Mailer'
+      messageNew: 'Kontakt'
       manageTeam: 'Team verwalten'
       pageAbout: 'Was ist "Serve the City"?'
       pagePressInfo: 'Presseinformationen'
@@ -211,6 +208,10 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       toProject: 'zurück zum Projekt'
       searchProjects: 'Projekte suchen'
       findProject: 'Projekt finden'
+      cropListviewImage: 'Listenbild anpassen'
+      cropProjectImage: 'Projektbild anpassen'
+      cropThumbnailImage: 'Thumbnail anpassen'
+      cropImage: 'Zuschneiden'
       uploadPictures: Bilder hochladen
       uploadSelectedPictures: Ausgewählte Bilder hochladen
     label:
@@ -225,6 +226,10 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       team: 'Team'
       gallery: Fotogalerie
       uploadImage: 'Bild hochladen'
+      listviewImage: 'Vorschau'
+      projectImage: 'Projektansicht'
+      thumbnailImage: 'Thumbnail'
+      cropImage: 'Bildausschnitt für %{crop_target} anpassen'
       parent_project: 'Dieses Projekt ist Teil von'
     help:
       picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
@@ -232,6 +237,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       uploadPictures: "Hast du während des Projektes Bilder gemacht, die du veröffentlichen möchtest? Dann kannst du sie hier hochladen.
         Hast du andere Personen fotografiert, stelle bitte sicher, dass du ihr Einverständnis für das Veröffentlichen der Bilder hast."
     message:
+      imageCropped: 'Der Bildausschnitt wurde angepasst.'
       created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'
       leaderAdded: 'Projektleiter erfolgreich hinzugefügt.'

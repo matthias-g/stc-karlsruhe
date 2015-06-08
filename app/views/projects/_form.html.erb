@@ -29,12 +29,26 @@
         <label class="control-label" for="project_picture_source">
           <%= Project.human_attribute_name('picture') %>
         </label>
-        <% if @project.picture.file %>
-          <div class="project-picture picture-container">
-            <%= image_tag @project.picture_url(:preview) %>
-          </div>
-        <% end %>
         <%= f.file_field :picture, hide_label: true %>
+
+        <% if @project.picture.file %>
+            <div class="project-picture picture-container">
+              <%= image_tag @project.picture_url(:project_view) %>
+            </div>
+            <%= link_to t('project.action.cropListviewImage'),
+                        crop_picture_project_path(@project, crop_target: 'project_list'),
+                        class: 'btn btn-default',
+                        data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+            <%= link_to t('project.action.cropProjectImage'),
+                        crop_picture_project_path(@project, crop_target: 'project_view'),
+                        class: 'btn btn-default',
+                        data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+            <%= link_to t('project.action.cropThumbnailImage'),
+                        crop_picture_project_path(@project, crop_target: 'thumbnail'),
+                        class: 'btn btn-default',
+                        data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+        <% end %>
+
       </div>
       <%= f.text_field :picture_source,
             help: t('project.help.picture_source') %>
@@ -144,5 +158,13 @@
 </div>
 
 <% end %>
+
+
+<div class="modal fade" id="image_crop_modal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
 
 </div>

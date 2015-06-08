@@ -1,9 +1,9 @@
 $(document).ready(function() {
     /* lazyload images (must be activated with lazy:true in image_tag helper) */
-    $('img').lazyload({threshold: 150});
+    $('img').lazyload({threshold: 200});
 
     /* clip preview texts */
-    clipTexts();
+    /*clipTexts();*/
 
     /* find flash messages */
     $('#messages > *').detach().each(function() {
@@ -26,10 +26,14 @@ $(document).ready(function() {
         });
     });
 
+    /* Load modal AJAX content */
+    $('.modal').on('show.bs.modal', function (event) {
+        $('.modal-content', this).load($(event.relatedTarget).attr('href'));
+    })
 });
 
 /* clip overflowing text in all .clipText areas within {parent}. */
-function clipTexts(parent) {
+/*function clipTexts(parent) {
     $('.clipText', parent).each(function() {
         var p = $(this).children(),
             divh = $(this).height();
@@ -39,7 +43,7 @@ function clipTexts(parent) {
             });
         }
     });
-}
+}*/
 
 /* show a flash message */
 function showMessage(htmlstr) {
@@ -51,4 +55,14 @@ function showMessage(htmlstr) {
         msg.fadeOut();
     }, 5000);
     $('#messages').append(msg);
+}
+
+function sendWithAjax(form) {
+    var url = $(form).attr('action') +'?'+ $(form).serialize();
+    var res = $('<div>').load(url + ' #messages > *', function() {
+        res.children().each(function(i, e) {
+            showMessage($(e));
+        });
+    });
+    return false;
 }

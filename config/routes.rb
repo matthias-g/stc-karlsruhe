@@ -42,6 +42,7 @@ StcKarlsruhe::Application.routes.draw do
       get :make_invisible
       get :open
       get :close
+      get :crop_picture
       post :contact_volunteers
     end
   end

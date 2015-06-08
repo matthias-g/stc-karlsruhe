@@ -1,34 +1,63 @@
-<%= form_for(@survey) do |f| %>
-  <% if @survey.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@survey.errors.count, "error") %> prohibited this feedback_survey from being saved:</h2>
+<div id="survey-edit-view">
+<%= bootstrap_form_for(@survey) do |f| %>
 
-      <ul>
-      <% @survey.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+
+<% if @survey.errors.any? %>
+  <section id="error_explanation">
+    <h2><%= t('feedback.message.errorList') %></h2>
+    <ul>
+      <% @survey.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+    </ul>
+  </section>
+<% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+<section>
+  <div class="typeHeader">
+    &nbsp;<%= isNew ? t('feedback.label.newSurvey') : t('feedback.label.editSurvey') %>&nbsp;
+  </div>
+  <h1><%= @survey.title %></h1>
+</section>
+
+<div class="row row-sm-eq-height">
+
+  <div class="col-sm-4">
+
+    <section>
+      <%= f.text_field :title %>
+
+      <%= link_to t('feedback.action.addQuestion'), "javascript:void(0);",
+                  class: 'add-link btn btn-default btn-wide',
+                  data: {target: '#question-insertion-point'} %>
+
+
+    </section>
   </div>
 
-  <%= f.fields_for :questions do |builder| %>
-    <%= render 'question_fields', f: builder %>
-  <% end %>
+  <div class="col-sm-8">
+    <%#= f.fields_for :questions do |builder| %>
+        <%#= render 'question_fields', f: builder %>
+    <%# end %>
+    <div style="display: none;" id="question-insertion-point"></div>
+  </div>
 
-  <% new_object = f.object.class.reflect_on_association(:questions).klass.new %>
-  <div id="question-prototype" style="display: none;">
+</div>
+
+<section>
+  <%= f.submit %>
+  <%= link_to 'Back', feedback_surveys_path, class: 'btn btn-default' %>
+  <%#= link_to 'Show', @survey %>
+</section>
+
+<% new_object = f.object.class.reflect_on_association(:questions).klass.new %>
+<div id="question-prototype" style="display: none;">
+  <section>
     <%= f.fields_for(:questions, new_object, :child_index => :new_question) do |builder|
       render('question_fields', :f => builder)
     end %>
-  </div>
-  <%= link_to "add question", "javascript:void(0);", class: 'add-link' %>
+  </section>
+</div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
+</div>

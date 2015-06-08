@@ -40,6 +40,8 @@ de:
         one: Nachricht
         other: Nachrichten
     attributes:
+      survey:
+        title: 'Titel der Umfrage'
       project:
         title: 'Projekttitel'
         description: 'Beschreibung'
@@ -146,6 +148,9 @@ de:
       pagePrivacy: 'Datenschutzerklärung'
       statistics: Statistiken
       pageSponsors: 'Sponsoren'
+      surveyNew: 'Neue Umfrage erstellen'
+      surveyEdit: 'Umfrage bearbeiten: "%{survey}"'
+      surveyList: 'Umfragen'
 
   contact:
     orga:
@@ -340,3 +345,14 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       toggleFullscreen: "Vollbild an/aus"
       zoom: "Vergrößern / Verkleinern"
       delete: "Löschen"
+
+  feedback:
+    action:
+      newSurvey: 'Neue Umfrage erstellen'
+      addQuestion: 'Frage hinzufügen'
+    label:
+      surveyList: 'Umfragen'
+      newSurvey: 'Neue Umfrage'
+      editSurvey: 'Umfrage bearbeiten'
+    message:
+      surveyErrorList: 'Wegen folgender Fehler konnte die Umfrage nicht gespeichert werden:'

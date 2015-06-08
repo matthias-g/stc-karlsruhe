@@ -1,6 +1,5 @@
-<h1>Editing feedback_survey</h1>
+<% content_for :pageTitle do %>
+    <%= t('layout.title.surveyEdit', survey:@survey.title) %>
+<% end %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @survey %> |
-<%= link_to 'Back', feedback_surveys_path %>
+<%= render :partial => "form", :locals => {:isNew => false} %>

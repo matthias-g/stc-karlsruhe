@@ -165,7 +165,7 @@ $(document).ready(function ($) {
                 deleteCurrentImage();
             });
         function toggleDeleteButton() {
-            deleteButton.toggle(gallery.currItem.editable);
+            deleteButton.toggle(gallery.currItem.editable == true);
         }
         gallery.listen('beforeChange', toggleDeleteButton);
         toggleDeleteButton();

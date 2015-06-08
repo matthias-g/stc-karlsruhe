@@ -151,7 +151,10 @@ de:
       surveyNew: 'Neue Umfrage erstellen'
       surveyEdit: 'Umfrage bearbeiten: "%{survey}"'
       surveyList: 'Umfragen'
-
+      surveyView: 'Umfrage "%{survey}"'
+      surveyAnswerList: 'Umfragebögen'
+      surveyAnswerNew: 'Umfragebogen ausfüllen: "%{survey}"'
+      surveyAnswerEdit: 'Umfragebogen ansehen: "%{survey}"'
   contact:
     orga:
       link: 'Serve the City kontaktieren'
@@ -353,6 +356,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       removeQuestion: 'Frage entfernen'
     label:
       surveyList: 'Umfragen'
+      surveyAnswerList: 'Umfragebögen'
       newSurvey: 'Neue Umfrage'
       editSurvey: 'Umfrage bearbeiten'
     message:

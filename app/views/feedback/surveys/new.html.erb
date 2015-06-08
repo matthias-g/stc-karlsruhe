@@ -2,4 +2,6 @@
     <%= t('layout.title.surveyNew') %>
 <% end %>
 
-<%= render :partial => "form", :locals => {:isNew => true} %>
+<div class="feedback survey new-view">
+  <%= render :partial => "form", :locals => {:isNew => true} %>
+</div>

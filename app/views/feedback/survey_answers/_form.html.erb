@@ -1,21 +1,40 @@
-<%= form_for(@feedback_survey_answer) do |f| %>
-  <% if @feedback_survey_answer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@feedback_survey_answer.errors.count, "error") %> prohibited this feedback_survey_answer from being saved:</h2>
+<%= bootstrap_form_for(@survey_answer) do |f| %>
+<%#= form_for(@feedback_survey_answer) do |f| %>
 
-      <ul>
-      <% @feedback_survey_answer.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<% survey = @survey_answer.survey %>
+
+<% if @survey_answer.errors.any? %>
+  <section id="error_explanation">
+    <h2><%= t('feedback.message.errorList') %></h2>
+    <ul>
+      <% @survey_answer.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+    </ul>
+  </section>
+<% end %>
 
-  <div class="field">
-    <%= f.label :survey_id %><br>
-    <%= f.number_field :survey_id %>
+<section>
+  <div class="typeHeader">
+    &nbsp;<%= Feedback::SurveyAnswer.model_name.human %>&nbsp;
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <h1><%= survey.title %></h1>
+</section>
+
+<% new_object = f.object.class.reflect_on_association(:answers).klass.new %>
+<% survey.questions.each_with_index do |question, i| %>
+  <section>
+    <%= f.fields_for(:answers, new_object, :child_index => :new_answer) do |q| %>
+      <%= q.hidden_field :survey_answer_id %>
+      <%= q.hidden_field :question_id %>
+      <%= q.text_area :text, label: ((i+1).to_s + '.) ' + question.text) %>
+      <%= question.answer_options %>
+    <% end %>
+  </section>
+<% end %>
+
+<section>
+  <%= f.submit %>
+</section>
+
 <% end %>

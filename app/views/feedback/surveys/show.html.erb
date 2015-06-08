@@ -1,15 +1,29 @@
+<% content_for :pageTitle do %>
+    <%= t('layout.title.surveyView', survey: @survey.title) %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @survey.title %>
+<div class="feedback survey view">
 
-<ol>
-  <% @survey.questions.each do |question| %>
-    <li><%= question.text %></li>
-  <% end %>
-</ol>
-</p>
+<section>
+  <div class="typeHeader">
+    &nbsp;<%= Feedback::Survey.model_name.human %>&nbsp;
+  </div>
+  <h1><%= @survey.title %></h1>
+</section>
 
-<%= link_to 'Edit', edit_feedback_survey_path(@survey) %> |
-<%= link_to 'Back', feedback_surveys_path %>
+
+<% @survey.questions.each_with_index do |question, i| %>
+  <section>
+    <h3><%= i + 1 %>.)  <%= question.text %></h3>
+    <p><%= question.answer_options %></p>
+  </section>
+<% end %>
+
+<section>
+  <%= link_to 'Edit', edit_feedback_survey_path(@survey), class: 'btn btn-default' %>
+  <%= link_to 'Back', feedback_surveys_path, class: 'btn btn-default'%>
+</section>
+
+</div>

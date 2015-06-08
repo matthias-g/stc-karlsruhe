@@ -1,9 +1,30 @@
+<% survey = @survey_answer.survey %>
+<% answers = @survey_answer.answers.joins(:questions) %>
+
+<div class="feedback survey_answer view">
+
 <p id="notice"><%= notice %></p>
 
 <p>
   <strong>Survey:</strong>
-  <%= @feedback_survey_answer.survey_id %>
+  <%= @survey_answer.survey_id %>
 </p>
 
-<%= link_to 'Edit', edit_feedback_survey_answer_path(@feedback_survey_answer) %> |
+
+<section>
+  <div class="typeHeader">
+    &nbsp;<%= Feedback::SurveyAnswer.model_name.human %>&nbsp;
+  </div>
+  <h1><%= survey.title %></h1>
+</section>
+
+<% answers.each_with_index do |answer, i| %>
+  <section>
+    <%= answer.text %>
+  </section>
+<% end %>
+
+<%= link_to 'Edit', edit_feedback_survey_answer_path(@survey_answer) %> |
 <%= link_to 'Back', feedback_survey_answers_path %>
+
+</div>

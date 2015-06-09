@@ -37,7 +37,7 @@ class GalleryPictureUploader < CarrierWave::Uploader::Base
   end
 
   version :preview do
-    process :resize_to_fill => [524, 351]
+    process :resize_to_limit => [524, 351]
   end
 
   version :desktop do

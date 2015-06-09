@@ -22,7 +22,7 @@
           <td><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
           <td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% gallery.projects.each do |project| %>
-            <td><%= link_to project.title, show_project_week_path(project) %></td>
+            <td><%= link_to project.title, project %></td>
           <% end %>
         </tr>
       <% end %>

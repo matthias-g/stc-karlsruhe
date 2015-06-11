@@ -21,11 +21,13 @@
 <%= f.hidden_field :survey_id, value: @survey.id %>
 
 <section>
-  <% i = 0 %>
-  <%= f.fields_for :answers do |builder| %>
-    <%= builder.hidden_field :question_id %>
-    <%= builder.text_area :text, label: ((i+1).to_s + '.) ') + @survey.questions[i].text %>
-    <% i = i + 1 %>
+  <% @question_index = 0 %>
+  <%= f.fields_for :answers do |q| %>
+    <% @question_form = q %>
+    <% @question = @survey.questions[@question_index] %>
+    <%= q.hidden_field :question_id %>
+    <%= render :partial => (@question.type || 'text') + '_question' %>
+    <% @question_index += 1 %>
   <% end %>
 </section>
 

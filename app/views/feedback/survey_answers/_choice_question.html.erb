@@ -1,0 +1,7 @@
+
+<%= @question_form.form_group :text, label: {
+        text: (@question_index+1).to_s + '.) ' + @question.text } do %>
+    <% @question.answer_options.split(/\r?\n/).each do |o| %>
+        <%= @question_form.radio_button :text, o, label: o %>
+    <% end %>
+<% end %>

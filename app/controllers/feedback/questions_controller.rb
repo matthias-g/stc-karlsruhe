@@ -42,6 +42,6 @@ class Feedback::QuestionsController < ApplicationController
     end
 
     def feedback_question_params
-      params.require(:feedback_question).permit(:survey_id, :text, :answer_options, :type, :position, :parent_question_id)
+      params.require(:feedback_question).permit(:survey_id, :text, :answer_options, :question_type, :position, :parent_question_id)
     end
 end

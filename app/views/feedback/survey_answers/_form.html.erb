@@ -27,7 +27,7 @@
     <% @question = @survey.questions[i] %>
     <% @question_label = (i + 1).to_s + '.) ' + @question.text %>
     <%= q.hidden_field :question_id %>
-    <%= render :partial => (@question.type || 'text') + '_question' %>
+    <%= render partial: (@question.question_type || 'text') + '_question' %>
     <% i += 1 %>
   <% end %>
 </section>

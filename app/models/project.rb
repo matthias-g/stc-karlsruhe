@@ -24,6 +24,10 @@ class Project < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
+  # def sorted_users
+  #   users.select('users.*, participations.created_at').order('participations.created_at')
+  # end
+
   def volunteers
     users.where(participations: {as_leader: false})
   end

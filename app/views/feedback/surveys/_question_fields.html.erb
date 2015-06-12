@@ -1,6 +1,7 @@
 <section class="question-fields">
   <%= f.text_area :text %>
-  <%= f.number_field :type %>
+  <%= f.select(:question_type,
+               Feedback::Question.question_types.keys.map { |s| [t("feedback.question.type.#{s}"), s] }) %>
   <%= f.text_area :answer_options %>
   <%= f.number_field :position %>
   <%= f.hidden_field :_destroy %>

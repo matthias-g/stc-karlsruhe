@@ -18,7 +18,7 @@ class Feedback::QuestionsControllerTest < ActionController::TestCase
 
   test "should create feedback_question" do
     assert_difference('Feedback::Question.count') do
-      post :create, feedback_question: { answer_options: @feedback_question.answer_options, parent_question_id: @feedback_question.parent_question_id, position: @feedback_question.position, survey_id: @feedback_question.survey_id, text: @feedback_question.text, type: @feedback_question.type }
+      post :create, feedback_question: { answer_options: @feedback_question.answer_options, parent_question_id: @feedback_question.parent_question_id, position: @feedback_question.position, survey_id: @feedback_question.survey_id, text: @feedback_question.text, question_type: @feedback_question.question_type }
     end
 
     assert_redirected_to feedback_question_path(assigns(:feedback_question))
@@ -35,7 +35,7 @@ class Feedback::QuestionsControllerTest < ActionController::TestCase
   end
 
   test "should update feedback_question" do
-    patch :update, id: @feedback_question, feedback_question: { answer_options: @feedback_question.answer_options, parent_question_id: @feedback_question.parent_question_id, position: @feedback_question.position, survey_id: @feedback_question.survey_id, text: @feedback_question.text, type: @feedback_question.type }
+    patch :update, id: @feedback_question, feedback_question: { answer_options: @feedback_question.answer_options, parent_question_id: @feedback_question.parent_question_id, position: @feedback_question.position, survey_id: @feedback_question.survey_id, text: @feedback_question.text, question_type: @feedback_question.question_type }
     assert_redirected_to feedback_question_path(assigns(:feedback_question))
   end
 

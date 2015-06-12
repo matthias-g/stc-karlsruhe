@@ -15,20 +15,19 @@
   <div class="typeHeader">
     &nbsp;<%= Feedback::SurveyAnswer.model_name.human %>&nbsp;
   </div>
-  <h1><%= @survey.title %></h1>
+  <h1><%= @survey_answer.survey.title %></h1>
 </section>
 
-<%= f.hidden_field :survey_id, value: @survey.id %>
+<%= f.hidden_field :survey_id %>
 
 <section>
-  <% i = 0 %>
-  <%= f.fields_for :answers do |q| %>
-    <% @question_form = q %>
-    <% @question = @survey.questions[i] %>
-    <% @question_label = (i + 1).to_s + '.) ' + @question.text %>
-    <%= q.hidden_field :question_id %>
+  <%= f.fields_for :answers do |answer_fields| %>
+    <% @question_form = answer_fields %>
+    <% answer = @survey_answer.answers[answer_fields.index] %>
+    <% @question = answer.question %>
+    <% @question_label = (answer_fields.index + 1).to_s + '.) ' + @question.text %>
+    <%= answer_fields.hidden_field :question_id %>
     <%= render partial: (@question.question_type || 'text') + '_question' %>
-    <% i += 1 %>
   <% end %>
 </section>
 

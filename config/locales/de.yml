@@ -367,6 +367,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       surveyAnswerList: 'Ausgefüllte Umfragen'
       newSurvey: 'Neue Umfrage'
       editSurvey: 'Umfrage bearbeiten'
+      surveyAnswer: 'Einsendung %{id}'
     message:
       surveyErrorList: 'Wegen folgender Fehler konnte die Umfrage nicht gespeichert werden:'
     question:

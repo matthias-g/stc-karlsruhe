@@ -5,6 +5,7 @@
       <%= f.text_area :text %>
       <%= f.select(:question_type, Feedback::Question.question_types.keys.map {
             |s| [t("feedback.question.type.#{s}"), s] }) %>
+      <%= f.check_box :is_subquestion %>
     </div>
     <div class="col-sm-6">
       <%= f.text_area :answer_options %>

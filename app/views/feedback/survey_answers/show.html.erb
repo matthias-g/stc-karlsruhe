@@ -13,12 +13,20 @@
 </section>
 
 <section>
+  <% idx = 0 %>
   <% answers.each_with_index do |answer, i| %>
 
     <% question = answer.question %>
-    <h4><%= (i + 1).to_s + '.) ' + question.text %></h4>
-    <%= render partial: (question.question_type || 'text') + '_answer',
-               locals: {question: question, answer: answer} %>
+    <% question_label = question.text %>
+    <% if !question.is_subquestion %>
+        <% idx += 1 %>
+        <% question_label = idx.to_s + '.) ' + question_label %>
+    <% end %>
+    <div class="<%= question.is_subquestion ? 'subquestion' : '' %>">
+      <h4><%= question_label %></h4>
+      <%= render partial: (question.question_type || 'text') + '_answer',
+                 locals: {question: question, answer: answer} %>
+    </div>
   <% end %>
 </section>
 

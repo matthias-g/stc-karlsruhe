@@ -91,6 +91,7 @@ de:
         text: 'Frage'
         question_type: 'Art der Frage'
         answer_options: 'Optionen'
+        is_subquestion: 'Unterfrage'
 
   general:
     action:

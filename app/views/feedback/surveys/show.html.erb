@@ -14,9 +14,19 @@
 </section>
 
 <section>
-  <% @survey.questions.each_with_index do |question, i| %>
-    <h3><%= i + 1 %>.)  <%= question.text %></h3>
-    <p><%= question.answer_options %></p>
+  <% idx = 0 %>
+  <% @survey.questions.each do |question| %>
+
+    <% question_label = question.text %>
+    <% if !question.is_subquestion %>
+        <% idx += 1 %>
+        <% question_label = idx.to_s + '.) ' + question_label %>
+    <% end %>
+
+    <div class="<%= question.is_subquestion ? 'subquestion' : '' %>">
+      <h3><%= question_label %></h3>
+      <p><%= question.answer_options %></p>
+    </div>
   <% end %>
 </section>
 

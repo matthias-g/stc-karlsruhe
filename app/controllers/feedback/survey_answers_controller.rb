@@ -13,7 +13,7 @@ class Feedback::SurveyAnswersController < ApplicationController
   end
 
   def new
-    survey = Feedback::Survey.find(params[:survey_id])
+    survey = Feedback::Survey.friendly.find(params[:survey_id])
     @survey_answer = Feedback::SurveyAnswer.new(survey: @survey)
     @survey_answer.survey = survey
     survey.questions.each do |question|

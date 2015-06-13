@@ -39,7 +39,7 @@ class Feedback::SurveysController < ApplicationController
 
   private
     def set_survey
-      @survey = Feedback::Survey.find(params[:id])
+      @survey = Feedback::Survey.friendly.find(params[:id])
     end
 
     def survey_params

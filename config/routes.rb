@@ -1,8 +1,6 @@
 StcKarlsruhe::Application.routes.draw do
 
   namespace :feedback do
-    resources :questions
-    resources :answers
     resources :survey_answers
     resources :surveys
   end

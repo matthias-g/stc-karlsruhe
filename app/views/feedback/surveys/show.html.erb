@@ -33,7 +33,7 @@
 <section>
   <%= link_to t('feedback.action.editSurvey'), edit_feedback_survey_path(@survey), class: 'btn btn-default' %>
   <%= link_to t('feedback.action.toSurveyOverview'), feedback_surveys_path, class: 'btn btn-default'%>
-  <%= link_to t('feedback.action.newSurveyAnswer'), new_feedback_survey_answer_path(survey_id: @survey.id), class: 'btn btn-default'%>
+  <%= link_to t('feedback.action.newSurveyAnswer'), new_feedback_survey_survey_answer_path(survey_id: @survey.id), class: 'btn btn-default'%>
 </section>
 
 </div>

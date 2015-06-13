@@ -28,7 +28,7 @@ $ ->
   # create free text option for multiple choice groups
   $('.text-choice').each ->
     choice = $(this)
-    text = $('<input type="text">').val(choice.val())
+    text = $('<input type="text">').val(if (choice.val() == 'other') then '' else choice.val())
     text.on 'change keydown paste input select click', ->
       choice.val(text.val())
       choice.prop({checked: true})

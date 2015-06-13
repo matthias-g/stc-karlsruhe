@@ -4,7 +4,8 @@
       <% options.each do |o| %>
           <%= f.radio_button :text, o, label: o %>
       <% end %>
-      <% custom_value = options.include?(answer.text) ? '' : answer.text %>
+
+      <% custom_value = options.include?(answer.text) ? 'other' : (answer.text || 'other') %>
       <%= f.radio_button :text, custom_value, class: 'text-choice', label: '' %>
       <%# placeholder: t('feedback.label.custom_choice_placeholder')%>
   <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150612154646) do
+ActiveRecord::Schema.define(version: 20150613211700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,12 +49,11 @@ ActiveRecord::Schema.define(version: 20150612154646) do
     t.text     "answer_options"
     t.integer  "question_type"
     t.integer  "position"
-    t.integer  "parent_question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_subquestion", default: false
   end
 
-  add_index "feedback_questions", ["parent_question_id"], name: "index_feedback_questions_on_parent_question_id", using: :btree
   add_index "feedback_questions", ["survey_id"], name: "index_feedback_questions_on_survey_id", using: :btree
 
   create_table "feedback_survey_answers", force: true do |t|

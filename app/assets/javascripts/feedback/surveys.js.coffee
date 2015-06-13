@@ -23,4 +23,13 @@ $ ->
       $(this).val(idx)
 
   # make questions in the survey sortable
-  $('.survey .questions').sortable();
+  $('.survey .questions').sortable()
+
+  # create free text option for multiple choice groups
+  $('.text-choice').each ->
+    choice = $(this)
+    text = $('<input type="text">').val(choice.val())
+    text.on 'change keydown paste input select click', ->
+      choice.val(text.val())
+      choice.prop({checked: true})
+    choice.parent().after(text)

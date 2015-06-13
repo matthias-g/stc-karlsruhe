@@ -4,26 +4,13 @@
 
 <section class="feedback survey list-view">
   <h1><%= t('feedback.label.surveyList') %></h1>
-
-  <table>
-    <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-    </thead>
-
-    <tbody>
+  <ul>
     <% @surveys.each do |feedback_survey| %>
-        <tr>
-          <td><%= feedback_survey.title %></td>
-          <td><%= link_to 'Show', feedback_survey %></td>
-          <td><%= link_to 'Edit', edit_feedback_survey_path(feedback_survey) %></td>
-          <td><%= link_to 'Destroy', feedback_survey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
+      <li>
+        <%= link_to feedback_survey.title, feedback_survey %>
+      </li>
     <% end %>
-    </tbody>
-  </table>
+  </ul>
 
   <br>
 

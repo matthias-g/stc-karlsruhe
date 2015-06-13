@@ -354,9 +354,17 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       newSurvey: 'Neue Umfrage erstellen'
       addQuestion: 'Frage hinzufügen'
       removeQuestion: 'Frage entfernen'
+      newSurveyAnswer: 'Umfrage ausfüllen'
+      toSurveyOverview: 'zur Übersicht'
+      editSurvey: 'Umfrage bearbeiten'
+      deleteSurvey: 'Umfrage löschen'
+      saveSurvey: 'Umfrage speichern'
+      saveSurveyAnswer: 'Abschicken'
+      editSurveyAnswer: 'Einsendung bearbeiten'
+      toSurveyAnswerOverview: 'zur Übersicht'
     label:
       surveyList: 'Umfragen'
-      surveyAnswerList: 'Umfragebögen'
+      surveyAnswerList: 'Ausgefüllte Umfragen'
       newSurvey: 'Neue Umfrage'
       editSurvey: 'Umfrage bearbeiten'
     message:

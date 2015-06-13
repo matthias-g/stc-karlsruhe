@@ -13,19 +13,17 @@
   <h1><%= @survey.title %></h1>
 </section>
 
-
-<% @survey.questions.each_with_index do |question, i| %>
-  <section>
+<section>
+  <% @survey.questions.each_with_index do |question, i| %>
     <h3><%= i + 1 %>.)  <%= question.text %></h3>
     <p><%= question.answer_options %></p>
-  </section>
-<% end %>
+  <% end %>
+</section>
 
 <section>
-  <%= link_to 'Edit', edit_feedback_survey_path(@survey), class: 'btn btn-default' %>
-  <%= link_to 'Back', feedback_surveys_path, class: 'btn btn-default'%>
-  <%= link_to 'Fill in new Answer', new_feedback_survey_answer_path(survey_id: @survey.id),
-              class: 'btn btn-default'%>
+  <%= link_to t('feedback.action.editSurvey'), edit_feedback_survey_path(@survey), class: 'btn btn-default' %>
+  <%= link_to t('feedback.action.toSurveyOverview'), feedback_surveys_path, class: 'btn btn-default'%>
+  <%= link_to t('feedback.action.newSurveyAnswer'), new_feedback_survey_answer_path(survey_id: @survey.id), class: 'btn btn-default'%>
 </section>
 
 </div>

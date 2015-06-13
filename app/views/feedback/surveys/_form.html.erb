@@ -29,8 +29,13 @@
 </div>
 
 <section>
-  <%= f.submit %>
-  <%= link_to 'Back', feedback_surveys_path, class: 'btn btn-default' %>
+  <%= f.submit t('feedback.action.saveSurvey') %>
+  <%= link_to t('feedback.action.toSurveyOverview'), feedback_surveys_path, class: 'btn btn-default' %>
+  <% if !isNew %>
+    <%= link_to t('feedback.action.deleteSurvey'), feedback_survey_path(@survey), method: :delete,
+            data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %>
+  <% end %>
+
   <%#= link_to 'Show', @survey %>
   <%= link_to t('feedback.action.addQuestion'), 'javascript:void(0);',
         class: 'add-link btn btn-default',

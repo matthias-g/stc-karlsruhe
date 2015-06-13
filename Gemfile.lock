@@ -60,7 +60,7 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-passenger (0.0.5)
+    capistrano-passenger (0.1.0)
       capistrano (~> 3.0)
     capistrano-rails (1.1.3)
       capistrano (~> 3.1)
@@ -105,6 +105,8 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
+    jquery-ui-rails (5.0.5)
+      railties (>= 3.2.16)
     json (1.8.3)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -118,7 +120,7 @@ GEM
     mini_magick (4.2.7)
     mini_portile (0.6.2)
     minitest (5.7.0)
-    multi_json (1.11.0)
+    multi_json (1.11.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
@@ -210,6 +212,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  jquery-ui-rails
   jssorslider-rails!
   lazyload-rails
   letter_opener

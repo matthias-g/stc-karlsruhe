@@ -26,13 +26,13 @@
     <% question = answer.question %>
     <% question_label = (answer_fields.index + 1).to_s + '.) ' + question.text %>
     <%= answer_fields.hidden_field :question_id %>
-    <%= render partial: (question.question_type || 'text') + '_question',
+    <%= render partial: question.question_type + '_question',
                locals: { f: answer_fields, question: question, question_label: question_label } %>
   <% end %>
 </section>
 
 <section>
-  <%= f.submit t('feedback.action.saveSurveyAnswer') %>
+  <%= f.submit t('feedback.action.saveSurveyAnswer'), class:'submit btn btn-default' %>
 </section>
 
 <% end %>

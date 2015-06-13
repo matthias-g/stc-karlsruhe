@@ -1,5 +1,8 @@
 
 .feedback {
+  max-width: 750px;
+  margin: 0 auto;
+
   h1 {
     text-align: center;
   }
@@ -10,6 +13,18 @@
   }
 
   .add-link {
+    float: right;
+  }
+
+  .question {
+    margin: 20px 30px 10px;
+    .control-label {
+      margin-left: -20px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .submit {
     float: right;
   }
 }

@@ -26,7 +26,8 @@
     <% question = answer.question %>
     <% question_label = (answer_fields.index + 1).to_s + '.) ' + question.text %>
     <%= answer_fields.hidden_field :question_id %>
-    <%= render partial: (question.question_type || 'text') + '_question', locals: { f: answer_fields, question: question, question_label: question_label } %>
+    <%= render partial: (question.question_type || 'text') + '_question',
+               locals: { f: answer_fields, question: question, question_label: question_label } %>
   <% end %>
 </section>
 

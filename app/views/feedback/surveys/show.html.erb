@@ -24,6 +24,8 @@
 <section>
   <%= link_to 'Edit', edit_feedback_survey_path(@survey), class: 'btn btn-default' %>
   <%= link_to 'Back', feedback_surveys_path, class: 'btn btn-default'%>
+  <%= link_to 'Fill in new Answer', new_feedback_survey_answer_path(survey_id: @survey.id),
+              class: 'btn btn-default'%>
 </section>
 
 </div>

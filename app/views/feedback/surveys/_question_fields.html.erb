@@ -1,10 +1,16 @@
 <section class="question-fields">
-  <%= f.text_area :text %>
-  <%= f.select(:question_type,
-               Feedback::Question.question_types.keys.map { |s| [t("feedback.question.type.#{s}"), s] }) %>
-  <%= f.text_area :answer_options %>
-  <%= f.number_field :position %>
-  <%= f.hidden_field :_destroy %>
-  <%= link_to t('feedback.action.removeQuestion'), "javascript:void(0);",
-              class: 'remove-link btn btn-default' %>
+  <div class="row">
+    <div class="col-sm-6">
+      <%= f.hidden_field :position, class: 'position-field' %>
+      <%= f.text_area :text %>
+      <%= f.select(:question_type, Feedback::Question.question_types.keys.map {
+            |s| [t("feedback.question.type.#{s}"), s] }) %>
+    </div>
+    <div class="col-sm-6">
+      <%= f.text_area :answer_options %>
+      <%= f.hidden_field :_destroy %>
+      <%= link_to t('feedback.action.removeQuestion'), "javascript:void(0);",
+                  class: 'remove-link btn btn-default' %>
+    </div>
+  </div>
 </section>

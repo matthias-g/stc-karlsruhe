@@ -18,35 +18,25 @@
   <h1><%= @survey.title %></h1>
 </section>
 
-<div class="row row-sm-eq-height">
-
-  <div class="col-sm-4">
-
-    <section>
-      <%= f.text_field :title %>
-
-      <%= link_to t('feedback.action.addQuestion'), "javascript:void(0);",
-                  class: 'add-link btn btn-default btn-wide',
-                  data: {target: '#question-insertion-point'} %>
-
-
-    </section>
-  </div>
-
-  <div class="col-sm-8 questions">
-    <%= f.fields_for :questions do |builder| %>
-        <%= render 'question_fields', f: builder %>
-    <% end %>
-    <div style="display: none;" id="question-insertion-point"></div>
-  </div>
-
+<section>
+  <%= f.text_field :title %>
+</section>
+<div class="questions">
+  <%= f.fields_for :questions do |builder| %>
+      <%= render 'question_fields', f: builder %>
+  <% end %>
+  <div style="display: none;" id="question-insertion-point"></div>
 </div>
 
 <section>
   <%= f.submit %>
   <%= link_to 'Back', feedback_surveys_path, class: 'btn btn-default' %>
   <%#= link_to 'Show', @survey %>
+  <%= link_to t('feedback.action.addQuestion'), 'javascript:void(0);',
+        class: 'add-link btn btn-default',
+        data: {target: '#question-insertion-point'} %>
 </section>
+
 
 <% new_object = f.object.class.reflect_on_association(:questions).klass.new %>
 <div id="question-prototype" style="display: none;">

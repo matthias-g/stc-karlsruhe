@@ -12,13 +12,20 @@
   <h1><%= survey.title %></h1>
 </section>
 
-<% answers.each_with_index do |answer, i| %>
-  <section>
-    <%= answer.text %>
-  </section>
-<% end %>
+<section>
+  <% answers.each_with_index do |answer, i| %>
 
-<%= link_to 'Edit', edit_feedback_survey_answer_path(@survey_answer) %> |
-<%= link_to 'Back', feedback_survey_answers_path %>
+    <% question = answer.question %>
+    <h4><%= (i + 1).to_s + '.) ' + question.text %></h4>
+    <%= render partial: (question.question_type || 'text') + '_answer',
+               locals: {question: question, answer: answer} %>
+  <% end %>
+</section>
 
+<section>
+  <%= link_to 'Edit', edit_feedback_survey_answer_path(@survey_answer),
+              class: 'btn btn-default' %>
+  <%= link_to 'Back', feedback_survey_answers_path,
+              class: 'btn btn-default' %>
+</section>
 </div>

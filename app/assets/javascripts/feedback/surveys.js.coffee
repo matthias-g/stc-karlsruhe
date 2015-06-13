@@ -16,3 +16,11 @@ $ ->
 
   $('#question-prototype').closest('form').submit ->
     $('#question-prototype').remove()
+
+  # automatically set question position according to real position
+  $('.survey form').submit (e) ->
+    $('.questions .position-field').each (idx) ->
+      $(this).val(idx)
+
+  # make questions in the survey sortable
+  $('.survey .questions').sortable();

@@ -1,0 +1,20 @@
+<% content_for :pageTitle do %>
+    <%= t('layout.title.surveyAnswerList') %>
+<% end %>
+
+<section class="feedback survey_answer list-view">
+  <h1><%= t('feedback.label.surveyAnswerList') %></h1>
+
+  <ul>
+    <% @survey_answers.each do |survey_answer| %>
+        </td>
+          <li>
+            <%= link_to t('feedback.label.surveyAnswer', id: survey_answer.id), survey_answer %>
+            (zu "<%= link_to survey_answer.survey.title, survey_answer.survey %>")
+          </li>
+    <% end %>
+  </ul>
+
+</section>
+
+

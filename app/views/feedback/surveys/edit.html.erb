@@ -1,0 +1,7 @@
+<% content_for :pageTitle do %>
+    <%= t('layout.title.surveyEdit', survey:@survey.title) %>
+<% end %>
+
+<div  class="feedback survey edit-view">
+  <%= render :partial => "form", :locals => {:isNew => false} %>
+</div>

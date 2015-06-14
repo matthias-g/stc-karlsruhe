@@ -11,5 +11,6 @@
  *= require jquery.Jcrop
  *= require_self
  *= require photoswipe
+ *= require jquery-ui/sortable
  *= require_tree .
  */

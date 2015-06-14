@@ -1,0 +1,2 @@
+module Feedback::SurveysHelper
+end

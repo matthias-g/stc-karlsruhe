@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require jquery.lazyload
+//= require jquery-ui/sortable
 //= require jssor.slider.mini
 //= require photoswipe
 //= require jquery.Jcrop

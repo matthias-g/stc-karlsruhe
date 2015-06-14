@@ -388,6 +388,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       custom_choice_placeholder: 'anderes'
     message:
       surveyErrorList: 'Wegen folgender Fehler konnte die Umfrage nicht gespeichert werden:'
+      answerCreated: Vielen Dank für dein Feedback!
     question:
       type:
         text: Freitext

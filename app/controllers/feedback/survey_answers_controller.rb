@@ -30,7 +30,7 @@ class Feedback::SurveyAnswersController < ApplicationController
   def create
     @survey_answer = Feedback::SurveyAnswer.new(survey_answer_params)
     @survey_answer.save
-    respond_with([@survey_answer.survey, @survey_answer])
+    redirect_to '/', notice: t('feedback.message.answerCreated')
   end
 
   def update

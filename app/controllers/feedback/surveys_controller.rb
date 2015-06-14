@@ -1,6 +1,6 @@
 class Feedback::SurveysController < ApplicationController
   before_action :set_survey, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin_user!, except: :show
+  before_action :authenticate_admin_user!
 
   respond_to :html
 

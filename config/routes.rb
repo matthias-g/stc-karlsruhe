@@ -1,8 +1,8 @@
 StcKarlsruhe::Application.routes.draw do
 
   scope module: 'feedback' do
-    resources :surveys, as: :feedback_surveys do
-      resources :survey_answers, as: :feedback_survey_answers
+    resources :surveys, as: :feedback_surveys, path: 'umfragen' do
+      resources :survey_answers, as: :feedback_survey_answers, path: 'antworten'
     end
   end
 

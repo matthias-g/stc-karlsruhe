@@ -9,8 +9,7 @@
     <% @survey_answers.each do |survey_answer| %>
         </td>
           <li>
-            <%= link_to t('feedback.label.surveyAnswer', id: survey_answer.id), survey_answer %>
-            (zu "<%= link_to survey_answer.survey.title, survey_answer.survey %>")
+            <%= link_to t('feedback.label.surveyAnswer', id: survey_answer.id), [survey_answer.survey, survey_answer] %>
           </li>
     <% end %>
   </ul>

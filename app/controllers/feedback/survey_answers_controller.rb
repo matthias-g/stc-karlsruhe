@@ -4,7 +4,8 @@ class Feedback::SurveyAnswersController < ApplicationController
   respond_to :html
 
   def index
-    @survey_answers = Feedback::SurveyAnswer.all
+    survey = Feedback::Survey.friendly.find(params[:feedback_survey_id])
+    @survey_answers = survey.survey_answers
     respond_with(@survey_answers)
   end
 

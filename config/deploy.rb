@@ -32,3 +32,5 @@ set :linked_dirs, %w{public/downloads public/uploads log}
 
 # Default value for keep_releases is 5
 set :keep_releases, 20
+
+set :passenger_restart_with_touch, true

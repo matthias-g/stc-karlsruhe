@@ -394,3 +394,5 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         text: Freitext
         choice: Auswahl
         choice_or_text: Auswahl oder Freitext
+        text_line: Freitextzeile
+        info: Infotext

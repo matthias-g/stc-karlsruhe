@@ -1,4 +1,4 @@
-<%= bootstrap_form_for(@survey_answer) do |f| %>
+<%= bootstrap_form_for([@survey_answer.survey, @survey_answer]) do |f| %>
 
 <% if @survey_answer.errors.any? %>
   <section id="error_explanation">

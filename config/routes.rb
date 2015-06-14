@@ -1,9 +1,8 @@
 StcKarlsruhe::Application.routes.draw do
 
-  namespace :feedback do
-    resources :survey_answers, except: :new
-    resources :surveys do
-      resources :survey_answers
+  scope module: 'feedback' do
+    resources :surveys, as: :feedback_surveys do
+      resources :survey_answers, as: :feedback_survey_answers
     end
   end
 

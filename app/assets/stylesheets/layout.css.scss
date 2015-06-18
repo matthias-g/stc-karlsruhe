@@ -79,23 +79,20 @@ footer {
 }
 
 #messages {
-  z-index: 101;
+  z-index: 1001;
   position: fixed;
-  left: 0; top: 50px; right: 0;
+  left: 0; top: 70px; right: 0;
   margin: 0 auto;
-  width: 700px;
-  & > * {
-    padding: 10px 40px;
-    margin: 10px 0;
-    overflow: auto;
+  max-width: 700px;
+
+  .alert-info {
+    background: rgba($bg_notice, 0.85);
+    color: $col_notice;
   }
   .alert-notice {
     background: rgba($bg_notice, 0.85);
   }
   .alert-alert {
-    background: rgba($bg_alert, 0.85);
-  }
-  .alert-devise {
     background: rgba($bg_alert, 0.85);
   }
 }

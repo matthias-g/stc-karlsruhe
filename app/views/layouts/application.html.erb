@@ -29,6 +29,11 @@
 </div>
 
 <div id="messages">
+  <%= render 'layouts/messages' %>
+</div>
+
+<% if false %>
+<div id="messages">
   <%# devise errors %>
   <% if not resource.errors.empty? %>
       <% resource.errors.full_messages.each do |error| %>
@@ -40,6 +45,7 @@
       <div class="alert-<%= key %>"><%= value %></div>
   <% end %>
 </div>
+<% end %>
 
 <% if !content_for?(:pageHeader) %>
   <%= render '/layouts/smallheader' -%>

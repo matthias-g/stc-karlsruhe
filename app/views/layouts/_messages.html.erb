@@ -1,0 +1,22 @@
+<% flash.each do |msg_type, msg| %>
+  <div class="alert <%= bootstrap_class_for(msg_type) %> alert-dismissible" role="alert">
+    <a href="#" data-dismiss="alert" class="close">×</a>
+    <ul>
+      <% flash = msg.kind_of?(Array) ? msg : [[msg]] %>
+      <% flash.each do |f| %>
+        <li><%= f[0] %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if not resource.errors.empty? %>
+  <div class="alert alert-danger alert-block alert-dismissible" role="alert">
+    <a href="#" data-dismiss="alert" class="close">×</a>
+    <ul>
+      <% resource.errors.full_messages.each do |msg| %>
+         <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

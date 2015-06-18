@@ -5,10 +5,7 @@ $(document).ready(function() {
     /* clip preview texts */
     /*clipTexts();*/
 
-    /* find flash messages */
-    $('#messages > *').detach().each(function() {
-        showMessage($(this));
-    });
+    extractFlashMessages($('body'));
 
     /* uncollapse accordion section if it's referenced in the url hash */
     if (location.hash) {
@@ -45,24 +42,22 @@ $(document).ready(function() {
     });
 }*/
 
-/* show a flash message */
-function showMessage(htmlstr) {
-    var msg = $(htmlstr);
-    msg.click(function() {
-        msg.fadeOut();
+function extractFlashMessages(html) {
+    $('#messages .alert', html).detach().each(function(i, e) {
+        var msg = $(e);
+        var close = function() {
+            msg.alert('close');
+        }
+        msg.click(close);
+        window.setInterval(close, 5000);
+        $('#messages').append(msg);
     });
-    window.setInterval(function() {
-        msg.fadeOut();
-    }, 5000);
-    $('#messages').append(msg);
 }
 
 function sendWithAjax(form) {
     var url = $(form).attr('action') +'?'+ $(form).serialize();
-    var res = $('<div>').load(url + ' #messages > *', function() {
-        res.children().each(function(i, e) {
-            showMessage($(e));
-        });
+    var res = $('<div>').load(url + ' #messages', function() {
+        extractFlashMessages(res);
     });
     return false;
 }

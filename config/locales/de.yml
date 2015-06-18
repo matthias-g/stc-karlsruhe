@@ -7,11 +7,11 @@ de:
             sender:
              blank: 'Bitte gib deine E-Mail-Adresse an.'
             recipient:
-             blank: 'Wohin soll die Nachricht gehen? Bitte einen Empfänger angeben.'
+             blank: 'Empfänger fehlt.'
             subject:
-             blank: 'Bitte gib einen kurzen Betreff an.'
+             blank: 'Betreff ist leer.'
             body:
-             blank: 'Nachricht konnte gesendet werden: Du hast nichts geschrieben.'
+             blank: 'Nachrichtenfeld ist leer.'
 
   activerecord:
     errors:

@@ -41,7 +41,8 @@
 }
 
 .gallery-slides {
-  cursor: pointer;
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
   position: absolute;
   left: 0;
   top: 0;

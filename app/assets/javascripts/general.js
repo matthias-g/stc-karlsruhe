@@ -24,6 +24,8 @@ $(document).ready(function() {
             var err = textStatus + ", " + error;
             console.log( "Request Failed: " + err );
             console.log(jqxhr.responseJSON);
+            dst.parent().hide();
+            dst.parent().prev().css('margin-top','15px');
         });
     });
 

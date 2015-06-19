@@ -20,6 +20,10 @@ $(document).ready(function() {
         var dst = $(this);
         $.getJSON('https://graph.facebook.com/' + dst.data('fb-page'), function(res) {
             dst.text(res.likes);
+        }).fail(function (jqxhr, textStatus, error) {
+            var err = textStatus + ", " + error;
+            console.log( "Request Failed: " + err );
+            console.log(jqxhr.responseJSON);
         });
     });
 

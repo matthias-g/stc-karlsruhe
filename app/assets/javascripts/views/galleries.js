@@ -144,9 +144,21 @@ $(document).ready(function ($) {
             getThumbBoundsFn: function(index) {
                 var pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
                 var slider_container = $('.gallery-slides')[0].getBoundingClientRect();
-                return {x: slider_container.left,
-                        y: slider_container.top + pageYScroll,
-                        w: slider_container.width};
+                var preview = {};
+                var picture = galleryItems[index];
+                if ((picture.w / picture.h) > (slider_container.width / slider_container.height)) {
+                    preview.w = slider_container.width;
+                    preview.h = preview.w * picture.h / picture.w;
+                } else if ((picture.w / picture.h) < (slider_container.width / slider_container.height)) {
+                    preview.h = slider_container.height;
+                    preview.w = preview.h * picture.w / picture.h;
+                } else {
+                    preview.w = slider_container.width;
+                    preview.h = slider_container.height;
+                }
+                preview.x = slider_container.left + (slider_container.width - preview.w) / 2;
+                preview.y = slider_container.top + (slider_container.height - preview.h) / 2;
+                return {x: preview.x, y: preview.y + pageYScroll, w: preview.w};
             },
             getImageURLForShare: function( shareButtonData ) {
                 return gallery.currItem.raw_src || gallery.currItem.src || '';

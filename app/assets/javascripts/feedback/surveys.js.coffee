@@ -1,6 +1,5 @@
 $ ->
   addRemoveLinks = (scope) ->
-    console.log(scope.find('.remove-link'))
     scope.find('.remove-link').click ->
       $(this).prev('input[type=hidden]').attr('value', 1)
       $(this).closest('.question-fields').hide()

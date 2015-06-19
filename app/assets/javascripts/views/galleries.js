@@ -144,9 +144,9 @@ $(document).ready(function ($) {
             getThumbBoundsFn: function(index) {
                 var pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
                 var slider_container = $('.gallery-slides')[0].getBoundingClientRect();
-                return {x: container.left,
-                        y: container.top + pageYScroll,
-                        w: container.width};
+                return {x: slider_container.left,
+                        y: slider_container.top + pageYScroll,
+                        w: slider_container.width};
             },
             getImageURLForShare: function( shareButtonData ) {
                 return gallery.currItem.raw_src || gallery.currItem.src || '';

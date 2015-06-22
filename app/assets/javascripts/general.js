@@ -18,7 +18,8 @@ $(document).ready(function() {
     /* Retrieve Facebook likes with the graph API */
     $('.get-likes').each(function() {
         var dst = $(this);
-        $.getJSON('https://graph.facebook.com/' + dst.data('fb-page'), function(res) {
+        $.getJSON('https://graph.facebook.com/' + dst.data('fb-page')
+            + '?access_token='+ dst.data('fb-token'), function(res) {
             dst.text(res.likes);
         }).fail(function (jqxhr, textStatus, error) {
             var err = textStatus + ", " + error;

@@ -15,7 +15,7 @@ class GalleryPicture < ActiveRecord::Base
     update_attribute :visible, false
   end
 
-  def rotate(dir = 1)
+  def rotate(dir)
     picture.manipulate! do |img|
       img.rotate(90 * dir)
     end

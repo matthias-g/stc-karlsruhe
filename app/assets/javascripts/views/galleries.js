@@ -172,15 +172,47 @@ $(document).ready(function ($) {
             slider.$GoTo(gallery.getCurrentIndex());
         });
 
-        var deleteButton = $('.pswp__button--delete')
-            .unbind('click').click(function() {
+        $('.pswp__button--delete').unbind('click').click(function() {
                 deleteCurrentImage();
-            });
-        function toggleDeleteButton() {
-            deleteButton.toggle(gallery.currItem.editable == true);
+        });
+        $('.pswp__button--rotateright').unbind('click').click(function() {
+            rotateCurrentImage(1);
+        });
+        $('.pswp__button--rotateleft').unbind('click').click(function() {
+            rotateCurrentImage(-1);
+        });
+
+        function toggleEditButtons() {
+            $('.pswp__button--delete, .pswp__button--rotateright, .pswp__button--rotateleft')
+                .toggle(gallery.currItem.editable == true);
         }
-        gallery.listen('beforeChange', toggleDeleteButton);
-        toggleDeleteButton();
+        gallery.listen('beforeChange', toggleEditButtons);
+        toggleEditButtons();
+
+    }
+
+    function rotateCurrentImage(dir) {
+        var idx = gallery.getCurrentIndex();
+        var item = galleryItems[idx];
+        var dirStr = (dir > 0) ? "/rotateRight" : "/rotateLeft";
+        $.ajax({
+            url: "/api/gallery_pictures/" + item.id + dirStr,
+            dataType: "json",
+            type: "GET",
+            processData: false,
+            contentType: "application/json"
+        }).done(function(data) {
+            //TODO: show flash message
+        });
+
+        var tmp = item.w;
+        item.w = item.h;
+        item.h = tmp;
+
+        container.html(container_copy.children().clone());
+        createSlider();
+        gallery.close();
+        createGallery(idx);
     }
 
     function deleteCurrentImage() {

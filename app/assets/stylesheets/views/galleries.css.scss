@@ -152,7 +152,9 @@
   height /**/: 50px;
 }
 
-.pswp__button--delete {
+.pswp__button--delete,
+.pswp__button--rotateleft,
+.pswp__button--rotateright {
   display: block;
   background-image: none !important;
   color: white;

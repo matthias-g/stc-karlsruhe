@@ -79,7 +79,12 @@ StcKarlsruhe::Application.routes.draw do
       end
     end
     resources :galleries, only: :show
-    resources :gallery_pictures, only: :destroy
+    resources :gallery_pictures, only: [:destroy] do
+      member do
+        get :rotateRight
+        get :rotateLeft
+      end
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

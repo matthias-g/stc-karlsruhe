@@ -365,6 +365,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       toggleFullscreen: "Vollbild an/aus"
       zoom: "Vergrößern / Verkleinern"
       delete: "Löschen"
+      rotateRight: "Nach rechts drehen"
+      rotateLeft: "Nach links drehen"
 
   feedback:
     action:

@@ -56,8 +56,8 @@ class GalleryPictureUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
+  process :auto_orient # this should go before all other "process" steps
   process :store_dimensions
-
 
   private
 
@@ -67,5 +67,10 @@ class GalleryPictureUploader < CarrierWave::Uploader::Base
     end
   end
 
+  def auto_orient
+    manipulate! do |image|
+      image.tap(&:auto_orient)
+    end
+  end
 
 end

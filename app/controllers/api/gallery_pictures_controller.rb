@@ -1,6 +1,6 @@
 class Api::GalleryPicturesController < ApplicationController
 
-  before_action :set_gallery_picture, only: [:destroy]
+  before_action :set_gallery_picture, only: [:destroy, :rotateRight, :rotateLeft]
   before_action :authenticate_admin_user_or_uploader!
 
   respond_to :json
@@ -8,6 +8,16 @@ class Api::GalleryPicturesController < ApplicationController
   def destroy
     @gallery_picture.destroy
     respond_with(@gallery_picture)
+  end
+
+  def rotateRight
+    @gallery_picture.rotate(1)
+    respond_with(@gallery_picture) # todo what view makes sense?
+  end
+
+  def rotateLeft
+    @gallery_picture.rotate(-1)
+    respond_with(@gallery_picture) # todo what view makes sense?
   end
 
   private

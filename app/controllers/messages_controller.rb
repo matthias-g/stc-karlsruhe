@@ -62,7 +62,7 @@ class MessagesController < ApplicationController
 
   def block_spam
     unless user_signed_in? || verify_recaptcha(model: @message)
-      flash[:error] = flash[:recaptcha_error]
+      flash.now[:error] = flash[:recaptcha_error]
       flash.delete :recaptcha_error
       render :contact_mail_form
     end

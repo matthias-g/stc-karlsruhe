@@ -5,9 +5,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       build_resource(sign_up_params)
       clean_up_passwords(resource)
-      flash[:error] = flash[:recaptcha_error]
+      flash.now[:error] = flash[:recaptcha_error]
       flash.delete :recaptcha_error
-      redirect_to request.referer
+      render :new
     end
   end
 end

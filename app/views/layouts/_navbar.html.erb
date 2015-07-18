@@ -69,7 +69,7 @@
     </li>
 
     <% current_path = request.env['PATH_INFO'] %>
-    <% unless current_path == contact_path || current_path == login_or_register_path %>
+    <% unless current_path == contact_path || params[:controller] =~ /users.*/ %>
       <li class="dropdown hidden-hamburger">
         <%= link_to new_user_registration_path, data:{toggle:'dropdown'}, class:'dropdown-toggle' do %>
             <span class="glyphicon glyphicon-user"></span> <%= t('user.action.register') %>

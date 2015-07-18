@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
 
   def send_contact_mail
     @message = Message.new(params[:message])
-    if @message.valid?
+    if @message.valid? && (user_signed_in? || verify_recaptcha(model: @message))
       Mailer.contact_mail(@message).deliver
       redirect_to root_path, notice: t('contact.orga.success')
     else

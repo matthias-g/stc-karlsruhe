@@ -152,6 +152,7 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    recaptcha (0.4.0)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     sass (3.4.14)
@@ -218,6 +219,7 @@ DEPENDENCIES
   photoswipe-rails
   rails (~> 4.1.0)
   rails-i18n
+  recaptcha
   sass-rails
   sdoc
   sqlite3

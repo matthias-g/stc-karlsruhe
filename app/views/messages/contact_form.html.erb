@@ -13,6 +13,9 @@
         <%= form.text_field :subject, label: t('contact.general.placeholders.subject') %>
         <%= form.text_area :body, label: t('contact.general.placeholders.body') %>
         <%= form.hidden_field :recipient, value: 'default@servethecity-karlsruhe.de' %>
+        <% unless user_signed_in? %>
+          <%= recaptcha_tags ssl: true, ajax: true %>
+        <% end %>
         <%= form.submit t('contact.orga.submit') %>
       </div>
   <% end %>

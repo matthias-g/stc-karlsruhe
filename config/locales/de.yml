@@ -398,3 +398,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         choice_or_text: Auswahl oder Freitext
         text_line: Freitextzeile
         info: Infotext
+
+  recaptcha:
+    errors:
+      verification_failed: Die Nachricht konnte leider nicht versendet werden. Bitte bestätige im Formular das Feld zum Spamschutz.
+      recaptcha_unreachable: Die Nachricht konnte leider nicht versendet werden, da die Server zum Spamschutz nicht erreichbar sind.

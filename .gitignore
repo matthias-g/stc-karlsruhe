@@ -8,3 +8,4 @@ public/uploads/project
 public/uploads/gallery_picture
 public/downloads
 .ruby-gemset
+.env

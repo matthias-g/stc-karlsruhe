@@ -1,14 +1,14 @@
 class MessagesController < ApplicationController
-
   before_action :authenticate_admin_user!, only: [:admin_mail_form, :send_admin_mail]
+  before_action :set_message, only: [:send_contact_mail, :send_admin_mail]
+  before_action :block_spam, only: [:send_contact_mail]
 
-  def contact_form
+  def contact_mail_form
     @message = Message.new
   end
 
   def send_contact_mail
-    @message = Message.new(params[:message])
-    if @message.valid? && (user_signed_in? || verify_recaptcha(model: @message))
+    if @message.valid?
       Mailer.contact_mail(@message).deliver
       redirect_to root_path, notice: t('contact.orga.success')
     else
@@ -28,7 +28,6 @@ class MessagesController < ApplicationController
   end
 
   def send_admin_mail
-    @message = Message.new(params[:message])
     current_projects = ProjectWeek.default.projects.visible
     case @message.recipient
       when 'current_volunteers_and_leaders'
@@ -54,6 +53,18 @@ class MessagesController < ApplicationController
     else
       flash[:alert] = @message.errors.values
       redirect_to action: :admin_mail_form
+    end
+  end
+
+  def set_message
+    @message = Message.new(params[:message])
+  end
+
+  def block_spam
+    unless user_signed_in? || verify_recaptcha(model: @message)
+      flash[:error] = flash[:recaptcha_error]
+      flash.delete :recaptcha_error
+      render :contact_mail_form
     end
   end
 

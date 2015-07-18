@@ -30,7 +30,7 @@ StcKarlsruhe::Application.routes.draw do
 
   resources :roles
 
-  get 'kontakt', to: 'messages#contact_form', as: 'contact'
+  get 'kontakt', to: 'messages#contact_mail_form', as: 'contact'
   post 'kontakt', to: 'messages#send_contact_mail'
 
   get 'admin_mail', to: 'messages#admin_mail_form'
@@ -55,9 +55,10 @@ StcKarlsruhe::Application.routes.draw do
   get 'projekte-:year', to: 'projects#index'
   get 'projektwoche-:title', to: 'project_weeks#show', as: 'show_project_week'
 
-  devise_for :users,
-    path: '', path_names: { sign_in: 'login', sign_out: 'logout',
-                            sign_up: 'register', edit: 'edit_password'}
+  devise_for :users, path: '',
+             path_names: { sign_in: 'login', sign_out: 'logout',
+                           sign_up: 'register', edit: 'edit_password'},
+             controllers: { registrations: 'users/registrations'}
 
   resources :users, except: [:new, :create] do
     member do

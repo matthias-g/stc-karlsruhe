@@ -58,6 +58,8 @@ gem 'pg'
 
 gem 'friendly_id'
 
+gem 'dotenv-rails'
+
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano'
@@ -68,8 +70,4 @@ group :development do
   gem 'letter_opener'
   gem 'better_errors'
   gem 'binding_of_caller'
-end
-
-group :production do
-  gem 'dotenv-rails'
 end

@@ -8,11 +8,21 @@ class User < ActiveRecord::Base
 
   USERNAME_FORMAT = /\A[\w]+\z/
 
-  validates_presence_of :username, :first_name, :last_name
+  validates_presence_of :username, :first_name, :last_name, :email
   validates :username,
-      uniqueness: {case_sensitive: false},
-      format: {with: USERNAME_FORMAT,
-      message: I18n.t('activerecord.errors.messages.onlyLetters') }
+            uniqueness: { case_sensitive: false },
+            format: { with: USERNAME_FORMAT, message: I18n.t('activerecord.errors.messages.onlyLetters') },
+            length: { in: 2..50 }
+  validates :email,
+            uniqueness: { case_sensitive: false },
+            format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i },
+            length: { in: 5..100 }
+  validates :first_name,
+            length: { in: 2..50 },
+            format: { with: /\A[[[:word:]]-\.]+( [[[:word:]]-\.]+)*\z/, message: I18n.t('activerecord.errors.messages.onlyWordsAndInnerSpace') }
+  validates :last_name,
+            length: { in: 2..50 },
+            format: { with: /\A[[[:word:]]-\.]+( [[[:word:]]-\.]+)*\z/, message: I18n.t('activerecord.errors.messages.onlyWordsAndInnerSpace') }
   attr_accessor :login
 
   before_validation :set_default_username_if_blank!, on: :create

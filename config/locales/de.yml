@@ -29,6 +29,7 @@ de:
       messages:
         blank: 'darf nicht leer sein'
         onlyLetters: 'darf nur Buchstaben enthalten'
+        onlyWordsAndInnerSpace: darf nur Wortzeichen und Leerzeichen in der Mitte enthalten
     models:
       project:
         zero: 'Projekte'

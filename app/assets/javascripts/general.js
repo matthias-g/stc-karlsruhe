@@ -54,7 +54,7 @@ function extractFlashMessages(html) {
         var msg = $(e);
         var close = function() {
             msg.alert('close');
-        }
+        };
         msg.click(close);
         window.setInterval(close, 5000);
         $('#messages').append(msg);

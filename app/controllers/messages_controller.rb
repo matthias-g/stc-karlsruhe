@@ -37,14 +37,13 @@ class MessagesController < ApplicationController
       when 'current_leaders'
         to = current_projects.joins(:users).where('participations.as_leader = true').pluck(:email)
       when 'all_users'
-        to = User.all.pluck(:email)
+        to = User.where(cleared: false).all.pluck(:email)
       when 'active_users'
-        to = User.where('created_at > ?', 6.months.ago).pluck(:email) +
-             User.joins(:projects).where('participations.created_at > ?', 18.months.ago).pluck(:email)
+        to = User.where(cleared: false).where('created_at > ?', 6.months.ago).pluck(:email) +
+             User.where(cleared: false).joins(:projects).where('participations.created_at > ?', 18.months.ago).pluck(:email)
       else
         to = @message.recipient.split(/\s*,\s*/)
     end
-    test = to.uniq
     @message.recipient = (to + [current_user.email]).uniq.join(',')
     if @message.valid?
       Mailer.generic_mail(@message, true).deliver

@@ -18,3 +18,10 @@ admin:
   last_name: Istrator
   email: admin@root.org
   roles: admin
+
+deleted:
+  username: deleted
+  first_name: Gone
+  last_name: Away
+  email: deleted@nothing.com
+  cleared: true

@@ -47,7 +47,9 @@ class GalleriesControllerTest < ActionController::TestCase
 
   test "non-admin should not update gallery" do
     sign_in users(:sabine)
-    exception = assert_raises(ActionController::RoutingError) { patch :update, id: @gallery, gallery: { title: @gallery.title } }
+    exception = assert_raises(ActionController::RoutingError) do
+      patch :update, id: @gallery, gallery: { title: @gallery.title }
+    end
     assert_equal( 'Not Found', exception.message )
   end
 

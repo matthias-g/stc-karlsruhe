@@ -96,7 +96,8 @@ class ProjectsControllerTest < ActionController::TestCase
     sign_in user
     assert_not @project.has_volunteer?(user)
     get :enter, id: @project
-    assert_redirected_to @project
+    @project = Project.find(@project.id)
+    assert_redirected_to project_path(@project)
     assert @project.has_volunteer?(user)
   end
 

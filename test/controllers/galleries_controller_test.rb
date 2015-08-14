@@ -6,17 +6,20 @@ class GalleriesControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
+    sign_in users(:admin)
     get :index
     assert_response :success
     assert_not_nil assigns(:galleries)
   end
 
   test "should get new" do
+    sign_in users(:admin)
     get :new
     assert_response :success
   end
 
   test "should create gallery" do
+    sign_in users(:admin)
     assert_difference('Gallery.count') do
       post :create, gallery: { title: @gallery.title }
     end
@@ -25,21 +28,38 @@ class GalleriesControllerTest < ActionController::TestCase
   end
 
   test "should show gallery" do
+    sign_in users(:admin)
     get :show, id: @gallery
     assert_response :success
   end
 
   test "should get edit" do
+    sign_in users(:admin)
     get :edit, id: @gallery
     assert_response :success
   end
 
   test "should update gallery" do
+    sign_in users(:admin)
+    patch :update, id: @gallery, gallery: { title: @gallery.title }
+    assert_redirected_to gallery_path(assigns(:gallery))
+  end
+
+  test "non-admin should not update gallery" do
+    sign_in users(:sabine)
+    exception = assert_raises(ActionController::RoutingError) { patch :update, id: @gallery, gallery: { title: @gallery.title } }
+    assert_equal( 'Not Found', exception.message )
+  end
+
+  test "leader should update gallery" do
+    @gallery = galleries(:three)
+    sign_in users(:rolf)
     patch :update, id: @gallery, gallery: { title: @gallery.title }
     assert_redirected_to gallery_path(assigns(:gallery))
   end
 
   test "should destroy gallery" do
+    sign_in users(:admin)
     assert_difference('Gallery.count', -1) do
       delete :destroy, id: @gallery
     end

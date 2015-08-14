@@ -12,6 +12,7 @@ one:
   visible: true
   desired_team_size: 4
   project_week: one
+  gallery: one
 
 two:
   title: MyString
@@ -25,6 +26,7 @@ two:
   visible: false
   desired_team_size: 7
   project_week: one
+  gallery: two
 
 three:
   title: MyString
@@ -38,3 +40,4 @@ three:
   visible: false
   desired_team_size: 7
   project_week: one
+  gallery: three

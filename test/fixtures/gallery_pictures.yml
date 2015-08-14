@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  gallery_id: 1
+  gallery: one
   picture: MyString
+  uploader: sabine
 
 two:
-  gallery_id: 1
+  gallery: one
   picture: MyString
+  uploader: sabine

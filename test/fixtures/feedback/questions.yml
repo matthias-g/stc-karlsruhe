@@ -6,7 +6,7 @@ one:
   answer_options: MyText
   question_type: 1
   position: 1
-  parent_question_id: 1
+  is_subquestion: true
 
 two:
   survey_id: 1
@@ -14,4 +14,4 @@ two:
   answer_options: MyText
   question_type: 1
   position: 1
-  parent_question_id: 1
+  is_subquestion: false

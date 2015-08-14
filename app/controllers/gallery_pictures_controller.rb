@@ -35,7 +35,8 @@ class GalleryPicturesController < ApplicationController
 
   def destroy
     @gallery_picture.destroy
-    redirect_to request.referer
+    return redirect_to request.referer if request.referer
+    redirect_to @gallery_picture.gallery
   end
 
   def make_visible

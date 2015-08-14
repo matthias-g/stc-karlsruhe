@@ -2,6 +2,7 @@ require 'test_helper'
 
 class GalleryPicturesControllerTest < ActionController::TestCase
   setup do
+    sign_in users(:admin)
     @gallery_picture = gallery_pictures(:one)
   end
 
@@ -36,14 +37,22 @@ class GalleryPicturesControllerTest < ActionController::TestCase
 
   test "should update gallery_picture" do
     patch :update, id: @gallery_picture, gallery_picture: { gallery_id: @gallery_picture.gallery_id, picture: @gallery_picture.picture }
-    assert_redirected_to gallery_picture_path(assigns(:gallery_picture))
+    assert_redirected_to gallery_path(@gallery_picture.gallery)
   end
 
-  test "should destroy gallery_picture" do
+  test "should destroy gallery_picture with redirection to gallery" do
     assert_difference('GalleryPicture.count', -1) do
       delete :destroy, id: @gallery_picture
     end
+    assert_redirected_to gallery_path(@gallery_picture.gallery)
+  end
 
-    assert_redirected_to gallery_pictures_path
+  test "should destroy gallery_picture with redirection to referer" do
+    referer = 'https://servethecity-karlsruhe.de/projects/some-project'
+    @request.env['HTTP_REFERER'] = referer
+    assert_difference('GalleryPicture.count', -1) do
+      delete :destroy, id: @gallery_picture
+    end
+    assert_redirected_to referer
   end
 end

@@ -7,5 +7,6 @@ tmp/
 public/uploads/project
 public/uploads/gallery_picture
 public/downloads
+coverage/
 .ruby-gemset
 .env

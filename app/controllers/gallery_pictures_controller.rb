@@ -1,5 +1,5 @@
 class GalleryPicturesController < ApplicationController
-  before_action :set_gallery_picture, only: [:show, :edit, :update, :destroy, :make_visible, :make_invisible]
+  before_action :set_gallery_picture, except: [:index, :new, :create]
   before_action :authenticate_admin_user!
 
   respond_to :html

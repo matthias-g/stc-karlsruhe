@@ -15,8 +15,9 @@ module ProjectsHelper
     project.gallery.gallery_pictures.visible_for_user(current_user).count > 0
   end
 
-  def show_upload?(project)
-    project.has_volunteer?(current_user) || project.has_leader?(current_user) || (current_user && (current_user.is_admin? || current_user.is_photographer?))
+  def show_contains_invisible_pictures_notification?(project)
+    current_user && (project.gallery.gallery_pictures.where(visible: false).where(uploader_id: current_user.id).count > 0 ||
+        (current_user.is_admin? && @project.gallery.gallery_pictures.where(visible: false).count > 0))
   end
 
 end

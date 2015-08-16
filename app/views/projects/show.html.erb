@@ -73,20 +73,19 @@
           <% end %>
         </section>
       </div>
-      <% if show_gallery?(@project) || show_upload?(@project) %>
+      <% if show_gallery?(@project) || policy(@project).upload_pictures? %>
         <div class="row">
           <section class="col-md-12">
             <div class="gallery">
               <h3><%= t('project.label.gallery') %></h3>
               <% if show_gallery?(@project) %>
                 <%= render 'galleries/gallery', gallery: @project.gallery %>
-                <% if current_user && (@project.gallery.gallery_pictures.where(visible: false).where(uploader_id: current_user.id).count > 0 ||
-                    (current_user.is_admin? && @project.gallery.gallery_pictures.where(visible: false).count > 0)) %>
+                <% if show_contains_invisible_pictures_notification?(@project) %>
                   <i><%= t('project.message.galleryContainsInvisiblePictures') %></i>
                 <% end %>
               <% end %>
             </div>
-            <% if show_upload?(@project) %>
+            <% if policy(@project).upload_pictures? %>
               <div class="picture-upload">
                 <%= form_for(@project.gallery, html: { multipart: true}) do |f| %>
                   <%= f.hidden_field :title %>
@@ -102,7 +101,7 @@
                 <% end %>
               </div>
             <% end %>
-            <% if (current_user && current_user.is_admin?) %>
+            <% if policy(@project.gallery).edit? %>
               <%= link_to 'Galerie bearbeiten', edit_gallery_path(@project.gallery) %>
             <% end %>
           </section>
@@ -113,7 +112,7 @@
     <div class="col-md-4">
       <div class="row">
 
-        <% if user_signed_in? && ( current_user.leads_project?(@project) || current_user.is_admin? ) %>
+        <% if policy(@project).edit? %>
           <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
             <h3><%= t('project.label.manageProject') %></h3>
             <%= link_to t('project.action.edit'),
@@ -129,7 +128,7 @@
                           close_project_path(@project),
                           class:'btn btn-default btn-wide' %>
             <% end %>
-            <% if current_user.is_admin? %>
+            <% if policy(@project).change_visibility? %>
               <% if @project.visible %>
                 <%= link_to t('project.action.makeInvisible'),
                             make_invisible_project_path(@project),
@@ -192,20 +191,21 @@
             <%= t "project.status.#{@project.status}" %>
           </div>
           <div>
-            <% unless @project.closed? %>
-              <% if user_signed_in? && @project.has_volunteer?(current_user) %>
-                <p><%= t('project.message.teamMember') %></p>
-                <%= link_to t('project.action.leave'),
-                            leave_project_path(@project),
-                            class: 'btn btn-default btn-wide' %>
-              <% elsif @project.has_free_places? %>
-                <%= link_to t('project.action.enter'),
-                            enter_project_path(@project),
-                            class: 'btn btn-default btn-wide' %>
-              <% end %>
-              <% if user_signed_in? && @project.has_volunteer_in_subproject?(current_user) %>
-                <p><%= t('project.message.subprojectTeamMember') %></p>
-              <% end %>
+            <% if user_signed_in? && @project.has_volunteer?(current_user) %>
+              <p><%= t('project.message.teamMember') %></p>
+            <% end %>
+            <% if policy(@project).leave? %>
+              <%= link_to t('project.action.leave'),
+                          leave_project_path(@project),
+                          class: 'btn btn-default btn-wide' %>
+            <% end %>
+            <% if policy(@project).enter? %>
+              <%= link_to t('project.action.enter'),
+                          enter_project_path(@project),
+                          class: 'btn btn-default btn-wide' %>
+            <% end %>
+            <% if user_signed_in? && @project.has_volunteer_in_subproject?(current_user) %>
+              <p><%= t('project.message.subprojectTeamMember') %></p>
             <% end %>
           </div>
         </section>
@@ -225,7 +225,7 @@
     </div>
   </div>
 
-  <% if user_signed_in? && (@project.has_leader?(current_user) || current_user.is_admin?)  %>
+  <% if policy(@project).contact_volunteers?  %>
     <section class="contact-volunteers-form">
       <%= bootstrap_form_for(@message, url: {action: 'contact_volunteers'}) do |f| %>
         <h2><%= t('contact.team.title') %></h2>

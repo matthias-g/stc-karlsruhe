@@ -42,6 +42,7 @@ group :doc do
 end
 
 gem 'devise'
+gem 'pundit'
 
 gem 'mini_magick'
 gem 'carrierwave'

@@ -1,12 +1,12 @@
 class GalleriesController < ApplicationController
-  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :make_all_visible, :make_all_invisible]
-  before_action :authenticate_admin_user!, except: [:update]
-  before_action :authenticate_user!, only: [:update]
-  before_action :check_if_user_can_upload, only: [:update]
+  before_action :set_gallery, except: [:index, :new, :create]
+  before_action :authorize_gallery, except: [:index, :new, :create]
+  after_action :verify_authorized
 
   respond_to :html
 
   def index
+    authorize Gallery.new
     @galleries = Gallery.all
     respond_with(@galleries)
   end
@@ -21,6 +21,7 @@ class GalleriesController < ApplicationController
 
   def new
     @gallery = Gallery.new
+    authorize @gallery
     @gallery.gallery_pictures.build
     respond_with(@gallery)
   end
@@ -30,6 +31,7 @@ class GalleriesController < ApplicationController
 
   def create
     @gallery = Gallery.new(gallery_params)
+    authorize @gallery
     upload_pictures if @gallery.save
     respond_with(@gallery)
   end
@@ -68,13 +70,6 @@ class GalleriesController < ApplicationController
     params.require(:gallery).permit(:title, gallery_pictures_attributes: [:id, :gallery_id, :picture])
   end
 
-  def check_if_user_can_upload
-    not_found unless current_user
-    @gallery.projects.each do |project|
-      not_found unless project.has_leader?(current_user) || project.has_volunteer?(current_user) || current_user.is_admin? || current_user.is_photographer?
-    end
-  end
-
   def upload_pictures
     if params[:gallery_pictures] && params[:gallery_pictures][:picture].size > 0
       params[:gallery_pictures][:picture].each do |picture|
@@ -96,5 +91,9 @@ class GalleriesController < ApplicationController
                                   pictureCount: params[:gallery_pictures][:picture].size,
                                   uploader: current_user.full_name))
     Mailer.generic_mail(message).deliver
+  end
+
+  def authorize_gallery
+    authorize @gallery
   end
 end

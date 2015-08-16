@@ -404,3 +404,10 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
     errors:
       verification_failed: Bitte bestätige im Formular das Feld zum Spamschutz.
       recaptcha_unreachable: Die Server zum Spamschutz sind zur Zeit leider nicht erreichbar.
+
+  pundit:
+    default: Du hast keine Berechtigung für diese Aktion.
+    not_logged_in:
+    project_policy:
+      update?: Du kannst dieses Projekt nicht bearbeiten!
+      enter?: Leider ist die Teilnahme an diesem Projekt zur Zeit nicht möglich.

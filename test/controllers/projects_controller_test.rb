@@ -36,7 +36,7 @@ class ProjectsControllerTest < ActionController::TestCase
     @project = projects(:two)
     assert_not @project.visible
     get :show, id: @project
-    assert_redirected_to new_user_session_path
+    assert_redirected_to login_or_register_url
   end
 
   test 'should show invisible project if current user leads it' do

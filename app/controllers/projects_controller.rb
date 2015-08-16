@@ -1,18 +1,19 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :enter, :leave, :edit_leaders, :add_leader, :delete_leader, :make_visible, :make_invisible, :contact_volunteers, :delete_volunteer, :open, :close, :crop_picture]
-  before_action :authenticate_user!, only: [:edit, :update, :enter, :leave, :destroy, :new, :edit_leaders, :add_leader, :delete_leader, :open, :close]
-  before_action :authenticate_admin_user!, only: [:index, :make_visible, :make_invisible, :delete_volunteer]
-  before_action :redirect_non_leaders, only: [:edit, :edit_leaders, :add_leader, :delete_leader, :destroy, :update, :open, :close]
-  before_action :check_visible, only: [:show, :edit, :update, :enter, :leave, :edit_leaders, :add_leader, :delete_leader, :destroy]
+  before_action :set_project, except: [:index, :new, :create]
+  before_action :authenticate_user!, except: [:show]
+  before_action :authorize_project, except: [:index, :new, :create]
+
+  after_action :verify_authorized , except: [:new, :create]
 
   respond_to :html
 
   def index
+    authorize Project.new
     visible = true
     if params[:filter] && (params[:filter][:visibility] == 'hidden') && current_user.is_admin?
         visible = false
     end
-    @projects = Project.visible.order(:status)
+    @projects = Project.where(visible: visible).order(:status)
     @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] && (params[:filter][:day] != '')
     @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] && (params[:filter][:status] != '')
     respond_with(@projects)
@@ -53,12 +54,8 @@ class ProjectsController < ApplicationController
   end
 
   def enter
-    if @project.full? or @project.closed?
-      redirect_to project_url(@project), :notice => t('project.message.isFull')
-      return
-    end
     @project.add_volunteer(current_user)
-    redirect_to project_url(@project), :notice => t('project.message.participationSuccess')
+    redirect_to project_url(@project), notice: t('project.message.participationSuccess')
   end
 
   def leave
@@ -158,20 +155,8 @@ class ProjectsController < ApplicationController
         :picture, :picture_source, :desired_team_size,  :project_week_id, { :day_ids => [] }, :time, :parent_project_id)
     end
 
-    def redirect_non_leaders
-      unless current_user.leads_project?(@project) or current_user.is_admin?
-        redirect_to @project
-      end
-    end
-
-    def check_visible
-      unless @project.visible or (user_signed_in? and current_user.is_admin?) or (user_signed_in? and current_user.leads_project?(@project))
-        if user_signed_in?
-          redirect_to projects_path
-        else
-          redirect_to new_user_session_path
-        end
-      end
+    def authorize_project
+      authorize @project
     end
 
 end

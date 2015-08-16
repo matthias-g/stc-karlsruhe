@@ -1,20 +1,17 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :contact_user, :edit, :update, :confirm_delete, :destroy]
-  before_action :authenticate_user!, except: [:login_or_register]
-  before_action :authenticate_admin_user!, only: [:index]
-  before_action :own_user_or_authenticate_admin_user!, only: [:edit, :update, :destroy]
+  before_action :set_user, except: [:index, :login_or_register]
+  before_action :authorize_user, except: [:index, :login_or_register]
+  after_action :verify_authorized, except: [:login_or_register]
 
   respond_to :html
 
   def index
+    authorize User.new
     @users = User.all
     respond_with(@user)
   end
 
   def show
-    if @user.cleared && !current_user.is_admin?
-      not_found
-    end
     #Message for contact_user
     @message = Message.new
     respond_with(@user)
@@ -55,20 +52,18 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:username, :first_name, :last_name, :email, :phone)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:username, :first_name, :last_name, :email, :phone)
+  end
 
-    def own_user_or_authenticate_admin_user!
-      unless @user == current_user
-        authenticate_admin_user!
-      end
-    end
+  def authorize_user
+    authorize @user
+  end
 
 end

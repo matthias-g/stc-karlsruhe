@@ -31,7 +31,7 @@
             <td><%= @user.phone %></td>
           </tr>
         </table>
-        <% if (@user == current_user) || current_user.is_admin?  %>
+        <% if policy(@user).edit?  %>
             <%= link_to edit_user_path, title: t('user.action.edit'),
                    class:'btn btn-default' do %>
                 <span class="glyphicon glyphicon-pencil"></span>

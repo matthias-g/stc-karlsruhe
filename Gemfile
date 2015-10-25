@@ -63,6 +63,8 @@ gem 'friendly_id'
 
 gem 'dotenv-rails'
 
+gem 'unicorn'
+
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano'

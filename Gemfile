@@ -68,7 +68,7 @@ group :development do
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
-  gem 'capistrano-passenger'
+  gem 'capistrano-unicorn'
 
   gem 'web-console'
   gem 'letter_opener'

@@ -1,3 +1,5 @@
+require 'capistrano-unicorn'
+
 set :application, 'servethecity-karlsruhe'
 set :repo_url, 'git@github.com:matthias-g/stc-karlsruhe.git'
 
@@ -33,4 +35,6 @@ set :linked_dirs, %w{public/downloads public/uploads log}
 # Default value for keep_releases is 5
 set :keep_releases, 20
 
-set :passenger_restart_with_touch, true
+after 'deploy:restart', 'unicorn:reload'    # app IS NOT preloaded
+after 'deploy:restart', 'unicorn:restart'   # app preloaded
+after 'deploy:restart', 'unicorn:duplicate' # before_fork hook implemented (zero downtime deployments)

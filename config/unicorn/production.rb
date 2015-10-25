@@ -2,7 +2,7 @@
 # documentation.
 
 listen 5876 # by default Unicorn listens on port 8080
-worker_processes 6 # this should be >= nr_cpus
+worker_processes 12 # this should be >= nr_cpus
 pid '/home/stc/servethecity-karlsruhe/current/tmp/pids/unicorn.pid'
 
 # combine Ruby 2.0.0+ with "preload_app true" for memory savings

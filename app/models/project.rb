@@ -9,7 +9,7 @@ class Project < ActiveRecord::Base
   belongs_to :gallery, dependent: :destroy
 
   validates_presence_of :title, :desired_team_size
-  validate :desired_team_size, numericality: {only_integer: true, greater_than: 0}
+  validates :desired_team_size, numericality: {only_integer: true, greater_than: 0}
   before_save :adjust_status
   after_save :adjust_parent_status
   before_create :create_gallery!

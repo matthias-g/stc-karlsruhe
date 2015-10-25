@@ -30,5 +30,8 @@ module StcKarlsruhe
 
     # autoload lib directory (for CustomFailureApp)
     config.autoload_paths << Rails.root.join('lib')
+
+    # can be removed after update to Rails 5
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

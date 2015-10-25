@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.2.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails'
+gem 'rails', '~> 4.2'
 
 gem 'rails-i18n'
 
@@ -41,6 +41,8 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'responders'
+
 gem 'devise'
 gem 'pundit'
 
@@ -68,6 +70,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-passenger'
 
+  gem 'web-console'
   gem 'letter_opener'
   gem 'better_errors'
   gem 'binding_of_caller'

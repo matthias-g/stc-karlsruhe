@@ -136,7 +136,7 @@ class ProjectsController < ApplicationController
 
   def contact_volunteers
     @message = Message.new(params[:message])
-    Mailer.project_mail(@message, current_user, @project).deliver
+    Mailer.project_mail(@message, current_user, @project).deliver_now
     flash[:notice] = t('contact.team.success')
     redirect_to action: :show
   end

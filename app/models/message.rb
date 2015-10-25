@@ -6,7 +6,7 @@ class Message
 
   attr_accessor :sender, :recipient, :subject, :body
 
-  validate :sender, :recipient, format: { with: %r{.+@.+\..+} }
+  validates :sender, :recipient, format: { with: %r{.+@.+\..+} }
   validates :sender, :recipient, :subject, :body, presence: true, allow_blank: false
 
   def initialize(attributes = {})

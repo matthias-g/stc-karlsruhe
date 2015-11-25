@@ -12,6 +12,15 @@ class ChangeDesiredTeamSizeColumnType < ActiveRecord::Migration
           execute 'ALTER TABLE projects ALTER COLUMN desired_team_size TYPE text USING (latitude::text)'
         end
       end
+    elsif ActiveRecord::Base.connection.adapter_name == 'MySQL'
+      reversible do |change|
+        change.up do
+          execute 'ALTER TABLE projects MODIFY desired_team_size INTEGER'
+        end
+        change.down do
+          execute 'ALTER TABLE projects MODIFY desired_team_size TEXT'
+        end
+      end
     end
   end
 

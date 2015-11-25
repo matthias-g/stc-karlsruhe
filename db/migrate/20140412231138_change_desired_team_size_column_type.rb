@@ -21,6 +21,9 @@ class ChangeDesiredTeamSizeColumnType < ActiveRecord::Migration
           execute 'ALTER TABLE projects MODIFY desired_team_size TEXT'
         end
       end
+    else
+      adapter_name = ActiveRecord::Base.connection.adapter_name
+      raise "Database adapter #{adapter_name} not supported. Migration implemented only for SQLite, PostgreSQL, and MySQL."
     end
   end
 

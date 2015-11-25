@@ -6,6 +6,5 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Page.create!(header_name: 'bigheader')
 Role.create!(title: :admin)
-ProjectWeek.create!(default: true)
+ProjectWeek.create!(default: true, title: Time.now.year.to_s)

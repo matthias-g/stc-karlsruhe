@@ -90,7 +90,7 @@ class GalleriesController < ApplicationController
                                   title: title,
                                   pictureCount: params[:gallery_pictures][:picture].size,
                                   uploader: current_user.full_name))
-    Mailer.generic_mail(message).deliver_now
+    Mailer.generic_mail(message).deliver_later
   end
 
   def authorize_gallery

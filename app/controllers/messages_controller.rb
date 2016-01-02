@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
 
   def send_contact_mail
     if @message.valid?
-      Mailer.contact_mail(@message).deliver_later
+      Mailer.contact_mail(@message).deliver_now
       redirect_to root_path, notice: t('contact.orga.success')
     else
       flash[:alert] = @message.errors.values
@@ -46,7 +46,7 @@ class MessagesController < ApplicationController
     end
     @message.recipient = (to + [current_user.email]).uniq.join(',')
     if @message.valid?
-      Mailer.generic_mail(@message, true).deliver_later
+      Mailer.generic_mail(@message, true).deliver_now
       flash[:notice] = t('contact.adminMail.success')
       redirect_to action: :admin_mail_form
     else

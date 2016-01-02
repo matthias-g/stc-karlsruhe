@@ -7,18 +7,18 @@ class ProjectPolicy < ApplicationPolicy
 
   def index?
     return false unless user
-    user.is_admin?
+    user.admin?
   end
 
   def show?
     return true if record.visible?
     return false unless user
-    user.is_admin? || user.leads_project?(record)
+    user.admin? || user.leads_project?(record)
   end
 
   def edit?
     return false unless user
-    user.is_admin? || user.leads_project?(record)
+    user.admin? || user.leads_project?(record)
   end
 
   alias_method :update?, :edit?
@@ -43,12 +43,12 @@ class ProjectPolicy < ApplicationPolicy
 
   def delete_volunteer?
     return false unless user
-    user.is_admin?
+    user.admin?
   end
 
   def change_visibility?
     return false unless user
-    user.is_admin?
+    user.admin?
   end
 
   alias_method :make_visible?, :change_visibility?
@@ -56,7 +56,7 @@ class ProjectPolicy < ApplicationPolicy
 
   def upload_pictures?
     return false unless user
-    record.has_volunteer?(user) || record.has_leader?(user) || user.is_admin? || user.is_photographer?
+    record.has_volunteer?(user) || record.has_leader?(user) || user.admin? || user.photographer?
   end
 
 end

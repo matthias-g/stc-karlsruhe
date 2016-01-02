@@ -7,7 +7,7 @@ class GalleryPolicy < ApplicationPolicy
 
   def user_is_admin?
     return false unless user
-    user.is_admin?
+    user.admin?
   end
 
   alias_method :index?, :user_is_admin?
@@ -21,7 +21,7 @@ class GalleryPolicy < ApplicationPolicy
 
   def update?
     return false unless user
-    return true if user.is_admin? || user.is_photographer?
+    return true if user.admin? || user.photographer?
     record.projects.each do |project|
       return false unless Pundit.policy!(user, project).upload_pictures?
     end

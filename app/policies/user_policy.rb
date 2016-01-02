@@ -7,17 +7,17 @@ class UserPolicy < ApplicationPolicy
 
   def index?
     return false unless user
-    user.is_admin?
+    user.admin?
   end
 
   def show?
     return false unless user
-    !user.cleared? || user.is_admin?
+    !user.cleared? || user.admin?
   end
 
   def edit?
     return false unless user
-    user == record || user.is_admin?
+    user == record || user.admin?
   end
 
   alias_method :update?, :edit?

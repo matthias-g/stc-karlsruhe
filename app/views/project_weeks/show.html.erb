@@ -70,7 +70,7 @@
           <%= f.select(:status,
                        Project.statuses.keys.map { |s| [t("project.status.#{s}"), s] },
                        include_blank: "- - - Status egal - - -", hide_label: true) %>
-          <% if user_signed_in? && current_user.is_admin? %>
+          <% if user_signed_in? && current_user.admin? %>
             <%= f.select(:visibility,
                          [['Sichtbar', :visible], ['Versteckt', :hidden]],
                          hide_label: true) %>
@@ -92,7 +92,7 @@
   <div class="col-md-9 col-md-pull-3" id="project-list">
     <%
        visible = true
-       if params[:filter] && (params[:filter][:visibility] == 'hidden') && current_user.is_admin?
+       if params[:filter] && (params[:filter][:visibility] == 'hidden') && current_user.admin?
          visible = false
        end
        projects = @project_week.projects.toplevel.where(visible: visible).order(:status, picture_source: :desc)

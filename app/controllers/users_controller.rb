@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if @user.valid_password?(params[:confirm_delete_password]) || current_user.is_admin?
+    if @user.valid_password?(params[:confirm_delete_password]) || current_user.admin?
       @user.clear!
       @user.save!
       sign_out

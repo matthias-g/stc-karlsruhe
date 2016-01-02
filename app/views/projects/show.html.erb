@@ -237,7 +237,7 @@
     </section>
   <% end %>
 
-  <% if user_signed_in? && current_user.is_admin?  %>
+  <% if user_signed_in? && current_user.admin?  %>
     <section class="contact-volunteers-form">
      (Nur Admins:) Hier nochmal alle Emailadressen, damit du alternativ eine Email in deinem Emailprogramm schreiben kannst (bitte BCC verwenden).
       <div style="background: #eee; border: 1px solid #aaa; padding: 5px; margin: 10px;">

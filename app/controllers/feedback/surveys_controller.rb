@@ -50,7 +50,7 @@ class Feedback::SurveysController < ApplicationController
   end
 
   def redirect_non_admins_to_answers
-    unless current_user && current_user.is_admin?
+    unless current_user && current_user.admin?
       redirect_to new_feedback_survey_feedback_survey_answer_path(@survey)
     end
   end

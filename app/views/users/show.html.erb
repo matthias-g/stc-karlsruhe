@@ -14,7 +14,7 @@
 <div class="row row-sm-eq-height">
   <div class="col-sm-6">
 
-    <% if (current_user == @user) || current_user.is_admin? %>
+    <% if (current_user == @user) || current_user.admin? %>
       <section class="profile-data">
         <h2><%= t('user.label.userData') %></h2>
         <table>

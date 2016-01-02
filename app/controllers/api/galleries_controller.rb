@@ -8,7 +8,7 @@ class Api::GalleriesController < ApplicationController
                            .visible_for_user(current_user)
                            .as_json(only: [:width, :height, :desktop_width, :desktop_height, :picture, :id])
     if current_user
-      user_is_admin = current_user.is_admin?
+      user_is_admin = current_user.admin?
       @gallery.gallery_pictures.visible_for_user(current_user).each_with_index { |picture, index|
         if picture.uploader_id == current_user.id || user_is_admin
           gallery_pictures[index][:editable] = true

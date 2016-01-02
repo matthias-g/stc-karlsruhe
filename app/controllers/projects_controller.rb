@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
   def index
     authorize Project.new
     visible = true
-    if params[:filter] && (params[:filter][:visibility] == 'hidden') && current_user.is_admin?
+    if params[:filter] && (params[:filter][:visibility] == 'hidden') && current_user.admin?
         visible = false
     end
     @projects = Project.where(visible: visible).order(:status)

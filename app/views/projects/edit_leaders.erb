@@ -18,7 +18,7 @@
         <% @project.volunteers.each do |volunteer| %>
           <li>
             <%= volunteer.full_name %>
-            <% if current_user.is_admin? %>
+            <% if current_user.admin? %>
                 <%= link_to delete_volunteer_project_path(@project, :user_id => volunteer.id),
                             :method => 'delete', title:t('project.action.removeVolunteer') do %>
                   <span class="glyphicon glyphicon-remove"

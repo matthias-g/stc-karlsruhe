@@ -65,11 +65,11 @@ class User < ActiveRecord::Base
     roles.any?{|r| r.title.camelize == title.to_s.camelize}
   end
 
-  def is_admin?
+  def admin?
     has_role?(:admin)
   end
 
-  def is_photographer?
+  def photographer?
     has_role?(:photographer)
   end
 

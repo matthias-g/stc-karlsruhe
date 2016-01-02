@@ -101,8 +101,8 @@ $(document).ready(function ($) {
             galleryItems.push({
                 src: item.picture.desktop.url,
                 raw_src: item.picture.url,
-                w: item.width,
-                h: item.height,
+                w: item.desktop_width,
+                h: item.desktop_height,
                 id: item.id,
                 editable: item.editable
             });

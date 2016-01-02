@@ -57,13 +57,15 @@ class GalleryPictureUploader < CarrierWave::Uploader::Base
   # end
 
   process :auto_orient # this should go before all other "process" steps
-  process :store_dimensions
+  after :store, :store_dimensions
 
   private
 
-  def store_dimensions
+  def store_dimensions param
     if file && model
-      model.width, model.height = ::MiniMagick::Image.open(file.file)[:dimensions]
+      width, height = ::MiniMagick::Image.open(file.file)[:dimensions]
+      desktop_width, desktop_height = ::MiniMagick::Image.open(model.picture.desktop.file.file)[:dimensions]
+      model.update(width: width, height: height, desktop_width: desktop_width, desktop_height: desktop_height)
     end
   end
 

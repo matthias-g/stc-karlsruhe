@@ -4,7 +4,9 @@ class Api::GalleriesController < ApplicationController
   respond_to :json
 
   def show
-    gallery_pictures = @gallery.gallery_pictures.visible_for_user(current_user).as_json(only: [:width, :height, :picture, :id])
+    gallery_pictures = @gallery.gallery_pictures
+                           .visible_for_user(current_user)
+                           .as_json(only: [:width, :height, :desktop_width, :desktop_height, :picture, :id])
     if current_user
       user_is_admin = current_user.is_admin?
       @gallery.gallery_pictures.visible_for_user(current_user).each_with_index { |picture, index|

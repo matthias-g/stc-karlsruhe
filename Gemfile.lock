@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/matthias-g/jssorslider-rails.git
-  revision: 03e7ed9129bddb30bca6e11cd8904d9b0fd2bc15
+  revision: 71659bc563fc7e96ee2445356ab3b06fb344cc77
   specs:
-    jssorslider-rails (19.0)
+    jssorslider-rails (19.0.1)
       railties (>= 3.1)
 
 GEM

@@ -48,7 +48,7 @@ gem 'pundit'
 
 gem 'mini_magick'
 gem 'carrierwave'
-gem 'jssorslider-rails', github: 'matthias-g/jssorslider-rails', tag: '19.0.1'
+gem 'jssorslider-rails', github: 'matthias-g/jssorslider-rails'
 gem 'photoswipe-rails'
 
 gem 'bootstrap-sass'

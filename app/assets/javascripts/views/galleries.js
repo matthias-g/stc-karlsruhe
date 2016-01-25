@@ -81,7 +81,7 @@ $(document).ready(function ($) {
             $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
             $ActionMode: 1,                                 //[Optional] 0 None, 1 act by click, 2 act by mouse hover, 3 both, default value is 1
             $SpacingX: 6,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
-            $DisplayPieces: 7,                             //[Optional] Number of pieces to display, default value is 1
+            $Cols: 7,                             //[Optional] Number of pieces to display, default value is 1
             $ParkingPosition: 247                          //[Optional] The offset position to park thumbnail
         },
         $FillMode: 1
@@ -169,7 +169,7 @@ $(document).ready(function ($) {
         gallery = new PhotoSwipe(pswp.get(0), PhotoSwipeUI_Default, galleryItems, options);
         gallery.init();
         gallery.listen('close', function() {
-            slider.$GoTo(gallery.getCurrentIndex());
+            slider.$PlayTo(gallery.getCurrentIndex());
         });
 
         $('.pswp__button--delete').unbind('click').click(function() {

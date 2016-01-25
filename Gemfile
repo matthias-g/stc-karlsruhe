@@ -55,7 +55,7 @@ gem 'bootstrap-sass'
 gem 'bootstrap_form'
 
 gem 'actionview-encoded_mail_to'
-gem 'recaptcha', '~> 0.4.0'
+gem 'recaptcha', require: 'recaptcha/rails'
 
 gem 'pg'
 

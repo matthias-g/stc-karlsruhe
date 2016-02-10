@@ -1,5 +1,0 @@
-== README
-
-{<img src="https://gemnasium.com/matthias-g/stc-karlsruhe.svg" alt="Dependency Status" />}[https://gemnasium.com/matthias-g/stc-karlsruhe]
-
-

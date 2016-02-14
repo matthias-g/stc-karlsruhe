@@ -1,7 +1,5 @@
-class Api::ProjectWeeksController < ApplicationController
+class Api::ProjectWeeksController < Api::ApiController
   before_action :set_project_week, only: [:projects, :project_days]
-
-  respond_to :json
 
   def index
     project_weeks = ProjectWeek.all

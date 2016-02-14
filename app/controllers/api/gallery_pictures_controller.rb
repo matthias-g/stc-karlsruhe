@@ -1,9 +1,7 @@
-class Api::GalleryPicturesController < ApplicationController
+class Api::GalleryPicturesController < Api::ApiController
 
   before_action :set_gallery_picture, only: [:destroy, :rotateRight, :rotateLeft]
   before_action :authenticate_admin_user_or_uploader!
-
-  respond_to :json
 
   def destroy
     @gallery_picture.destroy

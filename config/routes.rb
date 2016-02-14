@@ -58,7 +58,7 @@ StcKarlsruhe::Application.routes.draw do
   devise_for :users, path: '',
              path_names: { sign_in: 'login', sign_out: 'logout',
                            sign_up: 'register', edit: 'edit_password'},
-             controllers: { registrations: 'users/registrations'}
+             controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
 
   resources :users, except: [:new, :create] do
     member do
@@ -72,7 +72,12 @@ StcKarlsruhe::Application.routes.draw do
   get '/:page', to: 'pages#page', as: :show_page
 
   namespace :api do
-    resources :projects, only: :show
+    resources :projects, only: :show do
+      member do
+        get :enter
+        get :leave
+      end
+    end
     resources :project_weeks, only: [:index] do
       member do
         get :projects

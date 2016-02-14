@@ -44,6 +44,7 @@ end
 gem 'responders'
 
 gem 'devise'
+gem 'simple_token_authentication', '~> 1.0'
 gem 'pundit'
 
 gem 'mini_magick'

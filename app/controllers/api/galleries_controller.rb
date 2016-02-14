@@ -1,7 +1,5 @@
-class Api::GalleriesController < ApplicationController
+class Api::GalleriesController < Api::ApiController
   before_action :set_gallery
-
-  respond_to :json
 
   def show
     gallery_pictures = @gallery.gallery_pictures

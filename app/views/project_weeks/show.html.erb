@@ -20,23 +20,7 @@
 
   <div class="select-year">
     <h1>Projektwoche <%= @project_week.title %></h1>
-    <% @weeks = (ProjectWeek.all.order(title: :desc)) %>
-    <% if !@weeks.blank? %>
-      <div class="dropdown h1">
-        <a class="dropdown-toggle" id="yearDropdown" title="Andere Projektwochen"
-           data-toggle="dropdown" aria-expanded="true">
-          <span class="glyphicon glyphicon-chevron-down"></span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-right" role="menu" id="yearDropdownMenu"
-            aria-labelledby="yearDropdown" data-current="<%= @weeks.find_index(@project_week) %>">
-          <% @weeks.each_with_index do |project_week, index| %>
-            <li role="presentation">
-              <%= link_to project_week.title, show_project_week_path(project_week.title), {:'data-index' => index} %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render partial: 'layouts/week_dropdown', locals: { target_path: method(:show_project_week_path) } %>
   </div>
 
   <div style="text-align: right">

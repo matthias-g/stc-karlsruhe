@@ -2,8 +2,13 @@
   <%= t('layout.title.statistics') %>
 <% end %>
 
-<section>
-  <h1>Projektauslastung</h1>
+<section id="statistics-header" class="showOverflow">
+  <div class="select-year">
+    <h1>Projektauslastung <%= @project_week.title %></h1>
+    <%= render partial: 'layouts/week_dropdown', locals: { target_path: method(:occupancy_in_year_path) } %>
+  </div>
+
+  <div class="clearfix"></div>
 </section>
 
 <div class="row row-md-eq-height">
@@ -40,7 +45,11 @@
         <td><strong><%= all_volunteers %></strong></td>
         <td><strong><%= all_team_size - all_volunteers %></strong></td>
         <td><strong><%= all_team_size %></strong></td>
-        <td><strong><%= 100 * all_volunteers / all_team_size  %> %</strong></td>
+        <% if all_team_size > 0 %>
+          <td><strong><%= 100 * all_volunteers / all_team_size  %> %</strong></td>
+        <% else %>
+          <td>-</td>
+        <% end %>
       </tr>
       </tbody>
     </table>

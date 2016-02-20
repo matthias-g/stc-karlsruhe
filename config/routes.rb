@@ -23,6 +23,7 @@ StcKarlsruhe::Application.routes.draw do
   get 'statistiken/teilnahmen', to: 'statistics#participations'
   get 'statistiken/teilnahmen/:date', to: 'statistics#participations_on_day', as: :participations_on_day
   get 'statistiken/auslastung', to: 'statistics#occupancy'
+  get 'statistiken/auslastung-:title', to: 'statistics#occupancy', as: :occupancy_in_year
 
   resources :project_weeks
 

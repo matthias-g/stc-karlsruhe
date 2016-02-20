@@ -11,7 +11,8 @@ class StatisticsController < ApplicationController
   end
 
   def occupancy
-    @projects = ProjectWeek.default.projects.visible.sort_by { |project| sort_column(project) }
+    @project_week = ProjectWeek.find_by_title(params[:title]) || ProjectWeek.default
+    @projects = @project_week.projects.visible.sort_by { |project| sort_column(project) }
     if params[:direction] == 'desc'
       @projects.reverse!
     end

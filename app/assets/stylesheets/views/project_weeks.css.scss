@@ -5,30 +5,6 @@
 #project-list-header {
   .select-year > * {
     float: left;
-    .dropdown-toggle {
-      color: rgba(#777, 0.4);
-      font-size: 0.7em;
-      margin-left: 15px;
-      vertical-align: 8%;
-      &:hover {
-        color: $link-hover-color;
-        cursor: pointer;
-      }
-    }
-    .dropdown-menu {
-      font-size: 1em;
-      right: 34px;
-      top: -73px; // -17
-      position: absolute;
-      min-width: 30px;
-      > li > a {
-        padding: 3px 5px;
-      }
-      .dropdown-header {
-        font-family: BoldFont;
-        font-size: 14px;
-      }
-    }
   }
 
   padding: 10px 20px;

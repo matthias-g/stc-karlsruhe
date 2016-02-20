@@ -171,6 +171,7 @@ de:
       text: 'Du hast die eine oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei Dir.'
       submit: 'Nachricht senden'
       success: 'Vielen Dank für Deine Nachricht! Wir werden sie so schnell wie möglich beantworten.'
+      intro: 'Über das Kontaktformular auf servethecity-karlsruhe.de ist eine neue Nachricht eingegangen:'
     team:
       title: 'Teilnehmer des Projektes benachrichtigen'
       text: 'Hier kannst du den Teilnehmern des Projektes eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'

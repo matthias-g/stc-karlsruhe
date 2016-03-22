@@ -56,12 +56,12 @@ bundle install
 
 Setup PostgreSQL
 ```shell
-user@host:~$ sudo -u postgres -i
+<<your username>>@host:~$ sudo -u postgres -i
 postgres@host:~$ psql -d postgres
 postgres=# create role <<your username>> login createdb;
 ```
 
-Create databases
+Setup databases
 ```shell
 rake db:setup
 ```

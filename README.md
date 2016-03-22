@@ -55,7 +55,7 @@ bundle install
 ```
 
 Setup PostgreSQL
-```shell
+```
 <<your username>>@host:~$ sudo -u postgres -i
 postgres@host:~$ psql -d postgres
 postgres=# create role <<your username>> login createdb;

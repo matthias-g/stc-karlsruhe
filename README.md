@@ -18,7 +18,7 @@ Development Setup
 
 Install [RVM](https://rvm.io)
 ```shell
-pg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 \curl -sSL https://get.rvm.io | bash -s stable
 ```
 
@@ -33,20 +33,20 @@ Install [JS runtime](https://github.com/rails/execjs)
 sudo apt-get install nodejs
 ```
 
+Clone repository
+```shell
+git clone https://github.com/matthias-g/stc-karlsruhe.git
+cd stc-karlsruhe/
+```
+
 Install Ruby
 ```shell
-rvm install ruby-2.2.3
+rvm install $(cat .ruby-version)
 ```
 
 Install Bundler
 ```shell
 gem install bundler
-```
-
-Clone repository
-```shell
-git clone https://github.com/matthias-g/stc-karlsruhe.git
-cd stc-karsruhe
 ```
 
 Install gems
@@ -56,9 +56,9 @@ bundle install
 
 Setup PostgreSQL
 ```shell
-sudo -u postgres -i
-psql -d postgres
-postgres=# create role <<your username>> login createdb
+user@host:~$ sudo -u postgres -i
+postgres@host:~$ psql -d postgres
+postgres=# create role <<your username>> login createdb;
 ```
 
 Create databases

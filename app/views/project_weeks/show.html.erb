@@ -111,6 +111,11 @@
         </div>
       </section>
     <% end %>
+    <% if projects.count == 0 %>
+    <section>
+      <%= t('project_week.noProjects') %>
+    </section>
+    <% end %>
   </div>
 
 </div>

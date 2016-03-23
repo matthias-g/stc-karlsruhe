@@ -346,6 +346,9 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
     errorsExist: 'Der Tag konnte wegen folgenden Fehlern nicht gespeichert werden:'
     confirmDelete: 'Wollen Sie den Projekttag "%s" wirklich löschen?'
 
+  project_week:
+    noProjects: 'Wir sind zwar schon bei der Planung der Projektwoche, aber bisher sind noch keine Projekte öffentlich. Schau später nochmal vorbei oder kontaktiere uns, wenn du einen Vorschlag für ein Projekt hast!'
+
   role:
     new: 'Neue User-Rolle'
     save: 'Rolle speichern'

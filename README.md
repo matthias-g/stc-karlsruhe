@@ -18,40 +18,40 @@ Development Setup
 
 Install [RVM](https://rvm.io)
 ```shell
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-\curl -sSL https://get.rvm.io | bash -s stable
+$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+$ \curl -sSL https://get.rvm.io | bash -s stable
 ```
 
 Install PostgreSQL
 ```shell
-sudo apt-get install postgresql libpq-dev
+$ sudo apt-get install postgresql libpq-dev
 ```
 
-Install [JS runtime](https://github.com/rails/execjs)
+Install [JS runtime](https://github.com/rails/execjs#execjs)
 ```shell
 # For example:
-sudo apt-get install nodejs
+$ sudo apt-get install nodejs
 ```
 
 Clone repository
 ```shell
-git clone https://github.com/matthias-g/stc-karlsruhe.git
-cd stc-karlsruhe/
+$ git clone https://github.com/matthias-g/stc-karlsruhe.git
+$ cd stc-karlsruhe/
 ```
 
 Install Ruby
 ```shell
-rvm install $(cat .ruby-version)
+$ rvm install $(cat .ruby-version)
 ```
 
 Install Bundler
 ```shell
-gem install bundler
+$ gem install bundler
 ```
 
 Install gems
 ```shell
-bundle install
+$ bundle install
 ```
 
 Setup PostgreSQL
@@ -63,10 +63,10 @@ postgres=# create role <<your username>> login createdb;
 
 Setup databases
 ```shell
-rake db:setup
+$ rake db:setup
 ```
 
 Start server
 ```shell
-rails s
+$ rails s
 ```

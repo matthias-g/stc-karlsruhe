@@ -258,39 +258,45 @@
            role="tabpanel" aria-labelledby="heading_donate">
         <div class="panel-body">
           <p>
-          Für Materialien bei den Aktionen benötigen wir finanzielle Mittel, deine Spende
-          ist also herzlich willkommen! Falls projektgebunden gespendet werden soll,
-          kann das im Überweisungsbetreff angemerkt werden. Wir können
-          <a href="/kontakt">auf Anfrage</a> auch eine offizielle Spendenbescheinigung ausstellen.
+            Für Materialien bei den Projekten und Werbemittel wie Plakate, Flyer und unsere Webseite
+            benötigen wir finanzielle Mittel. Deine Spende
+            ist also herzlich willkommen! Am einfachsten kannst du über die Spendenplattform
+            <%= link_to 'Betterplace', 'https://www.betterplace.org/de/projects/41347' %> spenden,
+            die dir auch eine Spendenbescheinigung austellt:
+            <%= link_to (image_tag 'Betterplace.jpg', class: 'img-responsive center-block'), 'https://www.betterplace.org/de/projects/41347' %>
           </p>
           <p>
-          Überweise deine Spende einfach an die folgende Bankverbindung:
+            Alternativ kannst auch per <%= link_to 'Überweisung', '#', id: 'transfer-link' %> spenden.
+          </p>
+          <div id="transfer-details" style="display: none;">
+            <p>
+              Überweise deine Spende einfach an die folgende Bankverbindung:
 
-          <table class="properties">
-            <tr>
-              <td>Inhaber</td>
-              <td>Nehemia-Initiative</td>
-            </tr>
-            <tr>
-              <td>IBAN</td>
-              <td>DE70520604100005010250</td>
-            </tr>
-            <tr>
-              <td>BIC</td>
-              <td>GENODEF1EK1</td>
-            </tr>
-            <tr>
-              <td>Betreff</td>
-              <td>STC Karlsruhe (+ evtl. Projekt-Name)</td>
-            </tr>
-          </table>
-          </p>
-          <p>
-          Alle Mitarbeiter bei <span class="term">Serve the City</span> arbeiten ehrenamtlich,
-          d.h. alle Spenden kommen fast ausschließlich den Projekten zugute.
-          Lediglich einige kleine Werbeausgaben (z.B. Flyer) werden auch
-          aus Spendengeldern finanziert.
-          </p>
+            <table class="properties">
+              <tr>
+                <td>Inhaber</td>
+                <td>Nehemia-Initiative</td>
+              </tr>
+              <tr>
+                <td>IBAN</td>
+                <td>DE70520604100005010250</td>
+              </tr>
+              <tr>
+                <td>BIC</td>
+                <td>GENODEF1EK1</td>
+              </tr>
+              <tr>
+                <td>Betreff</td>
+                <td>STC Karlsruhe (+ evtl. Projekt-Name)</td>
+              </tr>
+            </table>
+            </p>
+            <p>
+              Falls projektgebunden gespendet werden soll, kann das im
+              Überweisungsbetreff angemerkt werden. Wir können <%= link_to 'auf Anfrage', 'kontakt' %>
+              auch eine Spendenbescheinigung ausstellen.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -310,7 +316,7 @@
           <p>
           Wir sind bei vielen Projekten auf Sachspenden angewiesen. Ob es um Material,
           Verpflegung oder Werbemittel geht, wir können vieles gebrauchen und freuen
-          uns daher über jede Spende. <a href="/kontakt">Wende Dich einfach an das Orga-Team</a>.
+          uns daher über jede Spende. <a href="/kontakt">Wende dich einfach an das Orga-Team</a>.
           </p>
         </div>
       </div>
@@ -351,9 +357,9 @@
            role="tabpanel" aria-labelledby="heading_promote">
         <div class="panel-body">
           <p>
-          Das freut uns sehr! Wir können Dir dazu gerne kostenlose Werbemittel (Flyer, Plakate)
+          Das freut uns sehr! Wir können dir dazu gerne kostenlose Werbemittel (Flyer, Plakate)
           zur Verfügung stellen. <a href="/kontakt">Teile uns bitte auch mit</a>, wo und wie
-          Du werben willst, damit wir Dir das richtige Material in der richtigen Menge zur
+          du werben willst, damit wir dir das richtige Material in der richtigen Menge zur
           Verfügung stellen können.
           </p>
         </div>

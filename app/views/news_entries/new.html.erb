@@ -1,0 +1,4 @@
+<% content_for :pageTitle do %>
+    <%= t('layout.title.newsEntryNew') %>
+<% end %>
+<%= render :partial => "form", :locals => {:isNew => true} %>

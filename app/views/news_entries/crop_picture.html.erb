@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Remote file for Crop Picture Dialog</title>
+</head>
+<body>
+
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title"><%= t('news_entry.label.cropImage', crop_target: @crop_target_title) %></h4>
+    </div>
+    <div class="modal-body">
+      <%= image_tag @news_entry.picture_url(:precrop), id: "cropbox",
+                    :data => { :aspect => @crop_target_ratio} %>
+    </div>
+    <div class="modal-footer">
+
+      <%#<button type="button" class="btn btn-primary">Save changes</button>%>
+      <%= form_tag({controller: "news_entries", action: "crop_picture"}, method: "get",
+                   onsubmit: "$('.modal').modal('hide'); return sendWithAjax(this);") do %>
+          <div class="actions">
+            <% %w[x y w h].each do |a| %>
+                <%= hidden_field_tag "crop_#{a}", id: "crop_#{a}" %>
+            <% end %>
+            <%= hidden_field_tag "crop_target", @crop_target_symbol.to_s, id: "crop_target" %>
+            <%= submit_tag t('news_entry.action.cropImage'), class: 'btn btn-primary', style:'margin: 20px;' %>
+          </div>
+      <% end %>
+    </div>
+
+</body>

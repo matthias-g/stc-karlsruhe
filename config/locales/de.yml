@@ -35,6 +35,10 @@ de:
         zero: 'Projekte'
         one: 'Projekt'
         other: 'Projekte'
+      news_entry:
+        zero: 'News-Einträge'
+        one: 'News-Eintrag'
+        other: 'News-Einträge'
       user: Mitarbeiter
       message:
         zero: Nachrichten
@@ -66,6 +70,14 @@ de:
         time: Zeit
         subproject_ids: Teilprojekte
         parent_project_id: Überprojekt
+      news_entry:
+        title: 'Newstitel'
+        text: 'Text'
+        teaser: 'Teaser'
+        visible: 'Sichtbar'
+        picture: 'Bild'
+        picture_source: 'Bildrechte /-quelle'
+        category: 'News-Kategorie'
       user:
         username: 'Benutzername'
         first_name: 'Vorname'
@@ -129,6 +141,11 @@ de:
       projectEdit: 'Projekt bearbeiten: "%{project}"'
       projectCropPicture: 'Bildausschnitte festlegen: "%{project}"'
       projectView: 'Projekt "%{project}"'
+      newsEntryList: 'Newseinträge'
+      newsEntryNew: 'Neuer Newseintrag'
+      newsEntryEdit: 'News bearbeiten: "%{news_entry}"'
+      newsEntryCropPicture: 'Bildausschnitte festlegen: "%{news_entry}"'
+      newsEntryView: '%{news_entry}'
       roleList: 'Rollen'
       roleNew: 'Neue Benutzerrolle'
       roleEdit: 'Rolle bearbeiten'
@@ -291,6 +308,52 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       soon_full: Wenige Plätze
       full: Vollbesetzt
       closed: Abgeschlossen
+
+  news_entry:
+      action:
+        new: 'Neuer Eintrag'
+        edit: 'News bearbeiten'
+        delete: 'News löschen'
+        open: 'News anzeigen'
+        makeVisible: 'Sichtbar machen'
+        makeInvisible: 'News verstecken'
+        toOverview: 'alle News anzeigen'
+        toNews: 'zurück zum News-Eintrag'
+        searchNews: 'News suchen'
+        findNews: 'Newseintrag finden'
+        cropArticleImage: 'Artikelbild anpassen'
+        cropFullscreenImage: 'Vollbild anpassen'
+        cropThumbnailImage: 'Thumbnail anpassen'
+        cropImage: 'Zuschneiden'
+        uploadPictures: 'Bilder hochladen'
+        uploadSelectedPictures: 'Ausgewählte Bilder hochladen'
+      label:
+        news_entry: 'News-Eintrag'
+        manageNewsEntry: 'Eintrag verwalten'
+        new: 'Neuer News-Eintrag'
+        edit: 'News bearbeiten'
+        gallery: 'Fotogalerie'
+        uploadImage: 'Bild hochladen'
+        articleImage: 'Artikelbild'
+        fullscreenImage: 'Vollbild'
+        thumbnailImage: 'Thumbnail'
+        cropImage: 'Bildausschnitt für %{crop_target} anpassen'
+      help:
+        picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
+        teaser: 'Wenn Du dieses Feld ausfüllst, wird in Listen statt des ausführlichen Texts angezeigt.'
+      message:
+        imageCropped: 'Der Bildausschnitt wurde angepasst.'
+        created: 'Newseintrag wurde erfolgreich erstellt.'
+        updated: 'Newseintrag wurde erfolgreich aktualisiert.'
+        errorList: 'Wegen folgender Fehler konnte der Newseintrag nicht gespeichert werden:'
+        madeVisible: 'Newseintrag wurde sichtbar gemacht.'
+        madeInvisible: 'Newseintrag wurde unsichtbar gemacht.'
+      category:
+        general: 'Allgemein'
+        partners: 'Partner'
+        projects: 'Projekte'
+        media: 'Medien'
+        insight: 'Einblicke'
 
   user:
     action:

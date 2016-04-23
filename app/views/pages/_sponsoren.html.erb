@@ -7,6 +7,10 @@
 </section>
 
 <section>
+  <%= render :partial => '/news_entries/entries', :locals => {categories: [:partners], limit: 4} %>
+</section>
+
+<section>
   <p style="padding-top: 20px;">
     Ohne die Geld- und Sachspenden von Unternehmen und Vereinen hätten viele Projekte von
     <span class="term">Serve the City Karlsruhe</span> nicht in ihrer jetzigen Form

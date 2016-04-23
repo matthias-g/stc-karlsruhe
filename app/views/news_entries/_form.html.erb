@@ -1,0 +1,97 @@
+<div id="news-entry-edit-view">
+  <%= bootstrap_form_for(@news_entry) do |f| %>
+
+
+
+      <% if @news_entry.errors.any? %>
+          <section id="error_explanation">
+            <h2><%= t('news_entry.message.errorList') %></h2>
+            <ul>
+              <% @news_entry.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </section>
+      <% end %>
+
+      <section>
+        <div class="typeHeader">
+          &nbsp;<%= isNew ? t('news_entry.label.new') : t('news_entry.label.edit') %>&nbsp;
+        </div>
+        <h1><%= @news_entry.title %></h1>
+      </section>
+
+      <div class="row row-sm-eq-height">
+
+        <section class="col-sm-8">
+          <%= f.text_field :title %>
+          <div class="form-group">
+            <label class="control-label" for="news_entry_picture_source">
+              <%= NewsEntry.human_attribute_name('picture') %>
+            </label>
+            <%= f.file_field :picture, hide_label: true %>
+
+            <% if @news_entry.picture.file %>
+                <div class="news-entry-picture picture-container">
+                  <%= image_tag @news_entry.picture_url(:article) %>
+                </div>
+                <br />
+                <%= link_to t('news_entry.action.cropArticleImage'),
+                            crop_picture_news_entry_path(@news_entry, crop_target: 'article'),
+                            class: 'btn btn-default',
+                            data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+                <%= link_to t('news_entry.action.cropFullscreenImage'),
+                            crop_picture_news_entry_path(@news_entry, crop_target: 'fullscreen'),
+                            class: 'btn btn-default',
+                            data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+                <%= link_to t('news_entry.action.cropThumbnailImage'),
+                            crop_picture_news_entry_path(@news_entry, crop_target: 'thumbnail'),
+                            class: 'btn btn-default',
+                            data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+            <% end %>
+
+          </div>
+          <%= f.text_field :picture_source,
+                           help: t('project.help.picture_source') %>
+          <div class="teaser">
+            <%= f.text_area :teaser,
+                            help: t('news_entry.help.teaser') %>
+          </div>
+          <div class="text">
+            <%= f.text_area :text %>
+          </div>
+        </section>
+
+        <div class="col-sm-4">
+          <section class="slim">
+            <%= f.select :category, NewsEntry.categories.to_a.map { |w| [t("news_entry.category.#{w[0]}"), w[0]] } %>
+            <%= f.check_box :visible %>
+          </section>
+          <section class="slim">
+            <h3>
+              <%= t('news_entry.label.manageNewsEntry') %>
+            </h3>
+            <%= f.submit t('general.action.save'), class: 'btn btn-default btn-wide' %>
+            <%= link_to t('general.action.cancel'), @news_entry, class: 'btn btn-default btn-wide' %>
+            <% if !isNew && current_user.admin? %>
+                <%= link_to t('news_entry.action.delete'), @news_entry, method: :delete,
+                            data: { confirm: t('general.message.confirmDelete')},
+                            class: 'btn btn-default btn-wide' %>
+            <% end %>
+          </section>
+
+        </div>
+
+      </div>
+
+  <% end %>
+
+
+  <div class="modal fade" id="image_crop_modal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
+
+</div>

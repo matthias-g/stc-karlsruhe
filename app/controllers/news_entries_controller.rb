@@ -1,53 +1,47 @@
 class NewsEntriesController < ApplicationController
   before_action :set_news_entry, except: [:index, :new, :create]
-  before_action :authenticate_user!, except: [:show]
-  before_action :authorize_news_entry, except: [:index, :new, :create]
-  after_action :verify_authorized , except: [:index, :new, :create]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authorize_news_entry,  except: [:index, :new, :create]
+  after_action :verify_authorized,  except: [:index]
 
   respond_to :html
 
-  # GET /news_entries
-  # GET /news_entries.json
   def index
     @news_entries = NewsEntry.all.order(:created_at)
   end
 
-  # GET /news_entries/1
-  # GET /news_entries/1.json
   def show
   end
 
-  # GET /news_entries/new
   def new
     @news_entry = NewsEntry.new
     @news_entry.visible = false
+    authorize_news_entry
   end
 
-  # GET /news_entries/1/edit
   def edit
   end
 
-  # POST /news_entries
-  # POST /news_entries.json
   def create
     @news_entry = NewsEntry.new(news_entry_params)
-    @news_entry.save
-    respond_with(@news_entry)
+    authorize_news_entry
+    if @news_entry.save
+      flash[:notice] = t('news_entry.message.created')
+    end
+    respond_with @news_entry
   end
 
-  # PATCH/PUT /news_entries/1
-  # PATCH/PUT /news_entries/1.json
   def update
     if @news_entry.update(news_entry_params)
       flash[:notice] = t('news_entry.message.updated')
     end
-    respond_with(@news_entry)
+    respond_with @news_entry
   end
 
-  # DELETE /news_entries/1
-  # DELETE /news_entries/1.json
   def destroy
-    @news_entry.destroy
+    if @news_entry.destroy
+      flash[:notice] = t('news_entry.message.deleted')
+    end
     respond_with @news_entry
   end
 
@@ -77,12 +71,10 @@ class NewsEntriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_news_entry
       @news_entry = NewsEntry.friendly.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def news_entry_params
       params.require(:news_entry).permit(:title, :teaser, :text, :picture, :picture_source, :category, :visible)
     end

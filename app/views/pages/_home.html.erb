@@ -55,9 +55,11 @@
 </section>
 
 <section>
-  <div style="float:right">
-    <%= link_to t('news_entry.action.new'), new_news_entry_path %>
-  </div>
+  <% if policy(NewsEntry).new? %>
+    <div style="float:right">
+      <%= link_to t('news_entry.action.new'), new_news_entry_path %>
+    </div>
+  <% end %>
   <%= render partial: '/news_entries/entries', locals: {limit: 3} %>
   <div style="clear:both; padding-top:20px;">
     <%= link_to t('news_entry.action.toOverview'), news_entries_path %>

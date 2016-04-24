@@ -4,7 +4,7 @@
 <% list_news(categories, limit).each do |news| %>
   <div class="news-teaser">
     <%= news.created_at.strftime('%d. %B') %>
-    <% if news.show_picture? && news.picture.file %>
+    <% if news.show_picture? %>
         <div class="news-thumbnail">
           <%= link_to news do %>
               <%= image_tag news.picture_url(:thumb), lazy:true %>

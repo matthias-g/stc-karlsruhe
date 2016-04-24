@@ -1,17 +1,16 @@
 class NewsEntry < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :friendly_id_candidates, use: :slugged
+
+  mount_uploader :picture, NewsEntryImageUploader
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+
   enum category: { general: 1, partners: 2, projects: 3, media: 4, insight: 5 }
 
   validates_presence_of :title, :text, :category
 
-  mount_uploader :picture, NewsEntryImageUploader
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-  #after_update :crop_picture
-
-  extend FriendlyId
-  friendly_id :slug_candidates, use: :slugged
-
   def show_picture?
-    picture_source && !picture_source.empty? && picture
+    picture_source && !picture_source.empty? && picture && picture.file
   end
 
   def crop_picture(x,y,w,h,version)
@@ -26,9 +25,7 @@ class NewsEntry < ActiveRecord::Base
     title_changed? || super
   end
 
-  # Try building a slug based on the following fields in
-  # increasing order of specificity.
-  def slug_candidates
+  def friendly_id_candidates
     [:title]
   end
 end

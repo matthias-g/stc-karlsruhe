@@ -3,8 +3,10 @@
 <% end %>
 
 <section>
-  <div style="float:right">
-    <%= link_to t('news_entry.action.new'), new_news_entry_path %>
-  </div>
+  <% if policy(NewsEntry).new? %>
+    <div style="float:right">
+      <%= link_to t('news_entry.action.new'), new_news_entry_path %>
+    </div>
+  <% end %>
   <%= render '/news_entries/entries' %>
 </section>

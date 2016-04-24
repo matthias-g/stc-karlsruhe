@@ -345,6 +345,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         imageCropped: 'Der Bildausschnitt wurde angepasst.'
         created: 'Newseintrag wurde erfolgreich erstellt.'
         updated: 'Newseintrag wurde erfolgreich aktualisiert.'
+        deleted: 'Newseintrag wurde erfolgreich gelöscht.'
         errorList: 'Wegen folgender Fehler konnte der Newseintrag nicht gespeichert werden:'
         madeVisible: 'Newseintrag wurde sichtbar gemacht.'
         madeInvisible: 'Newseintrag wurde unsichtbar gemacht.'

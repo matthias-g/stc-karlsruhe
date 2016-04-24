@@ -1,0 +1,17 @@
+<% categories = local_assigns.fetch :categories, nil %>
+<% limit = local_assigns.fetch :limit, 0 %>
+
+<% list_news(categories, limit).each do |news| %>
+  <div class="news-teaser">
+    <%= news.created_at.strftime('%d. %B') %>
+    <% if news.show_picture? %>
+        <div class="news-thumbnail">
+          <%= link_to news do %>
+              <%= image_tag news.picture_url(:thumb), lazy:true %>
+          <% end %>
+        </div>
+    <% end %>
+    <h2><%= link_to news.title, news %></h2>
+    <p><%= simple_format news.teaser || news.text %></p>
+  </div>
+<% end %>

@@ -1,5 +1,11 @@
 StcKarlsruhe::Application.routes.draw do
 
+  resources :news_entries, path: 'news' do
+    member do
+      get :crop_picture
+    end
+  end
+
   scope module: 'feedback' do
     resources :surveys, as: :feedback_surveys, path: 'umfragen' do
       resources :survey_answers, as: :feedback_survey_answers, path: 'antworten'

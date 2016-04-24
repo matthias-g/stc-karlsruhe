@@ -1,0 +1,51 @@
+<% content_for :pageTitle do %>
+    <%= t('layout.title.newsEntryView', news_entry:@news_entry.title) %>
+<% end %>
+
+<% content_for :appendToHeader do %>
+    <meta name="description" content="<%= @news_entry.teaser %>" />
+    <meta property="og:title" content="<%= NewsEntry.model_name.human %>: <%= @news_entry.title %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="<%= image_url(@news_entry.picture_url) %>" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:description" content="<%= @news_entry.text %>" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="Serve the City Karlsruhe" />
+<% end %>
+
+<div id="news-entry-view">
+
+<section>
+  <div class="typeHeader">
+    <%= NewsEntry.model_name.human %>
+  </div>
+  <h1><%= @news_entry.title %></h1>
+</section>
+
+<div class="row">
+  <div class="col-md-12">
+    <section>
+      <% if @news_entry.show_picture? && @news_entry.picture.file %>
+          <div class="news-entry-picture picture-container">
+            <%= image_tag @news_entry.picture_url(:article) %>
+            <div class="copyright" title="© <%= @news_entry.picture_source %>">
+              © <%= @news_entry.picture_source %>
+            </div>
+          </div>
+      <% end %>
+      <%= @news_entry.text %>
+    </section>
+  </div>
+</div>
+
+<% if policy(@news_entry).edit? %>
+  <section>
+    <%= link_to t('news_entry.action.edit'),
+                edit_news_entry_path(@news_entry), class:'btn btn-default' %>
+    <%= link_to t('news_entry.action.delete'), @news_entry, method: :delete,
+                data: { confirm: t('general.message.confirmDelete')},
+                class: 'btn btn-default' %>
+  </section>
+<% end %>
+
+</div>

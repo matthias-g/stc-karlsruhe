@@ -1,0 +1,8 @@
+
+one:
+  title: Online
+  teaser: This news is online.
+  text: Good news. Just for this test this news is online.
+  category: 1
+  visible: true
+  slug: online

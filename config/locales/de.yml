@@ -286,7 +286,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       teamMember: 'Du bist im Projektteam.'
       subprojectTeamMember: 'Du bist bei einem Teilprojekt dabei.'
       isFull: 'Dieses Projekt ist schon vollbesetzt.'
-      participationSuccess: 'Du nimmst jetzt an diesem Projekt teil. Der Teamleiter wird sich mit Dir in Verbindung setzen.'
+      participationSuccess: 'Du nimmst jetzt an diesem Projekt teil. Die Projektleiter werden sich mit dir etwa eine Woche vor dem Projekt in Verbindung setzen.'
       madeVisible: 'Projekt wurde sichtbar gemacht.'
       madeInvisible: 'Projekt wurde unsichtbar gemacht.'
       opened: 'Projekt wurde geöffnet.'

@@ -76,6 +76,7 @@ StcKarlsruhe::Application.routes.draw do
   get :login_or_register, to: 'users#login_or_register'
 
   root 'pages#home'
+  get '/eigenes-projekt', to: 'pages#own_project', as: :own_project
   get '/:page', to: 'pages#page', as: :show_page
 
   namespace :api do

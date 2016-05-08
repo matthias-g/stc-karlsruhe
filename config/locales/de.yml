@@ -226,6 +226,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         subject: 'Betreff'
         body: 'Nachricht'
       submit: 'Nachricht schicken'
+    ownProject:
+      subject: Vorschlag für eigenes Projekt
 
   project:
     action:
@@ -275,6 +277,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       uploadPictures: "Hast du während des Projektes Bilder gemacht, die du veröffentlichen möchtest? Dann kannst du sie hier hochladen.
         Hast du andere Personen fotografiert, stelle bitte sicher, dass du ihr Einverständnis für das Veröffentlichen der Bilder hast."
     message:
+      startOwn: eigenes Projekt starten?
+      startOwnInfo: Wir helfen dir dabei!
       imageCropped: 'Der Bildausschnitt wurde angepasst.'
       created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'

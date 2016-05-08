@@ -11,11 +11,13 @@ h3, h4 {
   font-family: BoldFont;
 }
 
-ul {
-  padding-left: 20px;
-}
-li {
-  list-style: none;
+.alert {
+  ul {
+    padding-left: 20px;
+  }
+  li {
+    list-style: none;
+  }
 }
 
 /* MULTI-USE STYLES */

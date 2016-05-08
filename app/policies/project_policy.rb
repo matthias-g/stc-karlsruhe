@@ -10,6 +10,11 @@ class ProjectPolicy < ApplicationPolicy
     user.admin?
   end
 
+  def create?
+    return false unless user
+    user.admin?
+  end
+
   def show?
     return true if record.visible?
     return false unless user

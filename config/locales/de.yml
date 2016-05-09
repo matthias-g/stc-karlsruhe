@@ -1,4 +1,9 @@
 de:
+  time:
+    formats:
+      short_date: ! '%d. %B'
+      date: ! '%d. %B %Y'
+
   activemodel:
     errors:
       models:

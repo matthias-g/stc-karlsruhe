@@ -3,7 +3,7 @@
 
 <% list_news(categories, limit).each do |news| %>
   <div class="news-teaser">
-    <%= news.created_at.strftime('%d. %B') %>
+
     <% if news.show_picture? %>
         <div class="news-thumbnail">
           <%= link_to news do %>
@@ -11,6 +11,9 @@
           <% end %>
         </div>
     <% end %>
+    <div class="news-date">
+      <%= l news.created_at, format: :short_date %>
+    </div>
     <h2><%= link_to news.title, news %></h2>
     <div><%= simple_format (news.teaser || news.text) %></div>
   </div>

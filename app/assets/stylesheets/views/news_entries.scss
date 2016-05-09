@@ -3,6 +3,7 @@
   h1 {
     text-align: center;
   }
+
   .news-entry-text {
     padding: 20px;
     padding-top: 35px;
@@ -18,6 +19,10 @@
   clear: left;
   padding-top: 10px;
   padding-bottom: 25px;
+
+  .news-date {
+    font-style: italic;
+  }
 
   .news-thumbnail {
     float: left;

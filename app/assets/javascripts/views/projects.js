@@ -27,3 +27,18 @@ function updateWeekDays() {
         });
     });
 }
+
+// TODO Rails 5 http://stackoverflow.com/a/18770589
+var ready = function() {
+    $('.selectpicker').selectpicker('render');
+    $('#select-new-leader').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {
+        var user = $('#select-new-leader').val();
+        var project = $('#select-new-leader').data('project-id');
+        $.getJSON('/api/projects/' + project + '/add_leader?user_id=' + user, function(res) {
+            location.reload();
+        });
+    });
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

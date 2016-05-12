@@ -15,6 +15,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require bootstrap-select
+//= require bootstrap-select/i18n/defaults-de_DE
 //= require jquery.lazyload
 //= require jquery-ui/sortable
 //= require jssor.slider.mini

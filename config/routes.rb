@@ -79,24 +79,25 @@ StcKarlsruhe::Application.routes.draw do
   get '/eigenes-projekt', to: 'pages#own_project', as: :own_project
   get '/:page', to: 'pages#page', as: :show_page
 
-  namespace :api do
+  namespace :api, constraints: { format: 'json' } do
+    resources :galleries, only: :show
+    resources :gallery_pictures, only: [:destroy] do
+      member do
+        get :rotateRight
+        get :rotateLeft
+      end
+    end
     resources :projects, only: :show do
       member do
         get :enter
         get :leave
+        get :add_leader
       end
     end
     resources :project_weeks, only: [:index] do
       member do
         get :projects
         get :project_days
-      end
-    end
-    resources :galleries, only: :show
-    resources :gallery_pictures, only: [:destroy] do
-      member do
-        get :rotateRight
-        get :rotateLeft
       end
     end
   end

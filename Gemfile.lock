@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/matthias-g/bootstrap-select-rails.git
+  revision: 1215bab2e7b597ede2ffdb7f528190b2ba3dbcb5
+  specs:
+    bootstrap-select-rails (1.10.0)
+
+GIT
   remote: git://github.com/matthias-g/jssorslider-rails.git
   revision: e50a79ac7a207f9ccb7664241b6e84c0ea661efd
   specs:
@@ -249,6 +255,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
+  bootstrap-select-rails!
   bootstrap_form
   capistrano
   capistrano-bundler

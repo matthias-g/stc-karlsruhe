@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def index
     authorize User.new
     @users = User.all
-    respond_with(@user)
+    respond_with(@users)
   end
 
   def show

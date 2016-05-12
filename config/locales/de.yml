@@ -246,7 +246,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       makeVisible: 'Sichtbar machen'
       makeInvisible: 'Projekt verstecken'
       manageTeam: 'Team verwalten'
-      addLeader: 'als Leiter hinzufügen'
+      makeLeader: 'als Leiter hinzufügen'
+      addLeader: Projektleiter auswählen
       removeLeader: 'Projektleiter entfernen'
       removeVolunteer: 'Teammitglied entfernen'
       toOverview: 'zur Projektliste'

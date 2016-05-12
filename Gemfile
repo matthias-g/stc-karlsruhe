@@ -55,6 +55,8 @@ gem 'photoswipe-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
 
+gem 'bootstrap-select-rails', github: 'matthias-g/bootstrap-select-rails'
+
 gem 'actionview-encoded_mail_to'
 gem 'recaptcha', require: 'recaptcha/rails'
 

@@ -22,6 +22,7 @@ class Api::ProjectsController < Api::ApiController
 
   def add_leader
     new_leader = User.find(params[:user_id])
+    @project.add_volunteer(new_leader)
     @project.add_leader(new_leader)
     render action: :show, formats: [:json]
   end

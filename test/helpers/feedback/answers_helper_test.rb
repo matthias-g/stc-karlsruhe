@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class Feedback::AnswersHelperTest < ActionView::TestCase
+class Surveys::AnswersHelperTest < ActionView::TestCase
 end

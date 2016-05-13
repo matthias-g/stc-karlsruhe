@@ -1,0 +1,7 @@
+<% content_for :pageTitle do %>
+    <%#= t('layout.title.submissionEdit', template: @submission.template.title) %>
+<% end %>
+
+<div class="surveys submission edit-view">
+  <%= render :partial => "form", :locals => {:isNew => false} %>
+</div>

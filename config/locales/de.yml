@@ -49,8 +49,8 @@ de:
         zero: Nachrichten
         one: Nachricht
         other: Nachrichten
-      feedback/survey: 'Umfrage-Template'
-      feedback/survey_answer: 'Umfrage'
+      surveys/template: 'Umfrage-Template'
+      surveys/submission: 'Umfrage'
     attributes:
       project:
         title: 'Projekttitel'
@@ -103,9 +103,9 @@ de:
       gallery:
         picture: Bilder
         title: Titel
-      feedback/survey:
+      surveys/template:
         title: 'Titel der Umfrage'
-      feedback/question:
+      surveys/question:
         text: 'Frage'
         question_type: 'Art der Frage'
         answer_options: 'Optionen'
@@ -179,13 +179,13 @@ de:
       pagePrivacy: 'Datenschutzerklärung'
       statistics: Statistiken
       pageSponsors: 'Sponsoren'
-      surveyNew: 'Neue Umfrage erstellen'
-      surveyEdit: 'Umfrage bearbeiten: "%{survey}"'
-      surveyList: 'Umfragen'
-      surveyView: 'Umfrage "%{survey}"'
-      surveyAnswerList: 'Umfragebögen'
-      surveyAnswerNew: 'Umfragebogen ausfüllen: "%{survey}"'
-      surveyAnswerEdit: 'Umfragebogen ansehen: "%{survey}"'
+      templateNew: 'Neue Umfrage erstellen'
+      templateEdit: 'Umfrage bearbeiten: "%{template}"'
+      templateList: 'Umfragen'
+      templateView: 'Umfrage "%{template}"'
+      submissionList: 'Umfragebögen'
+      submissionNew: 'Umfragebogen ausfüllen: "%{template}"'
+      submissionEdit: 'Umfragebogen ansehen: "%{template}"'
   contact:
     orga:
       link: 'Serve the City kontaktieren'
@@ -447,29 +447,29 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       rotateRight: "Nach rechts drehen"
       rotateLeft: "Nach links drehen"
 
-  feedback:
+  surveys:
     action:
-      newSurvey: 'Neue Umfrage erstellen'
+      newTemplate: 'Neue Umfrage erstellen'
       addQuestion: 'Frage hinzufügen'
       removeQuestion: 'Frage entfernen'
-      newSurveyAnswer: 'Umfrage ausfüllen'
-      toSurveyOverview: 'zur Übersicht'
-      editSurvey: 'Umfrage bearbeiten'
-      deleteSurvey: 'Umfrage löschen'
-      saveSurvey: 'Umfrage speichern'
-      saveSurveyAnswer: 'Abschicken'
-      editSurveyAnswer: 'Einsendung bearbeiten'
-      toSurveyAnswerOverview: 'zur Übersicht'
+      newSubmission: 'Umfrage ausfüllen'
+      toTemplateOverview: 'zur Übersicht'
+      editTemplate: 'Umfrage bearbeiten'
+      deleteTemplate: 'Umfrage löschen'
+      saveTemplate: 'Umfrage speichern'
+      saveSubmission: 'Abschicken'
+      editSubmission: 'Einsendung bearbeiten'
+      toSubmissionOverview: 'zur Übersicht'
     label:
-      surveyList: 'Umfragen'
-      surveyAnswerList: 'Einsendungen zu Umfragen'
-      newSurvey: 'Neue Umfrage'
-      editSurvey: 'Umfrage bearbeiten'
-      surveyAnswer: 'Einsendung %{id}'
+      templateList: 'Umfragen'
+      submissionList: 'Einsendungen zu Umfragen'
+      newTemplate: 'Neue Umfrage'
+      editTemplate: 'Umfrage bearbeiten'
+      submission: 'Einsendung %{id}'
       custom_choice_placeholder: 'anderes'
     message:
-      surveyErrorList: 'Wegen folgender Fehler konnte die Umfrage nicht gespeichert werden:'
-      answerCreated: Vielen Dank für dein Feedback!
+      templateErrorList: 'Wegen folgender Fehler konnte die Umfrage nicht gespeichert werden:'
+      answerCreated: Vielen Dank für dein Surveys!
     question:
       type:
         text: Freitext

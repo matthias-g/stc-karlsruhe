@@ -1,0 +1,12 @@
+<div class="choice question">
+  <%= f.form_group :text, label: {text: question_label} do %>
+      <% options = question.answer_options.split(/\r?\n/) %>
+      <% options.each do |o| %>
+          <%= f.radio_button :text, o, label: o %>
+      <% end %>
+
+      <% custom_value = options.include?(answer.text) ? 'other' : (answer.text || 'other') %>
+      <%= f.radio_button :text, custom_value, class: 'text-choice', label: '' %>
+      <%# placeholder: t('surveys.label.custom_choice_placeholder')%>
+  <% end %>
+</div>

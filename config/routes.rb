@@ -6,9 +6,9 @@ StcKarlsruhe::Application.routes.draw do
     end
   end
 
-  scope module: 'feedback' do
-    resources :surveys, as: :feedback_surveys, path: 'umfragen' do
-      resources :survey_answers, as: :feedback_survey_answers, path: 'antworten'
+  scope module: 'surveys' do
+    resources :templates, as: :surveys_templates, path: 'umfragen' do
+      resources :submissions, as: :surveys_submissions, path: 'antworten'
     end
   end
 

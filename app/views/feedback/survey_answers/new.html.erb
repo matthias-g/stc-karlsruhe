@@ -1,7 +1,0 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.surveyAnswerNew', survey: @survey_answer.survey.title) %>
-<% end %>
-
-<div class="feedback survey_answer new-view">
-  <%= render :partial => "form", :locals => {:isNew => true} %>
-</div>

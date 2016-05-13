@@ -1,0 +1,39 @@
+<% content_for :pageTitle do %>
+    <%= t('layout.title.templateView', template: @template.title) %>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<div class="surveys template view">
+
+<section>
+  <div class="typeHeader">
+    &nbsp;<%= Surveys::Template.model_name.human %>&nbsp;
+  </div>
+  <h1><%= @template.title %></h1>
+</section>
+
+<section>
+  <% idx = 0 %>
+  <% @template.questions.each do |question| %>
+
+    <% question_label = question.text %>
+    <% if !question.is_subquestion %>
+        <% idx += 1 %>
+        <% question_label = idx.to_s + '.) ' + question_label %>
+    <% end %>
+
+    <div class="<%= question.is_subquestion ? 'subquestion' : '' %>">
+      <h3><%= question_label %></h3>
+      <p><%= question.answer_options %></p>
+    </div>
+  <% end %>
+</section>
+
+<section>
+  <%= link_to t('surveys.action.editTemplate'), edit_surveys_template_path(@template), class: 'btn btn-default' %>
+  <%= link_to t('surveys.action.toTemplateOverview'), surveys_templates_path, class: 'btn btn-default'%>
+  <%= link_to t('surveys.action.newSubmission'), new_surveys_template_surveys_submission_path(@template), class: 'btn btn-default'%>
+</section>
+
+</div>

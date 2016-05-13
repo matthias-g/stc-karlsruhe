@@ -1,0 +1,47 @@
+<%= bootstrap_form_for([@submission.template, @submission]) do |f| %>
+
+<% if @submission.errors.any? %>
+  <section id="error_explanation">
+    <h2><%= t('surveys.message.errorList') %></h2>
+    <ul>
+      <% @submission.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<section>
+  <div class="typeHeader">
+    &nbsp;<%= Surveys::Submission.model_name.human %>&nbsp;
+  </div>
+  <h1><%= @submission.template.title %></h1>
+</section>
+
+<%= f.hidden_field :template_id %>
+
+<section>
+  <% idx = 0 %>
+  <%= f.fields_for :answers do |answer_fields| %>
+    <% answer = @submission.answers[answer_fields.index] %>
+    <% question = answer.question %>
+
+    <% question_label = question.text %>
+    <% if !question.is_subquestion %>
+      <% idx += 1 %>
+      <% question_label = idx.to_s + '.) ' + question_label %>
+    <% end %>
+
+    <div class="<%= question.is_subquestion ? 'subquestion' : '' %>">
+      <%= answer_fields.hidden_field :question_id %>
+      <%= render partial: question.question_type + '_question',
+               locals: { f: answer_fields, question: question, answer: answer, question_label: question_label } %>
+    </div>
+  <% end %>
+</section>
+
+<section>
+  <%= f.submit t('surveys.action.saveSubmission'), class:'submit btn btn-default' %>
+</section>
+
+<% end %>

@@ -1,0 +1,7 @@
+<% content_for :pageTitle do %>
+    <%= t('layout.title.templateNew') %>
+<% end %>
+
+<div class="surveys template new-view">
+  <%= render :partial => "form", :locals => {:isNew => true} %>
+</div>

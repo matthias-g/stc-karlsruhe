@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160423135917) do
+ActiveRecord::Schema.define(version: 20160512232220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,47 +31,6 @@ ActiveRecord::Schema.define(version: 20160423135917) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
-
-  create_table "feedback_answers", force: :cascade do |t|
-    t.integer  "survey_answer_id"
-    t.integer  "question_id"
-    t.text     "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "feedback_answers", ["question_id"], name: "index_feedback_answers_on_question_id", using: :btree
-  add_index "feedback_answers", ["survey_answer_id"], name: "index_feedback_answers_on_survey_answer_id", using: :btree
-
-  create_table "feedback_questions", force: :cascade do |t|
-    t.integer  "survey_id"
-    t.text     "text"
-    t.text     "answer_options"
-    t.integer  "question_type"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "is_subquestion", default: false
-  end
-
-  add_index "feedback_questions", ["survey_id"], name: "index_feedback_questions_on_survey_id", using: :btree
-
-  create_table "feedback_survey_answers", force: :cascade do |t|
-    t.integer  "survey_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "feedback_survey_answers", ["survey_id"], name: "index_feedback_survey_answers_on_survey_id", using: :btree
-
-  create_table "feedback_surveys", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "slug",       limit: 255
-  end
-
-  add_index "feedback_surveys", ["slug"], name: "index_feedback_surveys_on_slug", unique: true, using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false
@@ -197,6 +156,47 @@ ActiveRecord::Schema.define(version: 20160423135917) do
   end
 
   add_index "roles_users", ["user_id", "role_id"], name: "index_roles_users_on_user_id_and_role_id", using: :btree
+
+  create_table "surveys_answers", force: :cascade do |t|
+    t.integer  "submission_id"
+    t.integer  "question_id"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "surveys_answers", ["question_id"], name: "index_surveys_answers_on_question_id", using: :btree
+  add_index "surveys_answers", ["submission_id"], name: "index_surveys_answers_on_submission_id", using: :btree
+
+  create_table "surveys_questions", force: :cascade do |t|
+    t.integer  "template_id"
+    t.text     "text"
+    t.text     "answer_options"
+    t.integer  "question_type"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_subquestion", default: false
+  end
+
+  add_index "surveys_questions", ["template_id"], name: "index_surveys_questions_on_template_id", using: :btree
+
+  create_table "surveys_submissions", force: :cascade do |t|
+    t.integer  "template_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "surveys_submissions", ["template_id"], name: "index_surveys_submissions_on_template_id", using: :btree
+
+  create_table "surveys_templates", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "slug",       limit: 255
+  end
+
+  add_index "surveys_templates", ["slug"], name: "index_surveys_templates_on_slug", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",               limit: 255

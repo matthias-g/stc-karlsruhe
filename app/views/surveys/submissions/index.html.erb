@@ -1,0 +1,19 @@
+<% content_for :pageTitle do %>
+    <%= t('layout.title.submissionList') %>
+<% end %>
+
+<section class="surveys submission list-view">
+  <h1><%= t('surveys.label.submissionList') %></h1>
+
+  <ul>
+    <% @submissions.each do |submission| %>
+        </td>
+          <li>
+            <%= link_to t('surveys.label.submission', id: submission.id), [submission.template, submission] %>
+          </li>
+    <% end %>
+  </ul>
+
+</section>
+
+

@@ -75,7 +75,7 @@ class Project < ActiveRecord::Base
   end
 
   def add_leader user
-    Participation.create(project: self, user: user, as_leader: true)
+    Participation.create(project: self, user: user, as_leader: true) unless has_leader? user
   end
 
   def has_leader? user

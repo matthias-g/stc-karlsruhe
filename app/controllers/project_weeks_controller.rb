@@ -14,9 +14,9 @@ class ProjectWeeksController < ApplicationController
 
     if params[:filter]
       p = filter_params
-      @projects = @projects.where(visible: (p[:visibility] == 'visible')) if (p[:visibility] != '')
-      @projects = @projects.in(ProjectDay.find(p[:day]).projects) if (p[:day] != '')
-      @projects = @projects.where(status: Project.statuses[p[:status]]) if (p[:status] != '')
+      @projects = @projects.where(visible: (p[:visibility] != 'hidden')) if !p[:visibility].blank?
+      @projects = @projects.merge(ProjectDay.find(p[:day]).projects) if !p[:day].blank?
+      @projects = @projects.where(status: Project.statuses[p[:status]]) if !p[:status].blank?
     end
 
     @projects = policy_scope(@projects)

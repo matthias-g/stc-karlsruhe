@@ -13,11 +13,12 @@
   <meta property="og:site_name" content="Serve the City Karlsruhe" />
 <% end %>
 
-<div id="project-view" <%='class=project-invisible' unless @project.visible %>>
+<div id="project-view" <%='class=project-invisible' unless @project.visible? %>>
 
   <section class="">
     <div class="typeHeader">
       <%= @project.is_subproject? ? t('project.label.subproject') : Project.model_name.human %>
+      <%= ' (' + t('project.status.hidden') + ')' if !@project.visible? %>
     </div>
     <h1><%= @project.title %></h1>
   </section>

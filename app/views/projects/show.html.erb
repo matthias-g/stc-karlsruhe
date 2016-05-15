@@ -15,7 +15,7 @@
 
 <div id="project-view">
 
-  <section>
+  <section class="<%='invisible-project' unless @project.visible %>">
     <div class="typeHeader">
       <%= @project.is_subproject? ? t('project.label.subproject') : Project.model_name.human %>
     </div>
@@ -29,7 +29,7 @@
         <section class="col-md-12">
 
           <% if @project.show_picture? && @project.picture.file %>
-            <div class="project-picture picture-container">
+            <div class="project-picture picture-container <%='invisible-project' unless @project.visible %>">
               <%= image_tag @project.picture_url(:project_view) %>
               <div class="copyright" title="© <%= @project.picture_source %>">
                 © <%= @project.picture_source %>
@@ -68,12 +68,12 @@
               <h3><%= Project.human_attribute_name('subproject_ids') %></h3>
               <div class="row">
                 <% visible_subprojects.each do |subproject| %>
-                  <%= link_to project_path(subproject) do %>
-                    <div class="col-md-4 col-sm-6 subproject" >
+                  <div class="col-md-4 col-sm-6 subproject <%='invisible-project' unless subproject.visible %>" >
+                    <%= link_to project_path(subproject) do %>
                       <%= image_tag subproject.picture.thumb.url, class: 'img-responsive' %>
                       <%= subproject.title %>
-                    </div>
-                  <% end %>
+                    <% end %>
+                  </div>
                 <% end %>
               </div>
             </div>
@@ -179,7 +179,7 @@
 
         <% if @project.parent_project %>
           <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
-            <div class="parent-project">
+            <div class="parent-project <%='invisible-project' unless @project.parent_project.visible %>">
               <h3><%= t('project.label.parent_project') %></h3>
               <%= link_to project_path(@project.parent_project) do %>
                 <div class="row parent-project">

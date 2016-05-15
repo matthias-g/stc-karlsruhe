@@ -91,11 +91,17 @@ class ProjectsController < ApplicationController
 
   def make_visible
     @project.make_visible!
+    if @project.subprojects
+      @project.subprojects.each { |project| project.make_visible! }
+    end
     redirect_to @project, notice: t('project.message.madeVisible')
   end
 
   def make_invisible
     @project.make_invisible!
+    if @project.subprojects
+      @project.subprojects.each { |project| project.make_invisible! }
+    end
     redirect_to @project, notice: t('project.message.madeInvisible')
   end
 

@@ -11,6 +11,10 @@
   font-family: BoldFont;
   src: asset-url("lato-bold.ttf");
 }
+@font-face {
+  font-family: Caveat;
+  src: asset-url("caveat-regular.ttf");
+}
 
 /* message / infobox colors */
 $col_positive: lightgrey;

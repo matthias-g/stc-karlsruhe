@@ -95,7 +95,7 @@
           <%= link_to project do %>
             <h2><%= project.title %></h2>
             <% if visible_subprojects.count > 0 %>
-              <h3><%= t('project.label.subproject', count: visible_subprojects.count) %></h3>
+              <h3><%= t('project.label.subprojects', count: visible_subprojects.count) %></h3>
             <% end %>
           <% end %>
         </div>

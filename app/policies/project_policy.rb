@@ -21,6 +21,10 @@ class ProjectPolicy < ApplicationPolicy
     user.admin? || user.leads_project?(record)
   end
 
+  def contact_volunteers?
+    edit? && record.visible?
+  end
+
   alias_method :update?, :edit?
   alias_method :destroy?, :edit?
   alias_method :edit_leaders?, :edit?
@@ -29,7 +33,6 @@ class ProjectPolicy < ApplicationPolicy
   alias_method :open?, :edit?
   alias_method :close?, :edit?
   alias_method :crop_picture?, :edit?
-  alias_method :contact_volunteers?, :edit?
 
   def enter?
     return false unless user
@@ -55,7 +58,7 @@ class ProjectPolicy < ApplicationPolicy
   alias_method :make_invisible?, :change_visibility?
 
   def upload_pictures?
-    return false unless user
+    return false unless user && record.visible?
     record.has_volunteer?(user) || record.has_leader?(user) || user.admin? || user.photographer?
   end
 

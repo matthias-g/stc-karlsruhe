@@ -42,12 +42,26 @@ body {
 
 header {
   margin: 0 auto;
-  padding: 70px 0 40px;
+  padding: 70px 0 20px;
   background: image-url("logo_bg.png") center top / auto 100% no-repeat;
   text-align: center;
 
+  a {
+    outline: none !important;
+  }
+
   .logo img {
     max-width: 90%;
+  }
+
+  .logo h2 {
+    margin-top: 10;
+    margin-bottom: 30px;
+    font-family: Caveat !important;
+    text-align: center;
+    font-size: 50px;
+    color: white;
+    text-shadow: 0 0 3px #000;
   }
 
   &.smallheader {

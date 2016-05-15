@@ -13,9 +13,9 @@
   <meta property="og:site_name" content="Serve the City Karlsruhe" />
 <% end %>
 
-<div id="project-view">
+<div id="project-view" <%='class=project-invisible' unless @project.visible %>>
 
-  <section class="<%='invisible-project' unless @project.visible %>">
+  <section class="">
     <div class="typeHeader">
       <%= @project.is_subproject? ? t('project.label.subproject') : Project.model_name.human %>
     </div>
@@ -29,7 +29,7 @@
         <section class="col-md-12">
 
           <% if @project.show_picture? && @project.picture.file %>
-            <div class="project-picture picture-container <%='invisible-project' unless @project.visible %>">
+            <div class="project-picture picture-container">
               <%= image_tag @project.picture_url(:project_view) %>
               <div class="copyright" title="© <%= @project.picture_source %>">
                 © <%= @project.picture_source %>
@@ -68,7 +68,7 @@
               <h3><%= Project.human_attribute_name('subproject_ids') %></h3>
               <div class="row">
                 <% visible_subprojects.each do |subproject| %>
-                  <div class="col-md-4 col-sm-6 subproject <%='invisible-project' unless subproject.visible %>" >
+                  <div class="col-md-4 col-sm-6 subproject <%='subproject-invisible' unless subproject.visible %>" >
                     <%= link_to project_path(subproject) do %>
                       <%= image_tag subproject.picture.thumb.url, class: 'img-responsive' %>
                       <%= subproject.title %>
@@ -234,6 +234,7 @@
     </div>
   </div>
 
+
   <% if policy(@project).contact_volunteers?  %>
     <section class="contact-volunteers-form">
       <%= bootstrap_form_for(@message, url: {action: 'contact_volunteers'}) do |f| %>
@@ -244,16 +245,19 @@
         <%= f.submit t('contact.team.submit') %>
       <% end %>
     </section>
+
+    <% if user_signed_in? && current_user.admin?  %>
+        <section class="contact-volunteers-form">
+          (Nur Admins:) Hier nochmal alle Emailadressen, damit du alternativ eine Email in deinem Emailprogramm schreiben kannst (bitte BCC verwenden).
+          <div style="background: #eee; border: 1px solid #aaa; padding: 5px; margin: 10px;">
+            <%= (@project.volunteers + @project.leaders + [current_user]).uniq.map { |v| v.email}.join(', ') %>
+          </div>
+        </section>
+    <% end %>
+
   <% end %>
 
-  <% if user_signed_in? && current_user.admin?  %>
-    <section class="contact-volunteers-form">
-     (Nur Admins:) Hier nochmal alle Emailadressen, damit du alternativ eine Email in deinem Emailprogramm schreiben kannst (bitte BCC verwenden).
-      <div style="background: #eee; border: 1px solid #aaa; padding: 5px; margin: 10px;">
-        <%= (@project.volunteers + @project.leaders + [current_user]).uniq.map { |v| v.email}.join(', ') %>
-      </div>
-    </section>
-  <% end %>
+
 
   <section>
     <%= render '/layouts/share' -%>

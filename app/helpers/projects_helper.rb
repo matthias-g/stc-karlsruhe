@@ -12,7 +12,7 @@ module ProjectsHelper
   end
 
   def show_gallery?(project)
-    project.gallery.gallery_pictures.visible_for_user(current_user).count > 0
+    (project.gallery.gallery_pictures.visible_for_user(current_user).count > 0) && project.visible?
   end
 
   def show_contains_invisible_pictures_notification?(project)

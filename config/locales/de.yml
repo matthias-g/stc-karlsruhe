@@ -262,7 +262,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       uploadSelectedPictures: Ausgewählte Bilder hochladen
     label:
       project: 'Projekt'
-      subproject:
+      subproject: 'Teilprojekt'
+      subprojects:
         one: '1 Teilprojekt'
         other: '%{count} Teilprojekte'
       vacancies: 'freie Plätze'

@@ -16,7 +16,6 @@ class ProjectsController < ApplicationController
     @projects = Project.where(visible: visible).order(:status)
     @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] && (params[:filter][:day] != '')
     @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] && (params[:filter][:status] != '')
-    respond_with(@projects)
   end
 
   def show
@@ -25,17 +24,14 @@ class ProjectsController < ApplicationController
     if @project.gallery.gallery_pictures.count == 0
       @project.gallery.gallery_pictures.build
     end
-    respond_with(@project)
   end
 
   def new
     @project = Project.new
     @project.project_week = ProjectWeek.all.order(title: :desc).first
-    respond_with(@project)
   end
 
   def edit
-    respond_with(@project)
   end
 
   def create

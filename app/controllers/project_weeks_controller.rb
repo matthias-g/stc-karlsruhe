@@ -18,6 +18,7 @@ class ProjectWeeksController < ApplicationController
       @projects = @projects.in(ProjectDay.find(p[:day]).projects) if (p[:day] != '')
       @projects = @projects.where(status: Project.statuses[p[:status]]) if (p[:status] != '')
     end
+
     @projects = policy_scope(@projects)
   end
 
@@ -31,14 +32,17 @@ class ProjectWeeksController < ApplicationController
   def create
     @project_week = ProjectWeek.new(project_week_params)
     @project_week.save
+    respond_with @project_week
   end
 
   def update
     @project_week.update(project_week_params)
+    respond_with @project_week
   end
 
   def destroy
     @project_week.destroy
+    respond_with @project_week
   end
 
   private
@@ -50,7 +54,7 @@ class ProjectWeeksController < ApplicationController
       params.require(:project_week).permit(:title, :default)
     end
 
-  def filter_params
-    params.require(:filter).permit(:visibility, :day, :status)
-  end
+    def filter_params
+      params.require(:filter).permit(:visibility, :day, :status)
+    end
 end

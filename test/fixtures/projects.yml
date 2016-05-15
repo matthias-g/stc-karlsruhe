@@ -41,3 +41,17 @@ three:
   desired_team_size: 7
   project_week: one
   gallery: three
+
+four:
+  title: MyString
+  description: MyText
+  location: MyString
+  latitude: 1.5
+  longitude: 1.5
+  individual_tasks: MyText
+  material: MyText
+  requirements: MyText
+  visible: true
+  desired_team_size: 7
+  project_week: one
+  gallery: four

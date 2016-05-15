@@ -6,21 +6,17 @@ class ProjectDaysController < ApplicationController
 
   def index
     @project_days = ProjectDay.all
-    respond_with(@project_days)
   end
 
   def show
-    respond_with(@project_day)
   end
 
   def new
     @project_day = ProjectDay.new
     @project_day.project_week = ProjectWeek.default
-    respond_with(@project_day)
   end
 
   def edit
-    respond_with(@project_day)
   end
 
   def create

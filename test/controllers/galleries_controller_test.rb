@@ -53,7 +53,7 @@ class GalleriesControllerTest < ActionController::TestCase
   end
 
   test "leader should update gallery" do
-    @gallery = galleries(:three)
+    @gallery = galleries(:four)
     sign_in users(:rolf)
     patch :update, id: @gallery, gallery: { title: @gallery.title }
     assert_redirected_to gallery_path(assigns(:gallery))

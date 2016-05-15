@@ -38,7 +38,7 @@ class GalleriesController < ApplicationController
 
   def update
     upload_pictures if @gallery.update(gallery_params)
-    return redirect_to request.referer if request.referer
+    #return redirect_to request.referer if request.referer
     respond_with(@gallery)
   end
 

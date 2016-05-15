@@ -14,3 +14,8 @@ three:
   user: rolf
   project: three
   as_leader: true
+
+four:
+  user: rolf
+  project: four
+  as_leader: true

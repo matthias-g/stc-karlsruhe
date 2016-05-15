@@ -1,9 +1,4 @@
 class ProjectPolicy < ApplicationPolicy
-  class Scope < Scope
-    def resolve
-      scope
-    end
-  end
 
   def index?
     return false unless user
@@ -62,6 +57,16 @@ class ProjectPolicy < ApplicationPolicy
   def upload_pictures?
     return false unless user
     record.has_volunteer?(user) || record.has_leader?(user) || user.admin? || user.photographer?
+  end
+
+  class Scope < Scope
+    def resolve
+      if user && user.admin?
+        scope.all
+      else
+        scope.where(Project.unscoped.where(visible: true, participations: {as_leader: true}).where_values_hash.inject(:or)) # TODO Rails 5
+      end
+    end
   end
 
 end

@@ -14,8 +14,9 @@ class Project < ActiveRecord::Base
   after_save :adjust_parent_status
   before_create :create_gallery!
 
-  scope :visible, -> { where(projects: {visible: true}) }
+  scope :visible,  -> { where(projects: {visible: true}) }
   scope :toplevel, -> { where(parent_project_id: nil) }
+  scope :active,   -> { visible.where("status <> ?", Project.statuses[:closed]) }
 
   enum status: { open: 1, soon_full: 2, full: 3, closed: 4 }
 

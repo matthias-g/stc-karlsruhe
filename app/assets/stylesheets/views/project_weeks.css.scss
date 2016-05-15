@@ -36,8 +36,16 @@
   max-width: 620px;
   padding: 12px !important;
   .project-title {
-    * {line-height: 1.05em;}
-    h2 {margin-top: 10px;}
+    * {
+      line-height: 1.05em;
+    }
+    h2 {
+      margin-top: 10px;
+    }
+    h3 {
+      margin-top: -5px;
+      color: gray;
+    }
   }
   .project-image {
     position: relative;
@@ -64,21 +72,25 @@
     text-align: center;
     border-bottom: 1px solid $border_default;
   }
-  .open {
+  .status_open {
     color: $col_positive;
     background: rgba($bg_positive, .8);
   }
-  .soon_full {
+  .status_soon_full {
     color: $col_neutral;
     background: rgba($bg_neutral, .8);
   }
-  .full {
+  .status_full {
     color: $col_negative;
     background: rgba($bg_negative, .8);
   }
-  .closed {
+  .status_closed {
     color: $color_inactive;
     background: $bg_inactive;
+  }
+  .status_hidden {
+    color: $color_hidden;
+    background: $bg_hidden;
   }
 }
 

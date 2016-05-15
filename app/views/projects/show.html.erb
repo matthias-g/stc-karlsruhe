@@ -27,6 +27,7 @@
     <div class="col-md-8">
       <div class="row">
         <section class="col-md-12">
+
           <% if @project.show_picture? && @project.picture.file %>
             <div class="project-picture picture-container">
               <%= image_tag @project.picture_url(:project_view) %>
@@ -35,32 +36,38 @@
               </div>
             </div>
           <% end %>
+
           <div class="description">
             <%= simple_format @project.description %>
           </div>
+
           <% unless @project.individual_tasks.empty? %>
             <div class="individual_tasks">
-              <h3><%= Project.human_attribute_name('individual_tasks') %></h3>
+              <h3><%= Project.human_attribute_name(:individual_tasks) %></h3>
               <%= simple_format @project.individual_tasks %>
             </div>
           <% end %>
+
           <% unless @project.requirements.empty? %>
             <div class="requirements">
-              <h3><%= Project.human_attribute_name('requirements') %></h3>
+              <h3><%= Project.human_attribute_name(:requirements) %></h3>
               <%= simple_format @project.requirements %>
             </div>
           <% end %>
+
           <% unless @project.material.empty? %>
             <div class="material">
-              <h3><%= Project.human_attribute_name('material') %></h3>
+              <h3><%= Project.human_attribute_name(:material) %></h3>
               <%= simple_format @project.material %>
             </div>
           <% end %>
-          <% if @project.subprojects && @project.subprojects.count > 0 %>
+
+          <% visible_subprojects = policy_scope(@project.subprojects) %>
+          <% if visible_subprojects.count > 0 %>
             <div class="subprojects">
               <h3><%= Project.human_attribute_name('subproject_ids') %></h3>
               <div class="row">
-                <% @project.subprojects.each do |subproject| %>
+                <% visible_subprojects.each do |subproject| %>
                   <%= link_to project_path(subproject) do %>
                     <div class="col-md-4 col-sm-6 subproject" >
                       <%= image_tag subproject.picture.thumb.url, class: 'img-responsive' %>
@@ -71,8 +78,10 @@
               </div>
             </div>
           <% end %>
+
         </section>
       </div>
+
       <% if show_gallery?(@project) || policy(@project).upload_pictures? %>
         <div class="row">
           <section class="col-md-12">

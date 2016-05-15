@@ -6,21 +6,23 @@ class ProjectWeeksController < ApplicationController
 
   def index
     @project_weeks = ProjectWeek.all
-    respond_with(@project_weeks)
   end
 
   def show
-    if params[:title]
-      @project_week = ProjectWeek.find_by_title(params[:title])
-    else
-      @project_week = ProjectWeek.find(params[:id])
+    @project_week = !params[:title] ? set_project_week : ProjectWeek.find_by_title(params[:title])
+    @projects = @project_week.projects.toplevel.order(visible: :desc, status: :asc, picture_source: :desc)
+
+    if params[:filter]
+      p = filter_params
+      @projects = @projects.where(visible: (p[:visibility] == 'visible')) if (p[:visibility] != '')
+      @projects = @projects.in(ProjectDay.find(p[:day]).projects) if (p[:day] != '')
+      @projects = @projects.where(status: Project.statuses[p[:status]]) if (p[:status] != '')
     end
-    respond_with(@project_week)
+    @projects = policy_scope(@projects)
   end
 
   def new
     @project_week = ProjectWeek.new
-    respond_with(@project_week)
   end
 
   def edit
@@ -29,17 +31,14 @@ class ProjectWeeksController < ApplicationController
   def create
     @project_week = ProjectWeek.new(project_week_params)
     @project_week.save
-    respond_with(@project_week)
   end
 
   def update
     @project_week.update(project_week_params)
-    respond_with(@project_week)
   end
 
   def destroy
     @project_week.destroy
-    respond_with(@project_week)
   end
 
   private
@@ -50,4 +49,8 @@ class ProjectWeeksController < ApplicationController
     def project_week_params
       params.require(:project_week).permit(:title, :default)
     end
+
+  def filter_params
+    params.require(:filter).permit(:visibility, :day, :status)
+  end
 end

@@ -10,4 +10,8 @@ class ProjectWeek < ActiveRecord::Base
     projects.visible.joins(:users).select(:user_id).uniq.count
   end
 
+  def vacancy_count
+    projects.active.toplevel.map{|p| p.aggregated_desired_team_size - p.aggregated_volunteers.count}.sum
+  end
+
 end

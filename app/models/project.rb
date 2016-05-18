@@ -39,14 +39,14 @@ class Project < ActiveRecord::Base
     if !subprojects || subprojects.count == 0
       return volunteers
     end
-    User.joins(:projects).where("(participations.project_id = #{self.id} or parent_project_id = #{self.id}) and participations.as_leader = false")
+    User.joins(:projects).where("(projects.id = #{self.id} or parent_project_id = #{self.id}) and participations.as_leader = false and projects.visible = true")
   end
 
   def aggregated_leaders
     if !subprojects || subprojects.count == 0
       return leaders
     end
-    User.joins(:projects).where("(participations.project_id = #{self.id} or parent_project_id = #{self.id}) and participations.as_leader = true")
+    User.joins(:projects).where("(projects.id = #{self.id} or parent_project_id = #{self.id}) and participations.as_leader = true")
   end
 
   def volunteers_in_subprojects
@@ -134,7 +134,7 @@ class Project < ActiveRecord::Base
   def aggregated_desired_team_size
     desired_team_size = self.desired_team_size
     if subprojects
-      subprojects.each { |p| desired_team_size += p.desired_team_size }
+      subprojects.each { |p| desired_team_size += p.visible? ? p.desired_team_size : 0 }
     end
     desired_team_size
   end

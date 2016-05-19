@@ -7,7 +7,7 @@ class NewsEntriesController < ApplicationController
   respond_to :html
 
   def index
-    @news_entries = NewsEntry.all.order(:created_at)
+    @news_entries = policy_scope(NewsEntry).order(created_at: :desc)
   end
 
   def show

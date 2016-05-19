@@ -354,6 +354,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         fullscreenImage: 'Vollbild'
         thumbnailImage: 'Thumbnail'
         cropImage: 'Bildausschnitt für %{crop_target} anpassen'
+        invisible: versteckt
       help:
         picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
         teaser: 'Wenn Du dieses Feld ausfüllst, wird in Listen statt des ausführlichen Texts angezeigt.'

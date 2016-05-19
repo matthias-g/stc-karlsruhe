@@ -1,12 +1,15 @@
 module NewsEntriesHelper
 
   def list_news(categories, limit = 0)
-    news = if categories.nil?
-      NewsEntry.all
-    else
-      NewsEntry.where(category: categories.map{|c| NewsEntry.categories[c]})
+    news = @news_entries if @news_entries
+    unless news
+      if categories.nil?
+        news = policy_scope(NewsEntry)
+      else
+        news = policy_scope(NewsEntry).where(category: categories.map{|c| NewsEntry.categories[c]})
+      end
     end
-    news = news.order(:created_at)
+    news = news.order(created_at: :desc)
     news = news.limit(limit) if limit > 0
     news
   end

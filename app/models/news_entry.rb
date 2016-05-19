@@ -5,6 +5,8 @@ class NewsEntry < ActiveRecord::Base
   mount_uploader :picture, NewsEntryImageUploader
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
+  scope :visible,  -> { where(visible: true) }
+
   enum category: { general: 1, partners: 2, projects: 3, media: 4, insight: 5 }
 
   validates_presence_of :title, :text, :category

@@ -14,7 +14,7 @@
     <div class="news-date">
       <%= l news.created_at, format: :short_date %>
     </div>
-    <h2><%= link_to news.title, news %></h2>
+    <h2><%= link_to news.title, news %><%= ' (' + t('news_entry.label.invisible') + ')' unless news.visible? %></h2>
     <div><%= simple_format (news.teaser || news.text) %></div>
   </div>
 <% end %>

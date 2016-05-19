@@ -15,4 +15,14 @@ class NewsEntryPolicy < ApplicationPolicy
   alias_method :upload_pictures?, :edit?
   alias_method :crop_picture?, :edit?
 
+  class Scope < Scope
+    def resolve
+      if user && user.admin?
+        scope.all
+      else
+        scope.visible
+      end
+    end
+  end
+
 end

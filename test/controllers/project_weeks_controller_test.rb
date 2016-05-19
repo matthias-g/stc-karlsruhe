@@ -32,6 +32,16 @@ class ProjectWeeksControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "project should show short description if available" do
+    get :show, id: @project_week
+    assert_select '.project-description', projects(:one).short_description
+  end
+
+  test "project should show description if no short description available" do
+    get :show, id: @project_week
+    assert_select '.project-description', projects(:four).description
+  end
+
   test "should get edit" do
     sign_in users(:admin)
     get :edit, id: @project_week

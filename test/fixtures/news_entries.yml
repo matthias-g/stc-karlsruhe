@@ -6,3 +6,11 @@ one:
   category: 1
   visible: true
   slug: online
+
+two:
+  title: Short
+  teaser: ''
+  text: This is short. It doesn't even have a teaser.
+  category: 1
+  visible: true
+  slug: short

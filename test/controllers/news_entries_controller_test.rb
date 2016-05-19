@@ -11,6 +11,16 @@ class NewsEntriesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:news_entries)
   end
 
+  test "should show teaser in index if available" do
+    get :index
+    assert_select '.news-teaser div p', news_entries(:one).teaser
+  end
+
+  test "should show text in index if no teaser available" do
+    get :index
+    assert_select '.news-teaser div p', news_entries(:two).text
+  end
+
   test "should get new" do
     sign_in users(:admin)
     get :new

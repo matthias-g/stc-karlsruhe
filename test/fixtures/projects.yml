@@ -1,8 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyText
+  title: Kostenlose Fahrradreparatur in der Innenstadt
+  short_description: Hast du Lust auf ein Projekt unter freiem Himmel? Wir bieten eine kostenlose Fahrradreparatur an.
+  description: Wir werden einen kleinen Pavillion in der Innenstadt aufbauen und eine kostenlose Fahrradreparatur für die vorbeifahrenden Leute anbieten.
   location: MyString
   latitude: 1.5
   longitude: 1.5
@@ -43,8 +44,8 @@ three:
   gallery: three
 
 four:
-  title: MyString
-  description: MyText
+  title: Ausflug in den Zoo
+  description: Du hast Lust auf einen unvergesslichen Zoobesuch? Dann sei dabei! :)
   location: MyString
   latitude: 1.5
   longitude: 1.5

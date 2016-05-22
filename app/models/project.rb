@@ -38,10 +38,11 @@ class Project < ActiveRecord::Base
   end
 
   def volunteers_in_subprojects
-    aggregated_users.where(projects: {parent_project_id: self.id}).only_volunteers
+    User.joins(:projects).where("parent_project_id = #{self.id}").only_volunteers
   end
 
   def aggregated_users
+    return users if subprojects.empty?
     User.joins(:projects).where("(projects.id = #{self.id} or parent_project_id = #{self.id})")
   end
 

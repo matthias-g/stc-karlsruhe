@@ -102,12 +102,14 @@ class Project < ActiveRecord::Base
 
   def close!
     self.status = :closed
-    self.save
+    subprojects.each {|p| p.close!}
+    save
   end
 
   def open!
     self.status = :open
-    self.save
+    subprojects.each {|p| p.open!}
+    save
   end
 
   def crop_picture(x,y,w,h,version)
@@ -119,10 +121,6 @@ class Project < ActiveRecord::Base
   end
 
 
-
-  def closed?
-    self.status == :closed
-  end
 
   def has_free_places?
     desired_team_size - volunteers.count > 0

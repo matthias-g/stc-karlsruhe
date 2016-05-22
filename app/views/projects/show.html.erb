@@ -224,11 +224,20 @@
             <h3><%= Project.human_attribute_name('leaders') %></h3>
             <%= list_users(@project.leaders) %>
           </div>
-          <div>
-            <h3><%= Project.human_attribute_name('volunteers') %>
-              (<%= @project.aggregated_volunteers.size %>/<%= @project.aggregated_desired_team_size %>)</h3>
-            <%= list_users(@project.aggregated_volunteers.uniq) %>
-          </div>
+          <% if !@project.volunteers.empty? %>
+            <div>
+              <h3><%= t('project.label.volunteers_in_project', members: @project.volunteers.size,
+                        limit: @project.desired_team_size) %></h3>
+              <%= list_users(@project.volunteers) %>
+            </div>
+          <% end %>
+          <% if !@project.volunteers_in_subprojects.empty? %>
+            <div>
+              <h3><%= t('project.label.volunteers_in_subprojects', members: @project.volunteers_in_subprojects.size,
+                        limit: @project.aggregated_desired_team_size - @project.desired_team_size) %></h3>
+              <%= list_users(@project.volunteers_in_subprojects.uniq) %>
+            </div>
+          <% end %>
         </section>
 
       </div>

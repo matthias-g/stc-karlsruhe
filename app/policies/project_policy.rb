@@ -36,7 +36,6 @@ class ProjectPolicy < ApplicationPolicy
     record.visible? && (is_volunteer? || is_leader? || is_admin? || (user && user.photographer?))
   end
 
-
   alias_method :index, :is_admin?
   alias_method :create, :is_admin?
   alias_method :update?, :edit?

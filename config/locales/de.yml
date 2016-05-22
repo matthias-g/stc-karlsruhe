@@ -321,7 +321,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         Benutzer: %{uploader}\n\n
         Bitte überprüfe die Bilder und schalte sie gegebenenfalls frei."
     status:
-      open: Offen
+      open: Freie Plätze
       soon_full: Wenige Plätze
       full: Vollbesetzt
       closed: Abgeschlossen

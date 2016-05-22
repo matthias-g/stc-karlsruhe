@@ -209,7 +209,7 @@
                           leave_project_path(@project),
                           class: 'btn btn-default btn-wide' %>
             <% end %>
-            <% if policy(@project).enter? %>
+            <% if policy(@project).enter? || !current_user %>
               <%= link_to t('project.action.enter'),
                           enter_project_path(@project),
                           class: 'btn btn-default btn-wide' %>

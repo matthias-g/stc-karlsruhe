@@ -22,4 +22,6 @@
 //= require jssor.slider.mini
 //= require photoswipe
 //= require jquery.Jcrop
+//= require highcharts
+//= require chartkick
 //= require_tree .

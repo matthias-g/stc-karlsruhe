@@ -1,10 +1,18 @@
 <% content_for :pageTitle do %>
-  <%= t('layout.title.statistics') %>
+    <%= t('layout.title.statistics') %>
 <% end %>
 
 <section>
   <h1>Neue Projektteilnahmen</h1>
 </section>
+
+<div class="row row-md-eq-height">
+
+  <section class="col-md-12">
+    <%= line_chart Participation.where(as_leader: false).where('created_at > ?', 60.days.ago).group_by_day(:created_at).count, colors: ['#229c95'] %>
+  </section>
+
+</div>
 
 <div class="row row-md-eq-height">
 
@@ -17,13 +25,16 @@
       </tr>
       </thead>
       <tbody>
-      <% (0...30).each do |x| %>
-        <tr>
+      <% (0...60).each do |x| %>
           <% date = x.days.ago.to_date %>
-          <td><%= l date, format: :default %></td>
-          <td><%= @participations.where(created_at: date.beginning_of_day..date.end_of_day).count %></td>
-          <td><%= link_to 'Details', participations_on_day_path(date: date)  %></td>
-        </tr>
+          <% participations_on_date = @participations.where(created_at: date.beginning_of_day..date.end_of_day).count %>
+          <% if participations_on_date > 0 %>
+              <tr>
+                <td><%= l date, format: :default %></td>
+                <td><%= participations_on_date %></td>
+                <td><%= link_to 'Details', participations_on_day_path(date: date)  %></td>
+              </tr>
+          <% end %>
       <% end %>
       </tbody>
     </table>

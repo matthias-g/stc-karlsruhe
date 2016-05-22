@@ -26,6 +26,9 @@ class User < ActiveRecord::Base
             format: { with: /\A[[[:word:]]-\.]+( [[[:word:]]-\.]+)*\z/, message: I18n.t('activerecord.errors.messages.onlyWordsAndInnerSpace') }
   attr_accessor :login
 
+  scope :only_leaders,    -> { where(participations: {as_leader: true}) }
+  scope :only_volunteers, -> { where(participations: {as_leader: false}) }
+
   before_validation :set_default_username_if_blank!, on: :create
 
   def self.find_for_database_authentication(warden_conditions)

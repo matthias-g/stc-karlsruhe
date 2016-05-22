@@ -1,67 +1,5 @@
 class ProjectPolicy < ApplicationPolicy
 
-  def index?
-    return false unless user
-    user.admin?
-  end
-
-  def create?
-    return false unless user
-    user.admin?
-  end
-
-  def show?
-    return true if record.visible?
-    return false unless user
-    user.admin? || user.leads_project?(record)
-  end
-
-  def edit?
-    return false unless user
-    user.admin? || user.leads_project?(record)
-  end
-
-  def contact_volunteers?
-    edit? && record.visible?
-  end
-
-  alias_method :update?, :edit?
-  alias_method :destroy?, :edit?
-  alias_method :edit_leaders?, :edit?
-  alias_method :add_leader?, :edit_leaders?
-  alias_method :delete_leader?, :edit_leaders?
-  alias_method :open?, :edit?
-  alias_method :close?, :edit?
-  alias_method :crop_picture?, :edit?
-
-  def enter?
-    return false unless user
-    record.visible? && !record.full? && !record.closed? && !record.has_volunteer?(user)
-  end
-
-  def leave?
-    return false unless user
-    record.visible? && !record.closed? && record.has_volunteer?(user)
-  end
-
-  def delete_volunteer?
-    return false unless user
-    user.admin?
-  end
-
-  def change_visibility?
-    return false unless user
-    user.admin?
-  end
-
-  alias_method :make_visible?, :change_visibility?
-  alias_method :make_invisible?, :change_visibility?
-
-  def upload_pictures?
-    return false unless user && record.visible?
-    record.has_volunteer?(user) || record.has_leader?(user) || user.admin? || user.photographer?
-  end
-
   class Scope < Scope
     def resolve
       if user && user.admin?
@@ -70,6 +8,59 @@ class ProjectPolicy < ApplicationPolicy
         scope.where(Project.unscoped.where(visible: true, participations: {as_leader: true}).where_values_hash.inject(:or)) # TODO Rails 5
       end
     end
+  end
+
+
+
+  def show?
+    record.visible? || edit?
+  end
+
+  def edit?
+    is_admin? || is_leader?
+  end
+
+  def contact_volunteers?
+    record.visible? && edit?
+  end
+
+  def enter?
+    !is_volunteer? && record.has_free_places? && !record.closed?
+  end
+
+  def leave?
+    is_volunteer? && !record.closed?
+  end
+
+  def upload_pictures?
+    record.visible? && (is_volunteer? || is_leader? || is_admin? || (user && user.photographer?))
+  end
+
+
+  alias_method :index, :is_admin?
+  alias_method :create, :is_admin?
+  alias_method :update?, :edit?
+  alias_method :destroy?, :edit?
+
+  alias_method :open?, :edit?
+  alias_method :close?, :edit?
+  alias_method :change_visibility?, :is_admin?
+  alias_method :make_visible?, :change_visibility?
+  alias_method :make_invisible?, :change_visibility?
+
+  alias_method :crop_picture?, :edit?
+  alias_method :edit_leaders?, :edit?
+  alias_method :add_leader?, :edit_leaders?
+  alias_method :delete_leader?, :edit_leaders?
+  alias_method :delete_volunteer?, :is_admin?
+
+
+  def is_leader?
+    user && (record.has_leader? user)
+  end
+
+  def is_volunteer?
+    user && (record.has_volunteer? user)
   end
 
 end

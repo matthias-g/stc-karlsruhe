@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
 
   scope :visible,  -> { where(projects: {visible: true}) }
   scope :toplevel, -> { where(parent_project_id: nil) }
-  scope :active,   -> { visible.where("status <> ?", Project.statuses[:closed]) }
+  scope :active,   -> { visible.where('status <> ?', Project.statuses[:closed]) }
 
   enum status: { open: 1, soon_full: 2, full: 3, closed: 4 }
 
@@ -27,31 +27,38 @@ class Project < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
-  # def sorted_users
-  #   users.select('users.*, participations.created_at').order('participations.created_at')
-  # end
+
 
   def volunteers
-    users.where(participations: {as_leader: false})
+    users.only_volunteers
   end
 
-  def aggregated_volunteers
-    if !subprojects || subprojects.count == 0
-      return volunteers
-    end
-    User.joins(:projects).where("(projects.id = #{self.id} or parent_project_id = #{self.id}) and participations.as_leader = false and projects.visible = true")
-  end
-
-  def aggregated_leaders
-    if !subprojects || subprojects.count == 0
-      return leaders
-    end
-    User.joins(:projects).where("(projects.id = #{self.id} or parent_project_id = #{self.id}) and participations.as_leader = true")
+  def leaders
+    users.only_leaders
   end
 
   def volunteers_in_subprojects
-    User.joins(:projects).where('projects.parent_project_id' => self.id).where('participations.as_leader' => false)
+    aggregated_users.where(projects: {parent_project_id: self.id}).only_volunteers
   end
+
+  def aggregated_users
+    User.joins(:projects).where("(projects.id = #{self.id} or parent_project_id = #{self.id})")
+  end
+
+  def aggregated_volunteers
+    aggregated_users.only_volunteers
+  end
+
+  def aggregated_leaders
+    aggregated_users.only_leaders
+  end
+
+  def aggregated_desired_team_size
+    desired_team_size = self.desired_team_size
+    subprojects.each { |p| desired_team_size += p.visible? ? p.desired_team_size : 0 }
+    desired_team_size
+  end
+
 
   def add_volunteer user
     users << user
@@ -71,10 +78,6 @@ class Project < ActiveRecord::Base
     self.save #adjusts status
   end
 
-  def leaders
-    users.where(participations: {as_leader: true})
-  end
-
   def add_leader user
     Participation.create(project: self, user: user, as_leader: true) unless has_leader? user
   end
@@ -83,9 +86,11 @@ class Project < ActiveRecord::Base
     leaders.include? user
   end
 
-  def delete_leader(user)
+  def delete_leader user
     Participation.where(project_id: self.id, user_id: user.id, as_leader: true).first.destroy!
   end
+
+
 
   def make_visible!
     update_attribute :visible, true
@@ -105,12 +110,45 @@ class Project < ActiveRecord::Base
     self.save
   end
 
+  def crop_picture(x,y,w,h,version)
+    self.crop_x = x
+    self.crop_y = y
+    self.crop_w = w
+    self.crop_h = h
+    picture.recreate_versions!(version)
+  end
+
+
+
   def closed?
-    self.status == 'closed'
+    self.status == :closed
   end
 
   def has_free_places?
     desired_team_size - volunteers.count > 0
+  end
+
+  def is_subproject?
+    parent_project != nil
+  end
+
+  def show_picture?
+    picture_source && !picture_source.empty? && picture
+  end
+
+
+
+  private
+
+  def should_generate_new_friendly_id?
+    title_changed? || super
+  end
+
+  def slug_candidates
+    candidates = []
+    candidates << :title
+    candidates << [:title, project_week.title] if project_week
+    candidates
   end
 
   def adjust_status
@@ -129,43 +167,6 @@ class Project < ActiveRecord::Base
 
   def adjust_parent_status
     parent_project.save if parent_project # adjusts status
-  end
-
-  def aggregated_desired_team_size
-    desired_team_size = self.desired_team_size
-    if subprojects
-      subprojects.each { |p| desired_team_size += p.visible? ? p.desired_team_size : 0 }
-    end
-    desired_team_size
-  end
-
-  def is_subproject?
-    parent_project != nil
-  end
-
-  def show_picture?
-    picture_source && !picture_source.empty? && picture
-  end
-
-  def crop_picture(x,y,w,h,version)
-    self.crop_x = x
-    self.crop_y = y
-    self.crop_w = w
-    self.crop_h = h
-    picture.recreate_versions!(version)
-  end
-
-  def should_generate_new_friendly_id?
-    title_changed? || super
-  end
-
-  # Try building a slug based on the following fields in
-  # increasing order of specificity.
-  def slug_candidates
-    candidates = []
-    candidates << :title
-    candidates << [:title, project_week.title] if project_week
-    candidates
   end
 
   def create_gallery!

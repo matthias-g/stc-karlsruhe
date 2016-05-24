@@ -209,7 +209,7 @@
                           leave_project_path(@project),
                           class: 'btn btn-default btn-wide' %>
             <% end %>
-            <% if @project.visible? && !@project.full? && !@project.closed? && !@project.has_volunteer?(current_user) %>
+            <% if @project.visible? && @project.has_free_places? && !@project.closed? && !@project.has_volunteer?(current_user) %>
               <%= link_to t('project.action.enter'),
                           enter_project_path(@project),
                           class: 'btn btn-default btn-wide' %>

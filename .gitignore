@@ -6,6 +6,7 @@ db/test.sqlite3
 tmp/
 public/uploads/project
 public/uploads/gallery_picture
+public/uploads/news_entry
 public/downloads
 coverage/
 .ruby-gemset

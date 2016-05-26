@@ -60,8 +60,8 @@ class NewsEntriesController < ApplicationController
         when :fullscreen
           @crop_target_title = t('news_entry.label.fullscreenImage')
           @crop_target_ratio = 800.0/600
-        when :thumbnail
-          @crop_target_title = t('news_entry.label.thumbnailImage')
+        when :thumb
+          @crop_target_title = t('news_entry.label.thumbImage')
           @crop_target_ratio = 120.0/120
       end
       respond_with @news_entry do |format|

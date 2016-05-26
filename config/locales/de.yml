@@ -354,7 +354,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         uploadImage: 'Bild hochladen'
         articleImage: 'Artikelbild'
         fullscreenImage: 'Vollbild'
-        thumbnailImage: 'Thumbnail'
+        thumbImage: 'Thumbnail'
         cropImage: 'Bildausschnitt für %{crop_target} anpassen'
         invisible: versteckt
       help:

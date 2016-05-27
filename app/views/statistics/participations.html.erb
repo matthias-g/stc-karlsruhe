@@ -2,6 +2,11 @@
     <%= t('layout.title.statistics') %>
 <% end %>
 
+<% content_for :appendToHeader do %>
+    <%= javascript_include_tag 'highcharts' %>
+    <%= javascript_include_tag 'chartkick' %>
+<% end %>
+
 <section>
   <h1>Neue Projektteilnahmen</h1>
 </section>

@@ -1,6 +1,6 @@
 <% content_for :gallery_scripts, flush: true do %>
-    <%= javascript_include_tag 'jssor.slider.mini' %>
-    <%= javascript_include_tag 'photoswipe' %>
+    <%= javascript_include_tag 'jssor.slider.mini', 'data-turbolinks-track': true %>
+    <%= javascript_include_tag 'photoswipe', 'data-turbolinks-track': true %>
 <% end %>
 
 <div id="slider_container" class="gallery-container" data-gallery-id="<%= gallery.id %>">

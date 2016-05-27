@@ -19,7 +19,5 @@
 //= require bootstrap-select/i18n/defaults-de_DE
 //= require jquery.lazyload
 //= require jquery-ui/sortable
-//= require jssor.slider.mini
-//= require photoswipe
 //= require jquery.Jcrop
 //= require_tree .

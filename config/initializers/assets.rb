@@ -1,5 +1,5 @@
 StcKarlsruhe::Application.configure do
 
-  config.assets.precompile += %w( highcharts.js chartkick.js )
+  config.assets.precompile += %w( highcharts.js chartkick.js jssor.slider.mini photoswipe )
 
 end

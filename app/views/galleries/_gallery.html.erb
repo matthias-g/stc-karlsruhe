@@ -1,3 +1,8 @@
+<% content_for :gallery_scripts, flush: true do %>
+    <%= javascript_include_tag 'jssor.slider.mini' %>
+    <%= javascript_include_tag 'photoswipe' %>
+<% end %>
+
 <div id="slider_container" class="gallery-container" data-gallery-id="<%= gallery.id %>">
 
   <%# Loading Screen %>

@@ -28,3 +28,4 @@
 //= require views/week_dropdown
 //= require views/pages/faq
 //= require views/pages/home
+//= require surveys/templates

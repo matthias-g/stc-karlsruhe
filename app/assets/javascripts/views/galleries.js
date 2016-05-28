@@ -1,3 +1,5 @@
+//= require jssor.slider.mini
+//= require photoswipe
 
 $(document).ready(function ($) {
     // auto submit uploaded images

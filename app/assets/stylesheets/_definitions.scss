@@ -16,66 +16,74 @@
   src: asset-url("caveat-regular.ttf");
 }
 
-/* message / infobox colors */
-$col_positive: lightgrey;
-$bg_positive: #197435;
-$col_neutral: lightgrey;
-$bg_neutral: #d49203;
-$col_negative: lightgrey;
-$bg_negative: #a60000;
-$color_inactive: black;
-$bg_inactive: #aaa;
-$color_hidden: black;
-$bg_hidden: #c44aba;
+/* status colors */
+
+$status_open:           #197435;
+$status_soon_full:      #D49203;
+$status_full:           #A60000;
+$status_finished:       #999;
+$status_hidden:         #C44ABA;
+$status_open_text:      lightgrey;
+$status_soon_full_text: lightgrey;
+$status_full_text:      lightgrey;
+$status_finished_text:  black;
+$status_hidden_text:    black;
 
 /* flash message colors */
-$bg_notice: rgb(200,255,200);
-$col_notice: rgb(100,100,100);
-$bg_alert: rgb(255,141,130);
-$border_default: #000;
-$img_bg_default: #aaa;
-$footer_color: #fff;
-$footer_shadow_color: #000;
+$flash_notice:        rgba(#C8FFC8, 0.85);
+$flash_alert:         rgba(#FF8D82, 0.85);
+$flash_notice_text:   #646464;
+$flash_alert_text:    #000;
 
+/* general design element colors */
+$default_border:      rgba(#777, 0.5);
+$default_image_bg:    #AAA;
+$primary:             #28B7AF;
+$primary_text:        #FFF;
+$primary_text_shadow: rgba(#082725, 0.6);
+$section:             rgba(#FFF, 0.8);
 
-$bg_primary: rgb(40,183,175);
-$textshadow_primary: rgba(8, 39, 37, 0.6);
-$bg_button: rgb(44,153,145);
-$bg_section: rgba(#fff, 0.8);
+$facebook:            rgba(#3A5795, 0.8);
+$facebook_text:       #FFF;
+$gallery:             #191919;
+$separator:           #000;
+$footer_text:         #FFF;
+$footer_text_shadow:  #000;
+$unobtrusive_text:    gray;
 
 
 /* bootstrap general */
-$body-bg: #929d9b;
-$grid-gutter-width: 16px;
-$screen-sm-min: 550px;
-$screen-md-min: 790px;
-$screen-lg-min: 1300px;
+$body-bg:               #929D9B;
+$grid-gutter-width:     16px;
+$screen-sm-min:         550px;
+$screen-md-min:         790px;
+$screen-lg-min:         1300px;
 $grid-float-breakpoint: 680px;
-$dropdown-bg: rgba(#fff, 0.9);
+$dropdown-bg:           rgba(#FFF, 0.9);
 
 /*$screen-sm-min: 768px;
 $screen-md-min: 992px;
 $screen-lg-min: 1200px;*/
 
 /* bootstrap navbar */
-$navbar-height: 30px;
-$navbar-default-bg: rgba($bg_primary, 0.9);
-$navbar-default-color: rgba(#fff, 0.7);
-$navbar-default-link-color: $navbar-default-color;
-$navbar-default-link-hover-color: #fff;
-$navbar-default-link-active-color: rgba(#fff, 0.5);
-$navbar-default-toggle-hover-bg: $navbar-default-color;
+$navbar-height:                      30px;
+$navbar-default-bg:                  rgba($primary, 0.9);
+$navbar-default-color:               rgba(#FFF, 0.7);
+$navbar-default-link-color:          $navbar-default-color;
+$navbar-default-link-hover-color:    #FFF;
+$navbar-default-link-active-color:   rgba(#FFF, 0.5);
+$navbar-default-toggle-hover-bg:     $navbar-default-color;
 $navbar-default-toggle-border-color: transparent;
 
 /* bootstrap text and headings */
-$font-family-sans-serif: NormalFont, Helvetica, Arial, sans-serif;
-$headings-font-family: CaptionFont, Helvetica, Arial, sans-serif;
-$font-size-base: 16px;
-$font-size-h1: 35px;
-$font-size-h2: 25px;
-$font-size-h3: 17px;
-$font-size-h4: 17px;
-$text-color: #000;
-$link-color: rgb(44,153,145);
-$link-hover-color: rgba($link_color, 0.8);
+$font-family-sans-serif:  NormalFont, Helvetica, Arial, sans-serif;
+$headings-font-family:    CaptionFont, Helvetica, Arial, sans-serif;
+$font-size-base:    16px;
+$font-size-h1:      35px;
+$font-size-h2:      25px;
+$font-size-h3:      17px;
+$font-size-h4:      17px;
+$text-color:        #000;
+$link-color:        #2C9991;
+$link-hover-color:  rgba($link_color, 0.8);
 $link-hover-decoration: none;

@@ -44,14 +44,14 @@
     }
     h3 {
       margin-top: -5px;
-      color: gray;
+      color: $unobtrusive_text;
     }
   }
   .project-image {
     position: relative;
     float: right;
     margin-left: 7px;
-    background: $img_bg_default;
+    background: $default_image_bg;
     width: 50%;
     max-width: 200px;
     overflow: hidden;
@@ -70,27 +70,7 @@
     font-size: 18px;
     letter-spacing: 1px;
     text-align: center;
-    border-bottom: 1px solid $border_default;
-  }
-  .status_open {
-    color: $col_positive;
-    background: rgba($bg_positive, .8);
-  }
-  .status_soon_full {
-    color: $col_neutral;
-    background: rgba($bg_neutral, .8);
-  }
-  .status_full {
-    color: $col_negative;
-    background: rgba($bg_negative, .8);
-  }
-  .status_closed {
-    color: $color_inactive;
-    background: $bg_inactive;
-  }
-  .status_hidden {
-    color: $color_hidden;
-    background: $bg_hidden;
+    border-bottom: 1px solid #000;
   }
 }
 

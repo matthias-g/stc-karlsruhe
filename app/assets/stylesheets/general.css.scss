@@ -20,6 +20,31 @@ h3, h4 {
   }
 }
 
+.status_open {
+  color: $status_open_text;
+  background: $status_open;
+}
+.status_soon_full {
+  color: $status_soon_full_text;
+  background: $status_soon_full;
+}
+.status_full {
+  color: $status_full_text;
+  background: $status_full;
+}
+.status_finished {
+  color: $status_finished_text;
+  background: $status_finished;
+}
+.status_hidden {
+  color: $status_hidden_text;
+  background: $status_hidden;
+}
+.status_active {
+  color: $status_open_text;
+  background: $status_open;
+}
+
 /* MULTI-USE STYLES */
 .spotlight {
   text-align: center;
@@ -59,29 +84,12 @@ h3, h4 {
     margin: 5px 0;
     text-align: center;
   }
-
-  &.open {
-    color: $col_positive;
-    background: $bg_positive;
-  }
-  &.soon_full {
-    color: $col_neutral;
-    background: $bg_neutral;
-  }
-  &.full {
-    color: $col_negative;
-    background: $bg_negative;
-  }
-  &.closed {
-    color: $color_inactive;
-    background: $bg_inactive;
-  }
 }
 
 /* sections (standalone and within rows) */
 section {
   margin: 0 0 $grid-gutter-width;
-  background-color: $bg_section;
+  background: $section;
   padding: 10px !important;
   position: relative;
   overflow: hidden;

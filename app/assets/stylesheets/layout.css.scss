@@ -29,7 +29,7 @@ body {
     font-size: 14px;
     font-weight: bold;
     text-decoration: none;
-    text-shadow: 1px 1px 1px rgba(8, 39, 37, 0.6);
+    text-shadow: 1px 1px 1px $primary_text_shadow;
     text-transform: uppercase;
     transition: color 0.3s ease 0s;
   }
@@ -81,13 +81,13 @@ footer {
   bottom: 10px;
   right: 5px;
   font-size: 0.7em;
-  color: $footer_color;
+  color: $footer_text;
   padding: 5px;
   text-shadow:
-      0 0 1px rgba($footer_shadow_color, 0.5),
-      1px 1px 1px rgba($footer_shadow_color, 1);
+      0 0 1px rgba($footer_text_shadow, 0.5),
+      1px 1px 1px rgba($footer_text_shadow, 1);
   a, a:hover, a:focus {
-    color: $footer_color;
+    color: $footer_text;
     text-shadow: none;
   }
 }
@@ -99,15 +99,13 @@ footer {
   margin: 0 auto;
   max-width: 700px;
 
-  .alert-info {
-    background: rgba($bg_notice, 0.85);
-    color: $col_notice;
-  }
-  .alert-notice {
-    background: rgba($bg_notice, 0.85);
+  .alert-info, .alert-notice {
+    background: $flash_notice;
+    color: $flash_notice_text;
   }
   .alert-alert {
-    background: rgba($bg_alert, 0.85);
+    background: $flash_alert;
+    color: $flash_alert_text;
   }
 }
 

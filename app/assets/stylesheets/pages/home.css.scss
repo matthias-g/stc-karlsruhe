@@ -63,17 +63,17 @@
 }
 
 #project-link {
-  background: rgba(40,183,175, 0.8)
+  background: rgba($primary, 0.8)
     url("/images/projectlink_bg.png")
     left center / contain no-repeat padding-box;
   a {
     font: 40px CaptionFont;
-    color: #fff;
+    color: $primary_text;
     text-decoration: none;
     transition: text-shadow 0.3s;
   }
   a:hover {
-    text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 3px rgba($primary_text, 0.5);
   }
 }
 
@@ -87,31 +87,29 @@
   text-decoration: none;
   transition: text-shadow 0.3s;
   &:hover {
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 3px rgba(#000, 0.5);
   }
 }
 
 #project-map {
-  background: #aaa;
+  background: $default_image_bg;
   margin: 0 auto;
   border-radius: 6px;
-  border: 1px solid rgba(#777,0.5);
+  border: 1px solid $default_border;
   width: 100%;
 }
 
 #facebook-box {
-  background: rgba(#3A5795, 0.8)
-    //url("/images/projectlink_bg.png")
-    left center / contain no-repeat padding-box;
+  background: $facebook left center / contain no-repeat padding-box;
   font: 20px NormalFont;
-  color: #fff;
+  color: $facebook_text;
   a {
-    color: #fff;
+    color: $facebook_text;
     text-decoration: none;
     transition: text-shadow 0.3s;
   }
   a:hover {
-    text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 3px rgba($facebook_text, 0.5);
   }
   h1 {
     margin-top: 5px;

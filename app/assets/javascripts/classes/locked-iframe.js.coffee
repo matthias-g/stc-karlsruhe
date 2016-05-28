@@ -1,7 +1,8 @@
-class LockedIframe
+class @LockedIframe
   
-  constructor: (trigger) ->
+  constructor: (@html) ->
+    trigger = $('.locked-iframe-trigger', @html)
+    iframe = $('.locked-iframe', @html) 
     trigger.click ->
-      $($(@).data('target-frame')).each ->
-        $(@).removeClass('locked-iframe').attr(src: $(this).data('frame-src'))
-      $(@).hide()
+      iframe.removeClass('locked-iframe').attr(src: iframe.data('frame-src'))
+      trigger.hide()

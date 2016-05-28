@@ -167,7 +167,8 @@
             <%= simple_format @project.location %>
           </div>
           <% unless @project.longitude == 0 %>
-            <div class="map" data-zoom="<%= @project.map_zoom %>"
+            <div class="map" data-class="GoogleMap" data-map-id="project"
+                 data-zoom="<%= @project.map_zoom %>"
                  data-lon="<%= @project.map_longitude %>"
                  data-lat="<%= @project.map_latitude %>">
               <div data-name="<%= @project.title %>"

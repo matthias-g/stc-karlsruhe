@@ -1,12 +1,12 @@
 
-  
 # submit handler for the project list filter
 filterProjectList = (e, obj) ->
   e.preventDefault()
   $('#project-list').load '?' + parametrize(obj) + ' #project-list > *', ->
-    $('#project-list img').lazyload()
-    $('#filterResults').text 'Gefundene Projekte: ' + $('#project-list > *').size()
-      
+    $('img', @).lazyload()
+    $('#filterResults').text 'Gefundene Projekte: ' + $(@).children().size()
+
+# handler for "add leader" select
 addNewLeader = (e, idx, val) ->
   $.ajax '/api/projects/' + $(@).data('project-id') + '/add_leader?user_id=' + val, ->
     location.reload()
@@ -20,16 +20,14 @@ updateDaysOnWeekChange = ->
       $('<option>').attr(value: day.id).text(day.title).appendTo daySelect    
     
     
-ready = ->
-  # load select pickers
-  $('.selectpicker').selectpicker 'render'
-  
-  # register submit/change handlers
-  submitOnChange $('#projectFilter'), filterProjectList 
+      
+onPageLoad ->
+  # update project list if filter changes
+  onFieldChange $('#projectFilter'), filterProjectList
+
+  # update available days when week selction changes
   $('#project-edit-view .week select').change updateDaysOnWeekChange
+  
+  # update leaders when a new leader is selected
   $('#select-new-leader').on 'changed.bs.select', addNewLeader
 
-
-# TODO Rails 5 http://stackoverflow.com/a/18770589      
-$(document).ready ready
-$(document).on 'page:load', ready

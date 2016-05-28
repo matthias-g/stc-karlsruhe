@@ -1,23 +1,25 @@
-class Countdown
-  SECOND = 1000
-  MINUTE = SECOND * 60
-  HOUR = MINUTE * 60
-  DAY = HOUR * 24
-  constructor: (counter) ->
-    @counter = counter
-    @fields = counter.find('div span')
-    @end = new Date(counter.data('date'))
-    timer = setInterval @update, 1000
-    @update
-  update = ->
-    d = @end - (new Date)
+class @Countdown
+
+  @SECOND:  1000
+  @MINUTE:  @SECOND * 60
+  @HOUR:    @MINUTE * 60
+  @DAY:     @HOUR * 24
+
+  constructor: (@html) ->
+    @fields = @html.find('div span')
+    @endDate = new Date(@html.data('date'))
+    timer = setInterval(@update, 1000)
+    @update()
+    
+  update: =>
+    d = @endDate - (new Date)
     if d < 0
       clearInterval timer
-      @counter.find('div').hide()
-      @counter.find('.running').hide()
-      @counter.find('.finished').show()
+      @html.find('div').hide()
+      @html.find('.running').hide()
+      @html.find('.finished').show()
       return
-    @fields.eq(0).text Math.floor(d / _day)
-    @fields.eq(1).text ('0' + Math.floor(d % @DAY / @HOUR)).slice(-2)
-    @fields.eq(2).text ('0' + Math.floor(d % @HOUR / @MINUTE)).slice(-2)
-    @fields.eq(3).text ('0' + Math.floor(d % @MINUTE / @SECOND)).slice(-2)
+    @fields.eq(0).text Math.floor(d / Countdown.DAY)
+    @fields.eq(1).text Math.floor(d % Countdown.DAY / Countdown.HOUR)
+    @fields.eq(2).text Math.floor(d % Countdown.HOUR / Countdown.MINUTE)
+    @fields.eq(3).text Math.floor(d % Countdown.MINUTE / Countdown.SECOND)

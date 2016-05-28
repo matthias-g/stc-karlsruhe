@@ -96,7 +96,7 @@ $(document).ready(function ($) {
     // build gallery item array
     var galleryItems = [];
     var galleryId = container.data('gallery-id');
-    $.getJSON('/api/galleries/' + galleryId + '.json', function( data ) {
+    $.getJSON('/api/galleries/' + galleryId, function( data ) {
         $.each(data.gallery_pictures, function(index, item) {
             galleryItems.push({
                 src: item.picture.desktop.url,

@@ -78,7 +78,7 @@
       </h3>
       <%= f.submit t('general.action.save'), class: 'btn btn-default btn-wide' %>
       <%= link_to t('general.action.cancel'), @project, class: 'btn btn-default btn-wide' %>
-      <% if !isNew && current_user.admin? && !@project.closed? %>
+      <% if !isNew && policy(@project).destroy? %>
           <%= link_to t('project.action.delete'), @project, method: :delete,
                       data: { confirm: t('general.message.confirmDelete')},
                       class: 'btn btn-default btn-wide' %>
@@ -88,8 +88,7 @@
     <section class="slim">
       <div class="week">
         <%= f.collection_select(:project_week_id, ProjectWeek.all.order(title: :desc), :id, :title,
-                                {:selected => @project.project_week.id},
-                                :onChange => "javascript:updateWeekDays()" ) -%>
+             {selected: @project.project_week.id}) -%>
       </div>
       <div class="days">
         <%= f.collection_select(:day_ids, @project.project_week.days.order(date: :asc), :id, :title,

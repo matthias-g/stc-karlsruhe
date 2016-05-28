@@ -20,4 +20,11 @@
 //= require jquery.lazyload
 //= require jquery-ui/sortable
 //= require jquery.Jcrop
-//= require_tree .
+//= require general
+//= require locked-iframes
+//= require project-map
+//= require views/projects
+//= require views/projects_coffee
+//= require views/week_dropdown
+//= require views/pages/faq
+//= require views/pages/home

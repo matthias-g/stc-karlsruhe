@@ -11,10 +11,7 @@ body {
   padding: 0;
   min-height: 100%;
   position: relative;
-  background-image: image-url("bg.jpg");
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
+  background: image-url("bg.jpg") center/cover fixed;
 }
 
 #navigation {
@@ -36,7 +33,7 @@ body {
   .dropdown-menu {
     padding: 10px;
     min-width: 230px;
-    background-color: rgba($dropdown-bg, 0.8);
+    background: rgba($dropdown-bg, 0.8);
   }
 }
 
@@ -55,17 +52,15 @@ header {
   }
 
   .logo h2 {
-    margin-top: 10;
-    margin-bottom: 30px;
-    font-family: Caveat !important;
+    margin: 10px 0 30px;
+    font: 50px Caveat !important;
     text-align: center;
-    font-size: 50px;
     color: white;
     text-shadow: 0 0 3px #000;
   }
 
   &.smallheader {
-    background-image: image-url("logo_bg_small.png");
+    background: image-url("logo_bg_small.png");
     padding-bottom: 30px;
   }
 }

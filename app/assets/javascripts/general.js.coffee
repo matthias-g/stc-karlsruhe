@@ -84,6 +84,3 @@ onNewContent ->
 
   # lazyload images (must be activated with lazy:true in image_tag helper)
   $('img', @).lazyload threshold: 200
-
-  # init select pickers
-  $('.selectpicker', @).selectpicker 'render'

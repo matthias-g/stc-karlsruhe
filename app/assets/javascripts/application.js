@@ -14,6 +14,8 @@
 //= require jquery.Jcrop
 //= require highcharts
 //= require chartkick
+
 //= require_tree ./classes
 //= require general
 //= require_tree ./views
+//= require_tree ./pages

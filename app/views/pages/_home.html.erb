@@ -123,7 +123,7 @@
 %>
 
 <div class="row row-sm-eq-height">
-  <section class="col-sm-6" id="facebook-box">
+  <section class="col-sm-6" id="likebox">
     <h1>
       <%= link_to 'https://www.facebook.com/servethecity.karlsruhe', :target => "_blank" do %>
           <i class="fa fa-facebook-square" style="font-size: 1.3em;padding-right: 10px;"></i> Serve the City auf Facebook
@@ -134,7 +134,7 @@
             data-fb-token="1632977830272942|_y8PPboBvdNWpQG9jIDhHa--ArA"></span> &#132;Gefällt mir&#147;-Angaben
     </div>
   </section>
-  <section class="col-sm-6" id="project-link">
+  <section class="col-sm-6" id="projects-link">
     <div class="center-wrap" style="padding: 20px 20px 20px 30px;">
       <%= link_to show_project_week_path(ProjectWeek.default.title) do %>
           <i class="fa fa-arrow-right" style="position:relative;bottom:3px"></i> &nbsp;zu den Projekten
@@ -153,7 +153,7 @@
 <section>
   <h2>Projektkarte <%= ProjectWeek.default.title %></h2>
   <div class="box box-5by2" style="min-height:200px;">
-    <div id="project-map" class="map" data-class="GoogleMap"
+    <div id="projects-map" data-class="GoogleMap"
          data-lat="49.011627" data-lon="8.403869" data-zoom="12">
       <% ProjectWeek.default.projects.each do |p| %>
           <% if (p.visible && !p.longitude.nil? && !p.latitude.nil?) %>

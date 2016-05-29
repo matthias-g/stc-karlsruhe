@@ -32,7 +32,7 @@
   max-width: 600px;
   margin: 0 auto;
   background: #000;
-  iframe {
+  .locked-iframe {
     border: none;
   }
   .locked-iframe-trigger {
@@ -62,44 +62,7 @@
   }
 }
 
-#project-link {
-  background: rgba($primary, 0.8)
-    url("/images/projectlink_bg.png")
-    left center / contain no-repeat padding-box;
-  a {
-    font: 40px CaptionFont;
-    color: $primary_text;
-    text-decoration: none;
-    transition: text-shadow 0.3s;
-  }
-  a:hover {
-    text-shadow: 0 0 3px rgba($primary_text, 0.5);
-  }
-}
-
-#photo-link {
-  display: block;
-  margin: 0;
-  padding: 35px 50px 25px;
-  background: url("/images/photolink_bg.png") left center / cover;
-  font: 45px CaptionFont;
-  color: #000;
-  text-decoration: none;
-  transition: text-shadow 0.3s;
-  &:hover {
-    text-shadow: 0 0 3px rgba(#000, 0.5);
-  }
-}
-
-#project-map {
-  background: $default_image_bg;
-  margin: 0 auto;
-  border-radius: 6px;
-  border: 1px solid $default_border;
-  width: 100%;
-}
-
-#facebook-box {
+#likebox {
   background: $facebook left center / contain no-repeat padding-box;
   font: 20px NormalFont;
   color: $facebook_text;
@@ -120,6 +83,31 @@
     padding-left: 10px;
   }
 }
+
+#projects-link {
+  background: rgba($primary, 0.8)
+    url("/images/projectlink_bg.png")
+    left center / contain no-repeat padding-box;
+  a {
+    font: 40px CaptionFont;
+    color: $primary_text;
+    text-decoration: none;
+    transition: text-shadow 0.3s;
+  }
+  a:hover {
+    text-shadow: 0 0 3px rgba($primary_text, 0.5);
+  }
+}
+
+#projects-map {
+  background: $default_image_bg;
+  margin: 0 auto;
+  border-radius: 6px;
+  border: 1px solid $default_border;
+  width: 100%;
+}
+
+
 
 .schirmherr-ribbon {
   padding: 2px 0;

@@ -1,3 +1,6 @@
+#= require jssor.slider.mini
+#= require photoswipe
+
 class @Gallery
 
   EASING_LEFT = { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }

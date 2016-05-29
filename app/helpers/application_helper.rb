@@ -22,4 +22,9 @@ module ApplicationHelper
   def bootstrap_class_for(flash_type)
     BOOTSTRAP_FLASH_MSG.fetch(flash_type.to_sym, flash_type.to_s)
   end
+
+  def privileged_user?
+    signed_in? && (current_user.roles.any? || current_user.projects_as_leader.any?)
+  end
+
 end

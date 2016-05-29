@@ -11,14 +11,18 @@
           <% end %>
         </div>
     <% end %>
-    <div class="news-date">
-      <%= l news.created_at, format: :short_date %>
+
+    <div class="news-text">
+      <div class="news-date">
+        <%= l news.created_at, format: :short_date %>
+      </div>
+      <h2><%= link_to news.title, news %><%= ' (' + t('news_entry.label.invisible') + ')' unless news.visible? %></h2>
+      <% if news.teaser && !news.teaser.empty? %> <%# TODO Ruby 2.3 use safe navigation operator %>
+          <div><%= simple_format news.teaser %></div>
+      <% else %>
+          <div><%= simple_format news.text %></div>
+      <% end %>
     </div>
-    <h2><%= link_to news.title, news %><%= ' (' + t('news_entry.label.invisible') + ')' unless news.visible? %></h2>
-    <% if news.teaser && !news.teaser.empty? %> <%# TODO Ruby 2.3 use safe navigation operator %>
-        <div><%= simple_format news.teaser %></div>
-    <% else %>
-        <div><%= simple_format news.text %></div>
-    <% end %>
+
   </div>
 <% end %>

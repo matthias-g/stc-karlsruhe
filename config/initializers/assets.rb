@@ -1,5 +1,5 @@
 StcKarlsruhe::Application.configure do
 
-  config.assets.precompile += %w( highcharts.js chartkick.js views/galleries )
+  config.assets.precompile += %w( editing.js )
 
 end

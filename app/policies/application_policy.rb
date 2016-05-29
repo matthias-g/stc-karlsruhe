@@ -22,7 +22,7 @@ class ApplicationPolicy
 
 
   def index?
-    false
+    is_admin?
   end
 
   def show?

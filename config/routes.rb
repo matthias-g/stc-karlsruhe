@@ -43,23 +43,19 @@ StcKarlsruhe::Application.routes.draw do
   get 'admin_mail', to: 'messages#admin_mail_form'
   post 'admin_mail', to: 'messages#send_admin_mail'
 
-  resources :projects, path: 'projekte' do
+  resources :projects, except: [:index], path: 'projekte' do
     member do
+      get :activate
+      get :close
+      get :hide
       get :enter
       get :leave
-      get :edit_leaders
-      post :add_leader
-      delete :delete_leader
-      delete :delete_volunteer
-      get :make_visible
-      get :make_invisible
-      get :open
-      get :close
+      get :edit_team
       get :crop_picture
       post :contact_volunteers
     end
   end
-  get 'projekte-:year', to: 'projects#index'
+
   get 'projektwoche-:title', to: 'project_weeks#show', as: 'show_project_week'
 
   devise_for :users, path: '',
@@ -79,7 +75,7 @@ StcKarlsruhe::Application.routes.draw do
   get '/eigenes-projekt', to: 'pages#own_project', as: :own_project
   get '/:page', to: 'pages#page', as: :show_page
 
-  namespace :api, constraints: { format: 'json' } do
+  namespace :api, constraints: {format: [:json, :js]}, defaults: {format: :json} do
     resources :galleries, only: :show
     resources :gallery_pictures, only: [:destroy] do
       member do
@@ -89,9 +85,10 @@ StcKarlsruhe::Application.routes.draw do
     end
     resources :projects, only: :show do
       member do
-        get :enter
-        get :leave
         get :add_leader
+        get :add_volunteer
+        get :remove_leader
+        get :remove_volunteer
       end
     end
     resources :project_weeks, only: [:index] do

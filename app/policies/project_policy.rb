@@ -5,53 +5,59 @@ class ProjectPolicy < ApplicationPolicy
       if user && user.admin?
         scope.all
       else
-        scope.where(Project.unscoped.where(visible: true, participations: {as_leader: true}).where_values_hash.inject(:or)) # TODO Rails 5
+        or_values = Project.unscoped.visible.where(participations: {as_leader: true})
+        scope.where(or_values.where_values_hash.inject(:or)) #TODO: Rails 5
       end
     end
   end
 
-
-
   def show?
-    record.visible? || edit?
+    !record.hidden? || edit?
   end
 
   def edit?
     is_admin? || is_leader?
   end
 
+
   def contact_volunteers?
-    record.visible? && edit?
+    !record.hidden? && edit?
   end
 
   def enter?
-    !is_volunteer? && record.has_free_places? && !record.closed?
+    !is_volunteer? && record.has_free_places? && !record.finished?
   end
 
   def leave?
-    is_volunteer? && !record.closed?
+    is_volunteer? && !record.finished?
   end
 
+  def activate?
+    edit? && !record.active?
+  end
+
+  def close?
+    edit? && !record.finished?
+  end
+
+  def hide?
+    edit? && !record.hidden?
+  end
+
+
   def upload_pictures?
-    record.visible? && (is_volunteer? || is_leader? || is_admin? || (user && user.photographer?))
+    !record.hidden? && (is_volunteer? || is_leader? || is_admin? || (user && user.photographer?))
   end
 
   alias_method :index, :is_admin?
   alias_method :create, :is_admin?
-  alias_method :update?, :edit?
-  alias_method :destroy?, :edit?
-
-  alias_method :open?, :edit?
-  alias_method :close?, :edit?
-  alias_method :change_visibility?, :is_admin?
-  alias_method :make_visible?, :change_visibility?
-  alias_method :make_invisible?, :change_visibility?
 
   alias_method :crop_picture?, :edit?
-  alias_method :edit_leaders?, :edit?
-  alias_method :add_leader?, :edit_leaders?
-  alias_method :delete_leader?, :edit_leaders?
-  alias_method :delete_volunteer?, :is_admin?
+  alias_method :edit_team?, :edit?
+  alias_method :add_leader?, :edit_team?
+  alias_method :add_volunteer?, :edit_team?
+  alias_method :remove_leader?, :is_admin?
+  alias_method :remove_volunteer?, :is_admin?
 
 
   def is_leader?

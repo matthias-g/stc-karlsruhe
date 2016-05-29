@@ -10,15 +10,12 @@ class ProjectWeeksController < ApplicationController
 
   def show
     @project_week = !params[:title] ? set_project_week : ProjectWeek.find_by_title(params[:title])
-    @projects = @project_week.projects.toplevel.order(visible: :desc, status: :asc, picture_source: :desc)
-
+    @projects = @project_week.projects.toplevel.order(status: :asc, picture_source: :desc)
     if params[:filter]
-      p = filter_params
-      @projects = @projects.where(visible: (p[:visibility] != 'hidden')) if !p[:visibility].blank?
-      @projects = @projects.merge(ProjectDay.find(p[:day]).projects) if !p[:day].blank?
-      @projects = @projects.where(status: Project.statuses[p[:status]]) if !p[:status].blank?
+      p = filter_params # TODO: multiple day selection
+      @projects = @projects.where(status: Project.statuses[p[:status]]) if p[:status].present?
+      @projects = @projects.joins(:days).where(project_days: {id: [p[:day]]}).distinct if p[:day].present?
     end
-
     @projects = policy_scope(@projects)
   end
 

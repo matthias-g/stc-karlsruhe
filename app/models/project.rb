@@ -10,19 +10,15 @@ class Project < ActiveRecord::Base
 
   validates_presence_of :title, :desired_team_size
   validates :desired_team_size, numericality: {only_integer: true, greater_than_or_equal_to: 0}
-  before_save :adjust_status
-  after_save :adjust_parent_status
   before_create :create_gallery!
 
-  scope :visible,  -> { where(projects: {visible: true}) }
-  scope :toplevel, -> { where(parent_project_id: nil) }
-  scope :active,   -> { visible.where('status <> ?', Project.statuses[:closed]) }
+  scope :toplevel, -> { where(parent_project: nil) }
+  scope :visible,  -> { where.not(status: Project.statuses[:hidden]) }
 
-  enum status: { open: 1, soon_full: 2, full: 3, closed: 4 }
+  enum status: { active: 1, finished: 2, hidden: 3 }
 
   mount_uploader :picture, ImageUploader
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-  #after_update :crop_picture
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
@@ -55,63 +51,61 @@ class Project < ActiveRecord::Base
   end
 
   def aggregated_desired_team_size
-    desired_team_size = self.desired_team_size
-    subprojects.each { |p| desired_team_size += p.visible? ? p.desired_team_size : 0 }
-    desired_team_size
+    size = self.desired_team_size
+    subprojects.each { |p| size += p.desired_team_size unless p.hidden? }
+    size
   end
 
 
-  def add_volunteer user
-    users << user
-    self.save #adjusts status
-  end
 
-  def has_volunteer? user
-    volunteers.include? user
-  end
-
-  def has_volunteer_in_subproject? user
-    volunteers_in_subprojects.include? user
-  end
-
-  def delete_volunteer user
-    Participation.where(project_id: self.id, user_id: user.id, as_leader: false).first.destroy!
-    self.save #adjusts status
-  end
-
-  def add_leader user
-    Participation.create(project: self, user: user, as_leader: true) unless has_leader? user
-  end
-
-  def has_leader? user
+  def has_leader? (user)
     leaders.include? user
   end
 
-  def delete_leader user
-    Participation.where(project_id: self.id, user_id: user.id, as_leader: true).first.destroy!
+  def has_volunteer? (user)
+    volunteers.include? user
+  end
+
+  def has_volunteer_in_subproject? (user)
+    volunteers_in_subprojects.include? user
+  end
+
+  def add_volunteer (user)
+    (!has_volunteer? user) && participations.build(user: user, as_leader: false).save
+  end
+
+  def add_leader (user)
+    (!has_leader? user) && participations.build(user: user, as_leader: false).save
+  end
+
+  def remove_volunteer (user)
+    p = participations.where(user: user, as_leader: false).first
+    p.present? && p.destroy!
+  end
+
+  def remove_leader (user)
+    p = participations.where(user: user, as_leader: true).first
+    p.present? && p.destroy!
   end
 
 
 
-  def make_visible!
-    update_attribute :visible, true
+  def activate!
+    active!
+    #subprojects.each {|p| p.active!}
   end
 
-  def make_invisible!
-    update_attribute :visible, false
+  def hide!
+    hidden!
+    subprojects.each {|p| p.hidden!}
   end
 
   def close!
-    self.status = :closed
-    subprojects.each {|p| p.close!}
-    save
+    finished!
+    subprojects.each {|p| p.finished!}
   end
 
-  def open!
-    self.status = :open
-    subprojects.each {|p| p.open!}
-    save
-  end
+
 
   def crop_picture(x,y,w,h,version)
     self.crop_x = x
@@ -122,20 +116,31 @@ class Project < ActiveRecord::Base
   end
 
 
-
   def has_free_places?
-    desired_team_size - volunteers.count > 0
+    desired_team_size > volunteers.count
   end
 
   def is_subproject?
-    parent_project != nil
+    parent_project.present?
   end
 
   def show_picture?
-    picture_source && !picture_source.empty? && picture
+    picture_source.present? && picture && picture.file
   end
 
-
+  def dynamic_status
+    return status unless active?
+    total = aggregated_desired_team_size
+    free = total - aggregated_volunteers.count
+    percent = 100 * free.to_f / total
+    if (free == 0)
+      :full
+    elsif (percent < 20) or (free < 2)
+      :soon_full
+    else
+      :open
+    end
+  end
 
   private
 
@@ -148,24 +153,6 @@ class Project < ActiveRecord::Base
     candidates << :title
     candidates << [:title, project_week.title] if project_week
     candidates
-  end
-
-  def adjust_status
-    if self.status == 'closed'
-      return
-    end
-    free = aggregated_desired_team_size - aggregated_volunteers.count
-    if free > 2
-      self.status = :open
-    elsif free > 0
-      self.status = :soon_full
-    else
-      self.status = :full
-    end
-  end
-
-  def adjust_parent_status
-    parent_project.save if parent_project # adjusts status
   end
 
   def create_gallery!

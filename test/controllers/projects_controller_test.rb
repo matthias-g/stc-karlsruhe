@@ -27,14 +27,14 @@ class ProjectsControllerTest < ActionController::TestCase
   end
 
   test 'should show visible project' do
-    assert @project.visible
+    assert_not @project.hidden?
     get :show, id: @project
     assert_response :success
   end
 
   test 'should redirect when trying to show invisible project' do
     @project = projects(:two)
-    assert_not @project.visible
+    assert @project.hidden?
     get :show, id: @project
     assert_redirected_to login_or_register_url
   end
@@ -44,7 +44,7 @@ class ProjectsControllerTest < ActionController::TestCase
     sign_in user
     @project = projects(:three)
     assert user.leads_project?(@project)
-    assert_not @project.visible
+    assert @project.hidden?
     get :show, id: @project
     assert_response :success
   end
@@ -104,7 +104,7 @@ class ProjectsControllerTest < ActionController::TestCase
   test 'volunteer should leave project' do
     user = users(:sabine)
     sign_in user
-    @project.add_volunteer(user)
+    @project.edit_team(user)
     assert @project.has_volunteer?(user)
     get :leave, id: @project
     assert_redirected_to @project
@@ -114,47 +114,47 @@ class ProjectsControllerTest < ActionController::TestCase
   test 'admin should make project visible' do
     sign_in users(:admin)
     @project = projects(:three)
-    assert_not @project.visible?
+    assert @project.hidden?
     get :make_visible, id: @project
     @project = Project.find(@project.id)
-    assert @project.visible?
+    assert_not @project.hidden?
   end
 
   test 'non-admin should not make project visible' do
     sign_in users(:rolf)
     @project = projects(:three)
-    assert_not @project.visible?
+    assert @project.hidden?
     get :make_visible, id: @project
-    assert_not @project.visible?
+    assert @project.hidden?
   end
 
   test 'not signed in user should not make project visible' do
     @project = projects(:three)
-    assert_not @project.visible?
+    assert @project.hidden?
     get :make_visible, id: @project
-    assert_not @project.visible?
+    assert @project.hidden?
     assert_redirected_to login_or_register_path
   end
 
   test 'admin should make project invisible' do
     sign_in users(:admin)
-    assert @project.visible?
+    assert_not @project.hidden?
     get :make_invisible, id: @project
     @project = Project.find(@project.id)
-    assert_not @project.visible?
+    assert @project.hidden?
   end
 
   test 'non-admin should not make project invisible' do
     sign_in users(:rolf)
-    assert @project.visible?
+    assert_not @project.hidden?
     get :make_invisible, id: @project
-    assert @project.visible?
+    assert_not @project.hidden?
   end
 
   test 'not signed in user should not make project invisible' do
-    assert @project.visible?
+    assert_not @project.hidden?
     get :make_invisible, id: @project
-    assert @project.visible?
+    assert_not @project.hidden?
     assert_redirected_to login_or_register_path
   end
 

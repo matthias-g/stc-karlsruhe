@@ -7,7 +7,7 @@ class Api::ProjectWeeksController < Api::ApiController
   end
 
   def projects
-    projects = @project_week.projects.where(visible: true)
+    projects = @project_week.projects.visible
     respond_with(projects.to_json(only: [:id, :title, :description, :short_description]))
   end
 

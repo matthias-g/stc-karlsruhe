@@ -13,12 +13,14 @@
   <meta property="og:site_name" content="Serve the City Karlsruhe" />
 <% end %>
 
-<div id="project-view" <%='class=project-invisible' unless @project.visible? %>>
+<% btn_classes = 'btn btn-default btn-wide' %>
+
+<div id="project-view" class="project-<%= @project.status %>">
 
   <section class="">
     <div class="typeHeader">
       <%= @project.is_subproject? ? t('project.label.subproject') : Project.model_name.human %>
-      <%= ' (' + t('project.status.hidden') + ')' if !@project.visible? %>
+      <%= ' (' + t("project.status.#{@project.status}") + ')' if !@project.active? %>
     </div>
     <h1><%= @project.title %></h1>
   </section>
@@ -29,7 +31,7 @@
       <div class="row">
         <section class="col-md-12">
 
-          <% if @project.show_picture? && @project.picture.file %>
+          <% if @project.show_picture? %>
             <div class="project-picture picture-container">
               <%= image_tag @project.picture_url(:project_view) %>
               <div class="copyright" title="© <%= @project.picture_source %>">
@@ -42,21 +44,21 @@
             <%= simple_format @project.description %>
           </div>
 
-          <% unless @project.individual_tasks.empty? %>
+          <% if @project.individual_tasks.present? %>
             <div class="individual_tasks">
               <h3><%= Project.human_attribute_name(:individual_tasks) %></h3>
               <%= simple_format @project.individual_tasks %>
             </div>
           <% end %>
 
-          <% unless @project.requirements.empty? %>
+          <% if @project.requirements.present? %>
             <div class="requirements">
               <h3><%= Project.human_attribute_name(:requirements) %></h3>
               <%= simple_format @project.requirements %>
             </div>
           <% end %>
 
-          <% unless @project.material.empty? %>
+          <% if @project.material.present? %>
             <div class="material">
               <h3><%= Project.human_attribute_name(:material) %></h3>
               <%= simple_format @project.material %>
@@ -64,15 +66,15 @@
           <% end %>
 
           <% visible_subprojects = policy_scope(@project.subprojects) %>
-          <% if visible_subprojects.count > 0 %>
+          <% if visible_subprojects.any? %>
             <div class="subprojects">
               <h3><%= Project.human_attribute_name('subproject_ids') %></h3>
               <div class="row">
-                <% visible_subprojects.each do |subproject| %>
-                  <div class="col-md-4 col-sm-6 subproject <%='subproject-invisible' unless subproject.visible %>" >
-                    <%= link_to project_path(subproject) do %>
-                      <%= image_tag subproject.picture.thumb.url, class: 'img-responsive' %>
-                      <%= subproject.title %>
+                <% visible_subprojects.each do |sub| %>
+                  <div class="col-md-4 col-sm-6 subproject subproject-<%= sub.status %>" >
+                    <%= link_to project_path(sub) do %>
+                      <%= image_tag sub.picture.thumb.url, class: 'img-responsive' %>
+                      <%= sub.title %>
                     <% end %>
                   </div>
                 <% end %>
@@ -125,34 +127,38 @@
         <% if policy(@project).edit? %>
           <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
             <h3><%= t('project.label.manageProject') %></h3>
-            <%= link_to t('project.action.edit'),
-                        edit_project_path(@project), class:'btn btn-default btn-wide' %>
-            <%= link_to t('project.action.manageTeam'),
-                        edit_leaders_project_path(@project), class:'btn btn-default btn-wide' %>
-            <% if @project.closed? %>
-              <%= link_to t('project.action.open'),
-                          open_project_path(@project),
-                          class:'btn btn-default btn-wide' %>
-            <% else %>
-              <%= link_to t('project.action.close'),
-                          close_project_path(@project),
-                          class:'btn btn-default btn-wide' %>
+            <%= link_to t('project.action.edit'), edit_project_path(@project), class: btn_classes %>
+            <%= link_to t('project.action.manageTeam'), edit_team_project_path(@project), class: btn_classes %>
+            <% if policy(@project).activate? %>
+              <%= link_to t('project.action.activate'), activate_project_path(@project), class: btn_classes %>
             <% end %>
-            <% if policy(@project).change_visibility? %>
-              <% if @project.visible %>
-                <%= link_to t('project.action.makeInvisible'),
-                            make_invisible_project_path(@project),
-                            class:'btn btn-default btn-wide' %>
-              <% else %>
-                <%= link_to t('project.action.makeVisible'),
-                            make_visible_project_path(@project),
-                            class:'btn btn-default btn-wide' %>
-              <% end %>
+            <% if policy(@project).close? %>
+              <%= link_to t('project.action.close'), close_project_path(@project), class: btn_classes %>
             <% end %>
-            <%= link_to t('project.action.toOverview'),
-                        show_project_week_path(@project.project_week.title), class: 'btn btn-default btn-wide' %>
+            <% if policy(@project).hide? %>
+              <%= link_to t('project.action.hide'), hide_project_path(@project), class: btn_classes %>
+            <% end %>
           </section>
         <% end %>
+
+        <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
+          <div class="wide infobox status_<%= @project.dynamic_status %>">
+            <%= t "project.status.#{@project.dynamic_status}" %>
+          </div>
+          <div>
+            <% if user_signed_in? && @project.has_volunteer?(current_user) %>
+                <p><%= t('project.message.teamMember') %></p>
+            <% end %>
+            <% if policy(@project).leave? %>
+                <%= link_to t('project.action.leave'), leave_project_path(@project), class: btn_classes %>
+            <% elsif policy(@project).enter? || !current_user %>
+                <%= link_to t('project.action.enter'), enter_project_path(@project), class: btn_classes %>
+            <% end %>
+            <% if user_signed_in? && @project.has_volunteer_in_subproject?(current_user) %>
+                <p><%= t('project.message.subprojectTeamMember') %></p>
+            <% end %>
+          </div>
+        </section>
 
         <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
           <div>
@@ -181,7 +187,7 @@
 
         <% if @project.parent_project %>
           <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
-            <div class="parent-project <%='invisible-project' unless @project.parent_project.visible %>">
+            <div class="parent-project <%='invisible-project' if @project.parent_project.hidden? %>">
               <h3><%= t('project.label.parent_project') %></h3>
               <%= link_to project_path(@project.parent_project) do %>
                 <div class="row parent-project">
@@ -196,30 +202,6 @@
             </div>
           </section>
         <% end %>
-
-        <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
-          <div class="wide infobox <%= @project.status %>">
-            <%= t "project.status.#{@project.status}" %>
-          </div>
-          <div>
-            <% if user_signed_in? && @project.has_volunteer?(current_user) %>
-              <p><%= t('project.message.teamMember') %></p>
-            <% end %>
-            <% if policy(@project).leave? %>
-              <%= link_to t('project.action.leave'),
-                          leave_project_path(@project),
-                          class: 'btn btn-default btn-wide' %>
-            <% end %>
-            <% if @project.visible? && @project.has_free_places? && !@project.closed? && !@project.has_volunteer?(current_user) %>
-              <%= link_to t('project.action.enter'),
-                          enter_project_path(@project),
-                          class: 'btn btn-default btn-wide' %>
-            <% end %>
-            <% if user_signed_in? && @project.has_volunteer_in_subproject?(current_user) %>
-              <p><%= t('project.message.subprojectTeamMember') %></p>
-            <% end %>
-          </div>
-        </section>
         <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim col-lastfix">
           <div>
             <h3><%= Project.human_attribute_name('leaders') %></h3>

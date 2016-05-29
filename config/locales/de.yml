@@ -241,13 +241,13 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       enter: 'Team beitreten'
       leave: 'Team verlassen'
       delete: 'Projekt löschen'
-      open: 'Projekt öffnen'
-      close: 'Projekt abschließen'
-      makeVisible: 'Sichtbar machen'
-      makeInvisible: 'Projekt verstecken'
+      activate: 'Projekt aktivieren'
+      close: 'Projekt beenden'
+      hide: 'Unsichtbar machen'
       manageTeam: 'Team verwalten'
       makeLeader: 'als Leiter hinzufügen'
-      addLeader: Projektleiter auswählen
+      addLeader: 'Projektleiter auswählen'
+      addVolunteer: 'Teilnehmer hinzufügen'
       removeLeader: 'Projektleiter entfernen'
       removeVolunteer: 'Teammitglied entfernen'
       toOverview: 'zur Projektliste'
@@ -297,6 +297,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       updated: 'Projekt wurde erfolgreich aktualisiert.'
       leaderAdded: 'Projektleiter erfolgreich hinzugefügt.'
       leaderRemoved: 'Projektleiter erfolgreich entfernt.'
+      volunteerAdded: 'Teilnehmer erfolgreich hinzugefügt.'
       volunteerRemoved: 'Teilnehmer erfolgreich entfernt.'
       errorList: 'Wegen folgender Fehler konnte das Projekt nicht gespeichert werden:'
       remainingVacancy: '%s freie Plätze'
@@ -304,10 +305,9 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       subprojectTeamMember: 'Du bist bei einem Teilprojekt dabei.'
       isFull: 'Dieses Projekt ist schon vollbesetzt.'
       participationSuccess: 'Du nimmst jetzt an diesem Projekt teil. Die Projektleiter werden sich mit dir etwa eine Woche vor dem Projekt in Verbindung setzen.'
-      madeVisible: 'Projekt wurde sichtbar gemacht.'
-      madeInvisible: 'Projekt wurde unsichtbar gemacht.'
-      opened: 'Projekt wurde geöffnet.'
-      closed: 'Projekt wurde geschlossen.'
+      activated: 'Projekt wurde aktiviert.'
+      hidden: 'Projekt wurde unsichtbar gemacht.'
+      finished: 'Projekt wurde beendet.'
       galleryPicturesUploaded: 'Vielen Dank für das Hochladen deiner Bilder! Sobald sie jemand aus dem Orgateam freigeschaltet hat,
         sind sie öffentlich sichtbar.'
       galleryContainsInvisiblePictures: 'Einige der Bilder in dieser Galerie wurden noch nicht von jemandem aus dem Orgateam freigeschaltet
@@ -321,11 +321,12 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         Benutzer: %{uploader}\n\n
         Bitte überprüfe die Bilder und schalte sie gegebenenfalls frei."
     status:
+      active: Aktiv
+      finished: Beendet
+      hidden: Versteckt
       open: Freie Plätze
       soon_full: Wenige Plätze
       full: Vollbesetzt
-      closed: Abgeschlossen
-      hidden: Versteckt
 
   news_entry:
       action:

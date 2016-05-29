@@ -1,22 +1,11 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, except: [:index, :new, :create]
+  before_action :set_project, except: [:new, :create]
   before_action :authenticate_user!, except: [:show]
-  before_action :authorize_project, except: [:index, :new, :create]
-
+  before_action :authorize_project, except: [:new, :create]
   after_action :verify_authorized , except: [:new, :create]
 
   respond_to :html
 
-  def index
-    authorize Project.new
-    visible = true
-    if params[:filter] && (params[:filter][:visibility] == 'hidden') && current_user.admin?
-        visible = false
-    end
-    @projects = Project.where(visible: visible).order(:status)
-    @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] && (params[:filter][:day] != '')
-    @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] && (params[:filter][:status] != '')
-  end
 
   def show
     #Message for contact_volunteers
@@ -31,15 +20,14 @@ class ProjectsController < ApplicationController
     @project.project_week = ProjectWeek.all.order(title: :desc).first
   end
 
-  def edit
-  end
-
   def create
     @project = Project.new(project_params)
     @project.add_leader(current_user)
-    @project.visible = false
-    @project.save
+    @project.hide!
     respond_with(@project)
+  end
+
+  def edit
   end
 
   def update
@@ -48,6 +36,16 @@ class ProjectsController < ApplicationController
     end
     respond_with(@project)
   end
+
+  def destroy
+    @project.destroy
+    respond_with(@project)
+  end
+
+  def edit_team
+  end
+
+
 
   def enter
     @project.add_volunteer(current_user)
@@ -59,57 +57,22 @@ class ProjectsController < ApplicationController
     redirect_to project_url(@project)
   end
 
-  def destroy
-    @project.destroy
-    respond_with(@project)
+  def activate
+    @project.activate!
+    redirect_to @project, notice: t('project.message.activated')
   end
 
-  def edit_leaders
-  end
-
-  def add_leader
-    new_leader = User.find(params[:user_id])
-    @project.add_leader(new_leader)
-    redirect_to edit_leaders_project_url(@project), notice: t('project.message.leaderAdded')
-  end
-
-  def delete_leader
-    leader = User.find(params[:user_id])
-    @project.delete_leader(leader)
-    redirect_to edit_leaders_project_url(@project), notice: t('project.message.leaderRemoved')
-  end
-
-  def delete_volunteer
-    volunteer = User.find(params[:user_id])
-    @project.delete_volunteer(volunteer)
-    redirect_to edit_leaders_project_url(@project), notice: t('project.message.volunteerRemoved')
-  end
-
-  def make_visible
-    @project.make_visible!
-    if @project.subprojects
-      @project.subprojects.each { |project| project.make_visible! }
-    end
-    redirect_to @project, notice: t('project.message.madeVisible')
-  end
-
-  def make_invisible
-    @project.make_invisible!
-    if @project.subprojects
-      @project.subprojects.each { |project| project.make_invisible! }
-    end
-    redirect_to @project, notice: t('project.message.madeInvisible')
-  end
-
-  def open
-    @project.open!
-    redirect_to @project, notice: t('project.message.opened')
+  def hide
+    @project.hide!
+    redirect_to @project, notice: t('project.message.hidden')
   end
 
   def close
     @project.close!
-    redirect_to @project, notice: t('project.message.closed')
+    redirect_to @project, notice: t('project.message.finished')
   end
+
+
 
   def crop_picture
     if params.has_key?(:crop_x)
@@ -143,18 +106,19 @@ class ProjectsController < ApplicationController
     redirect_to action: :show
   end
 
+
+
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_project
       @project = Project.friendly.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:title, :user_id, :status,
         :location, :latitude, :longitude, :map_latitude, :map_longitude, :map_zoom,
         :description, :short_description, :individual_tasks, :material, :requirements,
-        :picture, :picture_source, :desired_team_size,  :project_week_id, { :day_ids => [] }, :time, :parent_project_id)
+        :picture, :picture_source, :desired_team_size,  :project_week_id, { day_ids: [] }, :time, :parent_project_id)
     end
 
     def authorize_project

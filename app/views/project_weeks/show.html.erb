@@ -65,17 +65,10 @@
       <section class="col-sm-6 col-md-12 slim">
         <h3>Filtern</h3>
         <%= bootstrap_form_for(:filter, url: projects_path, method:'get', html:{id:'projectFilter'}) do |f| %>
-          <%#= collection_select(:week, ProjectWeek.all, :id, :title,
-                 :include_blank => "- - - Aktionswoche egal - - -") %>
           <%= f.collection_select(:day, @project_week.days.order(date: :asc), :id, :title,
-                                  include_blank: "- - - Alle Tage - - -", hide_label: true) %>
-          <%= f.select(:status,
-                       Project.statuses.keys.map { |s| [t("project.status.#{s}"), s] },
+                       include_blank: "- - - Alle Tage - - -", hide_label: true) %>
+          <%= f.select(:status, Project.statuses.keys.map { |s| [t("project.status.#{s}"), s] },
                        include_blank: "- - - Status egal - - -", hide_label: true) %>
-          <% if user_signed_in? && current_user.admin? %>
-            <%= f.select(:visibility, [['Sichtbar', :visible], ['Versteckt', :hidden]],
-                         include_blank: "- - - Sichtbarkeit egal - - -", hide_label: true) %>
-          <% end %>
           <%= f.submit 'Projekte filtern', class:'btn btn-default btn-wide' %>
           <div id="filterResults"></div>
         <% end %>
@@ -106,34 +99,30 @@
         <div class="project-title">
           <%= link_to project do %>
             <h2><%= project.title %></h2>
-            <% if visible_subprojects.count > 0 %>
+            <% if visible_subprojects.any? %>
               <h3><%= t('project.label.subprojects', count: visible_subprojects.count) %></h3>
             <% end %>
           <% end %>
         </div>
         <div class="project-image">
           <%= link_to project do %>
-            <% if project.show_picture? && project.picture.file %>
+            <% if project.show_picture? %>
               <%= image_tag project.picture_url(:project_list), lazy:true %>
             <% else %>
               <%= image_tag 'placeholder.svg' %>
             <% end %>
-            <% ext_status = project.visible? ? project.status : :hidden %>
-            <div class="project-status status_<%= ext_status %>">
-              <%= t "project.status.#{ext_status}" %>
+            <div class="project-status status_<%= project.dynamic_status %>">
+              <%= t "project.status.#{project.dynamic_status}" %>
             </div>
           <% end %>
         </div>
         <div class="project-description">
-          <% if project.short_description.empty? %>
-              <div><%= project.description %></div>
-          <% else %>
-              <div><%= project.short_description %></div>
-          <% end %>
+          <div><%= project.short_description.presence ||
+                       truncate(project.description, length: 250, separator: ' ', omission: '...') %></div>
         </div>
       </section>
     <% end %>
-    <% if @project_week.projects.toplevel.visible.count == 0 %>
+    <% if @project_week.projects.toplevel.visible.empty? %>
       <section>
         <%= t('project_week.noProjects') %>
       </section>

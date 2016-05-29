@@ -10,7 +10,7 @@ one:
   individual_tasks: MyText
   material: MyText
   requirements: MyText
-  visible: true
+  status: active
   desired_team_size: 4
   project_week: one
   gallery: one
@@ -24,7 +24,7 @@ two:
   individual_tasks: MyText
   material: MyText
   requirements: MyText
-  visible: false
+  status: hidden
   desired_team_size: 7
   project_week: one
   gallery: two
@@ -38,7 +38,7 @@ three:
   individual_tasks: MyText
   material: MyText
   requirements: MyText
-  visible: false
+  status: hidden
   desired_team_size: 7
   project_week: one
   gallery: three
@@ -52,7 +52,7 @@ four:
   individual_tasks: MyText
   material: MyText
   requirements: MyText
-  visible: true
+  status: active
   desired_team_size: 7
   project_week: one
   gallery: four

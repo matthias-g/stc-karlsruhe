@@ -156,7 +156,7 @@
     <div id="projects-map" data-class="GoogleMap"
          data-lat="49.011627" data-lon="8.403869" data-zoom="12">
       <% ProjectWeek.default.projects.each do |p| %>
-          <% if (p.visible && !p.longitude.nil? && !p.latitude.nil?) %>
+          <% if (!p.hidden? && !p.longitude.nil? && !p.latitude.nil?) %>
               <div data-lon="<%= p.longitude %>" data-lat="<%= p.latitude %>"
                    data-name="<%= p.title %>" data-href="<%= url_for(p) %>">
                 <% if p.short_description.empty? %>

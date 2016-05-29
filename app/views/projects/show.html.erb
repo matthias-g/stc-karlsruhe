@@ -198,7 +198,7 @@
         <% end %>
 
         <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
-          <div class="wide infobox <%= @project.status %>">
+          <div class="wide infobox status_<%= @project.status %>">
             <%= t "project.status.#{@project.status}" %>
           </div>
           <div>

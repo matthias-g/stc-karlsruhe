@@ -39,7 +39,7 @@
           <% end %>
 
           <div class="description">
-            <%= simple_format @project.description %>
+            <%= simple_format( simple_format_urls @project.description ) %>
           </div>
 
           <% unless @project.individual_tasks.empty? %>

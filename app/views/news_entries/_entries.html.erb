@@ -18,9 +18,9 @@
       </div>
       <h2><%= link_to news.title, news %><%= ' (' + t('news_entry.label.invisible') + ')' unless news.visible? %></h2>
       <% if news.teaser && !news.teaser.empty? %> <%# TODO Ruby 2.3 use safe navigation operator %>
-          <div><%= simple_format news.teaser %></div>
+          <div><%= simple_format(simple_format_urls news.teaser) %></div>
       <% else %>
-          <div><%= simple_format news.text %></div>
+          <div><%= simple_format(simple_format_urls news.text) %></div>
       <% end %>
     </div>
 

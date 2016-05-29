@@ -34,7 +34,7 @@
           </div>
       <% end %>
       <div class="news-entry-text">
-        <%= simple_format @news_entry.text %>
+        <%= simple_format( simple_format_urls @news_entry.text ) %>
       </div>
     </section>
   </div>

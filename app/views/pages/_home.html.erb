@@ -160,9 +160,9 @@
               <div data-lon="<%= p.longitude %>" data-lat="<%= p.latitude %>"
                    data-name="<%= p.title %>" data-href="<%= url_for(p) %>">
                 <% if p.short_description.empty? %>
-                    <%= simple_format p.description %>
+                    <%= simple_format(simple_format_urls p.description) %>
                 <% else %>
-                    <%= simple_format p.short_description %>
+                    <%= simple_format(simple_format_urls p.short_description) %>
                 <% end %>
               </div>
           <% end %>

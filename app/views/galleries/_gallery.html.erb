@@ -2,106 +2,110 @@
     <%= javascript_include_tag 'views/galleries', 'data-turbolinks-track': true %>
 <% end %>
 
-<div id="slider_container" class="gallery-container" data-gallery-id="<%= gallery.id %>">
+<div data-class="Gallery" data-gallery-id="<%= gallery.id %>">
 
-  <%# Loading Screen %>
-  <div u="loading" class="gallery-loading">
-    <div class="gallery-loading-background">
-    </div>
-    <div class="gallery-loading-animation">
-    </div>
-  </div>
+  <div id="slider_container" class="gallery-container slider-container">
 
-  <div u="slides" class="gallery-slides">
-    <% gallery.gallery_pictures.visible_for_user(current_user).each do |picture| %>
-      <div>
-        <img u="image" src="<%= picture.picture.preview.url %>" />
-        <img u="thumb" src="<%= picture.picture.thumb.url %>" />
+    <%# Loading Screen %>
+    <div u="loading" class="gallery-loading">
+      <div class="gallery-loading-background">
       </div>
-    <% end %>
-  </div>
-
-  <span u="arrowleft" class="gallery-arrow-left">
-  </span>
-  <span u="arrowright" class="gallery-arrow-right">
-  </span>
-
-  <div u="thumbnavigator" class="gallery-thumbnavigator">
-    <div u="slides" style="cursor: default;">
-      <div u="prototype" class="p">
-        <div u="thumbnailtemplate" class="i"></div>
-        <div class="o"></div>
+      <div class="gallery-loading-animation">
       </div>
     </div>
-  </div>
-</div>
 
-<%# Root element of PhotoSwipe. Must have class pswp. %>
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-  <%# Background of PhotoSwipe. 
-       It's a separate element as animating opacity is faster than rgba(). %>
-  <div class="pswp__bg"></div>
-
-  <%# Slides wrapper with overflow:hidden. %>
-  <div class="pswp__scroll-wrap">
-
-    <%# Container that holds slides. 
-        PhotoSwipe keeps only 3 of them in the DOM to save memory.
-        Don't modify these 3 pswp__item elements, data is added later on. %>
-    <div class="pswp__container">
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
+    <div u="slides" class="gallery-slides">
+      <% gallery.gallery_pictures.visible_for_user(current_user).each do |picture| %>
+        <div>
+          <img u="image" src="<%= picture.picture.preview.url %>" />
+          <img u="thumb" src="<%= picture.picture.thumb.url %>" />
+        </div>
+      <% end %>
     </div>
 
-    <%# Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. %>
-    <div class="pswp__ui pswp__ui--hidden">
+    <span u="arrowleft" class="gallery-arrow-left">
+    </span>
+    <span u="arrowright" class="gallery-arrow-right">
+    </span>
 
-      <div class="pswp__top-bar">
+    <div u="thumbnavigator" class="gallery-thumbnavigator">
+      <div u="slides" style="cursor: default;">
+        <div u="prototype" class="p">
+          <div u="thumbnailtemplate" class="i"></div>
+          <div class="o"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <%#  Controls are self-explanatory. Order can be changed. %>
+  <%# Root element of PhotoSwipe. Must have class pswp. %>
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
-        <div class="pswp__counter"></div>
+    <%# Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). %>
+    <div class="pswp__bg"></div>
 
-        <button class="pswp__button pswp__button--close" title="<%= t('gallery.action.close') %>"></button>
+    <%# Slides wrapper with overflow:hidden. %>
+    <div class="pswp__scroll-wrap">
 
-        <button class="pswp__button pswp__button--share" title="<%= t('gallery.action.share') %>"></button>
+      <%# Container that holds slides.
+          PhotoSwipe keeps only 3 of them in the DOM to save memory.
+          Don't modify these 3 pswp__item elements, data is added later on. %>
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
 
-        <button class="pswp__button pswp__button--fs" title="<%= t('gallery.action.toggleFullscreen') %>"></button>
+      <%# Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. %>
+      <div class="pswp__ui pswp__ui--hidden">
 
-        <button class="pswp__button pswp__button--zoom" title="<%= t('gallery.action.zoom') %>"></button>
+        <div class="pswp__top-bar">
 
-        <div class="pswp__button pswp__button--delete" title="<%= t('gallery.action.delete') %>"><i class="fa fa-trash"></i></div>
+          <%#  Controls are self-explanatory. Order can be changed. %>
 
-        <div class="pswp__button pswp__button--rotateright" title="<%= t('gallery.action.rotateRight') %>"><i class="fa fa-rotate-right"></i></div>
+          <div class="pswp__counter"></div>
 
-        <div class="pswp__button pswp__button--rotateleft" title="<%= t('gallery.action.rotateLeft') %>"><i class="fa fa-rotate-left"></i></div>
+          <button class="pswp__button pswp__button--close" title="<%= t('gallery.action.close') %>"></button>
+
+          <button class="pswp__button pswp__button--share" title="<%= t('gallery.action.share') %>"></button>
+
+          <button class="pswp__button pswp__button--fs" title="<%= t('gallery.action.toggleFullscreen') %>"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="<%= t('gallery.action.zoom') %>"></button>
+
+          <div class="pswp__button pswp__button--delete" title="<%= t('gallery.action.delete') %>"><i class="fa fa-trash"></i></div>
+
+          <div class="pswp__button pswp__button--rotateright" title="<%= t('gallery.action.rotateRight') %>"><i class="fa fa-rotate-right"></i></div>
+
+          <div class="pswp__button pswp__button--rotateleft" title="<%= t('gallery.action.rotateLeft') %>"><i class="fa fa-rotate-left"></i></div>
 
 
-        <%# Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR %>
-        <%# element will get class pswp__preloader--active when preloader is running %>
-        <div class="pswp__preloader">
-          <div class="pswp__preloader__icn">
-            <div class="pswp__preloader__cut">
-              <div class="pswp__preloader__donut"></div>
+          <%# Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR %>
+          <%# element will get class pswp__preloader--active when preloader is running %>
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-        <div class="pswp__share-tooltip"></div>
-      </div>
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
 
-      <button class="pswp__button pswp__button--arrow--left" title="<%= t('gallery.action.goto.previous') %>">
-      </button>
+        <button class="pswp__button pswp__button--arrow--left" title="<%= t('gallery.action.goto.previous') %>">
+        </button>
 
-      <button class="pswp__button pswp__button--arrow--right" title="<%= t('gallery.action.goto.next') %>">
-      </button>
+        <button class="pswp__button pswp__button--arrow--right" title="<%= t('gallery.action.goto.next') %>">
+        </button>
 
-      <div class="pswp__caption">
-        <div class="pswp__caption__center"></div>
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+
       </div>
 
     </div>

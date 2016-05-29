@@ -1,3 +1,5 @@
+@import "definitions";
+
 .waitinfo {
   display: none;
 }
@@ -8,7 +10,7 @@
   left: 0;
   width: 500px;
   height: 333px;
-  background: #191919;
+  background: $gallery;
   overflow: hidden;
 }
 
@@ -23,7 +25,7 @@
   opacity: 0.7;
   position: absolute;
   display: block;
-  background-color: #000000;
+  background-color: #000;
   top: 0;
   left: 0;
   width: 100%;

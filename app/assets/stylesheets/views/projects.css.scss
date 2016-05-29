@@ -13,7 +13,7 @@
   }
   .map {
     border-radius: 6px;
-    border: 1px solid rgba($border_default,0.5);
+    border: 1px solid $default_border;
     height: 150px;
     width: 100%;
   }
@@ -22,7 +22,7 @@
     img {
       width: 100%;
       height: auto;
-      border: 1px solid rgba($border_default,0.5);
+      border: 1px solid $default_border;
     }
   }
   .description {
@@ -89,13 +89,13 @@
     }
   }
 
-  &.project-invisible h1, .subproject-invisible a {
-    color: #c44aba !important;
+  &.project-hidden h1, .subproject-hidden a {
+    color: $status_hidden !important;
   }
-  .subproject-invisible {
+  .subproject-hidden {
     opacity: 0.65;
     img {
-      box-shadow: 0 0 5px #c44aba;
+      box-shadow: 0 0 5px $status_hidden;
     }
   }
 

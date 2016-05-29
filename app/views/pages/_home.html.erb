@@ -31,7 +31,7 @@
 </div>
 
 <section style="text-align: center">
-  <div id="countdown" data-date="06/06/2016 00:00">
+  <div id="countdown" data-class="Countdown" data-date="06/06/2016 00:00">
     <div><span></span>Tage</div>
     <div><span></span>Stunden</div>
     <div><span></span>Minuten</div>
@@ -42,14 +42,12 @@
 </section>
 
 <section>
-  <div id="trailer" class="box box-16by9" style="max-width: 600px">
-    <iframe id="trailerFrame" class="locked-iframe" allowfullscreen
+  <div id="trailer" data-class="LockedIframe" class="box box-16by9" style="max-width: 600px">
+    <iframe class="locked-iframe" allowfullscreen
             data-frame-src="https://www.youtube.com/embed/OTH-e01ZUig?rel=0&autoplay=true&autohide=1&iv_load_policy=3&color=white&showinfo=0">
     </iframe>
-    <div class="locked-iframe-trigger" data-target-frame="#trailerFrame">
-      <div>
-        <i class="fa fa-play-circle-o"></i>
-      </div>
+    <div class="locked-iframe-trigger">
+      <div><i class="fa fa-play-circle-o"></i></div>
     </div>
   </div>
 </section>
@@ -125,18 +123,18 @@
 %>
 
 <div class="row row-sm-eq-height">
-  <section class="col-sm-6" id="facebook-box">
+  <section class="col-sm-6" id="likebox">
     <h1>
       <%= link_to 'https://www.facebook.com/servethecity.karlsruhe', :target => "_blank" do %>
           <i class="fa fa-facebook-square" style="font-size: 1.3em;padding-right: 10px;"></i> Serve the City auf Facebook
       <% end %>
     </h1>
     <div>
-      <span class="get-likes" data-fb-page="servethecity.karlsruhe"
+      <span data-class="Likebox" data-fb-page="servethecity.karlsruhe"
             data-fb-token="1632977830272942|_y8PPboBvdNWpQG9jIDhHa--ArA"></span> &#132;Gefällt mir&#147;-Angaben
     </div>
   </section>
-  <section class="col-sm-6" id="project-link">
+  <section class="col-sm-6" id="projects-link">
     <div class="center-wrap" style="padding: 20px 20px 20px 30px;">
       <%= link_to show_project_week_path(ProjectWeek.default.title) do %>
           <i class="fa fa-arrow-right" style="position:relative;bottom:3px"></i> &nbsp;zu den Projekten
@@ -155,7 +153,7 @@
 <section>
   <h2>Projektkarte <%= ProjectWeek.default.title %></h2>
   <div class="box box-5by2" style="min-height:200px;">
-    <div id="project-map" class="map"
+    <div id="projects-map" data-class="GoogleMap"
          data-lat="49.011627" data-lon="8.403869" data-zoom="12">
       <% ProjectWeek.default.projects.each do |p| %>
           <% if (p.visible && !p.longitude.nil? && !p.latitude.nil?) %>

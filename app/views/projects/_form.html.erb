@@ -78,7 +78,7 @@
       </h3>
       <%= f.submit t('general.action.save'), class: 'btn btn-default btn-wide' %>
       <%= link_to t('general.action.cancel'), @project, class: 'btn btn-default btn-wide' %>
-      <% if !isNew && current_user.admin? && !@project.closed? %>
+      <% if !isNew && policy(@project).destroy? %>
           <%= link_to t('project.action.delete'), @project, method: :delete,
                       data: { confirm: t('general.message.confirmDelete')},
                       class: 'btn btn-default btn-wide' %>
@@ -88,8 +88,7 @@
     <section class="slim">
       <div class="week">
         <%= f.collection_select(:project_week_id, ProjectWeek.all.order(title: :desc), :id, :title,
-                                {:selected => @project.project_week.id},
-                                :onChange => "javascript:updateWeekDays()" ) -%>
+             {selected: @project.project_week.id}) -%>
       </div>
       <div class="days">
         <%= f.collection_select(:day_ids, @project.project_week.days.order(date: :asc), :id, :title,
@@ -102,13 +101,14 @@
         <%= f.text_area :location %>
       </div>
       <div>
-        <div class="map edit"
+        <div class="map" data-class="GoogleMap" data-map-id="project"
              data-lon="<%= @project.map_longitude %>"
              data-lat="<%= @project.map_latitude %>"
              data-zoom="<%= @project.map_zoom %>">
           <div data-lon="<%= @project.longitude %>"
                data-lat="<%= @project.latitude %>"
-               data-name="<%= @project.title %>">
+               data-name="<%= @project.title %>"
+               data-editable="true">
           </div>
         </div>
         <%= f.text_field :longitude, type: :hidden, hide_label: true %>
@@ -160,7 +160,7 @@
 <% end %>
 
 
-<div class="modal fade" id="image_crop_modal" role="dialog" aria-hidden="true">
+<div class="modal fade" id="image_crop_modal" data-class="Modal" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
     </div>

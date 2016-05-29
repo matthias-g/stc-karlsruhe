@@ -1,3 +1,5 @@
+@import "definitions";
+
 .contact-form {
   .leftCol {
     width: 180px;
@@ -7,7 +9,7 @@
   }
   .rightCol {
     float: left;
-    border-left: 1px solid black;
+    border-left: 1px solid $separator;
     padding: 10px;
 
     div:first-child h3 {

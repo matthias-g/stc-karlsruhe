@@ -76,11 +76,9 @@ instantiateClasses = (html) ->
 ### INIT ###
 
 onPageLoad ->
-  console.log('onpageload')
   uncollapseAccordeonAnchor()
 
 onNewContent ->
-  console.log('onnewcontent')
   extractFlashMessages(@)
   instantiateClasses(@)
 

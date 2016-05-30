@@ -1,5 +1,5 @@
 #= require jssor.slider.mini
-#= require photoswipe
+#require photoswipe, but only just in time
 
 class @Gallery
 
@@ -90,8 +90,8 @@ class @Gallery
     @photoswipe_html = @html.find('.pswp').get(0)
     @slider = @photoswipe = undefined
     @items = []
-    @loadGalleryItems()
-    @initSlider()
+    @loadGalleryItems().done =>
+      @initSlider()
     
   # load picture info with AJAX
   loadGalleryItems: =>
@@ -135,7 +135,7 @@ class @Gallery
       
     
   # create Photoswipe (fullscreen) view and open the given item
-  openSlideshow: (itemIdx) =>
+  openSlideshow: (itemIdx) =>   
     options = {
       index: itemIdx
       history: false
@@ -158,22 +158,25 @@ class @Gallery
       getImageURLForShare: (shareButtonData) =>
         @photoswipe.currItem.raw_src or @photoswipe.currItem.src or ''
     }
-    toggleEditButtons = =>
-      $('.pswp__button--delete, .pswp__button--rotateright, .pswp__button--rotateleft').toggle(@photoswipe.currItem.editable == true)
-
-    # Initializes and opens PhotoSwipe (fullscreen picture viewing)
-    @photoswipe = new PhotoSwipe(@photoswipe_html, PhotoSwipeUI_Default, @items, options)
-    @photoswipe.init()
-    @photoswipe.listen 'close', =>
-      @slider.$PlayTo(@photoswipe.getCurrentIndex())
-    @photoswipe.listen 'beforeChange', toggleEditButtons
-    toggleEditButtons()
+    
     $('.pswp__button--delete').unbind('click').click =>
       @deleteCurrentImage()
     $('.pswp__button--rotateright').unbind('click').click =>
       @rotateCurrentImage(1)
     $('.pswp__button--rotateleft').unbind('click').click =>
       @rotateCurrentImage(-1)
+      
+    toggleEditButtons = =>
+      $('.pswp__button--delete, .pswp__button--rotateright, .pswp__button--rotateleft').toggle(@photoswipe.currItem.editable == true)
+    
+    requireScript 'photoswipe', =>
+      # Initializes and opens PhotoSwipe (fullscreen picture viewing)
+      @photoswipe = new PhotoSwipe(@photoswipe_html, PhotoSwipeUI_Default, @items, options)
+      @photoswipe.init()
+      @photoswipe.listen 'close', =>
+        @slider.$PlayTo(@photoswipe.getCurrentIndex())
+      @photoswipe.listen 'beforeChange', toggleEditButtons
+      toggleEditButtons()
 
       
   # closes Photoswipe (fullscreen) view

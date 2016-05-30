@@ -1,7 +1,16 @@
 
    
 ### PUBLIC ###
-    
+
+# dynamically loads a script (once)
+loadedScripts = []
+@requireScript = (path, callback) ->
+  if path in loadedScripts
+    callback()
+  else
+    loadedScripts.push path
+    $.getScript '/assets/' + path + '.js', callback
+
 # create a new flash message and append it
 @createFlashMessage = (str) ->
   appendFlashMessage $("""

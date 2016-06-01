@@ -65,7 +65,7 @@
 
           <% visible_subprojects = policy_scope(@project.subprojects) %>
           <% if visible_subprojects.count > 0 %>
-            <div class="subprojects">
+            <div class="subprojects" id='<%= Project.human_attribute_name('subproject_ids').downcase %>'>
               <h3><%= Project.human_attribute_name('subproject_ids') %></h3>
               <div class="row">
                 <% visible_subprojects.each do |subproject| %>
@@ -214,6 +214,9 @@
               <%= link_to t('project.action.enter'),
                           enter_project_path(@project),
                           class: 'btn btn-default btn-wide' %>
+            <% elsif @project.visible? && !@project.closed? && !@project.full? && !@project.has_volunteer_in_subproject?(current_user) %>
+                <p><%= t('project.message.enterOneOfTheSubprojects',
+                         subprojects_link: link_to(Project.human_attribute_name('subproject_ids'), "##{Project.human_attribute_name('subproject_ids').downcase}" )).html_safe %></p>
             <% end %>
             <% if user_signed_in? && @project.has_volunteer_in_subproject?(current_user) %>
               <p><%= t('project.message.subprojectTeamMember') %></p>

@@ -133,7 +133,7 @@ de:
       home: 'Startseite'
       projects: 'Projekte'
       contact: 'Kontakt'
-      sponsors: 'Sponsoren'
+      supporters: 'Unterstützer'
       aboutUs: 'Impressum'
       privacy: 'Datenschutz'
       disclaimer: 'Haftungsausschluss'
@@ -178,7 +178,7 @@ de:
       pageLegalNotice: 'Impressum'
       pagePrivacy: 'Datenschutzerklärung'
       statistics: Statistiken
-      pageSponsors: 'Sponsoren und Partner'
+      pageSupporters: 'Unterstützer'
       templateNew: 'Neue Umfrage erstellen'
       templateEdit: 'Umfrage bearbeiten: "%{template}"'
       templateList: 'Umfragen'

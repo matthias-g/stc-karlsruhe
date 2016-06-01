@@ -178,7 +178,7 @@ de:
       pageLegalNotice: 'Impressum'
       pagePrivacy: 'Datenschutzerklärung'
       statistics: Statistiken
-      pageSponsors: 'Sponsoren'
+      pageSponsors: 'Sponsoren und Partner'
       templateNew: 'Neue Umfrage erstellen'
       templateEdit: 'Umfrage bearbeiten: "%{template}"'
       templateList: 'Umfragen'

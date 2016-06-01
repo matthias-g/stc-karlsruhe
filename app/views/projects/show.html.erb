@@ -15,7 +15,7 @@
 
 <div id="project-view" <%='class=project-invisible' unless @project.visible? %>>
 
-  <section class="">
+  <section class="no-print">
     <div class="typeHeader">
       <%= @project.is_subproject? ? t('project.label.subproject') : Project.model_name.human %>
       <%= ' (' + t('project.status.hidden') + ')' if !@project.visible? %>
@@ -28,6 +28,8 @@
     <div class="col-md-8">
       <div class="row">
         <section class="col-md-12">
+
+          <h2 class="print-only"><%= @project.title %></h2>
 
           <% if @project.show_picture? && @project.picture.file %>
             <div class="project-picture picture-container">
@@ -84,7 +86,7 @@
       </div>
 
       <% if show_gallery?(@project) || policy(@project).upload_pictures? %>
-        <div class="row">
+        <div class="row no-print">
           <section class="col-md-12">
             <div class="gallery">
               <h3><%= t('project.label.gallery') %></h3>
@@ -123,7 +125,7 @@
       <div class="row">
 
         <% if policy(@project).edit? %>
-          <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
+          <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim no-print">
             <h3><%= t('project.label.manageProject') %></h3>
             <%= link_to t('project.action.edit'),
                         edit_project_path(@project), class:'btn btn-default btn-wide' %>
@@ -167,7 +169,7 @@
             <%= simple_format @project.location %>
           </div>
           <% unless @project.longitude == 0 %>
-            <div class="map" data-class="GoogleMap" data-map-id="project"
+            <div class="map no-print" data-class="GoogleMap" data-map-id="project"
                  data-zoom="<%= @project.map_zoom %>"
                  data-lon="<%= @project.map_longitude %>"
                  data-lat="<%= @project.map_latitude %>">
@@ -197,7 +199,7 @@
           </section>
         <% end %>
 
-        <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
+        <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim no-print">
           <div class="wide infobox status_<%= @project.status %>">
             <%= t "project.status.#{@project.status}" %>
           </div>
@@ -223,7 +225,7 @@
             <% end %>
           </div>
         </section>
-        <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim col-lastfix">
+        <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim col-lastfix no-print">
           <div>
             <h3><%= Project.human_attribute_name('leaders') %></h3>
             <%= list_users(@project.leaders) %>
@@ -250,7 +252,7 @@
 
 
   <% if policy(@project).contact_volunteers?  %>
-    <section class="contact-volunteers-form">
+    <section class="contact-volunteers-form no-print">
       <%= bootstrap_form_for(@message, url: {action: 'contact_volunteers'}) do |f| %>
         <h2><%= t('contact.team.title') %></h2>
         <p><%= t('contact.team.text') %></p>
@@ -261,7 +263,7 @@
     </section>
 
     <% if user_signed_in? && current_user.admin?  %>
-        <section class="contact-volunteers-form">
+        <section class="contact-volunteers-form no-print">
           (Nur Admins:) Hier nochmal alle Emailadressen, damit du alternativ eine Email in deinem Emailprogramm schreiben kannst (bitte BCC verwenden).
           <div style="background: #eee; border: 1px solid #aaa; padding: 5px; margin: 10px;">
             <%= (@project.volunteers + @project.leaders + [current_user]).uniq.map { |v| v.email}.join(', ') %>
@@ -273,7 +275,7 @@
 
 
 
-  <section>
+  <section class="no-print">
     <%= render '/layouts/share' -%>
     <% if request.referer && URI(request.referer).path == show_project_week_path(@project.project_week.title) %>
       <%= link_to t('project.action.toOverview'),

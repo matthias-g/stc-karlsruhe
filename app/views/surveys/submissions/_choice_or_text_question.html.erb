@@ -1,5 +1,5 @@
 <div class="choice question">
-  <%= f.form_group :text, label: {text: question_label} do %>
+  <%= f.form_group :text, label: {text: question_label}, help: question.explanation do %>
       <% options = question.answer_options.split(/\r?\n/) %>
       <% options.each do |o| %>
           <%= f.radio_button :text, o, label: o %>

@@ -46,7 +46,8 @@ class Surveys::TemplatesController < ApplicationController
   end
 
   def template_params
-    params.require(:surveys_template).permit(:title, questions_attributes: [:id, :text, :answer_options, :question_type, :position, :is_subquestion, :_destroy] )
+    params.require(:surveys_template).permit(:title, questions_attributes:
+        [:id, :text, :explanation, :answer_options, :question_type, :position, :is_subquestion, :_destroy] )
   end
 
   def redirect_non_admins_to_answers

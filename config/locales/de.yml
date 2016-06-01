@@ -107,6 +107,7 @@ de:
         title: 'Titel der Umfrage'
       surveys/question:
         text: 'Frage'
+        explanation: Erklärung
         question_type: 'Art der Frage'
         answer_options: 'Optionen'
         is_subquestion: 'Unterfrage'

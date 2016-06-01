@@ -25,6 +25,7 @@
 
     <div class="<%= question.is_subquestion ? 'subquestion' : '' %>">
       <h3><%= question_label %></h3>
+      <%= content_tag(:p, question.explanation, class: 'explanation') unless question.explanation.blank? %>
       <p><%= question.answer_options %></p>
     </div>
   <% end %>

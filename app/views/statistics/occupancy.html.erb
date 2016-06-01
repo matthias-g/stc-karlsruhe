@@ -27,13 +27,25 @@
       <% all_volunteers = 0; all_team_size = 0 %>
       <% @projects.each do |project| %>
         <tr>
-          <% volunteers = project.volunteers.size; team_size = project.desired_team_size %>
-          <td><%= link_to project.title, project_path(project) %></td>
-          <td><%= volunteers %></td>
-          <td><%= team_size - volunteers %></td>
-          <td><%= team_size %></td>
+          <%
+            volunteers = project.volunteers.size
+            team_size = project.desired_team_size
+            unless team_size > 0
+              aggr_volunteers = project.aggregated_volunteers.count
+              aggr_team_size = project.aggregated_desired_team_size
+            end
+          %>
+          <td>
+            <%= link_to project.title, project_path(project) %>
+            <%= content_tag :span, '(Ü)', title: 'Überprojekt: Statistiken beinhalten Zahlen für Unterprojekte' unless team_size > 0 %>
+          </td>
+          <td><%= team_size > 0 ? volunteers : aggr_volunteers %></td>
+          <td><%= team_size > 0 ? team_size - volunteers : aggr_team_size - aggr_volunteers %></td>
+          <td><%= team_size > 0 ? team_size : aggr_team_size %></td>
           <% if team_size > 0 %>
             <td><%= 100 * volunteers / team_size %> %</td>
+          <% elsif aggr_team_size > 0 %>
+              <td><%= 100 * aggr_volunteers / aggr_team_size %> %</td>
           <% else %>
             <td>-</td>
           <% end %>

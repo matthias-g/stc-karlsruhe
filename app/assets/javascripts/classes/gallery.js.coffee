@@ -1,5 +1,5 @@
 #= require jssor.slider.mini
-#require photoswipe, but only just in time
+#= require photoswipe
 
 class @Gallery
 
@@ -168,15 +168,14 @@ class @Gallery
       
     toggleEditButtons = =>
       $('.pswp__button--delete, .pswp__button--rotateright, .pswp__button--rotateleft').toggle(@photoswipe.currItem.editable == true)
-    
-    requireScript 'photoswipe', =>
-      # Initializes and opens PhotoSwipe (fullscreen picture viewing)
-      @photoswipe = new PhotoSwipe(@photoswipe_html, PhotoSwipeUI_Default, @items, options)
-      @photoswipe.init()
-      @photoswipe.listen 'close', =>
-        @slider.$PlayTo(@photoswipe.getCurrentIndex())
-      @photoswipe.listen 'beforeChange', toggleEditButtons
-      toggleEditButtons()
+
+    # Initializes and opens PhotoSwipe (fullscreen picture viewing)
+    @photoswipe = new PhotoSwipe(@photoswipe_html, PhotoSwipeUI_Default, @items, options)
+    @photoswipe.init()
+    @photoswipe.listen 'close', =>
+      @slider.$PlayTo(@photoswipe.getCurrentIndex())
+    @photoswipe.listen 'beforeChange', toggleEditButtons
+    toggleEditButtons()
 
       
   # closes Photoswipe (fullscreen) view

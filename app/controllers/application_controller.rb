@@ -37,8 +37,14 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
+    template = Surveys::Template.joins('LEFT JOIN surveys_submissions ON surveys_submissions.template_id = surveys_templates.id')
+                   .where(show_in_user_profile: true)
+                   .where('surveys_submissions.user_id != ? or surveys_submissions.user_id is null', current_user.id)
+                   .order('RANDOM()').first
     sign_in_url = new_user_session_url
-    if request.referer == sign_in_url || request.referer == login_or_register_url || request.referer =~ /.*\/password\/.*/
+    if template
+      signed_in_root_path(resource)
+    elsif request.referer == sign_in_url || request.referer == login_or_register_url || request.referer =~ /.*\/password\/.*/
       super
     else
       stored_location_for(resource) || request.referer || signed_in_root_path(resource)

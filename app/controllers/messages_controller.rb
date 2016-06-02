@@ -31,11 +31,11 @@ class MessagesController < ApplicationController
     current_projects = ProjectWeek.default.projects.visible
     case @message.recipient
       when 'current_volunteers_and_leaders'
-        to = current_projects.joins(:users).pluck(:email)
+        to = current_projects.joins(:users).where('users.cleared': false).pluck(:email)
       when 'current_volunteers'
-        to = current_projects.joins(:users).where('participations.as_leader = false').pluck(:email)
+        to = current_projects.joins(:users).where('users.cleared': false).where('participations.as_leader = false').pluck(:email)
       when 'current_leaders'
-        to = current_projects.joins(:users).where('participations.as_leader = true').pluck(:email)
+        to = current_projects.joins(:users).where('users.cleared': false).where('participations.as_leader = true').pluck(:email)
       when 'all_users'
         to = User.where(cleared: false).all.pluck(:email)
       when 'active_users'

@@ -5,8 +5,8 @@ class Surveys::SubmissionsController < ApplicationController
   respond_to :html
 
   def index
-    template = Surveys::Template.friendly.find(params[:surveys_template_id])
-    @submissions = template.submissions
+    @template = Surveys::Template.friendly.find(params[:surveys_template_id])
+    @submissions = @template.submissions
     respond_with(@submissions)
   end
 

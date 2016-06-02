@@ -5,15 +5,24 @@
 <section class="surveys submission list-view">
   <h1><%= t('surveys.label.submissionList') %></h1>
 
-  <ul>
+  <% if @template.questions.count == 1 %>
+      <h3><%= @template.questions.first.text %></h3>
+  <% end %>
+
+  <table class="table">
     <% @submissions.each do |submission| %>
-        </td>
-          <li>
-            <%= link_to t('surveys.label.submission', id: submission.id), [submission.template, submission] %>
-          </li>
+        <tr>
+          <% if @template.questions.count == 1 %>
+              <% answer = submission.answers.first %>
+              <td><%= answer.text %></td>
+              <td style="color: grey"><%= l answer.created_at, format: :short %></td>
+          <% else %>
+              <td>
+                <%= link_to t('surveys.label.submission', id: submission.id), [submission.template, submission] %>
+              </td>
+        <% end %>
+        </tr>
     <% end %>
-  </ul>
+  </table>
 
 </section>
-
-

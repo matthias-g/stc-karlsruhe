@@ -3,7 +3,6 @@
 
 //= require bootstrap-select
 //= require bootstrap-select/i18n/defaults-de_DE
-//= require jquery-ui/sortable
 //= require jquery.Jcrop
 //= require highcharts
 //= require chartkick

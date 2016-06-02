@@ -13,12 +13,10 @@ class UsersController < ApplicationController
 
   def show
     if @user.id === current_user.id
-      template = Surveys::Template.joins('LEFT JOIN surveys_submissions ON surveys_submissions.template_id = surveys_templates.id')
-                     .where(show_in_user_profile: true)
-                     .where('surveys_submissions.user_id != ? or surveys_submissions.user_id is null', current_user.id)
-                     .order('RANDOM()').first
-      # TODO using Rails 5 say something like: .where.not('surveys_submissions.user_id': @current_user.id).or('surveys_submissions.user_id = NULL')
-      @submission = Surveys::Submission.create_for_template(template) if template
+      template = Surveys::Template.where(show_in_user_profile: true).order('RANDOM()').first
+      unless template.submissions.where(user_id: current_user.id).exists?
+        @submission = Surveys::Submission.create_for_template(template)
+      end
     else
       #Message for contact_user
       @message = Message.new

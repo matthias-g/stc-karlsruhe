@@ -4,106 +4,114 @@
 
 <div id="user-view">
 
-<section>
-  <div class="typeHeader">
-    <%= (@user == current_user) ? t('user.label.myProfile') : t('user.label.profile') %>
-  </div>
-  <h1><%= @user.full_name %></h1>
-</section>
+  <section>
+    <div class="typeHeader">
+      <%= (@user == current_user) ? t('user.label.myProfile') : t('user.label.profile') %>
+    </div>
+    <h1><%= @user.full_name %></h1>
+  </section>
 
-<div class="row row-sm-eq-height">
-  <div class="col-sm-6">
+  <div class="row row-sm-eq-height">
+    <div class="col-sm-6">
 
-    <% if (current_user == @user) || current_user.admin? %>
-      <section class="profile-data">
-        <h2><%= t('user.label.userData') %></h2>
-        <table>
-          <tr>
-            <td><%= t('activerecord.attributes.user.username') %>:</td>
-            <td><%= @user.username %></td>
-          </tr>
-          <tr>
-            <td><%= t('activerecord.attributes.user.email') %>:</td>
-            <td><%= @user.email %></td>
-          </tr>
-          <tr>
-            <td><%= t('activerecord.attributes.user.phone') %>:</td>
-            <td><%= @user.phone %></td>
-          </tr>
-        </table>
-        <% if policy(@user).edit?  %>
-            <%= link_to edit_user_path, title: t('user.action.edit'),
-                   class:'btn btn-default' do %>
-                <span class="glyphicon glyphicon-pencil"></span>
-                <%= t('user.action.edit') %>
+      <% if @user == current_user && @submission %>
+          <section class="survey">
+            <h2>Umfrage</h2>
+            <%= bootstrap_form_for([@submission.template, @submission]) do |f| %>
+                <%= render partial: 'surveys/submissions/form_questions', locals: { f: f } %>
+                <%= f.submit t('surveys.action.saveSubmission'), class:'submit btn btn-default pull-right' %>
             <% end %>
-        <% end %>
-      </section>
-    <% end %>
+          </section>
+      <% end %>
 
-    <% unless @user == current_user  %>
-      <section class="contact-user-form">
-        <h2><%= t('contact.user.title', recipient: @user.first_name) %></h2>
-        <%= bootstrap_form_for @message, url: { action: 'contact_user' } do |f| %>
-          <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
-          <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
-          <%= f.submit t('contact.user.submit') %>
-        <% end %>
-      </section>
-    <% end %>
+      <% if (current_user == @user) || current_user.admin? %>
+          <section class="profile-data">
+            <h2><%= t('user.label.userData') %></h2>
+            <table>
+              <tr>
+                <td><%= t('activerecord.attributes.user.username') %>:</td>
+                <td><%= @user.username %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.user.email') %>:</td>
+                <td><%= @user.email %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.user.phone') %>:</td>
+                <td><%= @user.phone %></td>
+              </tr>
+            </table>
+            <% if policy(@user).edit?  %>
+                <%= link_to edit_user_path, title: t('user.action.edit'),
+                            class:'btn btn-default' do %>
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <%= t('user.action.edit') %>
+                <% end %>
+            <% end %>
+          </section>
+      <% end %>
 
-    <% if @user == current_user  %>
-      <section class="actions">
-        <h2>Aufgaben</h2>
-        <%= link_to t('contact.orga.link'), kontakt_path,
-                 class:'btn btn-default btn-wide' %>
-        <%= link_to t('project.action.searchProjects'), show_project_week_path(ProjectWeek.default.title),
-                 class:'btn btn-default btn-wide' %>
-        <%= link_to t('project.action.new'), new_project_path,
-                 class:'btn btn-default btn-wide' %>
-      </section>
-    <% end %>
-  </div>
+      <% unless @user == current_user  %>
+          <section class="contact-user-form">
+            <h2><%= t('contact.user.title', recipient: @user.first_name) %></h2>
+            <%= bootstrap_form_for @message, url: { action: 'contact_user' } do |f| %>
+                <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
+                <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
+                <%= f.submit t('contact.user.submit') %>
+            <% end %>
+          </section>
+      <% end %>
 
-  <section class="col-sm-6 projects">
-      <h2><%= Project.model_name.human(count:2) %></h2>
-      <%
-         @pastProjects = (@user.projects_as_volunteer | @user.projects_as_leader)
-            .select{|p| p.status == 'closed'}
-         @projectsAsLeader = @user.projects_as_leader - @pastProjects
-         @projectsAsVolunteer = @user.projects_as_volunteer - @projectsAsLeader - @pastProjects
-      %>
-      <% if @projectsAsLeader.any? %>
+    </div>
+
+    <section class="col-sm-6 projects" >
+
+    <h2><%= Project.model_name.human(count:2) %></h2>
+    <%
+      @pastProjects = (@user.projects_as_volunteer | @user.projects_as_leader)
+          .select{|p| p.status == 'closed'}
+      @projectsAsLeader = @user.projects_as_leader - @pastProjects
+      @projectsAsVolunteer = @user.projects_as_volunteer - @projectsAsLeader - @pastProjects
+    %>
+    <% if @projectsAsLeader.any? %>
         <h3><%= t('user.label.projectsAsLeader') %> (<%= @projectsAsLeader.size %>
-           <%= Project.model_name.human(count: @projectsAsLeader.size) %>):</h3>
+          <%= Project.model_name.human(count: @projectsAsLeader.size) %>):</h3>
         <% @projectsAsLeader.each do |project| %>
             <%= link_to project.title, project %>
         <% end %>
-      <% end %>
-      <% if @projectsAsVolunteer.any? %>
+    <% end %>
+    <% if @projectsAsVolunteer.any? %>
         <h3><%= t('user.label.projectsAsVolunteer') %> (<%= @projectsAsVolunteer.size %>
-           <%= Project.model_name.human(count: @projectsAsVolunteer.size) %>):</h3>
+          <%= Project.model_name.human(count: @projectsAsVolunteer.size) %>):</h3>
         <% @projectsAsVolunteer.each do |project| %>
             <%= link_to project.title, project %>
         <% end %>
-      <% end %>
-      <% if @pastProjects.any? %>
-          <h3><%= t('user.label.pastProjects') %> (<%= @pastProjects.size %>
-            <%= Project.model_name.human(count: @pastProjects.size) %>):</h3>
-          <% @pastProjects.each do |project| %>
-              <%= link_to project.title, project %>
-          <% end %>
-      <% end %>
-      <% if @user.projects_as_volunteer.blank? && @user.projects_as_leader.blank? %>
-        <% if current_user == @user %>
-          <%= t('user.message.youHaveNoProjects') %><br />
-          <%= link_to t('project.action.findProject'), show_project_week_path(ProjectWeek.default.title) %>
-        <% else %>
-          <%= t('user.message.hasNoProjects', user:@user.first_name) %>
+    <% end %>
+    <% if @pastProjects.any? %>
+        <h3><%= t('user.label.pastProjects') %> (<%= @pastProjects.size %>
+          <%= Project.model_name.human(count: @pastProjects.size) %>):</h3>
+        <% @pastProjects.each do |project| %>
+            <%= link_to project.title, project %>
         <% end %>
-      <% end %>
-  </section>
-</div>
+    <% end %>
+    <% if @user.projects_as_volunteer.blank? && @user.projects_as_leader.blank? %>
+        <% if current_user == @user %>
+            <%= t('user.message.youHaveNoProjects') %><br />
+            <%= link_to t('project.action.findProject'), show_project_week_path(ProjectWeek.default.title) %>
+        <% else %>
+            <%= t('user.message.hasNoProjects', user:@user.first_name) %>
+        <% end %>
+    <% end %>
+    <% if @user == current_user  %>
+        <div class="actions">
+          <%= link_to t('project.action.searchProjects'), show_project_week_path(ProjectWeek.default.title),
+                      class:'btn btn-default btn-wide' %>
+          <%= link_to t('project.action.startOwnProject'), '/eigenes-projekt',
+                      class:'btn btn-default btn-wide' %>
+        </div>
+    <% end %>
+    </section>
+  </div>
 
 </div>
 

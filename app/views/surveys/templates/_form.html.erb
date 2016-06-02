@@ -20,6 +20,7 @@
 
 <section>
   <%= f.text_field :title %>
+  <%= f.check_box :show_in_user_profile %>
 </section>
 <div class="questions">
   <%= f.fields_for :questions do |builder| %>

@@ -35,6 +35,7 @@
   <%= link_to t('surveys.action.editTemplate'), edit_surveys_template_path(@template), class: 'btn btn-default' %>
   <%= link_to t('surveys.action.toTemplateOverview'), surveys_templates_path, class: 'btn btn-default'%>
   <%= link_to t('surveys.action.newSubmission'), new_surveys_template_surveys_submission_path(@template), class: 'btn btn-default'%>
+  <%= link_to t('surveys.action.showSubmissions'), surveys_template_surveys_submissions_path(@template), class: 'btn btn-default'%>
 </section>
 
 </div>

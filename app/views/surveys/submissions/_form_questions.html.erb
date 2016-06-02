@@ -1,0 +1,18 @@
+<% idx = 0 %>
+<%= f.hidden_field :template_id %>
+<%= f.fields_for :answers do |answer_fields| %>
+    <% answer = @submission.answers[answer_fields.index] %>
+    <% question = answer.question %>
+
+    <% question_label = question.text %>
+    <% if @submission.answers.count > 1 && !question.is_subquestion %>
+        <% idx += 1 %>
+        <% question_label = idx.to_s + '.) ' + question_label %>
+    <% end %>
+
+    <div class="<%= question.is_subquestion ? 'subquestion' : '' %>">
+      <%= answer_fields.hidden_field :question_id %>
+      <%= render partial: 'surveys/submissions/' + question.question_type + '_question',
+                 locals: { f: answer_fields, question: question, answer: answer, question_label: question_label } %>
+    </div>
+<% end %>

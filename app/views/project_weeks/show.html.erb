@@ -84,7 +84,7 @@
       <section class="col-sm-6 col-md-12 slim hidden-xs hidden-sm">
         <h3>Eigenes Projekt</h3>
         <span>Du möchtest ein eigenes Projekt starten?</span>
-        <%= link_to t('project.message.startOwnInfo'),
+        <%= link_to t('project.message.weHelpYou'),
                     '/eigenes-projekt', class:'btn btn-default btn-new-project' %>
       </section>
 
@@ -144,8 +144,8 @@
 
 <section class="visible-xs visible-sm slim">
   <h3>Eigenes Projekt</h3>
-  <span>Du möchtest ein eigenes Projekt starten?</span>
-  <%= link_to t('project.message.startOwnInfo'),
+  <span><%= t('project.action.wantToStartOwnProject') %></span>
+  <%= link_to t('project.action.weHelpYou'),
               '/eigenes-projekt', class:'btn btn-default btn-new-project' %>
 </section>
 

@@ -170,15 +170,17 @@ ActiveRecord::Schema.define(version: 20160601181306) do
     t.integer  "template_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "surveys_submissions", ["template_id"], name: "index_surveys_submissions_on_template_id", using: :btree
 
   create_table "surveys_templates", force: :cascade do |t|
-    t.string   "title",      limit: 255
+    t.string   "title",                limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "slug",       limit: 255
+    t.string   "slug",                 limit: 255
+    t.boolean  "show_in_user_profile",             default: false
   end
 
   add_index "surveys_templates", ["slug"], name: "index_surveys_templates_on_slug", unique: true, using: :btree

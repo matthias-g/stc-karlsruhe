@@ -16,11 +16,7 @@ class Surveys::SubmissionsController < ApplicationController
 
   def new
     template = Surveys::Template.friendly.find(params[:surveys_template_id])
-    @submission = Surveys::Submission.new(template: template)
-    @submission.template = template
-    template.questions.each do |question|
-      @submission.answers.build(question: question)
-    end
+    @submission = Surveys::Submission.create_for_template(template)
     respond_with(@submission)
   end
 
@@ -29,6 +25,7 @@ class Surveys::SubmissionsController < ApplicationController
 
   def create
     @submission = Surveys::Submission.new(submission_params)
+    @submission.user_id = current_user.id if current_user
     @submission.save
     redirect_to '/', notice: t('surveys.message.answerCreated')
   end

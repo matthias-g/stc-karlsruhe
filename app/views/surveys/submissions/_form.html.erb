@@ -18,26 +18,8 @@
   <h1><%= @submission.template.title %></h1>
 </section>
 
-<%= f.hidden_field :template_id %>
-
 <section>
-  <% idx = 0 %>
-  <%= f.fields_for :answers do |answer_fields| %>
-    <% answer = @submission.answers[answer_fields.index] %>
-    <% question = answer.question %>
-
-    <% question_label = question.text %>
-    <% if !question.is_subquestion %>
-      <% idx += 1 %>
-      <% question_label = idx.to_s + '.) ' + question_label %>
-    <% end %>
-
-    <div class="<%= question.is_subquestion ? 'subquestion' : '' %>">
-      <%= answer_fields.hidden_field :question_id %>
-      <%= render partial: question.question_type + '_question',
-               locals: { f: answer_fields, question: question, answer: answer, question_label: question_label } %>
-    </div>
-  <% end %>
+  <%= render partial: 'form_questions', locals: { f: f } %>
 </section>
 
 <section>

@@ -12,9 +12,10 @@ loadedScripts = []
     $.getScript '/assets/' + path + '.js', callback
 
 # create a new flash message and append it
-@createFlashMessage = (str) ->
+@createFlashMessage = (str, type) ->
+  type ?= 'info'
   appendFlashMessage $("""
-    <div class="alert alert-info alert-dismissible" role="alert">
+    <div class="alert alert-""" + type + """ alert-dismissible" role="alert">
       <a href="#" data-dismiss="alert" class="close">×</a>
       <ul><li>""" + str + """</li></ul>
     </div>
@@ -55,7 +56,7 @@ loadedScripts = []
 ### PRIVATE ###
 
 # append a flash message, with timeout
-appendFlashMessage = (flash) ->
+@appendFlashMessage = (flash) ->
   close = ->
     flash.alert 'close'
   flash.click close
@@ -64,8 +65,8 @@ appendFlashMessage = (flash) ->
 
 # extract flash messages from the given container and append them
 extractFlashMessages = (html) ->
-  $('#messages .alert', html).detach().each (i, e) ->
-    appendFlashMessage $(e)
+  $('#messages .alert', html).detach().each (index, element) ->
+    appendFlashMessage $(element)
 
 # uncollapse accordion section if it's referenced in the url hash
 uncollapseAccordeonAnchor = ->

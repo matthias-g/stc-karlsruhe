@@ -46,7 +46,7 @@ class Surveys::TemplatesController < ApplicationController
   end
 
   def template_params
-    params.require(:surveys_template).permit(:title, questions_attributes:
+    params.require(:surveys_template).permit(:title, :show_in_user_profile, questions_attributes:
         [:id, :text, :explanation, :answer_options, :question_type, :position, :is_subquestion, :_destroy] )
   end
 

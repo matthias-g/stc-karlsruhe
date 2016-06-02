@@ -105,6 +105,7 @@ de:
         title: Titel
       surveys/template:
         title: 'Titel der Umfrage'
+        show_in_user_profile: In Benutzerprofil anzeigen
       surveys/question:
         text: 'Frage'
         explanation: Erklärung
@@ -261,6 +262,9 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       cropImage: 'Zuschneiden'
       uploadPictures: Bilder hochladen
       uploadSelectedPictures: Ausgewählte Bilder hochladen
+      wantToStartOwnProject: Du möchtest ein eigenes Projekt starten?
+      weHelpYou: Wir helfen dir dabei!
+      startOwnProject: Eigenes Projekt starten
     label:
       project: 'Projekt'
       subproject: 'Teilprojekt'
@@ -291,8 +295,6 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       uploadPictures: "Hast du während des Projektes Bilder gemacht, die du veröffentlichen möchtest? Dann kannst du sie hier hochladen.
         Hast du andere Personen fotografiert, stelle bitte sicher, dass du ihr Einverständnis für das Veröffentlichen der Bilder hast."
     message:
-      startOwn: eigenes Projekt starten?
-      startOwnInfo: Wir helfen dir dabei!
       imageCropped: 'Der Bildausschnitt wurde angepasst.'
       created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'
@@ -471,6 +473,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       saveSubmission: 'Abschicken'
       editSubmission: 'Einsendung bearbeiten'
       toSubmissionOverview: 'zur Übersicht'
+      showSubmissions: Antworten ansehen
     label:
       templateList: 'Umfragen'
       submissionList: 'Einsendungen zu Umfragen'
@@ -480,7 +483,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       custom_choice_placeholder: 'anderes'
     message:
       templateErrorList: 'Wegen folgender Fehler konnte die Umfrage nicht gespeichert werden:'
-      answerCreated: Vielen Dank für dein Surveys!
+      answerCreated: Vielen Dank für dein Feedback!
     question:
       type:
         text: Freitext

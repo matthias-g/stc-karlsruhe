@@ -476,7 +476,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       showSubmissions: Antworten ansehen
     label:
       templateList: 'Umfragen'
-      submissionList: 'Einsendungen zu Umfragen'
+      submissionList: 'Einsendungen zur Umfrage "%{survey_title}"'
       newTemplate: 'Neue Umfrage'
       editTemplate: 'Umfrage bearbeiten'
       submission: 'Einsendung %{id}'

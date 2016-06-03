@@ -3,10 +3,10 @@
 <% end %>
 
 <section class="surveys submission list-view">
-  <h1><%= t('surveys.label.submissionList') %></h1>
+  <h1><%= t('surveys.label.submissionList', survey_title: @template.title) %></h1>
 
   <% if @template.questions.count == 1 %>
-      <h3><%= @template.questions.first.text %></h3>
+      <h3><%= @template.questions.first.text %> (<%= @submissions.count %>)</h3>
   <% end %>
 
   <table class="table">

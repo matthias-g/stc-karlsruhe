@@ -8,13 +8,13 @@ class @Countdown
   constructor: (@html) ->
     @fields = @html.find('div span')
     @endDate = new Date(@html.data('date'))
-    timer = setInterval(@update, 1000)
+    @timer = setInterval(@update, 1000)
     @update()
     
   update: =>
     d = @endDate - (new Date)
     if d < 0
-      clearInterval timer
+      clearInterval @timer
       @html.find('div').hide()
       @html.find('.running').hide()
       @html.find('.finished').show()

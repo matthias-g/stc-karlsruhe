@@ -17,7 +17,7 @@
 
 <section>
   <div class="typeHeader">
-    <%= l @news_entry.created_at, format: :date %>
+    <%= l @news_entry.created_at.to_date, format: :date %>
   </div>
   <h1><%= @news_entry.title %></h1>
 </section>

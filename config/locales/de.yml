@@ -1,6 +1,7 @@
 de:
-  time:
+  date:
     formats:
+      only_day: ! '%d.'
       short_date: ! '%d. %B'
       date: ! '%d. %B %Y'
 

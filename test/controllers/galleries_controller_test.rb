@@ -59,6 +59,14 @@ class GalleriesControllerTest < ActionController::TestCase
     assert_redirected_to gallery_path(assigns(:gallery))
   end
 
+  test "update gallery redirects to referer" do
+    @gallery = galleries(:four)
+    sign_in users(:rolf)
+    @request.env['HTTP_REFERER'] =project_path(@gallery.projects.first)
+    patch :update, id: @gallery, gallery: { title: @gallery.title }
+    assert_redirected_to project_path(assigns(:gallery).projects.first)
+  end
+
   test "should destroy gallery" do
     sign_in users(:admin)
     assert_difference('Gallery.count', -1) do

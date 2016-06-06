@@ -4,10 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#28B7AF" />
-  <title>
-    <%= (yield(:pageTitle) + ' - ') if content_for?(:pageTitle) %>
-    <%= t('layout.pageTitle') %>
-  </title>
+  <title><%= (content_for?(:pageTitle) ? (yield(:pageTitle).strip + ' - ') : '') + t('layout.pageTitle') %></title>
   <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -15,6 +12,12 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track': true %>
   <%= javascript_include_tag 'editing', 'data-turbolinks-track': true if privileged_user? %>
   <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp' %>
+  <meta property="og:title" content="<%= yield(:pageTitle).strip.presence || t('layout.pageTitle') %>" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="<%= url_for(only_path: false, overwrite_params: nil, protocol: :https) %>" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:site_name" content="Serve the City Karlsruhe" />
+  <meta property="fb:app_id" content="1632977830272942" />
   <%= yield(:appendToHeader) %>
 </head>
 <body>

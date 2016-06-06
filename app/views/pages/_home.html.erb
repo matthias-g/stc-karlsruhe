@@ -1,17 +1,12 @@
 <%= render '/layouts/bigheader' -%>
 
-<% content_for :appendToHeader do %>
-  <meta name="description" content="Du willst Menschen in Karlsruhe begegnen, ihnen Gutes tun?
-  Engagiere dich, unkompliziert und ohne lange Verpflichtungen." />
+<% desc = 'Du willst Menschen in Karlsruhe begegnen, ihnen Gutes tun?
+  Engagiere dich, unkompliziert und ohne lange Verpflichtungen.' %>
 
-  <meta property="og:title" content="Serve the City Karlsruhe" />
-  <meta property="og:type" content="website" />
+<% content_for :appendToHeader do %>
+  <meta name="description" content="<%= desc %>" />
   <meta property="og:image" content="https://www.servethecity-karlsruhe.de/images/share.jpg" />
-  <meta property="og:url" content="https://servethecity-karlsruhe.de" />
-  <meta property="og:description" content="Du willst Menschen in Karlsruhe begegnen, ihnen Gutes tun?
-  Engagiere dich, unkompliziert und ohne lange Verpflichtungen." />
-  <meta property="og:locale" content="de_DE" />
-  <meta property="og:site_name" content="Serve the City Karlsruhe" />
+  <meta property="og:description" content="<%= desc %>" />
 <% end %>
 
 <div class="schirmherr-ribbon-wrapper hidden-xs">

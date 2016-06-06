@@ -2,16 +2,12 @@
   <%= t('layout.title.pageAbout') %>
 <% end %>
 
-<% content_for :appendToHeader do %>
-  <meta name="description" content="Antworten auf die wichtigsten Fragen zu Serve the City" />
+<% desc = "Antworten auf die wichtigsten Fragen zu Serve the City" %>
 
-  <meta property="og:title" content="<%= t('layout.title.pageAbout') %>" />
-  <meta property="og:type" content="website" />
+<% content_for :appendToHeader do %>
+  <meta name="description" content="<%= desc %>" />
   <meta property="og:image" content="https://www.servethecity-karlsruhe.de/images/share.jpg" />
-  <meta property="og:url" content="<%= show_page_url(:faq) %>" />
-  <meta property="og:description" content="Antworten auf die wichtigsten Fragen zu Serve the City" />
-  <meta property="og:locale" content="de_DE" />
-  <meta property="og:site_name" content="Serve the City Karlsruhe" />
+  <meta property="og:description" content="<%= desc %>" />
 <% end %>
 
 <section>

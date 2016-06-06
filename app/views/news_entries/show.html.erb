@@ -4,13 +4,8 @@
 
 <% content_for :appendToHeader do %>
     <meta name="description" content="<%= @news_entry.teaser %>" />
-    <meta property="og:title" content="<%= NewsEntry.model_name.human %>: <%= @news_entry.title %>" />
-    <meta property="og:type" content="website" />
     <meta property="og:image" content="<%= image_url(@news_entry.picture_url) %>" />
-    <meta property="og:url" content="<%= request.original_url %>" />
     <meta property="og:description" content="<%= @news_entry.text %>" />
-    <meta property="og:locale" content="de_DE" />
-    <meta property="og:site_name" content="Serve the City Karlsruhe" />
 <% end %>
 
 <div id="news-entry-view">

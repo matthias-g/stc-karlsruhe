@@ -10,6 +10,7 @@ class MessagesController < ApplicationController
   def send_contact_mail
     if @message.valid?
       Mailer.contact_mail(@message).deliver_now
+      Mailer.contact_mail_copy_for_sender(@message).deliver_now
       redirect_to root_path, notice: t('contact.orga.success')
     else
       flash[:alert] = @message.errors.values

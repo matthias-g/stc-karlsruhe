@@ -7,6 +7,11 @@ class Mailer < ActionMailer::Base
     mail from: message.sender, to: recipient, reply_to: message.sender, subject: message.subject
   end
 
+  def contact_mail_copy_for_sender(message)
+    @message = message.body
+    mail to: message.sender, subject: message.subject
+  end
+
   def project_mail(message, sender, project)
     @message = message.body
     @project_title = project.title

@@ -159,7 +159,6 @@ de:
       roleView: 'Benutzerrolle'
       userEdit: 'User bearbeiten: "%{user}"'
       userList: 'Registrierte Benutzer'
-      userView: 'Profil "%{user}"'
       userLogin: 'Login'
       userRegister: 'Registrierung'
       userProfileEdit: 'Profil bearbeiten: "%{user}"'

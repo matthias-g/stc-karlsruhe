@@ -33,7 +33,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def upload_pictures?
-    record.visible? && (is_volunteer? || is_leader? || is_admin? || (user && user.photographer?))
+    record.visible? && is_today_or_past? && (is_volunteer? || is_leader? || is_admin? || (user && user.photographer?))
   end
 
   alias_method :index, :is_admin?
@@ -60,6 +60,16 @@ class ProjectPolicy < ApplicationPolicy
 
   def is_volunteer?
     user && (record.has_volunteer? user)
+  end
+
+  private
+
+  def is_today_or_past?
+    today_or_future = false
+    record.days.each do |day|
+      today_or_future ||= day.date && (day.date.today? || day.date.past?)
+    end
+    today_or_future
   end
 
 end

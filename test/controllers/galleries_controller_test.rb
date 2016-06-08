@@ -54,8 +54,37 @@ class GalleriesControllerTest < ActionController::TestCase
 
   test "leader should update gallery" do
     @gallery = galleries(:four)
+    project_day = @gallery.projects.first.days.first
+    project_day.date = 1.day.ago
+    project_day.save!
     sign_in users(:rolf)
-    patch :update, id: @gallery, gallery: { title: @gallery.title }
+    new_title = 'This is the new title'
+    patch :update, id: @gallery, gallery: { title: new_title }
+    assert_equal new_title, assigns(:gallery).title
+    assert_redirected_to gallery_path(assigns(:gallery))
+  end
+
+  test "update should not be possible for leader if project takes place in future" do
+    @gallery = galleries(:four)
+    project_day = @gallery.projects.first.days.first
+    project_day.date = 1.day.from_now
+    project_day.save!
+    sign_in users(:rolf)
+    new_title = 'This is the new title'
+    patch :update, id: @gallery, gallery: { title: new_title }
+    assert_not_equal new_title, assigns(:gallery).title
+    assert_redirected_to root_path
+  end
+
+  test "update should be possible for admin even if project takes place in future" do
+    @gallery = galleries(:four)
+    project_day = @gallery.projects.first.days.first
+    project_day.date = 1.day.from_now
+    project_day.save!
+    sign_in users(:admin)
+    new_title = 'This is the new title'
+    patch :update, id: @gallery, gallery: { title: new_title }
+    assert_equal new_title, assigns(:gallery).title
     assert_redirected_to gallery_path(assigns(:gallery))
   end
 

@@ -1,5 +1,7 @@
 <% content_for :pageTitle do %>
-  <%= t('layout.title.projectView', project:@project.title) %>
+  <% title = @project.title %>
+  <% title += ' - ' + @project.parent_project.title if @project.parent_project %>
+  <%= title %>
 <% end %>
 
 <% content_for :appendToHeader do %>

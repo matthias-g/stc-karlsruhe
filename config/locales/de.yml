@@ -148,7 +148,6 @@ de:
       projectNew: 'Neues Projekt'
       projectEdit: 'Projekt bearbeiten: "%{project}"'
       projectCropPicture: 'Bildausschnitte festlegen: "%{project}"'
-      projectView: 'Projekt "%{project}"'
       newsEntryList: 'Newseinträge'
       newsEntryNew: 'Neuer Newseintrag'
       newsEntryEdit: 'News bearbeiten: "%{news_entry}"'

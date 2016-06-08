@@ -111,6 +111,18 @@ class ProjectsControllerTest < ActionController::TestCase
     assert_not @project.has_volunteer?(user)
   end
 
+  test 'send notification when volunteer leaves project ' do
+    user = users(:sabine)
+    sign_in user
+    @project.add_volunteer(user)
+    assert @project.has_volunteer?(user)
+    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+      get :leave, id: @project
+    end
+    assert_redirected_to @project
+    assert_not @project.has_volunteer?(user)
+  end
+
   test 'admin should make project visible' do
     sign_in users(:admin)
     @project = projects(:three)

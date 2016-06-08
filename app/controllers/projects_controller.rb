@@ -56,6 +56,7 @@ class ProjectsController < ApplicationController
 
   def leave
     @project.delete_volunteer(current_user)
+    Mailer.leaving_project_notification(current_user, @project).deliver_now
     redirect_to project_url(@project)
   end
 

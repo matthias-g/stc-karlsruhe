@@ -31,4 +31,11 @@ class Mailer < ActionMailer::Base
     end
   end
 
+  def leaving_project_notification(user, project)
+    @user = user
+    @project = project
+    recipients = (project.leaders.pluck(:email) + [StcKarlsruhe::Application::NOTIFICATION_RECIPIENT]).uniq.join(',')
+    mail bcc: recipients, subject: t('project.message.leavingProjectNotification.subject')
+  end
+
 end

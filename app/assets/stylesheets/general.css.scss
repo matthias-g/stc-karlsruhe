@@ -32,6 +32,10 @@ h3, h4 {
   color: $status_full_text;
   background: $status_full;
 }
+.status_closed {  // TODO can be deleted when status refactoring completed
+  color: $status_finished_text;
+  background: $status_finished;
+}
 .status_finished {
   color: $status_finished_text;
   background: $status_finished;

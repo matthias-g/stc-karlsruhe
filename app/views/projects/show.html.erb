@@ -60,7 +60,7 @@
             </div>
           <% end %>
 
-          <% visible_subprojects = policy_scope(@project.subprojects) %>
+          <% visible_subprojects = policy_scope(@project.subprojects).sort_by { |p| p.title.length } %>
           <% if visible_subprojects.count > 0 %>
             <div class="subprojects" id='<%= Project.human_attribute_name('subproject_ids').downcase %>'>
               <h3><%= Project.human_attribute_name('subproject_ids') %></h3>
@@ -68,7 +68,13 @@
                 <% visible_subprojects.each do |subproject| %>
                   <div class="col-md-4 col-sm-6 subproject <%='subproject-invisible' unless subproject.visible %>" >
                     <%= link_to project_path(subproject) do %>
-                      <%= image_tag subproject.picture.thumb.url, class: 'img-responsive' %>
+                        <div class="project-image">
+                          <%= image_tag subproject.picture.thumb.url, class: 'img-responsive' %>
+                          <% ext_status = subproject.visible? ? subproject.status : :hidden %>
+                          <div class="project-status status_<%= ext_status %>">
+                            <%= t "project.status.#{ext_status}" %>
+                          </div>
+                        </div>
                       <%= subproject.title %>
                     <% end %>
                   </div>

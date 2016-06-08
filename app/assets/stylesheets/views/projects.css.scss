@@ -67,10 +67,17 @@
   .subproject {
     text-align: center;
     min-height: 165px;
-    img {
+    .project-image {
       display: block;
+      width: 100px;
       margin-left: auto;
       margin-right: auto;
+      position: relative;
+      .project-status {
+        bottom: 0;
+        width: 100px;
+        position: absolute;
+      }
     }
   }
 

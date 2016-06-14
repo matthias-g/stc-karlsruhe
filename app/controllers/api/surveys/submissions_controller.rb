@@ -7,7 +7,7 @@ class Api::Surveys::SubmissionsController < Api::ApiController
   def create
     @submission = Surveys::Submission.new(submission_params)
     authorize @submission
-    @submission.user_id = current_user.id if current_user
+    @submission.user_id = current_user.id if current_user && @submission.template.show_in_user_profile
     @submission.save
     respond_with :api, @submission.template, @submission
   end

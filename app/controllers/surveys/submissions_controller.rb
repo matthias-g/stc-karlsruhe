@@ -25,7 +25,7 @@ class Surveys::SubmissionsController < ApplicationController
 
   def create
     @submission = Surveys::Submission.new(submission_params)
-    @submission.user_id = current_user.id if current_user
+    @submission.user_id = current_user.id if current_user && @submission.template.show_in_user_profile
     @submission.save
     redirect_to '/', notice: t('surveys.message.answerCreated')
   end

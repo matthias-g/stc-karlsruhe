@@ -7,9 +7,9 @@ addLink = ->
   new_id = new Date().getTime()
   regexp = new RegExp("new_question", "g")
   question = $('#question-prototype').html().replace(regexp, new_id)
+  question = $(question)
   $($(this).data('target')).before(question)
-  console.log($('.questions').find('.question-fields').last())
-  addRemoveLinks($('.questions').find('.question-fields').last())
+  addRemoveLinks(question)
 
   
 onPageLoad ->

@@ -5,6 +5,7 @@ class GalleryPicture < ActiveRecord::Base
   belongs_to :uploader, class_name: 'User'
 
   scope :visible, -> { where(visible: true) }
+  scope :invisible,  -> { where(visible: false) }
   scope :visible_for_user, ->(user) { user ? where("visible = 't' or uploader_id = #{user.id}") : visible }
 
   def make_visible!

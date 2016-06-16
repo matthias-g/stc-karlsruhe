@@ -5,26 +5,43 @@
       <%= @gallery.title %>
     </p>
 
-    <div style='max-width: 600px;'>
-      <%= render 'gallery', gallery: @gallery %>
+    <div class="row">
+
+      <div class="col-md-10">
+        <div style='max-width: 600px;'>
+          <%= render 'gallery', gallery: @gallery %>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        Anzahl Bilder: <%= @gallery.gallery_pictures.count %>
+      </div>
+      <div class="col-md-4">
+        davon unsichtbar: <%= @gallery.gallery_pictures.invisible.count %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form_for(@gallery, html: { multipart: true}) do |f| %>
+            <%= f.hidden_field :title %>
+            <div class="field">
+              <%= f.label :picture %><br>
+              <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+            </div>
+
+            <div class="actions">
+              <%= f.submit 'Hochladen' %>
+            </div>
+        <% end %>
+      </div>
     </div>
-
-    <%= form_for(@gallery, html: { multipart: true}) do |f| %>
-      <%= f.hidden_field :title %>
-      <div class="field">
-        <%= f.label :picture %><br>
-        <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit 'Hochladen' %>
-      </div>
-    <% end %>
 
     <%= link_to 'Bearbeiten', edit_gallery_path(@gallery) %> |
     <%= link_to 'Zur Galerieübersicht', galleries_path %> |
     <% @gallery.projects.each do |project| %>
-      <%= link_to 'Zum Projekt', project %>
+        <%= link_to 'Zum Projekt', project %>
+    <% end %>
+    <% @gallery.news_entries.each do |news_entry| %>
+        <%= link_to 'Zum Newseintrag', news_entry %>
     <% end %>
 
   </section>

@@ -11,26 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160601181306) do
+ActiveRecord::Schema.define(version: 20160614133645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "ckeditor_assets", force: :cascade do |t|
-    t.string   "data_file_name",    limit: 255, null: false
-    t.string   "data_content_type", limit: 255
-    t.integer  "data_file_size"
-    t.integer  "assetable_id"
-    t.string   "assetable_type",    limit: 30
-    t.string   "type",              limit: 30
-    t.integer  "width"
-    t.integer  "height"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
-  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false
@@ -70,15 +54,17 @@ ActiveRecord::Schema.define(version: 20160601181306) do
     t.string   "title"
     t.string   "teaser"
     t.string   "text"
+    t.string   "picture"
     t.string   "picture_source"
     t.integer  "category"
     t.boolean  "visible"
     t.string   "slug"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.string   "picture"
+    t.integer  "gallery_id"
   end
 
+  add_index "news_entries", ["gallery_id"], name: "index_news_entries_on_gallery_id", using: :btree
   add_index "news_entries", ["slug"], name: "index_news_entries_on_slug", using: :btree
 
   create_table "participations", force: :cascade do |t|
@@ -90,15 +76,6 @@ ActiveRecord::Schema.define(version: 20160601181306) do
   end
 
   add_index "participations", ["user_id", "project_id", "as_leader"], name: "index_participations_on_user_id_and_project_id_and_as_leader", unique: true, using: :btree
-
-  create_table "pictures", force: :cascade do |t|
-    t.string   "copyright"
-    t.string   "file"
-    t.integer  "parent_id"
-    t.string   "parent_type"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
 
   create_table "project_days", force: :cascade do |t|
     t.string   "title",           limit: 255
@@ -229,5 +206,6 @@ ActiveRecord::Schema.define(version: 20160601181306) do
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

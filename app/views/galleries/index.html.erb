@@ -19,7 +19,7 @@
         <tr>
           <td><%= gallery.title %></td>
           <td><%= gallery.gallery_pictures.count %></td>
-          <td><%= gallery.gallery_pictures.where(visible: false).count %></td>
+          <td><%= gallery.gallery_pictures.invisible.count %></td>
           <td><%= link_to 'Show', gallery %></td>
           <td><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
           <td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>

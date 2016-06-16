@@ -10,39 +10,65 @@
 
 <div id="news-entry-view">
 
-<section>
-  <div class="typeHeader">
-    <%= l @news_entry.created_at.to_date, format: :date %>
-  </div>
-  <h1><%= @news_entry.title %></h1>
-</section>
-
-<div class="row">
-  <div class="col-md-12">
-    <section>
-      <% if @news_entry.show_picture? && @news_entry.picture.file %>
-          <div class="news-entry-picture picture-container">
-            <%= image_tag @news_entry.picture_url(:article) %>
-            <div class="copyright" title="© <%= @news_entry.picture_source %>">
-              © <%= @news_entry.picture_source %>
-            </div>
-          </div>
-      <% end %>
-      <div class="news-entry-text">
-        <%= simple_format( simple_format_urls @news_entry.text ) %>
-      </div>
-    </section>
-  </div>
-</div>
-
-<% if policy(@news_entry).edit? %>
   <section>
-    <%= link_to t('news_entry.action.edit'),
-                edit_news_entry_path(@news_entry), class:'btn btn-default' %>
-    <%= link_to t('news_entry.action.delete'), @news_entry, method: :delete,
-                data: { confirm: t('general.message.confirmDelete')},
-                class: 'btn btn-default' %>
+    <div class="typeHeader">
+      <%= l @news_entry.created_at.to_date, format: :date %>
+    </div>
+    <h1><%= @news_entry.title %></h1>
   </section>
-<% end %>
+
+  <div class="row">
+    <div class="col-md-12">
+      <section>
+        <% if show_gallery?(@news_entry) %>
+            <div class="news-entry-gallery">
+              <%= render 'galleries/gallery', gallery: @news_entry.gallery %>
+              <% if current_user && current_user.admin? && @news_entry.gallery.gallery_pictures.invisible.any? %>
+                  <i><%= t('gallery.message.containsInvisiblePictures') %></i>
+              <% end %>
+              <% if policy(@news_entry.gallery).edit? %>
+                  <%= link_to 'Galerie bearbeiten', edit_gallery_path(@news_entry.gallery) %>
+              <% end %>
+            </div>
+        <% elsif @news_entry.show_picture? %>
+            <div class="news-entry-picture picture-container">
+              <%= image_tag @news_entry.picture_url(:article) %>
+              <div class="copyright" title="© <%= @news_entry.picture_source %>">
+                © <%= @news_entry.picture_source %>
+              </div>
+              <!--<% if policy(@news_entry).upload_pictures? %>-->
+                  <!--<div class="picture-upload">-->
+                    <!--<%= form_for(@news_entry.gallery, html: { multipart: true}) do |f| %>-->
+                        <!--<%= f.hidden_field :title %>-->
+                        <!--<div class="field">-->
+                          <!--<%= t('news_entry.help.uploadPictures') %>-->
+                          <!--<%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>-->
+                          <!--<p class="waitinfo">Bitte warten, die Bilder werden hochgeladen...</p>-->
+                        <!--</div>-->
+
+                        <!--<div class="actions">-->
+                          <!--<%= f.submit t('gallery.action.uploadSelectedPictures') %>-->
+                        <!--</div>-->
+                    <!--<% end %>-->
+                  <!--</div>-->
+              <!--<% end %>-->
+            </div>
+        <% end %>
+        <div class="news-entry-text">
+          <%= simple_format( simple_format_urls @news_entry.text ) %>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <% if policy(@news_entry).edit? %>
+      <section>
+        <%= link_to t('news_entry.action.edit'),
+                    edit_news_entry_path(@news_entry), class:'btn btn-default' %>
+        <%= link_to t('news_entry.action.delete'), @news_entry, method: :delete,
+                    data: { confirm: t('general.message.confirmDelete')},
+                    class: 'btn btn-default' %>
+      </section>
+  <% end %>
 
 </div>

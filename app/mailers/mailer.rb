@@ -43,4 +43,16 @@ class Mailer < ActionMailer::Base
     mail bcc: recipients, subject: t('project.message.leavingProjectNotification.subject')
   end
 
+  def gallery_picture_uploaded_notification(gallery, picture_count, uploader)
+    @uploader = uploader
+    @gallery = gallery
+    @picture_count = picture_count
+    @title = gallery.title
+    @title = gallery.projects.collect{ |p| p.title }.join(', ') if @title.blank?
+    @title = gallery.news_entries.collect{ |p| p.title }.join(', ') if @title.blank?
+    @type = 'Projekts' if gallery.projects.any?
+    @type = 'Newseintrags' if gallery.news_entries.any?
+    mail to: StcKarlsruhe::Application::NOTIFICATION_RECIPIENT, subject: t('project.message.mailNewPictures.subject', pictureCount: picture_count)
+  end
+
 end

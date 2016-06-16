@@ -81,16 +81,8 @@ class GalleriesController < ApplicationController
   end
 
   def send_notice_mail
-    title = @gallery.title
-    title = @gallery.projects.collect{ |p| p.title }.join(', ') if title.blank?
-    message = Message.new(sender: 'no-reply@servethecity-karlsruhe.de',
-                          subject: t('project.message.mailNewPictures.subject', pictureCount: params[:gallery_pictures][:picture].size),
-                          recipient: StcKarlsruhe::Application::NOTIFICATION_RECIPIENT,
-                          body: t('project.message.mailNewPictures.body',
-                                  title: title,
-                                  pictureCount: params[:gallery_pictures][:picture].size,
-                                  uploader: current_user.full_name))
-    Mailer.generic_mail(message).deliver_now
+    picture_count = params[:gallery_pictures][:picture].size
+    Mailer.gallery_picture_uploaded_notification(@gallery, picture_count, current_user).deliver_now
   end
 
   def authorize_gallery

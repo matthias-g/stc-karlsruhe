@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+
+<p>Hallo,</p>
+
+<p>soeben wurden neue Bilder zur <%= link_to 'Fotogalerie', @gallery %> <%= 'eines ' + @type + ' ' if @type %>hinzugefügt:</p>
+
+<p>Titel: <%= @title %><br />
+  Anzahl Bilder: <%= @picture_count %><br />
+  Benutzer: <%= @uploader.full_name %></p>
+
+<p>Bitte überprüfe die Bilder und schalte sie gegebenenfalls frei.</p>
+
+</body>
+</html>

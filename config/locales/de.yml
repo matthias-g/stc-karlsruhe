@@ -259,8 +259,6 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       cropProjectImage: 'Projektbild anpassen'
       cropThumbnailImage: 'Thumbnail anpassen'
       cropImage: 'Zuschneiden'
-      uploadPictures: Bilder hochladen
-      uploadSelectedPictures: Ausgewählte Bilder hochladen
       wantToStartOwnProject: Du möchtest ein eigenes Projekt starten?
       weHelpYou: Wir helfen dir dabei!
       startOwnProject: Eigenes Projekt starten
@@ -313,8 +311,6 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       closed: 'Projekt wurde geschlossen.'
       galleryPicturesUploaded: 'Vielen Dank für das Hochladen deiner Bilder! Sobald sie jemand aus dem Orgateam freigeschaltet hat,
         sind sie öffentlich sichtbar.'
-      galleryContainsInvisiblePictures: 'Einige der Bilder in dieser Galerie wurden noch nicht von jemandem aus dem Orgateam freigeschaltet
-        und sind daher noch nicht öffentlich sichtbar.'
       mailNewPictures:
         subject: '%{pictureCount} neue Bilder hochgeladen'
         body: "Hallo,\n
@@ -365,6 +361,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       help:
         picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
         teaser: 'Wenn Du dieses Feld ausfüllst, wird in Listen statt des ausführlichen Texts angezeigt.'
+        uploadPictures: 'Hier kannst du Bilder hochladen, die in einer Galerie anstelle des Artikelbildes angezeigt werden.'
       message:
         imageCropped: 'Der Bildausschnitt wurde angepasst.'
         created: 'Newseintrag wurde erfolgreich erstellt.'
@@ -460,6 +457,11 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       delete: "Löschen"
       rotateRight: "Nach rechts drehen"
       rotateLeft: "Nach links drehen"
+      uploadPictures: Bilder hochladen
+      uploadSelectedPictures: Ausgewählte Bilder hochladen
+    message:
+      containsInvisiblePictures: 'Einige der Bilder in dieser Galerie wurden noch nicht von jemandem aus dem Orgateam freigeschaltet
+              und sind daher noch nicht öffentlich sichtbar.'
 
   surveys:
     action:

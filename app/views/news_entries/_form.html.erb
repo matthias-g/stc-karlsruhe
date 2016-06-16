@@ -1,8 +1,6 @@
 <div id="news-entry-edit-view">
   <%= bootstrap_form_for(@news_entry) do |f| %>
 
-
-
       <% if @news_entry.errors.any? %>
           <section id="error_explanation">
             <h2><%= t('news_entry.message.errorList') %></h2>
@@ -53,6 +51,7 @@
           </div>
           <%= f.text_field :picture_source,
                            help: t('project.help.picture_source') %>
+
           <div class="teaser">
             <%= f.text_area :teaser,
                             help: t('news_entry.help.teaser') %>
@@ -84,6 +83,23 @@
 
       </div>
 
+  <% end %>
+
+  <% if @news_entry.gallery && policy(@news_entry).upload_pictures? %>
+      <section class="picture-upload">
+        <%= form_for(@news_entry.gallery, html: { multipart: true}) do |gallery_form| %>
+            <%= gallery_form.hidden_field :title %>
+            <div class="field">
+              <%= t('news_entry.help.uploadPictures') %>
+              <%= gallery_form.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+              <p class="waitinfo">Bitte warten, die Bilder werden hochgeladen...</p>
+            </div>
+
+            <div class="actions">
+              <%= gallery_form.submit t('gallery.action.uploadSelectedPictures') %>
+            </div>
+        <% end %>
+      </section>
   <% end %>
 
 

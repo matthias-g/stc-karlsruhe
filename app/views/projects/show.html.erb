@@ -96,7 +96,7 @@
               <% if show_gallery?(@project) %>
                 <%= render 'galleries/gallery', gallery: @project.gallery %>
                 <% if show_contains_invisible_pictures_notification?(@project) %>
-                  <i><%= t('project.message.galleryContainsInvisiblePictures') %></i>
+                  <i><%= t('gallery.message.containsInvisiblePictures') %></i>
                 <% end %>
               <% end %>
             </div>
@@ -111,7 +111,7 @@
                   </div>
 
                   <div class="actions">
-                    <%= f.submit t('project.action.uploadSelectedPictures') %>
+                    <%= f.submit t('gallery.action.uploadSelectedPictures') %>
                   </div>
                 <% end %>
               </div>

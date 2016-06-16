@@ -8,8 +8,8 @@
   position: relative;
   top: 0;
   left: 0;
-  width: 500px;
-  height: 333px;
+  width: $gallery-width;
+  height: $gallery-height;
   background: $gallery;
   overflow: hidden;
 }
@@ -48,8 +48,8 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 500px;
-  height: 333px;
+  width: $gallery-width;
+  height: $gallery-height;
   overflow: hidden;
 }
 
@@ -97,7 +97,7 @@
 .gallery-thumbnavigator {
   position: absolute;
   /* size of thumbnail navigator container */
-  width: 500px;
+  width: $gallery-width;
   height: 70px;
   left: 0px;
   bottom: 0px;

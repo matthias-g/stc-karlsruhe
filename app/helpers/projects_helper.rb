@@ -11,13 +11,14 @@ module ProjectsHelper
     output.html_safe
   end
 
-  def show_gallery?(project)
-    (project.gallery.gallery_pictures.visible_for_user(current_user).count > 0) && project.visible?
+  # for projects and news_entries
+  def show_gallery?(item)
+    (item.gallery && item.gallery.gallery_pictures.visible_for_user(current_user).any?) && item.visible?
   end
 
   def show_contains_invisible_pictures_notification?(project)
-    current_user && (project.gallery.gallery_pictures.where(visible: false).where(uploader_id: current_user.id).count > 0 ||
-        (current_user.admin? && @project.gallery.gallery_pictures.where(visible: false).count > 0))
+    current_user && (project.gallery.gallery_pictures.invisible.where(uploader_id: current_user.id).count > 0 ||
+        (current_user.admin? && project.gallery.gallery_pictures.invisible.any?))
   end
 
   def options_for_project_leader_select

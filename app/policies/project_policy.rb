@@ -10,7 +10,13 @@ class ProjectPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    is_admin?
+  end
 
+  def create?
+    is_admin?
+  end
 
   def show?
     record.visible? || edit?
@@ -36,8 +42,6 @@ class ProjectPolicy < ApplicationPolicy
     record.visible? && is_today_or_past? && (is_volunteer? || is_leader? || is_admin? || (user && user.photographer?))
   end
 
-  alias_method :index, :is_admin?
-  alias_method :create, :is_admin?
   alias_method :update?, :edit?
   alias_method :destroy?, :edit?
 

@@ -5,10 +5,10 @@ class ProjectsControllerTest < ActionController::TestCase
     @project = projects(:one)
   end
 
-  test 'should get new as user' do
+  test 'should not get new as user' do
     sign_in users(:sabine)
     get :new
-    assert_response :success
+    assert_redirected_to root_path
   end
 
   test 'should get new as admin' do
@@ -17,13 +17,17 @@ class ProjectsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test 'should create project' do
+  test 'should create only for admin project' do
     sign_in users(:rolf)
+    assert_no_difference('Project.count') do
+      post :create, project: { description: 'Description', individual_tasks: 'Tasks', title: 'Title', desired_team_size: '6' }
+    end
+    sign_out users(:rolf)
+
+    sign_in users(:admin)
     assert_difference('Project.count') do
       post :create, project: { description: 'Description', individual_tasks: 'Tasks', title: 'Title', desired_team_size: '6' }
     end
-
-    assert_redirected_to project_path(assigns(:project))
   end
 
   test 'should show visible project' do

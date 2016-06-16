@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :authorize_project, except: [:index, :new, :create]
 
-  after_action :verify_authorized , except: [:new, :create]
+  after_action :verify_authorized
 
   respond_to :html
 
@@ -28,6 +28,7 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    authorize_project
     @project.project_week = ProjectWeek.all.order(title: :desc).first
   end
 
@@ -36,6 +37,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    authorize_project
     @project.add_leader(current_user)
     @project.visible = false
     @project.save

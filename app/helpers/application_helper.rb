@@ -28,8 +28,8 @@ module ApplicationHelper
   end
 
   def simple_format_urls text
-    markdown_inline_style = %r{\[((?:https?|mailto)://\S+)\]\((.*)\)}
-    text = text.gsub markdown_inline_style, '<a href="\1" target="_blank">\2</a>'
+    markdown_inline_style = %r{\[(.*)\]\(((?:https?|mailto)://\S+)\)}
+    text = text.gsub markdown_inline_style, '<a href="\2" target="_blank">\1</a>'
     angle_brackets = %r{\<((?:https?|mailto)://\S+)\>}
     text.gsub angle_brackets, '<a href="\1" target="_blank">\1</a>'
   end

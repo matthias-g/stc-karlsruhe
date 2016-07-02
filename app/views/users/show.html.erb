@@ -41,6 +41,7 @@
                 <td><%= @user.phone %></td>
               </tr>
             </table>
+            <span><%= email_reception_description @user %></span>
             <% if policy(@user).edit?  %>
                 <%= link_to edit_user_path, title: t('user.action.edit'),
                             class:'btn btn-default' do %>
@@ -97,14 +98,13 @@
     <% if @user.projects_as_volunteer.blank? && @user.projects_as_leader.blank? %>
         <% if current_user == @user %>
             <%= t('user.message.youHaveNoProjects') %><br />
-            <%= link_to t('project.action.findProject'), show_project_week_path(ProjectWeek.default.title) %>
         <% else %>
             <%= t('user.message.hasNoProjects', user:@user.first_name) %>
         <% end %>
     <% end %>
     <% if @user == current_user  %>
         <div class="actions">
-          <%= link_to t('project.action.searchProjects'), show_project_week_path(ProjectWeek.default.title),
+          <%= link_to t('project.action.findProject'), show_project_week_path(ProjectWeek.default.title),
                       class:'btn btn-default btn-wide' %>
           <%= link_to t('project.action.startOwnProject'), '/eigenes-projekt',
                       class:'btn btn-default btn-wide' %>

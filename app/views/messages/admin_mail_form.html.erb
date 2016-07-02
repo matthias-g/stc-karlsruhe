@@ -10,11 +10,13 @@
       </div>
       <div class="rightCol">
         <%= form.select(:sender, @senders.map{|g| [g, g]},
-                 {label: t('contact.adminMail.placeholders.sender')}) %>
-        <%= form.select(:recipient, @recipients.map{|g| [t('contact.adminMail.groups.' + g), g]},
-                 {label: t('contact.adminMail.placeholders.recipient')}) %>
-        <%= form.text_field :subject, label: t('contact.adminMail.placeholders.subject') %>
-        <%= form.text_area :body, label: t('contact.adminMail.placeholders.body') %>
+                 {label: t('contact.adminMail.labels.sender')}) %>
+        <%= form.select(:recipient, @recipients.map{|group| [t('contact.adminMail.groups.' + group), group]},
+                 {label: t('contact.adminMail.labels.recipient')}) %>
+        <%= form.select(:type, @types.map{|type| [t('contact.adminMail.types.' + type), type]},
+                        {label: t('contact.adminMail.labels.type')}) %>
+        <%= form.text_field :subject, label: t('contact.adminMail.labels.subject') %>
+        <%= form.text_area :body, label: t('contact.adminMail.labels.body') %>
         <%= form.submit t('contact.adminMail.submit') %>
       </div>
   <% end %>

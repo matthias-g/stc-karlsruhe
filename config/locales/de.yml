@@ -94,6 +94,11 @@ de:
         password_confirmation: 'Passwort wiederholen'
         current_password: 'Aktuelles Passwort'
         remember_me: 'merken'
+        receive_emails_about_project_weeks: Infos zu den jährlichen Projektwochen
+        receive_emails_about_my_project_weeks: Infos zu Projektwochen, an denen ich teilnehme
+        receive_emails_about_other_projects: Infos zu weiteren Serve the City Projekten
+        receive_other_emails_from_orga: Sonstige E-Mails vom Orgateam
+        receive_emails_from_other_users: Andere Nutzer können mich über ein Kontaktformular kontaktieren
       project_day:
         title: 'Titel'
       message:
@@ -218,7 +223,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         body: 'Deine Nachricht'
     adminMail:
       title: 'Admin-Mailer'
-      text: 'Hier kannst du projektübergreifenden Empfängergruppen eine Email schreiben. Du selbst erhältst auch immer eine Kopie.'
+      text: 'Hier kannst du projektübergreifenden Empfängergruppen eine E-Mail schreiben. Du selbst erhältst auch immer eine Kopie.'
       success: 'Die Nachricht wurde erfolgreich gesendet.'
       groups:
         current_volunteers_and_leaders: 'Aktuelle Projektleiter und Mitarbeiter'
@@ -226,12 +231,18 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         current_leaders: 'Aktuelle Projektleiter'
         all_users: 'Alle angemeldeten Benutzer'
         active_users: 'Aktive Benutzer (Registrierung < 6m oder Projektteilnahme < 18m)'
-      placeholders:
+      types:
+        about_project_weeks: Allgemeine Informationen zu Projektwochen
+        about_my_project_weeks: Informationen bezüglich der aktuellen Projektwoche
+        about_other_projects: Informationen zu anderen Serve the City Projekten
+        other_email_from_orga: Sonstige E-Mail vom Orgateam
+      labels:
         sender: 'Absender-Adresse'
         recipient: 'Empfängergruppe'
+        type: Typ
         subject: 'Betreff'
         body: 'Nachricht'
-      submit: 'Nachricht schicken'
+      submit: 'Nachricht absenden'
     ownProject:
       subject: Vorschlag für eigenes Projekt
 
@@ -396,17 +407,24 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       register: 'Registrieren'
       countActive: 'Mitarbeiter'
       user: 'User'
-      user_or_email: 'Benutzername / Email'
+      user_or_email: 'Benutzername / E-Mail'
       profile: 'Profil'
       myProfile: 'Mein Profil'
       userData: 'Profildaten'
+      emailSettings: 'E-Mail-Einstellungen'
+      receiveEmailsFromOrga: 'E-Mails vom Orgateam erhalten'
+      emailReception:
+        orga: Du erhältst E-Mails vom Orgateam.
+        orgaAndUser: Du erhältst E-Mails vom Orgateam und anderen Nutzern.
+        user: Du erhältst E-Mails von anderen Nutzern.
+        none: Du erhältst keine E-Mails vom Orgateam oder anderen Nutzern.
       projectsAsLeader: 'Leitung'
       projectsAsVolunteer: 'Teilnahme'
       pastProjects: 'Abgeschlossen'
       confirmDeletePassword: 'Dein Passwort, zur Bestätigung'
       userList: 'Userliste'
       edit: 'Profil bearbeiten'
-      waitingForEmailConfirmation: 'Ihre Emailadresse %{email} ist noch nicht bestätigt.'
+      waitingForEmailConfirmation: 'Ihre E-Mail-Adresse %{email} ist noch nicht bestätigt.'
       image: 'Profilbild'
       otherActions: 'Weitere Aktionen'
       passwordReset: 'Neues Passwort festlegen'

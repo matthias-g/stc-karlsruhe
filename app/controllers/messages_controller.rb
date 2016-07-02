@@ -24,28 +24,39 @@ class MessagesController < ApplicationController
                 'Serve the City Karlsruhe <orga@servethecity-karlsruhe.de>',
                 'Serve the City Karlsruhe <no-reply@servethecity-karlsruhe.de>',
                 current_user.full_name+ ' <' + current_user.email + '>']
-    @recipients = ['current_volunteers_and_leaders', 'current_volunteers',
-                   'current_leaders', 'all_users', 'active_users']
+    @recipients = %w(current_volunteers_and_leaders current_volunteers current_leaders all_users active_users)
+    @types = %w(about_project_weeks about_my_project_weeks about_other_projects other_email_from_orga)
   end
 
   def send_admin_mail
     current_projects = ProjectWeek.default.projects.visible
     case @message.recipient
       when 'current_volunteers_and_leaders'
-        to = current_projects.joins(:users).where('users.cleared': false).pluck(:email)
+        to = current_projects.joins(:users).where('users.cleared': false)
       when 'current_volunteers'
-        to = current_projects.joins(:users).where('users.cleared': false).where('participations.as_leader = false').pluck(:email)
+        to = current_projects.joins(:users).where('users.cleared': false).where('participations.as_leader = false')
       when 'current_leaders'
-        to = current_projects.joins(:users).where('users.cleared': false).where('participations.as_leader = true').pluck(:email)
+        to = current_projects.joins(:users).where('users.cleared': false).where('participations.as_leader = true')
       when 'all_users'
-        to = User.where(cleared: false).all.pluck(:email)
+        to = User.where(cleared: false).all
       when 'active_users'
-        to = User.where(cleared: false).where('created_at > ?', 6.months.ago).pluck(:email) +
-             User.where(cleared: false).joins(:projects).where('participations.created_at > ?', 18.months.ago).pluck(:email)
+        to = User.where(cleared: false).joins(:projects).where('participations.created_at > ? or created_at > ?', 18.months.ago, 6.months.ago) # TODO Rails 5
       else
         to = @message.recipient.split(/\s*,\s*/)
     end
-    @message.recipient = (to + [current_user.email]).uniq.join(',')
+    case @message.type
+      when 'about_project_weeks'
+        to = to.where('users.receive_emails_about_project_weeks': true)
+      when 'about_my_project_weeks'
+        to = to.where('users.receive_emails_about_my_project_weeks': true)
+      when 'about_other_projects'
+        to = to.where('users.receive_emails_about_other_projects': true)
+      when 'other_email_from_orga'
+        to = to.where('users.receive_other_emails_from_orga': true)
+      else
+        to = to.where('users.receive_other_emails_from_orga': true)
+    end
+    @message.recipient = (to.pluck(:email) + [current_user.email]).uniq.join(',')
     if @message.valid?
       Mailer.generic_mail(@message, true).deliver_now
       flash[:notice] = t('contact.adminMail.success')

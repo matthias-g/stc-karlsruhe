@@ -26,21 +26,43 @@
               <div><%= t('user.label.waitingForEmailConfirmation',
                          email: resource.unconfirmed_email) %></div>
           <% end %>
-          <br />
-          <%= f.submit t('general.action.save') %>
-          <%= link_to t('general.action.cancel'), user_path(@user), class:'btn btn-default' %>
         </section>
+
         <section class="col-sm-6">
           <!--<h2><%= t('user.label.image') %></h2>
           <p>...coming soon<br><br></p>-->
 
+          <h2><%= t('user.label.emailSettings') %></h2>
+          <div class="checkbox">
+            <%= label_tag :emails_from_orga do %>
+                <%= check_box_tag :emails_from_orga, :emails_from_orga, receive_email_from_orga(@user) %>
+                <%= t('user.label.receiveEmailsFromOrga') %>
+            <% end %>
+          </div>
+          <div class="emails-from-orga">
+            <%= f.check_box :receive_emails_about_project_weeks %>
+            <%= f.check_box :receive_emails_about_my_project_weeks %>
+            <%= f.check_box :receive_emails_about_other_projects %>
+            <%= f.check_box :receive_other_emails_from_orga %>
+          </div>
+          <%= f.check_box :receive_emails_from_other_users %>
+
           <h2><%= t('user.label.otherActions') %></h2>
           <% if (current_user == @user) %>
-            <%= link_to t('user.action.changePassword'), edit_user_registration_path,
-                        class:'btn btn-default btn-wide' %>
-            <%= link_to t('user.action.deleteAccount'), confirm_delete_user_path,
-                        class:'btn btn-default btn-wide' %>
-        <% end %>
+              <%= link_to t('user.action.changePassword'), edit_user_registration_path,
+                          class:'btn btn-default btn-wide' %>
+              <%= link_to t('user.action.deleteAccount'), confirm_delete_user_path,
+                          class:'btn btn-default btn-wide' %>
+          <% end %>
+        </section>
+      </div>
+
+      <div class="row row-sm-eq-height">
+        <section class="col-sm-12">
+          <div class="pull-right">
+            <%= link_to t('general.action.cancel'), user_path(@user), class:'btn btn-default' %>
+            <%= f.submit t('general.action.save'), class:'btn btn-default' %>
+          </div>
         </section>
       </div>
     </div>

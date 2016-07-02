@@ -11,6 +11,7 @@ sabine:
   first_name: Sabine
   last_name: Schultz
   email: sabine.schultz@example.de
+  receive_other_emails_from_orga: false
 
 admin:
   username: admin

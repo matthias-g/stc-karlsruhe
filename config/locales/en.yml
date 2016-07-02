@@ -95,7 +95,7 @@ en:
       submit: 'Send message'
       title: ''
       text: ''
-    placeholder:
+    labels:
       email: 'Email'
       subject: 'Subject'
       body: 'Message'

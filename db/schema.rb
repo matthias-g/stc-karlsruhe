@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160614133645) do
+ActiveRecord::Schema.define(version: 20160702121039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,9 +70,9 @@ ActiveRecord::Schema.define(version: 20160614133645) do
   create_table "participations", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "project_id"
-    t.boolean  "as_leader",  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "as_leader",  default: false
   end
 
   add_index "participations", ["user_id", "project_id", "as_leader"], name: "index_participations_on_user_id_and_project_id_and_as_leader", unique: true, using: :btree
@@ -188,23 +188,33 @@ ActiveRecord::Schema.define(version: 20160614133645) do
   add_index "surveys_templates", ["slug"], name: "index_surveys_templates_on_slug", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",               limit: 255
-    t.string   "first_name",             limit: 255
-    t.string   "last_name",              limit: 255
+    t.string   "username",                              limit: 255
+    t.string   "first_name",                            limit: 255
+    t.string   "last_name",                             limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  limit: 255, default: "",    null: false
-    t.string   "encrypted_password",     limit: 255, default: "",    null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                                 limit: 255, default: "",    null: false
+    t.string   "encrypted_password",                    limit: 255, default: "",    null: false
+    t.string   "reset_password_token",                  limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string   "phone",                  limit: 255, default: ""
-    t.boolean  "cleared",                            default: false
+    t.string   "phone",                                 limit: 255, default: ""
+    t.boolean  "cleared",                                           default: false
     t.string   "authentication_token"
+    t.boolean  "receive_emails_about_project_weeks",                default: true
+    t.boolean  "receive_emails_about_my_project_weeks",             default: true
+    t.boolean  "receive_emails_about_other_projects",               default: true
+    t.boolean  "receive_other_emails_from_orga",                    default: true
+    t.boolean  "receive_emails_from_other_users",                   default: true
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["receive_emails_about_my_project_weeks"], name: "index_users_on_receive_emails_about_my_project_weeks", using: :btree
+  add_index "users", ["receive_emails_about_other_projects"], name: "index_users_on_receive_emails_about_other_projects", using: :btree
+  add_index "users", ["receive_emails_about_project_weeks"], name: "index_users_on_receive_emails_about_project_weeks", using: :btree
+  add_index "users", ["receive_emails_from_other_users"], name: "index_users_on_receive_emails_from_other_users", using: :btree
+  add_index "users", ["receive_other_emails_from_orga"], name: "index_users_on_receive_other_emails_from_orga", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 

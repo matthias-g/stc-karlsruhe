@@ -11,7 +11,7 @@
       <div class="rightCol">
         <%= form.select(:sender, @senders.map{|g| [g, g]},
                  {label: t('contact.adminMail.labels.sender')}) %>
-        <%= form.select(:recipient, @recipients.map{|group| [t('contact.adminMail.groups.' + group, user_email: current_user.email), group]},
+        <%= form.select(:recipient, @recipients.map{|group| [t('contact.adminMail.groups.' + group, user_email: current_user.email, project_week: ProjectWeek.default.title), group]},
                  {label: t('contact.adminMail.labels.recipient')}) %>
         <%= form.select(:type, @types.map{|type| [t('contact.adminMail.types.' + type), type]},
                         {label: t('contact.adminMail.labels.type')}) %>

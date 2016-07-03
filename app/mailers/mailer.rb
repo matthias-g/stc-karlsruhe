@@ -29,6 +29,7 @@ class Mailer < ActionMailer::Base
 
   def admin_mail(message)
     @message = message.body
+    @type = message.type
     mail from: message.sender, bcc: message.recipient, subject: message.subject
   end
 

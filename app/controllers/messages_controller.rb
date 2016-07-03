@@ -25,7 +25,7 @@ class MessagesController < ApplicationController
                 'Serve the City Karlsruhe <no-reply@servethecity-karlsruhe.de>',
                 current_user.full_name+ ' <' + current_user.email + '>']
     @recipients = %w(current_volunteers_and_leaders current_volunteers current_leaders all_users active_users me)
-    @types = %w(about_project_weeks about_my_project_weeks about_other_projects other_email_from_orga)
+    @types = %w(about_project_weeks about_other_projects other_email_from_orga)
   end
 
   def send_admin_mail
@@ -40,7 +40,7 @@ class MessagesController < ApplicationController
       when 'all_users'
         to = User.where(cleared: false).all
       when 'active_users'
-        to = User.where(cleared: false).joins(:projects).where('participations.created_at > ? or created_at > ?', 18.months.ago, 6.months.ago) # TODO Rails 5
+        to = User.where(cleared: false).joins(:projects).where('participations.created_at > ? or participations.created_at > ?', 18.months.ago, 6.months.ago) # TODO Rails 5
       when 'me'
         to = User.where(id: current_user.id)
       else
@@ -48,9 +48,11 @@ class MessagesController < ApplicationController
     end
     case @message.type
       when 'about_project_weeks'
-        to = to.where('users.receive_emails_about_project_weeks': true)
-      when 'about_my_project_weeks'
-        to = to.where('users.receive_emails_about_my_project_weeks': true)
+        if %w(current_volunteers_and_leaders current_volunteers current_leaders).include? @message.recipient
+          to = to.where('users.receive_emails_about_my_project_weeks': true)
+        else
+          to = to.where('users.receive_emails_about_project_weeks': true)
+        end
       when 'about_other_projects'
         to = to.where('users.receive_emails_about_other_projects': true)
       when 'other_email_from_orga'

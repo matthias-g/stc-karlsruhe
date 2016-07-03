@@ -94,9 +94,9 @@ de:
         password_confirmation: 'Passwort wiederholen'
         current_password: 'Aktuelles Passwort'
         remember_me: 'merken'
-        receive_emails_about_project_weeks: Infos zu den jährlichen Projektwochen
-        receive_emails_about_my_project_weeks: Infos zu Projektwochen, an denen ich teilnehme
-        receive_emails_about_other_projects: Infos zu weiteren Serve the City Projekten
+        receive_emails_about_project_weeks: Informationen zu Projektwochen allgemein (z.B. Ankündigungen der Projektwochen)
+        receive_emails_about_my_project_weeks: Informationen zu Projektwochen, an denen ich teilnehme
+        receive_emails_about_other_projects: Informationen zu weiteren Serve the City Projekten
         receive_other_emails_from_orga: Sonstige E-Mails vom Orgateam
         receive_emails_from_other_users: Andere Nutzer können mich über ein Kontaktformular kontaktieren
       project_day:
@@ -226,16 +226,15 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       text: 'Hier kannst du projektübergreifenden Empfängergruppen eine E-Mail schreiben. Du selbst erhältst auch immer eine Kopie.'
       success: 'Die Nachricht wurde erfolgreich gesendet.'
       groups:
-        current_volunteers_and_leaders: 'Aktuelle Projektleiter und Mitarbeiter'
-        current_volunteers: 'Aktuelle Mitarbeiter'
-        current_leaders: 'Aktuelle Projektleiter'
+        current_volunteers_and_leaders: "Projektleiter und Mitarbeiter der Projektwoche %{project_week}"
+        current_volunteers: "Mitarbeiter der Projektwoche %{project_week}"
+        current_leaders: "Projektleiter der Projektwoche %{project_week}"
         all_users: 'Alle angemeldeten Benutzer'
-        active_users: 'Aktive Benutzer (Registrierung < 6m oder Projektteilnahme < 18m)'
-        me: "Mich <%{user_email}>"
+        active_users: 'Aktive Benutzer (Registrierung < 6 M oder Projektteilnahme < 18 M)'
+        me: "Ich <%{user_email}>"
       types:
-        about_project_weeks: Allgemeine Informationen zu Projektwochen
-        about_my_project_weeks: Informationen bezüglich der aktuellen Projektwoche
-        about_other_projects: Informationen zu anderen Serve the City Projekten
+        about_project_weeks: Informationen zur Projektwoche
+        about_other_projects: Informationen zu weiteren Serve the City Projekten
         other_email_from_orga: Sonstige E-Mail vom Orgateam
       labels:
         sender: 'Absender-Adresse'

@@ -6,3 +6,4 @@
 //= require jquery.Jcrop
 //= require highcharts
 //= require chartkick
+//= require trix

@@ -231,6 +231,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         current_leaders: 'Aktuelle Projektleiter'
         all_users: 'Alle angemeldeten Benutzer'
         active_users: 'Aktive Benutzer (Registrierung < 6m oder Projektteilnahme < 18m)'
+        me: "Mich <%{user_email}>"
       types:
         about_project_weeks: Allgemeine Informationen zu Projektwochen
         about_my_project_weeks: Informationen bezüglich der aktuellen Projektwoche

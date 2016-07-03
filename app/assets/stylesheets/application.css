@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require jquery.Jcrop
+ *= require trix
  *= require_self
  *= require photoswipe
  *= require jquery-ui/sortable

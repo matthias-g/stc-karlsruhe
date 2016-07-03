@@ -27,13 +27,9 @@ class Mailer < ActionMailer::Base
     mail to: recipient.email, reply_to: sender.email, subject: message.subject
   end
 
-  def generic_mail(message, bcc = nil)
+  def admin_mail(message)
     @message = message.body
-    if bcc
-      mail from: message.sender, bcc: message.recipient, subject: message.subject
-    else
-      mail from: message.sender, to: message.recipient, subject: message.subject
-    end
+    mail from: message.sender, bcc: message.recipient, subject: message.subject
   end
 
   def leaving_project_notification(user, project)

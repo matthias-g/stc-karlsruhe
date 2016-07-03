@@ -24,7 +24,7 @@ class MessagesController < ApplicationController
                 'Serve the City Karlsruhe <orga@servethecity-karlsruhe.de>',
                 'Serve the City Karlsruhe <no-reply@servethecity-karlsruhe.de>',
                 current_user.full_name+ ' <' + current_user.email + '>']
-    @recipients = %w(current_volunteers_and_leaders current_volunteers current_leaders all_users active_users)
+    @recipients = %w(current_volunteers_and_leaders current_volunteers current_leaders all_users active_users me)
     @types = %w(about_project_weeks about_my_project_weeks about_other_projects other_email_from_orga)
   end
 
@@ -41,6 +41,8 @@ class MessagesController < ApplicationController
         to = User.where(cleared: false).all
       when 'active_users'
         to = User.where(cleared: false).joins(:projects).where('participations.created_at > ? or created_at > ?', 18.months.ago, 6.months.ago) # TODO Rails 5
+      when 'me'
+        to = User.where(id: current_user.id)
       else
         to = @message.recipient.split(/\s*,\s*/)
     end
@@ -58,7 +60,7 @@ class MessagesController < ApplicationController
     end
     @message.recipient = (to.pluck(:email) + [current_user.email]).uniq.join(',')
     if @message.valid?
-      Mailer.generic_mail(@message, true).deliver_now
+      Mailer.admin_mail(@message).deliver_now
       flash[:notice] = t('contact.adminMail.success')
       redirect_to action: :admin_mail_form
     else

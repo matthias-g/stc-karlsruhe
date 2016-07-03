@@ -57,11 +57,16 @@ gem 'bootstrap_form'
 
 gem 'bootstrap-select-rails', github: 'matthias-g/bootstrap-select-rails'
 
+gem 'trix'
+
 gem 'groupdate'
 gem 'chartkick'
 
 gem 'actionview-encoded_mail_to'
 gem 'recaptcha', require: 'recaptcha/rails'
+
+gem 'premailer-rails'
+gem 'nokogiri'
 
 gem 'pg'
 

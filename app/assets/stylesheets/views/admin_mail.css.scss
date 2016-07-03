@@ -1,0 +1,42 @@
+.admin-mail-body {
+  background-color: white;
+  line-height: 1.4;
+  font-size: 16px;
+  font-family: NormalFont, Helvetica, Arial, sans-serif;
+
+  blockquote {
+    margin: 0 0 0 5px;
+    padding: 0 0 0 10px;
+    border-left: 5px solid #ccc;
+    font-size: inherit;
+  }
+
+  pre {
+    font-family: monospace;
+    font-size: 12px;
+    margin: 0;
+    padding: 10px;
+    white-space: pre-wrap;
+    background-color: #eee;
+  }
+
+  ul, ol, li {
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-left: 20px;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  a {
+    color: #2C9991;
+    text-decoration: none;
+  }
+
+}

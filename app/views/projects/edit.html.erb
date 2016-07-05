@@ -1,4 +1,4 @@
 <% content_for :pageTitle do %>
     <%= t('layout.title.projectEdit', project:@project.title) %>
 <% end %>
-<%= render :partial => "form", :locals => {:isNew => false} %>
+<%= render partial: 'form', locals: {isNew: false} %>

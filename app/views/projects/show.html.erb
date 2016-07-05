@@ -15,7 +15,7 @@
   <section class="no-print">
     <div class="typeHeader">
       <%= @project.is_subproject? ? t('project.label.subproject') : Project.model_name.human %>
-      <%= ' (' + t('project.status.hidden') + ')' if !@project.visible? %>
+      <%= ' (' + t('project.status.hidden') + ')' unless @project.visible? %>
     </div>
     <h1><%= @project.title %></h1>
   </section>
@@ -232,14 +232,14 @@
             <h3><%= Project.human_attribute_name('leaders') %></h3>
             <%= list_users(@project.leaders) %>
           </div>
-          <% if !@project.volunteers.empty? %>
+          <% unless @project.volunteers.empty? %>
             <div>
               <h3><%= t('project.label.volunteers_in_project', members: @project.volunteers.size,
                         limit: @project.desired_team_size) %></h3>
               <%= list_users(@project.volunteers) %>
             </div>
           <% end %>
-          <% if !@project.volunteers_in_subprojects.empty? %>
+          <% unless @project.volunteers_in_subprojects.empty? %>
             <div>
               <h3><%= t('project.label.volunteers_in_subprojects', members: @project.volunteers_in_subprojects.size,
                         limit: @project.aggregated_desired_team_size - @project.desired_team_size) %></h3>

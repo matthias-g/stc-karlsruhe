@@ -1,0 +1,46 @@
+<section>
+  <table class="table">
+    <tbody>
+    <tr>
+      <th>Absender</th>
+      <td><%= @message.from %></td>
+    </tr>
+    <tr>
+      <th>Empfänger</th>
+      <td><%= @message.sent? ? @message.recipient : render_recipient_group(@message.recipient, current_user) %></td>
+    </tr>
+    <tr>
+      <th>Erstellt</th>
+      <td><%= l @message.created_at, format: :short %></td>
+    </tr>
+    <tr>
+      <th>Autor</th>
+      <td><%= @message.author.full_name %></td>
+    </tr>
+    <tr>
+      <th>Betreff</th>
+      <td><%= @message.subject %></td>
+    </tr>
+    <% if @message.sent? %>
+        <tr>
+          <th>Versandt</th>
+          <td><%= l @message.sent_at, format: :short %></td>
+        </tr>
+        <tr>
+          <th>Sender</th>
+          <td><%= @message.sender.full_name %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <div class="admin-mail-body" style="background-color: transparent; padding-left: 8px;">
+    <%= @message.body.html_safe %>
+    <%= render partial: 'mailer/footer', locals: { type: @message.content_type } %>
+  </div>
+</section>
+
+<section>
+  <%= link_to t('general.action.back'), orga_messages_path, class: 'btn-default btn' %>
+  <%= link_to t('general.action.edit'), edit_orga_message_path(@message), class: 'btn-default btn' unless @message.sent? %>
+  <%= link_to t('orga_message.action.send_now'), send_message_orga_message_path(@message), class: 'btn-default btn' unless @message.sent? %>
+</section>

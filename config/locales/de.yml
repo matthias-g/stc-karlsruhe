@@ -5,20 +5,6 @@ de:
       short_date: ! '%d. %B'
       date: ! '%d. %B %Y'
 
-  activemodel:
-    errors:
-      models:
-        message:
-          attributes:
-            sender:
-             blank: 'Bitte gib deine E-Mail-Adresse an.'
-            recipient:
-             blank: 'Empfänger fehlt.'
-            subject:
-             blank: 'Betreff ist leer.'
-            body:
-             blank: 'Nachrichtenfeld ist leer.'
-
   activerecord:
     errors:
       models:
@@ -50,6 +36,7 @@ de:
         zero: Nachrichten
         one: Nachricht
         other: Nachrichten
+      orga_message: Orga-Mail
       surveys/template: 'Umfrage-Template'
       surveys/submission: 'Umfrage'
     attributes:
@@ -104,6 +91,12 @@ de:
       message:
         sender: 'Sender'
         recipient: 'Empfänger'
+        subject: 'Betreff'
+        body: 'Nachricht'
+      orga_message:
+        from: 'Absender'
+        recipient: 'Empfänger'
+        content_type: Typ
         subject: 'Betreff'
         body: 'Nachricht'
       gallery:
@@ -239,12 +232,23 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       labels:
         sender: 'Absender-Adresse'
         recipient: 'Empfängergruppe'
-        type: Typ
+        content_type: Typ
         subject: 'Betreff'
         body: 'Nachricht'
-      submit: 'Nachricht absenden'
+      save: 'Nachricht speichern'
     ownProject:
       subject: Vorschlag für eigenes Projekt
+  orga_message:
+    action:
+      write_new: Neue Mail verfassen
+      send_now: Jetzt senden
+    label:
+      write_new_mail: Neue Mail verfassen
+      edit_mail: Mail bearbeiten
+    message:
+      updated: Die Mail wurde erfolgreich geändert.
+      message_already_sent: Diese Nachricht wurde bereits versandt!
+      send_success: Die Nachricht wurde erfolgreich versandt.
 
   project:
     action:

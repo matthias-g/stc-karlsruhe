@@ -19,4 +19,10 @@ class Message
     false
   end
 
+  class << self
+    def i18n_scope
+      :activerecord
+    end
+  end
+
 end

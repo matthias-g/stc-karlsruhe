@@ -27,10 +27,42 @@ class Mailer < ActionMailer::Base
     mail to: recipient.email, reply_to: sender.email, subject: message.subject
   end
 
-  def admin_mail(message)
+  def orga_mail(message)
+    current_projects = ProjectWeek.default.projects.visible
+    case message.recipient
+      when 'current_volunteers_and_leaders'
+        to = current_projects.joins(:users).where('users.cleared': false)
+      when 'current_volunteers'
+        to = current_projects.joins(:users).where('users.cleared': false).where('participations.as_leader = false')
+      when 'current_leaders'
+        to = current_projects.joins(:users).where('users.cleared': false).where('participations.as_leader = true')
+      when 'all_users'
+        to = User.where(cleared: false).all
+      when 'active_users'
+        to = User.where(cleared: false).joins(:projects).where('participations.created_at > ? or participations.created_at > ?', 18.months.ago, 6.months.ago) # TODO Rails 5
+      when 'me'
+        to = User.where(id: message.sender.id)
+      else
+        to = message.recipient.split(/\s*,\s*/)
+    end
+    case message.content_type
+      when 'about_project_weeks'
+        if %w(current_volunteers_and_leaders current_volunteers current_leaders).include? message.recipient
+          to = to.where('users.receive_emails_about_my_project_weeks': true)
+        else
+          to = to.where('users.receive_emails_about_project_weeks': true)
+        end
+      when 'about_other_projects'
+        to = to.where('users.receive_emails_about_other_projects': true)
+      when 'other_email_from_orga'
+        to = to.where('users.receive_other_emails_from_orga': true)
+      else
+        to = to.where('users.receive_other_emails_from_orga': true)
+    end
+    recipients = (to.pluck(:email) + [message.sender.email]).uniq.join(',')
     @message = message.body
-    @type = message.type
-    mail from: message.sender, bcc: message.recipient, subject: message.subject
+    @type = message.content_type
+    mail from: message.from, bcc: recipients, subject: message.subject
   end
 
   def leaving_project_notification(user, project)

@@ -40,8 +40,11 @@ StcKarlsruhe::Application.routes.draw do
   get 'kontakt', to: 'messages#contact_mail_form', as: 'contact'
   post 'kontakt', to: 'messages#send_contact_mail'
 
-  get 'admin_mail', to: 'messages#admin_mail_form'
-  post 'admin_mail', to: 'messages#send_admin_mail'
+  resources :orga_messages, path: 'orga-mails' do
+    member do
+      get :send_message
+    end
+  end
 
   resources :projects, path: 'projekte' do
     member do

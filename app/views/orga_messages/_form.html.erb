@@ -1,0 +1,14 @@
+<section class="contact-form">
+  <%= bootstrap_form_for @message do |form| %>
+      <%= form.select :from, from_options, tabindex: 1 %>
+      <%= form.select :recipient, recipient_options, tabindex: 2 %>
+      <%= form.select :content_type, content_type_options, tabindex: 3 %>
+      <%= form.text_field :subject, tabindex: 4 %>
+      <%= form.label OrgaMessage.human_attribute_name('body') %>
+      <%= form.trix_editor :body, class: 'admin-mail-body', tabindex: 5 %>
+      <div>
+        <%= form.submit t('contact.adminMail.save'), class: 'btn-default btn', tabindex: 11 %>
+        <%= link_to t('general.action.cancel'), orga_messages_path, class: 'btn-default btn', tabindex: 12 %>
+      </div>
+  <% end %>
+</section>

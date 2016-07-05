@@ -5,7 +5,7 @@ class NewsEntryPolicy < ApplicationPolicy
   end
 
   def edit?
-    user && user.admin?
+    is_admin?
   end
 
   alias_method :new?, :edit?

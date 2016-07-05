@@ -48,6 +48,12 @@ en:
         recipient: Recipient
         subject: Subject
         body: Message
+      orga_message:
+        from: Sender
+        recipient: Recipient
+        content_type: Type
+        subject: Subject
+        body: Message
     errors:
       messages:
         blank: 'may not be blank.'

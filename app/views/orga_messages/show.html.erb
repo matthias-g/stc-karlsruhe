@@ -42,6 +42,8 @@
 <section>
   <%= link_to t('general.action.back'), orga_messages_path, class: 'btn-default btn' %>
   <%= link_to t('general.action.edit'), edit_orga_message_path(@message), class: 'btn-default btn' unless @message.sent? %>
-  <%= link_to t('general.action.delete'), orga_message_path(@message), method: :delete, class: 'btn-default btn', data: { confirm: 'Are you sure?' } if policy(@message).destroy? %>
-  <%= link_to t('orga_message.action.send_now'), send_message_orga_message_path(@message), class: 'btn-default btn' unless @message.sent? %>
+  <%= link_to t('general.action.delete'), orga_message_path(@message), method: :delete, class: 'btn-default btn',
+              data: { confirm: t('orga_message.message.really_destroy') } if policy(@message).destroy? %>
+  <%= link_to t('orga_message.action.send_now'), send_message_orga_message_path(@message), class: 'btn-default btn',
+              data: { confirm: t('orga_message.message.really_send') } unless @message.sent? %>
 </section>

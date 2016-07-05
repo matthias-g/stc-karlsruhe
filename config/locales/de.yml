@@ -253,6 +253,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       updated: Die Mail wurde erfolgreich geändert.
       message_already_sent: Diese Nachricht wurde bereits versandt!
       send_success: Die Nachricht wurde erfolgreich versandt.
+      really_destroy: Willst du die Nachricht wirklich löschen?
+      really_send: Willst du die Nachricht wirklich versenden?
 
   project:
     action:

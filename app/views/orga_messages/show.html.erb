@@ -2,32 +2,32 @@
   <table class="table">
     <tbody>
     <tr>
-      <th>Absender</th>
+      <th><%= OrgaMessage.human_attribute_name('from') %></th>
       <td><%= @message.from %></td>
     </tr>
     <tr>
-      <th>Empfänger</th>
+      <th><%= OrgaMessage.human_attribute_name('recipient') %></th>
       <td><%= @message.sent? ? @message.recipient : render_recipient_group(@message.recipient, current_user) %></td>
     </tr>
     <tr>
-      <th>Erstellt</th>
+      <th><%= OrgaMessage.human_attribute_name('created_at') %></th>
       <td><%= l @message.created_at, format: :short %></td>
     </tr>
     <tr>
-      <th>Autor</th>
+      <th><%= OrgaMessage.human_attribute_name('author') %></th>
       <td><%= @message.author.full_name %></td>
     </tr>
     <tr>
-      <th>Betreff</th>
+      <th><%= OrgaMessage.human_attribute_name('subject') %></th>
       <td><%= @message.subject %></td>
     </tr>
     <% if @message.sent? %>
         <tr>
-          <th>Versandt</th>
+          <th><%= OrgaMessage.human_attribute_name('sent_at') %></th>
           <td><%= l @message.sent_at, format: :short %></td>
         </tr>
         <tr>
-          <th>Sender</th>
+          <th><%= OrgaMessage.human_attribute_name('sender') %></th>
           <td><%= @message.sender.full_name %></td>
         </tr>
     <% end %>
@@ -42,5 +42,6 @@
 <section>
   <%= link_to t('general.action.back'), orga_messages_path, class: 'btn-default btn' %>
   <%= link_to t('general.action.edit'), edit_orga_message_path(@message), class: 'btn-default btn' unless @message.sent? %>
+  <%= link_to t('general.action.delete'), orga_message_path(@message), method: :delete, class: 'btn-default btn', data: { confirm: 'Are you sure?' } if policy(@message).destroy? %>
   <%= link_to t('orga_message.action.send_now'), send_message_orga_message_path(@message), class: 'btn-default btn' unless @message.sent? %>
 </section>

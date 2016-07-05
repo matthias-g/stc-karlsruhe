@@ -6,10 +6,10 @@
     <table class="table">
       <thead>
       <tr>
-        <th>Erstellt</th>
-        <th>Betreff</th>
-        <th>Empfänger</th>
-        <th>Versandt</th>
+        <th><%= OrgaMessage.human_attribute_name('created_at') %></th>
+        <th><%= OrgaMessage.human_attribute_name('subject') %></th>
+        <th><%= OrgaMessage.human_attribute_name('recipient') %></th>
+        <th><%= OrgaMessage.human_attribute_name('sent_at') %></th>
       </tr>
       </thead>
 

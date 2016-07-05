@@ -99,6 +99,10 @@ de:
         content_type: Typ
         subject: 'Betreff'
         body: 'Nachricht'
+        created_at: Erstellt
+        author: Autor
+        sent_at: Versandt
+        sender: Sender
       gallery:
         picture: Bilder
         title: Titel

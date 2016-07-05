@@ -11,7 +11,7 @@ class OrgaMessagePolicy < ApplicationPolicy
   alias_method :new?, :index?
   alias_method :create?, :index?
   alias_method :edit?, :index?
-  alias_method :destroy?, :index?
+  alias_method :destroy?, :update?
   alias_method :send_message?, :update?
 
 end

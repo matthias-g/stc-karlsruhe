@@ -1,4 +1,4 @@
-$ ->
+onPageLoad ->
   $('#user-view .survey form').submit (event) ->
     event.preventDefault()
     form = $(this)

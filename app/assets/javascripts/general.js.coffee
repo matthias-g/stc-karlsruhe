@@ -41,7 +41,9 @@ loadedScripts = []
 
 # register handler for page load 
 @onPageLoad = (handler) ->
-  $(document).on 'turbolinks:load', handler
+  # TODO Rails 5 http://stackoverflow.com/a/18770589
+  $(document).ready handler
+  #$(document).on 'page:load', handler
   
 # execute handler when new HTML is available (page load or ajax)
 @onNewContent = (handler) ->

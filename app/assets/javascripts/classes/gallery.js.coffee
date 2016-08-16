@@ -173,7 +173,7 @@ class @Gallery
     @photoswipe = new PhotoSwipe(@photoswipe_html, PhotoSwipeUI_Default, @items, options)
     @photoswipe.init()
     @photoswipe.listen 'close', =>
-      @slider.$PlayTo(@photoswipe.getCurrentIndex())
+      @slider.$GoTo(@photoswipe.getCurrentIndex())
     @photoswipe.listen 'beforeChange', toggleEditButtons
     toggleEditButtons()
 

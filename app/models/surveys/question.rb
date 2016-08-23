@@ -1,4 +1,4 @@
-class Surveys::Question < ActiveRecord::Base
+class Surveys::Question < ApplicationRecord
 
   belongs_to :template, class_name: 'Surveys::Template'
   has_many :answers, class_name: 'Surveys::Answer', dependent: :destroy

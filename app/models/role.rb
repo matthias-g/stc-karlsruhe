@@ -1,6 +1,6 @@
 # based on https://github.com/refinery/refinerycms/blob/master/authentication/app/models/refinery/role.rb
 
-class Role < ActiveRecord::Base
+class Role < ApplicationRecord
 
   before_validation :camelize_title
   validates :title, :presence => true, :uniqueness =>  true

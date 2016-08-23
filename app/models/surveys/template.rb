@@ -1,4 +1,4 @@
-class Surveys::Template < ActiveRecord::Base
+class Surveys::Template < ApplicationRecord
 
   has_many :questions, -> { order 'position' }, class_name: 'Surveys::Question', dependent: :destroy
   has_many :submissions, :class_name => 'Surveys::Submission', dependent: :destroy

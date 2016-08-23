@@ -1,4 +1,4 @@
-class GalleryPicture < ActiveRecord::Base
+class GalleryPicture < ApplicationRecord
 
   mount_uploader :picture, GalleryPictureUploader
   belongs_to :gallery

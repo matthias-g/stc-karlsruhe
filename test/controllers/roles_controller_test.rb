@@ -1,42 +1,42 @@
 require 'test_helper'
 
-class RolesControllerTest < ActionController::TestCase
+class RolesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @role = roles(:default)
     sign_in users(:admin)
   end
 
   test "should get new" do
-    get :new
+    get new_role_url
     assert_response :success
   end
 
   test "should create role" do
     assert_difference('Role.count') do
-      post :create, role: { title: @role.title }
+      post roles_url, params: { role: { title: @role.title } }
     end
 
     assert_redirected_to role_path(assigns(:role))
   end
 
   test "should show role" do
-    get :show, id: @role
+    get role_url(@role)
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @role
+    get edit_role_url(@role)
     assert_response :success
   end
 
   test "should update role" do
-    patch :update, id: @role, role: { title: @role.title }
+    patch role_url(@role), params: { role: { title: @role.title } }
     assert_redirected_to role_path(assigns(:role))
   end
 
   test "should destroy role" do
     assert_difference('Role.count', -1) do
-      delete :destroy, id: @role
+      delete role_url(@role)
     end
 
     assert_redirected_to roles_path

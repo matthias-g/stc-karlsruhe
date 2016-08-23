@@ -1,4 +1,4 @@
-StcKarlsruhe::Application.routes.draw do
+Rails.application.routes.draw do
 
   resources :news_entries, path: 'news' do
     member do
@@ -38,7 +38,7 @@ StcKarlsruhe::Application.routes.draw do
   resources :roles
 
   get 'kontakt', to: 'messages#contact_mail_form', as: 'contact'
-  post 'kontakt', to: 'messages#send_contact_mail'
+  post 'kontakt', to: 'messages#send_contact_mail', as: 'send_contact_mail'
 
   resources :orga_messages, path: 'orga-mails' do
     member do

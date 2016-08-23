@@ -5,9 +5,11 @@
 <% end %>
 
 <% content_for :appendToHeader do %>
-  <meta name="description" content="<%= @project.short_description %>" />
-  <meta property="og:image" content="<%= image_url(@project.picture_url) %>" />
-  <meta property="og:description" content="<%= @project.short_description %>" />
+    <meta name="description" content="<%= @project.short_description %>" />
+    <% if @project.show_picture? %>
+        <meta property="og:image" content="<%= image_url(@project.picture_url) %>" />
+    <% end %>
+    <meta property="og:description" content="<%= @project.short_description %>" />
 <% end %>
 
 <div id="project-view" <%='class=project-invisible' unless @project.visible? %>>

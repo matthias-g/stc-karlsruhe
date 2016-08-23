@@ -4,7 +4,9 @@
 
 <% content_for :appendToHeader do %>
     <meta name="description" content="<%= @news_entry.teaser %>" />
-    <meta property="og:image" content="<%= image_url(@news_entry.picture_url) %>" />
+    <% if @news_entry.show_picture? %>
+        <meta property="og:image" content="<%= image_url(@news_entry.picture_url) %>" />
+    <% end %>
     <meta property="og:description" content="<%= @news_entry.text %>" />
 <% end %>
 

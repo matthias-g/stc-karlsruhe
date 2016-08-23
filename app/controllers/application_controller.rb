@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by ignoring session
   protect_from_forgery
 
-  before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized

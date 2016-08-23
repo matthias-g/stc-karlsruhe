@@ -1,27 +1,27 @@
 require 'test_helper'
 
-class GalleriesControllerTest < ActionController::TestCase
+class GalleriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @gallery = galleries(:one)
   end
 
   test "should get index" do
     sign_in users(:admin)
-    get :index
+    get galleries_url
     assert_response :success
     assert_not_nil assigns(:galleries)
   end
 
   test "should get new" do
     sign_in users(:admin)
-    get :new
+    get new_gallery_url
     assert_response :success
   end
 
   test "should create gallery" do
     sign_in users(:admin)
     assert_difference('Gallery.count') do
-      post :create, gallery: { title: @gallery.title }
+      post galleries_url, params: { gallery: { title: @gallery.title } }
     end
 
     assert_redirected_to gallery_path(assigns(:gallery))
@@ -29,25 +29,25 @@ class GalleriesControllerTest < ActionController::TestCase
 
   test "should show gallery" do
     sign_in users(:admin)
-    get :show, id: @gallery
+    get gallery_url(@gallery)
     assert_response :success
   end
 
   test "should get edit" do
     sign_in users(:admin)
-    get :edit, id: @gallery
+    get edit_gallery_url(@gallery)
     assert_response :success
   end
 
   test "should update gallery" do
     sign_in users(:admin)
-    patch :update, id: @gallery, gallery: { title: @gallery.title }
+    patch gallery_url(@gallery), params: { gallery: { title: @gallery.title } }
     assert_redirected_to gallery_path(assigns(:gallery))
   end
 
   test "non-admin should not update gallery" do
     sign_in users(:sabine)
-    patch :update, id: @gallery, gallery: { title: @gallery.title }
+    patch gallery_url(@gallery), params: { gallery: { title: @gallery.title } }
     assert_redirected_to root_path
     assert_not_nil flash[:error]
   end
@@ -59,7 +59,7 @@ class GalleriesControllerTest < ActionController::TestCase
     project_day.save!
     sign_in users(:rolf)
     new_title = 'This is the new title'
-    patch :update, id: @gallery, gallery: { title: new_title }
+    patch gallery_url(@gallery), params: { gallery: { title: new_title } }
     assert_equal new_title, assigns(:gallery).title
     assert_redirected_to gallery_path(assigns(:gallery))
   end
@@ -71,7 +71,7 @@ class GalleriesControllerTest < ActionController::TestCase
     project_day.save!
     sign_in users(:rolf)
     new_title = 'This is the new title'
-    patch :update, id: @gallery, gallery: { title: new_title }
+    patch gallery_url(@gallery), params: { gallery: { title: new_title } }
     assert_not_equal new_title, assigns(:gallery).title
     assert_redirected_to root_path
   end
@@ -83,7 +83,7 @@ class GalleriesControllerTest < ActionController::TestCase
     project_day.save!
     sign_in users(:admin)
     new_title = 'This is the new title'
-    patch :update, id: @gallery, gallery: { title: new_title }
+    patch gallery_url(@gallery), params: { gallery: { title: new_title } }
     assert_equal new_title, assigns(:gallery).title
     assert_redirected_to gallery_path(assigns(:gallery))
   end
@@ -91,15 +91,15 @@ class GalleriesControllerTest < ActionController::TestCase
   test "update gallery redirects to referer" do
     @gallery = galleries(:four)
     sign_in users(:rolf)
-    @request.env['HTTP_REFERER'] =project_path(@gallery.projects.first)
-    patch :update, id: @gallery, gallery: { title: @gallery.title }
-    assert_redirected_to project_path(assigns(:gallery).projects.first)
+    referer = project_path(@gallery.projects.first)
+    patch gallery_url(@gallery), params: { gallery: { title: @gallery.title } }, headers: { 'HTTP_REFERER': referer}
+    assert_redirected_to referer
   end
 
   test "should destroy gallery" do
     sign_in users(:admin)
     assert_difference('Gallery.count', -1) do
-      delete :destroy, id: @gallery
+      delete gallery_url(@gallery)
     end
 
     assert_redirected_to galleries_path

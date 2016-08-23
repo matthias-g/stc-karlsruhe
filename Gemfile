@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.2.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.4'
+gem 'rails', '~> 5.0.0'
 
 gem 'rails-i18n'
 
@@ -35,6 +35,9 @@ gem 'turbolinks', '~> 2.5.3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
+
+# Use Redis adapter to run Action Cable in production
+# gem 'redis', '~> 3.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -83,12 +86,23 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano3-unicorn'
 
+  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
+  gem 'listen', '~> 3.0.5'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener'
   gem 'better_errors'
   gem 'binding_of_caller'
 end
 
 group :test do
+  gem 'rails-controller-testing'
   gem 'simplecov', require: false
+end
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platform: :mri
 end

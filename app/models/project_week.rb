@@ -1,4 +1,4 @@
-class ProjectWeek < ActiveRecord::Base
+class ProjectWeek < ApplicationRecord
   validates_uniqueness_of :title
 
   has_many :days, class_name: 'ProjectDay'
@@ -7,7 +7,7 @@ class ProjectWeek < ActiveRecord::Base
   scope :default, -> { where(default: true).first }
 
   def active_user_count
-    projects.visible.joins(:users).select(:user_id).uniq.count
+    projects.visible.joins(:users).select(:user_id).distinct.count
   end
 
   def vacancy_count

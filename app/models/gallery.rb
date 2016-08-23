@@ -1,4 +1,4 @@
-class Gallery < ActiveRecord::Base
+class Gallery < ApplicationRecord
 
   has_many :gallery_pictures, dependent: :destroy
   accepts_nested_attributes_for :gallery_pictures

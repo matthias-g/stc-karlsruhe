@@ -1,28 +1,28 @@
 require 'test_helper'
 
-class OrgaMessagesControllerTest < ActionController::TestCase
+class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @message = orga_messages(:one)
   end
 
   test "should get index" do
     sign_in users(:admin)
-    get :index
+    get orga_messages_url
     assert_response :success
     assert_not_nil assigns(:messages)
   end
 
   test "should get new" do
     sign_in users(:admin)
-    get :new
+    get new_orga_message_url
     assert_response :success
   end
 
   test "should create orga_message" do
     sign_in users(:admin)
     assert_difference('OrgaMessage.count') do
-      post :create, orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
-                                    subject: @message.subject, body: @message.body}
+      post orga_messages_url, params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
+                                    subject: @message.subject, body: @message.body} }
     end
 
     assert_redirected_to orga_message_path(assigns(:message))
@@ -30,82 +30,82 @@ class OrgaMessagesControllerTest < ActionController::TestCase
 
   test "should show orga_message" do
     sign_in users(:admin)
-    get :show, id: @message
+    get orga_message_url(@message)
     assert_response :success
   end
 
   test "should get edit" do
     sign_in users(:admin)
-    get :edit, id: @message
+    get edit_orga_message_url(@message)
     assert_response :success
   end
 
   test "should update orga_message" do
     sign_in users(:admin)
-    patch :update, id: @message, orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
-                                                  subject: @message.subject, body: @message.body}
+    patch orga_message_url(@message), params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
+                                                  subject: @message.subject, body: @message.body} }
     assert_redirected_to orga_message_path(assigns(:message))
   end
 
   test "should destroy orga_message" do
     sign_in users(:admin)
     assert_difference('OrgaMessage.count', -1) do
-      delete :destroy, id: @message
+      delete orga_message_url(@message)
     end
     assert_redirected_to orga_messages_path
   end
 
   test "don't do anything for not logged in users" do
-    get :index
+    get orga_messages_url
     assert_redirected_to login_or_register_url
-    get :new
+    get new_orga_message_url
     assert_redirected_to login_or_register_url
     assert_no_difference 'OrgaMessage.count' do
-      post :create, orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
-                                    subject: @message.subject, body: @message.body}
+      post orga_messages_url, params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
+                                    subject: @message.subject, body: @message.body} }
     end
     assert_redirected_to login_or_register_url
-    get :show, id: @message
+    get orga_message_url(@message)
     assert_redirected_to login_or_register_url
-    get :edit, id: @message
+    get edit_orga_message_url(@message)
     assert_redirected_to login_or_register_url
-    patch :update, id: @message, orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
-                                                 subject: @message.subject, body: @message.body}
+    patch orga_message_url(@message), params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
+                                                 subject: @message.subject, body: @message.body} }
     assert_redirected_to login_or_register_url
     assert_no_difference 'OrgaMessage.count' do
-      delete :destroy, id: @message
+      delete orga_message_url(@message)
     end
     assert_redirected_to login_or_register_url
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
-      get :send_message, id: @message
+      get send_message_orga_message_url(@message)
     end
     assert_redirected_to login_or_register_url
   end
 
   test "don't do anything for non admins" do
     sign_in users(:rolf)
-    get :index
+    get orga_messages_url
     assert_redirected_to root_url
-    get :new
+    get new_orga_message_url
     assert_redirected_to root_url
     assert_no_difference 'OrgaMessage.count' do
-      post :create, orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
-                                    subject: @message.subject, body: @message.body}
+      post orga_messages_url, params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
+                                                        subject: @message.subject, body: @message.body} }
     end
     assert_redirected_to root_url
-    get :show, id: @message
+    get orga_message_url(@message)
     assert_redirected_to root_url
-    get :edit, id: @message
+    get edit_orga_message_url(@message)
     assert_redirected_to root_url
-    patch :update, id: @message, orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
-                                                 subject: @message.subject, body: @message.body}
+    patch orga_message_url(@message), params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
+                                                                subject: @message.subject, body: @message.body} }
     assert_redirected_to root_url
     assert_no_difference 'OrgaMessage.count' do
-      delete :destroy, id: @message
+      delete orga_message_url(@message)
     end
     assert_redirected_to root_url
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
-      get :send_message, id: @message
+      get send_message_orga_message_url(@message)
     end
     assert_redirected_to root_url
   end
@@ -113,7 +113,7 @@ class OrgaMessagesControllerTest < ActionController::TestCase
   test "send mail about project weeks to all users" do
     sign_in users(:admin)
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
-      get :send_message, id: @message
+      get send_message_orga_message_url(@message)
     end
     assert_redirected_to orga_message_path(assigns(:message))
     assert_equal users(:admin).id, assigns(:message).sender.id
@@ -127,7 +127,7 @@ class OrgaMessagesControllerTest < ActionController::TestCase
   test "send other email from orga to all users" do
     sign_in users(:admin)
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
-      get :send_message, id: orga_messages(:two)
+      get send_message_orga_message_url(orga_messages(:two))
     end
     assert_redirected_to orga_message_path(assigns(:message))
     assert_equal users(:admin).id, assigns(:message).sender.id

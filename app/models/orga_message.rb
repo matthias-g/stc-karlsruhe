@@ -1,4 +1,4 @@
-class OrgaMessage < ActiveRecord::Base
+class OrgaMessage < ApplicationRecord
   include OrgaMessagesHelper
 
   belongs_to :author, class_name: 'User'

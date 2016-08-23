@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Api::GalleriesControllerTest < ActionController::TestCase
+class Api::GalleriesControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

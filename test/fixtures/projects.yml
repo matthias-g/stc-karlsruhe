@@ -1,5 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# TODO 'Use YAML to DRY Out Your Fixtures' http://chriskottom.com/blog/2014/11/fixing-fixtures/
+
 one:
   title: Kostenlose Fahrradreparatur in der Innenstadt
   short_description: Hast du Lust auf ein Projekt unter freiem Himmel? Wir bieten eine kostenlose Fahrradreparatur an.
@@ -57,3 +59,65 @@ four:
   project_week: one
   gallery: four
   days: one
+
+kindergarten-party:
+  title: Fest im Kindergarten
+  description: In diesem Projekt organisieren wir ein Fest für die Kinder eines Kindergartens.
+  visible: true
+  desired_team_size: 2
+  project_week: one
+  gallery: five
+
+kindergarten-kitchen:
+  title: Küche für Kindergarten-Fest
+  description: Wir kochen für das Fest.
+  visible: true
+  desired_team_size: 5
+  project_week: one
+  parent_project: kindergarten-party
+  gallery: six
+
+kindergarten-music:
+  title: Musik bei Kindergarten-Fest
+  description: Wir machen Musik beim Fest.
+  visible: true
+  desired_team_size: 3
+  project_week: one
+  parent_project: kindergarten-party
+  gallery: seven
+
+closed:
+  title: Geschlossenes Projekt
+  status: closed
+  desired_team_size: 5
+
+closed_parent_project:
+  title: Geschlossenes Überprojekt
+  status: closed
+  desired_team_size: 5
+
+closed_subproject:
+  title: Geschlossenes Unterprojekt
+  status: closed
+  parent_project: closed_parent_project
+  desired_team_size: 5
+
+full:
+  title: Volles Projekt
+  status: full
+  desired_team_size: 1
+
+soon_full:
+  title: Volles Projekt
+  status: soon_full
+  desired_team_size: 3
+
+full_but_closed:
+  title: Volles Projekt
+  status: closed
+  desired_team_size: 1
+
+soon_full_but_closed:
+  title: Volles Projekt
+  status: closed
+  desired_team_size: 3

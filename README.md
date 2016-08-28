@@ -2,6 +2,7 @@ Serve the City Karlsruhe
 ========================
 
 [![Dependency Status](https://gemnasium.com/matthias-g/stc-karlsruhe.svg)](https://gemnasium.com/matthias-g/stc-karlsruhe)
+[![Test Coverage](https://codeclimate.com/github/matthias-g/stc-karlsruhe/badges/coverage.svg)](https://codeclimate.com/github/matthias-g/stc-karlsruhe/coverage)
 
 This is the software running at [servethecity-karlsruhe.de](https://servethecity-karlsruhe.de) used for managing
 projects and volunteers during a project week of Serve the City Karlsruhe.

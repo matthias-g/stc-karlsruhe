@@ -106,6 +106,7 @@ end
 group :test do
   gem 'rails-controller-testing'
   gem 'simplecov', require: false
+  gem "codeclimate-test-reporter", require: nil
 end
 
 group :development, :test do

@@ -1,11 +1,11 @@
 GIT
-  remote: git://github.com/matthias-g/bootstrap-select-rails.git
+  remote: https://github.com/matthias-g/bootstrap-select-rails.git
   revision: 1314664b5962ecbf1aaea107b1856487ebc07896
   specs:
     bootstrap-select-rails (1.10.0)
 
 GIT
-  remote: git://github.com/matthias-g/jssorslider-rails.git
+  remote: https://github.com/matthias-g/jssorslider-rails.git
   revision: 6e43adc053dc7eefe28ab14e8950315c181a0019
   specs:
     jssorslider-rails (21.1.5)
@@ -72,7 +72,7 @@ GEM
     bootstrap_form (2.5.0)
     builder (3.2.2)
     byebug (9.0.5)
-    capistrano (3.6.0)
+    capistrano (3.6.1)
       airbrussh (>= 1.0.0)
       capistrano-harrow
       i18n
@@ -264,7 +264,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
-    trix (0.9.7)
+    trix (0.9.9)
       rails
     turbolinks (2.5.3)
       coffee-rails
@@ -344,4 +344,4 @@ RUBY VERSION
    ruby 2.2.5p319
 
 BUNDLED WITH
-   1.12.3
+   1.12.5

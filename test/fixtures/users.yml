@@ -26,3 +26,21 @@ deleted:
   last_name: Away
   email: deleted@nothing.com
   cleared: true
+
+peter:
+  username: peter
+  first_name: Peter
+  last_name: Petersen
+  email: peter@peter.sen
+
+lea:
+  username: lea
+  first_name: Lea
+  last_name: Lustig
+  email: lea@lustig.de
+
+birgit:
+  username: birgit
+  first_name: Birgit
+  last_name: Bender
+  email: birgit@mail.de

@@ -96,7 +96,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'volunteer should enter project' do
-    user = users(:sabine)
+    user = users(:peter)
     sign_in user
     assert_not @project.has_volunteer?(user)
     get enter_project_url(@project)
@@ -106,7 +106,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'volunteer should leave project' do
-    user = users(:sabine)
+    user = users(:peter)
     sign_in user
     @project.add_volunteer(user)
     assert @project.has_volunteer?(user)
@@ -116,7 +116,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'send notification when volunteer leaves project ' do
-    user = users(:sabine)
+    user = users(:peter)
     sign_in user
     @project.add_volunteer(user)
     assert @project.has_volunteer?(user)

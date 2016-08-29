@@ -1,7 +1,13 @@
 require 'test_helper'
 
 class Api::ProjectsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @project = projects(:one)
+  end
+
+  test 'should show visible project' do
+    assert @project.visible
+    get project_url(@project)
+    assert_response :success
+  end
 end

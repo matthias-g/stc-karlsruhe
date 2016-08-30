@@ -61,7 +61,7 @@ class GalleryPictureUploader < CarrierWave::Uploader::Base
 
   private
 
-  def store_dimensions param
+  def store_dimensions(_params)
     if file && model
       width, height = ::MiniMagick::Image.open(file.file)[:dimensions]
       desktop_width, desktop_height = ::MiniMagick::Image.open(model.picture.desktop.file.file)[:dimensions]

@@ -24,8 +24,7 @@ class Project < ApplicationRecord
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
-
-
+  
   def volunteers
     users.only_volunteers
   end

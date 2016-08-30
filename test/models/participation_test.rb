@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ParticipationTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'active user count' do
+    assert_equal 5, Participation.active_user_count
+  end
 end

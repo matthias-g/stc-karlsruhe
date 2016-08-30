@@ -3,7 +3,14 @@
 one:
   title: MyString
   project_week: one
+  date: <%= '2015-05-07'.to_date %>
 
 two:
   title: MyString
   project_week: one
+  date: <%= '2015-05-08'.to_date %>
+
+three:
+  title: MyString
+  project_week: one
+  date: <%= '2015-05-09'.to_date %>

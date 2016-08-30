@@ -3,5 +3,8 @@
 admin:
   title: admin
 
+photographer:
+  title: photographer
+
 default:
   title: default

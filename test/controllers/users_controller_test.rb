@@ -5,4 +5,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user = users(:rolf)
   end
 
+  # TODO test that clear! is persisted with save!
+
 end

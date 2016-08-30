@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  template_id: 1
+  template: one
   text: MyText
   answer_options: MyText
   question_type: 1
@@ -9,7 +9,7 @@ one:
   is_subquestion: true
 
 two:
-  template_id: 1
+  template: one
   text: MyText
   answer_options: MyText
   question_type: 1

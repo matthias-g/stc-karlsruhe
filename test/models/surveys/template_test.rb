@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Surveys::SurveyAnswerTest < ActiveSupport::TestCase
+class Surveys::TemplateTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

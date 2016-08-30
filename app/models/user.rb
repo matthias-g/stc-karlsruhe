@@ -33,7 +33,8 @@ class User < ApplicationRecord
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
+    login = conditions.delete(:login)
+    if login
       where(conditions.to_hash).where(['lower(username) = :value OR lower(email) = :value', { :value => login.downcase }]).first
     else
       conditions[:email].downcase! if conditions[:email]
@@ -91,10 +92,6 @@ class User < ApplicationRecord
 
   def set_default_username_if_blank!  # not thread safe
     return unless username.blank?
-
-    def username_exists_in_database? username
-      User.where('lower(username) = ?', username.downcase).count > 0 || !USERNAME_FORMAT.match(username)
-    end
     possible_usernames = [first_name, "#{first_name}#{last_name.first}", "#{first_name}#{last_name}"]
     possible_usernames.each { |new_name|
       unless username_exists_in_database? new_name
@@ -113,6 +110,10 @@ class User < ApplicationRecord
         return new_name
       end
     end
+  end
+
+  def username_exists_in_database? username
+    User.where('lower(username) = ?', username.downcase).count > 0 || !USERNAME_FORMAT.match(username)
   end
 
 end

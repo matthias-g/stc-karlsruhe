@@ -1,5 +1,7 @@
 class NewsEntryImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
+  include Croppable
+
   storage :file
 
   version :thumb do
@@ -29,25 +31,5 @@ class NewsEntryImageUploader < CarrierWave::Uploader::Base
   def extension_whitelist
     %w(jpg jpeg gif png)
   end
-
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
-
-  def crop_pic
-    if model.crop_x.present?
-      resize_to_limit(500, 500)
-      manipulate! do |img|
-        x = model.crop_x
-        y = model.crop_y
-        w = model.crop_w
-        h = model.crop_h
-        img.crop "#{w}x#{h}+#{x}+#{y}"
-        img
-      end
-    end
-  end
-
-
 
 end

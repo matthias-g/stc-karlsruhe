@@ -1,28 +1,25 @@
 class Project < ApplicationRecord
 
+  include PhotoGallery
+  include CroppablePicture
+
   has_many :participations, dependent: :destroy
   has_many :users, through: :participations
   has_and_belongs_to_many :days, class_name: 'ProjectDay'
   belongs_to :project_week
   has_many :subprojects, class_name: 'Project', foreign_key: :parent_project_id
   belongs_to :parent_project, class_name: 'Project', foreign_key: :parent_project_id
-  belongs_to :gallery, dependent: :destroy
 
   validates_presence_of :title, :desired_team_size
   validates :desired_team_size, numericality: {only_integer: true, greater_than_or_equal_to: 0}
   before_save :adjust_status
   after_save :adjust_parent_status
-  before_create :create_gallery!
 
   scope :visible,  -> { where(projects: {visible: true}) }
   scope :toplevel, -> { where(parent_project_id: nil) }
   scope :active,   -> { visible.where('status <> ?', Project.statuses[:closed]) }
 
   enum status: { open: 1, soon_full: 2, full: 3, closed: 4 }
-
-  mount_uploader :picture, ImageUploader
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-  #after_update :crop_picture
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
@@ -113,14 +110,6 @@ class Project < ApplicationRecord
     save
   end
 
-  def crop_picture(x,y,w,h,version)
-    self.crop_x = x
-    self.crop_y = y
-    self.crop_w = w
-    self.crop_h = h
-    picture.recreate_versions!(version)
-  end
-
 
 
   def has_free_places?
@@ -129,10 +118,6 @@ class Project < ApplicationRecord
 
   def is_subproject?
     parent_project != nil
-  end
-
-  def show_picture?
-    picture_source && !picture_source.empty? && picture
   end
 
 
@@ -166,10 +151,6 @@ class Project < ApplicationRecord
 
   def adjust_parent_status
     parent_project.save if parent_project # adjusts status
-  end
-
-  def create_gallery!
-    self.gallery = Gallery.create!
   end
 
 end

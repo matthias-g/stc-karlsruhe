@@ -15,13 +15,16 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Role.count') do
       post roles_url, params: { role: { title: @role.title } }
     end
-
-    assert_redirected_to role_path(assigns(:role))
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+    assert_select '#title', 'Default'
   end
 
   test "should show role" do
     get role_url(@role)
     assert_response :success
+    assert_select '#title', @role.title
   end
 
   test "should get edit" do
@@ -30,8 +33,12 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update role" do
-    patch role_url(@role), params: { role: { title: @role.title } }
-    assert_redirected_to role_path(assigns(:role))
+    patch role_url(@role), params: { role: { title: 'New title' } }
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+    assert_equal 'New title', @role.reload.title
+    assert_select '#title', @role.title
   end
 
   test "should destroy role" do

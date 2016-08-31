@@ -9,7 +9,7 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:admin)
     get orga_messages_url
     assert_response :success
-    assert_not_nil assigns(:messages)
+    assert_select 'tbody tr', 3
   end
 
   test "should get new" do
@@ -24,8 +24,10 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
       post orga_messages_url, params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
                                     subject: @message.subject, body: @message.body} }
     end
-
-    assert_redirected_to orga_message_path(assigns(:message))
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+    assert_select '#subject', @message.subject
   end
 
   test "should show orga_message" do
@@ -43,8 +45,9 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
   test "should update orga_message" do
     sign_in users(:admin)
     patch orga_message_url(@message), params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
-                                                  subject: @message.subject, body: @message.body} }
-    assert_redirected_to orga_message_path(assigns(:message))
+                                                  subject: 'new subject', body: @message.body} }
+    assert_redirected_to orga_message_path(@message.reload)
+    assert_equal 'new subject', @message.subject
   end
 
   test "should destroy orga_message" do
@@ -115,9 +118,9 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
       get send_message_orga_message_url(@message)
     end
-    assert_redirected_to orga_message_path(assigns(:message))
-    assert_equal users(:admin).id, assigns(:message).sender.id
-    assert assigns(:message).sent?
+    assert_redirected_to orga_message_path(@message.reload)
+    assert_equal users(:admin).id, @message.sender.id
+    assert @message.sent?
     mail = ActionMailer::Base.deliveries.last
     assert_equal 6, mail.bcc.count
     assert (not mail.bcc.include? users(:deleted).email)
@@ -126,12 +129,13 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "send other email from orga to all users" do
     sign_in users(:admin)
+    message = orga_messages(:two)
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
-      get send_message_orga_message_url(orga_messages(:two))
+      get send_message_orga_message_url(message)
     end
-    assert_redirected_to orga_message_path(assigns(:message))
-    assert_equal users(:admin).id, assigns(:message).sender.id
-    assert assigns(:message).sent?
+    assert_redirected_to orga_message_path(message.reload)
+    assert_equal users(:admin).id, message.sender.id
+    assert message.sent?
     mail = ActionMailer::Base.deliveries.last
     assert_equal 5, mail.bcc.count
     assert (not mail.bcc.include? users(:deleted).email)

@@ -19,7 +19,7 @@
     </tr>
     <tr>
       <th><%= OrgaMessage.human_attribute_name('subject') %></th>
-      <td><%= @message.subject %></td>
+      <td id="subject"><%= @message.subject %></td>
     </tr>
     <% if @message.sent? %>
         <tr>

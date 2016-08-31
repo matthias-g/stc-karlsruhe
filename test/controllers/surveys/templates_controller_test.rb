@@ -9,7 +9,7 @@ class Surveys::TemplatesControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:admin)
     get surveys_templates_url
     assert_response :success
-    assert_not_nil assigns(:templates)
+    assert_select '.list-view ul li', 2
   end
 
   test "should get new" do
@@ -23,8 +23,10 @@ class Surveys::TemplatesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Surveys::Template.count') do
       post surveys_templates_url, params: { surveys_template: { title: @template.title } }
     end
-
-    assert_redirected_to surveys_template_path(assigns(:template))
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+    assert_select 'h1', @template.title
   end
 
   test "should show surveys_template" do
@@ -46,8 +48,12 @@ class Surveys::TemplatesControllerTest < ActionDispatch::IntegrationTest
 
   test "should update surveys_template" do
     sign_in users(:admin)
-    patch surveys_template_url(@template), params: { surveys_template: {title: @template.title } }
-    assert_redirected_to surveys_template_path(assigns(:template))
+    patch surveys_template_url(@template), params: { surveys_template: {title: 'new title' } }
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+    assert_equal 'new title', @template.reload.title
+    assert_select 'h1', 'new title'
   end
 
   test "should destroy surveys_template" do

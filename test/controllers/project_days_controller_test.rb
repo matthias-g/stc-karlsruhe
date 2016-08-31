@@ -9,7 +9,7 @@ class ProjectDaysControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get project_days_url
     assert_response :success
-    assert_not_nil assigns(:project_days)
+    assert_select 'tbody tr', 3
   end
 
   test "should get new" do
@@ -21,8 +21,10 @@ class ProjectDaysControllerTest < ActionDispatch::IntegrationTest
     assert_difference('ProjectDay.count') do
       post project_days_url, params: { project_day: { title: @project_day.title } }
     end
-
-    assert_redirected_to project_day_path(assigns(:project_day))
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+    assert_select 'h1', @project_day.title
   end
 
   test "should show project_day" do
@@ -36,8 +38,9 @@ class ProjectDaysControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update project_day" do
-    patch project_day_url(@project_day), params: { project_day: { title: @project_day.title } }
-    assert_redirected_to project_day_path(assigns(:project_day))
+    patch project_day_url(@project_day), params: { project_day: { title: 'new title' } }
+    assert_redirected_to project_day_path(@project_day.reload)
+    assert_equal 'new title', @project_day.title
   end
 
   test "should destroy project_day" do

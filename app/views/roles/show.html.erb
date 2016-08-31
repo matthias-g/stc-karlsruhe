@@ -5,7 +5,7 @@
 <section>
     <p>
       <strong><%= t('role.title') %></strong>
-      <%= @role.title %>
+      <span id="title"><%= @role.title %></span>
     </p>
 
     <%= link_to t('general.action.edit'), edit_role_path(@role) %> |

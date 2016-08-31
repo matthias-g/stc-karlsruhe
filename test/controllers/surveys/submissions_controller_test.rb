@@ -9,7 +9,7 @@ class Surveys::SubmissionsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:admin)
     get surveys_template_surveys_submissions_url(@surveys_submission.template_id)
     assert_response :success
-    assert_not_nil assigns(:submissions)
+    assert_select 'table tr', 2
   end
 
   test "should get new" do

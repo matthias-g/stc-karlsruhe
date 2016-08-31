@@ -74,7 +74,13 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:rolf)
     patch project_url(@project), params: { project: { description: 'New Description', title: @project.title, desired_team_size: @project.desired_team_size } }
     assert_equal I18n.t('project.message.updated'), flash[:notice]
-    assert_redirected_to project_path(assigns(:project))
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+    @project.reload
+    assert_select 'h1', @project.title
+    assert_equal 'New Description', @project.description
+    assert_select '.description', 'New Description'
   end
 
   test 'should not destroy project if no user logged in' do

@@ -9,7 +9,7 @@ class GalleryPicturesControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get gallery_pictures_url
     assert_response :success
-    assert_not_nil assigns(:gallery_pictures)
+    assert_select 'tbody tr', 2
   end
 
   test "should get new" do
@@ -21,8 +21,9 @@ class GalleryPicturesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('GalleryPicture.count') do
       post gallery_pictures_url, params: { gallery_picture: { gallery_id: @gallery_picture.gallery_id, picture: @gallery_picture.picture } }
     end
-
-    assert_redirected_to gallery_picture_path(assigns(:gallery_picture))
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
   end
 
   test "should show gallery_picture" do

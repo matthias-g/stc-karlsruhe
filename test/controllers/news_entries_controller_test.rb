@@ -8,7 +8,7 @@ class NewsEntriesControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get news_entries_url
     assert_response :success
-    assert_not_nil assigns(:news_entries)
+    assert_select '.news-teaser', 2
   end
 
   test "should show teaser in index if available" do
@@ -34,8 +34,10 @@ class NewsEntriesControllerTest < ActionDispatch::IntegrationTest
                                         text: @news_entry.text, title: @news_entry.title,
                                         category: @news_entry.category, visible: @news_entry.visible } }
     end
-
-    assert_redirected_to news_entry_path(assigns(:news_entry))
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+    assert_select 'h1', @news_entry.title
   end
 
   test "should show news_entry" do
@@ -53,9 +55,10 @@ class NewsEntriesControllerTest < ActionDispatch::IntegrationTest
   test "should update news_entry" do
     sign_in users(:admin)
     patch news_entry_url(@news_entry), params: { news_entry: { picture: @news_entry.picture, teaser: @news_entry.teaser,
-                                                  text: @news_entry.text, title: @news_entry.title,
+                                                  text: @news_entry.text, title: 'new title',
                                                   category: @news_entry.category, visible: @news_entry.visible } }
-    assert_redirected_to news_entry_path(assigns(:news_entry))
+    assert_redirected_to news_entry_path(@news_entry.reload)
+    assert_equal 'new title', @news_entry.title
   end
 
   test "should destroy news_entry" do

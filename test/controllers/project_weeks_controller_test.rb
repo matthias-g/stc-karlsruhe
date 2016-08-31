@@ -9,7 +9,7 @@ class ProjectWeeksControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:admin)
     get project_weeks_url
     assert_response :success
-    assert_not_nil assigns(:project_weeks)
+    assert_select 'tbody tr', 2
   end
 
   test "should get new" do
@@ -21,15 +21,18 @@ class ProjectWeeksControllerTest < ActionDispatch::IntegrationTest
   test "should create project_week" do
     sign_in users(:admin)
     assert_difference('ProjectWeek.count') do
-      post project_weeks_url, params: { project_week: { default: false, title: 'First project week' } }
+      post project_weeks_url, params: { project_week: { default: false, title: '2020' } }
     end
-
-    assert_redirected_to project_week_path(assigns(:project_week))
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+    assert_select 'h1', 'Projektwoche 2020'
   end
 
   test "should show project_week" do
     get project_week_url(@project_week)
     assert_response :success
+    assert_select 'h1', 'Projektwoche 2015'
   end
 
   test "project should show short description if available" do
@@ -50,8 +53,11 @@ class ProjectWeeksControllerTest < ActionDispatch::IntegrationTest
 
   test "should update project_week" do
     sign_in users(:admin)
-    patch project_week_url(@project_week), params: { project_week: { default: @project_week.default, title: @project_week.title } }
-    assert_redirected_to project_week_path(assigns(:project_week))
+    patch project_week_url(@project_week), params: { project_week: { default: @project_week.default, title: '2020' } }
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+    assert_select 'h1', 'Projektwoche 2020'
   end
 
   test "should destroy project_week" do
@@ -60,6 +66,6 @@ class ProjectWeeksControllerTest < ActionDispatch::IntegrationTest
       delete project_week_url(@project_week)
     end
 
-    assert_redirected_to project_weeks_path
+    assert_response :redirect
   end
 end

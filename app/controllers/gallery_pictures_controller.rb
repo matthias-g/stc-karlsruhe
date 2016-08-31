@@ -23,6 +23,7 @@ class GalleryPicturesController < ApplicationController
 
   def create
     @gallery_picture = GalleryPicture.new(gallery_picture_params)
+    @gallery_picture.uploader = current_user
     @gallery_picture.save
     respond_with(@gallery_picture)
   end

@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(version: 20160704161940) do
     t.index ["visible"], name: "index_gallery_pictures_on_visible", using: :btree
   end
 
+  create_table "leaderships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["user_id", "project_id"], name: "index_leaderships_on_user_id_and_project_id", unique: true, using: :btree
+  end
+
   create_table "news_entries", force: :cascade do |t|
     t.string   "title"
     t.string   "teaser"
@@ -79,10 +87,8 @@ ActiveRecord::Schema.define(version: 20160704161940) do
   create_table "participations", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "project_id"
-    t.boolean  "as_leader",  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["user_id", "project_id", "as_leader"], name: "index_participations_on_user_id_and_project_id_and_as_leader", unique: true, using: :btree
   end
 
   create_table "project_days", force: :cascade do |t|

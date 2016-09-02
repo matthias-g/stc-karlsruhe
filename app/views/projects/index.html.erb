@@ -14,7 +14,10 @@
       <div><%= Project.model_name.human(count: Project.visible.count) %></div>
     </div>
     <div class="infobox">
-      <span><%= Participation.active_user_count %></span>
+      <span><%= User.joins('LEFT JOIN "participations" ON "participations"."user_id" = "users"."id"')
+                      .joins('LEFT JOIN "leaderships" ON "leaderships"."user_id" = "users"."id"')
+                      .joins('INNER JOIN "projects" ON "projects"."id" = "leaderships"."project_id" OR "projects"."id" = "participations"."project_id"')
+                      .where('projects.visible': true).uniq.count %></span>
       <div><%= t('user.label.countActive') %></div>
     </div>
   </div>
@@ -67,11 +70,11 @@
           <div class="project-image">
             <%= link_to project do %>
                 <% if project.show_picture? && project.picture.file %>
-                    <%= image_tag project.picture_url(:listview), lazy:true %>
+                    <%= image_tag project.picture_url(:project_list), lazy:true %>
                 <% else %>
                     <%= image_tag 'placeholder.svg' %>
                 <% end %>
-                <div class="project-status <%= project.status %>">
+                <div class="project-status status_<%= project.status %>">
                   <%= t "project.status.#{project.status}" %>
                 </div>
             <% end %>

@@ -1,4 +1,4 @@
-class Participation < ApplicationRecord
+class Leadership < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
 

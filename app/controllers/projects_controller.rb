@@ -64,7 +64,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    respond_with(@project)
+    respond_with(@project.project_week)
   end
 
   def edit_leaders

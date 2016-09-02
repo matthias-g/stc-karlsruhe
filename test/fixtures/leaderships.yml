@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+rolf-at-one:
+  user: rolf
+  project: one
+
+rolf-at-three:
+  user: rolf
+  project: three
+
+rolf-at-four:
+  user: rolf
+  project: four
+
+rolf-at-kindergarten-party:
+  user: rolf
+  project: kindergarten-party
+
+birgit-at-kindergarten-music:
+  user: birgit
+  project: kindergarten-music

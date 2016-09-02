@@ -1,71 +1,37 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-rolf-at-one:
-  user: rolf
-  project: one
-  as_leader: true
-
 sabine-at-two:
   user: sabine
   project: two
-  as_leader: false
-
-rolf-at-three:
-  user: rolf
-  project: three
-  as_leader: true
-
-rolf-at-four:
-  user: rolf
-  project: four
-  as_leader: true
 
 sabine-at-bikerepair:
   user: sabine
   project: one
-  as_leader: false
-
-rolf-at-kindergarten-party:
-  user: rolf
-  project: kindergarten-party
-  as_leader: true
 
 sabine-at-kindergarten-party:
   user: sabine
   project: kindergarten-party
-  as_leader: false
 
 lea-at-kindergarten-music:
   user: lea
   project: kindergarten-music
-  as_leader: false
-
-birgit-at-kindergarten-music:
-  user: birgit
-  project: kindergarten-music
-  as_leader: true
 
 peter-at-kindergarten-kitchen:
   user: peter
   project: kindergarten-kitchen
-  as_leader: false
 
 sabine-at-full:
   user: sabine
   project: full
-  as_leader: false
 
 sabine-at-soon_full:
   user: sabine
   project: soon_full
-  as_leader: false
 
 sabine-at-full_but_closed:
   user: sabine
   project: full_but_closed
-  as_leader: false
 
 sabine-at-soon_full_but_closed:
   user: sabine
   project: soon_full_but_closed
-  as_leader: false

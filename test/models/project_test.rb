@@ -19,25 +19,6 @@ class ProjectTest < ActiveSupport::TestCase
     assert volunteer_names.include? 'peter'
   end
 
-  test "getting aggregated users of project with subprojects" do
-    users = projects(:'kindergarten-party').aggregated_users
-    assert_equal 5, users.count
-    usernames = users.collect { |user| user.username }
-    assert usernames.include? 'lea'
-    assert usernames.include? 'birgit'
-    assert usernames.include? 'peter'
-    assert usernames.include? 'rolf'
-    assert usernames.include? 'sabine'
-  end
-
-  test "getting aggregated users of project without subprojects" do
-    users = projects(:one).aggregated_users
-    assert_equal 2, users.count
-    usernames = users.collect { |user| user.username }
-    assert usernames.include? 'rolf'
-    assert usernames.include? 'sabine'
-  end
-
   test "getting aggregated volunteers of project with subprojects" do
     users = projects(:'kindergarten-party').aggregated_volunteers
     assert_equal 3, users.count

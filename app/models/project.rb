@@ -5,7 +5,9 @@ class Project < ApplicationRecord
   mount_uploader :picture, ImageUploader
 
   has_many :participations, dependent: :destroy
-  has_many :users, through: :participations
+  has_many :volunteers, class_name: 'User', through: :participations, source: :user
+  has_many :leaderships, dependent: :destroy
+  has_many :leaders, class_name: 'User', through: :leaderships, source: :user
   has_and_belongs_to_many :days, class_name: 'ProjectDay'
   belongs_to :project_week
   has_many :subprojects, class_name: 'Project', foreign_key: :parent_project_id
@@ -25,30 +27,17 @@ class Project < ApplicationRecord
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
-  
-  def volunteers
-    users.only_volunteers
-  end
-
-  def leaders
-    users.only_leaders
-  end
 
   def volunteers_in_subprojects
-    User.joins(:projects).where("parent_project_id = #{self.id}").only_volunteers
-  end
-
-  def aggregated_users
-    return users if subprojects.empty?
-    User.joins(:projects).where("(projects.id = #{self.id} or parent_project_id = #{self.id})")
+    User.joins(:projects_as_volunteer).where("parent_project_id = #{self.id}")
   end
 
   def aggregated_volunteers
-    aggregated_users.only_volunteers
+    User.joins(:projects_as_volunteer).where("(projects.id = #{self.id || 'NULL'} or parent_project_id = #{self.id || 'NULL'})")
   end
 
   def aggregated_leaders
-    aggregated_users.only_leaders
+    User.joins(:projects_as_leader).where("(projects.id = #{self.id || 'NULL'} or parent_project_id = #{self.id || 'NULL'})")
   end
 
   def aggregated_desired_team_size
@@ -59,7 +48,7 @@ class Project < ApplicationRecord
 
 
   def add_volunteer user
-    users << user
+    volunteers << user
     self.save #adjusts status
   end
 
@@ -72,12 +61,12 @@ class Project < ApplicationRecord
   end
 
   def delete_volunteer user
-    Participation.where(project_id: self.id, user_id: user.id, as_leader: false).first.destroy!
+    volunteers.destroy user
     self.save #adjusts status
   end
 
   def add_leader user
-    Participation.create(project: self, user: user, as_leader: true) unless has_leader? user
+    leaders << user
   end
 
   def has_leader? user
@@ -85,9 +74,8 @@ class Project < ApplicationRecord
   end
 
   def delete_leader user
-    Participation.where(project_id: self.id, user_id: user.id, as_leader: true).first.destroy!
+    leaders.destroy user
   end
-
 
 
   def make_visible!

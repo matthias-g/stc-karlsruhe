@@ -4,7 +4,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :participations, dependent: :destroy
-  has_many :projects, through: :participations
+  has_many :projects_as_volunteer, through: :participations, source: :project
+  has_many :leaderships, dependent: :destroy
+  has_many :projects_as_leader, through: :leaderships, source: :project
   has_and_belongs_to_many :roles
 
   USERNAME_FORMAT = /\A[\w]+\z/
@@ -26,9 +28,6 @@ class User < ApplicationRecord
             format: { with: /\A[[[:word:]]-\.]+( [[[:word:]]-\.]+)*\z/, message: I18n.t('activerecord.errors.messages.onlyWordsAndInnerSpace') }
   attr_accessor :login
 
-  scope :only_leaders,    -> { where(participations: {as_leader: true}) }
-  scope :only_volunteers, -> { where(participations: {as_leader: false}) }
-
   before_validation :set_default_username_if_blank!, on: :create
 
   def self.find_for_database_authentication(warden_conditions)
@@ -46,16 +45,8 @@ class User < ApplicationRecord
     first_name + ' ' + last_name
   end
 
-  def leads_project? project
+  def leads_project?(project)
     projects_as_leader.include? project
-  end
-
-  def projects_as_volunteer
-    projects.where(participations: {as_leader: false})
-  end
-
-  def projects_as_leader
-    projects.where(participations: {as_leader: true})
   end
 
   # based on https://github.com/refinery/refinerycms/blob/master/authentication/app/models/refinery/user.rb

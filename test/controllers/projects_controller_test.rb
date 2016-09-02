@@ -98,7 +98,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
       delete project_url(@project)
     end
 
-    assert_redirected_to projects_path
+    assert_redirected_to @project.project_week
   end
 
   test 'volunteer should enter project' do
@@ -119,6 +119,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     get leave_project_url(@project)
     assert_redirected_to @project
     assert_not @project.has_volunteer?(user)
+    assert User.exists?(user.id)
   end
 
   test 'send notification when volunteer leaves project ' do

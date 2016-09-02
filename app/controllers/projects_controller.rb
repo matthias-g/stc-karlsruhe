@@ -3,7 +3,8 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :authorize_project, except: [:index, :new, :create]
 
-  after_action :verify_authorized
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   respond_to :html
 
@@ -147,21 +148,22 @@ class ProjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.friendly.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:title, :user_id, :status,
-        :location, :latitude, :longitude, :map_latitude, :map_longitude, :map_zoom,
-        :description, :short_description, :individual_tasks, :material, :requirements,
-        :picture, :picture_source, :desired_team_size,  :project_week_id, { :day_ids => [] }, :time, :parent_project_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = Project.friendly.find(params[:id])
+  end
 
-    def authorize_project
-      authorize @project
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def project_params
+    params.require(:project).permit(:title, :user_id, :status,
+      :location, :latitude, :longitude, :map_latitude, :map_longitude, :map_zoom,
+      :description, :short_description, :individual_tasks, :material, :requirements,
+      :picture, :picture_source, :desired_team_size,  :project_week_id, { :day_ids => [] }, :time, :parent_project_id)
+  end
+
+  def authorize_project
+    authorize @project
+  end
 
 end

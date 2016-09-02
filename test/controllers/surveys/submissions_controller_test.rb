@@ -31,9 +31,9 @@ class Surveys::SubmissionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get edit" do
+  test "should not get edit" do
     sign_in users(:admin)
     get edit_surveys_template_surveys_submission_url(@surveys_submission.template_id, @surveys_submission)
-    assert_response :success
+    assert_redirected_to '/'
   end
 end

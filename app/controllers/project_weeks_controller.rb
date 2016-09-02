@@ -1,15 +1,18 @@
 class ProjectWeeksController < ApplicationController
-  before_action :set_project_week, only: [:edit, :update, :destroy]
+  before_action :set_project_week, except: [:index, :new, :create]
   before_action :authenticate_admin_user!, except: [:show]
+  before_action :authorize_project_week, except: [:index, :new, :create]
+
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   respond_to :html
 
   def index
-    @project_weeks = ProjectWeek.all
+    @project_weeks = policy_scope(ProjectWeek)
   end
 
   def show
-    @project_week = !params[:title] ? set_project_week : ProjectWeek.find_by_title(params[:title])
     @projects = @project_week.projects.toplevel.order(visible: :desc, status: :asc, picture_source: :desc)
 
     if params[:filter]
@@ -24,6 +27,7 @@ class ProjectWeeksController < ApplicationController
 
   def new
     @project_week = ProjectWeek.new
+    authorize_project_week
   end
 
   def edit
@@ -31,6 +35,7 @@ class ProjectWeeksController < ApplicationController
 
   def create
     @project_week = ProjectWeek.new(project_week_params)
+    authorize_project_week
     @project_week.save
     respond_with @project_week
   end
@@ -46,15 +51,20 @@ class ProjectWeeksController < ApplicationController
   end
 
   private
-    def set_project_week
-      @project_week = ProjectWeek.find(params[:id])
-    end
 
-    def project_week_params
-      params.require(:project_week).permit(:title, :default)
-    end
+  def set_project_week
+    @project_week = params[:title] ? ProjectWeek.find_by_title(params[:title]) : ProjectWeek.find(params[:id])
+  end
 
-    def filter_params
-      params.require(:filter).permit(:visibility, :day, :status)
-    end
+  def project_week_params
+    params.require(:project_week).permit(:title, :default)
+  end
+
+  def filter_params
+    params.require(:filter).permit(:visibility, :day, :status)
+  end
+
+  def authorize_project_week
+    authorize @project_week
+  end
 end

@@ -2,11 +2,15 @@ class Surveys::TemplatesController < ApplicationController
   before_action :authenticate_admin_user!, except: :show
   before_action :set_template, only: [:show, :edit, :update, :destroy]
   before_action :redirect_non_admins_to_answers, only: :show
+  before_action :authorize_template, except: [:index, :new, :create]
+
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   respond_to :html
 
   def index
-    @templates = Surveys::Template.all
+    @templates = policy_scope(Surveys::Template)
     respond_with(@templates)
   end
 
@@ -17,6 +21,7 @@ class Surveys::TemplatesController < ApplicationController
   def new
     @template = Surveys::Template.new
     @template.questions.build
+    authorize_template
     respond_with(@template)
   end
 
@@ -25,6 +30,7 @@ class Surveys::TemplatesController < ApplicationController
 
   def create
     @template = Surveys::Template.new(template_params)
+    authorize_template
     @template.save
     respond_with(@template)
   end
@@ -48,6 +54,10 @@ class Surveys::TemplatesController < ApplicationController
   def template_params
     params.require(:surveys_template).permit(:title, :show_in_user_profile, questions_attributes:
         [:id, :text, :explanation, :answer_options, :question_type, :position, :is_subquestion, :_destroy] )
+  end
+
+  def authorize_template
+    authorize @template
   end
 
   def redirect_non_admins_to_answers

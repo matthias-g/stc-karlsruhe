@@ -1,4 +1,4 @@
-class Surveys::SubmissionPolicy < ApplicationPolicy
+class RolePolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
@@ -15,7 +15,7 @@ class Surveys::SubmissionPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    is_admin?
   end
 
   def show?
@@ -23,13 +23,10 @@ class Surveys::SubmissionPolicy < ApplicationPolicy
   end
 
   def edit?
-    false
+    is_admin?
   end
 
   alias_method :update?, :edit?
-
-  def destroy?
-    is_admin?
-  end
+  alias_method :destroy?, :edit?
 
 end

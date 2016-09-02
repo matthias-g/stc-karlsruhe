@@ -1,11 +1,11 @@
-class Surveys::SubmissionPolicy < ApplicationPolicy
+class GalleryPicturePolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
       if user && user.admin?
         scope.all
       else
-        scope.none
+        scope.where(visible: true)
       end
     end
   end
@@ -15,21 +15,23 @@ class Surveys::SubmissionPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    is_admin?
   end
 
   def show?
-    is_admin?
+    is_admin? || record.visible || is_uploader?
   end
 
   def edit?
-    false
+    is_admin?
   end
 
   alias_method :update?, :edit?
+  alias_method :destroy?, :edit?
 
-  def destroy?
-    is_admin?
+  def is_uploader?
+    user && record.uploader == user
   end
+
 
 end

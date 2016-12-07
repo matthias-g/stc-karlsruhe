@@ -3,7 +3,7 @@
 <% end %>
 
 <section class="contact-form">
-  <%= bootstrap_form_for @message, :url => kontakt_path do |form| %>
+  <%= bootstrap_form_for @message, url: contact_path do |form| %>
       <h1><%= t 'contact.orga.title' %></h1>
       <div class="leftCol">
         <%= t 'contact.orga.text' %>

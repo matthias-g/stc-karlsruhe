@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
       redirect_to root_path, notice: t('contact.orga.success')
     else
       flash[:alert] = @message.errors.full_messages
-      redirect_to kontakt_path
+      redirect_to contact_path
     end
   end
 

@@ -31,8 +31,8 @@
     <div><span></span>Stunden</div>
     <div><span></span>Minuten</div>
     <div><span></span>Sekunden</div>
-    <span class="running">verbleiben bis zur Projektwoche&nbsp;2017</span>
-    <span class="finished">Die <%= link_to 'Projektwoche&nbsp;2017'.html_safe, show_project_week_path(ProjectWeek.default.title), class: 'black-link' %> ist abgeschlossen. Vielen Dank für euren Einsatz!</span>
+    <span class="running">verbleiben bis zur Aktionswoche&nbsp;2017</span>
+    <span class="finished">Die <%= link_to 'Aktionswoche&nbsp;2017'.html_safe, show_project_week_path(ProjectWeek.default.title), class: 'black-link' %> ist abgeschlossen. Vielen Dank für euren Einsatz!</span>
   </div>
 </section>
 
@@ -105,7 +105,7 @@
       <div class="col-sm-8">
         <h2>Planung 2015</h2>
         Zur Zeit laufen die Vorbereitungen für die Aktionswoche im Juni 2015.
-        Wir sammeln Projektideen, suchen Projektleiter, gestalten Plakate und Flyer und entwicklen die Webseite weiter.<br />
+        Wir sammeln Aktionsideen, suchen Aktionsleiter, gestalten Plakate und Flyer und entwicklen die Webseite weiter.<br />
         Für Fragen und Vorschläge jeder Art steht das Orga-Team gerne über das
         <a href="/kontakt">Kontaktformular</a> zur Verfügung.
       </div>
@@ -132,7 +132,7 @@
   <section class="col-sm-6" id="projects-link">
     <div class="center-wrap" style="padding: 20px 20px 20px 30px;">
       <%= link_to show_project_week_path(ProjectWeek.default.title) do %>
-          <i class="fa fa-arrow-right" style="position:relative;bottom:3px"></i> &nbsp;zu den Projekten
+          <i class="fa fa-arrow-right" style="position:relative;bottom:3px"></i> &nbsp;zu den Aktionen
       <% end %>
     </div>
   </section>
@@ -146,7 +146,7 @@
 %>
 
 <section>
-  <h2>Projektkarte <%= ProjectWeek.default.title %></h2>
+  <h2>Aktionskarte <%= ProjectWeek.default.title %></h2>
   <div class="box box-5by2" style="min-height:200px;">
     <div id="projects-map" data-class="GoogleMap"
          data-lat="49.011627" data-lon="8.403869" data-zoom="12">

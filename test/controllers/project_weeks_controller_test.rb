@@ -26,13 +26,13 @@ class ProjectWeeksControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
     follow_redirect!
     assert_response :success
-    assert_select 'h1', 'Projektwoche 2020'
+    assert_select 'h1', 'Aktionswoche 2020'
   end
 
   test "should show project_week" do
     get project_week_url(@project_week)
     assert_response :success
-    assert_select 'h1', 'Projektwoche 2015'
+    assert_select 'h1', 'Aktionswoche 2015'
   end
 
   test "project should show short description if available" do
@@ -57,7 +57,7 @@ class ProjectWeeksControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
     follow_redirect!
     assert_response :success
-    assert_select 'h1', 'Projektwoche 2020'
+    assert_select 'h1', 'Aktionswoche 2020'
   end
 
   test "should destroy project_week" do

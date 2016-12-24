@@ -4,7 +4,7 @@
 
 one:
   title: Kostenlose Fahrradreparatur in der Innenstadt
-  short_description: Hast du Lust auf ein Projekt unter freiem Himmel? Wir bieten eine kostenlose Fahrradreparatur an.
+  short_description: Hast du Lust auf eine Aktion unter freiem Himmel? Wir bieten eine kostenlose Fahrradreparatur an.
   description: Wir werden einen kleinen Pavillion in der Innenstadt aufbauen und eine kostenlose Fahrradreparatur für die vorbeifahrenden Leute anbieten.
   location: MyString
   latitude: 1.5
@@ -62,7 +62,7 @@ four:
 
 kindergarten-party:
   title: Fest im Kindergarten
-  description: In diesem Projekt organisieren wir ein Fest für die Kinder eines Kindergartens.
+  description: In dieser Aktion organisieren wir ein Fest für die Kinder eines Kindergartens.
   visible: true
   desired_team_size: 2
   project_week: one
@@ -87,37 +87,37 @@ kindergarten-music:
   gallery: seven
 
 closed:
-  title: Geschlossenes Projekt
+  title: Geschlossene Aktion
   status: closed
   desired_team_size: 5
 
 closed_parent_project:
-  title: Geschlossenes Überprojekt
+  title: Geschlossene Überaktion
   status: closed
   desired_team_size: 5
 
 closed_subproject:
-  title: Geschlossenes Unterprojekt
+  title: Geschlossene Unteraktion
   status: closed
   parent_project: closed_parent_project
   desired_team_size: 5
 
 full:
-  title: Volles Projekt
+  title: Volle Aktion
   status: full
   desired_team_size: 1
 
 soon_full:
-  title: Volles Projekt
+  title: Volle Aktion
   status: soon_full
   desired_team_size: 3
 
 full_but_closed:
-  title: Volles Projekt
+  title: Volle Aktion
   status: closed
   desired_team_size: 1
 
 soon_full_but_closed:
-  title: Volles Projekt
+  title: Volle Aktion
   status: closed
   desired_team_size: 3

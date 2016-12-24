@@ -24,9 +24,9 @@ de:
         onlyWordsAndInnerSpace: darf nur Wortzeichen und Leerzeichen in der Mitte enthalten
     models:
       project:
-        zero: 'Projekte'
-        one: 'Projekt'
-        other: 'Projekte'
+        zero: 'Aktionen'
+        one: 'Aktion'
+        other: 'Aktionen'
       news_entry:
         zero: 'News-Einträge'
         one: 'News-Eintrag'
@@ -41,10 +41,10 @@ de:
       surveys/submission: 'Umfrage'
     attributes:
       project:
-        title: 'Projekttitel'
+        title: 'Aktionstitel'
         description: 'Beschreibung'
         short_description: 'Kurzbeschreibung'
-        location: 'Projektort'
+        location: 'Aktionsort'
         latitude: 'Breitengrad'
         longitude: 'Längengrad'
         individual_tasks: 'Einzelne Arbeiten'
@@ -55,14 +55,14 @@ de:
         picture_source: 'Bildrechte /-quelle'
         desired_team_size: 'Gewünschte Teamgröße'
         leaders: 'Leitung'
-        day_ids: 'Projekttage'
+        day_ids: 'Aktionstage'
         volunteers: 'Team'
         status: 'Status'
-        project_week_id: Projektwoche
-        days: Projekttage
+        project_week_id: Aktionswoche
+        days: Aktionstage
         time: Zeit
-        subproject_ids: Teilprojekte
-        parent_project_id: Überprojekt
+        subproject_ids: Teilaktionen
+        parent_project_id: Überaktion
       news_entry:
         title: 'Newstitel'
         text: 'Text'
@@ -81,8 +81,8 @@ de:
         password_confirmation: 'Passwort wiederholen'
         current_password: 'Aktuelles Passwort'
         remember_me: 'merken'
-        receive_emails_about_project_weeks: Informationen zu Projektwochen allgemein (z.B. Ankündigungen der Projektwochen)
-        receive_emails_about_my_project_weeks: Informationen zu Projektwochen, an denen ich teilnehme
+        receive_emails_about_project_weeks: Informationen zu Aktionswochen allgemein (z.B. Ankündigungen der Aktionswochen)
+        receive_emails_about_my_project_weeks: Informationen zu Aktionswochen, an denen ich teilnehme
         receive_emails_about_other_projects: Informationen zu weiteren Serve the City Projekten
         receive_other_emails_from_orga: Sonstige E-Mails vom Orgateam
         receive_emails_from_other_users: Andere Nutzer können mich über ein Kontaktformular kontaktieren
@@ -136,7 +136,7 @@ de:
     pageTitle: 'Serve the City Karlsruhe'
     links:
       home: 'Startseite'
-      projects: 'Projekte'
+      projects: 'Aktionen'
       contact: 'Kontakt'
       supporters: 'Unterstützer'
       aboutUs: 'Impressum'
@@ -146,9 +146,9 @@ de:
       stcInternational: 'Serve the City international'
       shareOnFacebook: 'auf Facebook teilen'
     title:
-      projectList: 'Projektwoche %{year}'
-      projectNew: 'Neues Projekt'
-      projectEdit: 'Projekt bearbeiten: %{project}'
+      projectList: 'Aktionswoche %{year}'
+      projectNew: 'Neue Aktion'
+      projectEdit: 'Aktion bearbeiten: %{project}'
       projectCropPicture: 'Bildausschnitte festlegen: %{project}'
       newsEntryList: 'Newseinträge'
       newsEntryNew: 'Neuer Newseintrag'
@@ -169,10 +169,10 @@ de:
       userEmailConfirmation: 'E-Mail-Adressen-Bestätigung'
       userUnlocking: 'Account-Freischaltung'
       userDeleteAccount: 'Account löschen: %{user}'
-      projectDayEdit: 'Projekttag bearbeiten'
-      projectDayList: 'Projekttage'
-      projectDayNew: 'Neuer Projekttag'
-      projectDayView: 'Projekttag'
+      projectDayEdit: 'Aktionstag bearbeiten'
+      projectDayList: 'Aktionstage'
+      projectDayNew: 'Neuer Aktionstag'
+      projectDayView: 'Aktionstag'
       messageContactForm: 'Kontakt'
       messageAdminMailForm: 'Admin-Mailer'
       manageTeam: 'Team verwalten'
@@ -198,13 +198,13 @@ de:
       success: 'Vielen Dank für deine Nachricht! Wir werden sie so schnell wie möglich beantworten.'
       intro: 'Über das Kontaktformular auf servethecity-karlsruhe.de ist eine neue Nachricht eingegangen:'
     team:
-      title: 'Teilnehmer des Projektes benachrichtigen'
-      text: 'Hier kannst du den Teilnehmern des Projektes eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
+      title: 'Teilnehmer der Aktion benachrichtigen'
+      text: 'Hier kannst du den Teilnehmern der Aktion eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
       submit: 'Nachricht verteilen'
       success: 'Die Nachricht wurde an dich und alle Teilnehmer geschickt.'
       body: "Hallo,
 
-du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{sender_email}, Projektleiter von '%{title}') bekommen:"
+du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{sender_email}, Aktionsleiter von '%{title}') bekommen:"
     user:
       title: 'Kontaktiere %{recipient}'
       submit: 'Nachricht senden'
@@ -220,18 +220,18 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         body: 'Deine Nachricht'
     adminMail:
       title: 'Admin-Mailer'
-      text: 'Hier kannst du projektübergreifenden Empfängergruppen eine E-Mail schreiben. Du selbst erhältst auch immer eine Kopie.'
+      text: 'Hier kannst du aktionsübergreifenden Empfängergruppen eine E-Mail schreiben. Du selbst erhältst auch immer eine Kopie.'
       success: 'Die Nachricht wurde erfolgreich gesendet.'
       groups:
-        current_volunteers_and_leaders: "Projektleiter und Mitarbeiter der Projektwoche %{project_week}"
-        current_volunteers: "Mitarbeiter der Projektwoche %{project_week}"
-        current_leaders: "Projektleiter der Projektwoche %{project_week}"
+        current_volunteers_and_leaders: "Aktionsleiter und Mitarbeiter der Aktionswoche %{project_week}"
+        current_volunteers: "Mitarbeiter der Aktionswoche %{project_week}"
+        current_leaders: "Aktionsleiter der Aktionswoche %{project_week}"
         all_users: 'Alle angemeldeten Benutzer'
-        active_users: 'Aktive Benutzer (Registrierung < 6 M oder Projektteilnahme < 18 M)'
+        active_users: 'Aktive Benutzer (Registrierung < 6 M oder Aktionsteilnahme < 18 M)'
         me: "Ich <%{user_email}>"
       types:
-        about_project_weeks: Informationen zur Projektwoche
-        about_other_projects: Informationen zu weiteren Serve the City Projekten
+        about_project_weeks: Informationen zur Aktionswoche
+        about_other_projects: Informationen zu weiteren Serve the City Aktionen
         other_email_from_orga: Sonstige E-Mail vom Orgateam
       labels:
         sender: 'Absender-Adresse'
@@ -241,7 +241,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         body: 'Nachricht'
       save: 'Nachricht speichern'
     ownProject:
-      subject: Vorschlag für eigenes Projekt
+      subject: Vorschlag für eigene Aktion
   orga_message:
     action:
       write_new: Neue Mail verfassen
@@ -258,90 +258,90 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
 
   project:
     action:
-      new: 'Neues Projekt erstellen'
-      edit: 'Projekt bearbeiten'
+      new: 'Neue Aktion erstellen'
+      edit: 'Aktion bearbeiten'
       enter: 'Team beitreten'
       leave: 'Team verlassen'
-      delete: 'Projekt löschen'
-      open: 'Projekt öffnen'
-      close: 'Projekt abschließen'
+      delete: 'Aktion löschen'
+      open: 'Aktion öffnen'
+      close: 'Aktion abschließen'
       makeVisible: 'Sichtbar machen'
-      makeInvisible: 'Projekt verstecken'
+      makeInvisible: 'Aktion verstecken'
       manageTeam: 'Team verwalten'
       makeLeader: 'als Leiter hinzufügen'
-      addLeader: Projektleiter auswählen
-      removeLeader: 'Projektleiter entfernen'
+      addLeader: Aktionsleiter auswählen
+      removeLeader: 'Aktionsleiter entfernen'
       removeVolunteer: 'Teammitglied entfernen'
-      toOverview: 'zur Projektliste'
-      toProject: 'zurück zum Projekt'
-      searchProjects: 'Projekte suchen'
-      findProject: 'Projekt finden'
+      toOverview: 'zur Aktionsliste'
+      toProject: 'zurück zur Aktion'
+      searchProjects: 'Aktionen suchen'
+      findProject: 'Aktion finden'
       cropListviewImage: 'Listenbild anpassen'
-      cropProjectImage: 'Projektbild anpassen'
+      cropProjectImage: 'Aktionsbild anpassen'
       cropThumbnailImage: 'Thumbnail anpassen'
       cropImage: 'Zuschneiden'
-      wantToStartOwnProject: Du möchtest ein eigenes Projekt starten?
+      wantToStartOwnProject: Du möchtest eine eigene Aktion starten?
       weHelpYou: Wir helfen dir dabei!
-      startOwnProject: Eigenes Projekt starten
+      startOwnProject: Eigene Aktion starten
     label:
-      project: 'Projekt'
-      subproject: 'Teilprojekt'
+      project: 'Aktion'
+      subproject: 'Teilaktion'
       subprojects:
-        one: '1 Teilprojekt'
-        other: '%{count} Teilprojekte'
+        one: '1 Teilaktion'
+        other: '%{count} Teilaktionen'
       vacancies: 'freie Plätze'
-      manageProject: 'Projektverwaltung'
-      status: 'Projektstatus'
-      new: 'Neues Projekt'
-      edit: 'Projekt bearbeiten'
+      manageProject: 'Aktionsverwaltung'
+      status: 'Aktionsstatus'
+      new: 'Neue Aktion'
+      edit: 'Aktion bearbeiten'
       manageTeam: 'Team verwalten'
       leaders: 'Leitung'
       team: 'Team'
       gallery: Fotogalerie
       uploadImage: 'Bild hochladen'
       listviewImage: 'Vorschau'
-      projectImage: 'Projektansicht'
+      projectImage: 'Aktionsansicht'
       thumbnailImage: 'Thumbnail'
       cropImage: 'Bildausschnitt für %{crop_target} anpassen'
-      parent_project: 'Dieses Projekt ist Teil von'
+      parent_project: 'Diese Aktion ist Teil von'
       invisible: versteckt
       volunteers_in_project: 'Team (%{members} von %{limit})'
-      volunteers_in_subprojects: 'Team in Teilprojekten (%{members} von %{limit})'
+      volunteers_in_subprojects: 'Team in Teilaktionen (%{members} von %{limit})'
     help:
       picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
-      short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Projektliste statt der ausführlichen Beschreibung angezeigt.'
-      uploadPictures: "Hast du während des Projektes Bilder gemacht, die du veröffentlichen möchtest? Dann kannst du sie hier hochladen.
+      short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Aktionsliste statt der ausführlichen Beschreibung angezeigt.'
+      uploadPictures: "Hast du während der Aktion Bilder gemacht, die du veröffentlichen möchtest? Dann kannst du sie hier hochladen.
         Hast du andere Personen fotografiert, stelle bitte sicher, dass du ihr Einverständnis für das Veröffentlichen der Bilder hast."
     message:
       imageCropped: 'Der Bildausschnitt wurde angepasst.'
-      created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
-      updated: 'Projekt wurde erfolgreich aktualisiert.'
-      leaderAdded: 'Projektleiter erfolgreich hinzugefügt.'
-      leaderRemoved: 'Projektleiter erfolgreich entfernt.'
+      created: 'Aktion wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
+      updated: 'Aktion wurde erfolgreich aktualisiert.'
+      leaderAdded: 'Aktionsleiter erfolgreich hinzugefügt.'
+      leaderRemoved: 'Aktionsleiter erfolgreich entfernt.'
       volunteerRemoved: 'Teilnehmer erfolgreich entfernt.'
-      errorList: 'Wegen folgender Fehler konnte das Projekt nicht gespeichert werden:'
+      errorList: 'Wegen folgender Fehler konnte die Aktion nicht gespeichert werden:'
       remainingVacancy: '%s freie Plätze'
-      teamMember: 'Du bist im Projektteam.'
-      subprojectTeamMember: 'Du bist bei einem Teilprojekt dabei.'
-      enterOneOfTheSubprojects: 'Melde dich in einem der %{subprojects_link} an!'
-      isFull: 'Dieses Projekt ist schon vollbesetzt.'
-      participationSuccess: 'Du nimmst jetzt an diesem Projekt teil. Die Projektleiter werden sich mit dir etwa eine Woche vor dem Projekt in Verbindung setzen.'
-      madeVisible: 'Projekt wurde sichtbar gemacht.'
-      madeInvisible: 'Projekt wurde unsichtbar gemacht.'
-      opened: 'Projekt wurde geöffnet.'
-      closed: 'Projekt wurde geschlossen.'
+      teamMember: 'Du bist im Aktionsteam.'
+      subprojectTeamMember: 'Du bist bei einer Teilaktion dabei.'
+      enterOneOfTheSubprojects: 'Melde dich zu einer der %{subprojects_link} an!'
+      isFull: 'Diese Aktion ist schon vollbesetzt.'
+      participationSuccess: 'Du nimmst jetzt an dieser Aktion teil. Die Aktionsleiter werden sich mit dir etwa eine Woche vor der Aktion in Verbindung setzen.'
+      madeVisible: 'Aktion wurde sichtbar gemacht.'
+      madeInvisible: 'Aktion wurde unsichtbar gemacht.'
+      opened: 'Aktion wurde geöffnet.'
+      closed: 'Aktion wurde geschlossen.'
       galleryPicturesUploaded: 'Vielen Dank für das Hochladen deiner Bilder! Sobald sie jemand aus dem Orgateam freigeschaltet hat,
         sind sie öffentlich sichtbar.'
       mailNewPictures:
         subject: '%{pictureCount} neue Bilder hochgeladen'
         body: "Hallo,\n
-        soeben wurden neue Bilder zur Fotogalerie eines Projekts hinzugefügt:\n\n
-        Projekttitel: %{title}\n
+        soeben wurden neue Bilder zur Fotogalerie einer Aktion hinzugefügt:\n\n
+        Aktionstitel: %{title}\n
         Anzahl Bilder: %{pictureCount}\n
         Benutzer: %{uploader}\n\n
         Bitte überprüfe die Bilder und schalte sie gegebenenfalls frei."
       leavingProjectNotification:
-        subject: Austritt aus Projektteam
+        subject: Austritt aus Aktionsteam
     status:
       open: Freie Plätze
       soon_full: Wenige Plätze
@@ -394,7 +394,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       category:
         general: 'Allgemein'
         partners: 'Partner'
-        projects: 'Projekte'
+        projects: 'Aktionen'
         media: 'Medien'
         insight: 'Einblicke'
 
@@ -441,26 +441,26 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
     message:
       profileUpdated: 'Profil erfolgreich aktualisiert.'
       loggedInAs: 'eingeloggt als %s'
-      hasNoProjects: '%{user} nimmt noch an keinem Projekt teil.'
-      youHaveNoProjects: 'Du nimmst noch an keinem Projekt teil.'
+      hasNoProjects: '%{user} nimmt noch an keiner Aktion teil.'
+      youHaveNoProjects: 'Du nimmst noch an keiner Aktion teil.'
       invalidPassword: 'Das Passwort ist falsch'
       accountDeleted: 'Dein Account wurde gelöscht.'
     help:
       passwordLength: 'Mindestens 6 Zeichen lang.'
 
   project_day:
-    new: 'Neuer Projekttag'
-    save: 'Projekttag speichern'
-    list: 'Projekttage verwalten'
-    projectWeek: 'Projektwoche'
-    captionList: 'Projekttage'
-    captionNew: 'Neuer Projekttag'
-    captionEdit: 'Projekttag bearbeiten: "%s"'
+    new: 'Neuer Aktionstag'
+    save: 'Aktionstag speichern'
+    list: 'Aktionstage verwalten'
+    projectWeek: 'Aktionswoche'
+    captionList: 'Aktionstage'
+    captionNew: 'Neuer Aktionstag'
+    captionEdit: 'Aktionstag bearbeiten: "%s"'
     errorsExist: 'Der Tag konnte wegen folgenden Fehlern nicht gespeichert werden:'
-    confirmDelete: 'Wollen Sie den Projekttag "%s" wirklich löschen?'
+    confirmDelete: 'Wollen Sie den Aktionstag "%s" wirklich löschen?'
 
   project_week:
-    noProjects: 'Wir sind zwar schon bei der Planung der Projektwoche, aber bisher sind noch keine Projekte öffentlich. Schau später nochmal vorbei oder kontaktiere uns, wenn du einen Vorschlag für ein Projekt hast!'
+    noProjects: 'Wir sind zwar schon bei der Planung der Aktionswoche, aber bisher sind noch keine Aktionen öffentlich. Schau später nochmal vorbei oder kontaktiere uns, wenn du einen Vorschlag für eine Aktion hast!'
 
   role:
     new: 'Neue User-Rolle'
@@ -532,5 +532,5 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
     default: Du hast keine Berechtigung für diese Aktion.
     not_logged_in:
     project_policy:
-      update?: Du kannst dieses Projekt nicht bearbeiten!
-      enter?: Leider ist die Teilnahme an diesem Projekt zur Zeit nicht möglich.
+      update?: Du kannst diese Aktion nicht bearbeiten!
+      enter?: Leider ist die Teilnahme an dieser Aktion zur Zeit nicht möglich.

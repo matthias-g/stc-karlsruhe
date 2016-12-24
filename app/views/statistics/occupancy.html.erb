@@ -4,7 +4,7 @@
 
 <section id="statistics-header" class="showOverflow">
   <div class="select-year">
-    <h1>Projektauslastung <%= @project_week.title %></h1>
+    <h1>Aktionsauslastung <%= @project_week.title %></h1>
     <%= render partial: 'layouts/week_dropdown', locals: { target_path: method(:occupancy_in_year_path) } %>
   </div>
 
@@ -16,7 +16,7 @@
     <table class="table table-hover statistics-table">
       <thead>
       <tr>
-        <th><%= sortable_column 'title', 'Projekt'%></th>
+        <th><%= sortable_column 'title', 'Aktion'%></th>
         <th><%= sortable_column 'volunteer_count', 'Belegte Plätze'%></th>
         <th><%= sortable_column 'free_places', 'Freie Plätze'%></th>
         <th><%= sortable_column 'desired_team_size', 'Gesamt Plätze'%></th>
@@ -37,7 +37,7 @@
           %>
           <td>
             <%= link_to project.title, project_path(project) %>
-            <%= content_tag :span, '(Ü)', title: 'Überprojekt: Statistiken beinhalten Zahlen für Unterprojekte' unless team_size > 0 %>
+            <%= content_tag :span, '(Ü)', title: 'Überaktion: Statistiken beinhalten Zahlen für Unteraktionen' unless team_size > 0 %>
           </td>
           <td><%= team_size > 0 ? volunteers : aggr_volunteers %></td>
           <td><%= team_size > 0 ? team_size - volunteers : aggr_team_size - aggr_volunteers %></td>

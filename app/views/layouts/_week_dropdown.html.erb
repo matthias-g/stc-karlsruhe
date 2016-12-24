@@ -1,7 +1,7 @@
 <% @weeks = (ProjectWeek.all.order(title: :desc)) %>
 <% if !@weeks.blank? %>
   <div class="week-dropdown dropdown h1">
-    <a class="dropdown-toggle" id="weekDropdown" title="Andere Projektwochen"
+    <a class="dropdown-toggle" id="weekDropdown" title="Andere Aktionswochen"
        data-toggle="dropdown" aria-expanded="true">
       <span class="glyphicon glyphicon-chevron-down"></span>
     </a>

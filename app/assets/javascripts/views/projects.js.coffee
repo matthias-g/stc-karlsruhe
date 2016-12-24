@@ -4,7 +4,7 @@ filterProjectList = (e, obj) ->
   e.preventDefault()
   $('#project-list').load '?' + parametrize(obj) + ' #project-list > *', ->
     $('img', @).lazyload()
-    $('#filterResults').text 'Gefundene Projekte: ' + $(@).children().size()
+    $('#filterResults').text 'Gefundene Aktionen: ' + $(@).children().size()
 
 # handler for "add leader" select
 @addNewLeader = (val, html) ->

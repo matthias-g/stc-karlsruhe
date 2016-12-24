@@ -38,7 +38,7 @@
     <%= link_to 'Bearbeiten', edit_gallery_path(@gallery) %> |
     <%= link_to 'Zur Galerieübersicht', galleries_path %> |
     <% @gallery.projects.each do |project| %>
-        <%= link_to 'Zum Projekt', project %>
+        <%= link_to 'Zur Aktion', project %>
     <% end %>
     <% @gallery.news_entries.each do |news_entry| %>
         <%= link_to 'Zum Newseintrag', news_entry %>

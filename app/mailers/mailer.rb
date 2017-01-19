@@ -4,7 +4,7 @@ class Mailer < ActionMailer::Base
   def contact_mail(message)
     @message = message.body
     recipient = StcKarlsruhe::Application::CONTACT_FORM_RECIPIENT
-    mail from: message.sender, to: recipient, reply_to: message.sender, subject: message.subject
+    mail to: recipient, reply_to: message.sender, subject: message.subject
   end
 
   def contact_mail_copy_for_sender(message)

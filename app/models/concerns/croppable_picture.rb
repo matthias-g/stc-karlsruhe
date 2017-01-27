@@ -1,7 +1,6 @@
 module CroppablePicture extend ActiveSupport::Concern
 
   included do
-    mount_uploader :picture, ImageUploader
     attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
     def crop_picture(x,y,w,h,version)

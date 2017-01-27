@@ -2,6 +2,7 @@ class Project < ApplicationRecord
 
   include PhotoGallery
   include CroppablePicture
+  mount_uploader :picture, ImageUploader
 
   has_many :participations, dependent: :destroy
   has_many :users, through: :participations

@@ -2,6 +2,7 @@ class NewsEntry < ApplicationRecord
 
   include PhotoGallery
   include CroppablePicture
+  mount_uploader :picture, NewsEntryImageUploader
 
   validates_presence_of :title, :text, :category
 

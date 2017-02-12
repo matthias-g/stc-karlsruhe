@@ -1,0 +1,39 @@
+<% content_for :pageTitle do %>
+    <%= 'Stadtpiraten' %>
+<% end %>
+
+<section>
+  <h1>Stadtpiraten</h1>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-md-6">
+      <p>
+        Seit Anfang 2017 haben zusätzlich zu unserer jährlichen Aktionswoche ein Projekt, das das ganze Jahr über stattfindet:
+        Die Stadtpiraten Karlsruhe.
+      </p>
+      <p>
+        Die Stadtpiraten Karlsruhe veranstalten seit Mai 2015 mit einem Team von ehrenamtlichen Mitarbeitern ein wöchentliches Kinderprogramm
+        in der Landeserstaufnahmestelle in der Durlacher Allee 100, Karlsruhe. Das Programm setzt sich aus Bastelangeboten, Lieder, Spiel, Spaß und Freude zusammen.
+        Ergänzt wird es durch gelegentliche Ausflüge mit den Kindern (Schlittschuhfahren, Weihnachtszirkus, Zoobesuch,…).
+        Die Arbeit hat das Ziel, den Flüchtlingskindern Hoffnung zu geben und eine Perspektive zu schenken.
+      </p>
+      <p>
+        Willst du mit den Stadtpiraten Hoffnung und Freude schenken?
+        Dann melde dich bei ihnen über <%= mail_to 'info@stadtpiraten-karlsruhe.de', nil, encode: :hex %>.
+      </p>
+    </div>
+    <div class="col-md-6">
+      <div class="text-center">
+        <img class="img" src="/images/logo_stadtpiraten.png" alt=""/>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="text-center">
+        <img class="img" src="/images/ausflug_stadtpiraten.jpg" alt=""/>
+      </div>
+    </div>
+  </div>
+
+</section>

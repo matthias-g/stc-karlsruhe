@@ -9,6 +9,7 @@ class ProjectPolicy < ApplicationPolicy
       elsif user
         scope.joins(:leaderships).where(leaderships: {user_id: user.id}).or(scope.joins(:leaderships).where(visible: true).references(:leaderships))
       else
+        # TODO inner join removes projects without leaders
         scope.joins(:leaderships).where(visible: true)
       end
     end

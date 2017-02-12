@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'helpers'
 
 RSpec.describe ProjectPolicy do
-  fixtures :projects, :users
+  fixtures :projects, :users, :leaderships, :participations, :roles
 
   let(:user) { nil }
   let(:project) { projects(:one) }

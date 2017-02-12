@@ -20,6 +20,13 @@ admin:
   email: admin@root.org
   roles: admin
 
+photographer:
+  username: photographer
+  first_name: Photo
+  last_name: Graph
+  email: photo@graphs.com
+  roles: photographer
+
 deleted:
   username: deleted
   first_name: Gone

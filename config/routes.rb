@@ -83,26 +83,16 @@ Rails.application.routes.draw do
   get '/:page', to: 'pages#page', as: :show_page
 
   namespace :api, constraints: { format: 'json' } do
-    resources :galleries, only: :show
-    resources :gallery_pictures, only: [:destroy] do
-      member do
-        get :rotateRight
-        get :rotateLeft
-      end
+    jsonapi_resources :projects
+    jsonapi_resources :project_weeks
+    jsonapi_resources :galleries
+    jsonapi_resources :gallery_pictures do
+        member do
+          get :rotateRight
+          get :rotateLeft
+        end
     end
-    resources :projects, only: :show do
-      member do
-        get :enter
-        get :leave
-        get :add_leader
-      end
-    end
-    resources :project_weeks, only: [:index] do
-      member do
-        get :projects
-        get :project_days
-      end
-    end
+    jsonapi_resources :users
     scope module: 'surveys' do
       resources :templates, as: :surveys_templates, path: 'umfragen' do
         resources :submissions, as: :surveys_submissions, path: 'antworten'

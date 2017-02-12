@@ -191,7 +191,7 @@ class @Gallery
     # rotate image on server
     dirStr = if dir > 0 then '/rotateRight' else '/rotateLeft'
     $.ajax(
-      url: '/api/gallery_pictures/' + item.id + dirStr
+      url: '/api/gallery-pictures/' + item.id + dirStr
       dataType: 'json'
       type: 'GET'
       processData: false
@@ -220,7 +220,7 @@ class @Gallery
 
     # remove image on server
     $.ajax(
-      url: '/api/gallery_pictures/' + item.id
+      url: '/api/gallery-pictures/' + item.id
       dataType: 'json'
       type: 'POST'
       processData: false

@@ -1,11 +1,15 @@
 class ProjectPolicy < ApplicationPolicy
 
+  include ProjectUserRelationship
+
   class Scope < Scope
     def resolve
       if user && user.admin?
         scope.all
+      elsif user
+        scope.joins(:leaderships).where(leaderships: {user_id: user.id}).or(scope.joins(:leaderships).where(visible: true).references(:leaderships))
       else
-        scope.where(Project.unscoped.where(visible: true, participations: {as_leader: true}).where_values_hash.inject(:or)) # TODO Rails 5
+        scope.joins(:leaderships).where(visible: true)
       end
     end
   end
@@ -31,15 +35,36 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def enter?
-    !is_volunteer? && record.has_free_places? && !record.closed?
+    add_to_volunteers? [user]
   end
 
   def leave?
-    is_volunteer? && !record.closed?
+    remove_from_volunteers? user
   end
 
   def upload_pictures?
-    record.visible? && is_today_or_past? && (is_volunteer? || is_leader? || is_admin? || (user && user.photographer?))
+    record.visible? && is_today_or_past? && (is_volunteer?(user) || is_leader? || is_admin? || (user && user.photographer?))
+  end
+
+  def add_to_volunteers?(users)
+    users.reduce(true) do |result, user|
+      result && allow_add_volunteer_to_project?(user, record)
+    end
+  end
+
+  def remove_from_volunteers?(user)
+    allow_remove_volunteer_from_project?(user, record)
+  end
+
+  def replace_volunteers?(users)
+    allowed = true
+    record.volunteers.each do |volunteer|
+      allowed &= users.include?(volunteer) || remove_from_volunteers?(volunteer)
+    end
+    users.each do |user|
+      allowed &= is_volunteer?(user) || add_to_volunteers?([user])
+    end
+    allowed
   end
 
   alias_method :update?, :edit?
@@ -59,17 +84,17 @@ class ProjectPolicy < ApplicationPolicy
 
 
   def is_leader?
-    user && (record.has_leader? user)
+    record.has_leader?(user)
   end
 
-  def is_volunteer?
-    user && (record.has_volunteer? user)
+  def is_volunteer?(user)
+    record.has_volunteer?(user)
   end
 
   private
 
   def is_today_or_past?
-    today_or_future = false
+    today_or_future = nil
     record.days.each do |day|
       today_or_future ||= day.date && (day.date.today? || day.date.past?)
     end

@@ -1,4 +1,7 @@
 class UserPolicy < ApplicationPolicy
+
+  include ProjectUserRelationship
+
   class Scope < Scope
     def resolve
       scope
@@ -15,6 +18,14 @@ class UserPolicy < ApplicationPolicy
     !user.cleared? || user.admin?
   end
 
+  def permitted_attributes_for_show
+    return [:first_name] unless user
+    return [:first_name, :last_name] unless user == record || user.admin?
+    [:username, :first_name, :last_name, :email, :phone,
+        :receive_emails_about_project_weeks, :receive_emails_about_my_project_weeks, :receive_emails_about_other_projects,
+        :receive_other_emails_from_orga, :receive_emails_from_other_users]
+  end
+
   def edit?
     return false unless user
     user == record || user.admin?
@@ -27,6 +38,10 @@ class UserPolicy < ApplicationPolicy
   def contact_user?
     return false unless user
     true
+  end
+
+  def add_to_projects_as_volunteer?(projects)
+    projects.reduce(true) { |red, project| red && allow_add_volunteer_to_project?(record, project) }
   end
 
 end

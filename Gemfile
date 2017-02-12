@@ -56,6 +56,9 @@ gem 'devise'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'pundit'
 
+gem 'jsonapi-resources'
+gem 'jsonapi-authorization'
+
 gem 'mini_magick'
 gem 'carrierwave'
 gem 'jssorslider-rails', github: 'matthias-g/jssorslider-rails'
@@ -107,11 +110,15 @@ end
 group :test do
   gem 'simplecov', require: false
   gem 'codeclimate-test-reporter', require: nil
+  gem 'mutant'
+  gem 'mutant-rspec'
 end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+
+  gem 'rspec-rails'
 end
 
 

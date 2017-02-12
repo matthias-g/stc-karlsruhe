@@ -6,6 +6,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui/sortable
+//= require jsonapi-datastore
 //= require turbolinks
 //= require bootstrap-sprockets
 

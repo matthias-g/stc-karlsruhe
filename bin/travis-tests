@@ -1,0 +1,7 @@
+#!/bin/bash
+
+TMP_CC_REPO_TOKEN=${CODECLIMATE_REPO_TOKEN}
+unset CODECLIMATE_REPO_TOKEN
+bundle exec rails test
+CODECLIMATE_REPO_TOKEN=${TMP_CC_REPO_TOKEN}
+bundle exec rspec

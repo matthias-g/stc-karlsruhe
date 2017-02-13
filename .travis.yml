@@ -1,8 +1,7 @@
 language: ruby
 before_script: "bundle exec rails db:setup"
 env:
-  - TESTSCRIPT="rails test"
-  - TESTSCRIPT="rspec"
-  - TESTSCRIPT="mutant -r ./config/environment --use rspec ProjectPolicy -j 1"
+  - TESTSCRIPT="bin/travis-tests"
+  - TESTSCRIPT="bundle exec mutant -r ./config/environment --use rspec ProjectPolicy -j 1"
 script:
-  - bundle exec $TESTSCRIPT
+  - $TESTSCRIPT

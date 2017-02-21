@@ -8,10 +8,6 @@ RSpec.describe ProjectPolicy do
   let(:project) { projects(:one) }
   let(:policy) { ProjectPolicy.new(user, project) }
 
-  before do
-    policy = ProjectPolicy.new(user, project)
-  end
-
   describe 'show?' do
     subject { policy.show? }
 
@@ -271,7 +267,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'project happening today' do
-      before { project.days << ProjectDay.new(date: Time.now + 10.minutes) }
+      before { project.days << ProjectDay.new(date: Time.now) }
       let(:user) { users(:admin) }
 
       it 'is true for admin' do

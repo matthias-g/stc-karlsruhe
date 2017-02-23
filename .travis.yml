@@ -2,7 +2,11 @@ language: ruby
 before_script: "bundle exec rails db:setup"
 env:
   - TESTSCRIPT="bin/travis-tests"
+  - TESTSCRIPT="bin/travis-mutant OrgaMessagePolicy"
+  - TESTSCRIPT="bin/travis-mutant ProjectDayPolicy"
   - TESTSCRIPT="bin/travis-mutant ProjectPolicy"
+  - TESTSCRIPT="bin/travis-mutant ProjectWeekPolicy"
+  - TESTSCRIPT="bin/travis-mutant RolePolicy"
   - TESTSCRIPT="bin/travis-mutant UserPolicy"
 script:
   - $TESTSCRIPT

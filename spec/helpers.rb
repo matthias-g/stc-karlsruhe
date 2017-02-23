@@ -8,11 +8,14 @@ end
 
 module Fixtures extend ActiveSupport::Concern
 included do
-  def users(username)
-    User.find_by(username: username)
-  end
   def projects(title)
     Project.find_by(title: title)
+  end
+  def roles(title)
+    Role.find_by(title: title)
+  end
+  def users(username)
+    User.find_by(username: username)
   end
 end
 end

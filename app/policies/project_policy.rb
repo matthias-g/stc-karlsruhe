@@ -48,9 +48,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def add_to_volunteers?(users)
-    users.reduce(true) do |result, user|
-      result && allow_add_volunteer_to_project?(user, record)
-    end
+    users.all? { |user| allow_add_volunteer_to_project?(user, record) }
   end
 
   def remove_from_volunteers?(user)

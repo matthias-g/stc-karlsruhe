@@ -1,4 +1,5 @@
 #!/bin/bash
 
 unset CODECLIMATE_REPO_TOKEN
+bundle exec rails db:fixtures:load
 bundle exec mutant -r ./config/environment --use rspec $1 -j 1

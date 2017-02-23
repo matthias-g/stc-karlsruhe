@@ -14,3 +14,11 @@ two:
   category: 1
   visible: true
   slug: short
+
+invisible:
+  title: Invisible
+  teaser: ''
+  text: We are working on this
+  category: 1
+  visible: false
+  slug: invisible

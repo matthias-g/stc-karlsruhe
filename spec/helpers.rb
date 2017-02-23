@@ -25,3 +25,9 @@ RSpec::Matchers.define :lead_project do |project|
     user.leads_project? project
   end
 end
+
+RSpec::Matchers.define :volunteer_in_project do |project|
+  match do |user|
+    project.has_volunteer?(user)
+  end
+end

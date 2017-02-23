@@ -2,10 +2,11 @@
 
 one:
   gallery: one
-  picture: MyString
+  picture: VisiblePicture
   uploader: sabine
+  visible: true
 
 two:
   gallery: one
-  picture: MyString
+  picture: InvisiblePicture
   uploader: sabine

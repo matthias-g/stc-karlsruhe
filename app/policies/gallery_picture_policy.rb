@@ -30,7 +30,7 @@ class GalleryPicturePolicy < ApplicationPolicy
   alias_method :destroy?, :edit?
 
   def is_uploader?
-    user && record.uploader == user
+    user.equal?(record.uploader)
   end
 
 

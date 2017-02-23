@@ -2,10 +2,9 @@ require 'rails_helper'
 require 'helpers'
 
 RSpec.describe ProjectPolicy do
-  fixtures :projects, :users, :leaderships, :participations, :roles
 
   let(:user) { nil }
-  let(:project) { projects(:one) }
+  let(:project) { Project.find_by(title: 'Kostenlose Fahrradreparatur in der Innenstadt') }
   let(:policy) { ProjectPolicy.new(user, project) }
 
   describe 'show?' do
@@ -18,14 +17,14 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'invisible project' do
-      let(:project) { projects(:three) }
+      let(:project) { Project.find_by(title: 'Project 3') }
 
       it 'does not show for no user logged in' do
         expect(subject).to be_falsey
       end
 
       context 'project leader logged in' do
-        let(:user) { users(:rolf) }
+        let(:user) { User.find_by(username: :rolf) }
 
         it 'does show' do
           expect(subject).to be_truthy
@@ -42,7 +41,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'user leads project' do
-      let(:user) { users(:rolf) }
+      let(:user) { User.find_by(username: :rolf) }
 
       it 'is true' do
         expect(user).to lead_project(project)
@@ -51,7 +50,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'user is admin' do
-      let(:user) { users(:admin) }
+      let(:user) { User.find_by(username: :admin) }
 
       it 'is true' do
         expect(subject).to be_truthy
@@ -59,7 +58,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'for unrelated user' do
-      let(:user) { users(:sabine) }
+      let(:user) { User.find_by(username: :sabine) }
 
       it 'is false' do
         expect(user).not_to lead_project(project)
@@ -68,7 +67,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'project without leader' do
-      let(:project) { projects(:two) }
+      let(:project) { Project.find_by(title: 'Project 2') }
 
       it 'is false for no user logged in' do
         expect(project.leaders.count).to eq(0)
@@ -81,7 +80,7 @@ RSpec.describe ProjectPolicy do
     subject { policy.create? }
 
     context 'some user is logged in' do
-      let(:user) { users(:rolf) }
+      let(:user) { User.find_by(username: :rolf) }
 
       it 'is false' do
         expect(subject).to be_falsey
@@ -89,7 +88,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'admin is logged in' do
-      let(:user) { users(:admin) }
+      let(:user) { User.find_by(username: :admin) }
 
       it 'is true' do
         expect(subject).to be_truthy
@@ -101,7 +100,7 @@ RSpec.describe ProjectPolicy do
     subject { policy.index? }
 
     context 'some user is logged in' do
-      let(:user) { users(:rolf) }
+      let(:user) { User.find_by(username: :rolf) }
 
       it 'is false' do
         expect(subject).to be_falsey
@@ -109,7 +108,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'admin is logged in' do
-      let(:user) { users(:admin) }
+      let(:user) { User.find_by(username: :admin) }
 
       it 'is true' do
         expect(subject).to be_truthy
@@ -122,7 +121,7 @@ RSpec.describe ProjectPolicy do
 
     context 'if project is visible' do
       context 'for project leader' do
-        let(:user) { users(:rolf) }
+        let(:user) { User.find_by(username: :rolf) }
 
         it 'is true' do
           expect(subject).to be_truthy
@@ -130,7 +129,7 @@ RSpec.describe ProjectPolicy do
       end
 
       context 'for admin' do
-        let(:user) { users(:admin) }
+        let(:user) { User.find_by(username: :admin) }
 
         it 'is true' do
           expect(subject).to be_truthy
@@ -138,7 +137,7 @@ RSpec.describe ProjectPolicy do
       end
 
       context 'for other users' do
-        let(:user) { users(:sabine) }
+        let(:user) { User.find_by(username: :sabine) }
 
         it 'is false' do
           expect(subject).to be_falsey
@@ -150,7 +149,7 @@ RSpec.describe ProjectPolicy do
       before { project.visible = false }
 
       context 'for project leader' do
-        let(:user) { users(:rolf) }
+        let(:user) { User.find_by(username: :rolf) }
 
         it 'is false' do
           expect(subject).to be_falsey
@@ -158,7 +157,7 @@ RSpec.describe ProjectPolicy do
       end
 
       context 'for admin' do
-        let(:user) { users(:admin) }
+        let(:user) { User.find_by(username: :admin) }
 
         it 'is false' do
           expect(subject).to be_falsey
@@ -166,7 +165,7 @@ RSpec.describe ProjectPolicy do
       end
 
       context 'for other users' do
-        let(:user) { users(:sabine) }
+        let(:user) { User.find_by(username: :sabine) }
 
         it 'is false' do
           expect(subject).to be_falsey
@@ -186,7 +185,7 @@ RSpec.describe ProjectPolicy do
       end
 
       context 'project is invisible' do
-        let(:project) { projects(:three) }
+        let(:project) { Project.find_by(title: 'Project 3') }
 
         it 'is false for no user logged in' do
           expect(subject).to be_falsey
@@ -194,7 +193,7 @@ RSpec.describe ProjectPolicy do
       end
 
       context 'for admin' do
-        let(:user) { users(:admin) }
+        let(:user) { User.find_by(username: :admin) }
 
         it 'is false' do
           expect(subject).to be_falsey
@@ -210,14 +209,14 @@ RSpec.describe ProjectPolicy do
       end
 
       context 'project is invisible' do
-        let(:project) { projects(:three) }
+        let(:project) { Project.find_by(title: 'Project 3') }
 
         it 'is false for no user logged in' do
           expect(subject).to be_falsey
         end
 
         context 'for admin' do
-          let(:user) { users(:admin) }
+          let(:user) { User.find_by(username: :admin) }
 
           it 'is false' do
             expect(subject).to be_falsey
@@ -226,7 +225,7 @@ RSpec.describe ProjectPolicy do
       end
 
       context 'user is project leader' do
-        let(:user) { users(:rolf) }
+        let(:user) { User.find_by(username: :rolf) }
 
         it 'is true' do
           expect(subject).to be_truthy
@@ -234,7 +233,7 @@ RSpec.describe ProjectPolicy do
       end
 
       context 'user is admin' do
-        let(:user) { users(:admin) }
+        let(:user) { User.find_by(username: :admin) }
 
         it 'is true' do
           expect(subject).to be_truthy
@@ -242,7 +241,7 @@ RSpec.describe ProjectPolicy do
       end
 
       context 'user is volunteer' do
-        let(:user) { users(:sabine) }
+        let(:user) { User.find_by(username: :sabine) }
 
         it 'is true' do
           expect(subject).to be_truthy
@@ -250,7 +249,7 @@ RSpec.describe ProjectPolicy do
       end
 
       context 'user is photographer' do
-        let(:user) { users(:photographer) }
+        let(:user) { User.find_by(username: :photographer) }
 
         it 'is true' do
           expect(subject).to be_truthy
@@ -258,7 +257,7 @@ RSpec.describe ProjectPolicy do
       end
 
       context 'user is other user' do
-        let(:user) { users(:peter) }
+        let(:user) { User.find_by(username: :peter) }
 
         it 'is false' do
           expect(subject).to be_falsey
@@ -268,7 +267,7 @@ RSpec.describe ProjectPolicy do
 
     context 'project happening today' do
       before { project.days << ProjectDay.new(date: Time.now) }
-      let(:user) { users(:admin) }
+      let(:user) { User.find_by(username: :admin) }
 
       it 'is true for admin' do
         expect(subject).to be_truthy
@@ -285,7 +284,7 @@ RSpec.describe ProjectPolicy do
   end
 
   describe 'add_to_volunteers?' do
-    let(:new_volunteers) { [users(:peter)] }
+    let(:new_volunteers) { [User.find_by(username: :peter)] }
     subject { policy.add_to_volunteers?(new_volunteers) }
 
     context 'for no user logged in' do
@@ -295,7 +294,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'admin is logged in' do
-      let(:user) { users(:admin) }
+      let(:user) { User.find_by(username: :admin) }
 
       it 'is true' do
         expect(subject).to be_truthy
@@ -303,7 +302,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'other is logged in' do
-      let(:user) { users(:sabine) }
+      let(:user) { User.find_by(username: :sabine) }
 
       it 'is false' do
         expect(subject).to be_falsey
@@ -311,7 +310,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'user adds themselves' do
-      let(:user) { users(:peter) }
+      let(:user) { User.find_by(username: :peter) }
 
       it 'is true' do
         expect(subject).to be_truthy
@@ -319,10 +318,10 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'add multiple users' do
-      let(:new_volunteers) { [users(:peter), users(:birgit)] }
+      let(:new_volunteers) { [User.find_by(username: :peter), User.find_by(username: :birgit)] }
 
       context 'if the first user is logged in' do
-        let(:user) { users(:peter) }
+        let(:user) { User.find_by(username: :peter) }
 
         it 'is false' do
           expect(subject).to be_falsey
@@ -330,7 +329,7 @@ RSpec.describe ProjectPolicy do
       end
 
       context 'if the second user is logged in' do
-        let(:user) { users(:birgit) }
+        let(:user) { User.find_by(username: :birgit) }
 
         it 'is false' do
           expect(subject).to be_falsey
@@ -338,7 +337,7 @@ RSpec.describe ProjectPolicy do
       end
 
       context 'admin is logged in' do
-        let(:user) { users(:admin) }
+        let(:user) { User.find_by(username: :admin) }
 
         it 'is true' do
           expect(subject).to be_truthy
@@ -348,11 +347,11 @@ RSpec.describe ProjectPolicy do
   end
 
   describe 'remove_from_volunteers?' do
-    let(:user_to_remove) { users(:sabine) }
+    let(:user_to_remove) { User.find_by(username: :sabine) }
     subject { policy.remove_from_volunteers?(user_to_remove) }
 
     context 'some user is logged in' do
-      let(:user) { users(:rolf) }
+      let(:user) { User.find_by(username: :rolf) }
 
       it 'is false' do
         expect(subject).to be_falsey
@@ -360,7 +359,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'admin is logged in' do
-      let(:user) { users(:admin) }
+      let(:user) { User.find_by(username: :admin) }
 
       it 'is true' do
         expect(subject).to be_truthy
@@ -368,7 +367,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'user removes themselves' do
-      let(:user) { users(:sabine) }
+      let(:user) { User.find_by(username: :sabine) }
 
       it 'is true' do
         expect(subject).to be_truthy
@@ -377,11 +376,11 @@ RSpec.describe ProjectPolicy do
   end
 
   describe 'replace_volunteers?' do
-    let(:new_volunteers) { [users(:peter)] }
+    let(:new_volunteers) { [User.find_by(username: :peter)] }
     subject { policy.replace_volunteers?(new_volunteers) }
 
     context 'some user is logged in' do
-      let(:user) { users(:lea) }
+      let(:user) { User.find_by(username: :lea) }
 
       it 'is false' do
         expect(subject).to be_falsey
@@ -389,14 +388,14 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'admin is logged in' do
-      let(:user) { users(:admin) }
+      let(:user) { User.find_by(username: :admin) }
 
       it 'is true' do
         expect(subject).to be_truthy
       end
 
       context 'adds user to existing users' do
-        let(:new_volunteers) { [users(:sabine), users(:peter)] }
+        let(:new_volunteers) { [User.find_by(username: :sabine), User.find_by(username: :peter)] }
 
         it 'is true' do
           expect(subject).to be_truthy
@@ -405,7 +404,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'user removes themselves but adds someone else' do
-      let(:user) { users(:sabine) }
+      let(:user) { User.find_by(username: :sabine) }
 
       it 'is false' do
         expect(subject).to be_falsey
@@ -413,7 +412,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'user adds themselves but cannot remove someone else' do
-      let(:user) { users(:peter) }
+      let(:user) { User.find_by(username: :peter) }
 
       it 'is false' do
         expect(subject).to be_falsey
@@ -421,8 +420,8 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'user adds themselves' do
-      let(:new_volunteers) { [users(:sabine), users(:peter)] }
-      let(:user) { users(:peter) }
+      let(:new_volunteers) { [User.find_by(username: :sabine), User.find_by(username: :peter)] }
+      let(:user) { User.find_by(username: :peter) }
 
       it 'is true' do
         expect(subject).to be_truthy
@@ -434,7 +433,7 @@ RSpec.describe ProjectPolicy do
     subject { policy.enter? }
 
     context 'user is not yet volunteer' do
-      let(:user) { users(:peter) }
+      let(:user) { User.find_by(username: :peter) }
 
       it 'is true' do
         expect(subject).to be_truthy
@@ -442,7 +441,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'user is already volunteering' do
-      let(:user) { users(:sabine) }
+      let(:user) { User.find_by(username: :sabine) }
 
       it 'is false' do
         expect(subject).to be_falsey
@@ -454,7 +453,7 @@ RSpec.describe ProjectPolicy do
     subject { policy.leave? }
 
     context 'user is volunteer' do
-      let(:user) { users(:sabine) }
+      let(:user) { User.find_by(username: :sabine) }
 
       it 'is true' do
         expect(subject).to be_truthy
@@ -462,7 +461,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'user is not volunteering' do
-      let(:user) { users(:peter) }
+      let(:user) { User.find_by(username: :peter) }
 
       it 'is false' do
         expect(subject).to be_falsey

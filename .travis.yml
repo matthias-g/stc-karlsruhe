@@ -1,5 +1,5 @@
 language: ruby
-before_script: "bundle exec rails db:setup"
+before_script: "bundle exec rails db:setup; bundle exec rails db:fixtures:load"
 env:
   - TESTSCRIPT="bin/travis-tests"
   - TESTSCRIPT="bundle exec mutant -r ./config/environment --use rspec ProjectPolicy -j 1"

@@ -18,7 +18,7 @@ one:
   gallery: one
 
 two:
-  title: MyString
+  title: Project 2
   description: MyText
   location: MyString
   latitude: 1.5
@@ -32,7 +32,7 @@ two:
   gallery: two
 
 three:
-  title: MyString
+  title: Project 3
   description: MyText
   location: MyString
   latitude: 1.5

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+unset CODECLIMATE_REPO_TOKEN
+bundle exec mutant -r ./config/environment --use rspec $1 -j 1

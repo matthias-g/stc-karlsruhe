@@ -130,7 +130,7 @@ RSpec.describe UserPolicy do
     end
 
     context 'same user logged in' do
-      let(:current_user) { record }
+      let(:current_user) { users(:rolf) }
 
       it 'is true' do
         expect(subject).to be_truthy

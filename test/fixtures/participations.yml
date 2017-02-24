@@ -1,12 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-sabine-at-two:
-  user: sabine
-  project: two
-
 sabine-at-bikerepair:
   user: sabine
   project: one
+
+sabine-at-two:
+  user: sabine
+  project: two
 
 sabine-at-kindergarten-party:
   user: sabine

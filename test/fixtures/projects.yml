@@ -108,16 +108,16 @@ full:
   desired_team_size: 1
 
 soon_full:
-  title: Volle Aktion
+  title: Fast volle Aktion
   status: soon_full
   desired_team_size: 3
 
 full_but_closed:
-  title: Volle Aktion
+  title: Volle, geschlossene Aktion
   status: closed
   desired_team_size: 1
 
 soon_full_but_closed:
-  title: Volle Aktion
+  title: Fast volle, geschlossene Aktion
   status: closed
   desired_team_size: 3

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+INCLUSION=$(sed -n '/included do/{:a;n;/end #included/b;p;ba}' app/policies/concerns/project_user_relationship.rb | awk '{printf "%s\\n", $0}')
+sed -i "/include ProjectUserRelationship/c\ ${INCLUSION}" app/policies/user_policy.rb
+sed -i "/include ProjectUserRelationship/c\ ${INCLUSION}" app/policies/project_policy.rb
+
 unset CODECLIMATE_REPO_TOKEN
 bundle exec rails db:fixtures:load
 bundle exec mutant -r ./config/environment --use rspec $1 -j 1

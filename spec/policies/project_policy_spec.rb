@@ -268,7 +268,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'project happening today' do
-      before { project.days << ProjectDay.new(date: Time.now) }
+      before { project.days << ProjectDay.new(date: 1.seconds.ago) }
       let(:user) { users(:admin) }
 
       it 'is true for admin' do

@@ -77,7 +77,7 @@ loadedScripts = []
     method: 'PATCH'
   }
   $.ajax(url, settings)
-@requestToJsonApi = (url, method, payload) ->
+@requestToJsonApi = (url, method, payload = {}) ->
   settings = {
     accepts: {
       jsonapi: 'application/vnd.api+json'

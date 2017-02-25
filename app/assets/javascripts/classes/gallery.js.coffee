@@ -100,7 +100,6 @@ class @Gallery
     deferred = $.Deferred()
     window.getJsonApi('/api/galleries/' + galleryId + '?include=gallery-pictures', 'GET').done((response) =>
       window.getJsonApiStore().sync response
-      console.log response
       deferred.resolve(window.getJsonApiStore().find('galleries', galleryId))
     ).fail((error) ->
       console.log('Request failed', error)
@@ -199,31 +198,25 @@ class @Gallery
     @photoswipe.close()
       
     
-  # rotates the image currently opened in Photoswipe (dir = -1 or 1)
-  rotateCurrentImage: (dir) =>
+  # rotates the image currently opened in Photoswipe (direction = -1 or 1)
+  rotateCurrentImage: (direction) =>
     idx = @photoswipe.getCurrentIndex()
     item = @items[idx]
     
     # rotate image on server
-    dirStr = if dir > 0 then '/rotateRight' else '/rotateLeft'
-    $.ajax(
-      url: '/api/gallery-pictures/' + item.id + dirStr
-      dataType: 'json'
-      type: 'GET'
-      processData: false
-      contentType: 'application/json'
-    ).done (data) =>
+    rotationMethod = if direction > 0 then '/rotateRight' else '/rotateLeft'
+    window.getJsonApi('/api/gallery-pictures/' + item.id + rotationMethod).done (data) =>
       #TODO: show flash message
 
-    # update local image attributes
-    tmp = item.w
-    item.w = item.h
-    item.h = tmp
-    
-    # restart gallery
-    @initSlider()
-    @closeSlideshow()
-    @openSlideshow(idx)
+      # then update local image attributes
+      tmp = item.w
+      item.w = item.h
+      item.h = tmp
+
+      # restart gallery
+      @initSlider()
+      @closeSlideshow()
+      @openSlideshow(idx)
 
     
   # deletes the image currently opened in Photoswipe
@@ -235,28 +228,20 @@ class @Gallery
     item = @items[idx]
 
     # remove image on server
-    $.ajax(
-      url: '/api/gallery-pictures/' + item.id
-      dataType: 'json'
-      type: 'POST'
-      processData: false
-      contentType: 'application/json'
-      beforeSend: (xhr) =>
-        xhr.setRequestHeader 'X-Http-Method-Override', 'DELETE'
-    ).done (data) =>
+    window.requestToJsonApi('/api/gallery-pictures/' + item.id, 'DELETE').done (data) =>
       #TODO: show flash message
 
-    # remove image from Photoswipe
-    @items.splice idx, 1
-    if @items.length == 0
-      @photoswipe_html.remove()
-      @html.remove()
-      return
-    if idx >= @photoswipe.items.length - 1
-      @photoswipe.goTo(0)
-    @photoswipe.invalidateCurrItems()
-    @photoswipe.updateSize(true)
-    
-    # remove image from Slider
-    @slider_html_copy.find('.gallery-slides').children().eq(idx).remove()
-    @initSlider()
+      # then remove image from Photoswipe
+      @items.splice idx, 1
+      if @items.length == 0
+        @photoswipe_html.remove()
+        @html.remove()
+        return
+      if idx >= @photoswipe.items.length - 1
+        @photoswipe.goTo(0)
+      @photoswipe.invalidateCurrItems()
+      @photoswipe.updateSize(true)
+
+      # remove image from Slider
+      @slider_html_copy.find('.gallery-slides').children().eq(idx).remove()
+      @initSlider()

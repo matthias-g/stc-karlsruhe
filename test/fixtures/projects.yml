@@ -106,6 +106,8 @@ full:
   title: Volle Aktion
   status: full
   desired_team_size: 1
+  project_week: one
+  visible: true
 
 soon_full:
   title: Fast volle Aktion

@@ -122,7 +122,7 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     assert_equal users(:admin).id, @message.sender.id
     assert @message.sent?
     mail = ActionMailer::Base.deliveries.last
-    assert_equal 7, mail.bcc.count
+    assert_equal 8, mail.bcc.count
     assert (not mail.bcc.include? users(:deleted).email)
     assert mail.bcc.include? users(:sabine).email
   end
@@ -137,7 +137,7 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     assert_equal users(:admin).id, message.sender.id
     assert message.sent?
     mail = ActionMailer::Base.deliveries.last
-    assert_equal 6, mail.bcc.count
+    assert_equal 7, mail.bcc.count
     assert (not mail.bcc.include? users(:deleted).email)
     assert (not mail.bcc.include? users(:sabine).email)
   end

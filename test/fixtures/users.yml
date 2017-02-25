@@ -51,3 +51,9 @@ birgit:
   first_name: Birgit
   last_name: Bender
   email: birgit@mail.de
+
+tabea:
+  username: tabea
+  first_name: Tabea
+  last_name: Tischler
+  email: tabea@tischlers.de

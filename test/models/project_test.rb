@@ -7,8 +7,10 @@ class ProjectTest < ActiveSupport::TestCase
   end
 
   test "getting leaders" do
-    assert_equal 1, projects(:one).leaders.count
-    assert_equal 'rolf', projects(:one).leaders.first.username
+    assert_equal 2, projects(:one).leaders.count
+    usernames = projects(:one).leaders.collect { |user| user.username }
+    assert usernames.include? 'rolf'
+    assert usernames.include? 'tabea'
   end
 
   test "getting volunteers in subprojects" do
@@ -45,9 +47,10 @@ class ProjectTest < ActiveSupport::TestCase
 
   test "getting aggregated leaders of project without subprojects" do
     users = projects(:one).aggregated_leaders
-    assert_equal 1, users.count
+    assert_equal 2, users.count
     usernames = users.collect { |user| user.username }
     assert usernames.include? 'rolf'
+    assert usernames.include? 'tabea'
   end
 
   test "getting aggregated_desired_team_size of project with subprojects" do

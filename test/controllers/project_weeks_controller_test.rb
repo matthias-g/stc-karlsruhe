@@ -33,6 +33,44 @@ class ProjectWeeksControllerTest < ActionDispatch::IntegrationTest
     get project_week_url(@project_week)
     assert_response :success
     assert_select 'h1', 'Aktionswoche 2015'
+    expected_titles = ['Kostenlose Fahrradreparatur in der Innenstadt', 'Ausflug in den Zoo', 'Fest im Kindergarten', 'Volle Aktion']
+    assert_select '#project-list .project h2' do |titles|
+      assert_equal expected_titles.length, titles.length
+      actual_titles = titles.collect{|title| title.text}
+      expected_titles.each do |title|
+        assert_includes actual_titles, title
+      end
+    end
+  end
+
+  test "rolf should see one more project in project_week" do
+    sign_in users(:rolf)
+    get project_week_url(@project_week)
+    assert_response :success
+    assert_select 'h1', 'Aktionswoche 2015'
+    expected_titles = ['Project 3', 'Kostenlose Fahrradreparatur in der Innenstadt', 'Ausflug in den Zoo', 'Fest im Kindergarten', 'Volle Aktion']
+    assert_select '#project-list .project h2' do |titles|
+      assert_equal expected_titles.length, titles.length
+      actual_titles = titles.collect{|title| title.text}
+      expected_titles.each do |title|
+        assert_includes actual_titles, title
+      end
+    end
+  end
+
+  test "admin should see all projects in project_week" do
+    sign_in users(:admin)
+    get project_week_url(@project_week)
+    assert_response :success
+    assert_select 'h1', 'Aktionswoche 2015'
+    expected_titles = ['Project 2', 'Project 3', 'Kostenlose Fahrradreparatur in der Innenstadt', 'Ausflug in den Zoo', 'Fest im Kindergarten', 'Volle Aktion']
+    assert_select '#project-list .project h2' do |titles|
+      assert_equal expected_titles.length, titles.length
+      actual_titles = titles.collect{|title| title.text}
+      expected_titles.each do |title|
+        assert_includes actual_titles, title
+      end
+    end
   end
 
   test "project should show short description if available" do

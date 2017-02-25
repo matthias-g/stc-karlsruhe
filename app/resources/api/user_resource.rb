@@ -7,7 +7,6 @@ class Api::UserResource < JSONAPI::Resource
     Pundit.policy(context[:user], @model).permitted_attributes_for_show
   end
 
-  has_many :projects_as_volunteer, class_name: 'Project', through: :participations, # inverse_relationship: :volunteers,
-           always_include_linkage_data: false
+  has_many :projects_as_volunteer, class_name: 'Project', through: :participations, always_include_linkage_data: false
 
 end

@@ -45,7 +45,7 @@ RSpec.describe UserPolicy do
     subject { policy.index? }
 
     it 'is false for no user logged in' do
-      expect(subject).to be(false)
+      expect(subject).to be_falsey
     end
 
     context 'other user logged in' do
@@ -81,7 +81,7 @@ RSpec.describe UserPolicy do
     end
 
     context 'same user logged in' do
-      let(:current_user) { record }
+      let(:current_user) { users(record.username) }
 
       it 'is true' do
         expect(subject).to be_truthy
@@ -154,7 +154,7 @@ RSpec.describe UserPolicy do
     end
 
     context 'same user logged in' do
-      let(:current_user) { record }
+      let(:current_user) { users(record.username) }
 
       it 'contains other attributes' do
         expect(subject).to contain_exactly(:username, :first_name, :last_name, :email, :phone,

@@ -9,18 +9,17 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-    return false unless user
-    user.admin?
+    is_admin?
   end
 
   def show?
     return false unless user
-    !record.cleared? || user.admin?
+    !record.cleared? || is_admin?
   end
 
   def permitted_attributes_for_show
     return [:first_name] unless user
-    return [:first_name, :last_name] unless user.equal?(record) || user.admin?
+    return [:first_name, :last_name] unless user.eql?(record) || user.admin?
     [:username, :first_name, :last_name, :email, :phone,
         :receive_emails_about_project_weeks, :receive_emails_about_my_project_weeks, :receive_emails_about_other_projects,
         :receive_other_emails_from_orga, :receive_emails_from_other_users]
@@ -28,7 +27,7 @@ class UserPolicy < ApplicationPolicy
 
   def edit?
     return false unless user
-    user.equal?(record) || user.admin?
+    user.eql?(record) || is_admin?
   end
 
   alias_method :update?, :edit?

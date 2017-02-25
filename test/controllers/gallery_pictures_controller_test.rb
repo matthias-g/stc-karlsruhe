@@ -9,7 +9,7 @@ class GalleryPicturesControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get gallery_pictures_url
     assert_response :success
-    assert_select 'tbody tr', 2
+    assert_select 'tbody tr', 3
   end
 
   test "should get new" do

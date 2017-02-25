@@ -5,8 +5,12 @@ class GalleryPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    visible_gallery_pictures = GalleryPicturePolicy::Scope.new(user, record.gallery_pictures).resolve
+    visible_gallery_pictures.count > 0 || is_admin?
+  end
+
   alias_method :index?, :is_admin?
-  alias_method :show?, :is_admin?
   alias_method :new?, :is_admin?
   alias_method :edit?, :is_admin?
   alias_method :create?, :is_admin?

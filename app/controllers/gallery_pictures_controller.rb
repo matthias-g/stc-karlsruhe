@@ -52,7 +52,7 @@ class GalleryPicturesController < ApplicationController
   end
 
   def make_invisible
-    @gallery_picture.make_visible!
+    @gallery_picture.make_invisible!
     return redirect_to request.referer if request.referer
     redirect_to @gallery_picture.gallery
   end

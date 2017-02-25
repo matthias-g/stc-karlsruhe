@@ -10,3 +10,8 @@ two:
   gallery: one
   picture: InvisiblePicture
   uploader: sabine
+
+three:
+  gallery: three
+  picture: InvisiblePicture3
+  uploader: sabine

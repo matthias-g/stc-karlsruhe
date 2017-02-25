@@ -91,6 +91,11 @@ loadedScripts = []
     method: method
   }
   $.ajax(url, settings)
+
+@getJsonApiStore = ->
+  unless window.jsonApiStore
+    window.jsonApiStore = new JsonApiDataStore()
+  return window.jsonApiStore
   
 ### PRIVATE ###
 
@@ -133,7 +138,3 @@ onNewContent ->
 
   # lazyload images (must be activated with lazy:true in image_tag helper)
   $('img', @).lazyload threshold: 200
-
-
-onPageLoad ->
-  window.jsonApiStore = new JsonApiDataStore();

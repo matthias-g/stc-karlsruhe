@@ -92,23 +92,39 @@ class @Gallery
     @items = []
     @loadGalleryItems().done =>
       @initSlider()
-    
+
+  loadGallery: (galleryId) =>
+    gallery = window.getJsonApiStore().find('galleries', galleryId)
+    if gallery
+      return $.when(gallery)
+    deferred = $.Deferred()
+    window.getJsonApi('/api/galleries/' + galleryId + '?include=gallery-pictures', 'GET').done((response) =>
+      window.getJsonApiStore().sync response
+      console.log response
+      deferred.resolve(window.getJsonApiStore().find('galleries', galleryId))
+    ).fail((error) ->
+      console.log('Request failed', error)
+      deferred.reject(error)
+    )
+    return deferred.promise()
+
   # load picture info with AJAX
   loadGalleryItems: =>
     @items = []
     galleryId = @html.data('gallery-id')
-    $.getJSON('/api/galleries/' + galleryId, (data) =>
-      for pic in data.gallery_pictures
+    @loadGallery(galleryId).done((gallery) =>
+      for gallery_picture in gallery['gallery-pictures']
         @items.push(
-          src: pic.picture.desktop.url,
-          raw_src: pic.picture.url,
-          w: pic.desktop_width,
-          h: pic.desktop_height,
-          id: pic.id,
-          editable: pic.editable
+          src:      gallery_picture.picture.picture.desktop.url,
+          raw_src:  gallery_picture.picture.picture.url,
+          w:        gallery_picture['desktop-width'],
+          h:        gallery_picture['desktop-height'],
+          id:       gallery_picture.id,
+          editable: gallery_picture.editable
         )
-    ).fail (jqxhr, textStatus, error) =>
-      console.log( "Request Failed: " + textStatus + ", " + error )
+    ).fail((error) ->
+      console.log('Request failed', error)
+    )
 
       
   # create JSSOR (gallery) view

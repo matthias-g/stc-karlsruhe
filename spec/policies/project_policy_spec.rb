@@ -9,27 +9,25 @@ RSpec.describe ProjectPolicy do
   let(:project) { projects('Kostenlose Fahrradreparatur in der Innenstadt') }
   let(:policy) { ProjectPolicy.new(user, project) }
 
-  describe 'show?' do
-    subject { policy.show? }
+  permissions :show? do
+    subject { described_class }
 
-    context 'visible project' do
-      it 'does show for no user logged in' do
-        expect(subject).to be_truthy
-      end
+    it 'grants access if project is visible and no user logged in' do
+      expect(subject).to permit(user, project)
     end
 
     context 'invisible project' do
       let(:project) { projects('Project 3') }
 
-      it 'does not show for no user logged in' do
-        expect(subject).to be_falsey
+      it 'denies access if no user is logged in' do
+        expect(subject).not_to permit(user, project)
       end
 
-      context 'project leader logged in' do
+      context 'if project leader logged in' do
         let(:user) { users(:rolf) }
 
-        it 'does show' do
-          expect(subject).to be_truthy
+        it 'grants access' do
+          expect(subject).to permit(user, project)
         end
       end
     end

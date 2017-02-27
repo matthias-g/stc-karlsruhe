@@ -215,7 +215,7 @@ var JsonApiDataStore = (function () {
             }
           }
           if (rel.links) {
-            console.log("Warning: Links not implemented yet.");
+            // console.log("Warning: Links not implemented yet.");
           }
         }
       }

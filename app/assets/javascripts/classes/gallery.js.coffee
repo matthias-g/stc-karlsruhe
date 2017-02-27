@@ -93,25 +93,12 @@ class @Gallery
     @loadGalleryItems().done =>
       @initSlider()
 
-  loadGallery: (galleryId) =>
-    gallery = window.getJsonApiStore().find('galleries', galleryId)
-    if gallery
-      return $.when(gallery)
-    deferred = $.Deferred()
-    window.getJsonApi('/api/galleries/' + galleryId + '?include=gallery-pictures', 'GET').done((response) =>
-      window.getJsonApiStore().sync response
-      deferred.resolve(window.getJsonApiStore().find('galleries', galleryId))
-    ).fail((error) ->
-      console.log('Request failed', error)
-      deferred.reject(error)
-    )
-    return deferred.promise()
-
   # load picture info with AJAX
   loadGalleryItems: =>
     @items = []
     galleryId = @html.data('gallery-id')
-    @loadGallery(galleryId).done((gallery) =>
+    parameters = { 'include': 'gallery-pictures' }
+    window.getResource('galleries', galleryId, parameters).done((gallery) =>
       for gallery_picture in gallery['gallery-pictures']
         @items.push(
           src:      gallery_picture.picture.picture.desktop.url,

@@ -7,18 +7,23 @@ filterProjectList = (e, obj) ->
     $('#filterResults').text 'Gefundene Aktionen: ' + $(@).children().size()
 
 # handler for "add leader" select
-@addNewLeader = (val, html) ->
-  path = '/api/projects/' + html.data('project-id') + '/add_leader?user_id=' + val
-  $.ajax(path).done ->
+@addNewLeader = (userId, html) ->
+  projectId = html.data('project-id')
+  data = {
+    'data': [
+      { 'type': 'users', 'id': userId }
+    ]
+  }
+  window.requestToJsonApi("/api/projects/#{projectId}/relationships/leaders", 'POST', data).done ->
     location.reload()
 
 # project edit: load weekdays of selected week
 updateDaysOnWeekChange = ->
-  week = @.value
-  $.getJSON '/api/project_weeks/' + week + '/project_days', (res) ->
+  weekId = @.value
+  window.getResource('project-weeks', weekId, { 'include': 'days'}).done (projectWeek) ->
     daySelect = $('.days select').empty()
-    $.each res, (idx, day) ->
-      $('<option>').attr(value: day.id).text(day.title).appendTo daySelect    
+    for day in projectWeek.days
+      $('<option>').attr(value: day.id).text(day.title).appendTo daySelect
     
     
       

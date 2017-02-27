@@ -7,7 +7,7 @@ class ProjectDayPolicy < ApplicationPolicy
   end
 
   def index?
-    is_admin?
+    true
   end
 
   def create?
@@ -15,7 +15,7 @@ class ProjectDayPolicy < ApplicationPolicy
   end
 
   def show?
-    is_admin?
+    true
   end
 
   def edit?

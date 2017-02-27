@@ -50,52 +50,6 @@ loadedScripts = []
   onPageLoad ->  
     handler.call($('body').get(0))
     $('.modal').on 'shown.bs.modal', handler
-
-@getJsonApi = (url) ->
-  settings = {
-    accepts: {
-      jsonapi: 'application/vnd.api+json'
-    },
-    converters: {
-      'text jsonapi': (result) -> JSON.parse(result)
-    },
-    dataType: 'jsonapi'
-  }
-  $.ajax(url, settings)
-
-@updateJsonApi = (url, payload) ->
-  settings = {
-    accepts: {
-      jsonapi: 'application/vnd.api+json'
-    },
-    contentType: 'application/vnd.api+json',
-    converters: {
-      'text jsonapi': (result) -> JSON.parse(result)
-    },
-    dataType: 'jsonapi',
-    data: JSON.stringify(payload),
-    method: 'PATCH'
-  }
-  $.ajax(url, settings)
-@requestToJsonApi = (url, method, payload = {}) ->
-  settings = {
-    accepts: {
-      jsonapi: 'application/vnd.api+json'
-    },
-    contentType: 'application/vnd.api+json',
-    converters: {
-      'text jsonapi': (result) -> result
-    },
-    dataType: 'jsonapi',
-    data: JSON.stringify(payload),
-    method: method
-  }
-  $.ajax(url, settings)
-
-@getJsonApiStore = ->
-  unless window.jsonApiStore
-    window.jsonApiStore = new JsonApiDataStore()
-  return window.jsonApiStore
   
 ### PRIVATE ###
 

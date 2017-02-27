@@ -11,6 +11,7 @@
 //= require bootstrap-sprockets
 
 //= require general
+//= require jsonapi
 //= require_tree ./classes
 //= require_tree ./views
 //= require_tree ./pages

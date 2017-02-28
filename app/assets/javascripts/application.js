@@ -5,7 +5,7 @@
 //= require jquery.lazyload
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require jquery-ui/sortable
+//= require jquery-ui/widgets/sortable
 //= require jsonapi-datastore
 //= require turbolinks
 //= require bootstrap-sprockets

@@ -74,6 +74,8 @@ gem 'trix'
 gem 'groupdate'
 gem 'chartkick'
 
+gem 'dotenv-rails'
+
 gem 'actionview-encoded_mail_to'
 gem 'recaptcha', require: 'recaptcha/rails'
 
@@ -83,8 +85,6 @@ gem 'nokogiri'
 gem 'pg'
 
 gem 'friendly_id'
-
-gem 'dotenv-rails'
 
 gem 'unicorn'
 

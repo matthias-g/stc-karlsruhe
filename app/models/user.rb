@@ -65,6 +65,10 @@ class User < ApplicationRecord
     has_role?(:admin)
   end
 
+  def coordinator?
+    has_role?(:coordinator)
+  end
+
   def photographer?
     has_role?(:photographer)
   end

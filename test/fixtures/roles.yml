@@ -3,6 +3,9 @@
 admin:
   title: admin
 
+coordinator:
+  title: coordinator
+
 photographer:
   title: photographer
 

@@ -58,4 +58,8 @@ class ApplicationPolicy
     user && user.admin?
   end
 
+  def is_coordinator?
+    user && user.coordinator?
+  end
+
 end

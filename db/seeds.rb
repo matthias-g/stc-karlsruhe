@@ -7,4 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Role.create!(title: :admin)
+Role.create!(title: :coordinator)
+Role.create!(title: :photographer)
 ProjectWeek.create!(default: true, title: Time.now.year.to_s)

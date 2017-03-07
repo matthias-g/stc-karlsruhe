@@ -8,6 +8,7 @@ class PagesController < ApplicationController
 
   def page
     @partial_name = params[:page].gsub('-', '')
+    authorize :page, @partial_name if restricted_partials.include?(@partial_name)
     lookup_context.find_all("pages/_#{@partial_name}").any? or not_found
   end
 
@@ -18,9 +19,13 @@ class PagesController < ApplicationController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def page_params
-      params.require(:page)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def page_params
+    params.require(:page)
+  end
+
+  def restricted_partials
+    ['admindashboard']
+  end
 
 end

@@ -1,6 +1,6 @@
 class ProjectDaysController < ApplicationController
   before_action :set_project_day, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin_user!
+  before_action :authenticate_admin!
   before_action :authorize_project_day, except: [:index, :new, :create]
 
   after_action :verify_authorized, except: :index

@@ -1,6 +1,6 @@
 class RolesController < ApplicationController
   before_action :set_role, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin_user!
+  before_action :authenticate_admin!
   before_action :authorize_role, except: [:index, :new, :create]
 
   after_action :verify_authorized, except: :index

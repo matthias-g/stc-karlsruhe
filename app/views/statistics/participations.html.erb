@@ -14,7 +14,7 @@
 <div class="row row-md-eq-height">
 
   <section class="col-md-12">
-    <%= line_chart Participation.where(as_leader: false).where('created_at > ?', 60.days.ago).group_by_day(:created_at).count, colors: ['#229c95'] %>
+    <%= line_chart Participation.where('created_at > ?', 60.days.ago).group_by_day(:created_at).count, colors: ['#229c95'] %>
   </section>
 
 </div>

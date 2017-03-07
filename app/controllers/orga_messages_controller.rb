@@ -1,5 +1,5 @@
 class OrgaMessagesController < ApplicationController
-  before_action :authenticate_admin_user!
+  before_action :authenticate_admin_or_coordinator!
   before_action :set_message, except: [:index, :new, :create]
   before_action :authorize_message, except: [:index, :new, :create]
 

@@ -20,6 +20,13 @@ admin:
   email: admin@root.org
   roles: admin
 
+coordinator:
+  username: coordinator
+  first_name: Coordi
+  last_name: Nator
+  email: coordinator@example.org
+  roles: coordinator
+
 photographer:
   username: photographer
   first_name: Photo

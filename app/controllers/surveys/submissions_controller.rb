@@ -1,5 +1,5 @@
 class Surveys::SubmissionsController < ApplicationController
-  before_action :authenticate_admin_user!, except: [:new, :create]
+  before_action :authenticate_admin_or_coordinator!, except: [:new, :create]
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
   before_action :authorize_submission, except: [:index, :new, :create]
 

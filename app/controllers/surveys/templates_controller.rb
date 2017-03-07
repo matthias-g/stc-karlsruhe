@@ -1,5 +1,5 @@
 class Surveys::TemplatesController < ApplicationController
-  before_action :authenticate_admin_user!, except: :show
+  before_action :authenticate_admin_or_coordinator!, except: :show
   before_action :set_template, only: [:show, :edit, :update, :destroy]
   before_action :redirect_non_admins_to_answers, only: :show
   before_action :authorize_template, except: [:index, :new, :create]
@@ -61,7 +61,7 @@ class Surveys::TemplatesController < ApplicationController
   end
 
   def redirect_non_admins_to_answers
-    unless current_user && current_user.admin?
+    unless current_user && (current_user.admin? || current_user.coordinator?)
       redirect_to new_surveys_template_surveys_submission_path(@template)
     end
   end

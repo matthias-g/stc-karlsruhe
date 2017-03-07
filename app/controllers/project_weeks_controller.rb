@@ -1,6 +1,6 @@
 class ProjectWeeksController < ApplicationController
   before_action :set_project_week, except: [:index, :new, :create]
-  before_action :authenticate_admin_user!, except: [:show]
+  before_action :authenticate_admin!, except: [:show]
   before_action :authorize_project_week, except: [:index, :new, :create]
 
   after_action :verify_authorized, except: :index

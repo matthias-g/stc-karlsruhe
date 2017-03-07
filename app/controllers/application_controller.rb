@@ -26,9 +26,16 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError.new('Not Authorized')
   end
 
-  def authenticate_admin_user!
+  def authenticate_admin!
     authenticate_user!
     unless current_user.admin?
+      redirect_to '/'
+    end
+  end
+
+  def authenticate_admin_or_coordinator!
+    authenticate_user!
+    unless current_user.admin? || current_user.coordinator?
       redirect_to '/'
     end
   end

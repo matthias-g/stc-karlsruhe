@@ -12,15 +12,15 @@
     <% end %>
   </li>
   <li>
-  <%= link_to '/stadtpiraten' do %>
-      <span class="glyphicon glyphicon-cog"></span>
-      Stadtpiraten
-  <% end %>
+    <%= link_to '/stadtpiraten' do %>
+        <span class="glyphicon glyphicon-cog"></span>
+        Stadtpiraten
+    <% end %>
   </li>
   <li>
     <%= link_to contact_path do %>
-      <span class="glyphicon glyphicon-envelope"></span>
-      <%= t('layout.links.contact') %>
+        <span class="glyphicon glyphicon-envelope"></span>
+        <%= t('layout.links.contact') %>
     <% end %>
   </li>
   <li>
@@ -34,82 +34,89 @@
 <ul class="nav navbar-nav navbar-right" style="padding-right: 15px;">
 
   <% if user_signed_in? %>
-
-    <li>
-      <%= link_to user_path(current_user) do %>
-        <span class="glyphicon glyphicon-user"></span> <%= current_user.full_name %>
+      <li>
+        <%= link_to user_path(current_user) do %>
+            <span class="glyphicon glyphicon-user"></span> <%= current_user.full_name %>
+        <% end %>
+      </li>
+      <% if current_user.coordinator? %>
+          <li>
+            <%= link_to '/admin-dashboard' do %>
+                <span class="glyphicon glyphicon-dashboard"></span>
+                <%= t('layout.links.adminDashboard') %>
+            <% end %>
+          </li>
       <% end %>
-    </li>
-    <li>
-      <%= link_to destroy_user_session_path, :method => :delete do %>
-        <span class="glyphicon glyphicon-log-out"></span> <%= t('user.action.logout') %>
-      <% end %>
-    </li>
+      <li>
+        <%= link_to destroy_user_session_path, :method => :delete do %>
+            <span class="glyphicon glyphicon-log-out"></span> <%= t('user.action.logout') %>
+        <% end %>
+      </li>
 
   <% else %>
 
-    <li class="dropdown hidden-hamburger">
-      <%= link_to new_user_session_path(hideRegistration:1),
-            data:{toggle:'dropdown'}, class:'dropdown-toggle' do %>
-        <span class="glyphicon glyphicon-log-in"></span> <%= t('user.action.login') %>
-      <% end %>
-      <div class="dropdown-menu">
-        <%= bootstrap_form_for(resource, as: resource_name, namespace: 'navbar_login',
-             url: session_path(resource_name)) do |f| %>
-          <%= f.text_field :login, hide_label: true,
-                placeholder: t('user.label.user_or_email') %>
-          <%= f.password_field :password, hide_label: true,
-                placeholder: t('activerecord.attributes.user.password') %>
-          <% if devise_mapping.rememberable? -%>
-            <%= f.check_box :remember_me %>
-          <% end -%>
-          <%= f.submit t('user.action.login'), class:'btn btn-default btn-wide' %>
-          <div style="padding:5px;">
-              <%- if devise_mapping.recoverable? %>
-                <%= link_to t('user.action.recoverPassword'),
-                    new_password_path(resource_name) %><br />
-              <% end -%>
-          </div>
-        <% end %>
-      </div>
-    </li>
-
-    <% current_path = request.env['PATH_INFO'] %>
-    <% unless current_path == contact_path || params[:controller] =~ /users.*/ || current_path == own_project_path %>
       <li class="dropdown hidden-hamburger">
-        <%= link_to new_user_registration_path, data:{toggle:'dropdown'}, class:'dropdown-toggle' do %>
-            <span class="glyphicon glyphicon-user"></span> <%= t('user.action.register') %>
+        <%= link_to new_user_session_path(hideRegistration:1),
+                    data:{toggle:'dropdown'}, class:'dropdown-toggle' do %>
+            <span class="glyphicon glyphicon-log-in"></span> <%= t('user.action.login') %>
         <% end %>
         <div class="dropdown-menu">
-          <%= bootstrap_form_for(resource, as: resource_name, namespace: 'navbar_reg',
-               url: registration_path(resource_name)) do |f| %>
-            <%#= devise_error_messages! %>
-            <%= f.text_field :first_name, hide_label: true,
-                  placeholder: t('activerecord.attributes.user.first_name') %>
-            <%= f.text_field :last_name, hide_label: true,
-                  placeholder: t('activerecord.attributes.user.last_name') %>
-            <%= f.text_field :email, autofocus: true, hide_label: true,
-                  placeholder: t('activerecord.attributes.user.email') %>
-            <%= f.password_field :password, hide_label: true,
-                  placeholder: t('activerecord.attributes.user.password') %>
-            <%= f.form_group do %>
-              <%= recaptcha_tags ajax: true %>
-            <% end %>
-            <%= f.submit t('user.action.register'), class:'btn btn-default btn-wide' %>
+          <%= bootstrap_form_for(resource, as: resource_name, namespace: 'navbar_login',
+                                 url: session_path(resource_name)) do |f| %>
+              <%= f.text_field :login, hide_label: true,
+                               placeholder: t('user.label.user_or_email') %>
+              <%= f.password_field :password, hide_label: true,
+                                   placeholder: t('activerecord.attributes.user.password') %>
+              <% if devise_mapping.rememberable? -%>
+                  <%= f.check_box :remember_me %>
+              <% end -%>
+              <%= f.submit t('user.action.login'), class:'btn btn-default btn-wide' %>
+              <div style="padding:5px;">
+                <%- if devise_mapping.recoverable? %>
+                    <%= link_to t('user.action.recoverPassword'),
+                                new_password_path(resource_name) %><br />
+                <% end -%>
+              </div>
           <% end %>
         </div>
       </li>
-    <% end %>
 
-    <li class="visible-hamburger-block">
-      <%= link_to new_user_session_path(hideRegistration:1) do %>
-          <span class="glyphicon glyphicon-log-in"></span> <%= t('user.action.login') %>
+      <% current_path = request.env['PATH_INFO'] %>
+      <% unless current_path == contact_path || params[:controller] =~ /users.*/ || current_path == own_project_path %>
+          <li class="dropdown hidden-hamburger">
+            <%= link_to new_user_registration_path, data:{toggle:'dropdown'}, class:'dropdown-toggle' do %>
+                <span class="glyphicon glyphicon-user"></span> <%= t('user.action.register') %>
+            <% end %>
+            <div class="dropdown-menu">
+              <%= bootstrap_form_for(resource, as: resource_name, namespace: 'navbar_reg',
+                                     url: registration_path(resource_name)) do |f| %>
+                  <%#= devise_error_messages! %>
+                  <%= f.text_field :first_name, hide_label: true,
+                                   placeholder: t('activerecord.attributes.user.first_name') %>
+                  <%= f.text_field :last_name, hide_label: true,
+                                   placeholder: t('activerecord.attributes.user.last_name') %>
+                  <%= f.text_field :email, autofocus: true, hide_label: true,
+                                   placeholder: t('activerecord.attributes.user.email') %>
+                  <%= f.password_field :password, hide_label: true,
+                                       placeholder: t('activerecord.attributes.user.password') %>
+                  <%= f.form_group do %>
+                      <%= recaptcha_tags ajax: true %>
+                  <% end %>
+                  <%= f.submit t('user.action.register'), class:'btn btn-default btn-wide' %>
+              <% end %>
+            </div>
+          </li>
       <% end %>
-    </li>
-    <li class="visible-hamburger-block">
-      <%= link_to new_user_registration_path do %>
-          <span class="glyphicon glyphicon-user"></span> <%= t('user.action.register') %>
-      <% end %>
-    </li>
+
+      <li class="visible-hamburger-block">
+        <%= link_to new_user_session_path(hideRegistration:1) do %>
+            <span class="glyphicon glyphicon-log-in"></span> <%= t('user.action.login') %>
+        <% end %>
+      </li>
+      <li class="visible-hamburger-block">
+        <%= link_to new_user_registration_path do %>
+            <span class="glyphicon glyphicon-user"></span> <%= t('user.action.register') %>
+        <% end %>
+      </li>
   <% end %>
 </ul>

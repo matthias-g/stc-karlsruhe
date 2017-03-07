@@ -1,0 +1,56 @@
+<% content_for :pageTitle do %>
+    <%= 'Admin Dashboard' %>
+<% end %>
+
+<section>
+  <h1>Admin Dashboard</h1>
+</section>
+
+<div class="row">
+  <section class="col-sm-4">
+    <%= link_to statistiken_auslastung_path do %>
+        <h2>Auslastungsstatistik</h2>
+    <% end %>
+    <p>Statistik über Auslastung der Aktionen</p>
+  </section>
+  <section class="col-sm-4">
+    <%= link_to statistiken_teilnahmen_path do %>
+        <h2>Teilnahmenstatistik</h2>
+    <% end %>
+    <p>Statistik über neue Teilnahmen der letzten 60 Tage</p>
+  </section>
+  <section class="col-sm-4">
+    <%= link_to 'stats' do %>
+        <h2>Website-Statistiken</h2>
+    <% end %>
+    <p>Statistiken über Websitebesuche</p>
+    <p>Login mit Benutzername '<%= Rails.application.secrets.stats_user %>' und Passwort '<%= Rails.application.secrets.stats_password %>'</p>
+  </section>
+</div>
+
+<div class="row">
+  <section class="col-sm-6">
+    <%= link_to orga_messages_path do %>
+        <h2>Orgamails</h2>
+    <% end %>
+    <p>E-Mails an Mitarbeiter und Aktionsleiter schicken</p>
+  </section>
+  <section class="col-sm-6">
+    <%= link_to 'webmail' do %>
+        <h2>Webmail</h2>
+    <% end %>
+    <p>Auf eigenen E-Mail-Account zugreifen</p>
+    <% if Rails.application.secrets.change_mail_password_url %>
+        <%= link_to 'Passwort ändern', Rails.application.secrets.change_mail_password_url %>
+    <% end %>
+  </section>
+</div>
+
+<div class="row">
+  <section class="col-sm-12">
+    <%= link_to surveys_templates_path do %>
+        <h2>Umfragen</h2>
+    <% end %>
+    <p>Umfragen erstellen und Einsendungen zu Umfragen ansehen</p>
+  </section>
+</div>

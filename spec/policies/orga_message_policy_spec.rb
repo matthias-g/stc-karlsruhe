@@ -24,6 +24,14 @@ RSpec.describe OrgaMessagePolicy do
           expect(subject).to be_truthy
         end
       end
+
+      context 'coordinator logged in' do
+        let(:current_user) { users(:coordinator) }
+
+        it 'is true' do
+          expect(subject).to be_truthy
+        end
+      end
     end
   end
 
@@ -37,6 +45,14 @@ RSpec.describe OrgaMessagePolicy do
 
       context 'admin logged in' do
         let(:current_user) { users(:admin) }
+
+        it 'is true' do
+          expect(subject).to be_truthy
+        end
+      end
+
+      context 'coordinator logged in' do
+        let(:current_user) { users(:coordinator) }
 
         it 'is true' do
           expect(subject).to be_truthy

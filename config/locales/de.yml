@@ -413,6 +413,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       recoverPassword: 'Passwort vergessen?'
       changePassword: 'Passwort ändern'
       loginWithProvider: 'Anmelden via %{provider}'
+      newRole: Neue Rolle auswählen
     label:
       login: 'Anmelden'
       register: 'Registrieren'
@@ -423,6 +424,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       myProfile: 'Mein Profil'
       userData: 'Profildaten'
       emailSettings: 'E-Mail-Einstellungen'
+      roles: 'Rollen'
       receiveEmailsFromOrga: 'E-Mails vom Orgateam erhalten'
       emailReception:
         orga: Du erhältst E-Mails vom Orgateam.
@@ -464,7 +466,9 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
     noProjects: 'Wir sind zwar schon bei der Planung der Aktionswoche, aber bisher sind noch keine Aktionen öffentlich. Schau später nochmal vorbei oder kontaktiere uns, wenn du einen Vorschlag für eine Aktion hast!'
 
   role:
-    new: 'Neue User-Rolle'
+    action:
+      addUser: Benutzer hinzufügen
+    new: 'Neue User-Rolle anlegen'
     save: 'Rolle speichern'
     list: 'User-Rollen verwalten'
     role: 'Titel'

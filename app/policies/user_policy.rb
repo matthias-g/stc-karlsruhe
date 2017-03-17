@@ -43,4 +43,8 @@ class UserPolicy < ApplicationPolicy
     projects.all? { |project| allow_add_volunteer_to_project?(record, project) }
   end
 
+  def add_to_roles?(_role)
+    is_admin?
+  end
+
 end

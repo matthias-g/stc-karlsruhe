@@ -4,28 +4,52 @@
 
 <section>
   <h1><%= t('role.captionList') %></h1>
-  <%= link_to t('role.new'), new_role_path %>
 </section>
-<section id="roleList">
-    <table>
-      <thead>
-        <tr>
-          <th><%= t('general.label.name') %></th>
-          <th><%= t('general.label.actions') %></th>
-        </tr>
-      </thead>
 
-      <tbody>
-        <% @roles.each do |role| %>
-          <tr>
-            <td><%= link_to role.title, role %></td>
-            <td>
-              <%= link_to t('general.action.edit'), edit_role_path(role) %> |
-              <%= link_to t('general.action.delete'), role, method: :delete,
-                  data: { confirm: t('role.confirmDelete') % [role.title]} %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+<div class="row">
+  <% @roles.each do |role| %>
+      <section class="role-info col-md-6">
+        <h2><%= role.title %></h2>
+        <div>
+          <% policy_scope(role.users).each do |user| %>
+              <div class="user">
+                <span><%= user.full_name %></span>
+                <%= link_to '', '', class: 'glyphicon glyphicon-remove', data: {'user-id': user.id, 'role-id': role.id} %>
+              </div>
+          <% end %>
+        </div>
+        <div>
+          <%= select_tag "add-user-to-#{role.title}", options_for_add_user_to_role(role),
+                         class: 'selectpicker', title: t('role.action.addUser'),
+                         data: { class: 'SelectPicker', handler: 'addUserToRole',
+                                 live_search: true, role_id: role.id, size: 5 } %>
+        </div>
+      </section>
+  <% end %>
+</div>
+
+<section id="roleList">
+  <table>
+    <thead>
+    <tr>
+      <th><%= t('general.label.name') %></th>
+      <th><%= t('general.label.actions') %></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @roles.each do |role| %>
+        <tr>
+          <td><%= link_to role.title, role %></td>
+          <td>
+            <%= link_to t('general.action.edit'), edit_role_path(role) %> |
+            <%= link_to t('general.action.delete'), role, method: :delete,
+                        data: { confirm: t('role.confirmDelete') % [role.title]} %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to t('role.new'), new_role_path %>
 </section>

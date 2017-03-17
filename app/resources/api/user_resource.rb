@@ -8,5 +8,6 @@ class Api::UserResource < JSONAPI::Resource
   end
 
   has_many :projects_as_volunteer, class_name: 'Project', through: :participations, always_include_linkage_data: false
+  has_many :roles
 
 end

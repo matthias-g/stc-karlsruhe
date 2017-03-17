@@ -2,6 +2,8 @@
 
 class Role < ApplicationRecord
 
+  has_and_belongs_to_many :users
+
   before_validation :camelize_title
   validates :title, :presence => true, :uniqueness =>  true
 

@@ -138,6 +138,30 @@ RSpec.describe UserPolicy do
     end
   end
 
+  describe 'add_to_roles?' do
+    subject { policy.add_to_roles?(nil) }
+
+    it 'is false for no user logged in' do
+      expect(subject).to be_falsey
+    end
+
+    context 'other user logged in' do
+      let(:current_user) { users(:sabine) }
+
+      it 'is false' do
+        expect(subject).to be_falsey
+      end
+    end
+
+    context 'admin logged in' do
+      let(:current_user) { users(:admin) }
+
+      it 'is true' do
+        expect(subject).to be_truthy
+      end
+    end
+  end
+
   describe 'permitted_attributes_for_show' do
     subject { policy.permitted_attributes_for_show }
 

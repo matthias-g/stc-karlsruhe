@@ -30,6 +30,11 @@ class UserPolicy < ApplicationPolicy
     user.eql?(record) || is_admin?
   end
 
+  def updatable_fields
+    return [:projects_as_volunteer, :username, :first_name, :last_name, :email, :phone] unless is_admin?
+    [:roles, :projects_as_volunteer, :username, :first_name, :last_name, :email, :phone]
+  end
+
   alias_method :update?, :edit?
   alias_method :destroy?, :edit?
   alias_method :confirm_delete?, :destroy?
@@ -41,10 +46,6 @@ class UserPolicy < ApplicationPolicy
 
   def add_to_projects_as_volunteer?(projects)
     projects.all? { |project| allow_add_volunteer_to_project?(record, project) }
-  end
-
-  def add_to_roles?(_role)
-    is_admin?
   end
 
 end

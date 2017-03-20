@@ -18,8 +18,8 @@ RSpec.describe Api::UsersController, type: :controller do
     end
 
     context 'no user logged in' do
-      it 'should not be successful' do
-        expect(response.status).to eq(401)
+      it 'should be unauthorized or bad request' do
+        expect(response.status).to eq(401).or eq(400)
         expect(user.reload.has_role?(role.title)).to be_falsey
       end
     end
@@ -27,8 +27,8 @@ RSpec.describe Api::UsersController, type: :controller do
     context 'same user logged in' do
       let(:current_user) { users(:rolf) }
 
-      it 'should not be successful' do
-        expect(response.status).to eq(403)
+      it 'should be forbidden or bad request' do
+        expect(response.status).to eq(403).or eq(400)
         expect(user.reload.has_role?(role.title)).to be_falsey
       end
     end
@@ -36,8 +36,8 @@ RSpec.describe Api::UsersController, type: :controller do
     context 'other user logged in' do
       let(:current_user) { users(:sabine) }
 
-      it 'should not be successful' do
-        expect(response.status).to eq(403)
+      it 'should be forbidden or bad request' do
+        expect(response.status).to eq(403).or eq(400)
         expect(user.reload.has_role?(role.title)).to be_falsey
       end
     end

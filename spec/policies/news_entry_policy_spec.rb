@@ -24,6 +24,14 @@ RSpec.describe NewsEntryPolicy do
           expect(subject).to be_truthy
         end
       end
+
+      context 'coordinator logged in' do
+        let(:current_user) { users(:coordinator) }
+
+        it 'is true' do
+          expect(subject).to be_truthy
+        end
+      end
     end
   end
 
@@ -43,6 +51,14 @@ RSpec.describe NewsEntryPolicy do
 
       context 'for an admin' do
         let(:current_user) { users(:admin) }
+
+        it 'is true' do
+          expect(subject).to be_truthy
+        end
+      end
+
+      context 'for a coordinator' do
+        let(:current_user) { users(:coordinator) }
 
         it 'is true' do
           expect(subject).to be_truthy

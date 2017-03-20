@@ -4,7 +4,7 @@ class ProjectPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user && user.admin?
+      if user && (user.admin? || user.coordinator?)
         scope.all
       elsif user
         scope.joins('LEFT JOIN leaderships on projects.id = leaderships.project_id')
@@ -20,11 +20,11 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def index?
-    is_admin?
+    is_admin? || is_coordinator?
   end
 
   def create?
-    is_admin?
+    is_admin? || is_coordinator?
   end
 
   def show?
@@ -32,7 +32,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def edit?
-    is_admin? || is_leader?
+    is_admin? || is_coordinator? || is_leader?
   end
 
   def contact_volunteers?
@@ -48,7 +48,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def upload_pictures?
-    record.visible? && is_today_or_past? && (is_volunteer?(user) || is_leader? || is_admin? || (user && user.photographer?))
+    record.visible? && is_today_or_past? && (is_volunteer?(user) || is_leader? || is_coordinator? || is_admin? || (user && user.photographer?))
   end
 
   def add_to_volunteers?(users)

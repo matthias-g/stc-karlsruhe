@@ -57,6 +57,14 @@ RSpec.describe ProjectPolicy do
       end
     end
 
+    context 'user is coordinator' do
+      let(:user) { users(:coordinator) }
+
+      it 'is true' do
+        expect(subject).to be_truthy
+      end
+    end
+
     context 'for unrelated user' do
       let(:user) { users(:sabine) }
 
@@ -94,6 +102,14 @@ RSpec.describe ProjectPolicy do
         expect(subject).to be_truthy
       end
     end
+
+    context 'coordinator is logged in' do
+      let(:user) { users(:coordinator) }
+
+      it 'is true' do
+        expect(subject).to be_truthy
+      end
+    end
   end
 
   describe 'index?' do
@@ -109,6 +125,14 @@ RSpec.describe ProjectPolicy do
 
     context 'admin is logged in' do
       let(:user) { users(:admin) }
+
+      it 'is true' do
+        expect(subject).to be_truthy
+      end
+    end
+
+    context 'coordinator is logged in' do
+      let(:user) { users(:coordinator) }
 
       it 'is true' do
         expect(subject).to be_truthy
@@ -234,6 +258,14 @@ RSpec.describe ProjectPolicy do
 
       context 'user is admin' do
         let(:user) { users(:admin) }
+
+        it 'is true' do
+          expect(subject).to be_truthy
+        end
+      end
+
+      context 'user is coordinator' do
+        let(:user) { users(:coordinator) }
 
         it 'is true' do
           expect(subject).to be_truthy

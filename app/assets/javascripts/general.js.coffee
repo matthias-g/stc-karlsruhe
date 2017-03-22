@@ -41,9 +41,7 @@ loadedScripts = []
 
 # register handler for page load 
 @onPageLoad = (handler) ->
-  # TODO Rails 5 http://stackoverflow.com/a/18770589
-  $(document).ready handler
-  #$(document).on 'page:load', handler
+  $(document).on 'turbolinks:load', handler
   
 # execute handler when new HTML is available (page load or ajax)
 @onNewContent = (handler) ->
@@ -78,13 +76,19 @@ instantiateClasses = (html) ->
   $('[data-class]', html).each ->
     new window[$(@).data('class')]($(@));
 
-
-    
+pageLoaded = false
+recaptchaReady = false
+$.fn.initRecaptcha = ->
+  return if (!pageLoaded || !recaptchaReady)
+  @.each (index, element) ->
+    grecaptcha.render(element, {'sitekey' : $(element).data('sitekey')})
     
 ### INIT ###
 
 onPageLoad ->
   uncollapseAccordeonAnchor()
+  pageLoaded = true
+  $('.g-recaptcha').initRecaptcha()
 
 onNewContent ->
   extractFlashMessages(@)
@@ -92,3 +96,7 @@ onNewContent ->
 
   # lazyload images (must be activated with lazy:true in image_tag helper)
   $('img', @).lazyload threshold: 200
+
+@onloadCallback = ->
+  recaptchaReady = true
+  $('.g-recaptcha').initRecaptcha()

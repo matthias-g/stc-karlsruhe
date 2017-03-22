@@ -8,7 +8,11 @@
   <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <%# empty script tag as workaround for problem in Turbolinks
+   see https://github.com/turbolinks/turbolinks/issues/165#issuecomment-241931592 %>
+  <script></script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': true %>
+  <%= javascript_include_tag 'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit', defer: true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': true %>
   <%= javascript_include_tag 'editing', 'data-turbolinks-track': true if privileged_user? %>
   <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp' %>

@@ -3,7 +3,6 @@
 
 //= require jquery
 //= require jquery.lazyload
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui/widgets/sortable
 //= require jsonapi-datastore

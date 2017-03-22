@@ -81,32 +81,29 @@
         </div>
       </li>
 
-      <% current_path = request.env['PATH_INFO'] %>
-      <% unless current_path == contact_path || params[:controller] =~ /users.*/ || current_path == own_project_path %>
-          <li class="dropdown hidden-hamburger">
-            <%= link_to new_user_registration_path, data:{toggle:'dropdown'}, class:'dropdown-toggle' do %>
-                <span class="glyphicon glyphicon-user"></span> <%= t('user.action.register') %>
-            <% end %>
-            <div class="dropdown-menu">
-              <%= bootstrap_form_for(resource, as: resource_name, namespace: 'navbar_reg',
-                                     url: registration_path(resource_name)) do |f| %>
-                  <%#= devise_error_messages! %>
-                  <%= f.text_field :first_name, hide_label: true,
-                                   placeholder: t('activerecord.attributes.user.first_name') %>
-                  <%= f.text_field :last_name, hide_label: true,
-                                   placeholder: t('activerecord.attributes.user.last_name') %>
-                  <%= f.text_field :email, autofocus: true, hide_label: true,
-                                   placeholder: t('activerecord.attributes.user.email') %>
-                  <%= f.password_field :password, hide_label: true,
-                                       placeholder: t('activerecord.attributes.user.password') %>
-                  <%= f.form_group do %>
-                      <%= recaptcha_tags ajax: true %>
-                  <% end %>
-                  <%= f.submit t('user.action.register'), class:'btn btn-default btn-wide' %>
+      <li class="dropdown hidden-hamburger">
+        <%= link_to new_user_registration_path, data:{toggle:'dropdown'}, class:'dropdown-toggle' do %>
+            <span class="glyphicon glyphicon-user"></span> <%= t('user.action.register') %>
+        <% end %>
+        <div class="dropdown-menu">
+          <%= bootstrap_form_for(resource, as: resource_name, namespace: 'navbar_reg',
+                                 url: registration_path(resource_name)) do |f| %>
+              <%#= devise_error_messages! %>
+              <%= f.text_field :first_name, hide_label: true,
+                               placeholder: t('activerecord.attributes.user.first_name') %>
+              <%= f.text_field :last_name, hide_label: true,
+                               placeholder: t('activerecord.attributes.user.last_name') %>
+              <%= f.text_field :email, autofocus: true, hide_label: true,
+                               placeholder: t('activerecord.attributes.user.email') %>
+              <%= f.password_field :password, hide_label: true,
+                                   placeholder: t('activerecord.attributes.user.password') %>
+              <%= f.form_group do %>
+                  <%= recaptcha_tags ajax: true, script: false %>
               <% end %>
-            </div>
-          </li>
-      <% end %>
+              <%= f.submit t('user.action.register'), class:'btn btn-default btn-wide' %>
+          <% end %>
+        </div>
+      </li>
 
       <li class="visible-hamburger-block">
         <%= link_to new_user_session_path(hideRegistration:1) do %>

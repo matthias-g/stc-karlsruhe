@@ -281,13 +281,8 @@
 
   <section class="no-print">
     <%= render '/layouts/share' -%>
-    <% if request.referer && URI(request.referer).path == show_project_week_path(@project.project_week.title) %>
-      <%= link_to t('project.action.toOverview'),
-                  'javascript:history.back()', class: 'btn btn-default' %>
-    <% else %>
-      <%= link_to t('project.action.toOverview'),
-                  show_project_week_path(@project.project_week.title), class: 'btn btn-default' %>
-    <% end %>
+    <%= link_to t('project.action.toOverview'),
+                show_project_week_path(@project.project_week.title), class: 'btn btn-default' %>
   </section>
 
 </div>

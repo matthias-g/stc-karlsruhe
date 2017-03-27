@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def index
     authorize User.new
-    @users = User.all
+    @users = User.all.order(:created_at)
     respond_with(@users)
   end
 

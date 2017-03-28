@@ -78,11 +78,12 @@ instantiateClasses = (html) ->
 
 pageLoaded = false
 recaptchaReady = false
+recaptchaIds = []
 $.fn.initRecaptcha = ->
   return if (!pageLoaded || !recaptchaReady)
   @.each (index, element) ->
-    grecaptcha.render(element, {'sitekey' : $(element).data('sitekey')})
-    
+    recaptchaIds.push(grecaptcha.render(element, {'sitekey' : $(element).data('sitekey')}))
+
 ### INIT ###
 
 onPageLoad ->
@@ -100,3 +101,9 @@ onNewContent ->
 @onloadCallback = ->
   recaptchaReady = true
   $('.g-recaptcha').initRecaptcha()
+
+document.addEventListener "turbolinks:before-cache", ->
+  for recaptchaId in recaptchaIds
+    grecaptcha.reset(recaptchaId)
+  recaptchaIds = []
+  $('.g-recaptcha').empty()

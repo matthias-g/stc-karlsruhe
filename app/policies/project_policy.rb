@@ -35,6 +35,14 @@ class ProjectPolicy < ApplicationPolicy
     is_admin? || is_coordinator? || is_leader?
   end
 
+  def updatable_fields
+    all_fields = [:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements,
+                  :visible, :desired_team_size, :time, :short_description, :map_latitude, :map_longitude, :map_zoom,
+                  :picture, :picture_source, :project_week, :parent_project, :volunteers, :leaders]
+    return all_fields - [:visible] unless is_admin? || is_coordinator?
+    all_fields
+  end
+
   def contact_volunteers?
     record.visible? && edit?
   end

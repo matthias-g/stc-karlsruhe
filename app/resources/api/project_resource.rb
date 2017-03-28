@@ -13,5 +13,9 @@ module Api
     has_many :volunteers, class_name: 'User', through: :participations, always_include_linkage_data: true
     has_many :leaders, class_name: 'User', through: :leaderships, always_include_linkage_data: true
 
+    def self.updatable_fields(context)
+      Pundit.policy(context[:user], @model).updatable_fields
+    end
+
   end
 end

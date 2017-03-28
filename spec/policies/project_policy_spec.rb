@@ -501,4 +501,33 @@ RSpec.describe ProjectPolicy do
     end
   end
 
+  describe 'updatable_fields' do
+    subject { policy.updatable_fields }
+    let(:all_fields) { Api::ProjectResource._updatable_relationships | Api::ProjectResource._attributes.keys - [:id] }
+
+    context 'admin logged in' do
+      let(:user) { users(:admin) }
+
+      it 'contains all attributes except status and gallery' do
+        expect(subject).to match_array(all_fields - [:status, :gallery])
+      end
+    end
+
+    context 'coordinator logged in' do
+      let(:user) { users(:coordinator) }
+
+      it 'contains all attributes except status and gallery' do
+        expect(subject).to match_array(all_fields - [:status, :gallery])
+      end
+    end
+
+    context 'project leader logged in' do
+      let(:user) { users(:rolf) }
+
+      it 'contains all attributes except status, gallery and visible' do
+        expect(subject).to match_array(all_fields - [:status, :gallery, :visible])
+      end
+    end
+  end
+
 end

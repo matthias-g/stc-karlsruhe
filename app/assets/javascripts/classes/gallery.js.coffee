@@ -101,8 +101,8 @@ class @Gallery
     window.getResource('galleries', galleryId, parameters).done((gallery) =>
       for gallery_picture in gallery['gallery-pictures']
         @items.push(
-          src:      gallery_picture.picture.picture.desktop.url,
-          raw_src:  gallery_picture.picture.picture.url,
+          src:      gallery_picture.picture.desktop.url,
+          raw_src:  gallery_picture.picture.url,
           w:        gallery_picture['desktop-width'],
           h:        gallery_picture['desktop-height'],
           id:       gallery_picture.id,

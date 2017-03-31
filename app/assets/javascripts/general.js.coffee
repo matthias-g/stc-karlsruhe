@@ -107,3 +107,12 @@ document.addEventListener "turbolinks:before-cache", ->
     grecaptcha.reset(recaptchaId)
   recaptchaIds = []
   $('.g-recaptcha').empty()
+
+  selectMenus = $('.bootstrap-select')
+  selectMenus.find('button.dropdown-toggle').remove()
+  selectMenus.find('div.dropdown-menu').remove()
+  selectMenus.each (index, ele) ->
+    element = $(ele)
+    originalSelect = element.find('select')
+    originalSelect.insertAfter(element)
+    element.remove()

@@ -131,6 +131,9 @@ GEM
       railties (>= 3.2, < 5.1)
     equalizer (0.0.11)
     erubis (2.7.0)
+    exception_notification (4.2.1)
+      actionmailer (>= 4.0, < 6)
+      activesupport (>= 4.0, < 6)
     execjs (2.7.0)
     ffi (1.9.18)
     friendly_id (5.2.0)
@@ -382,6 +385,7 @@ DEPENDENCIES
   coffee-rails
   devise
   dotenv-rails
+  exception_notification
   friendly_id
   groupdate
   jbuilder

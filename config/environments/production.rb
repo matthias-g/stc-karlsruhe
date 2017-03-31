@@ -88,4 +88,11 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { :host => 'servethecity-karlsruhe.de' }
+
+  # Deliver mails on exceptions
+  config.middleware.use ExceptionNotification::Rack, email: {
+    email_prefix: '[Exception] ',
+    sender_address: 'error-sendor@servethecity-karlsruhe.de',
+    exception_recipients: 'failure-notifications@servethecity-karlsruhe.de'
+  }
 end

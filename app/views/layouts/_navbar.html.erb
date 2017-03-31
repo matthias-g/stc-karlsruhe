@@ -56,7 +56,7 @@
   <% else %>
 
       <li class="dropdown hidden-hamburger">
-        <%= link_to new_user_session_path(hideRegistration:1),
+        <%= link_to new_user_session_path,
                     data:{toggle:'dropdown'}, class:'dropdown-toggle' do %>
             <span class="glyphicon glyphicon-log-in"></span> <%= t('user.action.login') %>
         <% end %>
@@ -106,7 +106,7 @@
       </li>
 
       <li class="visible-hamburger-block">
-        <%= link_to new_user_session_path(hideRegistration:1) do %>
+        <%= link_to new_user_session_path do %>
             <span class="glyphicon glyphicon-log-in"></span> <%= t('user.action.login') %>
         <% end %>
       </li>

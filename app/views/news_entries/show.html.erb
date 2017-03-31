@@ -3,11 +3,11 @@
 <% end %>
 
 <% content_for :appendToHeader do %>
-    <meta name="description" content="<%= @news_entry.teaser %>" />
+    <meta name="description" content="<%= format_urls_no_html(@news_entry.teaser) %>" />
     <% if @news_entry.show_picture? %>
         <meta property="og:image" content="<%= image_url(@news_entry.picture_url) %>" />
     <% end %>
-    <meta property="og:description" content="<%= @news_entry.text %>" />
+    <meta property="og:description" content="<%= format_urls_no_html(@news_entry.text) %>" />
 <% end %>
 
 <div id="news-entry-view">

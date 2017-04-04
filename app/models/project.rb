@@ -108,6 +108,24 @@ class Project < ApplicationRecord
     parent_project != nil
   end
 
+  TIME_REGEX = /(\d{1,2})[:\.-]?(\d{1,2})?[^\d\/]*(\d{1,2})?[:\.-]?(\d{1,2})?.*/
+
+  def start_time
+    return nil unless days.first
+    day = days.first.date
+    return nil unless day
+    matches = time.match(TIME_REGEX)
+    Time.now.change(hour: matches[1], min: matches[2], year: day.year, month: day.month, day: day.day) if matches
+  end
+
+  def end_time
+    return nil unless days.first
+    day = days.first.date
+    return nil unless day
+    matches = time.match(TIME_REGEX)
+    Time.now.change(hour: matches[3], min: matches[4], year: day.year, month: day.month, day: day.day) if matches && matches[3]
+  end
+
 
 
   private

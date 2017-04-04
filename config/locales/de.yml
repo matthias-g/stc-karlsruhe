@@ -284,6 +284,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       wantToStartOwnProject: Du möchtest eine eigene Aktion starten?
       weHelpYou: Wir helfen dir dabei!
       startOwnProject: Eigene Aktion starten
+      exportICal: Als iCal/ICS exportieren
     label:
       project: 'Aktion'
       subproject: 'Teilaktion'
@@ -414,6 +415,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       changePassword: 'Passwort ändern'
       loginWithProvider: 'Anmelden via %{provider}'
       newRole: Neue Rolle auswählen
+      exportICal: Aktionen als ICS/iCal-Feed
     label:
       login: 'Anmelden'
       register: 'Registrieren'
@@ -527,6 +529,12 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         choice_or_text: Auswahl oder Freitext
         text_line: Freitextzeile
         info: Infotext
+
+  ical:
+    label:
+      project_weeks: 'Aktionswoche %{project_week}'
+      users: 'Aktionen von %{name}'
+      all_projects: Alle Aktionen
 
   recaptcha:
     errors:

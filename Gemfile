@@ -81,6 +81,8 @@ gem 'recaptcha', require: 'recaptcha/rails'
 gem 'premailer-rails'
 gem 'nokogiri'
 
+gem 'icalendar'
+
 gem 'pg'
 
 gem 'friendly_id'

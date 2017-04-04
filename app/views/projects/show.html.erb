@@ -268,7 +268,7 @@
 
     <% if user_signed_in? && current_user.admin?  %>
         <section class="contact-volunteers-form no-print">
-          (Nur Admins:) Hier nochmal alle Emailadressen, damit du alternativ eine Email in deinem Emailprogramm schreiben kannst (bitte BCC verwenden).
+          (Nur Admins:) Hier nochmal alle E-Mailadressen, damit du alternativ eine E-Mail in deinem E-Mailprogramm schreiben kannst (bitte BCC verwenden).
           <div style="background: #eee; border: 1px solid #aaa; padding: 5px; margin: 10px;">
             <%= (@project.volunteers + @project.leaders + [current_user]).uniq.map { |v| v.email}.join(', ') %>
           </div>
@@ -279,8 +279,11 @@
 
 
 
-  <section class="no-print">
+  <section class="footer no-print">
     <%= render '/layouts/share' -%>
+    <%= link_to project_ical_path(@project), class: 'pull-right', title: t('project.action.exportICal'), data: { 'turbolinks': false } do %>
+      <span class="glyphicon glyphicon-calendar"></span>
+    <% end %>
     <%= link_to t('project.action.toOverview'),
                 show_project_week_path(@project.project_week.title), class: 'btn btn-default' %>
   </section>

@@ -97,12 +97,18 @@
         <% end %>
     <% end %>
     <% if @user == current_user  %>
-        <div class="actions">
-          <%= link_to t('project.action.findProject'), show_project_week_path(ProjectWeek.default.title),
-                      class:'btn btn-default btn-wide' %>
-          <%= link_to t('project.action.startOwnProject'), '/eigenes-projekt',
-                      class:'btn btn-default btn-wide' %>
-        </div>
+          <div class="actions">
+            <%= link_to t('project.action.findProject'), show_project_week_path(ProjectWeek.default.title),
+                        class:'btn btn-default btn-wide' %>
+            <%= link_to t('project.action.startOwnProject'), '/eigenes-projekt',
+                        class:'btn btn-default btn-wide' %>
+          </div>
+          <div class="feed">
+            <span><%= t('user.action.exportICal') %>:</span>
+            <%= link_to user_ical_path(@user), data: { 'turbolinks': false } do %>
+                <span class="glyphicon glyphicon-calendar"></span>
+            <% end %>
+          </div>
     <% end %>
     </section>
   </div>

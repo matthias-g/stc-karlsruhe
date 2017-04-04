@@ -7,14 +7,14 @@ class ProjectPolicy < ApplicationPolicy
       if user && (user.admin? || user.coordinator?)
         scope.all
       elsif user
-        scope.joins('LEFT JOIN leaderships on projects.id = leaderships.project_id')
-            .where(leaderships: {user_id: user.id})
+        scope.joins('LEFT JOIN leaderships policyLeaderships on projects.id = policyLeaderships.project_id')
+            .where('policyLeaderships.user_id = ?', user.id)
             .or(
-                scope.joins('LEFT JOIN leaderships on projects.id = leaderships.project_id')
-                    .where(visible: true).references(:leaderships)
+                scope.joins('LEFT JOIN leaderships policyLeaderships on projects.id = policyLeaderships.project_id')
+                    .where(visible: true)
             ).distinct
       else
-        scope.joins('LEFT JOIN leaderships on projects.id = leaderships.project_id').where(visible: true).distinct
+        scope.joins('LEFT JOIN leaderships policyLeaderships on projects.id = policyLeaderships.project_id').where(visible: true).distinct
       end
     end
   end

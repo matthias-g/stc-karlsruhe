@@ -77,11 +77,14 @@ class IcalController < ApplicationController
         date = project_day.date
         if project.start_time
           event_start = DateTime.new(date.year, date.month, date.day, project.start_time.hour, project.start_time.min, 0)
-          event.dtstart =  Values::DateTime.new event_start
+          event.dtstart = Values::DateTime.new event_start
+        else
+          event.dtstart = Values::Date.new date
+          event.duration = Values::Duration.new '1D'
         end
         if project.end_time
           event_end = DateTime.new(date.year, date.month, date.day, project.end_time.hour, project.end_time.min, 0)
-          event.dtend =  Values::DateTime.new event_end
+          event.dtend = Values::DateTime.new event_end
         end
         event.summary = project.title
         event.location = project.location.gsub(/\s*\r?\n\s*/, ', ')

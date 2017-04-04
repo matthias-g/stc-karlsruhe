@@ -21,6 +21,9 @@ class UsersController < ApplicationController
       #Message for contact_user
       @message = Message.new
     end
+    @past_projects = @user.projects.select{|p| p.status == 'closed'}
+    @projects_as_leader = @user.projects_as_leader - @past_projects
+    @projects_as_volunteer = @user.projects_as_volunteer - @projects_as_leader - @past_projects
     respond_with(@user)
   end
 

@@ -49,6 +49,10 @@ class User < ApplicationRecord
     projects_as_leader.include? project
   end
 
+  def projects
+    Project.joins(:participations).joins(:leaderships).where('participations.user_id = ? OR leaderships.user_id = ?', id, id).distinct
+  end
+
   # based on https://github.com/refinery/refinerycms/blob/master/authentication/app/models/refinery/user.rb
   def add_role(title)
     raise ArgumentError, 'Role should be the title of the role not a role object.' if title.is_a?(Role)

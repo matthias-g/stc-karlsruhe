@@ -68,30 +68,24 @@
     <section class="col-sm-6 projects" >
 
     <h2><%= Project.model_name.human(count:2) %></h2>
-    <%
-      @pastProjects = (@user.projects_as_volunteer | @user.projects_as_leader)
-          .select{|p| p.status == 'closed'}
-      @projectsAsLeader = @user.projects_as_leader - @pastProjects
-      @projectsAsVolunteer = @user.projects_as_volunteer - @projectsAsLeader - @pastProjects
-    %>
-    <% if @projectsAsLeader.any? %>
-        <h3><%= t('user.label.projectsAsLeader') %> (<%= @projectsAsLeader.size %>
-          <%= Project.model_name.human(count: @projectsAsLeader.size) %>):</h3>
-        <% @projectsAsLeader.each do |project| %>
+    <% if @projects_as_leader.any? %>
+        <h3><%= t('user.label.projectsAsLeader') %> (<%= @projects_as_leader.size %>
+          <%= Project.model_name.human(count: @projects_as_leader.size) %>):</h3>
+        <% @projects_as_leader.each do |project| %>
             <%= link_to project.title, project %>
         <% end %>
     <% end %>
-    <% if @projectsAsVolunteer.any? %>
-        <h3><%= t('user.label.projectsAsVolunteer') %> (<%= @projectsAsVolunteer.size %>
-          <%= Project.model_name.human(count: @projectsAsVolunteer.size) %>):</h3>
-        <% @projectsAsVolunteer.each do |project| %>
+    <% if @projects_as_volunteer.any? %>
+        <h3><%= t('user.label.projectsAsVolunteer') %> (<%= @projects_as_volunteer.size %>
+          <%= Project.model_name.human(count: @projects_as_volunteer.size) %>):</h3>
+        <% @projects_as_volunteer.each do |project| %>
             <%= link_to project.title, project %>
         <% end %>
     <% end %>
-    <% if @pastProjects.any? %>
-        <h3><%= t('user.label.pastProjects') %> (<%= @pastProjects.size %>
-          <%= Project.model_name.human(count: @pastProjects.size) %>):</h3>
-        <% @pastProjects.each do |project| %>
+    <% if @past_projects.any? %>
+        <h3><%= t('user.label.pastProjects') %> (<%= @past_projects.size %>
+          <%= Project.model_name.human(count: @past_projects.size) %>):</h3>
+        <% @past_projects.each do |project| %>
             <%= link_to project.title, project %>
         <% end %>
     <% end %>

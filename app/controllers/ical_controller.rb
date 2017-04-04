@@ -4,8 +4,8 @@ class IcalController < ApplicationController
   include Icalendar
   include ApplicationHelper
 
-  after_action :verify_authorized, except: :all_projects
-  after_action :verify_policy_scoped, only: :all_projects
+  after_action :verify_authorized, except: [:all_projects, :users]
+  after_action :verify_policy_scoped, only: [:all_projects, :users]
   after_action :set_headers
 
   def projects
@@ -36,7 +36,6 @@ class IcalController < ApplicationController
 
   def users
     user = User.find(params[:user_id])
-    authorize user, :show?
     calendar = Calendar.new
 
     policy_scope(user.projects).each do |project|

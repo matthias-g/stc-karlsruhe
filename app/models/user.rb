@@ -27,6 +27,7 @@ class User < ApplicationRecord
             length: { in: 2..50 },
             format: { with: /\A[[[:word:]]-\.]+( [[[:word:]]-\.]+)*\z/, message: I18n.t('activerecord.errors.messages.onlyWordsAndInnerSpace') }
   attr_accessor :login
+  has_secure_token :ical_token
 
   before_validation :set_default_username_if_blank!, on: :create
 
@@ -92,12 +93,12 @@ class User < ApplicationRecord
   def set_default_username_if_blank!  # not thread safe
     return unless username.blank?
     possible_usernames = [first_name, "#{first_name}#{last_name.first}", "#{first_name}#{last_name}"]
-    possible_usernames.each { |new_name|
+    possible_usernames.each do |new_name|
       unless username_exists_in_database? new_name
         self.username = new_name
         break
       end
-    }
+    end
     max_num = 10 * User.count
     tries = 0
     while username.blank?
@@ -111,7 +112,7 @@ class User < ApplicationRecord
     end
   end
 
-  def username_exists_in_database? username
+  def username_exists_in_database?(username)
     User.where('lower(username) = ?', username.downcase).count > 0 || !USERNAME_FORMAT.match(username)
   end
 

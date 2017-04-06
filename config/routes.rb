@@ -82,10 +82,10 @@ Rails.application.routes.draw do
   get '/eigenes-projekt', to: 'pages#own_project', as: :own_project
   get '/:page', to: 'pages#page', as: :show_page
 
-  get 'ical/aktionen/:project_id', to: 'ical#projects', as: :project_ical
-  get 'ical/aktionswochen/:project_week_id', to: 'ical#project_weeks', as: :project_week_ical
-  get 'ical/users/:user_id', to: 'ical#users', as: :user_ical
-  get 'ical/aktionen', to: 'ical#all_projects', as: :all_projects_ical
+  get 'ical/aktionen/:project_id.ics', to: 'ical#projects', as: :project_ical
+  get 'ical/aktionswochen/:project_week_id.ics', to: 'ical#project_weeks', as: :project_week_ical
+  get 'ical/users/:ical_token/:user_id.ics', to: 'ical#users', as: :user_ical
+  get 'ical/aktionen.ics', to: 'ical#all_projects', as: :all_projects_ical
 
   namespace :api, constraints: { format: 'json' } do
     jsonapi_resources :projects

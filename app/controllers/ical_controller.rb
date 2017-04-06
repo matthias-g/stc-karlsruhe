@@ -11,7 +11,7 @@ class IcalController < ApplicationController
   def projects
     project = Project.friendly.find(params[:project_id])
     authorize project, :show?
-    calendar = Calendar.new
+    calendar = create_calendar
 
     add_project_to_calendar(project, calendar)
 
@@ -23,7 +23,7 @@ class IcalController < ApplicationController
   def project_weeks
     project_week = ProjectWeek.find(params[:project_week_id])
     authorize project_week, :show?
-    calendar = Calendar.new
+    calendar = create_calendar
 
     policy_scope(project_week.projects).each do |project|
       add_project_to_calendar(project, calendar)
@@ -36,7 +36,8 @@ class IcalController < ApplicationController
 
   def users
     user = User.find(params[:user_id])
-    calendar = Calendar.new
+    return not_found unless user.ical_token == params[:ical_token]
+    calendar = create_calendar
 
     policy_scope(user.projects).each do |project|
       add_project_to_calendar(project, calendar)
@@ -48,7 +49,7 @@ class IcalController < ApplicationController
   end
 
   def all_projects
-    calendar = Calendar.new
+    calendar = create_calendar
 
     policy_scope(Project).each do |project|
       add_project_to_calendar(project, calendar)
@@ -60,6 +61,12 @@ class IcalController < ApplicationController
   end
 
   private
+
+  def create_calendar
+    calendar = Calendar.new
+    calendar.prodid = 'STC Karlsruhe'
+    calendar
+  end
 
   def set_headers
     headers['Content-Type'] = 'text/calendar'

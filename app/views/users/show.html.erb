@@ -105,7 +105,7 @@
           </div>
           <div class="feed">
             <span><%= t('user.action.exportICal') %>:</span>
-            <%= link_to user_ical_path(@user), data: { 'turbolinks': false } do %>
+            <%= link_to user_ical_path(@user.ical_token, @user), data: { 'turbolinks': false } do %>
                 <span class="glyphicon glyphicon-calendar"></span>
             <% end %>
           </div>

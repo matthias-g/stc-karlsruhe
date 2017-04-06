@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160704161940) do
+ActiveRecord::Schema.define(version: 20170406213708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(version: 20160704161940) do
     t.boolean  "receive_emails_about_other_projects",               default: true
     t.boolean  "receive_other_emails_from_orga",                    default: true
     t.boolean  "receive_emails_from_other_users",                   default: true
+    t.string   "ical_token"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["receive_emails_about_my_project_weeks"], name: "index_users_on_receive_emails_about_my_project_weeks", using: :btree

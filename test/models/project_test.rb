@@ -247,4 +247,82 @@ class ProjectTest < ActiveSupport::TestCase
     assert_not_nil project.gallery
   end
 
+  test "parsing of start and end times" do
+    project = projects(:one)
+    assert_nil project.start_time
+    assert_nil project.end_time
+    project_day = project_days(:one)
+    project.days << project_day
+    project.time = '10:00 - 17:00 Uhr'
+
+    assert_equal project_day.date.year, project.start_time.year
+    assert_equal project_day.date.month, project.start_time.month
+    assert_equal project_day.date.day, project.start_time.day
+    assert_equal project_day.date.year, project.end_time.year
+    assert_equal project_day.date.month, project.end_time.month
+    assert_equal project_day.date.day, project.end_time.day
+    assert_equal 10, project.start_time.hour
+    assert_equal 0, project.start_time.min
+    assert_equal 17, project.end_time.hour
+    assert_equal 0, project.end_time.min
+
+    project.time = '10:30 - 17:45 Uhr'
+    assert_equal 10, project.start_time.hour
+    assert_equal 30, project.start_time.min
+    assert_equal 17, project.end_time.hour
+    assert_equal 45, project.end_time.min
+
+    project.time = '10:30 - 17:45'
+    assert_equal 10, project.start_time.hour
+    assert_equal 30, project.start_time.min
+    assert_equal 17, project.end_time.hour
+    assert_equal 45, project.end_time.min
+
+    project.time = '10:30 bis 17:45'
+    assert_equal 10, project.start_time.hour
+    assert_equal 30, project.start_time.min
+    assert_equal 17, project.end_time.hour
+    assert_equal 45, project.end_time.min
+
+    project.time = '10:30-17:45'
+    assert_equal 10, project.start_time.hour
+    assert_equal 30, project.start_time.min
+    assert_equal 17, project.end_time.hour
+    assert_equal 45, project.end_time.min
+
+    project.time = '10.30 - 17-45'
+    assert_equal 10, project.start_time.hour
+    assert_equal 30, project.start_time.min
+    assert_equal 17, project.end_time.hour
+    assert_equal 45, project.end_time.min
+
+    project.time = '17:00 - ca. 19:00 Uhr'
+    assert_equal 17, project.start_time.hour
+    assert_equal 00, project.start_time.min
+    assert_equal 19, project.end_time.hour
+    assert_equal 00, project.end_time.min
+
+    project.time = 'zwischen 14:00 - 21:00 Uhr '
+    assert_equal 14, project.start_time.hour
+    assert_equal 00, project.start_time.min
+    assert_equal 21, project.end_time.hour
+    assert_equal 00, project.end_time.min
+
+    project.time = 'Zwischen 12 und 16 Uhr'
+    assert_equal 12, project.start_time.hour
+    assert_equal 00, project.start_time.min
+    assert_equal 16, project.end_time.hour
+    assert_equal 00, project.end_time.min
+
+    project.time = '17:30'
+    assert_equal 17, project.start_time.hour
+    assert_equal 30, project.start_time.min
+    assert_nil project.end_time
+
+    project.time = 'Montag 19 Uhr / Mittwoch + Samstag 11 Uhr'
+    assert_equal 19, project.start_time.hour
+    assert_equal 00, project.start_time.min
+    assert_nil project.end_time
+  end
+
 end

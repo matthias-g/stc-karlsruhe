@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :projects, path: 'projekte' do
+  resources :projects, path: 'aktionen' do
     member do
       get :enter
       get :leave
@@ -62,8 +62,8 @@ Rails.application.routes.draw do
       post :contact_volunteers
     end
   end
-  get 'projekte-:year', to: 'projects#index'
-  get 'projektwoche-:title', to: 'project_weeks#show', as: 'show_project_week'
+  get 'aktionen-:year', to: 'projects#index'
+  get 'aktionswoche-:title', to: 'project_weeks#show', as: 'show_project_week'
 
   devise_for :users, path: '',
              path_names: { sign_in: 'login', sign_out: 'logout',
@@ -79,7 +79,7 @@ Rails.application.routes.draw do
   get :login_or_register, to: 'users#login_or_register'
 
   root 'pages#home'
-  get '/eigenes-projekt', to: 'pages#own_project', as: :own_project
+  get '/eigene-aktion', to: 'pages#own_project', as: :own_project
   get '/:page', to: 'pages#page', as: :show_page
 
   get 'ical/aktionen/:project_id.ics', to: 'ical#projects', as: :project_ical

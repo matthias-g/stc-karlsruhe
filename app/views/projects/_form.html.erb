@@ -24,50 +24,52 @@
 <div class="row row-sm-eq-height">
 
   <section class="col-sm-8">
-      <%= f.text_field :title %>
-      <div class="form-group">
-        <label class="control-label" for="project_picture_source">
-          <%= Project.human_attribute_name('picture') %>
-        </label>
-        <%= f.file_field :picture, hide_label: true %>
+    <%= f.text_field :title %>
+    <div class="form-group">
+      <label class="control-label" for="project_picture_source">
+        <%= Project.human_attribute_name('picture') %>
+      </label>
+      <%= f.file_field :picture, hide_label: true %>
 
-        <% if @project.picture.file %>
-            <div class="project-picture picture-container">
-              <%= image_tag @project.picture_url(:project_view) %>
-            </div>
-            <%= link_to t('project.action.cropListviewImage'),
-                        crop_picture_project_path(@project, crop_target: 'project_list'),
-                        class: 'btn btn-default',
-                        data: {toggle: 'modal', target: '#image_crop_modal'}  %>
-            <%= link_to t('project.action.cropProjectImage'),
-                        crop_picture_project_path(@project, crop_target: 'project_view'),
-                        class: 'btn btn-default',
-                        data: {toggle: 'modal', target: '#image_crop_modal'}  %>
-            <%= link_to t('project.action.cropThumbnailImage'),
-                        crop_picture_project_path(@project, crop_target: 'thumbnail'),
-                        class: 'btn btn-default',
-                        data: {toggle: 'modal', target: '#image_crop_modal'}  %>
-        <% end %>
+      <% if @project.picture.file %>
+          <div class="project-picture picture-container">
+            <%= image_tag @project.picture_url(:project_view) %>
+          </div>
+          <% if @project.persisted? %>
+              <%= link_to t('project.action.cropListviewImage'),
+                          crop_picture_project_path(@project, crop_target: 'project_list'),
+                          class: 'btn btn-default',
+                          data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+              <%= link_to t('project.action.cropProjectImage'),
+                          crop_picture_project_path(@project, crop_target: 'project_view'),
+                          class: 'btn btn-default',
+                          data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+              <%= link_to t('project.action.cropThumbnailImage'),
+                          crop_picture_project_path(@project, crop_target: 'thumbnail'),
+                          class: 'btn btn-default',
+                          data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+          <% end %>
+      <% end %>
 
-      </div>
-      <%= f.text_field :picture_source,
-            help: t('project.help.picture_source') %>
-      <div class="short_description">
-        <%= f.text_area :short_description,
+    </div>
+    <%= f.text_field :picture_source,
+                     help: t('project.help.picture_source') %>
+    <div class="short_description">
+      <%= f.text_area :short_description,
                       help: t('project.help.short_description') %>
-      </div>
-      <div class="description">
-        <%= f.text_area :description %>
-      </div>
-      <div class="individual_tasks">
-        <%= f.text_area :individual_tasks %>
-      </div>
-      <div class="requirements">
-        <%= f.text_area :requirements %>
-      </div>
-      <div class="material">
-        <%= f.text_area :material %>
-      </div>
+    </div>
+    <div class="description">
+      <%= f.text_area :description %>
+    </div>
+    <div class="individual_tasks">
+      <%= f.text_area :individual_tasks %>
+    </div>
+    <div class="requirements">
+      <%= f.text_area :requirements %>
+    </div>
+    <div class="material">
+      <%= f.text_area :material %>
+    </div>
   </section>
 
   <div class="col-sm-4">

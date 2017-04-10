@@ -36,6 +36,22 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test 'create project without title should show form again' do
+    sign_in users(:admin)
+    description = 'This is the description for this new project.'
+    post projects_url, params: { project: { description: description,
+                                            individual_tasks: 'Tasks',
+                                            desired_team_size: '6',
+                                            project_week_id: project_weeks(:one).id } }
+    assert_response :success
+    assert_select '#error_explanation' do |elements|
+      elements.each do |element|
+        assert_select element, 'li', 'Aktionstitel darf nicht leer sein'
+      end
+    end
+    assert_select '#project_description', description
+  end
+
   test 'should show visible project' do
     assert @project.visible
     get project_url(@project)

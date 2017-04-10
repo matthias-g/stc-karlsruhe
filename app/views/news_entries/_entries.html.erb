@@ -17,10 +17,10 @@
         <%= l news.created_at.to_date, format: :date %>
       </div>
       <h2><%= link_to news.title, news %><%= ' (' + t('news_entry.label.invisible') + ')' unless news.visible? %></h2>
-      <% if news.teaser && !news.teaser.empty? %> <%# TODO Ruby 2.3 use safe navigation operator %>
-          <div><%= simple_format(simple_format_urls news.teaser) %></div>
-      <% else %>
+      <% if news.teaser.blank? %>
           <div><%= simple_format(simple_format_urls news.text) %></div>
+      <% else %>
+          <div><%= simple_format(simple_format_urls news.teaser) %></div>
       <% end %>
     </div>
 

@@ -12,7 +12,7 @@ module CroppablePicture extend ActiveSupport::Concern
     end
 
     def show_picture?
-      picture_source && !picture_source.empty? && picture && picture.file
+      !picture_source.blank? && picture&.file
     end
   end
 

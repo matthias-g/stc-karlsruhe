@@ -17,7 +17,7 @@
       <span><%= User.joins('LEFT JOIN "participations" ON "participations"."user_id" = "users"."id"')
                       .joins('LEFT JOIN "leaderships" ON "leaderships"."user_id" = "users"."id"')
                       .joins('INNER JOIN "projects" ON "projects"."id" = "leaderships"."project_id" OR "projects"."id" = "participations"."project_id"')
-                      .where('projects.visible': true).uniq.count %></span>
+                      .where('projects.visible': true).distinct.count %></span>
       <div><%= t('user.label.countActive') %></div>
     </div>
   </div>

@@ -17,6 +17,12 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get index as admin' do
+    sign_in users(:admin)
+    get projects_url
+    assert_response :success
+  end
+
   test 'should create only for admin project' do
     sign_in users(:rolf)
     assert_no_difference('Project.count') do

@@ -17,6 +17,7 @@ class ProjectsController < ApplicationController
     @projects = Project.where(visible: visible).order(:status)
     @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] && (params[:filter][:day] != '')
     @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] && (params[:filter][:status] != '')
+    @projects = policy_scope(@projects)
   end
 
   def show

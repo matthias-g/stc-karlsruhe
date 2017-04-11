@@ -96,7 +96,7 @@ class IcalController < ApplicationController
         event.summary = project.title
         event.location = project.location.gsub(/\s*\r?\n\s*/, ', ')
         event.description = format_urls_no_html(project.description)
-        event.categories = project.project_week.title
+        event.categories = project.project_week.title if project.project_week
         event.url = project_url(project)
       end
     end

@@ -156,8 +156,9 @@
                             class:'btn btn-default btn-wide' %>
               <% end %>
             <% end %>
-            <%= link_to t('project.action.toOverview'),
-                        show_project_week_path(@project.project_week.title), class: 'btn btn-default btn-wide' %>
+            <% if @project.project_week %>
+                <%= link_to t('project.action.toOverview'), show_project_week_path(@project.project_week.title), class: 'btn btn-default' %>
+            <% end %>
           </section>
         <% end %>
 
@@ -282,10 +283,11 @@
   <section class="footer no-print">
     <%= render '/layouts/share' -%>
     <%= link_to project_ical_path(@project), class: 'pull-right', title: t('project.action.exportICal'), data: { 'turbolinks': false } do %>
-      <span class="glyphicon glyphicon-calendar"></span>
+        <span class="glyphicon glyphicon-calendar"></span>
     <% end %>
-    <%= link_to t('project.action.toOverview'),
-                show_project_week_path(@project.project_week.title), class: 'btn btn-default' %>
+    <% if @project.project_week %>
+        <%= link_to t('project.action.toOverview'), show_project_week_path(@project.project_week.title), class: 'btn btn-default' %>
+    <% end %>
   </section>
 
 </div>

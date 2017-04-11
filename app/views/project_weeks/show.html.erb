@@ -100,19 +100,18 @@
 
   <div class="col-md-9 col-md-pull-3" id="project-list">
     <% @projects.each do |project| %>
-      <% visible_subprojects = policy_scope(project.subprojects) %>
       <section class="project">
         <div class="project-title">
           <%= link_to project do %>
             <h2><%= project.title %></h2>
-            <% if visible_subprojects.count > 0 %>
-              <h3><%= t('project.label.subprojects', count: visible_subprojects.count) %></h3>
+            <% if policy_scope(project.subprojects).count > 0 %>
+              <h3><%= t('project.label.subprojects', count: policy_scope(project.subprojects).count) %></h3>
             <% end %>
           <% end %>
         </div>
         <div class="project-image">
           <%= link_to project do %>
-            <% if project.show_picture? && project.picture.file %>
+            <% if project.show_picture? %>
               <%= image_tag project.picture_url(:project_list), lazy:true %>
             <% else %>
               <%= image_tag 'placeholder.svg' %>
@@ -132,7 +131,7 @@
         </div>
       </section>
     <% end %>
-    <% if @project_week.projects.toplevel.visible.count == 0 %>
+    <% if policy_scope(@project_week.projects).toplevel.count == 0 %>
       <section>
         <%= t('project_week.noProjects') %>
       </section>

@@ -53,7 +53,7 @@ addParametersToUrl = (url, params) ->
 
 @getResource = (type, resourceId, parameters = {}) ->
   object = window.getJsonApiStore().find(type, resourceId)
-  if object
+  if object && (!parameters['include'] || object[parameters['include']])
     return $.when(object)
   deferred = $.Deferred()
   url = addParametersToUrl("/api/#{type}/#{resourceId}", parameters)
@@ -61,7 +61,19 @@ addParametersToUrl = (url, params) ->
     window.getJsonApiStore().sync response
     deferred.resolve(window.getJsonApiStore().find(type, resourceId))
   ).fail((error) ->
-    console.log('Failed getting resource', error)
+    console.log("Failed getting resource #{resourceId} of type #{type}", error)
+    deferred.reject(error)
+  )
+  return deferred.promise()
+
+@getResources = (type, parameters = {}) ->
+  deferred = $.Deferred()
+  url = addParametersToUrl("/api/#{type}", parameters)
+  window.getJsonApi(url, 'GET').done((response) =>
+    window.getJsonApiStore().sync response
+    deferred.resolve(window.getJsonApiStore().findAll(type))
+  ).fail((error) ->
+    console.log("Failed getting resources of type #{type}", error)
     deferred.reject(error)
   )
   return deferred.promise()

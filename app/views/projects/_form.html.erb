@@ -90,10 +90,10 @@
     <section class="slim">
       <div class="week">
         <%= f.collection_select(:project_week_id, ProjectWeek.all.order(title: :desc), :id, :title,
-             {selected: @project.project_week.id}) -%>
+             {selected: @project.project_week&.id, include_blank: true}) -%>
       </div>
       <div class="days">
-        <%= f.collection_select(:day_ids, @project.project_week.days.order(date: :asc), :id, :title,
+        <%= f.collection_select(:day_ids, available_project_days(@project), :id, :title,
                {selected: @project.days.collect {|t| t.id}}, multiple: true) -%>
       </div>
       <div class="time">
@@ -151,7 +151,7 @@
 
     <section class="slim">
       <div class="parent_project">
-        <%= f.select(:parent_project_id, @project.project_week.projects.collect{ |p| [p.title, p.id]}, {include_blank: true}) -%>
+        <%= f.select(:parent_project_id, available_projects(@project).collect{ |p| [p.title, p.id]}, {include_blank: true}) -%>
       </div>
     </section>
 

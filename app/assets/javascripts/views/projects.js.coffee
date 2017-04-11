@@ -20,11 +20,16 @@ filterProjectList = (e, obj) ->
 # project edit: load weekdays of selected week
 updateDaysOnWeekChange = ->
   weekId = @.value
-  window.getResource('project-weeks', weekId, { 'include': 'days'}).done (projectWeek) ->
+  updateSelect = (projectDays) ->
     daySelect = $('.days select').empty()
-    for day in projectWeek.days
+    for day in projectDays
       $('<option>').attr(value: day.id).text(day.title).appendTo daySelect
-    
+  if weekId
+    window.getResource('project-weeks', weekId, {'include': 'days'}).done (projectWeek) ->
+      updateSelect(projectWeek.days)
+  else
+    window.getResources('project-days', {'include': 'project-week'}).done (projectDays) ->
+      updateSelect(projectDays.filter (day) -> !day['project-week'])
     
       
 onPageLoad ->

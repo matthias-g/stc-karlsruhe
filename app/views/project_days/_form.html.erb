@@ -22,7 +22,7 @@
   <div>
     <h3><%= f.label :week %></h3>
     <%= f.collection_select(:project_week_id, ProjectWeek.all, :id, :title,
-                            {:selected => @project_day.project_week.id } ) -%>
+                            {selected: @project_day.project_week&.id, include_blank: true} ) -%>
   </div>
   <div class="actions">
     <%= f.submit t('project_day.save') %>

@@ -43,21 +43,21 @@
             <%= simple_format( simple_format_urls @project.description ) %>
           </div>
 
-          <% unless @project.individual_tasks.empty? %>
+          <% unless @project.individual_tasks.blank? %>
             <div class="individual_tasks">
               <h3><%= Project.human_attribute_name(:individual_tasks) %></h3>
               <%= simple_format @project.individual_tasks %>
             </div>
           <% end %>
 
-          <% unless @project.requirements.empty? %>
+          <% unless @project.requirements.blank? %>
             <div class="requirements">
               <h3><%= Project.human_attribute_name(:requirements) %></h3>
               <%= simple_format @project.requirements %>
             </div>
           <% end %>
 
-          <% unless @project.material.empty? %>
+          <% unless @project.material.blank? %>
             <div class="material">
               <h3><%= Project.human_attribute_name(:material) %></h3>
               <%= simple_format @project.material %>
@@ -73,7 +73,11 @@
                   <div class="col-md-4 col-sm-6 subproject <%='subproject-invisible' unless subproject.visible %>" >
                     <%= link_to project_path(subproject) do %>
                         <div class="project-image">
-                          <%= image_tag subproject.picture.thumb.url, class: 'img-responsive' %>
+                          <% if subproject.show_picture? %>
+                              <%= image_tag subproject.picture.thumb.url, class: 'img-responsive' %>
+                          <% else %>
+                              <%= image_tag 'placeholder.svg', class: 'img-responsive' %>
+                          <% end %>
                           <% ext_status = subproject.visible? ? subproject.status : :hidden %>
                           <div class="project-status status_<%= ext_status %>">
                             <%= t "project.status.#{ext_status}" %>

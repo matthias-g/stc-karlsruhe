@@ -75,6 +75,13 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should show project with subproject without image' do
+    @project = projects(:'kindergarten-party')
+    assert @project.visible
+    get project_url(@project)
+    assert_response :success
+  end
+
   test 'should redirect when getting edit with no user logged in' do
     get edit_project_url(@project)
     assert_redirected_to login_or_register_path

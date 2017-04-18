@@ -39,7 +39,7 @@ class Mailer < ActionMailer::Base
       when 'all_users'
         to = User.where(cleared: false).all
       when 'active_users'
-        to = User.where(cleared: false).joins(:projects).where('participations.created_at > ? or participations.created_at > ?', 18.months.ago, 6.months.ago) # TODO Rails 5
+        to = User.where(cleared: false).joins('LEFT JOIN participations on participations.user_id = users.id').where('participations.created_at > ? or users.created_at > ?', 18.months.ago, 6.months.ago) # TODO Rails 5
       when 'me'
         to = User.where(id: message.sender.id)
       else

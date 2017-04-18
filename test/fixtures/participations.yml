@@ -15,6 +15,7 @@ sabine-at-kindergarten-party:
 lea-at-kindergarten-music:
   user: lea
   project: kindergarten-music
+  created_at: <%= 20.months.ago.to_s(:db) %>
 
 peter-at-kindergarten-kitchen:
   user: peter

@@ -52,6 +52,7 @@ lea:
   first_name: Lea
   last_name: Lustig
   email: lea@lustig.de
+  created_at: <%= 33.months.ago.to_s(:db) %>
 
 birgit:
   username: birgit

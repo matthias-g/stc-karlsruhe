@@ -142,4 +142,22 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     assert (not mail.bcc.include? users(:sabine).email)
   end
 
+  test "send other email from orga to active users" do
+    sign_in users(:admin)
+    message = orga_messages(:two)
+    message.recipient = :active_users
+    message.save!
+    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+      get send_message_orga_message_url(message)
+    end
+    assert_redirected_to orga_message_path(message.reload)
+    assert_equal users(:admin).id, message.sender.id
+    assert message.sent?
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal 7, mail.bcc.count
+    assert (not mail.bcc.include? users(:deleted).email)
+    assert (not mail.bcc.include? users(:sabine).email)
+    assert (not mail.bcc.include? users(:lea).email)  # is old user
+  end
+
 end

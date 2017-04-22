@@ -88,6 +88,22 @@ class User < ApplicationRecord
     self.cleared = true
   end
 
+  def merge_other_users_project(other_user)
+    other_user.projects_as_volunteer.to_a.each do |project|
+      unless project.has_volunteer?(self)
+        project.delete_volunteer(other_user)
+        project.add_volunteer(self)
+      end
+    end
+
+    other_user.projects_as_leader.to_a.each do |project|
+      unless project.has_leader?(self)
+        project.delete_leader(other_user)
+        project.add_leader(self)
+      end
+    end
+  end
+
   private
 
   def set_default_username_if_blank!  # not thread safe

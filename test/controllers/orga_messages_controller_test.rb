@@ -123,7 +123,7 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     assert @message.sent?
     mail = ActionMailer::Base.deliveries.last
     assert_equal (User.count - 2), mail.bcc.count
-    assert (not mail.bcc.include? users(:deleted).email)
+    assert_not mail.bcc.include? users(:deleted).email
     assert mail.bcc.include? users(:sabine).email
   end
 
@@ -138,8 +138,8 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     assert message.sent?
     mail = ActionMailer::Base.deliveries.last
     assert_equal (User.count - 2), mail.bcc.count
-    assert (not mail.bcc.include? users(:deleted).email)
-    assert (not mail.bcc.include? users(:sabine).email)
+    assert_not mail.bcc.include? users(:deleted).email
+    assert_not mail.bcc.include? users(:sabine).email
   end
 
   test "send other email from orga to active users" do
@@ -155,9 +155,69 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     assert message.sent?
     mail = ActionMailer::Base.deliveries.last
     assert_equal (User.count - 3), mail.bcc.count
-    assert (not mail.bcc.include? users(:deleted).email)
-    assert (not mail.bcc.include? users(:sabine).email)
-    assert (not mail.bcc.include? users(:lea).email)  # is old user
+    assert_not mail.bcc.include? users(:deleted).email
+    assert_not mail.bcc.include? users(:sabine).email
+    assert_not mail.bcc.include? users(:lea).email  # is old user
+  end
+
+  test "send other email from orga to current volunteers" do
+    sign_in users(:admin)
+    message = orga_messages(:two)
+    message.recipient = :current_volunteers
+    message.save!
+    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+      get send_message_orga_message_url(message)
+    end
+    assert_redirected_to orga_message_path(message.reload)
+    assert_equal users(:admin).id, message.sender.id
+    assert message.sent?
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal 3, mail.bcc.count
+    assert_not mail.bcc.include? users(:sabine).email # is disabled
+    assert mail.bcc.include? users(:lea).email
+    assert mail.bcc.include? users(:peter).email
+    assert mail.bcc.include? users(:admin).email
+  end
+
+  test "send other email from orga to current leaders" do
+    sign_in users(:admin)
+    message = orga_messages(:two)
+    message.recipient = :current_leaders
+    message.save!
+    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+      get send_message_orga_message_url(message)
+    end
+    assert_redirected_to orga_message_path(message.reload)
+    assert_equal users(:admin).id, message.sender.id
+    assert message.sent?
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal 4, mail.bcc.count
+    assert mail.bcc.include? users(:tabea).email
+    assert mail.bcc.include? users(:birgit).email
+    assert mail.bcc.include? users(:rolf).email
+    assert mail.bcc.include? users(:admin).email
+  end
+
+  test "send other email from orga to current volunteers and leaders" do
+    sign_in users(:admin)
+    message = orga_messages(:two)
+    message.recipient = :current_volunteers_and_leaders
+    message.save!
+    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+      get send_message_orga_message_url(message)
+    end
+    assert_redirected_to orga_message_path(message.reload)
+    assert_equal users(:admin).id, message.sender.id
+    assert message.sent?
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal 6, mail.bcc.count
+    assert_not mail.bcc.include? users(:sabine).email # is disabled
+    assert mail.bcc.include? users(:lea).email
+    assert mail.bcc.include? users(:peter).email
+    assert mail.bcc.include? users(:tabea).email
+    assert mail.bcc.include? users(:birgit).email
+    assert mail.bcc.include? users(:rolf).email
+    assert mail.bcc.include? users(:admin).email
   end
 
   test "send email about project weeks from orga to all users" do
@@ -174,8 +234,8 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     assert message.sent?
     mail = ActionMailer::Base.deliveries.last
     assert_equal (User.count - 2), mail.bcc.count
-    assert (not mail.bcc.include? users(:deleted).email)
-    assert (not mail.bcc.include? users(:peter).email)
+    assert_not mail.bcc.include? users(:deleted).email
+    assert_not mail.bcc.include? users(:peter).email
   end
 
 end

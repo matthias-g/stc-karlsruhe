@@ -31,11 +31,14 @@ class Mailer < ActionMailer::Base
     current_projects = ProjectWeek.default.projects.visible
     case message.recipient
       when 'current_volunteers_and_leaders'
-        to = current_projects.joins(:users).where('users.cleared': false)
+        to = current_projects.joins('LEFT OUTER JOIN participations ON projects.id = participations. project_id')
+                 .joins('LEFT OUTER JOIN leaderships ON projects.id = leaderships.project_id')
+                 .joins('INNER JOIN "users" ON "users"."id" = "participations"."user_id" OR "users"."id" = "leaderships"."user_id"')
+                 .where('users.cleared': false)
       when 'current_volunteers'
-        to = current_projects.joins(:users).where('users.cleared': false).where('participations.as_leader = false')
+        to = current_projects.joins(:volunteers).where('users.cleared': false)
       when 'current_leaders'
-        to = current_projects.joins(:users).where('users.cleared': false).where('participations.as_leader = true')
+        to = current_projects.joins(:leaders).where('users.cleared': false)
       when 'all_users'
         to = User.where(cleared: false).all
       when 'active_users'
@@ -45,21 +48,24 @@ class Mailer < ActionMailer::Base
       else
         to = message.recipient.split(/\s*,\s*/)
     end
-    case message.content_type
-      when 'about_project_weeks'
-        if %w(current_volunteers_and_leaders current_volunteers current_leaders).include? message.recipient
-          to = to.where('users.receive_emails_about_my_project_weeks': true)
+    unless to.kind_of?(Array)
+      case message.content_type
+        when 'about_project_weeks'
+          if %w(current_volunteers_and_leaders current_volunteers current_leaders).include? message.recipient
+            to = to.where('users.receive_emails_about_my_project_weeks': true)
+          else
+            to = to.where('users.receive_emails_about_project_weeks': true)
+          end
+        when 'about_other_projects'
+          to = to.where('users.receive_emails_about_other_projects': true)
+        when 'other_email_from_orga'
+          to = to.where('users.receive_other_emails_from_orga': true)
         else
-          to = to.where('users.receive_emails_about_project_weeks': true)
-        end
-      when 'about_other_projects'
-        to = to.where('users.receive_emails_about_other_projects': true)
-      when 'other_email_from_orga'
-        to = to.where('users.receive_other_emails_from_orga': true)
-      else
-        to = to.where('users.receive_other_emails_from_orga': true)
+          to = to.where('users.receive_other_emails_from_orga': true)
+      end
+      to = to.pluck(:email)
     end
-    recipients = (to.pluck(:email) + [message.sender.email]).uniq.join(',')
+    recipients = (to + [message.sender.email]).uniq.join(',')
     @message = message.body
     @type = message.content_type
     mail from: message.from, bcc: recipients, subject: message.subject

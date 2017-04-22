@@ -108,4 +108,26 @@ class UserTest < ActiveSupport::TestCase
     assert user5.valid?
   end
 
+  test "merge other user's lead projects" do
+    project = projects(:'kindergarten-music')
+    user = users(:peter)
+    other_user = users(:birgit)
+    assert project.has_leader?(other_user)
+    user.merge_other_users_projects(other_user)
+
+    assert project.has_leader?(user)
+    assert_not project.has_leader?(other_user)
+  end
+
+  test "merge other user's participating projects" do
+    project = projects(:'kindergarten-kitchen')
+    user = users(:birgit)
+    other_user = users(:peter)
+    assert project.has_volunteer?(other_user)
+    user.merge_other_users_projects(other_user)
+
+    assert project.has_volunteer?(user)
+    assert_not project.has_volunteer?(other_user)
+  end
+
 end

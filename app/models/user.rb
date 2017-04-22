@@ -88,7 +88,7 @@ class User < ApplicationRecord
     self.cleared = true
   end
 
-  def merge_other_users_project(other_user)
+  def merge_other_users_projects(other_user)
     other_user.projects_as_volunteer.to_a.each do |project|
       unless project.has_volunteer?(self)
         project.delete_volunteer(other_user)

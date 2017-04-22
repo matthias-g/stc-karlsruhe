@@ -122,7 +122,7 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     assert_equal users(:admin).id, @message.sender.id
     assert @message.sent?
     mail = ActionMailer::Base.deliveries.last
-    assert_equal 9, mail.bcc.count
+    assert_equal (User.count - 2), mail.bcc.count
     assert (not mail.bcc.include? users(:deleted).email)
     assert mail.bcc.include? users(:sabine).email
   end
@@ -137,7 +137,7 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     assert_equal users(:admin).id, message.sender.id
     assert message.sent?
     mail = ActionMailer::Base.deliveries.last
-    assert_equal 8, mail.bcc.count
+    assert_equal (User.count - 2), mail.bcc.count
     assert (not mail.bcc.include? users(:deleted).email)
     assert (not mail.bcc.include? users(:sabine).email)
   end
@@ -154,10 +154,28 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     assert_equal users(:admin).id, message.sender.id
     assert message.sent?
     mail = ActionMailer::Base.deliveries.last
-    assert_equal 7, mail.bcc.count
+    assert_equal (User.count - 3), mail.bcc.count
     assert (not mail.bcc.include? users(:deleted).email)
     assert (not mail.bcc.include? users(:sabine).email)
     assert (not mail.bcc.include? users(:lea).email)  # is old user
+  end
+
+  test "send email about project weeks from orga to all users" do
+    sign_in users(:admin)
+    message = orga_messages(:two)
+    message.recipient = :all_users
+    message.content_type = :about_project_weeks
+    message.save!
+    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+      get send_message_orga_message_url(message)
+    end
+    assert_redirected_to orga_message_path(message.reload)
+    assert_equal users(:admin).id, message.sender.id
+    assert message.sent?
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal (User.count - 2), mail.bcc.count
+    assert (not mail.bcc.include? users(:deleted).email)
+    assert (not mail.bcc.include? users(:peter).email)
   end
 
 end

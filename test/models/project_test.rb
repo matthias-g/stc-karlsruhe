@@ -247,6 +247,20 @@ class ProjectTest < ActiveSupport::TestCase
     assert_not_nil project.gallery
   end
 
+  test "parent project cannot be same project" do
+    project = projects(:one)
+    assert project.valid?
+    project.parent_project = projects(:one)
+    assert_not project.valid?
+  end
+
+  test "parent project cannot be a subproject" do
+    project = projects(:one)
+    assert project.valid?
+    project.parent_project = projects(:'kindergarten-kitchen')
+    assert_not project.valid?
+  end
+
   test "parsing of start and end times" do
     project = projects(:one)
     assert_nil project.start_time

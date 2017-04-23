@@ -15,6 +15,7 @@ class Project < ApplicationRecord
 
   validates_presence_of :title, :desired_team_size
   validates :desired_team_size, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  validate :parent_project_cannot_be_same_project, :parent_project_cannot_be_a_subproject
   before_save :adjust_status
   after_save :adjust_parent_status
 
@@ -157,6 +158,18 @@ class Project < ApplicationRecord
 
   def adjust_parent_status
     parent_project.save if parent_project # adjusts status
+  end
+
+  def parent_project_cannot_be_same_project
+    if parent_project == self
+      errors.add(:parent_project, "can't be same project")
+    end
+  end
+
+  def parent_project_cannot_be_a_subproject
+    if parent_project&.parent_project
+      errors.add(:parent_project, "can't be a subproject itself")
+    end
   end
 
 end

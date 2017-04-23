@@ -20,15 +20,17 @@
               <%= volunteer.full_name %>
               <% if current_user.admin? %>
                   <%= link_to delete_volunteer_project_path(@project, :user_id => volunteer.id),
-                              :method => 'delete', title:t('project.action.removeVolunteer') do %>
+                              method: 'delete', title:t('project.action.removeVolunteer') do %>
                   <span class="glyphicon glyphicon-remove"
                         aria-label="<%=t('project.action.removeVolunteer')%>"></span>
                   <% end %>
               <% end %>
-              <%= link_to add_leader_project_path(@project, :user_id => volunteer.id),
-                          :method => 'post', title:t('project.action.makeLeader') do %>
-            <span class="glyphicon glyphicon-arrow-right"
-                  aria-label="<%=t('project.action.makeLeader')%>"></span>
+              <% unless @project.has_leader?(volunteer) %>
+                  <%= link_to add_leader_project_path(@project, :user_id => volunteer.id),
+                              method: 'post', title:t('project.action.makeLeader') do %>
+                  <span class="glyphicon glyphicon-arrow-right"
+                        aria-label="<%=t('project.action.makeLeader')%>"></span>
+                  <% end %>
               <% end %>
             </li>
         <% end %>
@@ -50,9 +52,9 @@
       </ul>
       <% if policy(User).index? %>
           <%= select_tag 'select-new-leader', options_for_project_leader_select,
-                class: 'selectpicker', title: t('project.action.addLeader'),
-                data: { class: 'SelectPicker', handler: 'addNewLeader',
-                        live_search: true, project_id: @project.id, size: 5 } %>
+                         class: 'selectpicker', title: t('project.action.addLeader'),
+                         data: { class: 'SelectPicker', handler: 'addNewLeader',
+                                 live_search: true, project_id: @project.id, size: 5 } %>
       <% end %>
     </section>
   </div>

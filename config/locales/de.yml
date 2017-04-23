@@ -147,7 +147,8 @@ de:
       stcInternational: 'Serve the City international'
       shareOnFacebook: 'auf Facebook teilen'
     title:
-      projectList: 'Aktionswoche %{year}'
+      projectList: 'Aktionen'
+      projectWeek: 'Aktionswoche %{year}'
       projectNew: 'Neue Aktion'
       projectEdit: 'Aktion bearbeiten: %{project}'
       projectCropPicture: 'Bildausschnitte festlegen: %{project}'

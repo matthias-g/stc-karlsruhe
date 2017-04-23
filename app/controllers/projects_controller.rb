@@ -10,13 +10,13 @@ class ProjectsController < ApplicationController
 
   def index
     authorize Project.new
-    visible = true
-    if params[:filter] && (params[:filter][:visibility] == 'hidden') && current_user.admin?
-        visible = false
+    @projects = policy_scope(Project.all).order(:status)
+    if params[:filter]
+      p = filter_params
+      @projects = @projects.where(visible: (p[:visibility] != 'hidden')) unless p[:visibility].blank?
+      @projects = @projects.merge(ProjectDay.find(p[:day]).projects) unless p[:day].blank?
+      @projects = @projects.where(status: Project.statuses[p[:status]]) unless p[:status].blank?
     end
-    @projects = Project.where(visible: visible).order(:status)
-    @projects &= ProjectDay.find(params[:filter][:day]).projects if params[:filter] && (params[:filter][:day] != '')
-    @projects &= Project.where(:status => Project.statuses[params[:filter][:status]]) if params[:filter] && (params[:filter][:status] != '')
     @projects = policy_scope(@projects)
   end
 
@@ -165,6 +165,10 @@ class ProjectsController < ApplicationController
 
   def authorize_project
     authorize @project
+  end
+
+  def filter_params
+    params.require(:filter).permit(:visibility, :day, :status)
   end
 
 end

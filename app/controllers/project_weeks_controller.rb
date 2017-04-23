@@ -54,6 +54,7 @@ class ProjectWeeksController < ApplicationController
 
   def set_project_week
     @project_week = params[:title] ? ProjectWeek.find_by_title(params[:title]) : ProjectWeek.find(params[:id])
+    not_found unless @project_week
   end
 
   def project_week_params

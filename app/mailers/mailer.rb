@@ -78,6 +78,13 @@ class Mailer < ActionMailer::Base
     mail bcc: recipients, subject: t('project.message.leavingProjectNotification.subject')
   end
 
+  def project_participate_notification(user, project)
+    @user = user
+    @project = project
+    recipients = user.email
+    mail bcc: recipients, subject: t('project.message.projectParticipateNotification.subject')
+  end
+
   def gallery_picture_uploaded_notification(gallery, picture_count, uploader)
     @uploader = uploader
     @gallery = gallery

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+
+<p>Hallo <%= @user.first_name %>,</p>
+
+<p>du nimmst jetzt an der Aktion "<%= @project.title %>" teil.
+  Auf der <%= link_to 'Aktionsseite', project_url(@project) %> kannst du alle wichtigen Daten dazu einsehen.<br/>
+  Bei Fragen zu der Aktion kannst du dich an die Aktionsleiter wenden, die auf der Aktionsseite verlinkt sind.<br/>
+  Solltest du doch nicht an der Aktion nicht teilnehmen können, kannst du dich auf der Aktionsseite auch wieder abmelden.</p>
+
+<p>Vielen Dank für deine Mitarbeit. Wir freuen uns auf dich!</p>
+
+<p>Herzliche Grüße</p>
+
+<p>Dein Serve the City Team</p>
+
+</body>
+</html>

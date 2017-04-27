@@ -5,7 +5,8 @@ class Project < ApplicationRecord
   mount_uploader :picture, ImageUploader
 
   has_many :participations, dependent: :destroy
-  has_many :volunteers, class_name: 'User', through: :participations, source: :user
+  has_many :volunteers, class_name: 'User', through: :participations, source: :user,
+           after_add: :on_volunteer_added, after_remove: :on_volunteer_removed
   has_many :leaderships, dependent: :destroy
   has_many :leaders, class_name: 'User', through: :leaderships, source: :user
   has_and_belongs_to_many :days, class_name: 'ProjectDay'
@@ -170,6 +171,14 @@ class Project < ApplicationRecord
     if parent_project&.parent_project
       errors.add(:parent_project, "can't be a subproject itself")
     end
+  end
+
+  def on_volunteer_added(user)
+    Mailer.project_participate_notification(user, self).deliver_now
+  end
+
+  def on_volunteer_removed(user)
+    Mailer.leaving_project_notification(user, self).deliver_now
   end
 
 end

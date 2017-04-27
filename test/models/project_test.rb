@@ -339,4 +339,14 @@ class ProjectTest < ActiveSupport::TestCase
     assert_nil project.end_time
   end
 
+  test 'send notification when volunteer enters project ' do
+    project = projects(:one)
+    user = users(:peter)
+    assert_not project.has_volunteer?(user)
+    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+      project.add_volunteer(user)
+    end
+    assert project.has_volunteer?(user)
+  end
+
 end

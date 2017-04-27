@@ -345,6 +345,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         Bitte überprüfe die Bilder und schalte sie gegebenenfalls frei."
       leavingProjectNotification:
         subject: Austritt aus Aktionsteam
+      projectParticipateNotification:
+        subject: Willkommen im Aktionsteam
     status:
       open: Freie Plätze
       soon_full: Wenige Plätze

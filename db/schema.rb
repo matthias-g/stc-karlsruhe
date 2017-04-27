@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406213708) do
+ActiveRecord::Schema.define(version: 20170427215246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -195,25 +195,27 @@ ActiveRecord::Schema.define(version: 20170406213708) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",                              limit: 255
-    t.string   "first_name",                            limit: 255
-    t.string   "last_name",                             limit: 255
+    t.string   "username",                                        limit: 255
+    t.string   "first_name",                                      limit: 255
+    t.string   "last_name",                                       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                                 limit: 255, default: "",    null: false
-    t.string   "encrypted_password",                    limit: 255, default: "",    null: false
-    t.string   "reset_password_token",                  limit: 255
+    t.string   "email",                                           limit: 255, default: "",    null: false
+    t.string   "encrypted_password",                              limit: 255, default: "",    null: false
+    t.string   "reset_password_token",                            limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string   "phone",                                 limit: 255, default: ""
-    t.boolean  "cleared",                                           default: false
+    t.string   "phone",                                           limit: 255, default: ""
+    t.boolean  "cleared",                                                     default: false
     t.string   "authentication_token"
-    t.boolean  "receive_emails_about_project_weeks",                default: true
-    t.boolean  "receive_emails_about_my_project_weeks",             default: true
-    t.boolean  "receive_emails_about_other_projects",               default: true
-    t.boolean  "receive_other_emails_from_orga",                    default: true
-    t.boolean  "receive_emails_from_other_users",                   default: true
+    t.boolean  "receive_emails_about_project_weeks",                          default: true
+    t.boolean  "receive_emails_about_my_project_weeks",                       default: true
+    t.boolean  "receive_emails_about_other_projects",                         default: true
+    t.boolean  "receive_other_emails_from_orga",                              default: true
+    t.boolean  "receive_emails_from_other_users",                             default: true
     t.string   "ical_token"
+    t.boolean  "receive_notifications_for_new_participation",                 default: true
+    t.boolean  "receive_notifications_for_users_leaving_project",             default: true
     t.index ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["receive_emails_about_my_project_weeks"], name: "index_users_on_receive_emails_about_my_project_weeks", using: :btree

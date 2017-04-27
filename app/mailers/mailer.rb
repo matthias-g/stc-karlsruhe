@@ -74,7 +74,9 @@ class Mailer < ActionMailer::Base
   def leaving_project_notification(user, project)
     @user = user
     @project = project
-    recipients = (project.leaders.pluck(:email) + [StcKarlsruhe::Application::NOTIFICATION_RECIPIENT]).uniq.join(',')
+    recipients = (project.leaders.where('users.receive_notifications_for_users_leaving_project': true).pluck(:email) +
+        [StcKarlsruhe::Application::NOTIFICATION_RECIPIENT])
+                     .uniq.join(',')
     mail bcc: recipients, subject: t('project.message.leavingProjectNotification.subject')
   end
 

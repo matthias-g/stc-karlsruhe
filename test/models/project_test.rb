@@ -349,4 +349,16 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.has_volunteer?(user)
   end
 
+  test "don't send notification when volunteer enters project when user doesn't want that" do
+    project = projects(:one)
+    user = users(:peter)
+    user.receive_notifications_for_new_participation = false
+    user.save!
+    assert_not project.has_volunteer?(user)
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+      project.add_volunteer(user)
+    end
+    assert project.has_volunteer?(user)
+  end
+
 end

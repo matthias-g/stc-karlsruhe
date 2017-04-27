@@ -86,6 +86,8 @@ de:
         receive_emails_about_other_projects: Informationen zu weiteren Serve the City Projekten
         receive_other_emails_from_orga: Sonstige E-Mails vom Orgateam
         receive_emails_from_other_users: Andere Nutzer können mich über ein Kontaktformular kontaktieren
+        receive_notifications_for_new_participation: Erhalte eine Benachrichtigung per E-Mail bei neuen Aktionsteilnahmen
+        receive_notifications_for_users_leaving_project: Erhalte eine Benachrichtigung, wenn Mitarbeiter ein von dir geleitetes Aktionsteam verlassen
       project_day:
         title: 'Titel'
       message:

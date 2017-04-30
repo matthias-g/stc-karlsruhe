@@ -75,6 +75,7 @@
             <%= f.select(:visibility, [['Sichtbar', :visible], ['Versteckt', :hidden]],
                          include_blank: "- - - Sichtbarkeit egal - - -", hide_label: true) %>
           <% end %>
+          <%= f.check_box :after_17h, label: 'Nur Aktionen ab 17 Uhr anzeigen' %>
           <%= f.submit 'Aktionen filtern', class:'btn btn-default btn-wide' %>
           <div id="filterResults"></div>
         <% end %>

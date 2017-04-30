@@ -23,6 +23,9 @@ class ProjectWeeksController < ApplicationController
     end
 
     @projects = policy_scope(@projects)
+    if params[:filter] && filter_params[:after_17h] == '1'
+      @projects = @projects.to_a.select { |project| project.start_time && project.start_time.hour >= 17 }
+    end
   end
 
   def new
@@ -62,7 +65,7 @@ class ProjectWeeksController < ApplicationController
   end
 
   def filter_params
-    params.require(:filter).permit(:visibility, :day, :status)
+    params.require(:filter).permit(:visibility, :day, :status, :after_17h)
   end
 
   def authorize_project_week

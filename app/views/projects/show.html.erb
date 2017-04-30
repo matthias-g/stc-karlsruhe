@@ -253,7 +253,7 @@
               <div>
                 <h3><%= t('project.label.volunteers_in_subprojects', members: @project.volunteers_in_subprojects.size,
                           limit: @project.aggregated_desired_team_size - @project.desired_team_size) %></h3>
-                <%= list_users(@project.volunteers_in_subprojects.uniq) %>
+                <%= list_users(@project.volunteers_in_subprojects.distinct) %>
               </div>
           <% end %>
         </section>

@@ -15,7 +15,7 @@
           <% if @template.questions.count == 1 %>
               <% answer = submission.answers.first %>
               <td><%= answer.text %></td>
-              <td style="color: grey"><%= l answer.created_at.localtime, format: :short_with_year %></td>
+              <td style="color: grey; min-width: 190px;"><%= l answer.created_at.localtime, format: :short_with_year %></td>
           <% else %>
               <td>
                 <%= link_to t('surveys.label.submission', id: submission.id), [submission.template, submission] %>

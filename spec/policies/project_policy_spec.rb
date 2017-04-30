@@ -84,30 +84,30 @@ RSpec.describe ProjectPolicy do
     end
   end
 
-  describe 'create?' do
-    subject { policy.create? }
+  permissions :create?, :change_visibility? do
+    subject { described_class }
 
     context 'some user is logged in' do
       let(:user) { users(:rolf) }
 
-      it 'is false' do
-        expect(subject).to be_falsey
+      it 'denies access' do
+        expect(subject).not_to permit(user, project)
       end
     end
 
     context 'admin is logged in' do
       let(:user) { users(:admin) }
 
-      it 'is true' do
-        expect(subject).to be_truthy
+      it 'grants access' do
+        expect(subject).to permit(user, project)
       end
     end
 
     context 'coordinator is logged in' do
       let(:user) { users(:coordinator) }
 
-      it 'is true' do
-        expect(subject).to be_truthy
+      it 'grants access' do
+        expect(subject).to permit(user, project)
       end
     end
   end

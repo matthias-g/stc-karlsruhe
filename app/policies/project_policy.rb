@@ -35,6 +35,10 @@ class ProjectPolicy < ApplicationPolicy
     is_admin? || is_coordinator? || is_leader?
   end
 
+  def change_visibility?
+    is_admin? || is_coordinator?
+  end
+
   def updatable_fields
     all_fields = [:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements,
                   :visible, :desired_team_size, :time, :short_description, :map_latitude, :map_longitude, :map_zoom,
@@ -83,7 +87,6 @@ class ProjectPolicy < ApplicationPolicy
 
   alias_method :open?, :edit?
   alias_method :close?, :edit?
-  alias_method :change_visibility?, :is_admin?
   alias_method :make_visible?, :change_visibility?
   alias_method :make_invisible?, :change_visibility?
 

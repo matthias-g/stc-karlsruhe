@@ -11,7 +11,6 @@ class Surveys::SubmissionsController < ApplicationController
   def index
     @template = Surveys::Template.friendly.find(params[:surveys_template_id])
     @submissions = policy_scope(@template.submissions.order(created_at: :desc))
-    respond_with(@submissions)
   end
 
   def show

@@ -1,0 +1,5 @@
+<%= @template.questions.collect{|item| "\"#{item.text && item.text.gsub('"', '""')}\""}.join(',').html_safe %>
+
+<% @submissions.each do |submission| %>
+<%= submission.answers.collect{|item| "\"#{item.text && item.text.gsub('"', '""')}\""}.join(',').html_safe %>
+<% end %>

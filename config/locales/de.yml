@@ -526,6 +526,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       editTemplate: 'Umfrage bearbeiten'
       submission: 'Einsendung %{id}'
       custom_choice_placeholder: 'anderes'
+      download_as_csv: Im CSV-Format herunterladen
     message:
       templateErrorList: 'Wegen folgender Fehler konnte die Umfrage nicht gespeichert werden:'
       answerCreated: Vielen Dank für dein Feedback!

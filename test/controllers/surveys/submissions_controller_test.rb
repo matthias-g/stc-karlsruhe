@@ -12,6 +12,12 @@ class Surveys::SubmissionsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'table tr', 2
   end
 
+  test "should get index as csv" do
+    sign_in users(:coordinator)
+    get surveys_template_surveys_submissions_url(@surveys_submission.template_id, format: :csv)
+    assert_response :success
+  end
+
   test "should get new" do
     get new_surveys_template_surveys_submission_url(@surveys_submission.template_id)
     assert_response :success

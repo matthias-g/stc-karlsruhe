@@ -311,6 +311,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       parent_project: 'Diese Aktion ist Teil von'
       invisible: versteckt
       volunteers_in_project: 'Team (%{members} von %{limit})'
+      volunteers_in_empty_project: 'Team (maximal %{limit})'
+      no_volunteers: 'Bisher haben sich noch keine Mitarbeiter für diese Aktion angemeldet.'
       volunteers_in_subprojects: 'Team in Teilaktionen (%{members} von %{limit})'
     help:
       picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'

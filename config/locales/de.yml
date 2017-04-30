@@ -4,6 +4,9 @@ de:
       only_day: ! '%d.'
       short_date: ! '%d. %B'
       date: ! '%d. %B %Y'
+  time:
+    formats:
+      short_with_year: "%d. %b %Y, %H:%M Uhr"
 
   activerecord:
     errors:

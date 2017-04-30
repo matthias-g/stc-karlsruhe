@@ -16,10 +16,10 @@
       <tbody>
       <% @messages.each do |message| %>
               <tr>
-                <td><%= l message.created_at, format: :short %></td>
+                <td><%= l message.created_at.localtime, format: :short_with_year %></td>
                 <td><%= message.subject %></td>
                 <td><%= message.sent? ? message.recipient : render_recipient_group(message.recipient, current_user) %></td>
-                <td><%= message.sent? ? l(message.sent_at, format: :short) : '-' %></td>
+                <td><%= message.sent? ? l(message.sent_at.localtime, format: :short_with_year) : '-' %></td>
                 <td>
                   <%= link_to t('general.action.show'), orga_message_path(message), class: 'btn-default btn' %>
                 </td>

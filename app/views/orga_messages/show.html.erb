@@ -11,7 +11,7 @@
     </tr>
     <tr>
       <th><%= OrgaMessage.human_attribute_name('created_at') %></th>
-      <td><%= l @message.created_at, format: :short %></td>
+      <td><%= l @message.created_at.localtime %></td>
     </tr>
     <tr>
       <th><%= OrgaMessage.human_attribute_name('author') %></th>
@@ -24,7 +24,7 @@
     <% if @message.sent? %>
         <tr>
           <th><%= OrgaMessage.human_attribute_name('sent_at') %></th>
-          <td><%= l @message.sent_at, format: :short %></td>
+          <td><%= l @message.sent_at.localtime %></td>
         </tr>
         <tr>
           <th><%= OrgaMessage.human_attribute_name('sender') %></th>

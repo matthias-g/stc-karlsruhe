@@ -20,7 +20,7 @@
     <p>Statistik über neue Teilnahmen der letzten 60 Tage</p>
   </section>
   <section class="col-sm-4">
-    <%= link_to 'stats' do %>
+    <%= link_to('stats', data: {turbolinks: false}) do %>
         <h2>Website-Statistiken</h2>
     <% end %>
     <p>Statistiken über Websitebesuche</p>
@@ -36,7 +36,7 @@
     <p>E-Mails an Mitarbeiter und Aktionsleiter schicken</p>
   </section>
   <section class="col-sm-4">
-    <%= link_to 'webmail' do %>
+    <%= link_to('webmail', data: {turbolinks: false}) do %>
         <h2>Webmail</h2>
     <% end %>
     <p>Auf eigenen E-Mail-Account zugreifen</p>

@@ -56,6 +56,14 @@ shared_examples 'a ProjectUserRelationship' do
         end
       end
     end
+
+    context 'coordinator is logged in' do
+      let(:current_user) { users(:coordinator) }
+
+      it 'is true' do
+        expect(subject).to be_truthy
+      end
+    end
   end
 
   describe 'allow_remove_volunteer_from_project?' do
@@ -103,6 +111,14 @@ shared_examples 'a ProjectUserRelationship' do
         it 'is false' do
           expect(subject).to be_falsey
         end
+      end
+    end
+
+    context 'coordinator is logged in' do
+      let(:current_user) { users(:coordinator) }
+
+      it 'is true' do
+        expect(subject).to be_truthy
       end
     end
   end

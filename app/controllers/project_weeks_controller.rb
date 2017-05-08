@@ -13,7 +13,7 @@ class ProjectWeeksController < ApplicationController
   end
 
   def show
-    @projects = @project_week.projects.toplevel.order(visible: :desc, status: :asc, picture_source: :desc)
+    @projects = @project_week.projects.toplevel
 
     if params[:filter]
       p = filter_params
@@ -22,7 +22,7 @@ class ProjectWeeksController < ApplicationController
       @projects = @projects.where(status: Project.statuses[p[:status]]) unless p[:status].blank?
     end
 
-    @projects = policy_scope(@projects)
+    @projects = policy_scope(@projects).order(visible: :desc, status: :asc, picture_source: :desc)
     if params[:filter] && filter_params[:after_17h] == '1'
       @projects = @projects.to_a.select { |project| project.start_time && project.start_time.hour >= 17 }
     end

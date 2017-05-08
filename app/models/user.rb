@@ -74,6 +74,10 @@ class User < ApplicationRecord
     has_role?(:coordinator)
   end
 
+  def in_orga_team?
+    admin? || coordinator?
+  end
+
   def photographer?
     has_role?(:photographer)
   end

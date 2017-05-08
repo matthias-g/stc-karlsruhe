@@ -28,26 +28,26 @@
       <div><%= Project.model_name.human(count: @project_week.projects.visible.count) %></div>
     </div>
     <% if @project_week.active_user_count > 0 %>
-      <% if current_user && current_user.admin? %>
+      <% if current_user && current_user.in_orga_team? %>
         <a href="<%= statistiken_teilnahmen_path %>" style="color: inherit;">
       <% end %>
       <div class="infobox">
         <span><%= @project_week.active_user_count %></span>
         <div><%= t('user.label.countActive') %></div>
       </div>
-      <% if current_user && current_user.admin? %>
+      <% if current_user && current_user.in_orga_team? %>
         </a>
       <% end %>
     <% end %>
     <% if @project_week.vacancy_count > 0 %>
-      <% if current_user && current_user.admin? %>
+      <% if current_user && current_user.in_orga_team? %>
         <a href="<%= statistiken_auslastung_path %>" style="color: inherit;">
       <% end %>
       <div class="infobox">
         <span><%= @project_week.vacancy_count %></span>
         <div><%= t('project.label.vacancies') %></div>
       </div>
-      <% if current_user && current_user.admin? %>
+      <% if current_user && current_user.in_orga_team? %>
         </a>
       <% end %>
     <% end %>
@@ -71,7 +71,7 @@
           <%= f.select(:status,
                        Project.statuses.keys.map { |s| [t("project.status.#{s}"), s] },
                        include_blank: "- - - Status egal - - -", hide_label: true) %>
-          <% if user_signed_in? && current_user.admin? %>
+          <% if user_signed_in? && current_user.in_orga_team? %>
             <%= f.select(:visibility, [['Sichtbar', :visible], ['Versteckt', :hidden]],
                          include_blank: "- - - Sichtbarkeit egal - - -", hide_label: true) %>
           <% end %>

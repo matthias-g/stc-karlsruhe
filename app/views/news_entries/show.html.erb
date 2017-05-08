@@ -25,7 +25,8 @@
         <% if show_gallery?(@news_entry) %>
             <div class="news-entry-gallery">
               <%= render 'galleries/gallery', gallery: @news_entry.gallery %>
-              <% if current_user && current_user.admin? && @news_entry.gallery.gallery_pictures.invisible.any? %>
+              <% if current_user && @news_entry.gallery.gallery_pictures.invisible.any? &&
+                  policy(@news_entry.gallery.gallery_pictures.invisible.first).make_visible? %>
                   <i><%= t('gallery.message.containsInvisiblePictures') %></i>
               <% end %>
               <% if policy(@news_entry.gallery).edit? %>

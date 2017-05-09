@@ -64,7 +64,7 @@
               </div>
           <% end %>
 
-          <% visible_subprojects = policy_scope(@project.subprojects).sort_by { |p| p.start_time } %>
+          <% visible_subprojects = policy_scope(@project.subprojects).sort_by { |p| p.start_time || p.days.first&.date || Time.now } %>
           <% if visible_subprojects.count > 0 %>
               <div class="subprojects" id='<%= Project.human_attribute_name('subproject_ids').downcase %>'>
                 <h3><%= Project.human_attribute_name('subproject_ids') %></h3>

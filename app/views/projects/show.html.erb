@@ -198,7 +198,11 @@
                 <%= link_to project_path(@project.parent_project) do %>
                     <div class="row parent-project">
                       <div class="col-md-6 col-sm-6 col-xs-6 image" >
-                        <%= image_tag @project.parent_project.picture.thumb.url || 'placeholder.svg', class: 'img-responsive' %>
+                        <% if @project.parent_project.show_picture? %>
+                            <%= image_tag @project.parent_project.picture.thumb.url, class: 'img-responsive' %>
+                        <% else %>
+                            <%= image_tag 'placeholder.svg', class: 'img-responsive' %>
+                        <% end %>
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-6 title">
                         <%= @project.parent_project.title %>

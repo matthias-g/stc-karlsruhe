@@ -75,9 +75,17 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should show project with subproject without image' do
+  test 'should show project with subproject without picture' do
     @project = projects(:'kindergarten-party')
     assert @project.visible
+    get project_url(@project)
+    assert_response :success
+  end
+
+  test 'should show project with parent project without picture' do
+    @project = projects(:'kindergarten-kitchen')
+    assert @project.visible
+    assert_not @project.parent_project.show_picture?
     get project_url(@project)
     assert_response :success
   end

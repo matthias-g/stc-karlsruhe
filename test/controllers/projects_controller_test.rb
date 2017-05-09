@@ -77,7 +77,16 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should show project with subproject without picture' do
     @project = projects(:'kindergarten-party')
+    assert @project.subprojects.select { |p| !p.show_picture? }.count > 0
     assert @project.visible
+    get project_url(@project)
+    assert_response :success
+  end
+
+  test 'should show project with subprojects with start time and without' do
+    @project = projects(:'kindergarten-party')
+    assert @project.subprojects.select { |p| p.start_time == nil }.count > 0
+    assert @project.subprojects.select { |p| p.start_time != nil }.count > 0
     get project_url(@project)
     assert_response :success
   end

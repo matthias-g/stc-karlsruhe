@@ -76,6 +76,8 @@ kindergarten-kitchen:
   project_week: one
   parent_project: kindergarten-party
   gallery: six
+  time: "14:00 - 16:00"
+  days: one
 
 kindergarten-music:
   title: Musik bei Kindergarten-Fest

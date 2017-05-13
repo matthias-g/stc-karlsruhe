@@ -205,10 +205,10 @@ de:
       success: 'Vielen Dank für deine Nachricht! Wir werden sie so schnell wie möglich beantworten.'
       intro: 'Über das Kontaktformular auf servethecity-karlsruhe.de ist eine neue Nachricht eingegangen:'
     team:
-      title: 'Teilnehmer der Aktion benachrichtigen'
-      text: 'Hier kannst du den Teilnehmern der Aktion eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
+      title: 'Mitarbeiter der Aktion benachrichtigen'
+      text: 'Hier kannst du den Mitarbeitern der Aktion eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
       submit: 'Nachricht verteilen'
-      success: 'Die Nachricht wurde an dich und alle Teilnehmer geschickt.'
+      success: 'Die Nachricht wurde an dich und alle Mitarbeiter geschickt.'
       body: "Hallo,
 
 du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{sender_email}, Aktionsleiter von '%{title}') bekommen:"
@@ -328,7 +328,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       updated: 'Aktion wurde erfolgreich aktualisiert.'
       leaderAdded: 'Aktionsleiter erfolgreich hinzugefügt.'
       leaderRemoved: 'Aktionsleiter erfolgreich entfernt.'
-      volunteerRemoved: 'Teilnehmer erfolgreich entfernt.'
+      volunteerRemoved: 'Mitarbeiter erfolgreich entfernt.'
       errorList: 'Wegen folgender Fehler konnte die Aktion nicht gespeichert werden:'
       remainingVacancy: '%s freie Plätze'
       teamMember: 'Du bist im Aktionsteam.'

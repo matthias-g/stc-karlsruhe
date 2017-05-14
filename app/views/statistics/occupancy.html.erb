@@ -5,7 +5,8 @@
 <section id="statistics-header" class="showOverflow">
   <div class="select-year">
     <h1>Aktionsauslastung <%= @project_week.title %></h1>
-    <%= render partial: 'layouts/week_dropdown', locals: { target_path: method(:occupancy_in_year_path) } %>
+    <%= render partial: 'layouts/week_dropdown',
+               locals: { target_path: lambda { |project_week| occupancy_in_year_path(project_week.title) } } %>
   </div>
 
   <div class="clearfix"></div>

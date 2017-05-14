@@ -7,14 +7,19 @@
     <%#= javascript_include_tag 'chartkick', 'data-turbolinks-track': true %>
 <%# end %>
 
-<section>
-  <h1>Neue Aktionsteilnahmen</h1>
+<section id="statistics-header" class="showOverflow">
+  <div class="select-year">
+    <h1>Neue Aktionsteilnahmen <%= @project_week.title %></h1>
+    <%= render partial: 'layouts/week_dropdown',
+               locals: { target_path: lambda { |project_week| statistiken_teilnahmen_path(date: project_week.date_range.end) } } %>
+  </div>
+  <div class="clearfix"></div>
 </section>
 
 <div class="row row-md-eq-height">
 
   <section class="col-md-12">
-    <%= line_chart Participation.where('created_at > ?', 60.days.ago).group_by_day(:created_at).count, colors: ['#229c95'] %>
+    <%= line_chart Participation.where(created_at: @start_date..@end_date).group_by_day(:created_at).count, colors: ['#229c95'] %>
   </section>
 
 </div>
@@ -30,9 +35,8 @@
       </tr>
       </thead>
       <tbody>
-      <% (0...60).each do |x| %>
-          <% date = x.days.ago.to_date %>
-          <% participations_on_date = @participations.where(created_at: date.beginning_of_day..date.end_of_day).count %>
+      <% @end_date.downto(@start_date) do |date| %>
+          <% participations_on_date = Participation.where(created_at: date.beginning_of_day..date.end_of_day).count %>
           <% if participations_on_date > 0 %>
               <tr>
                 <td><%= l date, format: :default %></td>

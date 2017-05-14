@@ -1,5 +1,5 @@
 <% @weeks = (ProjectWeek.all.order(title: :desc)) %>
-<% if !@weeks.blank? %>
+<% unless @weeks.blank? %>
   <div class="week-dropdown dropdown h1">
     <a class="dropdown-toggle" id="weekDropdown" title="Andere Aktionswochen"
        data-toggle="dropdown" aria-expanded="true">
@@ -9,7 +9,7 @@
         aria-labelledby="weekDropdown" data-current="<%= @weeks.find_index(@project_week) %>">
       <% @weeks.each_with_index do |project_week, index| %>
         <li role="presentation">
-          <%= link_to project_week.title, target_path.call(project_week.title), {:'data-index' => index} %>
+          <%= link_to project_week.title, target_path.call(project_week), {'data-index': index} %>
         </li>
       <% end %>
     </ul>

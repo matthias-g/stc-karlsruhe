@@ -19,7 +19,8 @@
 
   <div class="select-year">
     <h1>Aktionswoche <%= @project_week.title %></h1>
-    <%= render partial: 'layouts/week_dropdown', locals: { target_path: method(:show_project_week_path) } %>
+    <%= render partial: 'layouts/week_dropdown',
+               locals: { target_path: lambda { |project_week| show_project_week_path(project_week.title) } } %>
   </div>
 
   <div style="text-align: right">

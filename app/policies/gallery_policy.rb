@@ -12,11 +12,11 @@ class GalleryPolicy < ApplicationPolicy
 
   alias_method :index?, :is_admin?
   alias_method :new?, :is_admin?
-  alias_method :edit?, :is_admin?
+  alias_method :edit?, :is_admin_or_coordinator?
   alias_method :create?, :is_admin?
   alias_method :destroy?, :is_admin?
-  alias_method :make_all_visible?, :is_admin?
-  alias_method :make_all_invisible?, :is_admin?
+  alias_method :make_all_visible?, :is_admin_or_coordinator?
+  alias_method :make_all_invisible?, :is_admin_or_coordinator?
 
   def update?
     return false unless user

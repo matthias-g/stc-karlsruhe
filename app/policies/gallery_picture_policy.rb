@@ -19,7 +19,7 @@ class GalleryPicturePolicy < ApplicationPolicy
   end
 
   def show?
-    is_admin? || record.visible || is_uploader?
+    is_admin_or_coordinator? || record.visible || is_uploader?
   end
 
   def permitted_attributes_for_show
@@ -29,18 +29,18 @@ class GalleryPicturePolicy < ApplicationPolicy
   end
 
   def edit?
-    is_admin?
+    is_admin? || is_coordinator?
   end
 
   alias_method :update?, :edit?
   alias_method :destroy?, :edit?
 
   def make_visible?
-    is_admin?
+    is_admin_or_coordinator?
   end
 
   def make_invisible?
-    is_admin? || is_uploader?
+    is_admin_or_coordinator? || is_uploader?
   end
 
   def is_uploader?

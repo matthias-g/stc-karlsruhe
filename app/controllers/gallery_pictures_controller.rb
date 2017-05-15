@@ -1,6 +1,6 @@
 class GalleryPicturesController < ApplicationController
   before_action :set_gallery_picture, except: [:index, :new, :create]
-  before_action :authenticate_admin!
+  before_action :authenticate_admin!, only: [:index, :new, :create]
   before_action :authorize_gallery_picture, except: [:index, :new, :create]
 
   after_action :verify_authorized, except: :index

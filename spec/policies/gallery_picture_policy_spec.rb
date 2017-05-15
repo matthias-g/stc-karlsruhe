@@ -9,7 +9,7 @@ RSpec.describe GalleryPicturePolicy do
   let(:record) { GalleryPicture.find_by(picture: 'VisiblePicture') }
   let(:policy) { GalleryPicturePolicy.new(current_user, record) }
 
-  %w(edit? create? update? destroy? make_visible?).each do |method|
+  %w(create? update? destroy?).each do |method|
     describe method do
       subject { policy.public_send(method) }
 
@@ -19,6 +19,32 @@ RSpec.describe GalleryPicturePolicy do
 
       context 'admin logged in' do
         let(:current_user) { users(:admin) }
+
+        it 'is true' do
+          expect(subject).to be_truthy
+        end
+      end
+    end
+  end
+
+  %w(edit? make_visible?).each do |method|
+    describe method do
+      subject { policy.public_send(method) }
+
+      it 'is false for no user logged in' do
+        expect(subject).to be_falsey
+      end
+
+      context 'admin logged in' do
+        let(:current_user) { users(:admin) }
+
+        it 'is true' do
+          expect(subject).to be_truthy
+        end
+      end
+
+      context 'coordinator logged in' do
+        let(:current_user) { users(:coordinator) }
 
         it 'is true' do
           expect(subject).to be_truthy
@@ -57,6 +83,14 @@ RSpec.describe GalleryPicturePolicy do
         end
       end
 
+      context 'for an coordinator' do
+        let(:current_user) { users(:coordinator) }
+
+        it 'is true' do
+          expect(subject).to be_truthy
+        end
+      end
+
       context 'for uploader' do
         let(:current_user) { record.uploader }
 
@@ -84,6 +118,13 @@ RSpec.describe GalleryPicturePolicy do
 
     context 'for an admin' do
       let(:current_user) { users(:admin) }
+
+      it 'is true' do
+        expect(subject).to be_truthy
+      end
+    end
+    context 'for an coordinator' do
+      let(:current_user) { users(:coordinator) }
 
       it 'is true' do
         expect(subject).to be_truthy

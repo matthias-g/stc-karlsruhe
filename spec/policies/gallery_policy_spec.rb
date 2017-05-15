@@ -9,7 +9,7 @@ RSpec.describe GalleryPolicy do
   let(:record) { Gallery.find_by(title: 'GalleryOne') }
   let(:policy) { GalleryPolicy.new(current_user, record) }
 
-  %w(index? new? edit? create? destroy? make_all_visible? make_all_invisible?).each do |method|
+  %w(index? new? create? destroy?).each do |method|
     describe method do
       subject { policy.public_send(method) }
 
@@ -19,6 +19,32 @@ RSpec.describe GalleryPolicy do
 
       context 'admin logged in' do
         let(:current_user) { users(:admin) }
+
+        it 'is true' do
+          expect(subject).to be_truthy
+        end
+      end
+    end
+  end
+
+  %w(edit? make_all_visible? make_all_invisible?).each do |method|
+    describe method do
+      subject { policy.public_send(method) }
+
+      it 'is false for no user logged in' do
+        expect(subject).to be_falsey
+      end
+
+      context 'admin logged in' do
+        let(:current_user) { users(:admin) }
+
+        it 'is true' do
+          expect(subject).to be_truthy
+        end
+      end
+
+      context 'coordinator logged in' do
+        let(:current_user) { users(:coordinator) }
 
         it 'is true' do
           expect(subject).to be_truthy

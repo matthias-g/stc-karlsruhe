@@ -57,6 +57,38 @@ RSpec.describe ApplicationPolicy do
     end
   end
 
+  describe 'is_admin_or_coordinator?' do
+    subject { policy.is_admin_or_coordinator? }
+
+    it 'is false for no user logged in' do
+      expect(subject).to be_falsey
+    end
+
+    context 'for an admin' do
+      let(:current_user) { users(:admin) }
+
+      it 'is true' do
+        expect(subject).to be_truthy
+      end
+    end
+
+    context 'for a coordinator' do
+      let(:current_user) { users(:coordinator) }
+
+      it 'is true' do
+        expect(subject).to be_truthy
+      end
+    end
+
+    context 'for another user' do
+      let(:current_user) { users(:rolf) }
+
+      it 'is false' do
+        expect(subject).to be_falsey
+      end
+    end
+  end
+
   %w(index? new? edit? create? destroy?).each do |method|
     describe method do
       subject { policy.public_send(method) }

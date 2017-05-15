@@ -18,7 +18,7 @@ module ProjectsHelper
 
   def show_contains_invisible_pictures_notification?(project)
     current_user && (project.gallery.gallery_pictures.invisible.where(uploader_id: current_user.id).count > 0 ||
-        (current_user.admin? && project.gallery.gallery_pictures.invisible.any?))
+        ((current_user.admin? || current_user.coordinator?) && project.gallery.gallery_pictures.invisible.any?))
   end
 
   def options_for_project_leader_select

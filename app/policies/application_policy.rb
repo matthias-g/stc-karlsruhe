@@ -62,4 +62,8 @@ class ApplicationPolicy
     user && user.coordinator?
   end
 
+  def is_admin_or_coordinator?
+    user && (user.admin? || user.coordinator?)
+  end
+
 end

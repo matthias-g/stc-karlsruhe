@@ -7,3 +7,9 @@
 //= require highcharts
 //= require chartkick
 //= require trix
+
+Highcharts.setOptions({
+    global: {
+        useUTC: false
+    }
+});

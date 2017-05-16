@@ -2,7 +2,7 @@ class StatisticsController < ApplicationController
   before_action :authenticate_admin_or_coordinator!
 
   def participations
-    @end_date = params[:date]&.to_date || Date.today
+    @end_date = params[:date]&.to_date || Date.tomorrow
     @start_date = @end_date - 60
     @project_week = ProjectWeek.all.to_a.select { |project_week| (@start_date..@end_date).cover?(project_week.date_range.begin) }.first
     @project_week = ProjectWeek.default unless @project_week

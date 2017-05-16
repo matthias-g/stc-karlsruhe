@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:show]
-  before_action :authorize_project, except: [:index, :new, :create]
+  before_action :authorize_project, except: [:index, :new, :create, :delete_volunteer]
 
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
@@ -85,6 +85,7 @@ class ProjectsController < ApplicationController
 
   def delete_volunteer
     volunteer = User.find(params[:user_id])
+    authorize_delete_volunteer(volunteer)
     @project.delete_volunteer(volunteer)
     redirect_to edit_leaders_project_url(@project), notice: t('project.message.volunteerRemoved')
   end
@@ -164,6 +165,13 @@ class ProjectsController < ApplicationController
 
   def authorize_project
     authorize @project
+  end
+
+  def authorize_delete_volunteer(volunteer)
+    unless policy(@project).allow_remove_volunteer_from_project?(volunteer, @project)
+      raise Pundit::NotAuthorizedError, "not allowed to delete #{volunteer.full_name} from #{@project.title}"
+    end
+    skip_authorization
   end
 
   def filter_params

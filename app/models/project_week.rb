@@ -14,7 +14,7 @@ class ProjectWeek < ApplicationRecord
   end
 
   def vacancy_count
-    projects.active.toplevel.map{|p| p.aggregated_desired_team_size - p.aggregated_volunteers.count}.sum
+    projects.active.to_a.select{|p| p.subprojects.count == 0}.map{|p| p.aggregated_desired_team_size - p.aggregated_volunteers.count}.sum
   end
 
   def date_range

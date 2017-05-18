@@ -143,11 +143,21 @@ class Project < ApplicationRecord
     candidates
   end
 
+  def available_slots_count
+    desired_team_size = self.desired_team_size
+    volunteer_count = self.volunteers.count
+    subprojects.active.each do |project|
+      desired_team_size += project.desired_team_size
+      volunteer_count += project.volunteers.count
+    end
+    desired_team_size - volunteer_count
+  end
+
   def adjust_status
     if self.status == 'closed'
       return
     end
-    free = aggregated_desired_team_size - aggregated_volunteers.count
+    free = available_slots_count
     if free > 2
       self.status = :open
     elsif free > 0

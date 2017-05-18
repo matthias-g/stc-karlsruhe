@@ -229,6 +229,15 @@ class ProjectTest < ActiveSupport::TestCase
     assert full_subproject.reload.full?
   end
 
+  test 'adjust parent status when subproject changes' do
+    parent = Project.create title: 'parent', desired_team_size: 0
+    child1 = Project.create title: 'child1', desired_team_size: 9, parent_project: parent, visible: true
+    child2 = Project.create title: 'child2', desired_team_size: 2, parent_project: parent, visible: true
+    assert_equal 'open', parent.reload.status
+    child1.close!
+    assert_equal 'soon_full', parent.reload.status
+  end
+
   test "has_free_places?" do
     assert projects(:one).has_free_places?
     assert_not projects(:full).has_free_places?

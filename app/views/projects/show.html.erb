@@ -244,7 +244,7 @@
             <%= list_users(@project.leaders) %>
           </div>
           <div>
-            <% if @project.volunteers.empty? %>
+            <% if @project.volunteers.empty? && @project.desired_team_size > 0 %>
                 <h3><%= t('project.label.volunteers_in_empty_project', limit: @project.desired_team_size) %></h3>
                 <p class="no-volunteers"><%= t('project.label.no_volunteers') %></p>
             <% else %>

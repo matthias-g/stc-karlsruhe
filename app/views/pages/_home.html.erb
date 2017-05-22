@@ -26,13 +26,17 @@
 </div>
 
 <section style="text-align: center">
-  <div id="countdown" data-class="Countdown" data-date="05/15/2017 00:00">
+  <div id="countdown" data-class="Countdown" data-date="<%= ProjectWeek.default.date_range.begin.strftime('%m/%d/%Y 00:00') %>">
     <div><span></span>Tage</div>
     <div><span></span>Stunden</div>
     <div><span></span>Minuten</div>
     <div><span></span>Sekunden</div>
-    <span class="running">verbleiben bis zur Aktionswoche&nbsp;2017</span>
-    <span class="finished">Die <%= link_to 'Aktionswoche&nbsp;2017'.html_safe, show_project_week_path(ProjectWeek.default.title), class: 'black-link' %> läuft!</span>
+    <span class="running">verbleiben bis zur Aktionswoche&nbsp;<%= ProjectWeek.default.title %></span>
+    <% if Date.today <= ProjectWeek.default.date_range.end %>
+        <span class="finished">Die <%= link_to "Aktionswoche&nbsp;#{ProjectWeek.default.title}".html_safe, show_project_week_path(ProjectWeek.default.title), class: 'black-link' %> läuft!</span>
+    <% else %>
+        <span class="finished week-finished">Die <%= link_to "Aktionswoche&nbsp;#{ProjectWeek.default.title}".html_safe, show_project_week_path(ProjectWeek.default.title), class: 'black-link' %> ist abgeschlossen. Vielen Dank für euren Einsatz!</span>
+    <% end %>
   </div>
 </section>
 

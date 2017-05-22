@@ -6,7 +6,6 @@ class GalleryPicture < ApplicationRecord
 
   scope :visible, -> { where(visible: true) }
   scope :invisible,  -> { where(visible: false) }
-  scope :visible_for_user, ->(user) { user ? where("visible = 't' or uploader_id = #{user.id}") : visible }
 
   def make_visible!
     update_attribute :visible, true

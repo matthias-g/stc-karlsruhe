@@ -13,7 +13,7 @@ module ProjectsHelper
 
   # for projects and news_entries
   def show_gallery?(item)
-    (item.gallery && item.gallery.gallery_pictures.visible_for_user(current_user).any?) && item.visible?
+    (item.gallery && policy_scope(item.gallery.gallery_pictures).any?) && item.visible?
   end
 
   def show_contains_invisible_pictures_notification?(project)

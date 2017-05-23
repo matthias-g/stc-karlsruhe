@@ -1,10 +1,5 @@
 <div class="row">
   <section class="col-md-12">
-    <p>
-      <strong>Title:</strong>
-      <span id="title"><%= @gallery.title %></span>
-    </p>
-
     <div class="row">
 
       <div class="col-md-10">
@@ -13,30 +8,43 @@
         </div>
       </div>
 
-      <div class="col-md-4">
-        Anzahl Bilder: <%= @gallery.gallery_pictures.count %>
-      </div>
-      <div class="col-md-4">
-        davon unsichtbar: <%= @gallery.gallery_pictures.invisible.count %>
-      </div>
+      <% if policy(@gallery).update? %>
+          <div class="col-md-4">
+            Anzahl Bilder: <%= @gallery.gallery_pictures.count %>
+          </div>
+          <div class="col-md-4">
+            davon unsichtbar: <%= @gallery.gallery_pictures.invisible.count %>
+          </div>
 
-      <div class="col-md-6">
-        <%= form_for(@gallery, html: { multipart: true}) do |f| %>
-            <%= f.hidden_field :title %>
-            <div class="field">
-              <%= f.label :picture %><br>
-              <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
-            </div>
+          <div class="col-md-6">
+            <%= form_for(@gallery, html: { multipart: true}) do |f| %>
+                <%= f.hidden_field :title %>
+                <div class="field">
+                  <%= f.label :picture %><br>
+                  <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+                </div>
 
-            <div class="actions">
-              <%= f.submit 'Hochladen' %>
-            </div>
-        <% end %>
-      </div>
+                <div class="actions">
+                  <%= f.submit 'Hochladen' %>
+                </div>
+            <% end %>
+          </div>
+      <% end %>
     </div>
 
-    <%= link_to 'Bearbeiten', edit_gallery_path(@gallery) %> |
-    <%= link_to 'Zur Galerieübersicht', galleries_path %> |
+    <% unless @gallery.title.blank? %>
+        <p>
+          <strong>Title:</strong>
+          <span id="title"><%= @gallery.title %></span>
+        </p>
+    <% end %>
+
+    <% if policy(@gallery).edit? %>
+        <%= link_to 'Bearbeiten', edit_gallery_path(@gallery) %> |
+    <% end %>
+    <% if policy(@gallery).index? %>
+        <%= link_to 'Zur Galerieübersicht', galleries_path %> |
+    <% end %>
     <% @gallery.projects.each do |project| %>
         <%= link_to 'Zur Aktion', project %>
     <% end %>

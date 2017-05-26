@@ -6,9 +6,9 @@ GIT
 
 GIT
   remote: https://github.com/matthias-g/jssorslider-rails.git
-  revision: 6e43adc053dc7eefe28ab14e8950315c181a0019
+  revision: 4d99996dbd03f8f9cf2e38afb1744b86fac73f96
   specs:
-    jssorslider-rails (21.1.5)
+    jssorslider-rails (23.1.5)
       railties (>= 3.1)
 
 GEM
@@ -428,7 +428,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 2.2.5p319
+   ruby 2.3.4p301
 
 BUNDLED WITH
-   1.12.5
+   1.15.0

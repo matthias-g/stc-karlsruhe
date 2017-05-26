@@ -1,4 +1,4 @@
-#= require jssor.slider.mini
+#= require jssor.slider.min
 #= require photoswipe
 
 class @Gallery

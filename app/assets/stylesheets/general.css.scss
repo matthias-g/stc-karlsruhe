@@ -213,3 +213,15 @@ table.properties {
 a.black-link {
     color: #000;
 }
+
+.honig a {
+  color: transparent;
+  font-size: 1px;
+  float: right;
+  cursor: default;
+  -webkit-transform: translate(0, 20px);
+  -moz-transform: translate(0, 20px);
+  -ms-transform: translate(0, 20px);
+  -o-transform: translate(0, 20px);
+  transform: translate(0, 20px);
+}

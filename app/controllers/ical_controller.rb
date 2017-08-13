@@ -17,7 +17,7 @@ class IcalController < ApplicationController
 
     @filename = project.title
     ical_feed = calendar.to_ical
-    render text: ical_feed
+    render plain: ical_feed
   end
 
   def project_weeks
@@ -31,7 +31,7 @@ class IcalController < ApplicationController
 
     @filename = I18n.t('ical.label.project_weeks', project_week: project_week.title)
     ical_feed = calendar.to_ical
-    render text: ical_feed
+    render plain: ical_feed
   end
 
   def users
@@ -45,7 +45,7 @@ class IcalController < ApplicationController
 
     @filename = I18n.t('ical.label.users', name: user.first_name)
     ical_feed = calendar.to_ical
-    render text: ical_feed
+    render plain: ical_feed
   end
 
   def all_projects
@@ -57,7 +57,7 @@ class IcalController < ApplicationController
 
     @filename = I18n.t('ical.label.all_projects')
     ical_feed = calendar.to_ical
-    render text: ical_feed
+    render plain: ical_feed
   end
 
   private

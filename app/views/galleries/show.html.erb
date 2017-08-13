@@ -17,7 +17,7 @@
           </div>
 
           <div class="col-md-6">
-            <%= form_for(@gallery, html: { multipart: true}) do |f| %>
+            <%= form_with model: @gallery, html: { multipart: true}, local: true do |f| %>
                 <%= f.hidden_field :title %>
                 <div class="field">
                   <%= f.label :picture %><br>

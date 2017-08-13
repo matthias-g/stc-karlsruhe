@@ -1,4 +1,4 @@
-<%= form_for(@project_week) do |f| %>
+<%= form_with model: @project_week, local: true do |f| %>
   <% if @project_week.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@project_week.errors.count, "error") %> prohibited this project_week from being saved:</h2>

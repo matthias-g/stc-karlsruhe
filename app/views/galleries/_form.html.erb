@@ -1,5 +1,5 @@
 
-<%= form_for(@gallery, html: { multipart: true}) do |f| %>
+<%= form_with model: @gallery, html: { multipart: true}, local: true do |f| %>
   <% if @gallery.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@gallery.errors.count, "error") %> prohibited this gallery from being saved:</h2>

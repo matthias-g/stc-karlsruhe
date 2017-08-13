@@ -41,7 +41,7 @@
               </div>
               <!--<% if policy(@news_entry).upload_pictures? %>-->
                   <!--<div class="picture-upload">-->
-                    <!--<%= form_for(@news_entry.gallery, html: { multipart: true}) do |f| %>-->
+                    <!--<%= form_with model: @news_entry.gallery, html: { multipart: true}, local: true do |f| %>-->
                         <!--<%= f.hidden_field :title %>-->
                         <!--<div class="field">-->
                           <!--<%= t('news_entry.help.uploadPictures') %>-->

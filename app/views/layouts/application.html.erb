@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#28B7AF" />
   <title><%= (content_for?(:pageTitle) ? (yield(:pageTitle).strip + ' - ') : '') + t('layout.pageTitle') %></title>
-  <%= favicon_link_tag 'favicon.ico' %>
+  <%= favicon_link_tag 'favicon.ico', skip_pipeline: true %>
   <%= csrf_meta_tags %>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <%# empty script tag as workaround for problem in Turbolinks

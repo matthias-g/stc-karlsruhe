@@ -108,7 +108,7 @@
               </div>
               <% if policy(@project).upload_pictures? %>
                   <div class="picture-upload">
-                    <%= form_for(@project.gallery, html: { multipart: true}) do |f| %>
+                    <%= form_with model: @project.gallery, html: { multipart: true}, local: true do |f| %>
                         <%= f.hidden_field :title %>
                         <div class="field">
                           <%= t('project.help.uploadPictures') %>

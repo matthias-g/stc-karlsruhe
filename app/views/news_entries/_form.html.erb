@@ -87,7 +87,7 @@
 
   <% if @news_entry.gallery && policy(@news_entry).upload_pictures? %>
       <section class="picture-upload">
-        <%= form_for(@news_entry.gallery, html: { multipart: true}) do |gallery_form| %>
+        <%= form_with model: @news_entry.gallery, html: { multipart: true}, local: true do |gallery_form| %>
             <%= gallery_form.hidden_field :title %>
             <div class="field">
               <%= t('news_entry.help.uploadPictures') %>

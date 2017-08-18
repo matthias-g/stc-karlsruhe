@@ -1,4 +1,4 @@
-<%= raw "\xEF\xBB\xBF" %><%= @template.questions.collect{|item| "\"#{item.text && item.text.gsub('"', '""')}\""}.join(';').html_safe %>
+<%= "\xEF\xBB\xBF" %><%= @template.questions.collect{|item| "\"#{item.text && item.text.gsub('"', '""')}\""}.join(';').html_safe %>
 
 <% @submissions.each do |submission| %>
 <%= submission.answers.collect{|item| "\"#{item.text && item.text.gsub('"', '""')}\""}.join(';').html_safe %>;"<%= l(submission.created_at.localtime, format: :short_with_year) %>"

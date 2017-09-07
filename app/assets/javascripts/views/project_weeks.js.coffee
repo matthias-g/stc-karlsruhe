@@ -1,2 +1,3 @@
 onPageLoad ->
-  $("#weekDropdownMenu").css("top", -17 - 56 * $("#weekDropdownMenu").attr("data-current"))
+  parentTopPadding = parseInt($("#weekDropdownMenu").parent().parent().css('padding-top').slice(0, -2))
+  $("#weekDropdownMenu").css("top", 1 + parentTopPadding - 54.5 * $("#weekDropdownMenu").attr("data-current"))

@@ -1,28 +1,38 @@
 @import "definitions";
 
-.week-dropdown {
-  .dropdown-toggle {
-    color: rgba(#777, 0.4);
-    font-size: 0.7em;
-    margin-left: 15px;
-    vertical-align: 8%;
-    &:hover {
-      color: $link-hover-color;
-      cursor: pointer;
+#weekDropdown h1 {
+  color: rgba(#777, 0.4);
+  font-size: 24.5px;
+  margin-left: 15px;
+  margin-top: 28px;
+  vertical-align: 8%;
+  &:hover {
+    color: $link-hover-color;
+    cursor: pointer;
+  }
+}
+#weekDropdownMenu {
+  font-size: 1em;
+  //right: 34px;
+  left: 181px;
+  top: -73px; // -17
+  position: absolute;
+  min-width: 30px;
+  > li > h1 {
+    margin: 10px 0;
+    > a {
+      padding: 3px 5px;
+      color: #333333;
+      display: block;
     }
   }
-  .dropdown-menu {
-    font-size: 1em;
-    right: 34px;
-    top: -73px; // -17
-    position: absolute;
-    min-width: 30px;
-    > li > a {
-      padding: 3px 5px;
-    }
-    .dropdown-header {
-      font-family: BoldFont;
-      font-size: 14px;
-    }
+  .dropdown-header {
+    font-family: BoldFont;
+    font-size: 14px;
+  }
+}
+@media (max-width: $screen-sm-min) {
+  #weekDropdownMenu {
+    left: 161px;
   }
 }

@@ -66,7 +66,7 @@ gem 'photoswipe-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
 
-gem 'bootstrap-select-rails', github: 'matthias-g/bootstrap-select-rails'
+gem 'bootstrap-select-rails', github: 'matthias-g/bootstrap-select-rails', branch: 'upgrade-1.12.4'
 
 gem 'trix'
 

@@ -128,6 +128,19 @@
             </section>
           </div>
       <% end %>
+
+
+      <% if policy(@project).contact_leaders?  %>
+          <section class="contact-leaders-form no-print">
+            <%= bootstrap_form_for(@message, url: {action: 'contact_leaders'}) do |f| %>
+                <h2><%= t('contact.leaders.title') %></h2>
+                <p><%= t('contact.leaders.text') %></p>
+                <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
+                <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
+                <%= f.submit t('contact.leaders.submit') %>
+            <% end %>
+          </section>
+      <% end %>
     </div>
 
     <div class="col-md-4">
@@ -271,18 +284,6 @@
       </div>
     </div>
   </div>
-
-  <% if policy(@project).contact_leaders?  %>
-      <section class="contact-leaders-form no-print">
-        <%= bootstrap_form_for(@message, url: {action: 'contact_leaders'}) do |f| %>
-            <h2><%= t('contact.leaders.title') %></h2>
-            <p><%= t('contact.leaders.text') %></p>
-            <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
-            <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
-            <%= f.submit t('contact.leaders.submit') %>
-        <% end %>
-      </section>
-  <% end %>
 
   <% if policy(@project).contact_volunteers?  %>
       <section class="contact-volunteers-form no-print">

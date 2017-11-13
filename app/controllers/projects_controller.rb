@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    #Message for contact_volunteers
+    #Message for contact_volunteers or contact_leaders
     @message = Message.new
     if @project.gallery.gallery_pictures.count == 0
       @project.gallery.gallery_pictures.build
@@ -139,6 +139,13 @@ class ProjectsController < ApplicationController
         format.html { render :layout => false}
       end
     end
+  end
+
+  def contact_leaders
+    @message = Message.new(params[:message])
+    Mailer.project_mail_to_leaders(@message, current_user, @project).deliver_now
+    flash[:notice] = t('contact.leaders.success')
+    redirect_to action: :show
   end
 
   def contact_volunteers

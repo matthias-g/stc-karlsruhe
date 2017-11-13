@@ -212,6 +212,14 @@ de:
       body: "Hallo,
 
 du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{sender_email}, Aktionsleiter von '%{title}') bekommen:"
+    leaders:
+      title: 'Aktionsleiter kontaktieren'
+      text: 'Hier kannst du den Aktionsleitern eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
+      submit: 'Nachricht senden'
+      success: 'Die Nachricht wurde an die Aktionsleiter und an dich geschickt.'
+      body: "Hallo,
+
+      du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{sender_email}, Teilnehmer der Aktion '%{title}') bekommen:"
     user:
       title: 'Kontaktiere %{recipient}'
       submit: 'Nachricht senden'

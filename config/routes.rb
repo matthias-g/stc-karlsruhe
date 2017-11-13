@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     member do
       get :enter
       get :leave
+      get :register_for_participation
       get :edit_leaders
       post :add_leader
       delete :delete_leader
@@ -60,6 +61,7 @@ Rails.application.routes.draw do
       get :close
       get :crop_picture
       post :contact_volunteers
+      post :contact_leaders
     end
   end
   get 'aktionen-:year', to: 'projects#index'

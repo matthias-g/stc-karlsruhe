@@ -20,6 +20,14 @@ class Mailer < ActionMailer::Base
     mail bcc: recipients, reply_to: sender.email, subject: message.subject
   end
 
+  def project_mail_to_leaders(message, sender, project)
+    @message = message.body
+    @project_title = project.title
+    @sender = sender
+    recipients = (project.leaders + [sender]).map{|v| v.email}.uniq.join(',')
+    mail bcc: recipients, reply_to: sender.email, subject: message.subject
+  end
+
   def user_mail(message, sender, recipient)
     @message = message.body
     @sender = sender

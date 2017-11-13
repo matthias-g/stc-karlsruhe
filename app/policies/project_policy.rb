@@ -51,6 +51,10 @@ class ProjectPolicy < ApplicationPolicy
     record.visible? && edit?
   end
 
+  def contact_leaders?
+    record.has_volunteer?(user) && !record.closed?
+  end
+
   def enter?
     add_to_volunteers? [user]
   end

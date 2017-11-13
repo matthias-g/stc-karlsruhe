@@ -198,6 +198,48 @@ RSpec.describe ProjectPolicy do
     end
   end
 
+  describe 'contact_leaders?' do
+    subject { policy.contact_leaders? }
+
+    context 'if project is open' do
+      context 'for volunteer' do
+        let(:user) { users(:sabine) }
+
+        it 'is true' do
+          expect(subject).to be_truthy
+        end
+      end
+
+      context 'for other users' do
+        let(:user) { users(:peter) }
+
+        it 'is false' do
+          expect(subject).to be_falsey
+        end
+      end
+    end
+
+    context 'if project is closed' do
+      before { project.close! }
+
+      context 'for volunteer' do
+        let(:user) { users(:sabine) }
+
+        it 'is false' do
+          expect(subject).to be_falsey
+        end
+      end
+
+      context 'for other users' do
+        let(:user) { users(:peter) }
+
+        it 'is false' do
+          expect(subject).to be_falsey
+        end
+      end
+    end
+  end
+
   describe 'upload_pictures?' do
     subject { policy.upload_pictures? }
 

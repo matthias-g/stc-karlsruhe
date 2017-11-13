@@ -19,7 +19,7 @@
           <% end %>
         </div>
         <div>
-          <%= select_tag "add-user-to-#{role.title}", options_for_add_user_to_role(role),
+          <%= select_tag "add-user-to-#{role.title}", options_for_user_select,
                          class: 'selectpicker', title: t('role.action.addUser'),
                          data: { class: 'SelectPicker', handler: 'addUserToRole',
                                  live_search: true, role_id: role.id, size: 5 } %>

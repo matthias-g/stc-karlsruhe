@@ -51,7 +51,7 @@
         <% end %>
       </ul>
       <% if policy(User).index? %>
-          <%= select_tag 'select-new-leader', options_for_project_leader_select,
+          <%= select_tag 'select-new-leader', options_for_user_select,
                          class: 'selectpicker', title: t('project.action.addLeader'),
                          data: { class: 'SelectPicker', handler: 'addNewLeader',
                                  live_search: true, project_id: @project.id, size: 5 } %>

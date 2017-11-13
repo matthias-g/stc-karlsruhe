@@ -21,13 +21,6 @@ module ProjectsHelper
         ((current_user.admin? || current_user.coordinator?) && project.gallery.gallery_pictures.invisible.any?))
   end
 
-  def options_for_project_leader_select
-    options = policy_scope(User.all.where(cleared: false)).order(:first_name, :last_name).map do |user|
-      [user.full_name, user.id, {data: { tokens: user.username }}]
-    end
-    options_for_select(options)
-  end
-
   def available_project_days(project)
     if project.project_week
       @project.project_week.days.order(date: :asc)

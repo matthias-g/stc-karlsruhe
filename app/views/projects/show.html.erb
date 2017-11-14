@@ -239,15 +239,9 @@
                             leave_project_path(@project),
                             class: 'btn btn-default btn-wide' %>
             <% elsif @project.visible? && @project.has_free_places? && !@project.closed? && !@project.has_volunteer?(current_user) %>
-                <% if user_signed_in? %>
-                    <%= link_to t('project.action.enter'),
-                                enter_project_path(@project),
-                                class: 'btn btn-default btn-wide' %>
-                <% else %>
-                    <%= link_to t('project.action.enter'),
-                                register_for_participation_project_path(@project),
-                                class: 'btn btn-default btn-wide' %>
-                <% end %>
+                <%= link_to t('project.action.enter'),
+                            enter_project_path(@project),
+                            class: 'btn btn-default btn-wide' %>
             <% elsif @project.visible? && !@project.closed? && !@project.full? && !@project.has_volunteer_in_subproject?(current_user) %>
                 <p><%= t('project.message.enterOneOfTheSubprojects',
                          subprojects_link: link_to(Project.human_attribute_name('subproject_ids'), "##{Project.human_attribute_name('subproject_ids').downcase}" )).html_safe %></p>

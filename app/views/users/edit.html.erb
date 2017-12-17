@@ -48,7 +48,7 @@
           <%= f.check_box :receive_emails_from_other_users %>
           <%= f.check_box :receive_notifications_for_new_participation %>
           <% if @user.projects_as_leader.count > 0 %>
-              <%= f.check_box :receive_notifications_for_users_leaving_project %>
+              <%= f.check_box :receive_notifications_about_volunteers %>
           <% end %>
 
           <h2><%= t('user.label.otherActions') %></h2>

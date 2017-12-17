@@ -184,7 +184,8 @@ class Project < ApplicationRecord
   end
 
   def on_volunteer_added(user)
-    Mailer.project_participate_notification(user, self).deliver_now if user.receive_notifications_for_new_participation
+    Mailer.project_participate_volunteer_notification(user, self).deliver_now if user.receive_notifications_for_new_participation
+    Mailer.project_participate_leader_notification(user, self).deliver_now
   end
 
   def on_volunteer_removed(user)

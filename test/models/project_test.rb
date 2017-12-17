@@ -348,8 +348,8 @@ class ProjectTest < ActiveSupport::TestCase
     assert_nil project.end_time
   end
 
-  test 'send notification when volunteer enters project ' do
-    project = projects(:one)
+  test 'send notification to volunteer when volunteer enters project ' do
+    project = projects(:two)
     user = users(:peter)
     assert_not project.has_volunteer?(user)
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
@@ -358,11 +358,39 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.has_volunteer?(user)
   end
 
-  test "don't send notification when volunteer enters project when user doesn't want that" do
+  test "don't send notification to volunteer when volunteer enters project when user doesn't want that" do
+    project = projects(:two)
+    user = users(:peter)
+    user.receive_notifications_for_new_participation = false
+    user.save!
+    assert_not project.has_volunteer?(user)
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+      project.add_volunteer(user)
+    end
+    assert project.has_volunteer?(user)
+  end
+
+  test 'send notification to leaders when volunteer enters project ' do
     project = projects(:one)
     user = users(:peter)
     user.receive_notifications_for_new_participation = false
     user.save!
+    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+      project.add_volunteer(user)
+    end
+    notification_email = ActionMailer::Base.deliveries.last
+    assert_equal project.leaders.first.email, notification_email.bcc.first
+  end
+
+  test "don't send notification to leader when volunteer enters project when user doesn't want that" do
+    project = projects(:one)
+    user = users(:peter)
+    user.receive_notifications_for_new_participation = false
+    user.save!
+    project.leaders.each do |leader|
+      leader.receive_notifications_about_volunteers = false
+      leader.save!
+    end
     assert_not project.has_volunteer?(user)
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
       project.add_volunteer(user)

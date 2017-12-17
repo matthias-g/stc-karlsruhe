@@ -82,17 +82,25 @@ class Mailer < ActionMailer::Base
   def leaving_project_notification(user, project)
     @user = user
     @project = project
-    recipients = (project.leaders.where('users.receive_notifications_for_users_leaving_project': true).pluck(:email) +
+    recipients = (project.leaders.where('users.receive_notifications_about_volunteers': true).pluck(:email) +
         [StcKarlsruhe::Application::NOTIFICATION_RECIPIENT])
                      .uniq.join(',')
     mail bcc: recipients, subject: t('project.message.leavingProjectNotification.subject')
   end
 
-  def project_participate_notification(user, project)
+  def project_participate_volunteer_notification(user, project)
     @user = user
     @project = project
     recipients = user.email
-    mail bcc: recipients, subject: t('project.message.projectParticipateNotification.subject')
+    mail bcc: recipients, subject: t('project.message.projectParticipateVolunteerNotification.subject')
+  end
+
+  def project_participate_leader_notification(user, project)
+    @user = user
+    @project = project
+    recipients = project.leaders.where('users.receive_notifications_about_volunteers': true).pluck(:email).uniq.join(',')
+    return if recipients.blank?
+    mail bcc: recipients, subject: t('project.message.projectParticipateLeaderNotification.subject', {project: project.title})
   end
 
   def gallery_picture_uploaded_notification(gallery, picture_count, uploader)

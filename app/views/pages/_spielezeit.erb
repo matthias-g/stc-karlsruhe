@@ -1,0 +1,39 @@
+<% content_for :pageTitle do %>
+    <%= 'Spielezeit' %>
+<% end %>
+
+<section>
+  <h1>
+    Spielezeit mit Senioren in St. Anna
+    <div class="project-quick-info pull-right hidden-xs hidden-sm">
+      <div class="time">11. Januar 2018 von 15 bis 17 Uhr</div>
+      <div class="contact"><%= mail_to 'miri@servethecity-karlsruhe.de', nil, encode: :hex %></div>
+    </div>
+  </h1>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-md-6">
+      <p>
+        In Kooperation mit dem Altenpflegezentrum St. Anna in der Südstadt wollen wir einmal im Monat einen Spieletreff
+        mit den Bewohnern veranstalten. An diesem Nachmittag schaffen wir Raum für Gesellschaftsspiele und Zeit für Gespräche,
+        um Abwechslung in den Alltag der Bewohnern zu bringen.
+      </p>
+      <p>
+        Sei auch du dabei, wenn es am 11.01.18 zum ersten Mal heißt „Spielezeit”.
+        Wir treffen uns von 15 bis 17 Uhr im Bistro von St. Anna in der Rüppurrer Str. 29, 76137 Karlsruhe.
+      </p>
+      <p>
+        Melde dich kurz bei <%= mail_to 'miri@servethecity-karlsruhe.de', nil, encode: :hex %>  wenn du dabei bist.
+        Gerne kannst du dich auch melden, wenn du grundsätzlich Interesse hast, aber beim ersten Termin nicht kannst.
+      </p>
+    </div>
+    <div class="col-md-6">
+      <div class="text-center">
+        <img class="img img-responsive" src="/images/spielezeit.jpg" alt=""/>
+      </div>
+    </div>
+  </div>
+
+</section>

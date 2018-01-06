@@ -7,15 +7,32 @@
   </li>
   <li>
     <%= link_to show_project_week_path(ProjectWeek.default.title) do %>
-        <span class="glyphicon glyphicon-tasks"></span>
+        <span class="glyphicon glyphicon-calendar"></span>
         <%= t('layout.links.projects') %>
     <% end %>
   </li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      <span class="glyphicon glyphicon-tasks"></span>
+      Projekte
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <%= link_to '/stadtpiraten' do %>
+          <span class="glyphicon glyphicon-cog"></span>
+          Stadtpiraten
+        <% end %>
+      </li>
+      <li>
+        <%= link_to '/spielezeit' do %>
+          <span class="glyphicon glyphicon-tower"></span>
+          Spielezeit
+        <% end %>
+      </li>
+    </ul>
+  </li>
   <li>
-    <%= link_to '/stadtpiraten' do %>
-        <span class="glyphicon glyphicon-cog"></span>
-        Stadtpiraten
-    <% end %>
   </li>
   <li>
     <%= link_to contact_path do %>

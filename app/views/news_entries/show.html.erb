@@ -15,6 +15,7 @@
   <section>
     <div class="typeHeader">
       <%= l @news_entry.created_at.to_date, format: :date %>
+      <%= '| ' + t('news_entry.label.invisible') unless @news_entry.visible? %>
     </div>
     <h1><%= @news_entry.title %></h1>
   </section>

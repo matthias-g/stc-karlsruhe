@@ -17,7 +17,7 @@ class NewsEntryPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user && user.admin?
+      if user && (user.admin? || user.coordinator?)
         scope.all
       else
         scope.visible

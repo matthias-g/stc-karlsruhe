@@ -100,6 +100,7 @@ Rails.application.routes.draw do
           get :rotateLeft
         end
     end
+    jsonapi_resources :news_entries
     jsonapi_resources :users
     scope module: 'surveys' do
       resources :templates, as: :surveys_templates, path: 'umfragen' do

@@ -114,7 +114,7 @@ class ProjectPolicy < ApplicationPolicy
   def is_today_or_past?
     today_or_future = nil
     record.dates.each do |date|
-      today_or_future ||= date && (date.today? || date.past?)
+      today_or_future ||= date.today? || date.past?
     end
     today_or_future
   end

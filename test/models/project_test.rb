@@ -397,4 +397,11 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.has_volunteer?(user)
   end
 
+  test "dates doesn't include nil" do
+    project = projects(:one)
+    assert_nil project.date
+    assert_not_nil project.dates
+    assert_equal 0, project.dates.size
+  end
+
 end

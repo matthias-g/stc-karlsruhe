@@ -92,7 +92,6 @@ Rails.application.routes.draw do
   namespace :api, constraints: { format: 'json' } do
     jsonapi_resources :projects
     jsonapi_resources :project_weeks
-    jsonapi_resources :project_days
     jsonapi_resources :galleries
     jsonapi_resources :gallery_pictures do
         member do

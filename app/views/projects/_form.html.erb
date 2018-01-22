@@ -93,7 +93,8 @@
              {selected: @project.project_week&.id, include_blank: true}) -%>
       </div>
       <div class="day">
-        <%= f.date_select(:date, default: @project.project_week&.start_date) -%>
+        <%= f.text_field(:date, value: @project.date ? l(@project.date, format: :numeric) : '',
+                         data: { 'behaviour': 'datepicker', default: @project.project_week&.start_date }) -%>
       </div>
       <div class="time">
         <%= f.text_field :time %>

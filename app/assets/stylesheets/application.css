@@ -13,5 +13,6 @@
  *= require_self
  *= require photoswipe
  *= require jquery-ui/sortable
+ *= require bootstrap-datepicker3
  *= require_tree .
  */

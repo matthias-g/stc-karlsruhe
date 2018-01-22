@@ -9,7 +9,6 @@ class Project < ApplicationRecord
            after_add: :on_volunteer_added, after_remove: :on_volunteer_removed
   has_many :leaderships, dependent: :destroy
   has_many :leaders, class_name: 'User', through: :leaderships, source: :user
-  has_and_belongs_to_many :days, class_name: 'ProjectDay' # TODO delete
   belongs_to :project_week
   has_many :subprojects, class_name: 'Project', foreign_key: :parent_project_id
   belongs_to :parent_project, class_name: 'Project', foreign_key: :parent_project_id
@@ -102,8 +101,12 @@ class Project < ApplicationRecord
 
 
   def dates
-    return [date] unless subprojects.count > 0
-    subprojects.collect{ |p| p.date }
+    if subprojects.count > 0
+      dates = subprojects.collect{ |p| p.date }
+    else
+      dates = [date]
+    end
+    dates.reject{ |p| p == nil}
   end
 
 

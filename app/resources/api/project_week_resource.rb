@@ -3,7 +3,6 @@ class Api::ProjectWeekResource < JSONAPI::Resource
 
   attribute :title
   attributes :stats
-  has_many :days, class_name: 'ProjectDay'
   has_many :projects
 
   def stats

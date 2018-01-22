@@ -130,7 +130,8 @@ RSpec.describe GalleryPolicy do
       it 'is true' do
         expect(record.projects.count).to eq(1)
         project = record.projects.first
-        project.days << ProjectDay.new(date: 1.days.ago)
+        project.date = 1.days.ago
+        project.save!
         expect(current_user).to lead_project(project)
         expect(subject).to be_truthy
       end
@@ -142,7 +143,8 @@ RSpec.describe GalleryPolicy do
       it 'is false' do
         expect(record.projects.count).to eq(1)
         project = record.projects.first
-        project.days << ProjectDay.new(date: 1.days.ago)
+        project.date = 1.days.ago
+        project.save!
         expect(current_user).not_to lead_project(project)
         expect(current_user).not_to volunteer_in_project(project)
         expect(subject).to be_falsey

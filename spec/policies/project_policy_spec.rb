@@ -244,7 +244,7 @@ RSpec.describe ProjectPolicy do
     subject { policy.upload_pictures? }
 
     context "project's days are in future" do
-      before { project.days << ProjectDay.new(date: DateTime.tomorrow) }
+      before { project.date = DateTime.tomorrow; project.save! }
 
       it 'is false for no user logged in' do
         expect(subject).to be_falsey
@@ -268,7 +268,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'project took place yesterday' do
-      before { project.days << ProjectDay.new(date: 1.days.ago) }
+      before { project.date = 1.days.ago; project.save! }
 
       it 'is false for no user logged in' do
         expect(subject).to be_falsey
@@ -340,7 +340,7 @@ RSpec.describe ProjectPolicy do
     end
 
     context 'project happening today' do
-      before { project.days << ProjectDay.new(date: 1.seconds.ago) }
+      before { project.date = 1.seconds.ago; project.save! }
       let(:user) { users(:admin) }
 
       it 'is true for admin' do
@@ -348,8 +348,8 @@ RSpec.describe ProjectPolicy do
       end
     end
 
-    context 'project day has no date' do
-      before { project.days << ProjectDay.new(date: nil) }
+    context 'project has no date' do
+      before { project.date = nil; project.save! }
 
       it 'is false for no user logged in' do
         expect(subject).to be_falsey

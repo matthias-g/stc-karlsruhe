@@ -18,7 +18,7 @@ class ProjectWeeksController < ApplicationController
     if params[:filter]
       p = filter_params
       @projects = @projects.where(visible: (p[:visibility] != 'hidden')) unless p[:visibility].blank?
-      @projects = @projects.merge(ProjectDay.find(p[:day]).projects) unless p[:day].blank?
+      @projects = @projects.where(date: Date.parse(p[:day])) unless p[:day].blank?
       @projects = @projects.where(status: Project.statuses[p[:status]]) unless p[:status].blank?
     end
 
@@ -61,7 +61,7 @@ class ProjectWeeksController < ApplicationController
   end
 
   def project_week_params
-    params.require(:project_week).permit(:title, :default)
+    params.require(:project_week).permit(:title, :default, :start_date, :end_date)
   end
 
   def filter_params

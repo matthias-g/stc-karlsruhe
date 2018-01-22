@@ -274,16 +274,15 @@ class ProjectTest < ActiveSupport::TestCase
     project = projects(:one)
     assert_nil project.start_time
     assert_nil project.end_time
-    project_day = project_days(:one)
-    project.days << project_day
+    project.date = '2017-05-13'
     project.time = '10:00 - 17:00 Uhr'
 
-    assert_equal project_day.date.year, project.start_time.year
-    assert_equal project_day.date.month, project.start_time.month
-    assert_equal project_day.date.day, project.start_time.day
-    assert_equal project_day.date.year, project.end_time.year
-    assert_equal project_day.date.month, project.end_time.month
-    assert_equal project_day.date.day, project.end_time.day
+    assert_equal project.date.year, project.start_time.year
+    assert_equal project.date.month, project.start_time.month
+    assert_equal project.date.day, project.start_time.day
+    assert_equal project.date.year, project.end_time.year
+    assert_equal project.date.month, project.end_time.month
+    assert_equal project.date.day, project.end_time.day
     assert_equal 10, project.start_time.hour
     assert_equal 0, project.start_time.min
     assert_equal 17, project.end_time.hour

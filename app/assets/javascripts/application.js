@@ -8,6 +8,7 @@
 //= require jsonapi-datastore
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker
 
 //= require general
 //= require jsonapi

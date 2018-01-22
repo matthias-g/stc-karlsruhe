@@ -3,7 +3,10 @@ de:
     formats:
       only_day: ! '%d.'
       short_date: ! '%d. %B'
+      short_with_weekday: ! '%A, %d. %B'
+      weekday_and_year: ! '%A, %d. %B %Y'
       date: ! '%d. %B %Y'
+      numeric: ! '%d.%m.%Y'
   time:
     formats:
       short_with_year: "%d. %b %Y, %H:%M Uhr"
@@ -58,11 +61,11 @@ de:
         picture_source: 'Bildrechte /-quelle'
         desired_team_size: 'Gewünschte Teamgröße'
         leaders: 'Leitung'
-        day_ids: 'Aktionstage'
         volunteers: 'Team'
         status: 'Status'
         project_week_id: Aktionswoche
-        days: Aktionstage
+        date: Aktionstag
+        dates: Aktionstage
         time: Zeit
         subproject_ids: Teilaktionen
         parent_project_id: Überaktion
@@ -91,8 +94,6 @@ de:
         receive_emails_from_other_users: Andere Nutzer können mich über ein Kontaktformular kontaktieren
         receive_notifications_for_new_participation: Erhalte eine Benachrichtigung per E-Mail, wenn du bei einer Aktion teilnimmst
         receive_notifications_about_volunteers: Erhalte eine Benachrichtigung, wenn Mitarbeiter einem von dir geleiteten Aktionsteam beitreten oder es verlassen
-      project_day:
-        title: 'Titel'
       message:
         sender: 'Sender'
         recipient: 'Empfänger'
@@ -176,10 +177,6 @@ de:
       userEmailConfirmation: 'E-Mail-Adressen-Bestätigung'
       userUnlocking: 'Account-Freischaltung'
       userDeleteAccount: 'Account löschen: %{user}'
-      projectDayEdit: 'Aktionstag bearbeiten'
-      projectDayList: 'Aktionstage'
-      projectDayNew: 'Neuer Aktionstag'
-      projectDayView: 'Aktionstag'
       messageContactForm: 'Kontakt'
       messageAdminMailForm: 'Admin-Mailer'
       manageTeam: 'Team verwalten'
@@ -472,17 +469,6 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       accountDeleted: 'Dein Account wurde gelöscht.'
     help:
       passwordLength: 'Mindestens 6 Zeichen lang.'
-
-  project_day:
-    new: 'Neuer Aktionstag'
-    save: 'Aktionstag speichern'
-    list: 'Aktionstage verwalten'
-    projectWeek: 'Aktionswoche'
-    captionList: 'Aktionstage'
-    captionNew: 'Neuer Aktionstag'
-    captionEdit: 'Aktionstag bearbeiten: "%s"'
-    errorsExist: 'Der Tag konnte wegen folgenden Fehlern nicht gespeichert werden:'
-    confirmDelete: 'Wollen Sie den Aktionstag "%s" wirklich löschen?'
 
   project_week:
     noProjects: 'Wir sind zwar schon bei der Planung der Aktionswoche, aber bisher sind noch keine Aktionen öffentlich. Schau später nochmal vorbei oder kontaktiere uns, wenn du einen Vorschlag für eine Aktion hast!'

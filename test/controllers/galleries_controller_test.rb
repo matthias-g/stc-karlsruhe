@@ -60,9 +60,9 @@ class GalleriesControllerTest < ActionDispatch::IntegrationTest
 
   test "leader should update gallery of project in the past" do
     @gallery = galleries(:four)
-    project_day = @gallery.projects.first.days.first
-    project_day.date = 1.day.ago
-    project_day.save!
+    project = @gallery.projects.first
+    project.date = 1.day.ago
+    project.save!
     sign_in users(:rolf)
     new_title = 'This is the new title'
     patch gallery_url(@gallery), params: { gallery: { title: new_title } }
@@ -72,9 +72,9 @@ class GalleriesControllerTest < ActionDispatch::IntegrationTest
 
   test "update should not be possible for leader if project takes place in future" do
     @gallery = galleries(:four)
-    project_day = @gallery.projects.first.days.first
-    project_day.date = 1.day.from_now
-    project_day.save!
+    project = @gallery.projects.first
+    project.date = 1.day.from_now
+    project.save!
     sign_in users(:rolf)
     new_title = 'This is the new title'
     patch gallery_url(@gallery), params: { gallery: { title: new_title } }
@@ -84,9 +84,9 @@ class GalleriesControllerTest < ActionDispatch::IntegrationTest
 
   test "update should be possible for admin even if project takes place in future" do
     @gallery = galleries(:four)
-    project_day = @gallery.projects.first.days.first
-    project_day.date = 1.day.from_now
-    project_day.save!
+    project = @gallery.projects.first
+    project.date = 1.day.from_now
+    project.save!
     sign_in users(:admin)
     new_title = 'This is the new title'
     patch gallery_url(@gallery), params: { gallery: { title: new_title } }

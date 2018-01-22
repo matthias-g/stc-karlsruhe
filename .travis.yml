@@ -7,7 +7,6 @@ env:
   - TESTSCRIPT="bin/travis-mutant GalleryPolicy"
   - TESTSCRIPT="bin/travis-mutant NewsEntryPolicy"
   - TESTSCRIPT="bin/travis-mutant OrgaMessagePolicy"
-  - TESTSCRIPT="bin/travis-mutant ProjectDayPolicy"
   - TESTSCRIPT="bin/travis-mutant ProjectPolicy"
   - TESTSCRIPT="bin/travis-mutant ProjectWeekPolicy"
   - TESTSCRIPT="bin/travis-mutant RolePolicy"

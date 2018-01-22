@@ -78,9 +78,7 @@ class IcalController < ApplicationController
   end
 
   def add_project_to_calendar(project, calendar)
-    project.days.each do |project_day|
-      date = project_day.date
-      break unless date
+    project.dates.each do |date|
       calendar.event do |event|
         if project.start_time
           event_start = DateTime.new(date.year, date.month, date.day, project.start_time.hour, project.start_time.min, 0)

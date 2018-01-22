@@ -25,8 +25,9 @@
 
   <div style="text-align: right">
     <div class="infobox">
-      <span><%= @project_week.projects.visible.where.not(desired_team_size: 0).count %></span>
-      <div><%= Project.model_name.human(count: @project_week.projects.visible.count) %></div>
+      <% projects_count = @project_week.projects.visible.where.not(desired_team_size: 0).where(parent_project: nil).count %>
+      <span><%= projects_count %></span>
+      <div><%= Project.model_name.human(count: projects_count) %></div>
     </div>
     <% if @project_week.active_user_count > 0 %>
       <% if current_user&.in_orga_team? %>
@@ -67,12 +68,8 @@
         <%= bootstrap_form_for(:filter, url: projects_path, method:'get', html:{id:'projectFilter'}) do |f| %>
           <%#= collection_select(:week, ProjectWeek.all, :id, :title,
                  :include_blank => "- - - Aktionswoche egal - - -") %>
-          <%# f.collection_select(:day, @project_week.days.order(date: :asc), :id, :title,
-                                  include_blank: "- - - Alle Tage - - -", hide_label: true) %>
-          <%# TODO f.collection_select(:day, @project_week.date_range, :id, :title,
-                                  include_blank: "- - - Alle Tage - - -", hide_label: true) %>
-          <%= f.select(:status,
-                       Project.statuses.keys.map { |s| [t("project.status.#{s}"), s] },
+          <%= f.select(:day, options_for_day_select(@project_week), include_blank: "- - - Alle Tage - - -", hide_label: true) %>
+          <%= f.select(:status, Project.statuses.keys.map { |s| [t("project.status.#{s}"), s] },
                        include_blank: "- - - Status egal - - -", hide_label: true) %>
           <% if user_signed_in? && current_user.in_orga_team? %>
             <%= f.select(:visibility, [['Sichtbar', :visible], ['Versteckt', :hidden]],

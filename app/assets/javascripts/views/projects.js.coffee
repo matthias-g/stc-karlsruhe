@@ -18,6 +18,7 @@ filterProjectList = (e, obj) ->
     location.reload()
 
 # project edit: load weekdays of selected week
+# TODO currently not used
 updateDaysOnWeekChange = ->
   weekId = @.value
   updateSelect = (projectDays) ->
@@ -30,11 +31,13 @@ updateDaysOnWeekChange = ->
   else
     window.getResources('project-days', {'include': 'project-week'}).done (projectDays) ->
       updateSelect(projectDays.filter (day) -> !day['project-week'])
-    
-      
+
+
 onPageLoad ->
   # update project list if filter changes
   onFieldChange $('#projectFilter'), filterProjectList
 
   # update available days when week selction changes
   $('#project-edit-view .week select').change updateDaysOnWeekChange
+
+  $('[data-behaviour~=datepicker]').datepicker(autoclose: true, format: "dd.mm.yyyy", language: 'de')

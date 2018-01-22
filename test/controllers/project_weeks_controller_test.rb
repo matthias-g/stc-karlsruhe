@@ -21,7 +21,7 @@ class ProjectWeeksControllerTest < ActionDispatch::IntegrationTest
   test "should create project_week" do
     sign_in users(:admin)
     assert_difference('ProjectWeek.count') do
-      post project_weeks_url, params: { project_week: { default: false, title: '2020' } }
+      post project_weeks_url, params: { project_week: { default: false, title: '2020', start_date: '2020-05-13', end_date: '2020-05-20' } }
     end
     assert_response :redirect
     follow_redirect!

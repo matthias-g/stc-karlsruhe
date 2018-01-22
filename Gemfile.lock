@@ -78,6 +78,8 @@ GEM
     bindex (0.5.0)
     binding_of_caller (0.7.3)
       debug_inspector (>= 0.0.1)
+    bootstrap-datepicker-rails (1.7.1.1)
+      railties (>= 3.0)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -383,6 +385,7 @@ DEPENDENCIES
   actionview-encoded_mail_to
   better_errors
   binding_of_caller
+  bootstrap-datepicker-rails
   bootstrap-sass
   bootstrap-select-rails!
   bootstrap_form

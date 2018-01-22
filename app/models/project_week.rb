@@ -1,7 +1,6 @@
 class ProjectWeek < ApplicationRecord
   validates_uniqueness_of :title
 
-  has_many :days, class_name: 'ProjectDay'
   has_many :projects
 
   validates_presence_of :start_date, :end_date
@@ -20,20 +19,7 @@ class ProjectWeek < ApplicationRecord
   end
 
   def date_range
-    if start_date && end_date
-      return start_date..end_date
-    end
-    # TODO delete:
-    default = Date.new(1970, 1, 1)
-    return default..(default+1) if days.empty?
-    min = max = days.first.date
-    days.each do |day|
-      d = day.date
-      return default..(default+1) if d.blank?
-      min = d if d < min
-      max = d if d > max
-    end
-    return min..max
+    start_date..end_date
   end
 
 end

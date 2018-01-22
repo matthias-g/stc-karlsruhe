@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
     if params[:filter]
       p = filter_params
       @projects = @projects.where(visible: (p[:visibility] != 'hidden')) unless p[:visibility].blank?
-      @projects = @projects.merge(ProjectDay.find(p[:day]).projects) unless p[:day].blank?
+      @projects = @projects.where(date: Date.parse(p[:day])) unless p[:day].blank?
       @projects = @projects.where(status: Project.statuses[p[:status]]) unless p[:status].blank?
     end
     @projects = policy_scope(@projects)
@@ -167,7 +167,7 @@ class ProjectsController < ApplicationController
     params.require(:project).permit(:title, :user_id, :status,
       :location, :latitude, :longitude, :map_latitude, :map_longitude, :map_zoom,
       :description, :short_description, :individual_tasks, :material, :requirements,
-      :picture, :picture_source, :desired_team_size,  :project_week_id, { :day_ids => [] }, :time, :parent_project_id)
+      :picture, :picture_source, :desired_team_size,  :project_week_id, :date, :time, :parent_project_id)
   end
 
   def authorize_project
@@ -182,7 +182,7 @@ class ProjectsController < ApplicationController
   end
 
   def filter_params
-    params.require(:filter).permit(:visibility, :day, :status)
+    params.require(:filter).permit(:visibility, :date, :status)
   end
 
 end

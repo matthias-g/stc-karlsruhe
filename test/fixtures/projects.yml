@@ -58,7 +58,6 @@ four:
   desired_team_size: 7
   project_week: one
   gallery: four
-  days: one
 
 kindergarten-party:
   title: Fest im Kindergarten
@@ -77,7 +76,7 @@ kindergarten-kitchen:
   parent_project: kindergarten-party
   gallery: six
   time: "14:00 - 16:00"
-  days: one
+  date: '2017-07-03'
 
 kindergarten-music:
   title: Musik bei Kindergarten-Fest

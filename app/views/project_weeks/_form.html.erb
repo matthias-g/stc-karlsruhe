@@ -19,6 +19,16 @@
     <%= f.label :default %><br>
     <%= f.check_box :default %>
   </div>
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.text_field(:start_date, value: @project_week.start_date ? l(@project_week.start_date, format: :numeric) : '',
+                     data: { 'behaviour': 'datepicker' }) -%>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br>
+    <%= f.text_field(:end_date, value: @project_week.end_date ? l(@project_week.end_date, format: :numeric) : '',
+                     data: { 'behaviour': 'datepicker' }) -%>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

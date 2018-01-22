@@ -64,7 +64,7 @@
               </div>
           <% end %>
 
-          <% visible_subprojects = policy_scope(@project.subprojects).sort_by { |p| p.start_time || p.days.first&.date || Time.now } %>
+          <% visible_subprojects = policy_scope(@project.subprojects).sort_by { |p| p.start_time || p.date || Time.now } %>
           <% if visible_subprojects.count > 0 %>
               <div class="subprojects" id='<%= Project.human_attribute_name('subproject_ids').downcase %>'>
                 <h3><%= Project.human_attribute_name('subproject_ids') %></h3>
@@ -181,8 +181,8 @@
 
         <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
           <div>
-            <h3><%= Project.human_attribute_name('days') %></h3>
-            <%= @project.days.order(date: :asc).collect { |day| day.title }.join('<br />').html_safe %>
+            <h3><%= Project.human_attribute_name('dates') %></h3>
+            <%= @project.dates.reject{ |p| p == nil}.collect { |date| date.strftime("%A, %d. %B") }.join('<br />').html_safe %>
           </div>
           <div>
             <%= simple_format @project.time %>

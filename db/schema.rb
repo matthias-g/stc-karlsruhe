@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217171934) do
+ActiveRecord::Schema.define(version: 20180122114951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,26 +91,13 @@ ActiveRecord::Schema.define(version: 20171217171934) do
     t.datetime "updated_at"
   end
 
-  create_table "project_days", id: :serial, force: :cascade do |t|
-    t.string "title", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "project_week_id"
-    t.date "date"
-  end
-
-  create_table "project_days_projects", id: false, force: :cascade do |t|
-    t.integer "project_id", null: false
-    t.integer "project_day_id", null: false
-    t.index ["project_day_id", "project_id"], name: "index_project_days_projects_on_project_day_id_and_project_id"
-    t.index ["project_id", "project_day_id"], name: "index_project_days_projects_on_project_id_and_project_day_id"
-  end
-
   create_table "project_weeks", id: :serial, force: :cascade do |t|
     t.string "title", limit: 255
     t.boolean "default"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date "start_date"
+    t.date "end_date"
   end
 
   create_table "projects", id: :serial, force: :cascade do |t|
@@ -138,6 +125,7 @@ ActiveRecord::Schema.define(version: 20171217171934) do
     t.string "slug", limit: 255
     t.integer "parent_project_id"
     t.integer "gallery_id"
+    t.date "date"
     t.index ["gallery_id"], name: "index_projects_on_gallery_id"
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end

@@ -4,6 +4,8 @@ class ProjectWeek < ApplicationRecord
   has_many :days, class_name: 'ProjectDay'
   has_many :projects
 
+  validates_presence_of :start_date, :end_date
+
   scope :default, -> { where(default: true).first }
 
   def active_user_count
@@ -18,6 +20,10 @@ class ProjectWeek < ApplicationRecord
   end
 
   def date_range
+    if start_date && end_date
+      return start_date..end_date
+    end
+    # TODO delete:
     default = Date.new(1970, 1, 1)
     return default..(default+1) if days.empty?
     min = max = days.first.date

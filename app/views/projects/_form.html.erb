@@ -92,9 +92,8 @@
         <%= f.collection_select(:project_week_id, ProjectWeek.all.order(title: :desc), :id, :title,
              {selected: @project.project_week&.id, include_blank: true}) -%>
       </div>
-      <div class="days">
-        <%= f.collection_select(:day_ids, available_project_days(@project), :id, :title,
-               {selected: @project.days.collect {|t| t.id}}, multiple: true) -%>
+      <div class="day">
+        <%= f.date_select(:date, default: @project.project_week&.start_date) -%>
       </div>
       <div class="time">
         <%= f.text_field :time %>

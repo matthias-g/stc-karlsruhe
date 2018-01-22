@@ -9,7 +9,7 @@ class Project < ApplicationRecord
            after_add: :on_volunteer_added, after_remove: :on_volunteer_removed
   has_many :leaderships, dependent: :destroy
   has_many :leaders, class_name: 'User', through: :leaderships, source: :user
-  has_and_belongs_to_many :days, class_name: 'ProjectDay'
+  has_and_belongs_to_many :days, class_name: 'ProjectDay' # TODO delete
   belongs_to :project_week
   has_many :subprojects, class_name: 'Project', foreign_key: :parent_project_id
   belongs_to :parent_project, class_name: 'Project', foreign_key: :parent_project_id
@@ -101,6 +101,12 @@ class Project < ApplicationRecord
   end
 
 
+  def dates
+    return [date] unless subprojects.count > 0
+    subprojects.collect{ |p| p.date }
+  end
+
+
 
   def has_free_places?
     desired_team_size - volunteers.count > 0
@@ -113,16 +119,16 @@ class Project < ApplicationRecord
   TIME_REGEX = /(\d{1,2})[:\.-]?(\d{1,2})?[^\d\/]*(\d{1,2})?[:\.-]?(\d{1,2})?.*/
 
   def start_time
-    return nil unless days.first
-    day = days.first.date
+    return nil unless date
+    day = date
     return nil unless day
     matches = time.match(TIME_REGEX)
     Time.now.change(hour: matches[1], min: matches[2], year: day.year, month: day.month, day: day.day) if matches
   end
 
   def end_time
-    return nil unless days.first
-    day = days.first.date
+    return nil unless date
+    day = date
     return nil unless day
     matches = time.match(TIME_REGEX)
     Time.now.change(hour: matches[3], min: matches[4], year: day.year, month: day.month, day: day.day) if matches && matches[3]
@@ -184,11 +190,13 @@ class Project < ApplicationRecord
   end
 
   def on_volunteer_added(user)
+    return if status == 'closed'
     Mailer.project_participate_volunteer_notification(user, self).deliver_now if user.receive_notifications_for_new_participation
     Mailer.project_participate_leader_notification(user, self).deliver_now
   end
 
   def on_volunteer_removed(user)
+    return if status == 'closed'
     Mailer.leaving_project_notification(user, self).deliver_now
   end
 

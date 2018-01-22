@@ -21,14 +21,6 @@ module ProjectsHelper
         ((current_user.admin? || current_user.coordinator?) && project.gallery.gallery_pictures.invisible.any?))
   end
 
-  def available_project_days(project)
-    if project.project_week
-      @project.project_week.days.order(date: :asc)
-    else
-      ProjectDay.where(project_week: nil).order(date: :asc)
-    end
-  end
-
   def available_projects(project)
     if project.project_week
       project.project_week.projects

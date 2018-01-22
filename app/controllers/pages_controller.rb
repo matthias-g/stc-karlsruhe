@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   def home
     @partial_name = 'home'
-    @next_project_week = ProjectWeek.all.sort_by{|week| week.days.first&.date || Date.new(2005) }.last
+    @next_project_week = ProjectWeek.all.sort_by{|week| week.start_date }.last
     render 'page'
   end
 

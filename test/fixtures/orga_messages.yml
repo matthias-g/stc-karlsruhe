@@ -3,7 +3,7 @@
 one:
   from: Serve the City Karlsruhe <contact@servethecity-karlsruhe.de>
   recipient: all_users
-  content_type: about_project_weeks
+  content_type: about_action_groups
   subject: 'Bald: Neue Aktionswoche'
   body: Bald findet eine neue Aktionswoche statt!
   author: admin

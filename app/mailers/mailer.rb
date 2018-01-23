@@ -12,19 +12,19 @@ class Mailer < ActionMailer::Base
     mail to: message.sender, subject: message.subject
   end
 
-  def project_mail(message, sender, project)
+  def action_mail(message, sender, action)
     @message = message.body
-    @project_title = project.title
+    @action_title = action.title
     @sender = sender
-    recipients = (project.volunteers + project.leaders + [sender]).map{|v| v.email}.uniq.join(',')
+    recipients = (action.volunteers + action.leaders + [sender]).map{|v| v.email}.uniq.join(',')
     mail bcc: recipients, reply_to: sender.email, subject: message.subject
   end
 
-  def project_mail_to_leaders(message, sender, project)
+  def action_mail_to_leaders(message, sender, action)
     @message = message.body
-    @project_title = project.title
+    @action_title = action.title
     @sender = sender
-    recipients = (project.leaders + [sender]).map{|v| v.email}.uniq.join(',')
+    recipients = (action.leaders + [sender]).map{|v| v.email}.uniq.join(',')
     mail bcc: recipients, reply_to: sender.email, subject: message.subject
   end
 
@@ -36,17 +36,17 @@ class Mailer < ActionMailer::Base
   end
 
   def orga_mail(message)
-    current_projects = ProjectWeek.default.projects.visible
+    current_actions = ActionGroup.default.actions.visible
     case message.recipient
       when 'current_volunteers_and_leaders'
-        to = current_projects.joins('LEFT OUTER JOIN participations ON projects.id = participations. project_id')
-                 .joins('LEFT OUTER JOIN leaderships ON projects.id = leaderships.project_id')
+        to = current_actions.joins('LEFT OUTER JOIN participations ON actions.id = participations. action_id')
+                 .joins('LEFT OUTER JOIN leaderships ON actions.id = leaderships.action_id')
                  .joins('INNER JOIN "users" ON "users"."id" = "participations"."user_id" OR "users"."id" = "leaderships"."user_id"')
                  .where('users.cleared': false)
       when 'current_volunteers'
-        to = current_projects.joins(:volunteers).where('users.cleared': false)
+        to = current_actions.joins(:volunteers).where('users.cleared': false)
       when 'current_leaders'
-        to = current_projects.joins(:leaders).where('users.cleared': false)
+        to = current_actions.joins(:leaders).where('users.cleared': false)
       when 'all_users'
         to = User.where(cleared: false).all
       when 'active_users'
@@ -58,14 +58,14 @@ class Mailer < ActionMailer::Base
     end
     unless to.kind_of?(Array)
       case message.content_type
-        when 'about_project_weeks'
+        when 'about_action_groups'
           if %w(current_volunteers_and_leaders current_volunteers current_leaders).include? message.recipient
-            to = to.where('users.receive_emails_about_my_project_weeks': true)
+            to = to.where('users.receive_emails_about_my_action_groups': true)
           else
-            to = to.where('users.receive_emails_about_project_weeks': true)
+            to = to.where('users.receive_emails_about_action_groups': true)
           end
-        when 'about_other_projects'
-          to = to.where('users.receive_emails_about_other_projects': true)
+        when 'about_other_actions'
+          to = to.where('users.receive_emails_about_other_actions': true)
         when 'other_email_from_orga'
           to = to.where('users.receive_other_emails_from_orga': true)
         else
@@ -79,28 +79,28 @@ class Mailer < ActionMailer::Base
     mail from: message.from, bcc: recipients, subject: message.subject
   end
 
-  def leaving_project_notification(user, project)
+  def leaving_action_notification(user, action)
     @user = user
-    @project = project
-    recipients = (project.leaders.where('users.receive_notifications_about_volunteers': true).pluck(:email) +
+    @action = action
+    recipients = (action.leaders.where('users.receive_notifications_about_volunteers': true).pluck(:email) +
         [StcKarlsruhe::Application::NOTIFICATION_RECIPIENT])
                      .uniq.join(',')
-    mail bcc: recipients, subject: t('project.message.leavingProjectNotification.subject')
+    mail bcc: recipients, subject: t('action.message.action.leavingNotification.subject')
   end
 
-  def project_participate_volunteer_notification(user, project)
+  def action_participate_volunteer_notification(user, action)
     @user = user
-    @project = project
+    @action = action
     recipients = user.email
-    mail bcc: recipients, subject: t('project.message.projectParticipateVolunteerNotification.subject')
+    mail bcc: recipients, subject: t('action.message.action.participateVolunteerNotification.subject')
   end
 
-  def project_participate_leader_notification(user, project)
+  def action_participate_leader_notification(user, action)
     @user = user
-    @project = project
-    recipients = project.leaders.where('users.receive_notifications_about_volunteers': true).pluck(:email).uniq.join(',')
+    @action = action
+    recipients = action.leaders.where('users.receive_notifications_about_volunteers': true).pluck(:email).uniq.join(',')
     return if recipients.blank?
-    mail bcc: recipients, subject: t('project.message.projectParticipateLeaderNotification.subject', {project: project.title})
+    mail bcc: recipients, subject: t('action.message.action.participateLeaderNotification.subject', {action: action.title})
   end
 
   def gallery_picture_uploaded_notification(gallery, picture_count, uploader)
@@ -108,11 +108,11 @@ class Mailer < ActionMailer::Base
     @gallery = gallery
     @picture_count = picture_count
     @title = gallery.title
-    @title = gallery.projects.collect{ |p| p.title }.join(', ') if @title.blank?
+    @title = gallery.actions.collect{ |p| p.title }.join(', ') if @title.blank?
     @title = gallery.news_entries.collect{ |p| p.title }.join(', ') if @title.blank?
-    @type = 'Projekts' if gallery.projects.any?
+    @type = 'Projekts' if gallery.actions.any?
     @type = 'Newseintrags' if gallery.news_entries.any?
-    mail to: StcKarlsruhe::Application::NOTIFICATION_RECIPIENT, subject: t('project.message.mailNewPictures.subject', pictureCount: picture_count)
+    mail to: StcKarlsruhe::Application::NOTIFICATION_RECIPIENT, subject: t('action.message.mailNewPictures.subject', pictureCount: picture_count)
   end
 
 end

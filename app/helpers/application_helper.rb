@@ -24,7 +24,7 @@ module ApplicationHelper
   end
 
   def privileged_user?
-    signed_in? && (current_user.roles.any? || current_user.projects_as_leader.any?)
+    signed_in? && (current_user.roles.any? || current_user.actions_as_leader.any?)
   end
 
   def simple_format_urls text

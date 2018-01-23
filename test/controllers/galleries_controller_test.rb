@@ -58,11 +58,11 @@ class GalleriesControllerTest < ActionDispatch::IntegrationTest
     assert_not_nil flash[:error]
   end
 
-  test "leader should update gallery of project in the past" do
+  test "leader should update gallery of action in the past" do
     @gallery = galleries(:four)
-    project = @gallery.projects.first
-    project.date = 1.day.ago
-    project.save!
+    action = @gallery.actions.first
+    action.date = 1.day.ago
+    action.save!
     sign_in users(:rolf)
     new_title = 'This is the new title'
     patch gallery_url(@gallery), params: { gallery: { title: new_title } }
@@ -70,11 +70,11 @@ class GalleriesControllerTest < ActionDispatch::IntegrationTest
     assert_equal new_title, @gallery.reload.title
   end
 
-  test "update should not be possible for leader if project takes place in future" do
+  test "update should not be possible for leader if action takes place in future" do
     @gallery = galleries(:four)
-    project = @gallery.projects.first
-    project.date = 1.day.from_now
-    project.save!
+    action = @gallery.actions.first
+    action.date = 1.day.from_now
+    action.save!
     sign_in users(:rolf)
     new_title = 'This is the new title'
     patch gallery_url(@gallery), params: { gallery: { title: new_title } }
@@ -82,11 +82,11 @@ class GalleriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
-  test "update should be possible for admin even if project takes place in future" do
+  test "update should be possible for admin even if action takes place in future" do
     @gallery = galleries(:four)
-    project = @gallery.projects.first
-    project.date = 1.day.from_now
-    project.save!
+    action = @gallery.actions.first
+    action.date = 1.day.from_now
+    action.save!
     sign_in users(:admin)
     new_title = 'This is the new title'
     patch gallery_url(@gallery), params: { gallery: { title: new_title } }
@@ -97,7 +97,7 @@ class GalleriesControllerTest < ActionDispatch::IntegrationTest
   test "update gallery redirects to referer" do
     @gallery = galleries(:four)
     sign_in users(:rolf)
-    referer = project_path(@gallery.projects.first)
+    referer = action_path(@gallery.actions.first)
     patch gallery_url(@gallery), params: { gallery: { title: @gallery.title } }, headers: { 'HTTP_REFERER': referer}
     assert_redirected_to referer
   end

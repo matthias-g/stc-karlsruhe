@@ -4,7 +4,7 @@ class CreateParticipations < ActiveRecord::Migration
   def change
     create_table(:participations, id: false) do |t|
       t.references :user
-      t.references :project
+      t.references :action
       t.boolean :as_leader, default: false
 
       t.index [:user_id, :project_id, :as_leader], unique: true

@@ -113,9 +113,9 @@ RSpec.describe UserPolicy do
     end
   end
 
-  describe 'add_to_projects_as_volunteer?' do
-    let(:new_projects) { [projects('Kostenlose Fahrradreparatur in der Innenstadt')] }
-    subject { policy.add_to_projects_as_volunteer?(new_projects) }
+  describe 'add_to_actions_as_volunteer?' do
+    let(:new_action) { [actions('Kostenlose Fahrradreparatur in der Innenstadt')] }
+    subject { policy.add_to_actions_as_volunteer?(new_action) }
 
     it 'is false for no user logged in' do
       expect(subject).to be(false)
@@ -158,7 +158,7 @@ RSpec.describe UserPolicy do
 
       it 'contains other attributes' do
         expect(subject).to contain_exactly(:username, :first_name, :last_name, :email, :phone,
-                                           :receive_emails_about_project_weeks, :receive_emails_about_my_project_weeks,
+                                           :receive_emails_about_action_groups, :receive_emails_about_my_action_groups,
                                            :receive_emails_about_other_projects, :receive_other_emails_from_orga,
                                            :receive_emails_from_other_users)
       end
@@ -169,7 +169,7 @@ RSpec.describe UserPolicy do
 
       it 'contains other attributes' do
         expect(subject).to contain_exactly(:username, :first_name, :last_name, :email, :phone,
-                                           :receive_emails_about_project_weeks, :receive_emails_about_my_project_weeks,
+                                           :receive_emails_about_action_groups, :receive_emails_about_my_action_groups,
                                            :receive_emails_about_other_projects, :receive_other_emails_from_orga,
                                            :receive_emails_from_other_users)
       end

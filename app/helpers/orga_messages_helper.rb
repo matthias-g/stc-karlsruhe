@@ -8,7 +8,7 @@ module OrgaMessagesHelper
   end
 
   def render_recipient_group group, user
-    I18n.t('contact.adminMail.groups.' + group, user_email: user.email, project_week: ProjectWeek.default.title)
+    I18n.t('contact.adminMail.groups.' + group, user_email: user.email, action_group: ActionGroup.default.title)
   end
 
   def recipient_options
@@ -17,7 +17,7 @@ module OrgaMessagesHelper
   end
 
   def content_type_options
-    %w(about_project_weeks about_other_projects other_email_from_orga)
+    %w(about_action_groups about_other_projects other_email_from_orga)
         .map{|type| [t('contact.adminMail.types.' + type), type]}
   end
 

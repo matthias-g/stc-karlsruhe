@@ -75,7 +75,7 @@ class GalleriesController < ApplicationController
       params[:gallery_pictures][:picture].each do |picture|
         @gallery.gallery_pictures.create!(picture: picture, gallery: @gallery, uploader: current_user, visible: false)
       end
-      flash[:notice] = t('project.message.galleryPicturesUploaded')
+      flash[:notice] = t('action.message.galleryPicturesUploaded')
       send_notice_mail
     end
   end

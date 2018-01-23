@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   def home
     @partial_name = 'home'
-    @next_project_week = ProjectWeek.all.sort_by{|week| week.start_date }.last
+    @next_action_group = ActionGroup.all.sort_by{|week| week.start_date }.last
     render 'page'
   end
 
@@ -13,7 +13,7 @@ class PagesController < ApplicationController
     lookup_context.find_all("pages/_#{@partial_name}").any? or not_found
   end
 
-  def own_project
+  def own_action
     @message = Message.new
     @partial_name = 'eigenesprojekt'
     render 'page'

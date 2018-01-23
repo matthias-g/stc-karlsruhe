@@ -1,6 +1,6 @@
 class UserPolicy < ApplicationPolicy
 
-  include ProjectUserRelationship
+  include ActionUserRelationship
 
   class Scope < Scope
     def resolve
@@ -21,7 +21,7 @@ class UserPolicy < ApplicationPolicy
     return [:first_name] unless user
     return [:first_name, :last_name] unless user.eql?(record) || user.admin?
     [:username, :first_name, :last_name, :email, :phone,
-        :receive_emails_about_project_weeks, :receive_emails_about_my_project_weeks, :receive_emails_about_other_projects,
+        :receive_emails_about_action_groups, :receive_emails_about_my_action_groups, :receive_emails_about_other_projects,
         :receive_other_emails_from_orga, :receive_emails_from_other_users]
   end
 
@@ -31,8 +31,8 @@ class UserPolicy < ApplicationPolicy
   end
 
   def updatable_fields
-    return [:projects_as_volunteer, :username, :first_name, :last_name, :email, :phone] unless is_admin?
-    [:roles, :projects_as_volunteer, :username, :first_name, :last_name, :email, :phone]
+    return [:actions_as_volunteer, :username, :first_name, :last_name, :email, :phone] unless is_admin?
+    [:roles, :actions_as_volunteer, :username, :first_name, :last_name, :email, :phone]
   end
 
   alias_method :update?, :edit?
@@ -44,8 +44,8 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
-  def add_to_projects_as_volunteer?(projects)
-    projects.all? { |project| allow_add_volunteer_to_project?(record, project) }
+  def add_to_actions_as_volunteer?(actions)
+    actions.all? { |action| allow_add_volunteer_to_action?(record, action) }
   end
 
 end

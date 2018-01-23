@@ -40,7 +40,7 @@
           den Einsteig durch kurze Aktionen ohne Hintergedanken oder Folgeverpflichtungen.
           </p>
           <p>
-          Jede/r kann sich nach seinen Begabungen einbringen – Eine <%= link_to 'Aktionswoche', show_project_week_path(ProjectWeek.default.title), class: 'black-link' %>,
+          Jede/r kann sich nach seinen Begabungen einbringen – Eine <%= link_to 'Aktionswoche', show_action_group_path(ActionGroup.default.title), class: 'black-link' %>,
           bei der viele Freiwillige Gutes für ihre Stadt tun.
           </p>
         </div>
@@ -106,7 +106,7 @@
     </div>
 
     <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading_projects">
+      <div class="panel-heading" role="tab" id="heading_actions">
         <h4 class="panel-title">
           <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
              href="#unterstuetzte-projekte" aria-expanded="false" aria-controls="unterstuetzte-projekte">
@@ -115,7 +115,7 @@
         </h4>
       </div>
       <div id="unterstuetzte-projekte" class="panel-collapse collapse"
-           role="tabpanel" aria-labelledby="heading_projects">
+           role="tabpanel" aria-labelledby="heading_actions">
         <div class="panel-body">
           <p>
           Teameinsätze von <span class="term">Serve the City</span> finden in der Regel

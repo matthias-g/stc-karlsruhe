@@ -46,7 +46,7 @@ peter:
   first_name: Peter
   last_name: Petersen
   email: peter@peter.sen
-  receive_emails_about_project_weeks: false
+  receive_emails_about_action_groups: false
 
 lea:
   username: lea

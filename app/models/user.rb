@@ -4,9 +4,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :participations, dependent: :destroy
-  has_many :projects_as_volunteer, through: :participations, source: :project
+  has_many :actions_as_volunteer, through: :participations, source: :action
   has_many :leaderships, dependent: :destroy
-  has_many :projects_as_leader, through: :leaderships, source: :project
+  has_many :actions_as_leader, through: :leaderships, source: :action
   has_and_belongs_to_many :roles
 
   USERNAME_FORMAT = /\A[\w]+\z/
@@ -46,12 +46,12 @@ class User < ApplicationRecord
     first_name + ' ' + last_name
   end
 
-  def leads_project?(project)
-    projects_as_leader.include? project
+  def leads_action?(action)
+    actions_as_leader.include? action
   end
 
-  def projects
-    Project.joins(:participations).joins(:leaderships).where('participations.user_id = ? OR leaderships.user_id = ?', id, id).distinct
+  def actions
+    Action.joins(:participations).joins(:leaderships).where('participations.user_id = ? OR leaderships.user_id = ?', id, id).distinct
   end
 
   # based on https://github.com/refinery/refinerycms/blob/master/authentication/app/models/refinery/user.rb
@@ -92,18 +92,18 @@ class User < ApplicationRecord
     self.cleared = true
   end
 
-  def merge_other_users_projects(other_user)
-    other_user.projects_as_volunteer.to_a.each do |project|
-      unless project.has_volunteer?(self)
-        project.delete_volunteer(other_user)
-        project.add_volunteer(self)
+  def merge_other_users_actions(other_user)
+    other_user.actions_as_volunteer.to_a.each do |action|
+      unless action.has_volunteer?(self)
+        action.delete_volunteer(other_user)
+        action.add_volunteer(self)
       end
     end
 
-    other_user.projects_as_leader.to_a.each do |project|
-      unless project.has_leader?(self)
-        project.delete_leader(other_user)
-        project.add_leader(self)
+    other_user.actions_as_leader.to_a.each do |action|
+      unless action.has_leader?(self)
+        action.delete_leader(other_user)
+        action.add_leader(self)
       end
     end
   end

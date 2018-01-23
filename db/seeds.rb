@@ -9,4 +9,4 @@
 Role.create!(title: :admin)
 Role.create!(title: :coordinator)
 Role.create!(title: :photographer)
-ProjectWeek.create!(default: true, title: Time.now.year.to_s, start_date: 2.days.ago, end_date: 3.days.from_now)
+ActionGroup.create!(default: true, title: Time.now.year.to_s, start_date: 2.days.ago, end_date: 3.days.from_now)

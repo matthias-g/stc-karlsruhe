@@ -1,7 +1,7 @@
 module UsersHelper
 
   def receive_email_from_orga user
-    user.receive_emails_about_project_weeks || user.receive_emails_about_my_project_weeks ||
+    user.receive_emails_about_action_groups || user.receive_emails_about_my_action_groups ||
         user.receive_emails_about_other_projects || user.receive_other_emails_from_orga
   end
 

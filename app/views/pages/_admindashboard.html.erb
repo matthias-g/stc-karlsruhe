@@ -63,8 +63,8 @@
         </p>
       </div>
       <div class="col-sm-4">
-        <% policy_scope(ProjectWeek).order(title: :desc).each do |project_week| %>
-            <%= link_to 'Aktionswoche ' + project_week.title, project_week_ical_path(project_week), data: { 'turbolinks': false } %><br />
+        <% policy_scope(ActionGroup).order(title: :desc).each do |action_group| %>
+            <%= link_to 'Aktionswoche ' + action_group.title, action_group_ical_path(action_group), data: { 'turbolinks': false } %><br />
         <% end %>
       </div>
     </div>

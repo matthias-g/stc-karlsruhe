@@ -2,24 +2,24 @@
 
 rolf-at-one:
   user: rolf
-  project: one
+  action: one
 
 rolf-at-three:
   user: rolf
-  project: three
+  action: three
 
 rolf-at-four:
   user: rolf
-  project: four
+  action: four
 
 rolf-at-kindergarten-party:
   user: rolf
-  project: kindergarten-party
+  action: kindergarten-party
 
 birgit-at-kindergarten-music:
   user: birgit
-  project: kindergarten-music
+  action: kindergarten-music
 
 tabea-at-one:
   user: tabea
-  project: one
+  action: one

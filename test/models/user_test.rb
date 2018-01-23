@@ -15,32 +15,32 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 'Rolf Meier', users(:rolf).full_name
   end
 
-  test "user leads project" do
-    assert users(:rolf).leads_project?(projects(:one))
+  test "user leads action" do
+    assert users(:rolf).leads_action?(actions(:one))
   end
 
-  test "user doesn't lead project, but participates in project" do
-    assert_not users(:sabine).leads_project?(projects(:two))
+  test "user doesn't lead action, but participates in action" do
+    assert_not users(:sabine).leads_action?(actions(:two))
   end
 
-  test "user doesn't lead project" do
-    assert_not users(:lea).leads_project?(projects(:one))
+  test "user doesn't lead action" do
+    assert_not users(:lea).leads_action?(actions(:one))
   end
 
-  test "projects as leader" do
-    projects = users(:rolf).projects_as_leader
-    assert_equal 4, projects.count
+  test "actions as leader" do
+    actions = users(:rolf).actions_as_leader
+    assert_equal 4, actions.count
   end
 
-  test "projects as volunteer is zero" do
-    projects = users(:rolf).projects_as_volunteer
-    assert_equal 0, projects.count
+  test "actions as volunteer is zero" do
+    actions = users(:rolf).actions_as_volunteer
+    assert_equal 0, actions.count
   end
 
-  test "projects as volunteer" do
-    projects = users(:lea).projects_as_volunteer
-    assert_equal 1, projects.count
-    assert_equal 'Musik bei Kindergarten-Fest', projects.first.title
+  test "actions as volunteer" do
+    actions = users(:lea).actions_as_volunteer
+    assert_equal 1, actions.count
+    assert_equal 'Musik bei Kindergarten-Fest', actions.first.title
   end
 
   test "has_role? given a String" do
@@ -108,26 +108,26 @@ class UserTest < ActiveSupport::TestCase
     assert user5.valid?
   end
 
-  test "merge other user's lead projects" do
-    project = projects(:'kindergarten-music')
+  test "merge other user's lead actions" do
+    action = actions(:'kindergarten-music')
     user = users(:peter)
     other_user = users(:birgit)
-    assert project.has_leader?(other_user)
-    user.merge_other_users_projects(other_user)
+    assert action.has_leader?(other_user)
+    user.merge_other_users_actions(other_user)
 
-    assert project.has_leader?(user)
-    assert_not project.has_leader?(other_user)
+    assert action.has_leader?(user)
+    assert_not action.has_leader?(other_user)
   end
 
-  test "merge other user's participating projects" do
-    project = projects(:'kindergarten-kitchen')
+  test "merge other user's participating actions" do
+    action = actions(:'kindergarten-kitchen')
     user = users(:birgit)
     other_user = users(:peter)
-    assert project.has_volunteer?(other_user)
-    user.merge_other_users_projects(other_user)
+    assert action.has_volunteer?(other_user)
+    user.merge_other_users_actions(other_user)
 
-    assert project.has_volunteer?(user)
-    assert_not project.has_volunteer?(other_user)
+    assert action.has_volunteer?(user)
+    assert_not action.has_volunteer?(other_user)
   end
 
 end

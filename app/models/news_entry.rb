@@ -8,7 +8,7 @@ class NewsEntry < ApplicationRecord
 
   scope :visible,  -> { where(visible: true) }
 
-  enum category: { general: 1, partners: 2, projects: 3, media: 4, insight: 5 }
+  enum category: {general: 1, partners: 2, actions: 3, media: 4, insight: 5 }
 
   extend FriendlyId
   friendly_id :friendly_id_candidates, use: :slugged

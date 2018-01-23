@@ -45,8 +45,8 @@
     <% if policy(@gallery).index? %>
         <%= link_to 'Zur Galerieübersicht', galleries_path %> |
     <% end %>
-    <% @gallery.projects.each do |project| %>
-        <%= link_to 'Zur Aktion', project %>
+    <% @gallery.actions.each do |action| %>
+        <%= link_to 'Zur Aktion', action %>
     <% end %>
     <% @gallery.news_entries.each do |news_entry| %>
         <%= link_to 'Zum Newseintrag', news_entry %>

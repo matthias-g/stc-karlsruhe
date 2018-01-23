@@ -8,8 +8,8 @@ end
 
 module Fixtures extend ActiveSupport::Concern
 included do
-  def projects(title)
-    Project.find_by(title: title)
+  def actions(title)
+    Action.find_by(title: title)
   end
   def roles(title)
     Role.find_by(title: title)
@@ -20,14 +20,14 @@ included do
 end
 end
 
-RSpec::Matchers.define :lead_project do |project|
+RSpec::Matchers.define :lead_action do |action|
   match do |user|
-    user.leads_project? project
+    user.leads_action? action
   end
 end
 
-RSpec::Matchers.define :volunteer_in_project do |project|
+RSpec::Matchers.define :volunteer_in_action do |action|
   match do |user|
-    project.has_volunteer?(user)
+    action.has_volunteer?(user)
   end
 end

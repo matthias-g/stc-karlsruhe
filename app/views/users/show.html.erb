@@ -65,42 +65,42 @@
 
     </div>
 
-    <section class="col-sm-6 projects" >
+    <section class="col-sm-6 actions" >
 
-    <h2><%= Project.model_name.human(count:2) %></h2>
-    <% if @projects_as_leader.any? %>
-        <h3><%= t('user.label.projectsAsLeader') %> (<%= @projects_as_leader.size %>
-          <%= Project.model_name.human(count: @projects_as_leader.size) %>):</h3>
-        <% @projects_as_leader.each do |project| %>
-            <%= link_to project.title, project %>
+    <h2><%= Action.model_name.human(count:2) %></h2>
+    <% if @actions_as_leader.any? %>
+        <h3><%= t('user.label.actionsAsLeader') %> (<%= @actions_as_leader.size %>
+          <%= Action.model_name.human(count: @actions_as_leader.size) %>):</h3>
+        <% @actions_as_leader.each do |action| %>
+            <%= link_to action.title, action %>
         <% end %>
     <% end %>
-    <% if @projects_as_volunteer.any? %>
-        <h3><%= t('user.label.projectsAsVolunteer') %> (<%= @projects_as_volunteer.size %>
-          <%= Project.model_name.human(count: @projects_as_volunteer.size) %>):</h3>
-        <% @projects_as_volunteer.each do |project| %>
-            <%= link_to project.title, project %>
+    <% if @actions_as_volunteer.any? %>
+        <h3><%= t('user.label.actionsAsVolunteer') %> (<%= @actions_as_volunteer.size %>
+          <%= Action.model_name.human(count: @actions_as_volunteer.size) %>):</h3>
+        <% @actions_as_volunteer.each do |action| %>
+            <%= link_to action.title, action %>
         <% end %>
     <% end %>
-    <% if @past_projects.any? %>
-        <h3><%= t('user.label.pastProjects') %> (<%= @past_projects.size %>
-          <%= Project.model_name.human(count: @past_projects.size) %>):</h3>
-        <% @past_projects.each do |project| %>
-            <%= link_to project.title, project %>
+    <% if @past_actions.any? %>
+        <h3><%= t('user.label.pastActions') %> (<%= @past_actions.size %>
+          <%= Action.model_name.human(count: @past_actions.size) %>):</h3>
+        <% @past_actions.each do |action| %>
+            <%= link_to action.title, action %>
         <% end %>
     <% end %>
-    <% if @user.projects_as_volunteer.blank? && @user.projects_as_leader.blank? %>
+    <% if @user.actions_as_volunteer.blank? && @user.actions_as_leader.blank? %>
         <% if current_user == @user %>
-            <%= t('user.message.youHaveNoProjects') %><br />
+            <%= t('user.message.youHaveNoActions') %><br />
         <% else %>
-            <%= t('user.message.hasNoProjects', user:@user.first_name) %>
+            <%= t('user.message.hasNoActions', user:@user.first_name) %>
         <% end %>
     <% end %>
     <% if @user == current_user  %>
           <div class="actions">
-            <%= link_to t('project.action.findProject'), show_project_week_path(ProjectWeek.default.title),
+            <%= link_to t('action.action.findAction'), show_action_group_path(ActionGroup.default.title),
                         class:'btn btn-default btn-wide' %>
-            <%= link_to t('project.action.startOwnProject'), own_project_path,
+            <%= link_to t('action.action.startOwnAction'), own_action_path,
                         class:'btn btn-default btn-wide' %>
           </div>
           <div class="feed">

@@ -113,7 +113,7 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
-  test "send mail about project weeks to all users" do
+  test "send mail about action groups to all users" do
     sign_in users(:admin)
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
       get send_message_orga_message_url(@message)
@@ -220,11 +220,11 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     assert mail.bcc.include? users(:admin).email
   end
 
-  test "send email about project weeks from orga to all users" do
+  test "send email about action groups from orga to all users" do
     sign_in users(:admin)
     message = orga_messages(:two)
     message.recipient = :all_users
-    message.content_type = :about_project_weeks
+    message.content_type = :about_action_groups
     message.save!
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
       get send_message_orga_message_url(message)

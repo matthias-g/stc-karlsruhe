@@ -23,8 +23,8 @@
           <td><%= link_to 'Show', gallery %></td>
           <td><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
           <td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% gallery.projects.each do |project| %>
-            <td><%= link_to project.title, project %></td>
+          <% gallery.actions.each do |action| %>
+            <td><%= link_to action.title, action %></td>
           <% end %>
         </tr>
       <% end %>

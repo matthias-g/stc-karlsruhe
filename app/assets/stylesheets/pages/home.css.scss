@@ -87,9 +87,9 @@
   }
 }
 
-#projects-link {
+#actions-link {
   background: rgba($primary, 0.8)
-    url("/images/projectlink_bg.png")
+    url("/images/actionlink_bg.png")
     left center / contain no-repeat padding-box;
   a {
     font: 40px CaptionFont;
@@ -102,7 +102,7 @@
   }
 }
 
-#projects-map {
+#actions-map {
   background: $default_image_bg;
   margin: 0 auto;
   border-radius: 6px;

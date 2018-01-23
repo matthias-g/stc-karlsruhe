@@ -21,9 +21,9 @@ class UsersController < ApplicationController
       #Message for contact_user
       @message = Message.new
     end
-    @past_projects = @user.projects.select{|p| p.status == 'closed'}
-    @projects_as_leader = @user.projects_as_leader - @past_projects
-    @projects_as_volunteer = @user.projects_as_volunteer - @projects_as_leader - @past_projects
+    @past_actions = @user.actions.select{|p| p.status == 'closed'}
+    @actions_as_leader = @user.actions_as_leader - @past_actions
+    @actions_as_volunteer = @user.actions_as_volunteer - @actions_as_leader - @past_actions
     respond_with(@user)
   end
 
@@ -70,7 +70,7 @@ class UsersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     params.require(:user).permit(:username, :first_name, :last_name, :email, :phone,
-                                 :receive_emails_about_project_weeks, :receive_emails_about_my_project_weeks, :receive_emails_about_other_projects,
+                                 :receive_emails_about_action_groups, :receive_emails_about_my_action_groups, :receive_emails_about_other_actions,
                                  :receive_other_emails_from_orga, :receive_emails_from_other_users)
   end
 

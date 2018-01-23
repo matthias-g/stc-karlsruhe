@@ -4,7 +4,7 @@ log
 db/development.sqlite3
 db/test.sqlite3
 tmp/
-public/uploads/project
+public/uploads/action
 public/uploads/gallery_picture
 public/uploads/news_entry
 public/downloads

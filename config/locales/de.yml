@@ -29,7 +29,7 @@ de:
         onlyLetters: 'darf nur Buchstaben enthalten'
         onlyWordsAndInnerSpace: darf nur Wortzeichen und Leerzeichen in der Mitte enthalten
     models:
-      project:
+      action:
         zero: 'Aktionen'
         one: 'Aktion'
         other: 'Aktionen'
@@ -46,7 +46,7 @@ de:
       surveys/template: 'Umfrage-Template'
       surveys/submission: 'Umfrage'
     attributes:
-      project:
+      action:
         title: 'Aktionstitel'
         description: 'Beschreibung'
         short_description: 'Kurzbeschreibung'
@@ -63,12 +63,12 @@ de:
         leaders: 'Leitung'
         volunteers: 'Team'
         status: 'Status'
-        project_week_id: Aktionswoche
+        action_group_id: Aktionswoche
         date: Aktionstag
         dates: Aktionstage
         time: Zeit
-        subproject_ids: Teilaktionen
-        parent_project_id: Überaktion
+        subaction_ids: Teilaktionen
+        parent_action_id: Überaktion
       news_entry:
         title: 'Newstitel'
         text: 'Text'
@@ -87,8 +87,8 @@ de:
         password_confirmation: 'Passwort wiederholen'
         current_password: 'Aktuelles Passwort'
         remember_me: 'merken'
-        receive_emails_about_project_weeks: Informationen zu Aktionswochen allgemein (z.B. Ankündigungen der Aktionswochen)
-        receive_emails_about_my_project_weeks: Informationen zu Aktionswochen, an denen ich teilnehme
+        receive_emails_about_action_groups: Informationen zu Aktionswochen allgemein (z.B. Ankündigungen der Aktionswochen)
+        receive_emails_about_my_action_groups: Informationen zu Aktionswochen, an denen ich teilnehme
         receive_emails_about_other_projects: Informationen zu weiteren Serve the City Projekten
         receive_other_emails_from_orga: Sonstige E-Mails vom Orgateam
         receive_emails_from_other_users: Andere Nutzer können mich über ein Kontaktformular kontaktieren
@@ -142,7 +142,7 @@ de:
     pageTitle: 'Serve the City Karlsruhe'
     links:
       home: 'Startseite'
-      projects: 'Aktionen'
+      actions: 'Aktionen'
       contact: 'Kontakt'
       supporters: 'Unterstützer'
       adminDashboard: 'Admin Dashboard'
@@ -153,11 +153,11 @@ de:
       stcInternational: 'Serve the City international'
       shareOnFacebook: 'auf Facebook teilen'
     title:
-      projectList: 'Aktionen'
-      projectWeek: 'Aktionswoche %{year}'
-      projectNew: 'Neue Aktion'
-      projectEdit: 'Aktion bearbeiten: %{project}'
-      projectCropPicture: 'Bildausschnitte festlegen: %{project}'
+      actionGroup: 'Aktionswoche %{year}'
+      action:
+        list: 'Aktionen'
+        new: 'Neue Aktion'
+        edit: 'Aktion bearbeiten: %{action}'
       newsEntryList: 'Newseinträge'
       newsEntryNew: 'Neuer Newseintrag'
       newsEntryEdit: 'News bearbeiten: %{news_entry}'
@@ -235,14 +235,14 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       text: 'Hier kannst du aktionsübergreifenden Empfängergruppen eine E-Mail schreiben. Du selbst erhältst auch immer eine Kopie.'
       success: 'Die Nachricht wurde erfolgreich gesendet.'
       groups:
-        current_volunteers_and_leaders: "Aktionsleiter und Mitarbeiter der Aktionswoche %{project_week}"
-        current_volunteers: "Mitarbeiter der Aktionswoche %{project_week}"
-        current_leaders: "Aktionsleiter der Aktionswoche %{project_week}"
+        current_volunteers_and_leaders: "Aktionsleiter und Mitarbeiter der Aktionswoche %{action_group}"
+        current_volunteers: "Mitarbeiter der Aktionswoche %{action_group}"
+        current_leaders: "Aktionsleiter der Aktionswoche %{action_group}"
         all_users: 'Alle angemeldeten Benutzer'
         active_users: 'Aktive Benutzer (Registrierung < 6 M oder Aktionsteilnahme < 18 M)'
         me: "Ich <%{user_email}>"
       types:
-        about_project_weeks: Informationen zur Aktionswoche
+        about_action_groups: Informationen zur Aktionswoche
         about_other_projects: Informationen zu weiteren Serve the City Aktionen
         other_email_from_orga: Sonstige E-Mail vom Orgateam
       labels:
@@ -252,7 +252,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         subject: 'Betreff'
         body: 'Nachricht'
       save: 'Nachricht speichern'
-    ownProject:
+    ownAction:
       subject: Vorschlag für eigene Aktion
   orga_message:
     action:
@@ -268,7 +268,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       really_destroy: Willst du die Nachricht wirklich löschen?
       really_send: Willst du die Nachricht wirklich versenden?
 
-  project:
+  action:
     action:
       new: 'Neue Aktion erstellen'
       edit: 'Aktion bearbeiten'
@@ -285,25 +285,25 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       removeLeader: 'Aktionsleiter entfernen'
       removeVolunteer: 'Teammitglied entfernen'
       toOverview: 'zur Aktionsliste'
-      toProject: 'zurück zur Aktion'
-      searchProjects: 'Aktionen suchen'
-      findProject: 'Aktion finden'
+      toAction: 'zurück zur Aktion'
+      searchActions: 'Aktionen suchen'
+      findAction: 'Aktion finden'
       cropListviewImage: 'Listenbild anpassen'
-      cropProjectImage: 'Aktionsbild anpassen'
+      cropActionImage: 'Aktionsbild anpassen'
       cropThumbnailImage: 'Thumbnail anpassen'
       cropImage: 'Zuschneiden'
-      wantToStartOwnProject: Du möchtest eine eigene Aktion starten?
+      wantToStartOwnAction: Du möchtest eine eigene Aktion starten?
       weHelpYou: Wir helfen dir dabei!
-      startOwnProject: Eigene Aktion starten
+      startOwnAction: Eigene Aktion starten
       exportICal: Als iCal/ICS exportieren
     label:
-      project: 'Aktion'
-      subproject: 'Teilaktion'
-      subprojects:
+      action: 'Aktion'
+      subaction: 'Teilaktion'
+      subactions:
         one: '1 Teilaktion'
         other: '%{count} Teilaktionen'
       vacancies: 'freie Plätze'
-      manageProject: 'Aktionsverwaltung'
+      manageAction: 'Aktionsverwaltung'
       status: 'Aktionsstatus'
       new: 'Neue Aktion'
       edit: 'Aktion bearbeiten'
@@ -313,15 +313,15 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       gallery: Fotogalerie
       uploadImage: 'Bild hochladen'
       listviewImage: 'Vorschau'
-      projectImage: 'Aktionsansicht'
+      actionImage: 'Aktionsansicht'
       thumbnailImage: 'Thumbnail'
       cropImage: 'Bildausschnitt für %{crop_target} anpassen'
-      parent_project: 'Diese Aktion ist Teil von'
+      parent_action: 'Diese Aktion ist Teil von'
       invisible: versteckt
-      volunteers_in_project: 'Team (%{members} von %{limit})'
-      volunteers_in_empty_project: 'Team (maximal %{limit})'
+      volunteers_in_action: 'Team (%{members} von %{limit})'
+      volunteers_in_empty_action: 'Team (maximal %{limit})'
       no_volunteers: 'Bisher haben sich noch keine Mitarbeiter für diese Aktion angemeldet.'
-      volunteers_in_subprojects: 'Team in Teilaktionen (%{members} von %{limit})'
+      volunteers_in_subactions: 'Team in Teilaktionen (%{members} von %{limit})'
     help:
       picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
       short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Aktionsliste statt der ausführlichen Beschreibung angezeigt.'
@@ -337,8 +337,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       errorList: 'Wegen folgender Fehler konnte die Aktion nicht gespeichert werden:'
       remainingVacancy: '%s freie Plätze'
       teamMember: 'Du bist im Aktionsteam.'
-      subprojectTeamMember: 'Du bist bei einer Teilaktion dabei.'
-      enterOneOfTheSubprojects: 'Melde dich zu einer der %{subprojects_link} an!'
+      subactionTeamMember: 'Du bist bei einer Teilaktion dabei.'
+      enterOneOfThesubactions: 'Melde dich zu einer der %{subactions_link} an!'
       isFull: 'Diese Aktion ist schon vollbesetzt.'
       participationSuccess: 'Du nimmst jetzt an dieser Aktion teil. Die Aktionsleiter werden sich mit dir etwa eine Woche vor der Aktion in Verbindung setzen.'
       madeVisible: 'Aktion wurde sichtbar gemacht.'
@@ -355,12 +355,13 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         Anzahl Bilder: %{pictureCount}\n
         Benutzer: %{uploader}\n\n
         Bitte überprüfe die Bilder und schalte sie gegebenenfalls frei."
-      leavingProjectNotification:
-        subject: Austritt aus Aktionsteam
-      projectParticipateVolunteerNotification:
-        subject: Willkommen im Aktionsteam
-      projectParticipateLeaderNotification:
-        subject: Neuer Mitarbeiter bei %{project}
+      action:
+        leavingNotification:
+          subject: Austritt aus Aktionsteam
+        participateVolunteerNotification:
+          subject: Willkommen im Aktionsteam
+        participateLeaderNotification:
+          subject: Neuer Mitarbeiter bei %{action}
     status:
       open: Freie Plätze
       soon_full: Wenige Plätze
@@ -413,7 +414,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       category:
         general: 'Allgemein'
         partners: 'Partner'
-        projects: 'Aktionen'
+        actions: 'Aktionen'
         media: 'Medien'
         insight: 'Einblicke'
 
@@ -450,9 +451,9 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         orgaAndUser: Du erhältst E-Mails vom Orgateam und anderen Nutzern.
         user: Du erhältst E-Mails von anderen Nutzern.
         none: Du erhältst keine E-Mails vom Orgateam oder anderen Nutzern.
-      projectsAsLeader: 'Leitung'
-      projectsAsVolunteer: 'Teilnahme'
-      pastProjects: 'Abgeschlossen'
+      actionsAsLeader: 'Leitung'
+      actionsAsVolunteer: 'Teilnahme'
+      pastActions: 'Abgeschlossen'
       confirmDeletePassword: 'Dein Passwort, zur Bestätigung'
       userList: 'Userliste'
       edit: 'Profil bearbeiten'
@@ -463,15 +464,15 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
     message:
       profileUpdated: 'Profil erfolgreich aktualisiert.'
       loggedInAs: 'eingeloggt als %s'
-      hasNoProjects: '%{user} nimmt noch an keiner Aktion teil.'
-      youHaveNoProjects: 'Du nimmst noch an keiner Aktion teil.'
+      hasNoActions: '%{user} nimmt noch an keiner Aktion teil.'
+      youHaveNoActions: 'Du nimmst noch an keiner Aktion teil.'
       invalidPassword: 'Das Passwort ist falsch'
       accountDeleted: 'Dein Account wurde gelöscht.'
     help:
       passwordLength: 'Mindestens 6 Zeichen lang.'
 
-  project_week:
-    noProjects: 'Wir sind zwar schon bei der Planung der Aktionswoche, aber bisher sind noch keine Aktionen öffentlich. Schau später nochmal vorbei oder kontaktiere uns, wenn du einen Vorschlag für eine Aktion hast!'
+  action_group:
+    noActions: 'Wir sind zwar schon bei der Planung der Aktionswoche, aber bisher sind noch keine Aktionen öffentlich. Schau später nochmal vorbei oder kontaktiere uns, wenn du einen Vorschlag für eine Aktion hast!'
 
   role:
     action:
@@ -539,9 +540,9 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
 
   ical:
     label:
-      project_weeks: 'Aktionswoche %{project_week}'
+      action_groups: 'Aktionswoche %{action_group}'
       users: 'Aktionen von %{name}'
-      all_projects: Alle Aktionen
+      all_actions: Alle Aktionen
 
   recaptcha:
     errors:
@@ -551,6 +552,6 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
   pundit:
     default: Du hast keine Berechtigung für diese Aktion.
     not_logged_in:
-    project_policy:
+    action_policy:
       update?: Du kannst diese Aktion nicht bearbeiten!
       enter?: Leider ist die Teilnahme an dieser Aktion zur Zeit nicht möglich.

@@ -11,7 +11,7 @@ class Api::UserResource < JSONAPI::Resource
     Pundit.policy(context[:user], @model).updatable_fields
   end
 
-  has_many :projects_as_volunteer, class_name: 'Project', through: :participations, always_include_linkage_data: false
+  has_many :actions_as_volunteer, class_name: 'Action', through: :participations, always_include_linkage_data: false
   has_many :roles
 
 end

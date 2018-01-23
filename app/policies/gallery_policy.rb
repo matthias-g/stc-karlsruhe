@@ -21,7 +21,7 @@ class GalleryPolicy < ApplicationPolicy
   def update?
     return false unless user
     return true if user.admin? || user.photographer?
-    record.projects.all? { |project| Pundit.policy!(user, project).upload_pictures? }
+    record.actions.all? { |action| Pundit.policy!(user, action).upload_pictures? }
   end
 
 end

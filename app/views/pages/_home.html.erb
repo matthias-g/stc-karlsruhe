@@ -26,17 +26,17 @@
 </div>
 
 <section style="text-align: center">
-  <!--<div id="countdown" data-class="Countdown" data-date="<%= @next_project_week.date_range.begin.strftime('%m/%d/%Y 00:00') %>">-->
+  <!--<div id="countdown" data-class="Countdown" data-date="<%= @next_action_group.date_range.begin.strftime('%m/%d/%Y 00:00') %>">-->
   <div id="countdown" data-class="Countdown" data-date="<%= Date.parse('2018-04-28').strftime('%m/%d/%Y 00:00') %>">
     <div><span></span>Tage</div>
     <div><span></span>Stunden</div>
     <div><span></span>Minuten</div>
     <div><span></span>Sekunden</div>
-    <!--<span class="running">verbleiben bis zur Aktionswoche&nbsp;<%= @next_project_week.title %></span>-->
-    <!--<% if Date.today <= @next_project_week.date_range.end %>-->
-      <!--<span class="finished">Die <%= link_to "Aktionswoche&nbsp;#{@next_project_week.title}".html_safe, show_project_week_path(@next_project_week.title), class: 'black-link' %> läuft!</span>-->
+    <!--<span class="running">verbleiben bis zur Aktionswoche&nbsp;<%= @next_action_group.title %></span>-->
+    <!--<% if Date.today <= @next_action_group.date_range.end %>-->
+      <!--<span class="finished">Die <%= link_to "Aktionswoche&nbsp;#{@next_action_group.title}".html_safe, show_action_group_path(@next_action_group.title), class: 'black-link' %> läuft!</span>-->
       <!--<% else %>-->
-      <!--<span class="finished week-finished">Die <%= link_to "Aktionswoche&nbsp;#{@next_project_week.title}".html_safe, show_project_week_path(@next_project_week.title), class: 'black-link' %> ist abgeschlossen. Vielen Dank für euren Einsatz!</span>-->
+      <!--<span class="finished week-finished">Die <%= link_to "Aktionswoche&nbsp;#{@next_action_group.title}".html_safe, show_action_group_path(@next_action_group.title), class: 'black-link' %> ist abgeschlossen. Vielen Dank für euren Einsatz!</span>-->
       <!--<% end %>-->
     <span class="running">verbleiben bis zum ersten Aktionstag&nbsp;2018</span>
     <% if Date.today <= Date.parse('2018-04-29') %>
@@ -140,9 +140,9 @@
             data-fb-token="1632977830272942|_y8PPboBvdNWpQG9jIDhHa--ArA"></span><!-- &#132;Gefällt mir&#147;-Angaben-->
     </div>
   </section>
-  <section class="col-sm-6" id="projects-link">
+  <section class="col-sm-6" id="actions-link">
     <div class="center-wrap" style="padding: 20px 20px 20px 30px;">
-      <%= link_to show_project_week_path(ProjectWeek.default.title) do %>
+      <%= link_to show_action_group_path(ActionGroup.default.title) do %>
         <i class="fa fa-arrow-right" style="position:relative;bottom:3px"></i> &nbsp;zu den Aktionen
       <% end %>
     </div>
@@ -157,11 +157,11 @@
 %>
 
 <section>
-  <h2>Aktionskarte <%= ProjectWeek.default.title %></h2>
+  <h2>Aktionskarte <%= ActionGroup.default.title %></h2>
   <div class="box box-5by2" style="min-height:200px;">
-    <div id="projects-map" data-class="GoogleMap"
+    <div id="actions-map" data-class="GoogleMap"
          data-lat="49.011627" data-lon="8.403869" data-zoom="12">
-      <% ProjectWeek.default.projects.each do |p| %>
+      <% ActionGroup.default.actions.each do |p| %>
         <% if (p.visible && !p.longitude.nil? && !p.latitude.nil?) %>
           <div data-lon="<%= p.longitude %>" data-lat="<%= p.latitude %>"
                data-name="<%= p.title %>" data-href="<%= url_for(p) %>">

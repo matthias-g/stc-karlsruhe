@@ -1,0 +1,133 @@
+@import "definitions";
+
+/* SPECIFIC STYLES: ACTION PAGE */
+
+#action-view, #action-edit-view, #action-team-view {
+  h1 {
+    text-align: center;
+  }
+  h3 {
+    margin-top: 5px;
+    margin-bottom: 3px;
+    margin-left: 0px;
+  }
+  .map {
+    border-radius: 6px;
+    border: 1px solid $default_border;
+    height: 150px;
+    width: 100%;
+  }
+  .action-picture {
+    width: 100%;
+    img {
+      width: 100%;
+      height: auto;
+      border: 1px solid $default_border;
+    }
+  }
+  .description {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    textarea {
+      min-height: 300px;
+    }
+  }
+  .short_description textarea {
+    min-height: 120px;
+  }
+  .individual_tasks, .requirements, .material {
+    text-align: justify;
+    margin-top: 15px;
+    textarea {
+      min-height: 80px;
+    }
+  }
+  .days select {
+    min-height: 90px;
+  }
+  .location textarea {
+    min-height: 80px;
+  }
+
+  .no-volunteers {
+    color: #555;
+    font-style: italic;
+  }
+
+  .contact-volunteers-form {
+    #message_subject {
+      max-width: 550px;
+    }
+    #message_body {
+      max-width: 550px;
+      min-height: 150px;
+    }
+  }
+
+  .subactions h3 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .subaction {
+    text-align: center;
+    min-height: 165px;
+    .action-image {
+      display: block;
+      width: 100px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      .action-status {
+        bottom: 0;
+        width: 100px;
+        position: absolute;
+      }
+    }
+  }
+
+  .parent-action {
+    div.image {
+      border-right-width: 4px;
+      border-bottom-width: 6px;
+      border-top-width: 6px;
+      width: 110px;
+    }
+    div.title {
+      border-left-width: 4px;
+      border-bottom-width: 6px;
+      border-top-width: 6px;
+      line-height: normal;
+    }
+  }
+
+  &.action-hidden h1, .subaction-hidden a {
+    color: $status_hidden !important;
+  }
+  .subaction-hidden {
+    opacity: 0.65;
+    img {
+      box-shadow: 0 0 5px $status_hidden;
+    }
+  }
+
+  .gallery h3 {
+    margin-bottom: 10px;
+  }
+  .picture-upload, #gallery_picture {
+    padding-top: 20px;
+  }
+
+  section.footer .glyphicon {
+    font-size: 26px;
+    margin-top: 2px;
+    margin-right: 15px;
+  }
+
+}
+
+#action-team-view {
+  section {
+    overflow: inherit;
+  }
+}

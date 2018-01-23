@@ -1,0 +1,35 @@
+<%= form_with model: @action_group, local: true do |f| %>
+  <% if @action_group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@action_group.errors.count, "error") %> prohibited this action group from being saved:</h2>
+
+      <ul>
+      <% @action_group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :default %><br>
+    <%= f.check_box :default %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.text_field(:start_date, value: @action_group.start_date ? l(@action_group.start_date, format: :numeric) : '',
+                     data: { 'behaviour': 'datepicker' }) -%>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br>
+    <%= f.text_field(:end_date, value: @action_group.end_date ? l(@action_group.end_date, format: :numeric) : '',
+                     data: { 'behaviour': 'datepicker' }) -%>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

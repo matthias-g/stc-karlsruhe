@@ -1,0 +1,66 @@
+<% content_for :pageTitle do %>
+    <%= t('layout.title.manageTeam') %>
+<% end %>
+
+<div id="action-team-view">
+
+  <section>
+    <div class="typeHeader">
+      <%= t('action.label.manageTeam') %>
+    </div>
+    <h1><%= @action.title %></h1>
+  </section>
+
+  <div class="row row-sm-eq-height">
+    <section class="col-sm-6">
+      <h3><%= t('action.label.team') %></h3>
+      <ul>
+        <% @action.volunteers.each do |volunteer| %>
+            <li>
+              <%= volunteer.full_name %>
+              <% if policy(@action).remove_from_volunteers?(volunteer) %>
+                  <%= link_to delete_volunteer_action_path(@action, user_id: volunteer.id),
+                              method: 'delete', title:t('action.action.removeVolunteer') do %>
+                  <span class="glyphicon glyphicon-remove"
+                        aria-label="<%=t('action.action.removeVolunteer')%>"></span>
+                  <% end %>
+              <% end %>
+              <% unless @action.has_leader?(volunteer) %>
+                  <%= link_to add_leader_action_path(@action, user_id: volunteer.id),
+                              method: 'post', title:t('action.action.makeLeader') do %>
+                  <span class="glyphicon glyphicon-arrow-right"
+                        aria-label="<%=t('action.action.makeLeader')%>"></span>
+                  <% end %>
+              <% end %>
+            </li>
+        <% end %>
+      </ul>
+    </section>
+    <section class="col-sm-6">
+      <h3><%= t('action.label.leaders') %></h3>
+      <ul>
+        <% @action.leaders.each do |leader| %>
+            <li>
+              <%= leader.full_name %>
+              <%= link_to delete_leader_action_path(@action, :user_id => leader.id),
+                          :method => 'delete', title:t('action.action.removeLeader') do %>
+              <span class="glyphicon glyphicon-remove"
+                    aria-label="<%=t('action.action.removeLeader')%>"></span>
+              <% end %>
+            </li>
+        <% end %>
+      </ul>
+      <% if policy(User).index? %>
+          <%= select_tag 'select-new-leader', options_for_user_select,
+                         class: 'selectpicker', title: t('action.action.addLeader'),
+                         data: { class: 'SelectPicker', handler: 'addNewLeader',
+                                 live_search: true, action_id: @action.id, size: 5 } %>
+      <% end %>
+    </section>
+  </div>
+
+  <section>
+    <%= link_to t('action.action.toAction'), @action, class: 'btn btn-default' %>
+  </section>
+
+</div>

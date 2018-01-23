@@ -10,10 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180122114951) do
+ActiveRecord::Schema.define(version: 20180123180020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "action_groups", id: :serial, force: :cascade do |t|
+    t.string "title", limit: 255
+    t.boolean "default"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date "start_date"
+    t.date "end_date"
+  end
+
+  create_table "actions", id: :serial, force: :cascade do |t|
+    t.string "title", limit: 255
+    t.text "description"
+    t.string "location", limit: 255
+    t.float "latitude"
+    t.float "longitude"
+    t.text "individual_tasks"
+    t.text "material"
+    t.text "requirements"
+    t.boolean "visible"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string "picture", limit: 255
+    t.integer "desired_team_size"
+    t.integer "status", default: 1
+    t.string "time", limit: 255
+    t.text "short_description", default: ""
+    t.float "map_latitude", default: 49.01347014
+    t.float "map_longitude", default: 8.40445518
+    t.integer "map_zoom", default: 12
+    t.text "picture_source"
+    t.integer "action_group_id"
+    t.string "slug", limit: 255
+    t.integer "parent_action_id"
+    t.integer "gallery_id"
+    t.date "date"
+    t.index ["gallery_id"], name: "index_actions_on_gallery_id"
+    t.index ["slug"], name: "index_actions_on_slug", unique: true
+  end
 
   create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
     t.string "slug", limit: 255, null: false
@@ -49,10 +88,10 @@ ActiveRecord::Schema.define(version: 20180122114951) do
 
   create_table "leaderships", id: :serial, force: :cascade do |t|
     t.integer "user_id"
-    t.integer "project_id"
+    t.integer "action_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["user_id", "project_id"], name: "index_leaderships_on_user_id_and_project_id", unique: true
+    t.index ["user_id", "action_id"], name: "index_leaderships_on_user_id_and_action_id", unique: true
   end
 
   create_table "news_entries", id: :serial, force: :cascade do |t|
@@ -86,48 +125,9 @@ ActiveRecord::Schema.define(version: 20180122114951) do
 
   create_table "participations", id: :serial, force: :cascade do |t|
     t.integer "user_id"
-    t.integer "project_id"
+    t.integer "action_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "project_weeks", id: :serial, force: :cascade do |t|
-    t.string "title", limit: 255
-    t.boolean "default"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.date "start_date"
-    t.date "end_date"
-  end
-
-  create_table "projects", id: :serial, force: :cascade do |t|
-    t.string "title", limit: 255
-    t.text "description"
-    t.string "location", limit: 255
-    t.float "latitude"
-    t.float "longitude"
-    t.text "individual_tasks"
-    t.text "material"
-    t.text "requirements"
-    t.boolean "visible"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string "picture", limit: 255
-    t.integer "desired_team_size"
-    t.integer "status", default: 1
-    t.string "time", limit: 255
-    t.text "short_description", default: ""
-    t.float "map_latitude", default: 49.01347014
-    t.float "map_longitude", default: 8.40445518
-    t.integer "map_zoom", default: 12
-    t.text "picture_source"
-    t.integer "project_week_id"
-    t.string "slug", limit: 255
-    t.integer "parent_project_id"
-    t.integer "gallery_id"
-    t.date "date"
-    t.index ["gallery_id"], name: "index_projects_on_gallery_id"
-    t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
 
   create_table "roles", id: :serial, force: :cascade do |t|
@@ -196,8 +196,8 @@ ActiveRecord::Schema.define(version: 20180122114951) do
     t.string "phone", limit: 255, default: ""
     t.boolean "cleared", default: false
     t.string "authentication_token"
-    t.boolean "receive_emails_about_project_weeks", default: true
-    t.boolean "receive_emails_about_my_project_weeks", default: true
+    t.boolean "receive_emails_about_action_groups", default: true
+    t.boolean "receive_emails_about_my_action_groups", default: true
     t.boolean "receive_emails_about_other_projects", default: true
     t.boolean "receive_other_emails_from_orga", default: true
     t.boolean "receive_emails_from_other_users", default: true
@@ -206,9 +206,9 @@ ActiveRecord::Schema.define(version: 20180122114951) do
     t.boolean "receive_notifications_about_volunteers", default: true
     t.index ["authentication_token"], name: "index_users_on_authentication_token"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["receive_emails_about_my_project_weeks"], name: "index_users_on_receive_emails_about_my_project_weeks"
+    t.index ["receive_emails_about_action_groups"], name: "index_users_on_receive_emails_about_action_groups"
+    t.index ["receive_emails_about_my_action_groups"], name: "index_users_on_receive_emails_about_my_action_groups"
     t.index ["receive_emails_about_other_projects"], name: "index_users_on_receive_emails_about_other_projects"
-    t.index ["receive_emails_about_project_weeks"], name: "index_users_on_receive_emails_about_project_weeks"
     t.index ["receive_emails_from_other_users"], name: "index_users_on_receive_emails_from_other_users"
     t.index ["receive_other_emails_from_orga"], name: "index_users_on_receive_other_emails_from_orga"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

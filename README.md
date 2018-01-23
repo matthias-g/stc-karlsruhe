@@ -5,7 +5,7 @@ Serve the City Karlsruhe
 [![Test Coverage](https://codeclimate.com/github/matthias-g/stc-karlsruhe/badges/coverage.svg)](https://codeclimate.com/github/matthias-g/stc-karlsruhe/coverage)
 
 This is the software running at [servethecity-karlsruhe.de](https://servethecity-karlsruhe.de) used for managing
-projects and volunteers during a project week of Serve the City Karlsruhe.
+actions and volunteers during an action week of Serve the City Karlsruhe.
 It's written using Ruby on Rails.
 
 Do you want to improve this platform? Or do you want to start Serve the City in your city and are looking for a platform to use?

@@ -31,9 +31,7 @@ Rails.application.routes.draw do
   get 'statistiken/auslastung', to: 'statistics#occupancy'
   get 'statistiken/auslastung-:title', to: 'statistics#occupancy', as: :occupancy_in_year
 
-  resources :project_weeks
-
-  resources :project_days
+  resources :action_groups
 
   resources :roles
 
@@ -46,7 +44,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :projects, path: 'aktionen' do
+  resources :actions, path: 'aktionen' do
     member do
       get :enter
       get :leave
@@ -64,8 +62,8 @@ Rails.application.routes.draw do
       post :contact_leaders
     end
   end
-  get 'aktionen-:year', to: 'projects#index'
-  get 'aktionswoche-:title', to: 'project_weeks#show', as: 'show_project_week'
+  get 'aktionen-:year', to: 'actions#index'
+  get 'aktionswoche-:title', to: 'action_groups#show', as: 'show_action_group'
 
   devise_for :users, path: '',
              path_names: { sign_in: 'login', sign_out: 'logout',
@@ -81,17 +79,17 @@ Rails.application.routes.draw do
   get :login_or_register, to: 'users#login_or_register'
 
   root 'pages#home'
-  get '/eigene-aktion', to: 'pages#own_project', as: :own_project
+  get '/eigene-aktion', to: 'pages#own_action', as: :own_action
   get '/:page', to: 'pages#page', as: :show_page
 
-  get 'ical/aktionen/:project_id.ics', to: 'ical#projects', as: :project_ical
-  get 'ical/aktionswochen/:project_week_id.ics', to: 'ical#project_weeks', as: :project_week_ical
+  get 'ical/aktionen/:action_id.ics', to: 'ical#actions', as: :action_ical
+  get 'ical/aktionswochen/:action_group_id.ics', to: 'ical#action_groups', as: :action_group_ical
   get 'ical/users/:ical_token/:user_id.ics', to: 'ical#users', as: :user_ical
-  get 'ical/aktionen.ics', to: 'ical#all_projects', as: :all_projects_ical
+  get 'ical/aktionen.ics', to: 'ical#all_actions', as: :all_actions_ical
 
   namespace :api, constraints: { format: 'json' } do
-    jsonapi_resources :projects
-    jsonapi_resources :project_weeks
+    jsonapi_resources :actions
+    jsonapi_resources :action_groups
     jsonapi_resources :galleries
     jsonapi_resources :gallery_pictures do
         member do

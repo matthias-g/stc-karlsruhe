@@ -49,7 +49,7 @@ class GalleryPicturesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy gallery_picture with redirection to referer" do
-    referer = 'https://servethecity-karlsruhe.de/projects/some-project'
+    referer = 'https://servethecity-karlsruhe.de/actions/some-action'
     assert_difference('GalleryPicture.count', -1) do
       delete gallery_picture_url(@gallery_picture), headers: { 'HTTP_REFERER': referer }
     end

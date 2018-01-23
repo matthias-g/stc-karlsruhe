@@ -103,14 +103,14 @@ RSpec.describe ApplicationPolicy do
     subject { policy.show? }
 
     context 'for existing record' do
-      let(:record) { projects('Kostenlose Fahrradreparatur in der Innenstadt') }
+      let(:record) { actions('Kostenlose Fahrradreparatur in der Innenstadt') }
       it 'is true' do
         expect(subject).to be_truthy
       end
     end
 
     context 'for not visible record' do
-      let(:record) { projects('Project 2') }
+      let(:record) { actions('Action 2') }
       it 'is false' do
         expect(subject).to be_falsey
       end

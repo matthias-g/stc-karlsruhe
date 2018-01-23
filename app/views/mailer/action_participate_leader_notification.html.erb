@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+
+<p>Hallo,</p>
+
+<p>gerade hat sich <%= @user.full_name %> bei der von dir geleiteten Aktion <%= link_to @action.title, action_url(@action) %> als Mitarbeiter eingetragen.<p>
+
+<p>Damit sind jetzt <%= @action.volunteers.count %> von <%= @action.desired_team_size %> Plätzen bei der Aktion belegt.</p>
+
+<p>Herzliche Grüße</p>
+
+<p>Dein Serve the City Team</p>
+
+</body>
+</html>

@@ -124,29 +124,29 @@ RSpec.describe GalleryPolicy do
       end
     end
 
-    context 'for user leading related project' do
+    context 'for user leading related action' do
       let(:current_user) { users(:rolf) }
 
       it 'is true' do
-        expect(record.projects.count).to eq(1)
-        project = record.projects.first
-        project.date = 1.days.ago
-        project.save!
-        expect(current_user).to lead_project(project)
+        expect(record.actions.count).to eq(1)
+        action = record.actions.first
+        action.date = 1.days.ago
+        action.save!
+        expect(current_user).to lead_action(action)
         expect(subject).to be_truthy
       end
     end
 
-    context 'for an unrelated user to related project' do
+    context 'for an unrelated user to related action' do
       let(:current_user) { users(:peter) }
 
       it 'is false' do
-        expect(record.projects.count).to eq(1)
-        project = record.projects.first
-        project.date = 1.days.ago
-        project.save!
-        expect(current_user).not_to lead_project(project)
-        expect(current_user).not_to volunteer_in_project(project)
+        expect(record.actions.count).to eq(1)
+        action = record.actions.first
+        action.date = 1.days.ago
+        action.save!
+        expect(current_user).not_to lead_action(action)
+        expect(current_user).not_to volunteer_in_action(action)
         expect(subject).to be_falsey
       end
     end

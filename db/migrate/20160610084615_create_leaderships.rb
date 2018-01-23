@@ -3,7 +3,7 @@ class CreateLeaderships < ActiveRecord::Migration
 
     create_table :leaderships do |t|
       t.references :user
-      t.references :project
+      t.references :action
 
       t.index [:user_id, :project_id], unique: true
 

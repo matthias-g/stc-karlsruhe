@@ -3,7 +3,7 @@ class Api::GalleryResource < JSONAPI::Resource
 
   attribute :title
 
-  has_many :projects
+  has_many :actions
   has_many :gallery_pictures
 
 end

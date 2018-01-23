@@ -8,7 +8,7 @@ class RemoveProjectDays < ActiveRecord::Migration[5.1]
       week.save!
     end
 
-    add_column :projects, :date, :date
+    add_column :actions, :date, :date
     Project.all.find_all{ |p| p.days.count > 1 && p.subprojects.count == 0 }.each do |project|
       create_subprojects_for_multi_day_project(project)
     end

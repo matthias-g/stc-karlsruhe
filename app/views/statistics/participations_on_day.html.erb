@@ -17,11 +17,11 @@
       </tr>
       </thead>
       <tbody>
-      <% Project.all.each do |project| %>
+      <% Action.all.each do |action| %>
         <tr>
-          <% if @participations.where(project: project).count > 0 %>
-            <td><%= link_to project.title, project_path(project) %></td>
-            <td><%= @participations.where(project: project).count %></td>
+          <% if @participations.where(action: action).count > 0 %>
+            <td><%= link_to action.title, action_path(action) %></td>
+            <td><%= @participations.where(action: action).count %></td>
           <% end %>
         </tr>
       <% end %>

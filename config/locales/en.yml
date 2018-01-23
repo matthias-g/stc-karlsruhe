@@ -1,10 +1,10 @@
 en:
   activerecord:
     models:
-      project:
-        zero: 'Project'
-        one: 'Project'
-        other: 'Projects'
+      action:
+        zero: 'Action'
+        one: 'Action'
+        other: 'Actions'
       user:
         zero: 'User'
         one: 'User'
@@ -14,8 +14,8 @@ en:
         one: Message
         other: Messages
     attributes:
-      project:
-        title: 'Project Title'
+      action:
+        title: 'Action Title'
         description: 'Description'
         short_description: 'Short Description'
         location: 'Location'
@@ -31,10 +31,9 @@ en:
         leaders: 'Leaders'
         volunteers: 'Team'
         status: 'Status'
-        project_week_id: 'Project Week'
-        days: 'Project Days'
+        action_group_id: 'Action Group'
         time: Time
-        subproject_ids: Subprojects
+        subaction_ids: subactions
       user:
         username: 'Username'
         first_name: 'First Name'
@@ -94,7 +93,7 @@ en:
       fail: 'Message could not be send!'
       submit: 'Send message'
       title: 'Contact volunteers.'
-      text: 'You can send a message to all the volunteers of this project. A copy is send to you, too'
+      text: 'You can send a message to all the volunteers of this action. A copy is send to you, too'
     user:
       success: 'Message send to %{recipient}.'
       fail: 'Message could not be send!'
@@ -113,7 +112,7 @@ en:
   layout:
     title: 'Serve the City Karlsruhe'
     meta_links:
-      projects: 'Projects'
+      actions: 'Actions'
       home: 'Home'
     pageLinks:
       contact: 'Contact Us'
@@ -121,47 +120,47 @@ en:
       privacy: 'Privacy'
       disclaimer: 'Disclaimer'
 
-  project:
+  action:
     action:
-      new: 'New Project'
-      edit: 'Edit Project'
-      save: 'Update Project'
-      delete: 'Delete Project'
+      new: 'New Action'
+      edit: 'Edit Action'
+      save: 'Update Action'
+      delete: 'Delete Action'
       enter: 'Enter Team'
       leave: 'Leave Team'
-      editLeaders: 'Change Project Leaders'
+      editLeaders: 'Change Action Leaders'
       asLeader: '(=> as leader)'
       notAsLeader: '(X)'
       removeVolunteer: '(X)'
       toOverview: 'Back to the Overview'
-      toProject: 'Back to Project'
+      toAction: 'Back to Action'
       makeVisible: 'Make visible'
       makeInvisible: 'Make invisible'
-      open: 'Open project'
-      close: 'Close project'
+      open: 'Open action'
+      close: 'Close action'
     label:
-      project: 'Project'
+      action: 'Action'
       status: 'Status'
-      new: 'Create new Project'
-      edit: 'Edit Project: %s'
-      list: 'Projects in %{year}'
-      projectName: 'Project Name'
+      new: 'Create new Action'
+      edit: 'Edit Action: %s'
+      list: 'Action in %{year}'
+      actionName: 'Action Name'
       uploadImage: 'Upload Image'
     edit:
       hint:
         picture_source: 'Please enter the source of the uploaded picture. If you leave this field empty the picture will not be shown.'
     message:
-      created: 'Project was successfully created.'
-      updated: 'Project was successfully updated.'
+      created: 'Action was successfully created.'
+      updated: 'Action was successfully updated.'
       leaderAdded: 'Leader was successfully added.'
       leaderRemoved: 'Leader was successfully removed.'
       volunteerRemoved: 'Volunteer was successfully removed.'
-      errorList: 'Errors prohibited this project from being saved:'
+      errorList: 'Errors prohibited this action from being saved:'
       remainingVacancy: '%s vacancies'
       teamMember: 'You are a team member.'
 
   user:
-    link_to_project: 'Show all projects!'
+    link_to_action: 'Show all actions!'
     action:
       login: 'Sign In'
       logout: 'Sign Out'
@@ -222,5 +221,5 @@ en:
 
   pundit:
     default: You cannot perform this action.
-    project_policy:
-      update?: You cannot edit this project!
+    action_policy:
+      update?: You cannot edit this action!

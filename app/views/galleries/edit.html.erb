@@ -8,8 +8,8 @@
     <%= link_to 'Alle Bilder sichtbar machen', make_all_visible_gallery_path(@gallery) %> |
     <%= link_to 'Alle Bilder unsichtbar machen', make_all_invisible_gallery_path(@gallery) %> |
     <%= link_to 'Zur Galerieübersicht', galleries_path %> |
-    <% @gallery.projects.each do |project| %>
-      <%= link_to 'Zur Aktion', project %>
+    <% @gallery.actions.each do |action| %>
+      <%= link_to 'Zur Aktion', action %>
     <% end %>
 
   </section>

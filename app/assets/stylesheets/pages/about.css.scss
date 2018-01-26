@@ -1,0 +1,97 @@
+@import "definitions";
+
+#header-about {
+  background: image-url("logo_bg.png") center top / 80% auto no-repeat;
+  img {
+    width: 700px;
+  }
+}
+
+#about-faqs {
+  .spotlight {
+    display: block;
+    text-align: center;
+  }
+  .fa {
+    font-size: 70px;
+    margin: 10px;
+  }
+  .faq-plus-info {
+    text-align: center;
+    padding-top: 50px;
+  }
+}
+
+.schirmherr-ribbon {
+  padding: 2px 0;
+
+  pointer-events: auto;
+  background-color: rgba(58, 87, 149, 0.8);
+
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.15)));
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+
+  -webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+}
+
+.schirmherr-ribbon-top-right {
+  position: absolute;
+  top: 90px;
+  right: -100px;
+  z-index: 99;
+
+  -webkit-transform: rotate(40deg);
+  -moz-transform: rotate(40deg);
+  -ms-transform: rotate(40deg);
+  -o-transform: rotate(40deg);
+  transform: rotate(40deg);
+}
+
+.schirmherr-ribbon-wrapper {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  z-index: 99;
+  pointer-events: none;
+  right: 0;
+}
+
+.schirmherr-ribbon-top-right .schirmherr-ribbon-text {
+  padding-left: 95px;
+  width: 550px;
+  display: inline-block;
+}
+
+.schirmherr-ribbon-text {
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  font: 700 17px NormalFont, Helvetica, Arial, sans-serif;
+
+  line-height: 24px;
+  padding: 5px;
+
+  border-width: 1px 0;
+  border-style: dotted;
+  border-color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.schirmherr-ribbon-text .fa-umbrella {
+  font-size: 200%;
+  vertical-align: middle;
+  padding-right: 5px;
+}
+
+.schirmherr-ribbon-middle {
+  margin: 5px -10px 40px;
+}

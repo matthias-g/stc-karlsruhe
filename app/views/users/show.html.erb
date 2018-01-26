@@ -1,118 +1,121 @@
-<% content_for :pageTitle do %>
-    <%= @user.full_name %>
-<% end %>
+<% provide :title, @user.full_name %>
+<% wrapper_classes.delete('white-box').add('container-medium') %>
 
-<div id="user-view">
+<div class="white-box">
+  <div class="typeHeader">
+    <%= (@user == current_user) ? t('user.label.myProfile') : t('user.label.profile') %>
+  </div>
+  <h1><%= @user.full_name %></h1>
+</div>
 
-  <section>
-    <div class="typeHeader">
-      <%= (@user == current_user) ? t('user.label.myProfile') : t('user.label.profile') %>
-    </div>
-    <h1><%= @user.full_name %></h1>
-  </section>
+<div class="row row-sm-eq-height">
+  <div class="col-sm-6">
 
-  <div class="row row-sm-eq-height">
-    <div class="col-sm-6">
+    <% if @user == current_user && @submission %>
+        <section id="survey" class="white-box">
+          <h2>Umfrage</h2>
+          <%= bootstrap_form_for([@submission.template, @submission]) do |f| %>
+              <%= render partial: 'surveys/submissions/form_questions', locals: { f: f } %>
+              <%= f.submit t('surveys.action.saveSubmission'), class:'submit btn btn-default pull-right' %>
+          <% end %>
+        </section>
+    <% end %>
 
-      <% if @user == current_user && @submission %>
-          <section class="survey">
-            <h2>Umfrage</h2>
-            <%= bootstrap_form_for([@submission.template, @submission]) do |f| %>
-                <%= render partial: 'surveys/submissions/form_questions', locals: { f: f } %>
-                <%= f.submit t('surveys.action.saveSubmission'), class:'submit btn btn-default pull-right' %>
-            <% end %>
-          </section>
-      <% end %>
+    <% if (current_user == @user) || current_user.in_orga_team? %>
+        <section id="user-profile-data" class="white-box">
+          <h2><%= t('user.label.userData') %></h2>
+          <table>
+            <tr>
+              <td><%= t('activerecord.attributes.user.username') %>:</td>
+              <td><%= @user.username %></td>
+            </tr>
+            <tr>
+              <td><%= t('activerecord.attributes.user.email') %>:</td>
+              <td><%= @user.email %></td>
+            </tr>
+            <tr>
+              <td><%= t('activerecord.attributes.user.phone') %>:</td>
+              <td><%= @user.phone %></td>
+            </tr>
+          </table>
+          <span><%= email_reception_description @user %></span>
 
-      <% if (current_user == @user) || current_user.in_orga_team? %>
-          <section class="profile-data">
-            <h2><%= t('user.label.userData') %></h2>
-            <table>
-              <tr>
-                <td><%= t('activerecord.attributes.user.username') %>:</td>
-                <td><%= @user.username %></td>
-              </tr>
-              <tr>
-                <td><%= t('activerecord.attributes.user.email') %>:</td>
-                <td><%= @user.email %></td>
-              </tr>
-              <tr>
-                <td><%= t('activerecord.attributes.user.phone') %>:</td>
-                <td><%= @user.phone %></td>
-              </tr>
-            </table>
-            <span><%= email_reception_description @user %></span>
+          <div id="user-profile-actions">
             <% if policy(@user).edit?  %>
-                <%= link_to edit_user_path, title: t('user.action.edit'),
-                            class:'btn btn-default' do %>
+                <%= link_to edit_user_path, title: t('user.action.edit'), class:'btn btn-default' do %>
                     <span class="glyphicon glyphicon-pencil"></span>
                     <%= t('user.action.edit') %>
                 <% end %>
             <% end %>
-          </section>
-      <% end %>
-
-      <% unless @user == current_user  %>
-          <section class="contact-user-form">
-            <h2><%= t('contact.user.title', recipient: @user.first_name) %></h2>
-            <%= bootstrap_form_for @message, url: { action: 'contact_user' } do |f| %>
-                <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
-                <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
-                <%= f.submit t('contact.user.submit') %>
-            <% end %>
-          </section>
-      <% end %>
-
-    </div>
-
-    <section class="col-sm-6 actions" >
-
-    <h2><%= Action.model_name.human(count:2) %></h2>
-    <% if @actions_as_leader.any? %>
-        <h3><%= t('user.label.actionsAsLeader') %> (<%= @actions_as_leader.size %>
-          <%= Action.model_name.human(count: @actions_as_leader.size) %>):</h3>
-        <% @actions_as_leader.each do |action| %>
-            <%= link_to action.title, action %>
-        <% end %>
-    <% end %>
-    <% if @actions_as_volunteer.any? %>
-        <h3><%= t('user.label.actionsAsVolunteer') %> (<%= @actions_as_volunteer.size %>
-          <%= Action.model_name.human(count: @actions_as_volunteer.size) %>):</h3>
-        <% @actions_as_volunteer.each do |action| %>
-            <%= link_to action.title, action %>
-        <% end %>
-    <% end %>
-    <% if @past_actions.any? %>
-        <h3><%= t('user.label.pastActions') %> (<%= @past_actions.size %>
-          <%= Action.model_name.human(count: @past_actions.size) %>):</h3>
-        <% @past_actions.each do |action| %>
-            <%= link_to action.title, action %>
-        <% end %>
-    <% end %>
-    <% if @user.actions_as_volunteer.blank? && @user.actions_as_leader.blank? %>
-        <% if current_user == @user %>
-            <%= t('user.message.youHaveNoActions') %><br />
-        <% else %>
-            <%= t('user.message.hasNoActions', user:@user.first_name) %>
-        <% end %>
-    <% end %>
-    <% if @user == current_user  %>
-          <div class="actions">
-            <%= link_to t('action.action.findAction'), show_action_group_path(ActionGroup.default.title),
-                        class:'btn btn-default btn-wide' %>
-            <%= link_to t('action.action.startOwnAction'), own_action_path,
-                        class:'btn btn-default btn-wide' %>
-          </div>
-          <div class="feed">
-            <span><%= t('user.action.exportICal') %>:</span>
-            <%= link_to user_ical_path(@user.ical_token, @user), data: { 'turbolinks': false } do %>
-                <span class="glyphicon glyphicon-calendar"></span>
+            <%= link_to destroy_user_session_path, method: :delete, title: t('user.action.logout'), class:'btn btn-default' do %>
+                <span class="glyphicon glyphicon-log-out"></span>
+                <%= t('user.action.logout') %>
             <% end %>
           </div>
+        </section>
     <% end %>
-    </section>
+
+    <% unless @user == current_user  %>
+        <section id="contact-user-form" class="white-box">
+          <h2><%= t('contact.user.title', recipient: @user.first_name) %></h2>
+          <%= bootstrap_form_for @message, url: { action: 'contact_user' } do |f| %>
+              <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
+              <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
+              <%= f.submit t('contact.user.submit') %>
+          <% end %>
+        </section>
+    <% end %>
+
   </div>
+  <div class="col-sm-6">
 
+    <section id="user-actions" class="white-box">
+      <h2><%= Action.model_name.human(count:2) %></h2>
+      <% if @actions_as_leader.any? %>
+          <h3><%= t('user.label.actionsAsLeader') %> (<%= @actions_as_leader.size %>
+            <%= Action.model_name.human(count: @actions_as_leader.size) %>):</h3>
+          <% @actions_as_leader.each do |action| %>
+              <%= link_to action.title, action %>
+          <% end %>
+      <% end %>
+      <% if @actions_as_volunteer.any? %>
+          <h3><%= t('user.label.actionsAsVolunteer') %> (<%= @actions_as_volunteer.size %>
+            <%= Action.model_name.human(count: @actions_as_volunteer.size) %>):</h3>
+          <% @actions_as_volunteer.each do |action| %>
+              <%= link_to action.title, action %>
+          <% end %>
+      <% end %>
+      <% if @past_actions.any? %>
+          <h3><%= t('user.label.pastActions') %> (<%= @past_actions.size %>
+            <%= Action.model_name.human(count: @past_actions.size) %>):</h3>
+          <% @past_actions.each do |action| %>
+              <%= link_to action.title, action %>
+          <% end %>
+      <% end %>
+      <% if @user.actions_as_volunteer.blank? && @user.actions_as_leader.blank? %>
+          <% if current_user == @user %>
+              <%= t('user.message.youHaveNoActions') %><br />
+          <% else %>
+              <%= t('user.message.hasNoActions', user:@user.first_name) %>
+          <% end %>
+      <% end %>
+      <% if @user == current_user  %>
+            <div class="actions">
+              <%= link_to t('action.action.findAction'), show_action_group_path(ActionGroup.default.title),
+                          class:'btn btn-default btn-wide' %>
+              <%= link_to t('action.action.startOwnAction'), own_action_path,
+                          class:'btn btn-default btn-wide' %>
+            </div>
+            <div class="feed">
+              <span><%= t('user.action.exportICal') %>:</span>
+              <%= link_to user_ical_path(@user.ical_token, @user), data: { 'turbolinks': false } do %>
+                  <span class="glyphicon glyphicon-calendar"></span>
+              <% end %>
+            </div>
+      <% end %>
+    </section>
+
+  </div>
 </div>
 
 

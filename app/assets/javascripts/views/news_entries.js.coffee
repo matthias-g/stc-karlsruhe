@@ -12,6 +12,6 @@ changeVisibility = (visible, entryId) ->
     location.reload()
 
 onPageLoad ->
-  $('#change-visibility-button').click ->
+  $('#news-entry-visibility-button').click ->
     button = $(@)
     changeVisibility(!button.data('visible'), button.data('entry-id'))

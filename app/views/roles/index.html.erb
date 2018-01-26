@@ -1,14 +1,10 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.roleList') %>
-<% end %>
+<% provide :title, t('layout.title.roleList') %>
 
-<section>
-  <h1><%= t('role.captionList') %></h1>
-</section>
+<h1><%= t('role.captionList') %></h1>
 
 <div class="row">
   <% @roles.each do |role| %>
-      <section class="role-info col-md-4">
+      <div class="role-info col-md-4">
         <h2><%= role.title %></h2>
         <div>
           <% policy_scope(role.users).order(:first_name, :last_name).each do |user| %>
@@ -24,11 +20,11 @@
                          data: { class: 'SelectPicker', handler: 'addUserToRole',
                                  live_search: true, role_id: role.id, size: 5 } %>
         </div>
-      </section>
+      </div>
   <% end %>
 </div>
 
-<section id="roleList">
+<div id="roleList">
   <table>
     <thead>
     <tr>
@@ -52,4 +48,4 @@
   </table>
 
   <%= link_to t('role.new'), new_role_path %>
-</section>
+</div>

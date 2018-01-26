@@ -1,32 +1,27 @@
-<section>
-  <h1>Listing action_groups</h1>
-</section>
 
-<section>
-  <table>
-    <thead>
+<h1>Listing action_groups</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Default</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @action_groups.each do |action_group| %>
       <tr>
-        <th>Title</th>
-        <th>Default</th>
-        <th colspan="3"></th>
+        <td><%= action_group.title %></td>
+        <td><%= action_group.default %></td>
+        <td><%= link_to 'Show', show_action_group_path(action_group) %></td>
+        <td><%= link_to 'Edit', edit_action_group_path(action_group) %></td>
+        <td><%= link_to 'Destroy', action_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    </thead>
+    <% end %>
+  </tbody>
+</table>
 
-    <tbody>
-      <% @action_groups.each do |action_group| %>
-        <tr>
-          <td><%= action_group.title %></td>
-          <td><%= action_group.default %></td>
-          <td><%= link_to 'Show', action_group %></td>
-          <td><%= link_to 'Edit', edit_action_group_path(action_group) %></td>
-          <td><%= link_to 'Destroy', action_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<br>
 
-  <br>
-
-  <%= link_to 'New action group', new_action_group_path %>
-
-</section>
+<%= link_to 'New action group', new_action_group_path %>

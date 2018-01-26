@@ -1,13 +1,9 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.roleView') %>
-<% end %>
+<% provide :title, t('layout.title.roleView') %>
 
-<section>
-    <p>
-      <strong><%= t('role.title') %></strong>
-      <span id="title"><%= @role.title %></span>
-    </p>
+<p>
+  <strong><%= t('role.title') %></strong>
+  <span id="title"><%= @role.title %></span>
+</p>
 
-    <%= link_to t('general.action.edit'), edit_role_path(@role) %> |
-    <%= link_to t('general.action.back'), roles_path %>
-</section>
+<%= link_to t('general.action.edit'), edit_role_path(@role) %> |
+<%= link_to t('general.action.back'), roles_path %>

@@ -1,4 +1,3 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.newsEntryEdit', news_entry:@news_entry.title) %>
-<% end %>
+<% provide :title, t('layout.title.newsEntryEdit', news_entry:@news_entry.title) %>
+
 <%= render partial: 'form', locals: {isNew: false} %>

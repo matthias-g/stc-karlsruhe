@@ -1,41 +1,31 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.templateView', template: @template.title) %>
-<% end %>
+<% provide :title, t('layout.title.templateView', template: @template.title) %>
 
 <p id="notice"><%= notice %></p>
 
-<div class="surveys template view">
+<div class="typeHeader">
+  &nbsp;<%= Surveys::Template.model_name.human %>&nbsp;
+</div>
+<h1><%= @template.title %></h1>
 
-<section>
-  <div class="typeHeader">
-    &nbsp;<%= Surveys::Template.model_name.human %>&nbsp;
-  </div>
-  <h1><%= @template.title %></h1>
-</section>
+<% idx = 0 %>
+<% @template.questions.each do |question| %>
 
-<section>
-  <% idx = 0 %>
-  <% @template.questions.each do |question| %>
-
-    <% question_label = question.text %>
-    <% if !question.is_subquestion %>
-        <% idx += 1 %>
-        <% question_label = idx.to_s + '.) ' + question_label %>
-    <% end %>
-
-    <div class="<%= question.is_subquestion ? 'subquestion' : '' %>">
-      <h3><%= question_label %></h3>
-      <%= content_tag(:p, question.explanation, class: 'explanation') unless question.explanation.blank? %>
-      <p><%= question.answer_options %></p>
-    </div>
+  <% question_label = question.text %>
+  <% if !question.is_subquestion %>
+      <% idx += 1 %>
+      <% question_label = idx.to_s + '.) ' + question_label %>
   <% end %>
-</section>
 
-<section>
+  <div class="<%= question.is_subquestion ? 'subquestion' : '' %>">
+    <h3><%= question_label %></h3>
+    <%= content_tag(:p, question.explanation, class: 'explanation') unless question.explanation.blank? %>
+    <p><%= question.answer_options %></p>
+  </div>
+<% end %>
+
+<div class="section">
   <%= link_to t('surveys.action.editTemplate'), edit_surveys_template_path(@template), class: 'btn btn-default' %>
   <%= link_to t('surveys.action.toTemplateOverview'), surveys_templates_path, class: 'btn btn-default'%>
   <%= link_to t('surveys.action.newSubmission'), new_surveys_template_surveys_submission_path(@template), class: 'btn btn-default'%>
   <%= link_to t('surveys.action.showSubmissions'), surveys_template_surveys_submissions_path(@template), class: 'btn btn-default'%>
-</section>
-
 </div>

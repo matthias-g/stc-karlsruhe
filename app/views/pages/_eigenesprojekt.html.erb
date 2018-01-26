@@ -1,50 +1,42 @@
-<% content_for :pageTitle do %>
-    <%= 'Eigene Aktion vorschlagen' %>
-<% end %>
+<% provide :title, 'Eigene Aktion vorschlagen' %>
 
-<section>
-  <h1>Eigene Aktion vorschlagen</h1>
-</section>
-
-<section>
-  <div class="row">
-    <div class="col-md-6">
-      <p>
-        Du überlegst deine eigene Aktion zu starten? Dann bist du bei uns genau richtig!
-        Wir würden dir gerne dabei helfen, deine Ideen umzusetzen und die passenden Mitarbeiter dafür zu finden.
-      </p>
-      <p>
-        Nutze doch das rechts stehende Kontaktformular und schreib uns an.
-      </p>
-      <p>
-        Wenn du dir vorher schon Gedanken machen möchtest, haben wir hier einige Anregungen für dich:
-        <ul>
-          <li>Was möchtest du konkret machen?</li>
-          <li>Mit welcher Zielgruppe möchtest du eine Aktion durchführen?</li>
-          <li>Hast du schon eine konkrete Organisation / Institution / Gruppierung im Blick?</li>
-        </ul>
-      </p>
-      <p>
-        Um eine Aktion mit Serve the City durchzuführen, achten wir darauf, dass es zu dem Konzept unserer Aktionswoche passt.
-        Das besprechen wir bei Interesse gerne mit dir. Wir freuen uns auf deine Nachricht!
-      </p>
-    </div>
-    <div class="col-md-6">
-      <%= bootstrap_form_for @message, url: contact_path do |form| %>
-          <div>
-            <%= form.text_area :body, label: t('contact.general.placeholders.body'), rows: 7 %>
-            <%= form.email_field :sender, value: user_signed_in? ? current_user.email : @message.sender, label: t('contact.general.placeholders.sender') %>
-            <%= form.hidden_field :subject, value: t('contact.ownAction.subject') %>
-            <%= form.hidden_field :recipient, value: 'default@servethecity-karlsruhe.de' %>
-            <% unless user_signed_in? %>
-                <%= form.form_group do %>
-                    <%= recaptcha_tags ajax: true, script: false %>
-                <% end %>
-            <% end %>
-            <%= form.submit t('contact.orga.submit') %>
-          </div>
-      <% end %>
-    </div>
+<h1>Eigene Aktion vorschlagen</h1>
+<div class="row">
+  <div class="col-md-6">
+    <p>
+      Du überlegst deine eigene Aktion zu starten? Dann bist du bei uns genau richtig!
+      Wir würden dir gerne dabei helfen, deine Ideen umzusetzen und die passenden Mitarbeiter dafür zu finden.
+    </p>
+    <p>
+      Nutze doch das rechts stehende Kontaktformular und schreib uns an.
+    </p>
+    <p>
+      Wenn du dir vorher schon Gedanken machen möchtest, haben wir hier einige Anregungen für dich:
+      <ul>
+        <li>Was möchtest du konkret machen?</li>
+        <li>Mit welcher Zielgruppe möchtest du eine Aktion durchführen?</li>
+        <li>Hast du schon eine konkrete Organisation / Institution / Gruppierung im Blick?</li>
+      </ul>
+    </p>
+    <p>
+      Um eine Aktion mit Serve the City durchzuführen, achten wir darauf, dass es zu dem Konzept unserer Aktionswoche passt.
+      Das besprechen wir bei Interesse gerne mit dir. Wir freuen uns auf deine Nachricht!
+    </p>
   </div>
-
-</section>
+  <div class="col-md-6">
+    <%= bootstrap_form_for @message, url: contact_path do |form| %>
+        <div>
+          <%= form.text_area :body, label: t('contact.general.placeholders.body'), rows: 7 %>
+          <%= form.email_field :sender, value: user_signed_in? ? current_user.email : @message.sender, label: t('contact.general.placeholders.sender') %>
+          <%= form.hidden_field :subject, value: t('contact.ownAction.subject') %>
+          <%= form.hidden_field :recipient, value: 'default@servethecity-karlsruhe.de' %>
+          <% unless user_signed_in? %>
+              <%= form.form_group do %>
+                  <%= recaptcha_tags ajax: true, script: false %>
+              <% end %>
+          <% end %>
+          <%= form.submit t('contact.orga.submit') %>
+        </div>
+    <% end %>
+  </div>
+</div>

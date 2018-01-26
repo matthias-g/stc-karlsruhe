@@ -7,7 +7,7 @@
 <body>
 
 <%= form_tag({controller: "news_entries", action: "crop_picture"}, method: "get",
-             onsubmit: "$('.modal').modal('hide'); return sendWithAjax(this);") do %>
+             onsubmit: "$('.modal').modal('hide'); return sendFormWithAjax(this);") do %>
 
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

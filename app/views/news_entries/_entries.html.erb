@@ -2,7 +2,7 @@
 <% limit = local_assigns.fetch :limit, 0 %>
 
 <% list_news(categories, limit).each do |news| %>
-  <div class="news-teaser">
+  <div class="news-teaser swiper-slide">
 
     <% if news.show_picture? %>
         <div class="news-thumbnail">

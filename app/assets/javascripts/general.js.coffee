@@ -1,15 +1,14 @@
 
-   
 ### PUBLIC ###
 
 # dynamically loads a script (once)
-loadedScripts = []
-@requireScript = (path, callback) ->
-  if path in loadedScripts
-    callback()
-  else
-    loadedScripts.push path
-    $.getScript '/assets/' + path + '.js', callback
+#loadedScripts = []
+#@requireScript = (path, callback) ->
+#  if path in loadedScripts
+#    callback()
+#  else
+#    loadedScripts.push path
+#    $.getScript '/assets/' + path + '.js', callback
 
 # create a new flash message and append it
 @createFlashMessage = (str, type) ->
@@ -21,29 +20,17 @@ loadedScripts = []
     </div>
   """)
 
-# submit the given form directly (with ajax) and extract flash messages from the html response
-@sendWithAjax = (form) ->
+# submit the given form directly (with AJAX) and extract flash messages from the html response
+@sendFormWithAjax = (form) ->
   url = $(form).attr('action') + '?' + $(form).serialize()
-  res = $('<div>').load url + ' #messages', ->
+  res = $('<div>').load url + ' #flash-messages', ->
     extractFlashMessages res
-
-# create a parameter string of all the values of a form / part form
-@parametrize = (form) ->
-  inputs = $(':input', form).serializeArray()
-  params = $.map(inputs, (a) -> a.name + '=' + a.value).join('&')
-
-  
-# fires the handler on any field change, and hides the submit button
-@onFieldChange = (form, handler) ->
-  form.submit handler
-  $(':input', form).change handler
-  $('input[type="submit"]', form).hide()
 
 # register handler for page load 
 @onPageLoad = (handler) ->
   $(document).on 'turbolinks:load', handler
   
-# execute handler when new HTML is available (page load or ajax)
+# execute handler when new HTML is available (page load or AJAX)
 @onNewContent = (handler) ->
   onPageLoad ->  
     handler.call($('body').get(0))
@@ -57,11 +44,11 @@ loadedScripts = []
     flash.alert 'close'
   flash.click close
   window.setInterval close, 5000
-  $('#messages').append flash
+  $('#flash-messages').append flash
 
 # extract flash messages from the given container and append them
 extractFlashMessages = (html) ->
-  $('#messages .alert', html).detach().each (index, element) ->
+  $('#flash-messages .alert', html).detach().each (index, element) ->
     appendFlashMessage $(element)
 
 # uncollapse accordion section if it's referenced in the url hash
@@ -98,7 +85,8 @@ onNewContent ->
   # lazyload images (must be activated with lazy:true in image_tag helper)
   $('img', @).lazyload threshold: 200
 
-@onloadCallback = ->
+# this is called by the recaptcha library when loaded
+@recaptchaLoadCallback = ->
   recaptchaReady = true
   $('.g-recaptcha').initRecaptcha()
 

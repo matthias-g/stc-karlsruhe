@@ -1,3 +1,4 @@
+# noinspection ALL
 module ApplicationHelper
   # the following 3 helpers are needed to make devise forms usable in any view
   def resource_name
@@ -21,6 +22,10 @@ module ApplicationHelper
 
   def bootstrap_class_for(flash_type)
     BOOTSTRAP_FLASH_MSG.fetch(flash_type.to_sym, flash_type.to_s)
+  end
+
+  def wrapper_classes
+    (@wrapper_classes ||= Set['white-box'])
   end
 
   def privileged_user?

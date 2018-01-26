@@ -1,32 +1,22 @@
-<% content_for :pageTitle do %>
-  <%= t('layout.title.statistics') %>
-<% end %>
+<% provide :title, t('layout.title.statistics') %>
 
-<section>
-  <h1>Neue Aktionsteilnahmen am <%= l @date, format: :default %></h1>
-</section>
+<h1>Neue Aktionsteilnahmen am <%= l @date, format: :default %></h1>
 
-<div class="row row-md-eq-height">
-
-  <section class="col-md-12">
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th>Aktion</th>
-        <th>Neue Teilnahmen</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% Action.all.each do |action| %>
-        <tr>
-          <% if @participations.where(action: action).count > 0 %>
-            <td><%= link_to action.title, action_path(action) %></td>
-            <td><%= @participations.where(action: action).count %></td>
-          <% end %>
-        </tr>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Aktion</th>
+    <th>Neue Teilnahmen</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% Action.all.each do |action| %>
+    <tr>
+      <% if @participations.where(action: action).count > 0 %>
+        <td><%= link_to action.title, action_path(action) %></td>
+        <td><%= @participations.where(action: action).count %></td>
       <% end %>
-      </tbody>
-    </table>
-  </section>
-
-</div>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

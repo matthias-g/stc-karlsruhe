@@ -1,4 +1,3 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.action.new') %>
-<% end %>
+<% provide :title, t('layout.title.action.new') %>
+
 <%= render partial: 'form', locals: {isNew: true} %>

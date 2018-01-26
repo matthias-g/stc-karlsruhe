@@ -10,6 +10,7 @@
  *
  *= require jquery.Jcrop
  *= require trix
+ *= require swiper
  *= require_self
  *= require photoswipe
  *= require jquery-ui/sortable

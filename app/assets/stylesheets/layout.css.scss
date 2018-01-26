@@ -1,93 +1,73 @@
 @import "definitions";
 
-/* static layout */
+// STRUCTURAL CLASSES
 
+// for views, sections or as a row wrapper
+.container-medium {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// can be applied to view wrapper or sections
+.white-box {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background: rgba(white, 0.9);
+  box-shadow: 0 0 5px rgba(black, 0.4);
+  @include clearfix;
+  // use this if rounded borders are destroyed by child content
+  &.no-overflow {
+    overflow: hidden;
+  }
+  // use "large" if you want a full width layout
+  &:not(.large) {
+    @extend .container-medium;
+  }
+  @media(max-width: $screen-md-min - 1) {
+    margin: 5px;
+  }
+}
+
+// use class instead of tag if the section is not semantic
+section, .section {
+  margin: 60px 10px;
+  padding: 10px;
+  // use these classes to negate white-box padding
+  &.full-width {
+    margin-left: -10px;
+    margin-right: -10px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  &.no-top-margin {
+    margin-top: -10px;
+    padding-top: 0;
+  }
+  &.no-bottom-margin {
+    margin-bottom: -10px;
+    padding-bottom: 0;
+  }
+  &.no-padding {
+    padding: 0;
+  }
+}
+
+
+
+// LAYOUT PARTS
 html {
   height: 100%;
 }
-
-body {
-  margin: 0;
-  padding: 0;
+body, #page {
   min-height: 100%;
+}
+body {
   position: relative;
   background: image-url("bg.jpg") center/cover fixed;
 }
-
-#navigation {
-  .navbar-toggle {
-    color: $navbar-default-color;
-    font-size: 30px;
-    &:hover {
-      color: $navbar-default-bg !important;
-    }
-  }
-  li>a {
-    font-size: 14px;
-    font-weight: bold;
-    text-decoration: none;
-    text-shadow: 1px 1px 1px $primary_text_shadow;
-    text-transform: uppercase;
-    transition: color 0.3s ease 0s;
-  }
-  .dropdown-menu {
-    padding: 10px;
-    min-width: 230px;
-    background: rgba($dropdown-bg, 0.8);
-  }
-}
-
-header {
-  margin: 0 auto;
-  padding: 70px 0 20px;
-  background: image-url("logo_bg.png") center top / auto 100% no-repeat;
-  text-align: center;
-
-  a {
-    outline: none !important;
-  }
-
-  .logo img {
-    max-width: 90%;
-  }
-
-  .logo h2 {
-    margin: 10px 0 30px;
-    font: 50px Caveat !important;
-    text-align: center;
-    color: white;
-    text-shadow: 0 0 3px #000;
-  }
-
-  &.smallheader {
-    background-image: image-url("logo_bg_small.png");
-    padding-bottom: 30px;
-  }
-}
-
-#container {
-  padding-bottom: 50px;
-  margin: 0 auto 0;
-  max-width: 900px;
-}
-
-footer {
-  position: absolute;
-  bottom: 10px;
-  right: 5px;
-  font-size: 0.7em;
-  color: $footer_text;
-  padding: 5px;
-  text-shadow:
-      0 0 1px rgba($footer_text_shadow, 0.5),
-      1px 1px 1px rgba($footer_text_shadow, 1);
-  a, a:hover, a:focus {
-    color: $footer_text;
-    text-shadow: none;
-  }
-}
-
-#messages {
+#flash-messages {
   z-index: 1001;
   position: fixed;
   left: 0; top: 70px; right: 0;
@@ -104,10 +84,69 @@ footer {
   }
 }
 
-.shareOptions {
+#page {
+  margin-left: 140px;
+  padding-bottom: 50px;
+  position: relative;
+  @media(max-width: $grid-float-breakpoint) {
+    margin-left: 0;
+  }
+}
+
+#content {
+  @include clearfix;
+  margin: 0 10px;
+  @media(max-width: $screen-md-min - 1) {
+    margin: 0;
+  }
+}
+
+.header {
+  background: image-url("logo_bg_small.png") center top / 80% auto no-repeat;
+  margin: 0 auto -10px;
+  padding: 25px 0 30px;
+  text-align: center;
+  position: relative;
+  a {
+    outline: none !important;
+  }
+  img {
+    width: 500px;
+    max-width: 70%;
+    transform: rotate(-5deg);
+  }
+  h2 {
+    margin: 10px 0 30px;
+    font: 50px Caveat !important;
+    text-align: center;
+    color: white;
+    text-shadow: 0 0 3px #000;
+  }
+}
+
+#footer {
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+  font-size: 0.7em;
+  color: $footer_text;
+  padding: 5px;
+  text-shadow:
+          0 0 1px rgba($footer_text_shadow, 0.5),
+          1px 1px 1px rgba($footer_text_shadow, 1);
+  a, a:hover, a:focus {
+    color: $footer_text;
+    text-shadow: none;
+  }
+}
+
+// RECURRING, UNIQUE ELEMENTS
+#share-options {
   float: right;
 }
 
+
+// PRINT CLASSES
 .print-only {
   display: none;
 }

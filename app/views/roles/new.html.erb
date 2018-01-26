@@ -1,11 +1,5 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.roleNew') %>
-<% end %>
+<% provide :title, t('layout.title.roleNew') %>
 
-<section>
-  <h1><%= t('role.captionNew') %></h1>
-  <%= link_to t('role.list'), roles_path %>
-</section>
-<section id="roleNew">
-  <%= render 'form' %>
-</section>
+<h1><%= t('role.captionNew') %></h1>
+<%= link_to t('role.list'), roles_path %>
+<%= render 'form' %>

@@ -1,9 +1,3 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.userLogin') %>
-<% end %>
+<% provide :title, t('layout.title.userLogin') %>
 
-<div class="row">
-  <section class="col-centered slim col-medium">
-    <%= render '/users/login_form' -%>
-  </section>
-</div>
+<%= render '/users/login_form' -%>

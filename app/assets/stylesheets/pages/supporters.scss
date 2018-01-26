@@ -1,6 +1,6 @@
 @import "definitions";
 
-#sponsors {
+#page-supporters {
   p {
     padding-top: 20px;
   }
@@ -17,7 +17,7 @@
       color: $text-color;
     }
     li.active a {
-      background-color: $navbar-default-bg;
+      background-color: rgba($primary, 0.9);
     }
     li:not(.active) a:hover {
       background-color: rgba($primary, 0.5)

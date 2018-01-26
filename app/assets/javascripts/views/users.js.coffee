@@ -1,5 +1,5 @@
 onPageLoad ->
-  $('#user-view .survey form').submit (event) ->
+  $('#users .survey form').submit (event) ->
     event.preventDefault()
     form = $(this)
     url = '/api' + form.attr('action')

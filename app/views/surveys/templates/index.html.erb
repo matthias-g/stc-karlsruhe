@@ -1,20 +1,16 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.templateList') %>
-<% end %>
+<% provide :title, t('layout.title.templateList') %>
 
-<section class="surveys template list-view">
-  <h1><%= t('surveys.label.templateList') %></h1>
-  <ul>
-    <% @templates.each do |template| %>
-      <li>
-        <%= link_to template.title, template %>
-      </li>
-    <% end %>
-  </ul>
+<h1><%= t('surveys.label.templateList') %></h1>
 
-  <br>
+<ul>
+  <% @templates.each do |template| %>
+    <li>
+      <%= link_to template.title, template %>
+    </li>
+  <% end %>
+</ul>
 
-  <%= link_to t('surveys.action.newTemplate'), new_surveys_template_path, class: 'btn btn-default' %>
-</section>
+<br>
 
+<%= link_to t('surveys.action.newTemplate'), new_surveys_template_path, class: 'btn btn-default' %>
 

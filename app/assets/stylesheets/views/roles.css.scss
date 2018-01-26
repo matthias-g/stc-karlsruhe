@@ -1,4 +1,4 @@
-#roleList {
+#roles.index {
   table {
     display: block;
     border-collapse: collapse;
@@ -12,7 +12,8 @@
     min-width: 60%;
   }
 }
-#roleEdit, #roleNew {
+
+#roles.edit, #roles.new {
   .field {
     margin-bottom: 10px;
   }
@@ -21,6 +22,9 @@
     width: 50%;
   }
 }
-section.role-info {
-  overflow: inherit;
+
+#roles {
+  .role-info {
+    overflow: inherit;
+  }
 }

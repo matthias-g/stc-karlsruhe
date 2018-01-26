@@ -1,16 +1,12 @@
-<div class="row">
-  <section class="col-md-12">
-    <h1>Editing gallery</h1>
 
-    <%= render 'form' %>
+<h1>Editing gallery</h1>
 
-    <%= link_to 'Anzeigen', @gallery %> |
-    <%= link_to 'Alle Bilder sichtbar machen', make_all_visible_gallery_path(@gallery) %> |
-    <%= link_to 'Alle Bilder unsichtbar machen', make_all_invisible_gallery_path(@gallery) %> |
-    <%= link_to 'Zur Galerieübersicht', galleries_path %> |
-    <% @gallery.actions.each do |action| %>
-      <%= link_to 'Zur Aktion', action %>
-    <% end %>
+<%= render 'form' %>
 
-  </section>
-</div>
+<%= link_to 'Anzeigen', @gallery %> |
+<%= link_to 'Alle Bilder sichtbar machen', make_all_visible_gallery_path(@gallery) %> |
+<%= link_to 'Alle Bilder unsichtbar machen', make_all_invisible_gallery_path(@gallery) %> |
+<%= link_to 'Zur Galerieübersicht', galleries_path %> |
+<% @gallery.actions.each do |action| %>
+  <%= link_to 'Zur Aktion', action %>
+<% end %>

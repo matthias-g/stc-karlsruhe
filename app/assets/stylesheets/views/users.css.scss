@@ -1,11 +1,11 @@
-#user-view, #user-edit-view {
+#users {
   h1 {
     text-align: center;
   }
   h2 {
     margin-top: 0;
   }
-  .profile-data {
+  #user-profile-data {
     td:first-child {
       text-align: right;
       font-weight: bold;
@@ -18,13 +18,11 @@
       float: right;
     }
   }
-  section.actions a {
+
+  #user-actions a {
     display: block;
     margin-top: 5px;
     margin-left: 5px;
-  }
-  div.actions {
-    margin-top: 30px;
   }
   .emails-from-orga {
     margin-left: 30px;
@@ -37,6 +35,13 @@
     span.glyphicon {
       margin-left: 10px;
       margin-top: 5px;
+    }
+  }
+  #user-profile-actions {
+    text-align: right;
+    margin-top: 10px;
+    .btn {
+      margin: 5px;
     }
   }
 }

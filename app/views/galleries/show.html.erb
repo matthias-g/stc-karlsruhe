@@ -1,56 +1,52 @@
-<div class="row">
-  <section class="col-md-12">
-    <div class="row">
 
-      <div class="col-md-10">
-        <div style='max-width: 600px;'>
-          <%= render 'gallery', gallery: @gallery %>
-        </div>
+<div class="row">
+
+  <div class="col-md-10">
+    <div style='max-width: 600px;'>
+      <%= render 'gallery', gallery: @gallery %>
+    </div>
+  </div>
+
+  <% if policy(@gallery).update? %>
+      <div class="col-md-4">
+        Anzahl Bilder: <%= @gallery.gallery_pictures.count %>
+      </div>
+      <div class="col-md-4">
+        davon unsichtbar: <%= @gallery.gallery_pictures.invisible.count %>
       </div>
 
-      <% if policy(@gallery).update? %>
-          <div class="col-md-4">
-            Anzahl Bilder: <%= @gallery.gallery_pictures.count %>
-          </div>
-          <div class="col-md-4">
-            davon unsichtbar: <%= @gallery.gallery_pictures.invisible.count %>
-          </div>
+      <div class="col-md-6">
+        <%= form_with model: @gallery, html: { multipart: true}, local: true do |f| %>
+            <%= f.hidden_field :title %>
+            <div class="field">
+              <%= f.label :picture %><br>
+              <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+            </div>
 
-          <div class="col-md-6">
-            <%= form_with model: @gallery, html: { multipart: true}, local: true do |f| %>
-                <%= f.hidden_field :title %>
-                <div class="field">
-                  <%= f.label :picture %><br>
-                  <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
-                </div>
-
-                <div class="actions">
-                  <%= f.submit 'Hochladen' %>
-                </div>
-            <% end %>
-          </div>
-      <% end %>
-    </div>
-
-    <% unless @gallery.title.blank? %>
-        <p>
-          <strong>Title:</strong>
-          <span id="title"><%= @gallery.title %></span>
-        </p>
-    <% end %>
-
-    <% if policy(@gallery).edit? %>
-        <%= link_to 'Bearbeiten', edit_gallery_path(@gallery) %> |
-    <% end %>
-    <% if policy(@gallery).index? %>
-        <%= link_to 'Zur Galerieübersicht', galleries_path %> |
-    <% end %>
-    <% @gallery.actions.each do |action| %>
-        <%= link_to 'Zur Aktion', action %>
-    <% end %>
-    <% @gallery.news_entries.each do |news_entry| %>
-        <%= link_to 'Zum Newseintrag', news_entry %>
-    <% end %>
-
-  </section>
+            <div class="actions">
+              <%= f.submit 'Hochladen' %>
+            </div>
+        <% end %>
+      </div>
+  <% end %>
 </div>
+
+<% unless @gallery.title.blank? %>
+    <p>
+      <strong>Title:</strong>
+      <span id="title"><%= @gallery.title %></span>
+    </p>
+<% end %>
+
+<% if policy(@gallery).edit? %>
+    <%= link_to 'Bearbeiten', edit_gallery_path(@gallery) %> |
+<% end %>
+<% if policy(@gallery).index? %>
+    <%= link_to 'Zur Galerieübersicht', galleries_path %> |
+<% end %>
+<% @gallery.actions.each do |action| %>
+    <%= link_to 'Zur Aktion', action %>
+<% end %>
+<% @gallery.news_entries.each do |news_entry| %>
+    <%= link_to 'Zum Newseintrag', news_entry %>
+<% end %>

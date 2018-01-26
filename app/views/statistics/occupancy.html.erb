@@ -1,70 +1,62 @@
-<% content_for :pageTitle do %>
-  <%= t('layout.title.statistics') %>
-<% end %>
+<% provide :title, t('layout.title.statistics') %>
 
-<section id="statistics-header" class="showOverflow">
+<div id="statistics-header" class="section">
   <div class="select-year">
     <h1>Aktionsauslastung <%= @action_group.title %></h1>
     <%= render partial: 'layouts/week_dropdown',
                locals: { target_path: lambda { |action_group| occupancy_in_year_path(action_group.title) } } %>
   </div>
-
-  <div class="clearfix"></div>
-</section>
-
-<div class="row row-md-eq-height">
-  <section class="col-md-12">
-    <table class="table table-hover statistics-table">
-      <thead>
-      <tr>
-        <th><%= sortable_column 'title', 'Aktion'%></th>
-        <th><%= sortable_column 'volunteer_count', 'Belegte Plätze'%></th>
-        <th><%= sortable_column 'free_places', 'Freie Plätze'%></th>
-        <th><%= sortable_column 'desired_team_size', 'Gesamt Plätze'%></th>
-        <th><%= sortable_column 'occupancy', 'Auslastung'%></th>
-      </tr>
-      </thead>
-      <tbody>
-      <% all_volunteers = 0; all_team_size = 0 %>
-      <% @actions.each do |action| %>
-        <tr>
-          <%
-            volunteers = action.volunteers.size
-            team_size = action.desired_team_size
-            unless team_size > 0
-              aggr_volunteers = action.aggregated_volunteers.count
-              aggr_team_size = action.aggregated_desired_team_size
-            end
-          %>
-          <td>
-            <%= link_to action.title, action_path(action) %>
-            <%= content_tag :span, '(Ü)', title: 'Überaktion: Statistiken beinhalten Zahlen für Unteraktionen' unless team_size > 0 %>
-          </td>
-          <td><%= team_size > 0 ? volunteers : aggr_volunteers %></td>
-          <td><%= team_size > 0 ? team_size - volunteers : aggr_team_size - aggr_volunteers %></td>
-          <td><%= team_size > 0 ? team_size : aggr_team_size %></td>
-          <% if team_size > 0 %>
-            <td><%= 100 * volunteers / team_size %> %</td>
-          <% elsif aggr_team_size > 0 %>
-              <td><%= 100 * aggr_volunteers / aggr_team_size %> %</td>
-          <% else %>
-            <td>-</td>
-          <% end %>
-        </tr>
-        <% all_volunteers += volunteers; all_team_size += team_size %>
-      <% end %>
-      <tr>
-        <td><strong>Gesamt</strong></td>
-        <td><strong><%= all_volunteers %></strong></td>
-        <td><strong><%= all_team_size - all_volunteers %></strong></td>
-        <td><strong><%= all_team_size %></strong></td>
-        <% if all_team_size > 0 %>
-          <td><strong><%= 100 * all_volunteers / all_team_size  %> %</strong></td>
-        <% else %>
-          <td>-</td>
-        <% end %>
-      </tr>
-      </tbody>
-    </table>
-  </section>
 </div>
+
+<table class="table table-hover statistics-table">
+  <thead>
+  <tr>
+    <th><%= sortable_column 'title', 'Aktion'%></th>
+    <th><%= sortable_column 'volunteer_count', 'Belegte Plätze'%></th>
+    <th><%= sortable_column 'free_places', 'Freie Plätze'%></th>
+    <th><%= sortable_column 'desired_team_size', 'Gesamt Plätze'%></th>
+    <th><%= sortable_column 'occupancy', 'Auslastung'%></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% all_volunteers = 0; all_team_size = 0 %>
+  <% @actions.each do |action| %>
+    <tr>
+      <%
+        volunteers = action.volunteers.size
+        team_size = action.desired_team_size
+        unless team_size > 0
+          aggr_volunteers = action.aggregated_volunteers.count
+          aggr_team_size = action.aggregated_desired_team_size
+        end
+      %>
+      <td>
+        <%= link_to action.title, action_path(action) %>
+        <%= content_tag :span, '(Ü)', title: 'Überaktion: Statistiken beinhalten Zahlen für Unteraktionen' unless team_size > 0 %>
+      </td>
+      <td><%= team_size > 0 ? volunteers : aggr_volunteers %></td>
+      <td><%= team_size > 0 ? team_size - volunteers : aggr_team_size - aggr_volunteers %></td>
+      <td><%= team_size > 0 ? team_size : aggr_team_size %></td>
+      <% if team_size > 0 %>
+        <td><%= 100 * volunteers / team_size %> %</td>
+      <% elsif aggr_team_size > 0 %>
+          <td><%= 100 * aggr_volunteers / aggr_team_size %> %</td>
+      <% else %>
+        <td>-</td>
+      <% end %>
+    </tr>
+    <% all_volunteers += volunteers; all_team_size += team_size %>
+  <% end %>
+  <tr>
+    <td><strong>Gesamt</strong></td>
+    <td><strong><%= all_volunteers %></strong></td>
+    <td><strong><%= all_team_size - all_volunteers %></strong></td>
+    <td><strong><%= all_team_size %></strong></td>
+    <% if all_team_size > 0 %>
+      <td><strong><%= 100 * all_volunteers / all_team_size  %> %</strong></td>
+    <% else %>
+      <td>-</td>
+    <% end %>
+  </tr>
+  </tbody>
+</table>

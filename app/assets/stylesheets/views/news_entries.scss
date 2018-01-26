@@ -1,6 +1,6 @@
 @import "definitions";
 
-#news-entry-view {
+#news_entries {
 
   h1 {
     text-align: center;
@@ -22,22 +22,21 @@
 }
 
 .news-teaser {
-  clear: both;
   padding-top: 10px;
   padding-bottom: 25px;
-  .news-thumbnail {
-    float: left;
+  text-align: center;
+  .news-thumbnail img {
+    border-radius: 5px;
   }
   .news-date {
     font-style: italic;
   }
   .news-text {
-    margin-left: 150px;
-    max-width: 600px;
+    margin: 0 auto;
+    max-width: 300px;
   }
   h2, div {
     margin-top: 5px;
     margin-bottom: 5px;
   }
-
 }

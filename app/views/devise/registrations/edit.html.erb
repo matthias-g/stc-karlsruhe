@@ -1,24 +1,17 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.userPasswordChange', user:@user.full_name) %>
-<% end %>
+<% provide :title, t('layout.title.userPasswordChange', user:@user.full_name) %>
 
 <%= devise_error_messages! %>
 
 <%= bootstrap_form_for(resource, as: resource_name,
       url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
-<div id="user-edit-view">
-  <div class="row row-sm-eq-height">
-    <section class="col-middle col-centered">
-      <h1>Passwort ändern</h1>
-      <%= f.password_field :current_password %>
-      <%= f.password_field :password %>
-      <%= f.password_field :password_confirmation %>
+<h1>Passwort ändern</h1>
+<%= f.password_field :current_password %>
+<%= f.password_field :password %>
+<%= f.password_field :password_confirmation %>
 
-      <%= f.submit t('general.action.save') %>
-      <%= link_to t('general.action.cancel'), edit_user_path(@user), class:'btn btn-default' %>
-    </section>
-  </div>
-</div>
+<%= f.submit t('general.action.save') %>
+<%= link_to t('general.action.cancel'), edit_user_path(@user), class:'btn btn-default' %>
+
 
 <% end %>

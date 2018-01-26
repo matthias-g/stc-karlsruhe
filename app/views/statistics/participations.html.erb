@@ -1,52 +1,41 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.statistics') %>
-<% end %>
+<% provide :title, t('layout.title.statistics') %>
 
 <%# content_for :appendToHeader do %>
     <%#= javascript_include_tag 'highcharts', 'data-turbolinks-track': true %>
     <%#= javascript_include_tag 'chartkick', 'data-turbolinks-track': true %>
 <%# end %>
 
-<section id="statistics-header" class="showOverflow">
+
+<div id="statistics-header" class="section">
   <div class="select-year">
     <h1>Neue Aktionsteilnahmen <%= @action_group.title %></h1>
     <%= render partial: 'layouts/week_dropdown',
                locals: { target_path: lambda { |action_group| statistiken_teilnahmen_path(date: action_group.date_range.end) } } %>
   </div>
   <div class="clearfix"></div>
-</section>
-
-<div class="row row-md-eq-height">
-
-  <section class="col-md-12">
-    <%= line_chart Participation.where(created_at: @start_date..@end_date).group_by_day(:created_at).count, colors: ['#229c95'] %>
-  </section>
-
 </div>
 
-<div class="row row-md-eq-height">
+<div class="section">
+  <%= line_chart Participation.where(created_at: @start_date..@end_date).group_by_day(:created_at).count, colors: ['#229c95'] %>
+</div>
 
-  <section class="col-md-12">
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th>Datum</th>
-        <th>Neue Teilnahmen</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @end_date.downto(@start_date) do |date| %>
-          <% participations_on_date = Participation.where(created_at: date.beginning_of_day..date.end_of_day).count %>
-          <% if participations_on_date > 0 %>
-              <tr>
-                <td><%= l date, format: :default %></td>
-                <td><%= participations_on_date %></td>
-                <td><%= link_to 'Details', participations_on_day_path(date: date)  %></td>
-              </tr>
-          <% end %>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Datum</th>
+    <th>Neue Teilnahmen</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @end_date.downto(@start_date) do |date| %>
+      <% participations_on_date = Participation.where(created_at: date.beginning_of_day..date.end_of_day).count %>
+      <% if participations_on_date > 0 %>
+          <tr>
+            <td><%= l date, format: :default %></td>
+            <td><%= participations_on_date %></td>
+            <td><%= link_to 'Details', participations_on_day_path(date: date)  %></td>
+          </tr>
       <% end %>
-      </tbody>
-    </table>
-  </section>
-
-</div>
+  <% end %>
+  </tbody>
+</table>

@@ -1,5 +1,5 @@
 onPageLoad ->
-  $('#sponsors .nav-tabs a').click((e) ->
+  $('#page-supporters .nav-tabs a').click((e) ->
     e.preventDefault()
     $(this).tab('show')
   )

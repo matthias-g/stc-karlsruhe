@@ -1,36 +1,31 @@
-<div class="row">
-  <section class="col-md-12">
 
-    <h1>Orgamails</h1>
+<h1>Orgamails</h1>
 
-    <table class="table">
-      <thead>
-      <tr>
-        <th><%= OrgaMessage.human_attribute_name('created_at') %></th>
-        <th><%= OrgaMessage.human_attribute_name('subject') %></th>
-        <th><%= OrgaMessage.human_attribute_name('recipient') %></th>
-        <th><%= OrgaMessage.human_attribute_name('sent_at') %></th>
-      </tr>
-      </thead>
+<table class="table">
+  <thead>
+  <tr>
+    <th><%= OrgaMessage.human_attribute_name('created_at') %></th>
+    <th><%= OrgaMessage.human_attribute_name('subject') %></th>
+    <th><%= OrgaMessage.human_attribute_name('recipient') %></th>
+    <th><%= OrgaMessage.human_attribute_name('sent_at') %></th>
+  </tr>
+  </thead>
 
-      <tbody>
-      <% @messages.each do |message| %>
-              <tr>
-                <td><%= l message.created_at.localtime, format: :short_with_year %></td>
-                <td><%= message.subject %></td>
-                <td><%= message.sent? ? message.recipient : render_recipient_group(message.recipient, current_user) %></td>
-                <td><%= message.sent? ? l(message.sent_at.localtime, format: :short_with_year) : '-' %></td>
-                <td>
-                  <%= link_to t('general.action.show'), orga_message_path(message), class: 'btn-default btn' %>
-                </td>
-              </tr>
-      <% end %>
-      </tbody>
-    </table>
+  <tbody>
+  <% @messages.each do |message| %>
+          <tr>
+            <td><%= l message.created_at.localtime, format: :short_with_year %></td>
+            <td><%= message.subject %></td>
+            <td><%= message.sent? ? message.recipient : render_recipient_group(message.recipient, current_user) %></td>
+            <td><%= message.sent? ? l(message.sent_at.localtime, format: :short_with_year) : '-' %></td>
+            <td>
+              <%= link_to t('general.action.show'), orga_message_path(message), class: 'btn-default btn' %>
+            </td>
+          </tr>
+  <% end %>
+  </tbody>
+</table>
 
-    <br>
+<br>
 
-    <%= link_to t('orga_message.action.write_new'), new_orga_message_path, class: 'btn-default btn' %>
-
-  </section>
-</div>
+<%= link_to t('orga_message.action.write_new'), new_orga_message_path, class: 'btn-default btn' %>

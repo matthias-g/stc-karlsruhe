@@ -1,5 +1,5 @@
 onPageLoad ->
   # disables attachments in trix editor
-  $('.contact-form trix-editor').on "trix-file-accept", (event) ->
+  $('#messages.contact-mail-form trix-editor').on "trix-file-accept", (event) ->
     event.preventDefault()
-  $('.contact-form trix-editor').attr 'tabindex', 10
+  $('#messages.contact-mail-form trix-editor').attr 'tabindex', 10

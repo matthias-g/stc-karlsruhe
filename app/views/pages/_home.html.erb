@@ -1,135 +1,150 @@
-<%= render '/layouts/bigheader' -%>
+<% wrapper_classes.add('large').add('no-overflow') %>
 
-<% desc = 'Du willst Menschen in Karlsruhe begegnen, ihnen Gutes tun?
+<% content_for :head do %>
+  <% desc = 'Du willst Menschen in Karlsruhe begegnen, ihnen Gutes tun?
   Engagiere dich, unkompliziert und ohne lange Verpflichtungen.' %>
-
-<% content_for :appendToHeader do %>
   <meta name="description" content="<%= desc %>" />
   <meta property="og:image" content="https://www.servethecity-karlsruhe.de/images/share.jpg" />
   <meta property="og:description" content="<%= desc %>" />
 <% end %>
 
-<div class="schirmherr-ribbon-wrapper hidden-xs">
-  <div class="schirmherr-ribbon schirmherr-ribbon-top-right">
-    <div class="schirmherr-ribbon-text">
-      <i class="fa fa-umbrella"></i>
-      Unter der Schirmherrschaft von<br />Oberbürgermeister Dr. Frank Mentrup
-    </div>
-  </div>
-</div>
+<% content_for :pageHeader do %>
 
-<div class="schirmherr-ribbon schirmherr-ribbon-middle visible-xs-block">
-  <div class="schirmherr-ribbon-text">
-    <i class="fa fa-umbrella"></i>
-    Unter der Schirmherrschaft von<br />Oberbürgermeister Dr. Frank Mentrup
-  </div>
-</div>
-
-<section style="text-align: center">
-  <!--<div id="countdown" data-class="Countdown" data-date="<%= @next_action_group.date_range.begin.strftime('%m/%d/%Y 00:00') %>">-->
-  <div id="countdown" data-class="Countdown" data-date="<%= Date.parse('2018-04-28').strftime('%m/%d/%Y 00:00') %>">
-    <div><span></span>Tage</div>
-    <div><span></span>Stunden</div>
-    <div><span></span>Minuten</div>
-    <div><span></span>Sekunden</div>
-    <!--<span class="running">verbleiben bis zur Aktionswoche&nbsp;<%= @next_action_group.title %></span>-->
-    <!--<% if Date.today <= @next_action_group.date_range.end %>-->
-      <!--<span class="finished">Die <%= link_to "Aktionswoche&nbsp;#{@next_action_group.title}".html_safe, show_action_group_path(@next_action_group.title), class: 'black-link' %> läuft!</span>-->
-      <!--<% else %>-->
-      <!--<span class="finished week-finished">Die <%= link_to "Aktionswoche&nbsp;#{@next_action_group.title}".html_safe, show_action_group_path(@next_action_group.title), class: 'black-link' %> ist abgeschlossen. Vielen Dank für euren Einsatz!</span>-->
-      <!--<% end %>-->
-    <span class="running">verbleiben bis zum ersten Aktionstag&nbsp;2018</span>
-    <% if Date.today <= Date.parse('2018-04-29') %>
-      <span class="finished">Der erste Aktionstag&nbsp;2018 läuft!</span>
-    <% else %>
-      <span class="finished week-finished">Der erste Aktionstag&nbsp;2018 ist abgeschlossen. Vielen Dank für euren Einsatz!</span>
+  <header id="header-home" class="header">
+    <%= link_to root_path do %>
+      <%= image_tag("logo_wide", alt: "Serve the City Karlsruhe") %>
     <% end %>
-  </div>
-</section>
 
-<section>
-  <div id="trailer" data-class="LockedIframe" class="box box-16by9" style="max-width: 600px">
-    <iframe class="locked-iframe" allowfullscreen
-            data-frame-src="https://www.youtube.com/embed/3d6axxum4Vs?rel=0&autoplay=true&autohide=1&iv_load_policy=3&color=white&showinfo=0">
-    </iframe>
-    <div class="locked-iframe-trigger">
-      <div><i class="fa fa-play-circle-o"></i></div>
+    <div id="home-countdown" data-class="Countdown" data-date="<%= Date.parse('2018-04-28').strftime('%m/%d/%Y 00:00') %>">
+      <div><span></span>Tage</div>
+      <div><span></span>Stunden</div>
+      <div><span></span>Minuten</div>
+      <div><span></span>Sekunden</div>
+      <!--<span class="running">verbleiben bis zur Aktionswoche&nbsp;<%= @next_action_group.title %></span>-->
+      <!--<% if Date.today <= @next_action_group.date_range.end %>-->
+        <!--<span class="finished">Die <%= link_to "Aktionswoche&nbsp;#{@next_action_group.title}".html_safe, show_action_group_path(@next_action_group.title), class: 'black-link' %> läuft!</span>-->
+        <!--<% else %>-->
+        <!--<span class="finished week-finished">Die <%= link_to "Aktionswoche&nbsp;#{@next_action_group.title}".html_safe, show_action_group_path(@next_action_group.title), class: 'black-link' %> ist abgeschlossen. Vielen Dank für euren Einsatz!</span>-->
+        <!--<% end %>-->
+      <br />
+      <span class="running">bis zum ersten Aktionstag&nbsp;2018</span>
+      <% if Date.today <= Date.parse('2018-04-29') %>
+        <span class="finished">Der erste Aktionstag&nbsp;2018 läuft!</span>
+      <% else %>
+        <span class="finished week-finished">Der erste Aktionstag&nbsp;2018 ist abgeschlossen. Vielen Dank für euren Einsatz!</span>
+      <% end %>
+    </div>
+
+  </header>
+<% end %>
+
+<section id="home-intro-box" class="full-width no-top-margin no-padding">
+  <h1 class="sr-only">Aktionen</h1>
+  <div class="row row-md-eq-height">
+    <div class="col-sm-12 col-md-5">
+
+      <h2 class="sr-only">Karte</h2>
+      <div id="home-actions-map" data-class="GoogleMap" data-lat="49.011627" data-lon="8.403869" data-zoom="12">
+        <% actions = policy_scope(Action.active) %>
+        <% actions = policy_scope(Action.where.not(date: nil).order(date: :desc).limit(50)) unless actions.any? %>
+        <% actions.each do |action| %>
+          <% if action.visible? && !action.longitude.nil? && !action.latitude.nil? %>
+            <div data-lon="<%= action.longitude %>" data-lat="<%= action.latitude %>"
+                 data-name="<%= action.title %>" data-href="<%= url_for(action) %>">
+              <%= simple_format(simple_format_urls(action.short_description.empty? ? action.description : action.short_description)) %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+    </div>
+    <div class="col-sm-6 col-md-3">
+
+      <div class="linklist action_groups">
+        <h2>Aktionszeiträume und Projekte</h2>
+        <% groups = policy_scope(ActionGroup.where("end_date >= ?", Time.now)) %>
+        <% groups = policy_scope(ActionGroup.order(start_date: :desc).limit(2)) unless groups.any? %>
+        <% groups.order(:start_date).each do |group| %>
+          <%= link_to 'Aktionswoche ' + group.title, show_action_group_path(group.title), class: 'title' %>
+        <% end %>
+        <%= link_to '/stadtpiraten', class: 'title' do %>
+          <span class="glyphicon glyphicon-cog"></span> Stadtpiraten
+        <% end %>
+        <%= link_to '/spielezeit', class: 'title' do %>
+          <span class="glyphicon glyphicon-tower"></span> Spielezeit
+        <% end %>
+      </div>
+
+    </div>
+    <div class="col-sm-6 col-md-4">
+
+      <div class="linklist actions">
+        <% if user_signed_in? && (actions = policy_scope(current_user.actions.active).order(:date)).any? %>
+          <h2>Deine Aktionen</h2>
+        <% elsif (actions = policy_scope(Action.where("date >= ?", Time.now)).limit(5)).any? %>
+          <h2>Nächste Aktionen</h2>
+        <% else %>
+          <h2>Letzte Aktionen</h2>
+          <% actions = policy_scope(Action.where.not(date: nil).order(date: :desc).limit(4)) %>
+        <% end %>
+        <%= render partial: 'actions/action_list', locals: {actions: actions} %>
+      </div>
+
     </div>
   </div>
 </section>
 
-<section>
-  <% if policy(NewsEntry).new? %>
-    <div style="float:right">
-      <%= link_to t('news_entry.action.new'), new_news_entry_path %>
-    </div>
-  <% end %>
-  <%= render partial: '/news_entries/entries', locals: {limit: 3} %>
-  <div style="clear:both; padding-top:20px;">
-    <%= link_to t('news_entry.action.toOverview'), news_entries_path %>
-  </div>
-</section>
+<a href="#nav" class="btn btn-default" title="Toggle Nav">
+  Toggle nav
+</a>
 
-<section>
-  <h2 style="margin-bottom: -45px">Vision</h2>
-
+<section class="container-medium">
   <div class="row">
-    <div class="col-sm-4 spotlight no-float-below-700px">
-      <img src="/images/about_2.png" alt=""/>
-      <div>
-        Wir wollen den Menschen<br/>
-        in Karlsruhe dienen,<br/>
-        zu ihnen gehen,<br/>
-        Barrieren überwinden<br/>
-        und praktisch helfen.
-      </div>
+    <div class="col-sm-6 col-md-4">
+
+        <h1>Serve the City Karlsruhe</h1>
+        <p>
+          ... ist eine Rahmenstruktur für soziales Kurzzeit-Engagement.
+          Viele Leute wollen gerne etwas Gutes tun, können sich aber nicht langfristig verpflichten.
+          Serve the City schafft Gelegenheiten, mit kleinen Beiträgen den sozialen Zusammenhalt in unserer Stadt zu stärken.
+        </p>
+        <p>
+          <%= link_to '/about' do %>
+            <span class="glyphicon glyphicon-arrow-right"></span> Alles über Serve the City
+          <% end %>
+        </p>
+
     </div>
-    <div class="col-sm-4 spotlight no-float-below-700px">
-      <img src="/images/about_1.png" alt=""/>
-      <div>
-        Gemeinsam können wir<br/>
-        etwas bewegen. Wir<br/>
-        können zeigen, dass<br/>
-        Engagement mehr ist<br/>
-        als ein Tropfen auf den<br/>
-        heißen Stein.
+    <div class="col-sm-6 col-md-8">
+
+      <div data-class="LockedIframe" class="video box box-16by9">
+        <iframe class="locked-iframe" allowfullscreen data-frame-src="
+          https://www.youtube.com/embed/3d6axxum4Vs?rel=0&autoplay=true&autohide=1&iv_load_policy=3&color=white&showinfo=0">
+        </iframe>
+        <div class="locked-iframe-trigger">
+          <div><i class="fa fa-play-circle-o"></i></div>
+        </div>
       </div>
-    </div>
-    <div class="col-sm-4 spotlight no-float-below-700px">
-      <img src="/images/about_3.png" alt=""/>
-      <div>
-        Serve the City<br/>
-        vernetzt Menschen.<br/>
-        Hier können Helfer<br/>
-        Projekte in Karlsruhe<br/>
-        kennenlernen und<br/>
-        unterstützen.
-      </div>
+
     </div>
   </div>
 </section>
 
-<%#
-<div class="row row-sm-eq-height">
-  <section class="col-sm-12">
-    <div class="row">
-      <div class="col-sm-8">
-        <h2>Planung 2015</h2>
-        Zur Zeit laufen die Vorbereitungen für die Aktionswoche im Juni 2015.
-        Wir sammeln Aktionsideen, suchen Aktionsleiter, gestalten Plakate und Flyer und entwicklen die Webseite weiter.<br />
-        Für Fragen und Vorschläge jeder Art steht das Orga-Team gerne über das
-        <a href="/kontakt">Kontaktformular</a> zur Verfügung.
-      </div>
-      <div class="col-sm-4">
-        <img src="/images/planung_2015.jpg" class="img-responsive" alt=""/>
-      </div>
-    </div>
-  </section>
-</div>
-%>
 
-<div class="row row-sm-eq-height">
-  <section class="col-sm-6" id="likebox">
+<section id="home-news">
+  <h1 class="sr-only">News</h1>
+  <div class="swiper-container" data-class="TripleSlider">
+    <div class="swiper-wrapper">
+      <%= render partial: '/news_entries/entries', locals: {limit: 7} %>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</section>
+
+<% if false %>
+
+  <section id="home-likebox">
     <h1>
       <%= link_to 'https://www.facebook.com/servethecity.karlsruhe', :target => "_blank" do %>
         <i class="fa fa-facebook-square" style="font-size: 1.3em;padding-right: 10px;"></i> Serve the City auf Facebook
@@ -140,61 +155,36 @@
             data-fb-token="1632977830272942|_y8PPboBvdNWpQG9jIDhHa--ArA"></span><!-- &#132;Gefällt mir&#147;-Angaben-->
     </div>
   </section>
-  <section class="col-sm-6" id="actions-link">
-    <div class="center-wrap" style="padding: 20px 20px 20px 30px;">
-      <%= link_to show_action_group_path(ActionGroup.default.title) do %>
-        <i class="fa fa-arrow-right" style="position:relative;bottom:3px"></i> &nbsp;zu den Aktionen
-      <% end %>
-    </div>
-  </section>
-</div>
-
-<%#
   <section>
-    <a id="photo-link" href="https://www.dropbox.com/sh/5yuk5ubbiqwhp1r/5AXIf0bhtd">
-      "Dein Bild für Karlsruhe" &rarr; Link zur Dropbox</a>
+    <a id="home-photo-link" href="https://www.dropbox.com/sh/5yuk5ubbiqwhp1r/5AXIf0bhtd">
+      "Dein Bild für Karlsruhe" &rarr; Link zur Dropbox
+    </a>
   </section>
-%>
+<% end %>
 
-<section>
-  <h2>Aktionskarte <%= ActionGroup.default.title %></h2>
-  <div class="box box-5by2" style="min-height:200px;">
-    <div id="actions-map" data-class="GoogleMap"
-         data-lat="49.011627" data-lon="8.403869" data-zoom="12">
-      <% ActionGroup.default.actions.each do |p| %>
-        <% if (p.visible && !p.longitude.nil? && !p.latitude.nil?) %>
-          <div data-lon="<%= p.longitude %>" data-lat="<%= p.latitude %>"
-               data-name="<%= p.title %>" data-href="<%= url_for(p) %>">
-            <% if p.short_description.empty? %>
-              <%= simple_format(simple_format_urls p.description) %>
-            <% else %>
-              <%= simple_format(simple_format_urls p.short_description) %>
-            <% end %>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
+
+<section class="centered">
+  <h1 class="sr-only">Fragen?</h1>
+  <p>
+    Fragen? Wenn sie <%= link_to 'hier', '/about' %> nicht beantwortet sind, dann schau dich doch mal <%= link_to 'in unseren FAQs', '/faq' %> um.
+    Oder <%= link_to 'schreib uns vom Orga-Team', '/kontakt' %>!
+  </p>
 </section>
 
-<section>
-  <h2>Serve the City</h2>
-  <div class="row">
-    <a class="col-sm-4 spotlight no-float-below-700px" href="/faq#was-ist-stc">
-      <div class="fa fa-question" style="font-size: 70px; margin: 10px;"></div>
-      <div>Was ist <span class="term">Serve the City</span>?</div>
-    </a>
-    <a class="col-sm-4 spotlight no-float-below-700px" href="/faq#wer-kann-mitmachen">
-      <div class="fa fa-users" style="font-size: 70px; margin: 10px;"></div>
-      <div>Wer kann mitmachen?</div>
-    </a>
-    <a class="col-sm-4 spotlight no-float-below-700px" href="/faq#spenden">
-      <div class="fa fa-cubes" style="font-size: 70px; margin: 10px;"></div>
-      <div>Ich würde gerne etwas spenden!</div>
-    </a>
+<section id="home-images" class="full-width no-bottom-margin">
+  <h1 class="sr-only">Eindrücke</h1>
+  <div class="swiper-container" data-class="MultiImageSlider">
+    <div class="swiper-wrapper">
+      <% policy_scope(GalleryPicture.visible.order(created_at: :desc).limit(100)).sample(20).each do |pic| %>
+        <div class="swiper-slide" style="width: <%= ((pic.width / pic.height.to_f) * 250).round.to_s + 'px' %>">
+          <% action = pic.gallery.actions.first %>
+          <%= link_to action, title: action.title do %>
+            <img class="swiper-lazy" data-src="<%= pic.picture.preview.url %>" />
+            <div class="swiper-lazy-preloader"></div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div style="text-align: center; padding-top: 10px;">
-    Ein Blick in die <a href="/faq">FAQ</a> lohnt sich, wenn Du mehr über Serve the City
-    erfahren willst!
-  </div>
+
 </section>

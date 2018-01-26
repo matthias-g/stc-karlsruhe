@@ -4,30 +4,6 @@
 @import "bootstrap";
 @import "bootstrap-select";
 
-
-/* change cols so they can be sections at the same time */
-[class*="col-"] {
-  /* replace padding by (invisible) border (still included in width) */
-  margin: 0;
-  padding: 0;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  border-style: solid;
-  border-color: transparent;
-  border-width: 0 ($grid-gutter-width/2) $grid-gutter-width;
-  /* prevent double margin for cols that aren't sections but contain them */
-  & > section:first-child {
-    margin-top: 0px;
-  }
-  & > section:last-child {
-    margin-bottom: 0px;
-  }
-  .col-lastfix {
-    border-bottom-width: 0;
-  }
-}
-
-
 /* column modifiers */
 .col-narrow {
   min-width: 250px;

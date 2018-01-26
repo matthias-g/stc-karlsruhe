@@ -1,6 +1,7 @@
 @import "definitions";
 
-.contact-form {
+#messages.contact-mail-form {
+
   .leftCol {
     width: 180px;
     float: left;
@@ -33,4 +34,5 @@
   trix-editor {
     margin-bottom: 20px;
   }
+
 }

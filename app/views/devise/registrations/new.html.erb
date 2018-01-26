@@ -1,9 +1,3 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.userRegister') %>
-<% end %>
+<% provide :title, t('layout.title.userRegister') %>
 
-<div class="row">
-  <section class="col-medium col-centered">
-    <%= render '/users/register_form' %>
-  </section>
-</div>
+<%= render '/users/register_form' %>

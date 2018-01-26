@@ -1,33 +1,26 @@
 <% template = @submission.template %>
 <%# answers = @submission.answers.joins(:questions).order(:position) %>
 <% answers = @submission.answers %>
-<div class="surveys submission view">
 
 <p id="notice"><%= notice %></p>
 
-<section>
-  <div class="typeHeader">
-    &nbsp;<%= Surveys::Submission.model_name.human %>&nbsp;
-  </div>
-  <h1><%= template.title %></h1>
-</section>
-
-<section>
-  <% idx = 0 %>
-  <% answers.each do |answer| %>
-
-    <% question = answer.question %>
-    <% question_label = question.text %>
-    <% if !question.is_subquestion %>
-        <% idx += 1 %>
-        <% question_label = idx.to_s + '.) ' + question_label %>
-    <% end %>
-    <div class="<%= question.is_subquestion ? 'subquestion' : '' %>">
-      <h4><%= question_label %></h4>
-      <%= render partial: (question.question_type || 'text') + '_answer',
-                 locals: {question: question, answer: answer} %>
-    </div>
-  <% end %>
-</section>
-
+<div class="typeHeader">
+  &nbsp;<%= Surveys::Submission.model_name.human %>&nbsp;
 </div>
+<h1><%= template.title %></h1>
+
+<% idx = 0 %>
+<% answers.each do |answer| %>
+
+  <% question = answer.question %>
+  <% question_label = question.text %>
+  <% if !question.is_subquestion %>
+      <% idx += 1 %>
+      <% question_label = idx.to_s + '.) ' + question_label %>
+  <% end %>
+  <div class="<%= question.is_subquestion ? 'subquestion' : '' %>">
+    <h4><%= question_label %></h4>
+    <%= render partial: (question.question_type || 'text') + '_answer',
+               locals: {question: question, answer: answer} %>
+  </div>
+<% end %>

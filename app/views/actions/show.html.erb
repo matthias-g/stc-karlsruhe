@@ -1,10 +1,8 @@
-<% content_for :pageTitle do %>
-    <% title = @action.title %>
-    <% title += ' - ' + @action.parent_action.title if @action.parent_action %>
-    <%= title %>
-<% end %>
+<% provide :title, @action.title + (@action.parent_action ? (' - ' + @action.parent_action.title) : '') %>
+<% wrapper_classes.delete('white-box').add('container-medium') %>
+<% wrapper_classes.add('action-invisible') unless @action.visible? %>
 
-<% content_for :appendToHeader do %>
+<% content_for :head do %>
     <meta name="description" content="<%= @action.short_description %>" />
     <% if @action.show_picture? %>
         <meta property="og:image" content="<%= image_url(@action.picture_url) %>" />
@@ -12,174 +10,167 @@
     <meta property="og:description" content="<%= @action.short_description %>" />
 <% end %>
 
-<div id="action-view" <%= 'class=action-invisible' unless @action.visible? %>>
+<div class="white-box no-print">
+  <div class="typeHeader">
+    <%= @action.is_subaction? ? t('action.label.subaction') : Action.model_name.human %>
+    <%= ' (' + t('action.status.hidden') + ')' unless @action.visible? %>
+  </div>
+  <h1><%= @action.title %></h1>
+</div>
 
-  <section class="no-print">
-    <div class="typeHeader">
-      <%= @action.is_subaction? ? t('action.label.subaction') : Action.model_name.human %>
-      <%= ' (' + t('action.status.hidden') + ')' unless @action.visible? %>
-    </div>
-    <h1><%= @action.title %></h1>
-  </section>
+<div class="row row-md-eq-height">
+  <div class="col-md-8">
 
-  <div class="row row-md-eq-height">
+    <section class="white-box">
+      <h2 class="print-only"><%= @action.title %></h2>
 
-    <div class="col-md-8">
-      <div class="row">
-        <section class="col-md-12">
-
-          <h2 class="print-only"><%= @action.title %></h2>
-
-          <% if @action.show_picture? && @action.picture.file %>
-              <div class="action-picture picture-container">
-                <%= image_tag @action.picture_url(:action_view) %>
-                <div class="copyright" title="© <%= @action.picture_source %>">
-                  © <%= @action.picture_source %>
-                </div>
-              </div>
-          <% end %>
-
-          <div class="description">
-            <%= simple_format( simple_format_urls @action.description ) %>
+      <% if @action.show_picture? && @action.picture.file %>
+          <div class="action-picture picture-container">
+            <%= image_tag @action.picture_url(:action_view) %>
+            <div class="copyright" title="© <%= @action.picture_source %>">
+              © <%= @action.picture_source %>
+            </div>
           </div>
+      <% end %>
 
-          <% unless @action.individual_tasks.blank? %>
-              <div class="individual_tasks">
-                <h3><%= Action.human_attribute_name(:individual_tasks) %></h3>
-                <%= simple_format @action.individual_tasks %>
-              </div>
-          <% end %>
-
-          <% unless @action.requirements.blank? %>
-              <div class="requirements">
-                <h3><%= Action.human_attribute_name(:requirements) %></h3>
-                <%= simple_format @action.requirements %>
-              </div>
-          <% end %>
-
-          <% unless @action.material.blank? %>
-              <div class="material">
-                <h3><%= Action.human_attribute_name(:material) %></h3>
-                <%= simple_format @action.material %>
-              </div>
-          <% end %>
-
-          <% visible_subactions = policy_scope(@action.subactions).sort_by { |p| p.start_time || p.date || Time.now } %>
-          <% if visible_subactions.count > 0 %>
-              <div class="subactions" id='<%= Action.human_attribute_name('subaction_ids').downcase %>'>
-                <h3><%= Action.human_attribute_name('subaction_ids') %></h3>
-                <div class="row">
-                  <% visible_subactions.each do |subaction| %>
-                      <div class="col-md-4 col-sm-6 subaction <%='subaction-invisible' unless subaction.visible %>" >
-                        <%= link_to action_path(subaction) do %>
-                            <div class="action-image">
-                              <% if subaction.show_picture? %>
-                                  <%= image_tag subaction.picture.thumb.url, class: 'img-responsive' %>
-                              <% else %>
-                                  <%= image_tag 'placeholder.svg', class: 'img-responsive' %>
-                              <% end %>
-                              <% ext_status = subaction.visible? ? subaction.status : :hidden %>
-                              <div class="action-status status_<%= ext_status %>">
-                                <%= t "action.status.#{ext_status}" %>
-                              </div>
-                            </div>
-                            <%= subaction.title %>
-                        <% end %>
-                      </div>
-                  <% end %>
-                </div>
-              </div>
-          <% end %>
-
-        </section>
+      <div class="description">
+        <%= simple_format( simple_format_urls @action.description ) %>
       </div>
 
-      <% if show_gallery?(@action) || policy(@action).upload_pictures? %>
-          <div class="row no-print">
-            <section class="col-md-12">
-              <div class="gallery">
-                <h3><%= t('action.label.gallery') %></h3>
-                <% if show_gallery?(@action) %>
-                    <%= render 'galleries/gallery', gallery: @action.gallery %>
-                    <% if show_contains_invisible_pictures_notification?(@action) %>
-                        <i><%= t('gallery.message.containsInvisiblePictures') %></i>
-                    <% end %>
-                <% end %>
-              </div>
-              <% if policy(@action).upload_pictures? %>
-                  <div class="picture-upload">
-                    <%= form_with model: @action.gallery, html: { multipart: true}, local: true do |f| %>
-                        <%= f.hidden_field :title %>
-                        <div class="field">
-                          <%= t('action.help.uploadPictures') %>
-                          <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
-                          <p class="waitinfo">Bitte warten, die Bilder werden hochgeladen...</p>
-                        </div>
+      <% unless @action.individual_tasks.blank? %>
+          <div class="individual_tasks">
+            <h3><%= Action.human_attribute_name(:individual_tasks) %></h3>
+            <%= simple_format @action.individual_tasks %>
+          </div>
+      <% end %>
+      <% unless @action.requirements.blank? %>
+          <div class="requirements">
+            <h3><%= Action.human_attribute_name(:requirements) %></h3>
+            <%= simple_format @action.requirements %>
+          </div>
+      <% end %>
+      <% unless @action.material.blank? %>
+          <div class="material">
+            <h3><%= Action.human_attribute_name(:material) %></h3>
+            <%= simple_format @action.material %>
+          </div>
+      <% end %>
 
-                        <div class="actions">
-                          <%= f.submit t('gallery.action.uploadSelectedPictures') %>
+      <% visible_subactions = policy_scope(@action.subactions).sort_by { |p| p.start_time || p.date || Time.now } %>
+      <% if visible_subactions.count > 0 %>
+          <div class="subactions" id='<%= Action.human_attribute_name('subaction_ids').downcase %>'>
+            <h3><%= Action.human_attribute_name('subaction_ids') %></h3>
+            <div class="row">
+              <% visible_subactions.each do |subaction| %>
+                  <div class="col-md-4 col-sm-6 subaction <%='subaction-invisible' unless subaction.visible %>" >
+                    <%= link_to action_path(subaction) do %>
+                        <div class="action-image">
+                          <% if subaction.show_picture? %>
+                              <%= image_tag subaction.picture.thumb.url, class: 'img-responsive' %>
+                          <% else %>
+                              <%= image_tag 'placeholder.svg', class: 'img-responsive' %>
+                          <% end %>
+                          <% ext_status = subaction.visible? ? subaction.status : :hidden %>
+                          <div class="action-status status_<%= ext_status %>">
+                            <%= t "action.status.#{ext_status}" %>
+                          </div>
                         </div>
+                        <%= subaction.title %>
                     <% end %>
                   </div>
               <% end %>
-              <% if policy(@action.gallery).edit? %>
-                  <%= link_to 'Galerie bearbeiten', edit_gallery_path(@action.gallery) %>
-              <% end %>
-            </section>
+            </div>
           </div>
       <% end %>
+    </section>
+
+    <% if show_gallery?(@action) || policy(@action).upload_pictures? %>
+      <section class="white-box no-print">
+          <div class="gallery">
+            <h3><%= t('action.label.gallery') %></h3>
+            <% if show_gallery?(@action) %>
+                <%= render 'galleries/gallery', gallery: @action.gallery %>
+                <% if show_contains_invisible_pictures_notification?(@action) %>
+                    <i><%= t('gallery.message.containsInvisiblePictures') %></i>
+                <% end %>
+            <% end %>
+          </div>
+          <% if policy(@action).upload_pictures? %>
+              <div class="picture-upload">
+                <%= form_with model: @action.gallery, html: { multipart: true}, local: true do |f| %>
+                    <%= f.hidden_field :title %>
+                    <div class="field">
+                      <%= t('action.help.uploadPictures') %>
+                      <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+                      <p class="waitinfo">Bitte warten, die Bilder werden hochgeladen...</p>
+                    </div>
+
+                    <div class="actions">
+                      <%= f.submit t('gallery.action.uploadSelectedPictures') %>
+                    </div>
+                <% end %>
+              </div>
+          <% end %>
+          <% if policy(@action.gallery).edit? %>
+              <%= link_to 'Galerie bearbeiten', edit_gallery_path(@action.gallery) %>
+          <% end %>
+      </section>
+    <% end %>
 
 
-      <% if policy(@action).contact_leaders?  %>
-          <section class="contact-leaders-form no-print">
-            <%= bootstrap_form_for(@message, url: {action: 'contact_leaders'}) do |f| %>
-                <h2><%= t('contact.leaders.title') %></h2>
-                <p><%= t('contact.leaders.text') %></p>
-                <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
-                <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
-                <%= f.submit t('contact.leaders.submit') %>
+    <% if policy(@action).contact_leaders?  %>
+      <section class="white-box contact-leaders-form no-print">
+        <%= bootstrap_form_for(@message, url: {action: 'contact_leaders'}) do |f| %>
+            <h2><%= t('contact.leaders.title') %></h2>
+            <p><%= t('contact.leaders.text') %></p>
+            <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
+            <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
+            <%= f.submit t('contact.leaders.submit') %>
+        <% end %>
+      </section>
+    <% end %>
+  </div>
+
+  <div class="col-md-4">
+    <div class="row">
+
+      <% if policy(@action).edit? %>
+        <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered no-print">
+          <section class="white-box">
+            <h3><%= t('action.label.manageAction') %></h3>
+            <%= link_to t('action.action.edit'),
+                        edit_action_path(@action), class:'btn btn-default btn-wide' %>
+            <%= link_to t('action.action.manageTeam'),
+                        edit_leaders_action_path(@action), class:'btn btn-default btn-wide' %>
+            <% if @action.closed? %>
+                <%= link_to t('action.action.open'),
+                            open_action_path(@action),
+                            class:'btn btn-default btn-wide' %>
+            <% else %>
+                <%= link_to t('action.action.close'),
+                            close_action_path(@action),
+                            class:'btn btn-default btn-wide' %>
+            <% end %>
+            <% if policy(@action).change_visibility? %>
+                <% if @action.visible %>
+                    <%= link_to t('action.action.makeInvisible'),
+                                make_invisible_action_path(@action),
+                                class:'btn btn-default btn-wide' %>
+                <% else %>
+                    <%= link_to t('action.action.makeVisible'),
+                                make_visible_action_path(@action),
+                                class:'btn btn-default btn-wide' %>
+                <% end %>
+            <% end %>
+            <% if @action.action_group %>
+                <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group.title), class: 'btn btn-default' %>
             <% end %>
           </section>
+        </div>
       <% end %>
-    </div>
 
-    <div class="col-md-4">
-      <div class="row">
-
-        <% if policy(@action).edit? %>
-            <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim no-print">
-              <h3><%= t('action.label.manageAction') %></h3>
-              <%= link_to t('action.action.edit'),
-                          edit_action_path(@action), class:'btn btn-default btn-wide' %>
-              <%= link_to t('action.action.manageTeam'),
-                          edit_leaders_action_path(@action), class:'btn btn-default btn-wide' %>
-              <% if @action.closed? %>
-                  <%= link_to t('action.action.open'),
-                              open_action_path(@action),
-                              class:'btn btn-default btn-wide' %>
-              <% else %>
-                  <%= link_to t('action.action.close'),
-                              close_action_path(@action),
-                              class:'btn btn-default btn-wide' %>
-              <% end %>
-              <% if policy(@action).change_visibility? %>
-                  <% if @action.visible %>
-                      <%= link_to t('action.action.makeInvisible'),
-                                  make_invisible_action_path(@action),
-                                  class:'btn btn-default btn-wide' %>
-                  <% else %>
-                      <%= link_to t('action.action.makeVisible'),
-                                  make_visible_action_path(@action),
-                                  class:'btn btn-default btn-wide' %>
-                  <% end %>
-              <% end %>
-              <% if @action.action_group %>
-                  <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group.title), class: 'btn btn-default' %>
-              <% end %>
-            </section>
-        <% end %>
-
-        <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
+      <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered">
+        <div class="white-box">
           <div>
             <h3><%= Action.human_attribute_name('date'.pluralize(@action.dates.count)) %></h3>
             <%= @action.dates.collect { |date| l(date, format: :short_with_weekday)}.join('<br />').html_safe %>
@@ -202,31 +193,33 @@
                 </div>
               </div>
           <% end %>
-        </section>
+        </div>
+      </div>
 
-        <% if @action.parent_action %>
-            <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim">
-              <div class="parent-action <%='invisible-action' unless @action.parent_action.visible %>">
-                <h3><%= t('action.label.parent_action') %></h3>
-                <%= link_to action_path(@action.parent_action) do %>
-                    <div class="row parent-action">
-                      <div class="col-md-6 col-sm-6 col-xs-6 image" >
-                        <% if @action.parent_action.show_picture? %>
-                            <%= image_tag @action.parent_action.picture.thumb.url, class: 'img-responsive' %>
-                        <% else %>
-                            <%= image_tag 'placeholder.svg', class: 'img-responsive' %>
-                        <% end %>
-                      </div>
-                      <div class="col-md-6 col-sm-6 col-xs-6 title">
-                        <%= @action.parent_action.title %>
-                      </div>
+      <% if @action.parent_action %>
+          <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered">
+            <div class="white-box parent-action <%='invisible-action' unless @action.parent_action.visible %>">
+              <h3><%= t('action.label.parent_action') %></h3>
+              <%= link_to action_path(@action.parent_action) do %>
+                  <div class="row parent-action">
+                    <div class="col-md-6 col-sm-6 col-xs-6 image" >
+                      <% if @action.parent_action.show_picture? %>
+                          <%= image_tag @action.parent_action.picture.thumb.url, class: 'img-responsive' %>
+                      <% else %>
+                          <%= image_tag 'placeholder.svg', class: 'img-responsive' %>
+                      <% end %>
                     </div>
-                <% end %>
-              </div>
-            </section>
-        <% end %>
+                    <div class="col-md-6 col-sm-6 col-xs-6 title">
+                      <%= @action.parent_action.title %>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
 
-        <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim no-print">
+      <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered no-print">
+        <div class="white-box">
           <div class="wide infobox status_<%= @action.status %>">
             <%= t "action.status.#{@action.status}" %>
           </div>
@@ -250,8 +243,10 @@
                 <p><%= t('action.message.subactionTeamMember') %></p>
             <% end %>
           </div>
-        </section>
-        <section class="col-sm-6 col-md-12 col-narrow col-only-xs-centered slim col-lastfix no-print">
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered col-lastfix no-print">
+        <div class="white-box">
           <div>
             <h3><%= Action.human_attribute_name('leaders') %></h3>
             <%= list_users(@action.leaders) %>
@@ -273,44 +268,43 @@
                 <%= list_users(@action.volunteers_in_subactions.distinct) %>
               </div>
           <% end %>
-        </section>
-
+        </div>
       </div>
+
     </div>
   </div>
+</div>
 
-  <% if policy(@action).contact_volunteers?  %>
-      <section class="contact-volunteers-form no-print">
-        <%= bootstrap_form_for(@message, url: {action: 'contact_volunteers'}) do |f| %>
-            <h2><%= t('contact.team.title') %></h2>
-            <p><%= t('contact.team.text') %></p>
-            <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
-            <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
-            <%= f.submit t('contact.team.submit') %>
-        <% end %>
-      </section>
-
-      <% if user_signed_in? && current_user.admin?  %>
-          <section class="contact-volunteers-form no-print">
-            (Nur Admins:) Hier nochmal alle E-Mailadressen, damit du alternativ eine E-Mail in deinem E-Mailprogramm schreiben kannst (bitte BCC verwenden).
-            <div style="background: #eee; border: 1px solid #aaa; padding: 5px; margin: 10px;">
-              <%= (@action.volunteers + @action.leaders + [current_user]).uniq.map { |v| v.email}.join(', ') %>
-            </div>
-          </section>
+<% if policy(@action).contact_volunteers?  %>
+    <section class="white-box contact-volunteers-form no-print">
+      <%= bootstrap_form_for(@message, url: {action: 'contact_volunteers'}) do |f| %>
+          <h2><%= t('contact.team.title') %></h2>
+          <p><%= t('contact.team.text') %></p>
+          <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
+          <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
+          <%= f.submit t('contact.team.submit') %>
       <% end %>
+    </section>
 
+    <% if user_signed_in? && current_user.admin?  %>
+        <section class="white-box contact-volunteers-form no-print">
+          (Nur Admins:) Hier nochmal alle E-Mailadressen, damit du alternativ eine E-Mail in deinem E-Mailprogramm schreiben kannst (bitte BCC verwenden).
+          <div style="background: #eee; border: 1px solid #aaa; padding: 5px; margin: 10px;">
+            <%= (@action.volunteers + @action.leaders + [current_user]).uniq.map { |v| v.email}.join(', ') %>
+          </div>
+        </section>
+    <% end %>
+
+<% end %>
+
+
+
+<div class="footer no-print">
+  <%= render '/layouts/share' -%>
+  <%= link_to action_ical_path(@action), class: 'pull-right', title: t('action.action.exportICal'), data: { 'turbolinks': false } do %>
+      <span class="glyphicon glyphicon-calendar"></span>
   <% end %>
-
-
-
-  <section class="footer no-print">
-    <%= render '/layouts/share' -%>
-    <%= link_to action_ical_path(@action), class: 'pull-right', title: t('action.action.exportICal'), data: { 'turbolinks': false } do %>
-        <span class="glyphicon glyphicon-calendar"></span>
-    <% end %>
-    <% if @action.action_group %>
-        <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group.title), class: 'btn btn-default' %>
-    <% end %>
-  </section>
-
+  <% if @action.action_group %>
+      <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group.title), class: 'btn btn-default' %>
+  <% end %>
 </div>

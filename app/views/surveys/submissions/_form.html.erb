@@ -11,12 +11,10 @@
   </section>
 <% end %>
 
-<section>
-  <div class="typeHeader">
-    &nbsp;<%= Surveys::Submission.model_name.human %>&nbsp;
-  </div>
-  <h1><%= @submission.template.title %></h1>
-</section>
+<div class="typeHeader">
+  &nbsp;<%= Surveys::Submission.model_name.human %>&nbsp;
+</div>
+<h1><%= @submission.template.title %></h1>
 
 <section>
   <%= render partial: 'form_questions', locals: { f: f } %>

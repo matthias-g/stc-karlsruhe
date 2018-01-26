@@ -1,11 +1,3 @@
-
-# submit handler for the action list filter
-filterActionList = (e, obj) ->
-  e.preventDefault()
-  $('#action-list').load '?' + parametrize(obj) + ' #action-list > *', ->
-    $('img', @).lazyload()
-    $('#filterResults').text 'Gefundene Aktionen: ' + $(@).children().size()
-
 # handler for "add leader" select
 @addNewLeader = (userId, html) ->
   actionId = html.data('action-id')
@@ -34,10 +26,8 @@ updateDaysOnWeekChange = ->
 
 
 onPageLoad ->
-  # update action list if filter changes
-  onFieldChange $('#actionFilter'), filterActionList
-
   # update available days when week selction changes
   $('#action-edit-view .week select').change updateDaysOnWeekChange
 
+  # enable datepicker
   $('[data-behaviour~=datepicker]').datepicker(autoclose: true, format: "dd.mm.yyyy", language: 'de')

@@ -1,7 +1,3 @@
-<% content_for :pageTitle do %>
-    <%#= t('layout.title.submissionEdit', template: @submission.template.title) %>
-<% end %>
+<% provide :title, t('layout.title.submissionEdit', template: @submission.template.title) %>
 
-<div class="surveys submission edit-view">
-  <%= render partial: 'form', locals: {isNew: false} %>
-</div>
+<%= render partial: 'form', locals: {isNew: false} %>

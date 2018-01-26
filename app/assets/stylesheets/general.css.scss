@@ -20,103 +20,22 @@ h3, h4 {
   }
 }
 
-.status_open {
-  color: $status_open_text;
-  background: $status_open;
-}
-.status_soon_full {
-  color: $status_soon_full_text;
-  background: $status_soon_full;
-}
-.status_full {
-  color: $status_full_text;
-  background: $status_full;
-}
-.status_closed {  // TODO can be deleted when status refactoring completed
-  color: $status_finished_text;
-  background: $status_finished;
-}
-.status_finished {
-  color: $status_finished_text;
-  background: $status_finished;
-}
-.status_hidden {
-  color: $status_hidden_text;
-  background: $status_hidden;
-}
-.status_active {
-  color: $status_open_text;
-  background: $status_open;
-}
-
-/* MULTI-USE STYLES */
-.spotlight {
+.typeHeader {
+  font: 25px CaptionFont;
+  letter-spacing: 0.04em;
+  opacity: 0.5;
   text-align: center;
-  padding: 5px;
-  img {
-    width: 100px;
-    height: auto;
-    margin: 15px;
-  }
+  margin-bottom: 10px;
 }
 
-.picture-container {
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-  .copyright {
-    color: white;
-    font-size: 10px;
-    text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000;
-    position: absolute;
-    bottom: 0;
-    left: 100%;
-    white-space: nowrap;
-    padding-left: 10px;
-    transform-origin: 0% 100%;
-    -moz-transform: rotate(-90deg);
-    cursor: default;
+.row-no-padding > * {
+  &:first-child {
+    padding-left: 0;
+  }
+  &:last-child {
+    padding-right: 0;
   }
 }
-
-.infobox {
-  display: inline-block;
-  padding: 10px;
-  margin: 0 5px;
-  &.wide {
-    display: block;
-    margin: 5px 0;
-    text-align: center;
-  }
-}
-
-/* sections (standalone and within rows) */
-section {
-  margin: 0 0 $grid-gutter-width;
-  background: $section;
-  padding: 10px !important;
-  position: relative;
-  overflow: hidden;
-  &.slim {
-    padding: 10px !important;
-  }
-  &.showOverflow {
-    overflow: visible;
-  }
-  .typeHeader {
-    font: 25px CaptionFont;
-    letter-spacing: 0.04em;
-    opacity: 0.5;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-}
-@media (min-width: $screen-sm-min) {
-  section {
-    padding: 20px 30px !important;
-  }
-}
-
 
 /* buttons widths */
 .btn {
@@ -168,6 +87,10 @@ input.btn-wide {
   padding-top: 40%;
 }
 
+.box-5by3:before {
+  padding-top: 60%;
+}
+
 /* Centers the wrapped child. */
 .center-wrap {
   display: table;
@@ -181,6 +104,39 @@ input.btn-wide {
   }
 }
 
+.video {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #000;
+  .locked-iframe {
+    border: none;
+  }
+  .locked-iframe-trigger {
+    color: $link-color;
+    font-size: 100px;
+    cursor: pointer;
+    text-align: center;
+    text-shadow: 0 0 15px rgba(#000, 0.8);
+    transition: all 0.4s;
+    background: #000 url("/images/trailer_cover.jpg") center / cover;
+    &:hover {
+      color: $link-hover-color;
+    }
+    div {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 150px;
+      height: 100px;
+      margin: auto auto;
+      * {
+        vertical-align: top;
+      }
+    }
+  }
+}
 
 .locked-iframe {
   display: none !important;

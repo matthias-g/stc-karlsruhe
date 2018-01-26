@@ -20,3 +20,18 @@
     </ul>
   </div>
 <% end %>
+
+<% if false %>
+  <div id="messages">
+    <%# devise errors %>
+    <% if not resource.errors.empty? %>
+      <% resource.errors.full_messages.each do |error| %>
+        <div class="alert-devise"><%= error %></div>
+      <% end %>
+    <% end %>
+    <%# other errors/notifications %>
+    <% flash.each do |key, value| %>
+      <div class="alert-<%= key %>"><%= value %></div>
+    <% end %>
+  </div>
+<% end %>

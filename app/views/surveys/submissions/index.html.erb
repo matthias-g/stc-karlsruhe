@@ -1,30 +1,25 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.submissionList') %>
+<% provide :title, t('layout.title.submissionList') %>
+
+<h1><%= t('surveys.label.submissionList', survey_title: @template.title) %></h1>
+
+<% if @template.questions.count == 1 %>
+    <h3><%= @template.questions.first.text %> (<%= @submissions.count %>)</h3>
 <% end %>
 
-<section class="surveys submission list-view">
-  <h1><%= t('surveys.label.submissionList', survey_title: @template.title) %></h1>
-
-  <% if @template.questions.count == 1 %>
-      <h3><%= @template.questions.first.text %> (<%= @submissions.count %>)</h3>
+<table class="table">
+  <% @submissions.each do |submission| %>
+      <tr>
+        <% if @template.questions.count == 1 %>
+            <% answer = submission.answers.first %>
+            <td><%= answer.text %></td>
+            <td style="color: grey; min-width: 190px;"><%= l answer.created_at.localtime, format: :short_with_year %></td>
+        <% else %>
+            <td>
+              <%= link_to t('surveys.label.submission', id: submission.id), [submission.template, submission] %>
+            </td>
+      <% end %>
+      </tr>
   <% end %>
+</table>
 
-  <table class="table">
-    <% @submissions.each do |submission| %>
-        <tr>
-          <% if @template.questions.count == 1 %>
-              <% answer = submission.answers.first %>
-              <td><%= answer.text %></td>
-              <td style="color: grey; min-width: 190px;"><%= l answer.created_at.localtime, format: :short_with_year %></td>
-          <% else %>
-              <td>
-                <%= link_to t('surveys.label.submission', id: submission.id), [submission.template, submission] %>
-              </td>
-        <% end %>
-        </tr>
-    <% end %>
-  </table>
-
-  <%= link_to t('surveys.label.download_as_csv'), surveys_template_surveys_submissions_path(@template, format: :csv) %>
-
-</section>
+<%= link_to t('surveys.label.download_as_csv'), surveys_template_surveys_submissions_path(@template, format: :csv) %>

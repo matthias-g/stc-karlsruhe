@@ -1,20 +1,16 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.userEmailConfirmation') %>
+<% provide :title, t('layout.title.userEmailConfirmation') %>
+
+<h1><%=t('user.action.resendInstructions')%></h1>
+
+<%= form_with model: resource, scope: resource_name, url: confirmation_path(resource_name), method: :post, local: true do |f| %>
+  <%= devise_error_messages! %>
+
+  <div>
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, id: "#{resource_name}_email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+  </div>
+
+  <div><%= f.submit t('user.action.resendInstructions') %></div>
 <% end %>
 
-<section>
-    <h2><%=t('user.action.resendInstructions')%></h2>
-
-  <%= form_with model: resource, scope: resource_name, url: confirmation_path(resource_name), method: :post, local: true do |f| %>
-      <%= devise_error_messages! %>
-
-      <div>
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, id: "#{resource_name}_email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
-      </div>
-
-      <div><%= f.submit t('user.action.resendInstructions') %></div>
-    <% end %>
-
-    <%= render 'devise/shared/links' %>
-</section>
+<%= render 'devise/shared/links' %>

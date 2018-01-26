@@ -1,21 +1,13 @@
-<% content_for :pageTitle do %>
-  <%= t('layout.title.pageAbout') %>
-<% end %>
+<% provide :title, t('layout.title.pageAbout') %>
 
-<% desc = "Antworten auf die wichtigsten Fragen zu Serve the City" %>
-
-<% content_for :appendToHeader do %>
+<% content_for :head do %>
+  <% desc = "Antworten auf die wichtigsten Fragen zu Serve the City" %>
   <meta name="description" content="<%= desc %>" />
   <meta property="og:image" content="https://www.servethecity-karlsruhe.de/images/share.jpg" />
   <meta property="og:description" content="<%= desc %>" />
 <% end %>
 
-<section>
-  <h1>Fragen und Antworten zu Serve the City</h1>
-</section>
-
-<div id="faq">
-
+<h1>Fragen und Antworten zu Serve the City</h1>
 <section>
   <h2>Serve the City?</h2>
 
@@ -365,5 +357,3 @@
 
   </div>
 </section>
-
-</div>

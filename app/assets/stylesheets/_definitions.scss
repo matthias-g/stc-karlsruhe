@@ -55,25 +55,12 @@ $unobtrusive_text:    gray;
 /* bootstrap general */
 $body-bg:               #929D9B;
 $grid-gutter-width:     16px;
-$screen-sm-min:         550px;
-$screen-md-min:         790px;
-$screen-lg-min:         1300px;
-$grid-float-breakpoint: 680px;
+$screen-sm-min:         800px;
+$screen-md-min:         1100px;
+$screen-lg-min:         1350px;
+$grid-float-breakpoint: 650px;
 $dropdown-bg:           rgba(#FFF, 0.9);
 
-/*$screen-sm-min: 768px;
-$screen-md-min: 992px;
-$screen-lg-min: 1200px;*/
-
-/* bootstrap navbar */
-$navbar-height:                      30px;
-$navbar-default-bg:                  rgba($primary, 0.9);
-$navbar-default-color:               rgba(#FFF, 0.7);
-$navbar-default-link-color:          $navbar-default-color;
-$navbar-default-link-hover-color:    #FFF;
-$navbar-default-link-active-color:   rgba(#FFF, 0.5);
-$navbar-default-toggle-hover-bg:     $navbar-default-color;
-$navbar-default-toggle-border-color: transparent;
 
 /* bootstrap text and headings */
 $font-family-sans-serif:  NormalFont, Helvetica, Arial, sans-serif;
@@ -91,3 +78,15 @@ $link-hover-decoration: none;
 /* gallery */
 $gallery-width:     500px;
 $gallery-height:    333px;
+
+// from bootstrap
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}

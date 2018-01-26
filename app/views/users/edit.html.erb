@@ -1,74 +1,65 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.userProfileEdit', user:@user.full_name) %>
-<% end %>
+<% provide :title, t('layout.title.userProfileEdit', user:@user.full_name) %>
 
 <%= devise_error_messages! %>
 
+<div class="typeHeader">
+  <%= t('user.label.edit') %>
+</div>
+<h1><%= @user.full_name %></h1>
+
 <%= bootstrap_form_for(@user) do |f| %>
 
-    <div id="user-edit-view">
-      <section>
-        <div class="typeHeader">
-          <%= t('user.label.edit') %>
-        </div>
-        <h1><%= @user.full_name %></h1>
-      </section>
+  <div class="row row-sm-eq-height">
+    <div class="col-sm-6">
 
-      <div class="row row-sm-eq-height">
-        <section class="col-sm-6">
-          <h2><%= t('user.label.userData') %></h2>
-          <%= f.text_field :username %>
-          <%= f.text_field :first_name %>
-          <%= f.text_field :last_name %>
-          <%= f.text_field :email %>
-          <%= f.text_field :phone %>
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-              <div><%= t('user.label.waitingForEmailConfirmation',
-                         email: resource.unconfirmed_email) %></div>
-          <% end %>
-        </section>
+      <h2><%= t('user.label.userData') %></h2>
+      <%= f.text_field :username %>
+      <%= f.text_field :first_name %>
+      <%= f.text_field :last_name %>
+      <%= f.text_field :email %>
+      <%= f.text_field :phone %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div><%= t('user.label.waitingForEmailConfirmation',
+                     email: resource.unconfirmed_email) %></div>
+      <% end %>
 
-        <section class="col-sm-6">
-          <!--<h2><%= t('user.label.image') %></h2>
-          <p>...coming soon<br><br></p>-->
-
-          <h2><%= t('user.label.emailSettings') %></h2>
-          <div class="checkbox">
-            <%= label_tag :emails_from_orga do %>
-                <%= check_box_tag :emails_from_orga, :emails_from_orga, receive_email_from_orga(@user) %>
-                <%= t('user.label.receiveEmailsFromOrga') %>
-            <% end %>
-          </div>
-          <div class="emails-from-orga">
-            <%= f.check_box :receive_emails_about_action_groups %>
-            <%= f.check_box :receive_emails_about_my_action_groups %>
-            <%= f.check_box :receive_emails_about_other_projects %>
-            <%= f.check_box :receive_other_emails_from_orga %>
-          </div>
-          <%= f.check_box :receive_emails_from_other_users %>
-          <%= f.check_box :receive_notifications_for_new_participation %>
-          <% if @user.actions_as_leader.count > 0 %>
-              <%= f.check_box :receive_notifications_about_volunteers %>
-          <% end %>
-
-          <h2><%= t('user.label.otherActions') %></h2>
-          <% if (current_user == @user) %>
-              <%= link_to t('user.action.changePassword'), edit_user_registration_path,
-                          class:'btn btn-default btn-wide' %>
-              <%= link_to t('user.action.deleteAccount'), confirm_delete_user_path,
-                          class:'btn btn-default btn-wide' %>
-          <% end %>
-        </section>
-      </div>
-
-      <div class="row row-sm-eq-height">
-        <section class="col-sm-12">
-          <div class="pull-right">
-            <%= link_to t('general.action.cancel'), user_path(@user), class:'btn btn-default' %>
-            <%= f.submit t('general.action.save'), class:'btn btn-default' %>
-          </div>
-        </section>
-      </div>
     </div>
+    <div class="col-sm-6">
+
+      <!--<h2><%= t('user.label.image') %></h2>
+      <p>...coming soon<br><br></p>-->
+
+      <h2><%= t('user.label.emailSettings') %></h2>
+      <div class="checkbox">
+        <%= label_tag :emails_from_orga do %>
+            <%= check_box_tag :emails_from_orga, :emails_from_orga, receive_email_from_orga(@user) %>
+            <%= t('user.label.receiveEmailsFromOrga') %>
+        <% end %>
+      </div>
+      <div class="emails-from-orga">
+        <%= f.check_box :receive_emails_about_action_groups %>
+        <%= f.check_box :receive_emails_about_my_action_groups %>
+        <%= f.check_box :receive_emails_about_other_projects %>
+        <%= f.check_box :receive_other_emails_from_orga %>
+      </div>
+      <%= f.check_box :receive_emails_from_other_users %>
+      <%= f.check_box :receive_notifications_for_new_participation %>
+      <% if @user.actions_as_leader.count > 0 %>
+          <%= f.check_box :receive_notifications_about_volunteers %>
+      <% end %>
+
+      <h2><%= t('user.label.otherActions') %></h2>
+      <% if (current_user == @user) %>
+          <%= link_to t('user.action.changePassword'), edit_user_registration_path,
+                      class:'btn btn-default btn-wide' %>
+          <%= link_to t('user.action.deleteAccount'), confirm_delete_user_path,
+                      class:'btn btn-default btn-wide' %>
+      <% end %>
+
+    </div>
+  </div>
+
+  <%= link_to t('general.action.cancel'), user_path(@user), class:'btn btn-default' %>
+  <%= f.submit t('general.action.save'), class:'btn btn-default' %>
 
 <% end %>

@@ -1,17 +1,13 @@
 <% @weeks = (ActionGroup.all.order(title: :desc)) %>
 <% unless @weeks.blank? %>
-
-  <a class="dropdown-toggle" id="weekDropdown" title="Andere Aktionswochen"
-     data-toggle="dropdown" aria-expanded="true">
-    <h1><span class="glyphicon glyphicon-chevron-down"></span>
-    </h1>
-  </a>
-  <ul class="dropdown-menu" role="menu" id="weekDropdownMenu"
-      aria-labelledby="weekDropdown" data-current="<%= @weeks.find_index(@action_group) %>">
-    <% @weeks.each_with_index do |action_group, index| %>
-      <li role="presentation">
-        <h1><%= link_to action_group.title, target_path.call(action_group), {'data-index': index} %></h1>
-      </li>
-    <% end %>
-  </ul>
+  <div data-class="WeekDropdown" class="week-dropdown">
+    <a class="dropdown-toggle" title="Andere Aktionswochen" data-toggle="dropdown" aria-expanded="true">
+      <span class="glyphicon glyphicon-chevron-down"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu" data-current="<%= @weeks.find_index(@action_group) %>">
+      <% @weeks.each_with_index do |action_group, index| %>
+        <li><%= link_to action_group.title, target_path.call(action_group), {'data-index': index} %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>

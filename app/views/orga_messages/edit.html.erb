@@ -1,7 +1,4 @@
-<% content_for :pageTitle do %>
-    <%= t('layout.title.messageAdminMailForm') %>
-<% end %>
-<section>
-  <h1><%= t('orga_message.label.edit_mail') %></h1>
-</section>
+<% provide :title, t('layout.title.messageAdminMailForm') %>
+
+<h1><%= t('orga_message.label.edit_mail') %></h1>
 <%= render partial: 'form' %>

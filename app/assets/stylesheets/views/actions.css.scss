@@ -1,8 +1,7 @@
 @import "definitions";
 
-/* SPECIFIC STYLES: ACTION PAGE */
+#actions {
 
-#action-view, #action-edit-view, #action-team-view {
   h1 {
     text-align: center;
   }
@@ -123,11 +122,56 @@
     margin-top: 2px;
     margin-right: 15px;
   }
-
 }
 
-#action-team-view {
-  section {
-    overflow: inherit;
+#actions.edit-leaders section {
+  overflow: inherit;
+}
+
+.status_open {
+  color: $status_open_text;
+  background: $status_open;
+}
+.status_soon_full {
+  color: $status_soon_full_text;
+  background: $status_soon_full;
+}
+.status_full {
+  color: $status_full_text;
+  background: $status_full;
+}
+.status_closed {  // TODO can be deleted when status refactoring completed
+  color: $status_finished_text;
+  background: $status_finished;
+}
+.status_finished {
+  color: $status_finished_text;
+  background: $status_finished;
+}
+.status_hidden {
+  color: $status_hidden_text;
+  background: $status_hidden;
+}
+.status_active {
+  color: $status_open_text;
+  background: $status_open;
+}
+
+.picture-container {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  .copyright {
+    color: white;
+    font-size: 10px;
+    text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000;
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    white-space: nowrap;
+    padding-left: 10px;
+    transform-origin: 0% 100%;
+    -moz-transform: rotate(-90deg);
+    cursor: default;
   }
 }

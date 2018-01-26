@@ -9,6 +9,7 @@ class Action < ApplicationRecord
            after_add: :on_volunteer_added, after_remove: :on_volunteer_removed
   has_many :leaderships, dependent: :destroy
   has_many :leaders, class_name: 'User', through: :leaderships, source: :user
+  has_many :events
   belongs_to :action_group
   has_many :subactions, class_name: 'Action', foreign_key: :parent_action_id
   belongs_to :parent_action, class_name: 'Action', foreign_key: :parent_action_id

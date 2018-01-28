@@ -29,15 +29,15 @@
 
 <section>
   <%= f.submit t('surveys.action.saveTemplate') %>
-  <%= link_to t('surveys.action.toTemplateOverview'), surveys_templates_path, class: 'btn btn-default' %>
+  <%= link_to t('surveys.action.toTemplateOverview'), surveys_templates_path, class: 'btn btn-secondary' %>
   <% if !isNew %>
     <%= link_to t('surveys.action.deleteTemplate'), surveys_template_path(@template), method: :delete,
-                data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %>
+                data: { confirm: 'Are you sure?' }, class: 'btn btn-secondary' %>
   <% end %>
 
   <%#= link_to 'Show', @template %>
   <%= link_to t('surveys.action.addQuestion'), 'javascript:void(0);',
-        class: 'add-link btn btn-default',
+        class: 'add-link btn btn-secondary',
         data: {target: '#question-insertion-point'} %>
 </section>
 

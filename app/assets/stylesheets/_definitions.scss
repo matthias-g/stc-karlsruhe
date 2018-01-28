@@ -1,4 +1,4 @@
-/* fonts */
+// FONTS
 @font-face {
   font-family: CaptionFont;
   src: asset-url("libelsuit.ttf");
@@ -16,8 +16,7 @@
   src: asset-url("caveat-regular.ttf");
 }
 
-/* status colors */
-
+// ACTION STATUS + FLASH MESSAGE COLORS
 $status_open:           #197435;
 $status_soon_full:      #D49203;
 $status_full:           #A60000;
@@ -28,65 +27,20 @@ $status_soon_full_text: lightgrey;
 $status_full_text:      lightgrey;
 $status_finished_text:  black;
 $status_hidden_text:    black;
+$flash_notice:          rgba(#C8FFC8, 0.85);
+$flash_alert:           rgba(#FF8D82, 0.85);
+$flash_notice_text:     #646464;
+$flash_alert_text:      #000;
 
-/* flash message colors */
-$flash_notice:        rgba(#C8FFC8, 0.85);
-$flash_alert:         rgba(#FF8D82, 0.85);
-$flash_notice_text:   #646464;
-$flash_alert_text:    #000;
-
-/* general design element colors */
+// CUSTOM COLORS
 $default_border:      rgba(#777, 0.5);
 $default_image_bg:    #AAA;
-$primary:             #28B7AF;
-$primary_text:        #FFF;
-$primary_text_shadow: rgba(#082725, 0.6);
-$section:             rgba(#FFF, 0.8);
-
-$facebook:            rgba(#3A5795, 0.8);
-$facebook_text:       #FFF;
 $gallery:             #191919;
 $separator:           #000;
 $footer_text:         #FFF;
 $footer_text_shadow:  #000;
 $unobtrusive_text:    gray;
 
-
-/* bootstrap general */
-$body-bg:               #929D9B;
-$grid-gutter-width:     16px;
-$screen-sm-min:         800px;
-$screen-md-min:         1100px;
-$screen-lg-min:         1350px;
-$grid-float-breakpoint: 650px;
-$dropdown-bg:           rgba(#FFF, 0.9);
-
-
-/* bootstrap text and headings */
-$font-family-sans-serif:  NormalFont, Helvetica, Arial, sans-serif;
-$headings-font-family:    CaptionFont, Helvetica, Arial, sans-serif;
-$font-size-base:    16px;
-$font-size-h1:      35px;
-$font-size-h2:      25px;
-$font-size-h3:      17px;
-$font-size-h4:      17px;
-$text-color:        #000;
-$link-color:        #2C9991;
-$link-hover-color:  rgba($link_color, 0.8);
-$link-hover-decoration: none;
-
-/* gallery */
+// OTHER VARIABLES
 $gallery-width:     500px;
 $gallery-height:    333px;
-
-// from bootstrap
-@mixin clearfix() {
-  &:before,
-  &:after {
-    content: " "; // 1
-    display: table; // 2
-  }
-  &:after {
-    clear: both;
-  }
-}

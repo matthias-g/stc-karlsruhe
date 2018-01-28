@@ -1,0 +1,64 @@
+// UTILITIES
+
+// re-add the "hidden-sm-down" etc. classes since new "d-none d-sm-block" approach is very inconvenient
+@each $bp in map-keys($grid-breakpoints) {
+  .hidden-#{$bp}-up {
+    @include media-breakpoint-up($bp) {
+      display: none !important;
+    }
+  }
+  .hidden-#{$bp}-down {
+    @include media-breakpoint-down($bp) {
+      display: none !important;
+    }
+  }
+}
+
+// add missing "d-print-only" class (better than "d-none d-print-block")
+@media not print {
+  .d-print-only {
+    display: none;
+  }
+}
+
+// ALERTS
+.alert ul {
+    padding-left: 20px;
+    list-style: none;
+}
+
+// BUTTONS
+.btn {
+  min-width: 150px;
+}
+.btn-wide {
+  display: block;
+  margin: 3px;
+}
+input.btn-wide {
+  width: calc(100% - 6px);
+}
+
+// GRID
+.row-no-padding > * {
+  &:first-child {
+    padding-left: 0;
+  }
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+// TRANSITIONS
+.collapsing {
+  -webkit-transition: none;
+  transition: none;
+}
+
+// REBOOT, TYPE
+a:focus {
+  text-shadow: 0 0 1px $link-hover-color;
+}
+h3, h4 {
+  font-family: BoldFont;
+}

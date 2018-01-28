@@ -4,5 +4,5 @@
 <%= bootstrap_form_tag url: user_path(@user), method: :delete do |f| %>
     <%= f.password_field :confirm_delete_password,
            label: t('user.label.confirmDeletePassword') %>
-    <%= f.submit t('user.action.deleteAccount'), class: 'btn btn-default btn-wide' %>
+    <%= f.submit t('user.action.deleteAccount'), class: 'btn btn-secondary btn-wide' %>
 <% end %>

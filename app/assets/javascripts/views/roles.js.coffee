@@ -18,7 +18,7 @@
   return window.requestToJsonApi("/api/users/#{userId}/relationships/roles", 'DELETE', data)
 
 onPageLoad ->
-  $('.role-info .glyphicon-remove').click (event) ->
+  $('.role-info .fa-trash').click (event) ->
     event.preventDefault()
     removeButton = $(@)
     userId = removeButton.data('user-id')

@@ -51,15 +51,15 @@
       <h2><%= t('user.label.otherActions') %></h2>
       <% if (current_user == @user) %>
           <%= link_to t('user.action.changePassword'), edit_user_registration_path,
-                      class:'btn btn-default btn-wide' %>
+                      class:'btn btn-secondary btn-wide' %>
           <%= link_to t('user.action.deleteAccount'), confirm_delete_user_path,
-                      class:'btn btn-default btn-wide' %>
+                      class:'btn btn-secondary btn-wide' %>
       <% end %>
 
     </div>
   </div>
 
-  <%= link_to t('general.action.cancel'), user_path(@user), class:'btn btn-default' %>
-  <%= f.submit t('general.action.save'), class:'btn btn-default' %>
+  <%= link_to t('general.action.cancel'), user_path(@user), class:'btn btn-secondary' %>
+  <%= f.submit t('general.action.save'), class:'btn btn-secondary' %>
 
 <% end %>

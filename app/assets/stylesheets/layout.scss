@@ -1,4 +1,3 @@
-@import "definitions";
 
 // STRUCTURAL CLASSES
 
@@ -17,17 +16,18 @@
   background: rgba(white, 0.9);
   box-shadow: 0 0 5px rgba(black, 0.4);
   @include clearfix;
-  // use this if rounded borders are destroyed by child content
-  &.no-overflow {
-    overflow: hidden;
-  }
   // use "large" if you want a full width layout
   &:not(.large) {
     @extend .container-medium;
   }
-  @media(max-width: $screen-md-min - 1) {
+  @include media-breakpoint-down(md) {
     margin: 5px;
   }
+}
+
+// use this on white-boxes if rounded borders are destroyed by child content
+.no-overflow {
+  overflow: hidden;
 }
 
 // use class instead of tag if the section is not semantic
@@ -41,11 +41,11 @@ section, .section {
     padding-left: 0;
     padding-right: 0;
   }
-  &.no-top-margin {
+  &.top {
     margin-top: -10px;
     padding-top: 0;
   }
-  &.no-bottom-margin {
+  &.bottom {
     margin-bottom: -10px;
     padding-bottom: 0;
   }
@@ -96,8 +96,8 @@ body {
 #content {
   @include clearfix;
   margin: 0 10px;
-  @media(max-width: $screen-md-min - 1) {
-    margin: 0;
+  @include media-breakpoint-down(sm) {
+    margin: 0 5px;
   }
 }
 
@@ -143,18 +143,4 @@ body {
 // RECURRING, UNIQUE ELEMENTS
 #share-options {
   float: right;
-}
-
-
-// PRINT CLASSES
-.print-only {
-  display: none;
-}
-@media print {
-  header, footer, .no-print {
-    display: none !important;
-  }
-  .print-only {
-    display: block !important;
-  }
 }

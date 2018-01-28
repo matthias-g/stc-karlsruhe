@@ -10,7 +10,7 @@
     <meta property="og:description" content="<%= @action.short_description %>" />
 <% end %>
 
-<div class="white-box no-print">
+<div class="white-box d-print-none">
   <div class="typeHeader">
     <%= @action.is_subaction? ? t('action.label.subaction') : Action.model_name.human %>
     <%= ' (' + t('action.status.hidden') + ')' unless @action.visible? %>
@@ -22,7 +22,7 @@
   <div class="col-md-8">
 
     <section class="white-box">
-      <h2 class="print-only"><%= @action.title %></h2>
+      <h2 class="d-print-only"><%= @action.title %></h2>
 
       <% if @action.show_picture? && @action.picture.file %>
           <div class="action-picture picture-container">
@@ -85,7 +85,7 @@
     </section>
 
     <% if show_gallery?(@action) || policy(@action).upload_pictures? %>
-      <section class="white-box no-print">
+      <section class="white-box d-print-none">
           <div class="gallery">
             <h3><%= t('action.label.gallery') %></h3>
             <% if show_gallery?(@action) %>
@@ -119,7 +119,7 @@
 
 
     <% if policy(@action).contact_leaders?  %>
-      <section class="white-box contact-leaders-form no-print">
+      <section class="white-box contact-leaders-form d-print-none">
         <%= bootstrap_form_for(@message, url: {action: 'contact_leaders'}) do |f| %>
             <h2><%= t('contact.leaders.title') %></h2>
             <p><%= t('contact.leaders.text') %></p>
@@ -135,35 +135,35 @@
     <div class="row">
 
       <% if policy(@action).edit? %>
-        <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered no-print">
+        <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered d-print-none">
           <section class="white-box">
             <h3><%= t('action.label.manageAction') %></h3>
             <%= link_to t('action.action.edit'),
-                        edit_action_path(@action), class:'btn btn-default btn-wide' %>
+                        edit_action_path(@action), class:'btn btn-secondary btn-wide' %>
             <%= link_to t('action.action.manageTeam'),
-                        edit_leaders_action_path(@action), class:'btn btn-default btn-wide' %>
+                        edit_leaders_action_path(@action), class:'btn btn-secondary btn-wide' %>
             <% if @action.closed? %>
                 <%= link_to t('action.action.open'),
                             open_action_path(@action),
-                            class:'btn btn-default btn-wide' %>
+                            class:'btn btn-secondary btn-wide' %>
             <% else %>
                 <%= link_to t('action.action.close'),
                             close_action_path(@action),
-                            class:'btn btn-default btn-wide' %>
+                            class:'btn btn-secondary btn-wide' %>
             <% end %>
             <% if policy(@action).change_visibility? %>
                 <% if @action.visible %>
                     <%= link_to t('action.action.makeInvisible'),
                                 make_invisible_action_path(@action),
-                                class:'btn btn-default btn-wide' %>
+                                class:'btn btn-secondary btn-wide' %>
                 <% else %>
                     <%= link_to t('action.action.makeVisible'),
                                 make_visible_action_path(@action),
-                                class:'btn btn-default btn-wide' %>
+                                class:'btn btn-secondary btn-wide' %>
                 <% end %>
             <% end %>
             <% if @action.action_group %>
-                <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group.title), class: 'btn btn-default' %>
+                <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group.title), class: 'btn btn-secondary' %>
             <% end %>
           </section>
         </div>
@@ -183,7 +183,7 @@
             <%= simple_format @action.location %>
           </div>
           <% unless @action.longitude == 0 %>
-              <div class="map no-print" data-class="GoogleMap" data-map-id="action"
+              <div class="map d-print-none" data-class="GoogleMap" data-map-id="action"
                    data-zoom="<%= @action.map_zoom %>"
                    data-lon="<%= @action.map_longitude %>"
                    data-lat="<%= @action.map_latitude %>">
@@ -218,7 +218,7 @@
           </div>
       <% end %>
 
-      <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered no-print">
+      <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered d-print-none">
         <div class="white-box">
           <div class="wide infobox status_<%= @action.status %>">
             <%= t "action.status.#{@action.status}" %>
@@ -230,11 +230,11 @@
             <% if policy(@action).leave? %>
                 <%= link_to t('action.action.leave'),
                             leave_action_path(@action),
-                            class: 'btn btn-default btn-wide' %>
+                            class: 'btn btn-secondary btn-wide' %>
             <% elsif @action.visible? && @action.has_free_places? && !@action.closed? && !@action.has_volunteer?(current_user) %>
                 <%= link_to t('action.action.enter'),
                             enter_action_path(@action),
-                            class: 'btn btn-default btn-wide' %>
+                            class: 'btn btn-secondary btn-wide' %>
             <% elsif @action.visible? && !@action.closed? && !@action.full? && !@action.has_volunteer_in_subaction?(current_user) %>
                 <p><%= t('action.message.enterOneOfThesubactions',
                          subactions_link: link_to(Action.human_attribute_name('subaction_ids'), "##{Action.human_attribute_name('subaction_ids').downcase}" )).html_safe %></p>
@@ -245,7 +245,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered col-lastfix no-print">
+      <div class="col-sm-6 col-md-12 col-narrow col-only-xs-centered col-lastfix d-print-none">
         <div class="white-box">
           <div>
             <h3><%= Action.human_attribute_name('leaders') %></h3>
@@ -276,7 +276,7 @@
 </div>
 
 <% if policy(@action).contact_volunteers?  %>
-    <section class="white-box contact-volunteers-form no-print">
+    <section class="white-box contact-volunteers-form d-print-none">
       <%= bootstrap_form_for(@message, url: {action: 'contact_volunteers'}) do |f| %>
           <h2><%= t('contact.team.title') %></h2>
           <p><%= t('contact.team.text') %></p>
@@ -287,7 +287,7 @@
     </section>
 
     <% if user_signed_in? && current_user.admin?  %>
-        <section class="white-box contact-volunteers-form no-print">
+        <section class="white-box contact-volunteers-form d-print-none">
           (Nur Admins:) Hier nochmal alle E-Mailadressen, damit du alternativ eine E-Mail in deinem E-Mailprogramm schreiben kannst (bitte BCC verwenden).
           <div style="background: #eee; border: 1px solid #aaa; padding: 5px; margin: 10px;">
             <%= (@action.volunteers + @action.leaders + [current_user]).uniq.map { |v| v.email}.join(', ') %>
@@ -299,12 +299,12 @@
 
 
 
-<div class="footer no-print">
+<div class="footer d-print-none">
   <%= render '/layouts/share' -%>
-  <%= link_to action_ical_path(@action), class: 'pull-right', title: t('action.action.exportICal'), data: { 'turbolinks': false } do %>
-      <span class="glyphicon glyphicon-calendar"></span>
+  <%= link_to action_ical_path(@action), class: 'float-right', title: t('action.action.exportICal'), data: { 'turbolinks': false } do %>
+      <span class="fa fa-calendar"></span>
   <% end %>
   <% if @action.action_group %>
-      <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group.title), class: 'btn btn-default' %>
+      <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group.title), class: 'btn btn-secondary' %>
   <% end %>
 </div>

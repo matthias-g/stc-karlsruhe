@@ -16,7 +16,7 @@
           <h2>Umfrage</h2>
           <%= bootstrap_form_for([@submission.template, @submission]) do |f| %>
               <%= render partial: 'surveys/submissions/form_questions', locals: { f: f } %>
-              <%= f.submit t('surveys.action.saveSubmission'), class:'submit btn btn-default pull-right' %>
+              <%= f.submit t('surveys.action.saveSubmission'), class:'submit btn btn-secondary float-right' %>
           <% end %>
         </section>
     <% end %>
@@ -42,13 +42,13 @@
 
           <div id="user-profile-actions">
             <% if policy(@user).edit?  %>
-                <%= link_to edit_user_path, title: t('user.action.edit'), class:'btn btn-default' do %>
-                    <span class="glyphicon glyphicon-pencil"></span>
+                <%= link_to edit_user_path, title: t('user.action.edit'), class:'btn btn-secondary' do %>
+                    <span class="fa fa-pencil"></span>
                     <%= t('user.action.edit') %>
                 <% end %>
             <% end %>
-            <%= link_to destroy_user_session_path, method: :delete, title: t('user.action.logout'), class:'btn btn-default' do %>
-                <span class="glyphicon glyphicon-log-out"></span>
+            <%= link_to destroy_user_session_path, method: :delete, title: t('user.action.logout'), class:'btn btn-secondary' do %>
+                <span class="fa fa-sign-out"></span>
                 <%= t('user.action.logout') %>
             <% end %>
           </div>
@@ -102,14 +102,14 @@
       <% if @user == current_user  %>
             <div class="actions">
               <%= link_to t('action.action.findAction'), show_action_group_path(ActionGroup.default.title),
-                          class:'btn btn-default btn-wide' %>
+                          class:'btn btn-secondary btn-wide' %>
               <%= link_to t('action.action.startOwnAction'), own_action_path,
-                          class:'btn btn-default btn-wide' %>
+                          class:'btn btn-secondary btn-wide' %>
             </div>
             <div class="feed">
               <span><%= t('user.action.exportICal') %>:</span>
               <%= link_to user_ical_path(@user.ical_token, @user), data: { 'turbolinks': false } do %>
-                  <span class="glyphicon glyphicon-calendar"></span>
+                  <span class="fa fa-calendar"></span>
               <% end %>
             </div>
       <% end %>

@@ -1,0 +1,40 @@
+/*
+  aspect ratio keeping boxes (the box must have a single child)
+    the similar bootstrap solution .embed-responsive
+    doesn't support width/height settings/constraints on the container.
+*/
+.box {
+  position: relative;
+  width: 100%;
+  &:before {
+    content: "";
+    display: block;
+  }
+  & > * {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+/* possible aspect ratios */
+.box-1by1:before {
+  padding-top: 100%;
+}
+.box-4by3:before {
+  padding-top: 75%;
+}
+.box-16by9:before {
+  padding-top: 56.25%;
+}
+.box-5by2:before {
+  padding-top: 40%;
+}
+.box-5by3:before {
+  padding-top: 60%;
+}

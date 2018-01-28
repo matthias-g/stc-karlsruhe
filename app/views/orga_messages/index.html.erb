@@ -19,7 +19,7 @@
             <td><%= message.sent? ? message.recipient : render_recipient_group(message.recipient, current_user) %></td>
             <td><%= message.sent? ? l(message.sent_at.localtime, format: :short_with_year) : '-' %></td>
             <td>
-              <%= link_to t('general.action.show'), orga_message_path(message), class: 'btn-default btn' %>
+              <%= link_to t('general.action.show'), orga_message_path(message), class: 'btn-secondary btn' %>
             </td>
           </tr>
   <% end %>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to t('orga_message.action.write_new'), new_orga_message_path, class: 'btn-default btn' %>
+<%= link_to t('orga_message.action.write_new'), new_orga_message_path, class: 'btn-secondary btn' %>

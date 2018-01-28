@@ -1,3 +1,7 @@
+<a id="nav-button" href="#nav" title="Menü">
+  <div class="fa fa-bars"></div>
+</a>
+
 <nav id="nav" data-class="Navbar">
   <div id="nav-eclipse"></div>
   <div id="nav-bar">
@@ -9,21 +13,21 @@
     <ul>
       <li<%= current_page?(root_path) ? ' class=active' : '' %>>
         <%= link_to root_path do %>
-          <span class="glyphicon glyphicon-home"></span>
+          <span class="fa fa-home"></span>
           <%= t('layout.links.home') %>
         <% end %>
       </li>
 
       <li<%= current_page?('/about') ? ' class=active' : '' %>>
         <%= link_to '/about' do %>
-            <span class="glyphicon glyphicon-grain"></span>
+            <span class="fa fa-lightbulb-o"></span>
             <%= t('layout.links.about') %>
         <% end %>
       </li>
 
       <li<%= current_page?(show_action_group_path(ActionGroup.default.title)) ? ' class=active' : '' %>>
         <%= link_to show_action_group_path(ActionGroup.default.title) do %>
-            <span class="glyphicon glyphicon-hand-right"></span>
+            <span class="fa fa-hand-o-right"></span>
             <%= t('layout.links.actions') %>
         <% end %>
       </li>
@@ -31,7 +35,7 @@
       <% if user_signed_in? %>
         <li<%= current_page?(user_path(current_user)) ? ' class=active' : '' %>>
           <%= link_to user_path(current_user) do %>
-            <span class="glyphicon glyphicon-user"></span>
+            <span class="fa fa-user"></span>
             <%= t('layout.links.profile') %>
             <%#= current_user.full_name %>
           <% end %>
@@ -39,7 +43,7 @@
       <% else %>
         <li<%= current_page?(new_user_session_path) ? ' class=active' : '' %>>
           <%= link_to new_user_session_path do %>
-            <span class="glyphicon glyphicon-log-in"></span>
+            <span class="fa fa-sign-in"></span>
             <%= t('layout.links.login') %>
           <% end %>
         </li>
@@ -48,7 +52,7 @@
       <% if user_signed_in? && current_user.coordinator? %>
         <li<%= current_page?('/admin-dashboard') ? ' class=active' : '' %>>
           <%= link_to '/admin-dashboard' do %>
-            <span class="glyphicon glyphicon-dashboard"></span>
+            <span class="fa fa-cogs"></span>
             <%= t('layout.links.adminDashboard') %>
           <% end %>
         </li>
@@ -56,7 +60,7 @@
 
       <li<%= current_page?(contact_path) ? ' class=active' : '' %>>
         <%= link_to contact_path do %>
-            <span class="glyphicon glyphicon-envelope"></span>
+            <span class="fa fa-envelope"></span>
             <%= t('layout.links.contact') %>
         <% end %>
       </li>

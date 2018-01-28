@@ -36,15 +36,15 @@
               <br />
               <%= link_to t('news_entry.action.cropArticleImage'),
                           crop_picture_news_entry_path(@news_entry, crop_target: 'article'),
-                          class: 'btn btn-default',
+                          class: 'btn btn-secondary',
                           data: {toggle: 'modal', target: '#image_crop_modal'}  %>
               <%= link_to t('news_entry.action.cropFullscreenImage'),
                           crop_picture_news_entry_path(@news_entry, crop_target: 'fullscreen'),
-                          class: 'btn btn-default',
+                          class: 'btn btn-secondary',
                           data: {toggle: 'modal', target: '#image_crop_modal'}  %>
               <%= link_to t('news_entry.action.cropThumbnailImage'),
                           crop_picture_news_entry_path(@news_entry, crop_target: 'thumb'),
-                          class: 'btn btn-default',
+                          class: 'btn btn-secondary',
                           data: {toggle: 'modal', target: '#image_crop_modal'}  %>
           <% end %>
 
@@ -70,12 +70,12 @@
           <h3>
             <%= t('news_entry.label.manageNewsEntry') %>
           </h3>
-          <%= f.submit t('general.action.save'), class: 'btn btn-default btn-wide' %>
-          <%= link_to t('general.action.cancel'), @news_entry, class: 'btn btn-default btn-wide' %>
+          <%= f.submit t('general.action.save'), class: 'btn btn-secondary btn-wide' %>
+          <%= link_to t('general.action.cancel'), @news_entry, class: 'btn btn-secondary btn-wide' %>
           <% if !isNew && policy(@news_entry).destroy? %>
               <%= link_to t('news_entry.action.delete'), @news_entry, method: :delete,
                           data: { confirm: t('general.message.confirmDelete')},
-                          class: 'btn btn-default btn-wide' %>
+                          class: 'btn btn-secondary btn-wide' %>
           <% end %>
         </section>
 

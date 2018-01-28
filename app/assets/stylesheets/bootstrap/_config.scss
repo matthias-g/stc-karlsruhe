@@ -1,0 +1,43 @@
+// BOOTSTRAP COLORS
+$body-bg:       #929D9B;
+//$body-color:  black;
+$dropdown-bg:   rgba(white, 0.9);
+$primary:       #28B7AF;
+//$secondary:     $gray-600;
+//$success:       $green;
+//$info:          $cyan;
+//$warning:       $yellow;
+//$danger:        $red;
+//$light:         $gray-100;
+//$dark:          $gray-800;
+
+// BOOTSTRAP OPTIONS
+//$enable-caret:          true;
+//$enable-rounded:        true;
+//$enable-shadows:        false;
+//$enable-gradients:      false;
+//$enable-transitions:    true;
+//$enable-grid-classes:   true;
+//$enable-print-styles:   true;
+
+// BOOTSTRAP GRID
+$grid-breakpoints: (xs: 0, sm: 800px, md: 1100px, lg: 1350px, xl: 1600px);
+//$container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 1140px);
+$grid-gutter-width:     16px;
+$grid-float-breakpoint: 650px;
+//$spacer:                1rem;
+
+// BOOTSTRAP TYPOGRAPHY
+$font-family-sans-serif:  NormalFont, Helvetica, Arial, sans-serif;
+$headings-font-family:    CaptionFont, Helvetica, Arial, sans-serif;
+//$font-size-base:    1rem;
+//$font-size-h1:      2.5rem;
+//$font-size-h2:      2rem;
+//$font-size-h3:      1.75rem;
+//$font-size-h4:      1.5rem;
+$text-color:        #020202;
+$link-color:        #2C9991;
+//$link-decoration:   none;
+$link-hover-color:  rgba($link_color, 0.8);
+$link-hover-decoration: none;
+//$paragraph-margin-bottom: 1rem;

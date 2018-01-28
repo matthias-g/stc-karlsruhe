@@ -15,14 +15,13 @@
             <% if policy(@action).remove_from_volunteers?(volunteer) %>
                 <%= link_to delete_volunteer_action_path(@action, user_id: volunteer.id),
                             method: 'delete', title:t('action.action.removeVolunteer') do %>
-                <span class="glyphicon glyphicon-remove"
-                      aria-label="<%=t('action.action.removeVolunteer')%>"></span>
+                <span class="fa fa-times" aria-label="<%=t('action.action.removeVolunteer')%>"></span>
                 <% end %>
             <% end %>
             <% unless @action.has_leader?(volunteer) %>
                 <%= link_to add_leader_action_path(@action, user_id: volunteer.id),
                             method: 'post', title:t('action.action.makeLeader') do %>
-                <span class="glyphicon glyphicon-arrow-right"
+                <span class="fa fa-arrow-right"
                       aria-label="<%=t('action.action.makeLeader')%>"></span>
                 <% end %>
             <% end %>
@@ -38,7 +37,7 @@
             <%= leader.full_name %>
             <%= link_to delete_leader_action_path(@action, :user_id => leader.id),
                         :method => 'delete', title:t('action.action.removeLeader') do %>
-            <span class="glyphicon glyphicon-remove"
+            <span class="fa fa-times"
                   aria-label="<%=t('action.action.removeLeader')%>"></span>
             <% end %>
           </li>
@@ -54,5 +53,5 @@
 </div>
 
 <div class="section">
-  <%= link_to t('action.action.toAction'), @action, class: 'btn btn-default' %>
+  <%= link_to t('action.action.toAction'), @action, class: 'btn btn-secondary' %>
 </div>

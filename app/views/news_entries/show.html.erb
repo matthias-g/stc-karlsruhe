@@ -58,12 +58,12 @@
 <% if policy(@news_entry).edit? %>
     <div class="section">
       <%= link_to t('news_entry.action.edit'),
-                  edit_news_entry_path(@news_entry), class:'btn btn-default' %>
+                  edit_news_entry_path(@news_entry), class:'btn btn-secondary' %>
       <%= tag.a (@news_entry.visible? ? t('news_entry.action.makeInvisible') : t('news_entry.action.makeVisible')),
-                class:'btn btn-default', id: 'news-entry-visibility-button',
+                class:'btn btn-secondary', id: 'news-entry-visibility-button',
                 data: {'entry-id': @news_entry.id, visible: @news_entry.visible?} %>
       <%= link_to t('news_entry.action.delete'), @news_entry, method: :delete,
                   data: { confirm: t('general.message.confirmDelete')},
-                  class: 'btn btn-default' %>
+                  class: 'btn btn-secondary' %>
     </div>
 <% end %>

@@ -63,7 +63,8 @@ gem 'carrierwave'
 gem 'jssorslider-rails', github: 'matthias-g/jssorslider-rails'
 gem 'photoswipe-rails'
 
-gem 'bootstrap-sass'
+#gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.0.0'
 gem 'bootstrap_form'
 
 gem 'bootstrap-select-rails', github: 'matthias-g/bootstrap-select-rails', branch: 'upgrade-1.12.4'

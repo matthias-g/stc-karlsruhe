@@ -10,7 +10,7 @@
           <% policy_scope(role.users).order(:first_name, :last_name).each do |user| %>
               <div class="user">
                 <span><%= user.full_name %></span>
-                <%= link_to '', '', class: 'glyphicon glyphicon-remove', data: {'user-id': user.id, 'role-id': role.id} %>
+                <%= link_to '', '', class: 'fa fa-trash', data: {'user-id': user.id, 'role-id': role.id} %>
               </div>
           <% end %>
         </div>

@@ -1,3 +1,5 @@
+// this file is deprecated (Bootstrap 3)
+
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "definitions";
 @import "bootstrap-sprockets";
@@ -25,14 +27,14 @@
     width: auto !important;
   }
 }
-@media (max-width: $screen-xs-max) {
+@include media-breakpoint-only(xs) {
   .col-only-xs-centered {
     float: none !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 }
-@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+@include media-breakpoint-only(sm) {
   .col-only-sm-centered {
     float: none !important;
     margin-left: auto !important;
@@ -43,7 +45,7 @@
 
 
 /* row modifiers (equal height columns) */
-@media (min-width: $screen-sm-min) {
+@include media-breakpoint-up(sm) {
   .row-sm-eq-height {
     display: -webkit-box;
     display: -webkit-flex;
@@ -51,7 +53,7 @@
     display: flex;
   }
 }
-@media (min-width: $screen-md-min) {
+@include media-breakpoint-up(md) {
   .row-md-eq-height {
     display: -webkit-box;
     display: -webkit-flex;
@@ -62,7 +64,7 @@
     display: block !important;
   }
 }
-@media (min-width: $screen-lg-min) {
+@include media-breakpoint-up(lg) {
   .row-lg-eq-height {
     display: -webkit-box;
     display: -webkit-flex;
@@ -72,25 +74,4 @@
   .row-lg-diff-height {
     display: auto;
   }
-}
-
-/* responsive utility helper classes */
-.visible-hamburger-block {
-  display: none !important;
-}
-@media (max-width: $grid-float-breakpoint) {
-  .visible-hamburger-block {
-    display: block !important;
-  }
-  .hidden-hamburger {
-    display: none !important;
-  }
-}
-
-ul.nav li.dropdown:hover > ul.dropdown-menu {
-  display: block;
-}
-
-#navigation li.dropdown li a {
-  font-weight: normal;
 }

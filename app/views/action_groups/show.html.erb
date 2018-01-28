@@ -52,7 +52,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-3 col-md-push-9">
+  <div class="col-md-3 md-push-9">
     <div class="row row-sm-eq-height row-md-diff-height">
 
       <div class="col-sm-6 col-md-12">
@@ -70,25 +70,25 @@
                            include_blank: "- - - Sichtbarkeit egal - - -", hide_label: true) %>
             <% end %>
             <%= f.check_box :after_17h, label: 'Nur Aktionen ab 17 Uhr anzeigen' %>
-            <%= f.submit 'Aktionen filtern', class:'btn btn-default btn-wide' %>
+            <%= f.submit 'Aktionen filtern', class:'btn btn-secondary btn-wide' %>
             <div id="action-group-filter-results"></div>
           <% end %>
         </section>
       </div>
 
-      <div class="col-sm-6 col-md-12 hidden-xs hidden-sm">
+      <div class="col-sm-6 col-md-12 hidden-sm-down">
         <section class="white-box">
           <h3>Eigene Aktion</h3>
           <span><%= t('action.action.wantToStartOwnAction') %></span>
-          <%= link_to t('action.action.weHelpYou'), own_action_path, class:'btn btn-default btn-new-action' %>
+          <%= link_to t('action.action.weHelpYou'), own_action_path, class:'btn btn-secondary btn-new-action' %>
         </section>
       </div>
 
       <% if policy(:action).new? %>
-        <div class="col-sm-6 col-md-12 slim hidden-xs hidden-sm">
+        <div class="col-sm-6 col-md-12 slim hidden-sm-down">
           <section class="white-box">
             <h3>Optionen</h3>
-            <%= link_to t('action.action.new'), new_action_path, class:'btn btn-default btn-wide' %>
+            <%= link_to t('action.action.new'), new_action_path, class:'btn btn-secondary btn-wide' %>
           </section>
         </div>
       <% end %>
@@ -96,7 +96,7 @@
     </div>
   </div>
 
-  <div class="col-md-9 col-md-pull-3">
+  <div class="col-md-9 md-pull-3">
     <section id="action-list" class="white-box">
       <% @actions.each do |action| %>
         <div class="action">
@@ -138,16 +138,16 @@
     </section>
   </div>
 
-  <section class="visible-xs visible-sm white-box">
+  <section class="white-box hidden-md-up">
     <h3>Eigene Aktion</h3>
     <span><%= t('action.action.wantToStartOwnAction') %></span>
-    <%= link_to t('action.action.weHelpYou'), own_action_path, class:'btn btn-default btn-new-action' %>
+    <%= link_to t('action.action.weHelpYou'), own_action_path, class:'btn btn-secondary btn-new-action' %>
   </section>
 
   <% if policy(:action).new? %>
       <section class="visible-xs visible-sm white-box">
         <h3>Optionen</h3>
-        <%= link_to t('action.action.new'), new_action_path, class:'btn btn-default btn-wide' %>
+        <%= link_to t('action.action.new'), new_action_path, class:'btn btn-secondary btn-wide' %>
       </section>
   <% end %>
 </div>

@@ -35,15 +35,15 @@
           <% if @action.persisted? %>
             <%= link_to t('action.action.cropListviewImage'),
                         crop_picture_action_path(@action, crop_target: 'action_list'),
-                        class: 'btn btn-default',
+                        class: 'btn btn-secondary',
                         data: {toggle: 'modal', target: '#image_crop_modal'}  %>
             <%= link_to t('action.action.cropActionImage'),
                         crop_picture_action_path(@action, crop_target: 'action_view'),
-                        class: 'btn btn-default',
+                        class: 'btn btn-secondary',
                         data: {toggle: 'modal', target: '#image_crop_modal'}  %>
             <%= link_to t('action.action.cropThumbnailImage'),
                         crop_picture_action_path(@action, crop_target: 'thumbnail'),
-                        class: 'btn btn-default',
+                        class: 'btn btn-secondary',
                         data: {toggle: 'modal', target: '#image_crop_modal'}  %>
           <% end %>
         <% end %>
@@ -75,12 +75,12 @@
         <h3>
           <%= t('action.label.manageAction') %>
         </h3>
-        <%= f.submit t('general.action.save'), class: 'btn btn-default btn-wide' %>
-        <%= link_to t('general.action.cancel'), @action, class: 'btn btn-default btn-wide' %>
+        <%= f.submit t('general.action.save'), class: 'btn btn-secondary btn-wide' %>
+        <%= link_to t('general.action.cancel'), @action, class: 'btn btn-secondary btn-wide' %>
         <% if !isNew && policy(@action).destroy? %>
           <%= link_to t('action.action.delete'), @action, method: :delete,
                       data: { confirm: t('general.message.confirmDelete')},
-                      class: 'btn btn-default btn-wide' %>
+                      class: 'btn btn-secondary btn-wide' %>
         <% end %>
       </section>
 

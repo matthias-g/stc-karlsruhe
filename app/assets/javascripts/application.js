@@ -1,18 +1,24 @@
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
 
+// JQUERY
 //= require jquery
 //= require jquery.lazyload
 //= require jquery_ujs
 //= require jquery-ui/widgets/sortable
-//= require jsonapi-datastore
-//= require turbolinks
-//= require bootstrap-sprockets
+
+// BOOTSTRAP
+//= require popper
+//#= require bootstrap-sprockets
+//= require bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.de.js
 
-//= require general
+// OTHERS
+//= require jsonapi-datastore
+//= require turbolinks
+
+// PROJECT
 //= require jsonapi
+//= require general
 //= require_tree ./classes
 //= require_tree ./views
 //= require_tree ./pages

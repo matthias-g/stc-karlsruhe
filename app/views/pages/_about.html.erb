@@ -9,13 +9,13 @@
 <% end %>
 
 <% content_for :pageHeader do %>
-  <header id="header-about" class="header">
+  <header id="header-about" class="header d-print-none">
     <%= link_to root_path do %>
       <%= image_tag("logo_wide", alt: "Serve the City Karlsruhe") %>
       <h2>Helfen bewegt. begeistert. verbindet.</h2>
     <% end %>
 
-    <div class="schirmherr-ribbon-wrapper hidden-xs">
+    <div class="schirmherr-ribbon-wrapper hidden-xs-down">
       <div class="schirmherr-ribbon schirmherr-ribbon-top-right">
         <div class="schirmherr-ribbon-text">
           <i class="fa fa-umbrella"></i>
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="schirmherr-ribbon schirmherr-ribbon-middle visible-xs-block">
+    <div class="schirmherr-ribbon schirmherr-ribbon-middle hidden-sm-up">
       <div class="schirmherr-ribbon-text">
         <i class="fa fa-umbrella"></i>
         Unter der Schirmherrschaft von<br />Oberbürgermeister Dr. Frank Mentrup

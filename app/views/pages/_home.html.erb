@@ -10,7 +10,7 @@
 
 <% content_for :pageHeader do %>
 
-  <header id="header-home" class="header">
+  <header id="header-home" class="header d-print-none">
     <%= link_to root_path do %>
       <%= image_tag("logo_wide", alt: "Serve the City Karlsruhe") %>
     <% end %>
@@ -38,7 +38,7 @@
   </header>
 <% end %>
 
-<section id="home-intro-box" class="full-width no-top-margin no-padding">
+<section id="home-intro-box" class="full-width top no-padding">
   <h1 class="sr-only">Aktionen</h1>
   <div class="row row-md-eq-height">
     <div class="col-sm-12 col-md-5">
@@ -68,10 +68,10 @@
           <%= link_to 'Aktionswoche ' + group.title, show_action_group_path(group.title), class: 'title' %>
         <% end %>
         <%= link_to '/stadtpiraten', class: 'title' do %>
-          <span class="glyphicon glyphicon-cog"></span> Stadtpiraten
+          <span class="fa fa-cog"></span> Stadtpiraten
         <% end %>
         <%= link_to '/spielezeit', class: 'title' do %>
-          <span class="glyphicon glyphicon-tower"></span> Spielezeit
+          <span class="fa fa-trophy"></span> Spielezeit
         <% end %>
       </div>
 
@@ -94,10 +94,6 @@
   </div>
 </section>
 
-<a href="#nav" class="btn btn-default" title="Toggle Nav">
-  Toggle nav
-</a>
-
 <section class="container-medium">
   <div class="row">
     <div class="col-sm-6 col-md-4">
@@ -110,7 +106,7 @@
         </p>
         <p>
           <%= link_to '/about' do %>
-            <span class="glyphicon glyphicon-arrow-right"></span> Alles über Serve the City
+            <span class="fa fa-arrow-right"></span> Alles über Serve the City
           <% end %>
         </p>
 
@@ -171,7 +167,7 @@
   </p>
 </section>
 
-<section id="home-images" class="full-width no-bottom-margin">
+<section id="home-images" class="full-width bottom">
   <h1 class="sr-only">Eindrücke</h1>
   <div class="swiper-container" data-class="MultiImageSlider">
     <div class="swiper-wrapper">

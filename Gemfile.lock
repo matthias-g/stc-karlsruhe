@@ -68,7 +68,7 @@ GEM
       equalizer (~> 0.0.11)
     arel (8.0.0)
     ast (2.3.0)
-    autoprefixer-rails (7.1.6)
+    autoprefixer-rails (7.2.5)
       execjs
     bcrypt (3.1.11)
     better_errors (2.4.0)
@@ -78,11 +78,12 @@ GEM
     bindex (0.5.0)
     binding_of_caller (0.7.3)
       debug_inspector (>= 0.0.1)
+    bootstrap (4.0.0)
+      autoprefixer-rails (>= 6.0.3)
+      popper_js (>= 1.12.9, < 2)
+      sass (>= 3.5.2)
     bootstrap-datepicker-rails (1.7.1.1)
       railties (>= 3.0)
-    bootstrap-sass (3.3.7)
-      autoprefixer-rails (>= 5.2.1)
-      sass (>= 3.3.4)
     bootstrap_form (2.7.0)
     builder (3.2.3)
     byebug (9.1.0)
@@ -235,6 +236,7 @@ GEM
       ast (~> 2.2)
     pg (0.21.0)
     photoswipe-rails (4.1.2)
+    popper_js (1.12.9)
     premailer (1.11.0)
       addressable
       css_parser (>= 1.6.0)
@@ -385,8 +387,8 @@ DEPENDENCIES
   actionview-encoded_mail_to
   better_errors
   binding_of_caller
+  bootstrap (~> 4.0.0)
   bootstrap-datepicker-rails
-  bootstrap-sass
   bootstrap-select-rails!
   bootstrap_form
   byebug

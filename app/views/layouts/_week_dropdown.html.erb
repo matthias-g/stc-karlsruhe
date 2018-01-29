@@ -1,13 +1,11 @@
-<% @weeks = (ActionGroup.all.order(title: :desc)) %>
-<% unless @weeks.blank? %>
-  <div data-class="WeekDropdown" class="week-dropdown">
-    <a class="dropdown-toggle" title="Andere Aktionswochen" data-toggle="dropdown" aria-expanded="false">
-      <span class="fa fa-chevron-down"></span>
-    </a>
-    <ul class="dropdown-menu" role="menu" data-current="<%= @weeks.find_index(@action_group) %>">
-      <% @weeks.each_with_index do |action_group, index| %>
-        <li class=""><%= link_to action_group.title, target_path.call(action_group), {'data-index': index} %></li>
+<% if (@weeks = ActionGroup.all.order(title: :desc)).any? %>
+  <%# TODO BUG: two clicks necessary for opening dropdowns. %>
+  <div class="dropdown week-dropdown">
+    <a class="dropdown-toggle h1"  href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+    <div class="dropdown-menu">
+      <% @weeks.each do |action_group| %>
+        <%= link_to action_group.title, target_path.call(action_group), class: 'dropdown-item'%>
       <% end %>
-    </ul>
+    </div>
   </div>
 <% end %>

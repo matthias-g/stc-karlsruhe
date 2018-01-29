@@ -38,16 +38,12 @@ section, .section {
   &.full-width {
     margin-left: -10px;
     margin-right: -10px;
-    padding-left: 0;
-    padding-right: 0;
   }
   &.top {
     margin-top: -10px;
-    padding-top: 0;
   }
   &.bottom {
     margin-bottom: -10px;
-    padding-bottom: 0;
   }
   &.no-padding {
     padding: 0;

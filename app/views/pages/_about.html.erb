@@ -1,4 +1,4 @@
-<% wrapper_classes.add('large') %>
+<% wrapper_classes.delete('white-box') %>
 
 <% content_for :head do %>
   <% desc = 'Du willst Menschen in Karlsruhe begegnen, ihnen Gutes tun?
@@ -32,9 +32,9 @@
   </header>
 <% end %>
 
-<section class="container-medium">
-  <div class="row">
-    <div class="col-sm-6 col-md-4">
+<section class="white-box">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-sm-5 col-md-4">
 
       <h1>Serve the City Karlsruhe</h1>
       <p>
@@ -44,7 +44,7 @@
       </p>
 
     </div>
-    <div class="col-sm-6 col-md-8">
+    <div class="col-sm-5 col-md-7">
 
       <div data-class="LockedIframe" class="video box box-16by9">
         <iframe class="locked-iframe" allowfullscreen data-frame-src="
@@ -59,124 +59,148 @@
   </div>
 </section>
 
+<div class="white-box no-overflow">
 
-<section>
-  <h1>Die Ziele</h1>
-  <p>
-    Wir wollen, dass Karlsruhe eine Stadt ist, die anders geprägt ist.
-    Statt Isolation, Teilnahmslosigkeit und sozialer Verarmung wollen wir:
+  <section id="about-goals" class="full-width top">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-sm-5">
+        <h1>Die Ziele</h1>
+        <p>
+          Wir wollen, dass Karlsruhe eine Stadt ist, die anders geprägt ist.
+          Statt Isolation, Teilnahmslosigkeit und sozialer Verarmung wollen wir:
+        </p>
+        <ul>
+          <li>Gemeinsam Gutes tun, um soziale Barrieren zu überwinden</li>
+          <li>Aus Zuschauern soziale Akteure machen</li>
+          <li>Generationsübergreifende Teamerfahrungen möglich machen</li>
+          <li>Freundlichkeit, Respekt und Freigebigkeit kultivieren</li>
+          <li>Ängste vor Menschen aus anderen Kulturen abbauen</li>
+          <li>Mit Initiativen kooperieren und sie in ihrer Arbeit unterstützen</li>
+        </ul>
+      </div>
+      <div class="col-sm-5">
+        <%= image_tag 'about1.jpg', class: 'img-fluid' %>
+      </div>
+    </div>
+  </section>
 
-    <ul>
-      <li>Gemeinsam Gutes tun, um soziale Barrieren zu überwinden</li>
-      <li>Aus Zuschauern soziale Akteure machen</li>
-      <li>Generationsübergreifende Teamerfahrungen möglich machen</li>
-      <li>Freundlichkeit, Respekt und Freigebigkeit kultivieren</li>
-      <li>Ängste vor Menschen aus anderen Kulturen abbauen</li>
-      <li>Mit Initiativen kooperieren und sie in ihrer Arbeit unterstützen</li>
-    </ul>
-  </p>
-</section>
 
-<section>
-  <h1>Das Konzept</h1>
-  <div class="row">
-    <div class="col-sm-4">
-      <p>
-        <b>"Serve the City"-Aktionen</b> sind so ausgelegt, dass jeder mitmachen kann:
-        Es wird außer Motivation wenig vorausgesetzt, die Teilnahme ist <b>unkompliziert</b> und die Aktionen sind <b>kurz</b> gehalten.
-        Damit soll die Hemmschwelle für soziales Engagement gesenkt werden. Und eine große Vielfalt an Aktionen
-        sorgt dafür, dass <b>für jeden etwas dabei</b> ist.
-      </p>
+  <section id="about-concept" class="text-center">
+    <h1>Das Konzept</h1>
+    <div class="row">
+      <div class="col-sm-4">
+        <%= image_tag 'about_1.png' %>
+        <p>
+          <b>"Serve the City"-Aktionen</b> sind so ausgelegt, dass jeder mitmachen kann:
+          Es wird außer Motivation wenig vorausgesetzt, die Teilnahme ist <b>unkompliziert</b> und die Aktionen sind <b>kurz</b> gehalten.
+          Damit soll die Hemmschwelle für soziales Engagement gesenkt werden. Und eine große Vielfalt an Aktionen
+          sorgt dafür, dass <b>für jeden etwas dabei</b> ist.
+        </p>
+      </div>
+      <div class="col-sm-4">
+        <%= image_tag 'about_3.png' %>
+        <p>
+          Wir suchen die Aktionen in Kooperation <b>mit sozialen Einrichtungen</b> bzw. auch teils in Eigeninitiative aus.
+          Der <b>Fokus</b> liegt je nach Aktion <b>bei tatkräftiger Unterstützung oder bei sozialen Gemeinschaftserfahrungen</b>.
+          Mitarbeiter sind dabei bei Weitem nicht nur Geber: Wir sind überzeugt, dass die Teilnahme nicht nur
+          <b>eine Menge Spaß</b> macht, sondern auch völlig <b>neue Horizonte</b> öffnen kann.
+        </p>
+      </div>
+      <div class="col-sm-4">
+        <%= image_tag 'about_2.png' %>
+        <p>
+          Serve the City versteht sich als <b>Ergänzung zum langfristigen sozialen Engagement</b>.
+          <b>Viele Leute</b> schaffen zusammen das, was die üblichen Freiwilligenteams nicht schultern können.
+          Und vielleicht entdeckt der ein oder andere Mitarbeiter ja auch durch Serve the City eine soziale Tätigkeit,
+          die er/sie auch in einem größeren Rahmen fortführen will.
+        </p>
+      </div>
     </div>
-    <div class="col-sm-4">
-      <p>
-        Wir suchen die Aktionen in Kooperation <b>mit sozialen Einrichtungen</b> bzw. auch teils in Eigeninitiative aus.
-        Der <b>Fokus</b> liegt je nach Aktion <b>bei tatkräftiger Unterstützung oder bei sozialen Gemeinschaftserfahrungen</b>.
-        Mitarbeiter sind dabei bei Weitem nicht nur Geber: Wir sind überzeugt, dass die Teilnahme nicht nur
-        <b>eine Menge Spaß</b> macht, sondern auch völlig <b>neue Horizonte</b> öffnen kann.
-      </p>
+  </section>
+
+
+  <section id="about-movement" class="full-width">
+    <div class="row align-items-center">
+      <div class="col-sm-6 col-md-5">
+        <%= image_tag 'about3.jpg', class: 'img-fluid' %>
+      </div>
+      <div class="col-sm-6 col-md-7">
+        <h1>Die Bewegung</h1>
+        <p>
+          Das Idee von Serve the City entstand 2005 in Brüssel. Mittlerweile wurde das Konzept in über 100 Städten weltweit
+          von vielen tausend Freiwilligen aufgegriffen. Die Initiativen in den Städten sind eigenständig und stellen
+          lokale Begebenheiten und Bedürfnisse in der Stadt in den Mittelpunkt.
+        </p>
+        <p>
+          In Deutschland wurden nach dem Konzept von Serve the City erstmalig 2011 Kurzzeitprojekte durchgeführt.
+          Seitdem wächst die Bewegung auch in Deutschland beständig, sodass mittlerweile in Berlin, Bremen,
+          Dresden, Hannover und Verden Aktionen angeboten werden. Serve the City Karlsruhe ist seit 2013 dabei.
+        </p>
+        <p>
+          Seit 2013 bieten wir jedes Jahr im Frühsommer viele Aktionen im Rahmen einer Aktionswoche an.
+          Um nachhaltiger wirken zu können, suchen wir aber zusätzlich auch nach neuen Formen.
+          2017 gab es eine zweite Aktionswoche im November, und dieses Jahr wollen wir über das Jahr verteilt
+          mehrere Aktionstage veranstalten. Mit den <%= link_to 'Projekten', '/stadtpiraten' %> bewerben wir zudem regelmäßige Aktionen.
+        </p>
+      </div>
     </div>
-    <div class="col-sm-4">
-      <p>
-        Serve the City versteht sich als <b>Ergänzung zum langfristigen sozialen Engagement</b>.
-        <b>Viele Leute</b> schaffen zusammen das, was die üblichen Freiwilligenteams nicht schultern können.
-        Und vielleicht entdeckt der ein oder andere Mitarbeiter ja auch durch Serve the City eine soziale Tätigkeit,
-        die er/sie auch in einem größeren Rahmen fortführen will.
-      </p>
+  </section>
+
+  <section class="text-center">
+    <h1>Wer steht dahinter?</h1>
+    <div class="row">
+      <div class="col-sm-4">
+        <p>
+          Das Orga-Team von Serve the City Karlsruhe zählt aktuell 12 Freiwillige.
+          Wir kümmern uns um die langfristige Planung, Werbung, Presse, Sponsoring,
+          die Kooperation mit sozialen Einrichtungen und die Webseite.
+        </p>
+      </div>
+      <div class="col-sm-4">
+        <p>
+          Wir werden von vielen Aktionsleitern unterstützt, die die Durchführung der Aktionen organisieren.
+          Sie kümmern sich zusammen mit dem Orga-Team um die Logistik, das Material und die Aktionsleitung vor Ort.
+        </p>
+      </div>
+      <div class="col-sm-4">
+        <p>
+          Im Wesentlichen sind aber die vielen Mitarbeiter das Herz von Serve the City.
+          Hunderte haben schon mitgemacht. Und wir wollen, dass es noch mehr werden;
+          damit wir Karlsruhe gemeinsam prägen können!
+        </p>
+      </div>
     </div>
+  </section>
+  <div class="text-center">
+    <%= image_tag 'about2.jpg', class: 'img-fluid' %>
   </div>
-</section>
 
-<section>
-  <h1>Die Bewegung</h1>
-  <p>
-    Das Idee von Serve the City entstand 2005 in Brüssel. Mittlerweile wurde das Konzept in über 100 Städten weltweit
-    von vielen tausend Freiwilligen aufgegriffen. Die Initiativen in den Städten sind eigenständig und stellen
-    lokale Begebenheiten und Bedürfnisse in der Stadt in den Mittelpunkt.
-  </p>
-  <p>
-    In Deutschland wurden nach dem Konzept von Serve the City erstmalig 2011 Kurzzeitprojekte durchgeführt.
-    Seitdem wächst die Bewegung auch in Deutschland beständig, sodass mittlerweile in Berlin, Bremen,
-    Dresden, Hannover und Verden Aktionen angeboten werden. Serve the City Karlsruhe ist seit 2013 dabei.
-  </p>
-  <p>
-    Seit 2013 bieten wir jedes Jahr im Frühsommer viele Aktionen im Rahmen einer Aktionswoche an.
-    Um nachhaltiger wirken zu können, suchen wir aber zusätzlich auch nach neuen Formen.
-    2017 gab es eine zweite Aktionswoche im November, und dieses Jahr wollen wir über das Jahr verteilt
-    mehrere Aktionstage veranstalten. Mit den <%= link_to 'Projekten', '/stadtpiraten' %> bewerben wir zudem regelmäßige Aktionen.
-  </p>
-</section>
+  <section id="about-faqs" class="container-medium">
+    <h1 class="sr-only">Häufige Fragen</h1>
+    <div class="row">
+      <div class="col-sm-4">
+        <a class="spotlight" href="/faq#was-ist-stc">
+          <div class="fa fa-question"></div>
+          <div>Was ist <span class="term">Serve the City</span>?</div>
+        </a>
+      </div>
+      <div class="col-sm-4">
+        <a class="spotlight" href="/faq#wer-kann-mitmachen">
+          <div class="fa fa-users"></div>
+          <div>Wer kann mitmachen?</div>
+        </a>
+      </div>
+      <div class="col-sm-4">
+        <a class="spotlight" href="/faq#spenden">
+          <div class="fa fa-cubes"></div>
+          <div>Ich würde gerne etwas spenden!</div>
+        </a>
+      </div>
+    </div>
+    <div class="faq-plus-info">
+      Ein Blick in die <a href="/faq">FAQ</a> lohnt sich, wenn Du mehr über Serve the City erfahren willst!
+    </div>
+  </section>
 
-<section>
-  <h1>Wer steht dahinter?</h1>
-  <div class="row">
-    <div class="col-sm-4">
-      <p>
-        Das Orga-Team von Serve the City Karlsruhe zählt aktuell 12 Freiwillige.
-        Wir kümmern uns um die langfristige Planung, Werbung, Presse, Sponsoring,
-        die Kooperation mit sozialen Einrichtungen und die Webseite.
-      </p>
-    </div>
-    <div class="col-sm-4">
-      <p>
-        Wir werden von vielen Aktionsleitern unterstützt, die die Durchführung der Aktionen organisieren.
-        Sie kümmern sich zusammen mit dem Orga-Team um die Logistik, das Material und die Aktionsleitung vor Ort.
-      </p>
-    </div>
-    <div class="col-sm-4">
-      <p>
-        Im Wesentlichen sind aber die vielen Mitarbeiter das Herz von Serve the City.
-        Hunderte haben schon mitgemacht. Und wir wollen, dass es noch mehr werden;
-        damit wir Karlsruhe gemeinsam prägen können!
-      </p>
-    </div>
-  </div>
-</section>
+</div>
 
-
-<section id="about-faqs" class="medium">
-  <h1 class="sr-only">Häufige Fragen</h1>
-  <div class="row">
-    <div class="col-sm-4">
-      <a class="spotlight" href="/faq#was-ist-stc">
-        <div class="fa fa-question"></div>
-        <div>Was ist <span class="term">Serve the City</span>?</div>
-      </a>
-    </div>
-    <div class="col-sm-4">
-      <a class="spotlight" href="/faq#wer-kann-mitmachen">
-        <div class="fa fa-users"></div>
-        <div>Wer kann mitmachen?</div>
-      </a>
-    </div>
-    <div class="col-sm-4">
-      <a class="spotlight" href="/faq#spenden">
-        <div class="fa fa-cubes"></div>
-        <div>Ich würde gerne etwas spenden!</div>
-      </a>
-    </div>
-  </div>
-  <div class="faq-plus-info">
-    Ein Blick in die <a href="/faq">FAQ</a> lohnt sich, wenn Du mehr über Serve the City erfahren willst!
-  </div>
-</section>

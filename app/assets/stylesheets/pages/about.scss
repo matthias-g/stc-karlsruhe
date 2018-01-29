@@ -6,6 +6,25 @@
   }
 }
 
+#about-goals {
+  background: $primary;
+}
+
+#about-concept {
+  img {
+    display: block;
+    max-width: 90px;
+    width: 100%;
+    height: auto;
+    margin: 20px auto 10px;
+  }
+}
+
+#about-movement {
+  background: #333;
+  color: #eee;
+}
+
 #about-faqs {
   .spotlight {
     display: block;

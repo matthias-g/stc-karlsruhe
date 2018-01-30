@@ -1,5 +1,5 @@
 <% provide :title, t('layout.title.actionGroup', year: @action_group.title) %>
-<% wrapper_classes.delete('white-box').add('container-medium') %>
+<% wrapper_classes.delete('white-box') %>
 
 <% content_for :head do %>
   <% desc = "Alle Aktionen der Aktionswoche #{@action_group.title} vom #{l @action_group.date_range.begin, format: :only_day} "
@@ -9,7 +9,7 @@
   <meta property="og:description" content="<%= desc %>" />
 <% end %>
 
-<div id="action-group-header" class="white-box">
+<div id="action-group-header" class="white-box large">
   <div class="row align-items-center">
     <div id="action-group-select" class="col-sm-6">
       <h1>Aktionswoche <%= @action_group.title %></h1>
@@ -53,10 +53,10 @@
 
 <div class="row">
   <div class="col-md-3 md-push-9">
-    <div class="row row-sm-eq-height row-md-diff-height">
+    <div class="row">
 
       <div class="col-sm-6 col-md-12">
-        <section class="white-box">
+        <section class="white-box large">
           <h3>Filtern</h3>
           <%= bootstrap_form_for(:filter, url: actions_path, method:'get', html: {data: {
                 class: 'ActionFilter', list: '#action-list', info: '#action-group-filter-results'}}) do |f| %>
@@ -77,7 +77,7 @@
       </div>
 
       <div class="col-sm-6 col-md-12 hidden-sm-down">
-        <section class="white-box">
+        <section class="white-box large">
           <h3>Eigene Aktion</h3>
           <span><%= t('action.action.wantToStartOwnAction') %></span>
           <%= link_to t('action.action.weHelpYou'), own_action_path, class:'btn btn-secondary btn-new-action' %>
@@ -86,7 +86,7 @@
 
       <% if policy(:action).new? %>
         <div class="col-sm-6 col-md-12 slim hidden-sm-down">
-          <section class="white-box">
+          <section class="white-box large">
             <h3>Optionen</h3>
             <%= link_to t('action.action.new'), new_action_path, class:'btn btn-secondary btn-wide' %>
           </section>
@@ -97,39 +97,8 @@
   </div>
 
   <div class="col-md-9 md-pull-3">
-    <section id="action-list" class="white-box">
-      <% @actions.each do |action| %>
-        <div class="action">
-          <div class="action-title">
-            <%= link_to action do %>
-              <h2><%= action.title %></h2>
-              <% if policy_scope(action.subactions).count > 0 %>
-                <div><%= t('action.label.subactions', count: policy_scope(action.subactions).count) %></div>
-              <% end %>
-            <% end %>
-          </div>
-          <div class="action-image">
-            <%= link_to action do %>
-              <% if action.show_picture? %>
-                <%= image_tag action.picture_url(:action_list), lazy:true %>
-              <% else %>
-                <%= image_tag 'placeholder.svg' %>
-              <% end %>
-              <% ext_status = action.visible? ? action.status : :hidden %>
-              <div class="action-status status_<%= ext_status %>">
-                <%= t "action.status.#{ext_status}" %>
-              </div>
-            <% end %>
-          </div>
-          <div class="action-description">
-            <% if action.short_description.empty? %>
-                <div><%= action.description %></div>
-            <% else %>
-                <div><%= action.short_description %></div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+    <section id="action-list" class="invisible-box">
+      <%= render partial: 'actions/action_card_list', locals: { actions: @actions } %>
       <% if policy_scope(@action_group.actions).toplevel.count == 0 %>
         <div>
           <%= t('action_group.noActions') %>

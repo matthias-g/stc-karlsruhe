@@ -127,6 +127,31 @@
   overflow: inherit;
 }
 
+.action-card {
+  margin-bottom: 1rem !important;
+  min-width: 280px;
+  max-width: 350px;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(black, 0.5);
+  &:hover {
+    box-shadow: 0 0 10px rgba(black, 0.8);
+  }
+  .card-title {
+    margin-bottom: 0.2rem;
+  }
+  .badge {
+    margin-bottom: 0.5rem;
+  }
+}
+.card-deck::after {
+  display: flex;
+  flex: 1;
+  min-width: 280px;
+  flex-grow: 3;
+  content: '';
+}
+
+
 .status_open {
   color: $status_open_text;
   background: $status_open;

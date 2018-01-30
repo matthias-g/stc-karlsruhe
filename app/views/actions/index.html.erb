@@ -1,33 +1,6 @@
 <% provide :title, t('layout.title.action.list') %>
 
-<% @actions.each do |action| %>
-  <div class="action">
-    <div class="action-title">
-      <%= link_to action do %>
-         <h2><%= action.title %></h2>
-      <% end %>
-    </div>
-    <div class="action-image">
-      <%= link_to action do %>
-          <% if action.show_picture? && action.picture.file %>
-              <%= image_tag action.picture_url(:action_list), lazy:true %>
-          <% else %>
-              <%= image_tag 'placeholder.svg' %>
-          <% end %>
-          <div class="action-status status_<%= action.status %>">
-            <%= t "action.status.#{action.status}" %>
-          </div>
-      <% end %>
-    </div>
-    <div class="action-description">
-      <% if action.short_description.empty? %>
-          <div><%= action.description %></div>
-      <% else %>
-          <div><%= action.short_description %></div>
-      <% end %>
-    </div>
-  </div>
-<% end %>
+<%= render partial: 'action_card_list', locals: { actions: @actions } %>
 
 <div class="section hidden-md-up">
   <h3>Optionen</h3>

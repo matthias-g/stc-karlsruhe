@@ -25,6 +25,11 @@
   }
 }
 
+.invisible-box {
+  margin: 10px;
+  padding: 10px;
+}
+
 // use this on white-boxes if rounded borders are destroyed by child content
 .no-overflow {
   overflow: hidden;

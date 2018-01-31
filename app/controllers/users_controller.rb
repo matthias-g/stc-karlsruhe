@@ -70,7 +70,7 @@ class UsersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     params.require(:user).permit(:username, :first_name, :last_name, :email, :phone,
-                                 :receive_emails_about_action_groups, :receive_emails_about_my_action_groups, :receive_emails_about_other_actions,
+                                 :receive_emails_about_action_groups, :receive_emails_about_my_action_groups, :receive_emails_about_other_projects,
                                  :receive_other_emails_from_orga, :receive_emails_from_other_users)
   end
 

@@ -32,7 +32,7 @@
   <div id="page">
 
     <div id="flash-messages">
-      <%= render 'layouts/messages' %>
+      <%= render '/layouts/flash_messages' %>
     </div>
 
     <%= content_for?(:pageHeader) ? content_for(:pageHeader) : render('/layouts/header') -%>

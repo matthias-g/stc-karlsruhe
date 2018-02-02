@@ -1,3 +1,26 @@
+<% pics = policy_scope(gallery.gallery_pictures) %>
+
+<div data-class="GallerySlider" class="gallery-slider">
+  <div class="swiper-container gallery-top">
+    <div class="swiper-wrapper">
+      <% pics.each do |pic| %>
+        <div class="swiper-slide" style="background-image:url(<%= pic.picture.preview.url %>)"></div>
+      <% end %>
+    </div>
+    <div class="swiper-button-next swiper-button-white"></div>
+    <div class="swiper-button-prev swiper-button-white"></div>
+  </div>
+  <div class="swiper-container gallery-thumbs">
+    <div class="swiper-wrapper">
+      <% pics.each do |pic| %>
+        <div class="swiper-slide" style="background-image:url(<%= pic.picture.thumb.url %>)"></div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% if false %>
+
 <div data-class="Gallery" data-gallery-id="<%= gallery.id %>">
 
   <div id="slider_container" class="gallery-container slider-container">
@@ -109,3 +132,5 @@
   </div>
 
 </div>
+
+<% end %>

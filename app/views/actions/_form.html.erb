@@ -1,3 +1,4 @@
+<% wrapper_classes.delete('white-box') %>
 
 <%= bootstrap_form_for(@action, as: :the_action) do |f| %>
 
@@ -12,82 +13,96 @@
     </section>
   <% end %>
 
-
-  <div class="typeHeader">
-    &nbsp;<%= isNew ? t('action.label.new') : t('action.label.edit') %>&nbsp;
+  <div class="white-box record-header">
+    <div class="type">
+      &nbsp;<%= isNew ? t('action.label.new') : t('action.label.edit') %>&nbsp;
+    </div>
+    <h1><%= @action.title %></h1>
   </div>
-  <h1><%= @action.title %></h1>
 
-  <div class="row row-sm-eq-height">
+  <div class="row align-items-stretch">
+    <div class="col-sm-8">
 
-    <section class="col-sm-8">
-      <%= f.text_field :title %>
-      <div class="form-group">
-        <label class="control-label" for="action_picture_source">
-          <%= Action.human_attribute_name('picture') %>
-        </label>
-        <%= f.file_field :picture, hide_label: true %>
+      <div class="white-box">
+        <%= f.text_field :title %>
+        <div class="form-group">
+          <label class="control-label" for="action_picture_source">
+            <%= Action.human_attribute_name('picture') %>
+          </label>
+          <%= f.file_field :picture, hide_label: true %>
 
-        <% if @action.picture.file %>
-          <div class="action-picture picture-container">
-            <%= image_tag @action.picture_url(:action_view) %>
-          </div>
-          <% if @action.persisted? %>
-            <%= link_to t('action.action.cropListviewImage'),
-                        crop_picture_action_path(@action, crop_target: 'action_list'),
-                        class: 'btn btn-secondary',
-                        data: {toggle: 'modal', target: '#image_crop_modal'}  %>
-            <%= link_to t('action.action.cropActionImage'),
-                        crop_picture_action_path(@action, crop_target: 'action_view'),
-                        class: 'btn btn-secondary',
-                        data: {toggle: 'modal', target: '#image_crop_modal'}  %>
-            <%= link_to t('action.action.cropThumbnailImage'),
-                        crop_picture_action_path(@action, crop_target: 'thumbnail'),
-                        class: 'btn btn-secondary',
-                        data: {toggle: 'modal', target: '#image_crop_modal'}  %>
+          <% if @action.picture.file %>
+            <div class="action-picture picture-container">
+              <%= image_tag @action.picture_url(:action_view) %>
+            </div>
+            <% if @action.persisted? %>
+              <%= link_to crop_picture_action_path(@action, crop_target: 'action_list'),
+                          class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
+                <span class="fa fa-crop"></span> <%= t('action.action.cropListviewImage') %>
+              <% end %>
+              <%= link_to crop_picture_action_path(@action, crop_target: 'action_view'),
+                          class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'}  do %>
+                <span class="fa fa-crop"></span> <%= t('action.action.cropActionImage') %>
+              <% end %>
+              <%= link_to crop_picture_action_path(@action, crop_target: 'thumbnail'),
+                          class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
+                <span class="fa fa-crop"></span> <%= t('action.action.cropThumbnailImage') %>
+              <% end %>
+            <% end %>
           <% end %>
-        <% end %>
 
+        </div>
+        <%= f.text_field :picture_source,
+                         help: t('action.help.picture_source') %>
       </div>
-      <%= f.text_field :picture_source,
-                       help: t('action.help.picture_source') %>
-      <div class="short_description">
-        <%= f.text_area :short_description,
-                        help: t('action.help.short_description') %>
-      </div>
-      <div class="description">
-        <%= f.text_area :description %>
-      </div>
-      <div class="individual_tasks">
-        <%= f.text_area :individual_tasks %>
-      </div>
-      <div class="requirements">
-        <%= f.text_area :requirements %>
-      </div>
-      <div class="material">
-        <%= f.text_area :material %>
-      </div>
-    </section>
 
+      <div class="white-box">
+        <div class="short_description">
+          <%= f.text_area :short_description,
+                          help: t('action.help.short_description') %>
+        </div>
+        <div class="description">
+          <%= f.text_area :description %>
+        </div>
+        <div class="individual_tasks">
+          <%= f.text_area :individual_tasks %>
+        </div>
+        <div class="requirements">
+          <%= f.text_area :requirements %>
+        </div>
+        <div class="material">
+          <%= f.text_area :material %>
+        </div>
+      </div>
+
+    </div>
     <div class="col-sm-4">
 
-      <section class="slim">
+      <div class="white-box">
         <h3>
           <%= t('action.label.manageAction') %>
         </h3>
-        <%= f.submit t('general.action.save'), class: 'btn btn-secondary btn-wide' %>
-        <%= link_to t('general.action.cancel'), @action, class: 'btn btn-secondary btn-wide' %>
-        <% if !isNew && policy(@action).destroy? %>
-          <%= link_to t('action.action.delete'), @action, method: :delete,
-                      data: { confirm: t('general.message.confirmDelete')},
-                      class: 'btn btn-secondary btn-wide' %>
+        <%= button_tag class: 'btn btn-success btn-block' do %>
+          <span class="fa fa-save"></span> <%= t('general.action.save') %>
         <% end %>
-      </section>
+        <%= link_to @action, class: 'btn btn-warning btn-block' do %>
+          <span class="fa fa-ban"></span> <%= t('general.action.cancel') %>
+        <% end %>
+        <% if !isNew && policy(@action).destroy? %>
+          <%= link_to @action, method: :delete, class: 'btn btn-danger btn-block',
+                      data: { confirm: t('general.message.confirmDelete')} do %>
+            <span class="fa fa-trash"></span> <%= t('general.action.delete') %>
+          <% end %>
+        <% end %>
+      </div>
 
-      <section class="slim">
+      <div class="white-box">
         <div class="week">
           <%= f.collection_select(:action_group_id, ActionGroup.all.order(title: :desc), :id, :title,
                                   {selected: @action.action_group&.id, include_blank: true}) -%>
+        </div>
+        <div class="parent_action">
+          <%= f.select(:parent_action_id, available_actions(@action).collect{ |p| [p.title, p.id]}, {include_blank: true}) -%>
         </div>
         <div class="day">
           <%= f.text_field(:date, value: @action.date ? l(@action.date, format: :numeric) : '',
@@ -116,41 +131,11 @@
           <%= f.text_field :map_latitude, type: :hidden, hide_label: true %>
           <%= f.text_field :map_zoom, type: :hidden, hide_label: true %>
         </div>
-      </section>
+      </div>
 
-      <section class="slim">
+      <div class="white-box">
         <%= f.text_field :desired_team_size %>
-        <% if not isNew %>
-          <div>
-            <h3><%= Action.human_attribute_name('leaders') %></h3>
-            <% @action.leaders.each do |leader| %>
-              <div>
-                <%= leader.full_name %>
-                <%#= link_to '(X)', delete_leader_action_path(@action,
-                   :user_id => leader.id), :method => 'delete' %>
-              </div>
-            <% end %>
-            <%#= @action.leaders.collect { |v| v.first_name }.join(', ') %>
-          </div>
-          <div>
-            <h3><%= Action.human_attribute_name('volunteers') %></h3>
-            <% @action.volunteers.each do |volunteer| %>
-              <div>
-                <%= volunteer.full_name %>
-                <%#= link_to '(=> as leader)', add_leader_action_path(@action,
-                   :user_id => volunteer.id), :method => 'post' %>
-              </div>
-            <% end %>
-            <%#= @action.volunteers.collect { |v| v.first_name }.join(', ') %>
-          </div>
-        <% end %>
-      </section>
-
-      <section class="slim">
-        <div class="parent_action">
-          <%= f.select(:parent_action_id, available_actions(@action).collect{ |p| [p.title, p.id]}, {include_blank: true}) -%>
-        </div>
-      </section>
+      </div>
 
     </div>
 

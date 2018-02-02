@@ -1,20 +1,24 @@
+// VIEW RESTRICTED RULES (all "action" views)
 
 #actions {
 
+  // action title
   h1 {
     text-align: center;
   }
+
+  // badges in the action header, like "hidden" or "closed"
+  .labels {
+    text-align: center;
+    font-size: 1.7em;
+  }
+
+  // section headers
   h3 {
-    margin-top: 5px;
-    margin-bottom: 3px;
-    margin-left: 0px;
+    margin: 5px 0;
   }
-  .map {
-    border-radius: 6px;
-    border: 1px solid $default_border;
-    height: 150px;
-    width: 100%;
-  }
+
+  // picture
   .action-picture {
     width: 100%;
     img {
@@ -23,6 +27,8 @@
       border: 1px solid $default_border;
     }
   }
+
+  // description
   .description {
     margin-top: 15px;
     margin-bottom: 20px;
@@ -40,80 +46,45 @@
       min-height: 80px;
     }
   }
+
+  // gallery
+  #actions-gallery {
+    background: #222;
+    color: #eee;
+    .picture-upload, #gallery_picture {
+      padding-top: 20px;
+    }
+  }
+
+  // communication forms
+  #action-communication {
+    input[type="text"] {
+      max-width: 550px;
+    }
+    .message_body {
+      max-width: 550px;
+      min-height: 150px;
+    }
+  }
+
+  // time and location
   .days select {
     min-height: 90px;
   }
   .location textarea {
     min-height: 80px;
   }
+  .map {
+    border-radius: 6px;
+    border: 1px solid $default_border;
+    height: 150px;
+    width: 100%;
+  }
 
+  // no volunteers message
   .no-volunteers {
     color: #555;
     font-style: italic;
-  }
-
-  .contact-volunteers-form {
-    #message_subject {
-      max-width: 550px;
-    }
-    #message_body {
-      max-width: 550px;
-      min-height: 150px;
-    }
-  }
-
-  .subactions h3 {
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
-
-  .subaction {
-    text-align: center;
-    min-height: 165px;
-    .action-image {
-      display: block;
-      width: 100px;
-      margin-left: auto;
-      margin-right: auto;
-      position: relative;
-      .action-status {
-        bottom: 0;
-        width: 100px;
-        position: absolute;
-      }
-    }
-  }
-
-  .parent-action {
-    div.image {
-      border-right-width: 4px;
-      border-bottom-width: 6px;
-      border-top-width: 6px;
-      width: 110px;
-    }
-    div.title {
-      border-left-width: 4px;
-      border-bottom-width: 6px;
-      border-top-width: 6px;
-      line-height: normal;
-    }
-  }
-
-  &.action-hidden h1, .subaction-hidden a {
-    color: $status_hidden !important;
-  }
-  .subaction-hidden {
-    opacity: 0.65;
-    img {
-      box-shadow: 0 0 5px $status_hidden;
-    }
-  }
-
-  .gallery h3 {
-    margin-bottom: 10px;
-  }
-  .picture-upload, #gallery_picture {
-    padding-top: 20px;
   }
 
   section.footer .fa {
@@ -123,14 +94,45 @@
   }
 }
 
-#actions.edit-leaders section {
-  overflow: inherit;
+
+
+// NON VIEW RESTRICTED RULES //
+
+// action list entry (partial, used on "page home", "user show" and "action show")
+.action-entry {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #333;
+  .image {
+    width: 70px;
+    margin-right: 20px;
+    img {
+      border-radius: 50%;
+      width: 100%;
+      height: auto;
+    }
+  }
+  .info {
+    flex: 1;
+  }
+  .date {
+    display: none;
+  }
+  .title {
+    font-family: CaptionFont;
+    font-size: 22px;
+  }
+  &.hidden-action .title {
+    color: $status_hidden !important;
+  }
 }
 
+// action board entry (partial, used on "action group show")
 .action-card {
   margin-bottom: 1rem !important;
-  min-width: 280px;
-  max-width: 350px;
+  min-width: 340px;
+  max-width: 340px;
   cursor: pointer;
   box-shadow: 0 0 5px rgba(black, 0.5);
   &:hover {
@@ -143,15 +145,9 @@
     margin-bottom: 0.5rem;
   }
 }
-.card-deck::after {
-  display: flex;
-  flex: 1;
-  min-width: 280px;
-  flex-grow: 3;
-  content: '';
-}
 
 
+// general purpose action status classes
 .status_open {
   color: $status_open_text;
   background: $status_open;
@@ -179,23 +175,4 @@
 .status_active {
   color: $status_open_text;
   background: $status_open;
-}
-
-.picture-container {
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-  .copyright {
-    color: white;
-    font-size: 10px;
-    text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000;
-    position: absolute;
-    bottom: 0;
-    left: 100%;
-    white-space: nowrap;
-    padding-left: 10px;
-    transform-origin: 0% 100%;
-    -moz-transform: rotate(-90deg);
-    cursor: default;
-  }
 }

@@ -35,6 +35,10 @@ class ActionPolicy < ApplicationPolicy
     is_admin? || is_coordinator? || is_leader?
   end
 
+  def manageTeam?
+    edit? && !record.closed?
+  end
+
   def change_visibility?
     is_admin? || is_coordinator?
   end
@@ -52,11 +56,15 @@ class ActionPolicy < ApplicationPolicy
   end
 
   def contact_leaders?
-    record.has_volunteer?(user) && !record.closed?
+    record.visible? && record.has_volunteer?(user) && !record.closed?
   end
 
   def enter?
     add_to_volunteers? [user]
+  end
+
+  def enter_subaction?
+    !record.closed? && !record.full? && !record.has_volunteer_in_subaction?(user)
   end
 
   def leave?
@@ -64,7 +72,7 @@ class ActionPolicy < ApplicationPolicy
   end
 
   def upload_pictures?
-    record.visible? && is_today_or_past? && (is_volunteer?(user) || is_leader? || is_coordinator? || is_admin? || (user && user.photographer?))
+    is_today_or_past? && (is_volunteer?(user) || is_leader? || is_coordinator? || is_admin? || (user && user.photographer?))
   end
 
   def add_to_volunteers?(users)

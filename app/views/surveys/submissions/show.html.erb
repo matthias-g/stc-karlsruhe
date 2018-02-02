@@ -4,10 +4,13 @@
 
 <p id="notice"><%= notice %></p>
 
-<div class="typeHeader">
-  &nbsp;<%= Surveys::Submission.model_name.human %>&nbsp;
+<div class="record-header">
+  <div class="type">
+    &nbsp;<%= Surveys::Submission.model_name.human %>&nbsp;
+  </div>
+  <h1><%= template.title %></h1>
 </div>
-<h1><%= template.title %></h1>
+
 
 <% idx = 0 %>
 <% answers.each do |answer| %>
@@ -20,7 +23,6 @@
   <% end %>
   <div class="<%= question.is_subquestion ? 'subquestion' : '' %>">
     <h4><%= question_label %></h4>
-    <%= render partial: (question.question_type || 'text') + '_answer',
-               locals: {question: question, answer: answer} %>
+    <%= render (question.question_type || 'text') + '_answer', question: question, answer: answer %>
   </div>
 <% end %>

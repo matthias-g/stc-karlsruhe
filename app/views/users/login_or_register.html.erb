@@ -1,15 +1,14 @@
 <% provide :title, t('layout.title.userLogin') %>
+<% wrapper_classes.delete('container-medium').add('container-small') %>
 
-<div class="row row-md-eq-height">
-  <div class="col-md-1"></div>
+<div class="row align-items-stretch align-content-around">
 
-  <section class="col-md-5 col-only-xs-centered col-only-sm-centered slim col-medium">
-    <%= render 'users/login_form' -%>
+  <section class="col-md-5">
+    <%= render 'login_form' %>
   </section>
 
-  <section class="col-md-5 col-medium col-only-xs-centered col-only-sm-centered slim">
-    <%= render 'users/register_form' -%>
+  <section class="col-md-5">
+    <%= render 'register_form' %>
   </section>
 
-  <div class="col-md-1"></div>
 </div>

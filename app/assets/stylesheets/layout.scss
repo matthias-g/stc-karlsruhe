@@ -1,33 +1,35 @@
 
 // STRUCTURAL CLASSES
 
-// for views, sections or as a row wrapper
-.container-medium {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+.row > * {
+  margin-bottom: 10px;
 }
 
-// can be applied to view wrapper or sections
+// a content box. you have to apply margins yourself (e.g. BS4 margins: mb-3...)
 .white-box {
-  margin: 10px;
   padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   border-radius: 5px;
   background: rgba(white, 0.9);
   box-shadow: 0 0 5px rgba(black, 0.4);
   @include clearfix;
-  // use "large" if you want a full width layout
-  &:not(.large) {
-    @extend .container-medium;
+}
+
+.align-items-stretch > div {
+  > .white-box:first-child {
+    margin-top: 0;
   }
-  @include media-breakpoint-down(md) {
-    margin: 5px;
+  > .white-box:last-child {
+    margin-bottom: 0;
+  }
+  > .white-box:only-child {
+    min-height: 100%;
   }
 }
 
-.invisible-box {
-  margin: 10px;
-  padding: 10px;
+.parent-height {
+  min-height: 100%;
 }
 
 // use this on white-boxes if rounded borders are destroyed by child content
@@ -35,24 +37,35 @@
   overflow: hidden;
 }
 
-// use class instead of tag if the section is not semantic
+// restricts the content width. caution: this will invalidate horizontal margins
+.container-medium {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.container-small {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+// use this within white-boxes or BS columns
 section, .section {
-  margin: 60px 10px;
-  padding: 10px;
-  // use these classes to negate white-box padding
-  &.full-width {
-    margin-left: -10px;
-    margin-right: -10px;
-  }
-  &.top {
-    margin-top: -10px;
-  }
-  &.bottom {
-    margin-bottom: -10px;
-  }
-  &.no-padding {
-    padding: 0;
-  }
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+// use this on white-box children (e.g. sections) to negate padding
+.full-width {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+.top {
+  margin-top: -10px;
+}
+.bottom {
+  margin-bottom: -10px;
 }
 
 
@@ -145,3 +158,4 @@ body {
 #share-options {
   float: right;
 }
+

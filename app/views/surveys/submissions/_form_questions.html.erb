@@ -12,7 +12,7 @@
 
     <div class="<%= question.is_subquestion ? 'subquestion' : '' %>">
       <%= answer_fields.hidden_field :question_id %>
-      <%= render partial: 'surveys/submissions/' + question.question_type + '_question',
-                 locals: { f: answer_fields, question: question, answer: answer, question_label: question_label } %>
+      <%= render '/surveys/submissions/' + question.question_type + '_question',
+           f: answer_fields, question: question, answer: answer, question_label: question_label %>
     </div>
 <% end %>

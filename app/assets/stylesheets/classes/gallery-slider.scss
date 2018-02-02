@@ -1,0 +1,29 @@
+.gallery-slider {
+  position: relative;
+  height: 400px;
+
+  .swiper-slide {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .gallery-top {
+    height: 80%;
+    width: 100%;
+  }
+  .gallery-thumbs {
+    height: 20%;
+    box-sizing: border-box;
+    padding: 10px 0;
+  }
+  .gallery-thumbs .swiper-slide {
+    background-size: cover;
+    width: 100px;
+    height: 100%;
+    opacity: 0.4;
+  }
+  .gallery-thumbs .swiper-slide-active {
+    opacity: 1;
+  }
+
+}

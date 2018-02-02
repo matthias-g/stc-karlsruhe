@@ -13,7 +13,7 @@ module ActionsHelper
 
   # for actions and news_entries
   def show_gallery?(item)
-    (item.gallery && policy_scope(item.gallery.gallery_pictures).any?) && item.visible?
+    (item.gallery && policy_scope(item.gallery.gallery_pictures).any?)
   end
 
   def show_contains_invisible_pictures_notification?(action)

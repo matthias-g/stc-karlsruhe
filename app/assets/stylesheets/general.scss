@@ -1,15 +1,23 @@
 
-.typeHeader {
-  font: 25px CaptionFont;
-  letter-spacing: 0.04em;
-  opacity: 0.5;
+// styles for a header box
+.record-header {
   text-align: center;
-  margin-bottom: 10px;
+  padding-top: 1rem !important;
+  .type {
+    font: 1.5rem CaptionFont;
+    letter-spacing: 0.04rem;
+    opacity: 0.5;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .labels {
+    text-align: center;
+    font-size: 1.7rem;
+  }
 }
 
 
-
-/* Centers the wrapped child. */
+// centers the wrapped child
 .center-wrap {
   display: table;
   height: 100%;
@@ -22,42 +30,25 @@
   }
 }
 
-.video {
-  max-width: 600px;
-  margin: 0 auto;
-  background: #000;
-  .locked-iframe {
-    border: none;
-  }
-  .locked-iframe-trigger {
-    color: $link-color;
-    font-size: 100px;
-    cursor: pointer;
-    text-align: center;
-    text-shadow: 0 0 15px rgba(#000, 0.8);
-    transition: all 0.4s;
-    background: #000 url("/images/trailer_cover.jpg") center / cover;
-    &:hover {
-      color: $link-hover-color;
-    }
-    div {
-      position: absolute;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 150px;
-      height: 100px;
-      margin: auto auto;
-      * {
-        vertical-align: top;
-      }
-    }
-  }
-}
 
-.locked-iframe {
-  display: none !important;
+
+.picture-container {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  .copyright {
+    color: white;
+    font-size: 10px;
+    text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000;
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    white-space: nowrap;
+    padding-left: 10px;
+    transform-origin: 0% 100%;
+    -moz-transform: rotate(-90deg);
+    cursor: default;
+  }
 }
 
 .term {
@@ -65,10 +56,6 @@
   white-space: nowrap;
   padding-left: 1px;
   padding-right: 1px;
-}
-
-.centered {
-  text-align: center;
 }
 
 table.properties {

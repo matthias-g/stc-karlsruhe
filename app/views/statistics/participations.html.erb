@@ -9,8 +9,7 @@
 <div id="statistics-header" class="section">
   <div class="select-year">
     <h1>Neue Aktionsteilnahmen <%= @action_group.title %></h1>
-    <%= render partial: 'layouts/week_dropdown',
-               locals: { target_path: lambda { |action_group| statistiken_teilnahmen_path(date: action_group.date_range.end) } } %>
+    <%= render '/layouts/week_dropdown', target_path: lambda { |action_group| statistiken_teilnahmen_path(date: action_group.date_range.end) } %>
   </div>
   <div class="clearfix"></div>
 </div>

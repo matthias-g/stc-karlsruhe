@@ -6,44 +6,6 @@
 @import "bootstrap";
 @import "bootstrap-select";
 
-/* column modifiers */
-.col-narrow {
-  min-width: 250px;
-  max-width: 380px;
-}
-.col-medium {
-  min-width: 270px;
-  max-width: 440px;
-}
-.col-centered {
-  float: none !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-@media (max-width: 700px) {
-  .no-float-below-700px {
-    display: block !important;
-    float: none !important;
-    width: auto !important;
-  }
-}
-@include media-breakpoint-only(xs) {
-  .col-only-xs-centered {
-    float: none !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-}
-@include media-breakpoint-only(sm) {
-  .col-only-sm-centered {
-    float: none !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-}
-
-
-
 /* row modifiers (equal height columns) */
 @include media-breakpoint-up(sm) {
   .row-sm-eq-height {

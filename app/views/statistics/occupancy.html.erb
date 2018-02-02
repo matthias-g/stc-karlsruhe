@@ -3,8 +3,7 @@
 <div id="statistics-header" class="section">
   <div class="select-year">
     <h1>Aktionsauslastung <%= @action_group.title %></h1>
-    <%= render partial: 'layouts/week_dropdown',
-               locals: { target_path: lambda { |action_group| occupancy_in_year_path(action_group.title) } } %>
+    <%= render '/layouts/week_dropdown',  target_path: lambda { |action_group| occupancy_in_year_path(action_group.title) } %>
   </div>
 </div>
 

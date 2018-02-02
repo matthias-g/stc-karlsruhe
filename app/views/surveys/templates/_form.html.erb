@@ -11,10 +11,13 @@
   </section>
 <% end %>
 
-<div class="typeHeader">
-  &nbsp;<%= isNew ? t('surveys.label.newTemplate') : t('surveys.label.editTemplate') %>&nbsp;
+<div class="record-header">
+  <div class="type">
+    &nbsp;<%= isNew ? t('surveys.label.newTemplate') : t('surveys.label.editTemplate') %>&nbsp;
+  </div>
+  <h1><%= @template.title %></h1>
 </div>
-<h1><%= @template.title %></h1>
+
 
 <section>
   <%= f.text_field :title %>

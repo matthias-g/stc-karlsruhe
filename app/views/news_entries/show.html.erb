@@ -8,16 +8,17 @@
     <meta property="og:description" content="<%= format_urls_no_html(@news_entry.text) %>" />
 <% end %>
 
-
-<div class="typeHeader">
-  <%= l @news_entry.created_at.to_date, format: :date %>
-  <%= '| ' + t('news_entry.label.invisible') unless @news_entry.visible? %>
+<div class="record-header">
+  <div class="type">
+    <%= l @news_entry.created_at.to_date, format: :date %>
+    <%= '| ' + t('news_entry.label.invisible') unless @news_entry.visible? %>
+  </div>
+  <h1><%= @news_entry.title %></h1>
 </div>
-<h1><%= @news_entry.title %></h1>
 
 <% if show_gallery?(@news_entry) %>
     <div class="news-entry-gallery">
-      <%= render 'galleries/gallery', gallery: @news_entry.gallery %>
+      <%= render '/galleries/gallery', gallery: @news_entry.gallery %>
       <% if current_user && @news_entry.gallery.gallery_pictures.invisible.any? &&
           policy(@news_entry.gallery.gallery_pictures.invisible.first).make_visible? %>
           <i><%= t('gallery.message.containsInvisiblePictures') %></i>

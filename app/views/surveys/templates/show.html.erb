@@ -2,10 +2,12 @@
 
 <p id="notice"><%= notice %></p>
 
-<div class="typeHeader">
-  &nbsp;<%= Surveys::Template.model_name.human %>&nbsp;
+<div class="record-header">
+  <div class="type">
+    &nbsp;<%= Surveys::Template.model_name.human %>&nbsp;
+  </div>
+  <h1><%= @template.title %></h1>
 </div>
-<h1><%= @template.title %></h1>
 
 <% idx = 0 %>
 <% @template.questions.each do |question| %>

@@ -2,12 +2,11 @@
 
 <h1><%= t('user.label.userList') %></h1>
 
-<table class="table" style="width: 350px;">
+<table class="table">
   <thead>
     <tr>
       <th><%= t('activerecord.attributes.user.username') %></th>
-      <th><%= t('activerecord.attributes.user.first_name') %></th>
-      <th><%= t('activerecord.attributes.user.last_name') %></th>
+      <th><%= t('activerecord.attributes.user.first_name') +' & '+ t('activerecord.attributes.user.last_name') %></th>
       <th><%= t('activerecord.attributes.user.email') %> & <%= t('activerecord.attributes.user.phone') %></th>
     </tr>
   </thead>
@@ -16,8 +15,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.username , user %></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
+        <td><%= user.first_name + ' ' + user.last_name %></td>
         <td><%= user.email %> <br /> <%= user.phone %></td>
       </tr>
     <% end %>

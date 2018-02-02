@@ -178,6 +178,7 @@ de:
       userEmailConfirmation: 'E-Mail-Adressen-Bestätigung'
       userUnlocking: 'Account-Freischaltung'
       userDeleteAccount: 'Account löschen: %{user}'
+      galleryEdit: 'Galerie bearbeiten'
       messageContactForm: 'Kontakt'
       messageAdminMailForm: 'Admin-Mailer'
       manageTeam: 'Team verwalten'
@@ -272,14 +273,14 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
   action:
     action:
       new: 'Neue Aktion erstellen'
-      edit: 'Aktion bearbeiten'
+      edit: 'Bearbeiten'
       enter: 'Team beitreten'
       leave: 'Team verlassen'
       delete: 'Aktion löschen'
-      open: 'Aktion öffnen'
-      close: 'Aktion abschließen'
+      open: 'Öffnen'
+      close: 'Beenden'
       makeVisible: 'Sichtbar machen'
-      makeInvisible: 'Aktion verstecken'
+      makeInvisible: 'Verstecken'
       manageTeam: 'Team verwalten'
       makeLeader: 'als Leiter hinzufügen'
       addLeader: Aktionsleiter auswählen
@@ -299,7 +300,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       exportICal: Als iCal/ICS exportieren
     label:
       action: 'Aktion'
-      subaction: 'Teilaktion'
+      subaction_of: 'Teilaktion von'
       subactions:
         one: '1 Teilaktion'
         other: '%{count} Teilaktionen'
@@ -319,8 +320,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       cropImage: 'Bildausschnitt für %{crop_target} anpassen'
       parent_action: 'Diese Aktion ist Teil von'
       invisible: versteckt
-      volunteers_in_action: 'Team (%{members} von %{limit})'
-      volunteers_in_empty_action: 'Team (maximal %{limit})'
+      volunteers_in_action: 'Team'
       no_volunteers: 'Bisher haben sich noch keine Mitarbeiter für diese Aktion angemeldet.'
       volunteers_in_subactions: 'Team in Teilaktionen (%{members} von %{limit})'
     help:
@@ -339,7 +339,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       remainingVacancy: '%s freie Plätze'
       teamMember: 'Du bist im Aktionsteam.'
       subactionTeamMember: 'Du bist bei einer Teilaktion dabei.'
-      enterOneOfThesubactions: 'Melde dich zu einer der %{subactions_link} an!'
+      enterOneOfThesubactions: 'Melde dich zu einer der Teilaktionen an!'
       isFull: 'Diese Aktion ist schon vollbesetzt.'
       participationSuccess: 'Du nimmst jetzt an dieser Aktion teil. Die Aktionsleiter werden sich mit dir etwa eine Woche vor der Aktion in Verbindung setzen.'
       madeVisible: 'Aktion wurde sichtbar gemacht.'
@@ -502,6 +502,14 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       rotateLeft: "Nach links drehen"
       uploadPictures: Bilder hochladen
       uploadSelectedPictures: Ausgewählte Bilder hochladen
+      edit: Galerie bearbeiten
+      show: Galerie anzeigen
+      showAction: Aktion anzeigen
+      index: Alle Galerien auflisten
+      makeAllVisible: Alle Bilder sichtbar machen
+      makeAllInvisible: Alle Bilder verstecken
+    label:
+      editGallery: Galerie bearbeiten
     message:
       containsInvisiblePictures: 'Einige der Bilder in dieser Galerie wurden noch nicht von jemandem aus dem Orgateam freigeschaltet
               und sind daher noch nicht öffentlich sichtbar.'

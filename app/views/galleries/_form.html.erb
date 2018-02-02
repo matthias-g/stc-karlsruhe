@@ -12,44 +12,51 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="white-box">
+    <div class="field">
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </div>
   </div>
 
-  <table class="table">
-    <thead>
-    <tr>
-      <th><%= f.label :picture %></th>
-      <th><%= f.label 'Uploader' %></th>
-      <th colspan="1"></th>
-    </tr>
-    </thead>
+  <div class="white-box">
+    <table class="table">
+      <thead>
+      <tr>
+        <th><%= f.label :picture %></th>
+        <th><%= f.label 'Uploader' %></th>
+        <th colspan="1"></th>
+      </tr>
+      </thead>
 
-    <tbody>
-    <% @gallery.gallery_pictures.each do |picture| %>
-      <% unless picture.new_record? %>
-        <tr>
-          <td><%= image_tag picture.picture_url(:preview), class: 'img-responsive' %></td>
-          <td><%= if picture.visible
-                    link_to 'Unsichtbar machen', make_invisible_gallery_picture_path(picture)
-                  else
-                    link_to 'Sichtbar machen', make_visible_gallery_picture_path(picture)
-                  end %></td>
-          <td><%= picture.uploader.full_name %></td>
-          <td><%= link_to 'Bild entfernen', gallery_picture_path(picture), method: :delete %></td>
-        </tr>
+      <tbody>
+      <% @gallery.gallery_pictures.each do |picture| %>
+        <% unless picture.new_record? %>
+          <tr>
+            <td><%= image_tag picture.picture_url(:preview), class: 'img-responsive' %></td>
+            <td><%= if picture.visible
+                      link_to 'Unsichtbar machen', make_invisible_gallery_picture_path(picture)
+                    else
+                      link_to 'Sichtbar machen', make_visible_gallery_picture_path(picture)
+                    end %></td>
+            <td><%= picture.uploader.full_name %></td>
+            <td><%= link_to 'Bild entfernen', gallery_picture_path(picture), method: :delete %></td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
-    </tbody>
-  </table>
-
-  <div class="field">
-    <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+      </tbody>
+    </table>
   </div>
 
-  <div class="actions">
-    <%= f.submit 'Speichern und Bilder hochladen' %>
+  <div class="white-box">
+    <div class="field">
+      <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Speichern und Bilder hochladen' %>
+    </div>
   </div>
+
 <% end %>
 

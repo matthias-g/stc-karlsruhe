@@ -1,21 +1,21 @@
 <% provide :title, @user.full_name %>
-<% wrapper_classes.delete('white-box').add('container-medium') %>
+<% wrapper_classes.delete('white-box') %>
 
-<div class="white-box">
-  <div class="typeHeader">
+<div class="white-box record-header">
+  <div class="type">
     <%= (@user == current_user) ? t('user.label.myProfile') : t('user.label.profile') %>
   </div>
   <h1><%= @user.full_name %></h1>
 </div>
 
-<div class="row row-sm-eq-height">
-  <div class="col-sm-6">
+<div class="row align-items-stretch">
+  <div class="col-sm-5">
 
     <% if @user == current_user && @submission %>
         <section id="survey" class="white-box">
           <h2>Umfrage</h2>
           <%= bootstrap_form_for([@submission.template, @submission]) do |f| %>
-              <%= render partial: 'surveys/submissions/form_questions', locals: { f: f } %>
+              <%= render '/surveys/submissions/form_questions', f: f %>
               <%= f.submit t('surveys.action.saveSubmission'), class:'submit btn btn-secondary float-right' %>
           <% end %>
         </section>
@@ -40,18 +40,23 @@
           </table>
           <span><%= email_reception_description @user %></span>
 
-          <div id="user-profile-actions">
-            <% if policy(@user).edit?  %>
-                <%= link_to edit_user_path, title: t('user.action.edit'), class:'btn btn-secondary' do %>
-                    <span class="fa fa-pencil"></span>
-                    <%= t('user.action.edit') %>
+          <div class="row mt-5">
+            <div class="col">
+              <% if policy(@user).edit?  %>
+                <%= link_to edit_user_path, title: t('user.action.edit'), class:'btn btn-primary btn-block' do %>
+                  <span class="fa fa-pencil"></span>
+                  <%= t('user.action.edit') %>
                 <% end %>
-            <% end %>
-            <%= link_to destroy_user_session_path, method: :delete, title: t('user.action.logout'), class:'btn btn-secondary' do %>
+              <% end %>
+            </div>
+            <div class="col">
+              <%= link_to destroy_user_session_path, method: :delete, title: t('user.action.logout'), class:'btn btn-secondary btn-block' do %>
                 <span class="fa fa-sign-out"></span>
                 <%= t('user.action.logout') %>
-            <% end %>
+              <% end %>
+            </div>
           </div>
+
         </section>
     <% end %>
 
@@ -67,56 +72,49 @@
     <% end %>
 
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-7">
 
     <section id="user-actions" class="white-box">
       <h2><%= Action.model_name.human(count:2) %></h2>
+
       <% if @actions_as_leader.any? %>
-          <h3><%= t('user.label.actionsAsLeader') %> (<%= @actions_as_leader.size %>
-            <%= Action.model_name.human(count: @actions_as_leader.size) %>):</h3>
-          <% @actions_as_leader.each do |action| %>
-              <%= link_to action.title, action %>
-          <% end %>
+        <h3>
+          <%= t('user.label.actionsAsLeader') %> (<%= @actions_as_leader.size %>
+          <%= Action.model_name.human(count: @actions_as_leader.size) %>):
+        </h3>
+        <%= render '/actions/action_list', actions: @actions_as_leader %>
       <% end %>
+
       <% if @actions_as_volunteer.any? %>
-          <h3><%= t('user.label.actionsAsVolunteer') %> (<%= @actions_as_volunteer.size %>
-            <%= Action.model_name.human(count: @actions_as_volunteer.size) %>):</h3>
-          <% @actions_as_volunteer.each do |action| %>
-              <%= link_to action.title, action %>
-          <% end %>
+        <h3>
+          <%= t('user.label.actionsAsVolunteer') %> (<%= @actions_as_volunteer.size %>
+          <%= Action.model_name.human(count: @actions_as_volunteer.size) %>):
+        </h3>
+        <%= render '/actions/action_list', actions: @actions_as_volunteer %>
       <% end %>
+
       <% if @past_actions.any? %>
-          <h3><%= t('user.label.pastActions') %> (<%= @past_actions.size %>
-            <%= Action.model_name.human(count: @past_actions.size) %>):</h3>
-          <% @past_actions.each do |action| %>
-              <%= link_to action.title, action %>
-          <% end %>
+        <h3>
+          <%= t('user.label.pastActions') %> (<%= @past_actions.size %>
+          <%= Action.model_name.human(count: @past_actions.size) %>):
+        </h3>
+        <%= render '/actions/action_list', actions: @past_actions %>
       <% end %>
+
       <% if @user.actions_as_volunteer.blank? && @user.actions_as_leader.blank? %>
-          <% if current_user == @user %>
-              <%= t('user.message.youHaveNoActions') %><br />
-          <% else %>
-              <%= t('user.message.hasNoActions', user:@user.first_name) %>
-          <% end %>
+        <%= (current_user == @user) ? t('user.message.youHaveNoActions') : t('user.message.hasNoActions', user: @user.first_name) %>
       <% end %>
+
       <% if @user == current_user  %>
-            <div class="actions">
-              <%= link_to t('action.action.findAction'), show_action_group_path(ActionGroup.default.title),
-                          class:'btn btn-secondary btn-wide' %>
-              <%= link_to t('action.action.startOwnAction'), own_action_path,
-                          class:'btn btn-secondary btn-wide' %>
-            </div>
-            <div class="feed">
-              <span><%= t('user.action.exportICal') %>:</span>
-              <%= link_to user_ical_path(@user.ical_token, @user), data: { 'turbolinks': false } do %>
-                  <span class="fa fa-calendar"></span>
-              <% end %>
-            </div>
+        <div class="feed">
+          <span><%= t('user.action.exportICal') %>:</span>
+          <%= link_to user_ical_path(@user.ical_token, @user), data: { 'turbolinks': false } do %>
+              <span class="fa fa-calendar"></span>
+          <% end %>
+        </div>
       <% end %>
+
     </section>
 
   </div>
 </div>
-
-
-

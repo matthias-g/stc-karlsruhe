@@ -25,7 +25,7 @@ module ApplicationHelper
   end
 
   def wrapper_classes
-    (@wrapper_classes ||= Set['white-box'])
+    (@wrapper_classes ||= Set['white-box', 'container-medium'])
   end
 
   def privileged_user?

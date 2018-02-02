@@ -1,17 +1,22 @@
 <% provide :title, t('layout.title.userPasswordChange', user:@user.full_name) %>
-
-<%= devise_error_messages! %>
-
-<%= bootstrap_form_for(resource, as: resource_name,
-      url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<% wrapper_classes.delete('container-medium').add('container-small') %>
 
 <h1>Passwort ändern</h1>
-<%= f.password_field :current_password %>
-<%= f.password_field :password %>
-<%= f.password_field :password_confirmation %>
 
-<%= f.submit t('general.action.save') %>
-<%= link_to t('general.action.cancel'), edit_user_path(@user), class:'btn btn-secondary' %>
+
+<%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>
+
+  <%= devise_error_messages! %>
+
+  <%= f.password_field :current_password %>
+  <%= f.password_field :password %>
+  <%= f.password_field :password_confirmation %>
+
+  <%= button_tag class: 'btn btn-success' do %>
+    <span class="fa fa-save"></span> <%= t('general.action.save') %>
+  <% end %>
+
+  <%= link_to t('general.action.cancel'), edit_user_path(@user), class:'btn btn-link' %>
 
 
 <% end %>

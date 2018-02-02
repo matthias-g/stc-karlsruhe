@@ -1,11 +1,13 @@
 <% actions.each do |action| %>
-  <%= link_to action do %>
+  <%= link_to action, class: (action.visible? ? 'action-entry' : 'action-entry hidden-action') do %>
     <div class="image">
       <%= image_tag (action.show_picture? ? action.picture_url(:action_list) : 'placeholder.svg') %>
     </div>
-    <% unless action.date.nil? %>
-      <div class="date"><%= action.date.strftime('%d. %b %Y') %></div>
-    <% end %>
-    <div class="title"><%= action.title %></div>
+    <div class="info">
+      <% unless action.date.nil? %>
+        <div class="date"><%= action.date.strftime('%d. %b %Y') %></div>
+      <% end %>
+      <div class="title"><%= action.title %></div>
+    </div>
   <% end %>
 <% end %>

@@ -1,23 +1,33 @@
 <h2><%= t('user.label.login') %></h2>
-<%= bootstrap_form_for(resource, as: resource_name, namespace: 'page_login',
-       url: session_path(resource_name)) do |f| %>
-    <%= f.text_field :login, :autofocus => true %>
-    <%= f.password_field :password %>
-    <% if devise_mapping.rememberable? -%>
-        <%= f.check_box :remember_me %>
-    <% end -%>
-    <%= f.submit t('user.action.login') %>
 
-    <%- if devise_mapping.recoverable? %>
-        <%= link_to t('user.action.recoverPassword'),
-              new_password_path(resource_name), class:'btn btn-secondary' %><br />
-    <% end -%>
+<%= bootstrap_form_for(resource, as: resource_name, namespace: 'page_login', url: session_path(resource_name)) do |f| %>
 
-    <%- if devise_mapping.omniauthable? %>
-        <%- resource_class.omniauth_providers.each do |provider| %>
-            <%= link_to t('user.action.loginWithProvider', provider: provider.to_s.titleize),
-                        omniauth_authorize_path(resource_name, provider),
-                        class:'btn btn-secondary' %><br />
-        <% end -%>
-    <% end -%>
+  <%= f.text_field :login, :autofocus => true %>
+  <%= f.password_field :password %>
+  <% if devise_mapping.rememberable? %>
+    <%= f.check_box :remember_me %>
+  <% end %>
+
+  <%= button_tag class: 'btn btn-primary' do %>
+    <span class="fa fa-sign-in"></span> <%= t('user.action.login') %>
+  <% end %>
+
+  <% if devise_mapping.recoverable? %>
+    <%= link_to new_password_path(resource_name), class:'btn btn-link' do %>
+      <%= t('user.action.recoverPassword') %>
+    <% end %>
+  <% end %>
+
+  <%= link_to new_registration_path(resource_name), class:'btn btn-link' do %>
+    <%= t('user.action.register') %>
+  <% end %>
+
+  <% if devise_mapping.omniauthable? %>
+    <% resource_class.omniauth_providers.each do |provider| %>
+      <%= link_to omniauth_authorize_path(resource_name, provider), class:'btn btn-secondary' do %>
+        <span class="fa fa-openid"></span> <%= t('user.action.loginWithProvider', provider: provider.to_s.titleize) %>
+      <% end %>
+    <% end %>
+  <% end %>
+
 <% end %>

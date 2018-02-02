@@ -12,14 +12,14 @@
         </section>
     <% end %>
 
-    <section>
-      <div class="typeHeader">
+    <div class="record-header">
+      <div class="type">
         &nbsp;<%= isNew ? t('news_entry.label.new') : t('news_entry.label.edit') %>&nbsp;
       </div>
       <h1><%= @news_entry.title %></h1>
-    </section>
+    </div>
 
-    <div class="row row-sm-eq-height">
+    <div class="row align-items-stretch">
 
       <section class="col-sm-8">
         <%= f.text_field :title %>
@@ -62,20 +62,20 @@
       </section>
 
       <div class="col-sm-4">
-        <section class="slim">
+        <section>
           <%= f.select :category, NewsEntry.categories.to_a.map { |w| [t("news_entry.category.#{w[0]}"), w[0]] } %>
           <%= f.check_box :visible %>
         </section>
-        <section class="slim">
+        <section>
           <h3>
             <%= t('news_entry.label.manageNewsEntry') %>
           </h3>
-          <%= f.submit t('general.action.save'), class: 'btn btn-secondary btn-wide' %>
-          <%= link_to t('general.action.cancel'), @news_entry, class: 'btn btn-secondary btn-wide' %>
+          <%= f.submit t('general.action.save'), class: 'btn btn-secondary btn-block' %>
+          <%= link_to t('general.action.cancel'), @news_entry, class: 'btn btn-secondary btn-block' %>
           <% if !isNew && policy(@news_entry).destroy? %>
               <%= link_to t('news_entry.action.delete'), @news_entry, method: :delete,
                           data: { confirm: t('general.message.confirmDelete')},
-                          class: 'btn btn-secondary btn-wide' %>
+                          class: 'btn btn-secondary btn-block' %>
           <% end %>
         </section>
 

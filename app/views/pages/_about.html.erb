@@ -46,11 +46,11 @@
     </div>
     <div class="col-sm-5 col-md-7">
 
-      <div data-class="LockedIframe" class="video box box-16by9">
-        <iframe class="locked-iframe" allowfullscreen data-frame-src="
+      <div data-class="YoutubeVideo" class="youtube-video box box-16by9">
+        <iframe allowfullscreen data-frame-src="
           https://www.youtube.com/embed/3d6axxum4Vs?rel=0&autoplay=true&autohide=1&iv_load_policy=3&color=white&showinfo=0">
         </iframe>
-        <div class="locked-iframe-trigger">
+        <div class="trigger">
           <div><i class="fa fa-play-circle-o"></i></div>
         </div>
       </div>
@@ -119,12 +119,12 @@
   </section>
 
 
-  <section id="about-movement" class="full-width">
-    <div class="row align-items-center">
-      <div class="col-sm-6 col-md-5">
-        <%= image_tag 'about3.jpg', class: 'img-fluid' %>
+  <div id="about-movement" class="full-width">
+    <div class="row align-items-stretch">
+      <div class="col-sm-6 col-md-5" style="background: url(<%= image_path 'about3.jpg' %>) center / cover no-repeat;">
+
       </div>
-      <div class="col-sm-6 col-md-7">
+      <div class="col-sm-6 col-md-7 align-self-center p-5">
         <h1>Die Bewegung</h1>
         <p>
           Das Idee von Serve the City entstand 2005 in Brüssel. Mittlerweile wurde das Konzept in über 100 Städten weltweit
@@ -144,7 +144,7 @@
         </p>
       </div>
     </div>
-  </section>
+  </div>
 
   <section class="text-center">
     <h1>Wer steht dahinter?</h1>

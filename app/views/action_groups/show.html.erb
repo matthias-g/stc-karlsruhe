@@ -1,5 +1,5 @@
 <% provide :title, t('layout.title.actionGroup', year: @action_group.title) %>
-<% wrapper_classes.delete('white-box') %>
+<% wrapper_classes.delete('white-box').delete('container-medium') %>
 
 <% content_for :head do %>
   <% desc = "Alle Aktionen der Aktionswoche #{@action_group.title} vom #{l @action_group.date_range.begin, format: :only_day} "
@@ -9,18 +9,24 @@
   <meta property="og:description" content="<%= desc %>" />
 <% end %>
 
-<div id="action-group-header" class="white-box large">
+<div id="action-group-header" class="white-box">
   <div class="row align-items-center">
     <div id="action-group-select" class="col-sm-6">
       <h1>Aktionswoche <%= @action_group.title %></h1>
-      <%= render partial: 'layouts/week_dropdown',
-                 locals: { target_path: lambda { |action_group| show_action_group_path(action_group.title) } } %>
+      <%= render '/layouts/week_dropdown', target_path: lambda { |action_group| show_action_group_path(action_group.title) } %>
     </div>
 
     <div id="action-group-info" class="col-sm-6">
       <div class="infobox">
-        <% actions_count = @action_group.actions.visible.where.not(desired_team_size: 0).where(parent_action: nil).count %>
-        <span><%= actions_count %></span>
+        <% all_actions = policy_scope(@action_group.actions.where(parent_action: nil)) %>
+        <% actions_count = all_actions.count %>
+        <% visible_actions_count = all_actions.visible.count %>
+        <span>
+          <%= visible_actions_count %>
+          <span class="hidden-actions">
+            <%= ('+ ' + (actions_count - visible_actions_count).to_s) if visible_actions_count < actions_count %>
+          </span>
+        </span>
         <div><%= Action.model_name.human(count: actions_count) %></div>
       </div>
       <% if @action_group.active_user_count > 0 %>
@@ -52,11 +58,11 @@
 </div>
 
 <div class="row">
-  <div class="col-md-3 md-push-9">
-    <div class="row">
+  <div class="col-md-3 col-lg-2">
+    <div class="row align-items-stretch">
 
       <div class="col-sm-6 col-md-12">
-        <section class="white-box large">
+        <div class="white-box">
           <h3>Filtern</h3>
           <%= bootstrap_form_for(:filter, url: actions_path, method:'get', html: {data: {
                 class: 'ActionFilter', list: '#action-list', info: '#action-group-filter-results'}}) do |f| %>
@@ -70,53 +76,54 @@
                            include_blank: "- - - Sichtbarkeit egal - - -", hide_label: true) %>
             <% end %>
             <%= f.check_box :after_17h, label: 'Nur Aktionen ab 17 Uhr anzeigen' %>
-            <%= f.submit 'Aktionen filtern', class:'btn btn-secondary btn-wide' %>
+            <%= f.submit 'Aktionen filtern', class:'btn btn-secondary btn-block' %>
             <div id="action-group-filter-results"></div>
           <% end %>
-        </section>
+        </div>
       </div>
 
-      <div class="col-sm-6 col-md-12 hidden-sm-down">
-        <section class="white-box large">
+      <div class="col-sm-6 col-md-12 hidden-xs-down">
+        <div class="white-box">
           <h3>Eigene Aktion</h3>
           <span><%= t('action.action.wantToStartOwnAction') %></span>
-          <%= link_to t('action.action.weHelpYou'), own_action_path, class:'btn btn-secondary btn-new-action' %>
-        </section>
+          <%= link_to t('action.action.weHelpYou'), own_action_path %>
+        </div>
       </div>
 
       <% if policy(:action).new? %>
-        <div class="col-sm-6 col-md-12 slim hidden-sm-down">
-          <section class="white-box large">
+        <div class="col-sm-6 col-md-12 hidden-xs-down">
+          <div class="white-box">
             <h3>Optionen</h3>
-            <%= link_to t('action.action.new'), new_action_path, class:'btn btn-secondary btn-wide' %>
-          </section>
+            <%= link_to t('action.action.new'), new_action_path, class:'btn btn-secondary btn-block' %>
+          </div>
         </div>
       <% end %>
 
     </div>
   </div>
+  <div class="col-md-9 col-lg-10">
 
-  <div class="col-md-9 md-pull-3">
-    <section id="action-list" class="invisible-box">
-      <%= render partial: 'actions/action_card_list', locals: { actions: @actions } %>
+    <div id="action-list">
+      <%= render '/actions/action_card_list', actions: @actions %>
       <% if policy_scope(@action_group.actions).toplevel.count == 0 %>
-        <div>
+        <div class="white-box">
           <%= t('action_group.noActions') %>
         </div>
       <% end %>
-    </section>
+    </div>
+
   </div>
-
-  <section class="white-box hidden-md-up">
-    <h3>Eigene Aktion</h3>
-    <span><%= t('action.action.wantToStartOwnAction') %></span>
-    <%= link_to t('action.action.weHelpYou'), own_action_path, class:'btn btn-secondary btn-new-action' %>
-  </section>
-
-  <% if policy(:action).new? %>
-      <section class="visible-xs visible-sm white-box">
-        <h3>Optionen</h3>
-        <%= link_to t('action.action.new'), new_action_path, class:'btn btn-secondary btn-wide' %>
-      </section>
-  <% end %>
 </div>
+
+<div class="white-box hidden-sm-up">
+  <h3>Eigene Aktion</h3>
+  <span><%= t('action.action.wantToStartOwnAction') %></span>
+  <%= link_to t('action.action.weHelpYou'), own_action_path, class:'btn btn-secondary btn-new-action' %>
+</div>
+
+<% if policy(:action).new? %>
+  <div class="white-box hidden-sm-up">
+    <h3>Optionen</h3>
+    <%= link_to t('action.action.new'), new_action_path, class:'btn btn-secondary btn-block' %>
+  </div>
+<% end %>

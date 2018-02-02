@@ -1,4 +1,4 @@
-<% wrapper_classes.add('large').add('no-overflow') %>
+<% wrapper_classes.delete('container-medium').add('no-overflow') %>
 
 <% content_for :head do %>
   <% desc = 'Du willst Menschen in Karlsruhe begegnen, ihnen Gutes tun?
@@ -38,9 +38,9 @@
   </header>
 <% end %>
 
-<section id="home-intro-box" class="full-width top no-padding">
+<section id="home-intro-box" class="full-width top">
   <h1 class="sr-only">Aktionen</h1>
-  <div class="row row-md-eq-height">
+  <div class="row align-items-stretch">
     <div class="col-sm-12 col-md-5">
 
       <h2 class="sr-only">Karte</h2>
@@ -60,7 +60,7 @@
     </div>
     <div class="col-sm-6 col-md-3">
 
-      <div class="linklist action_groups">
+      <div id="home-group-list">
         <h2>Aktionszeiträume und Projekte</h2>
         <% groups = policy_scope(ActionGroup.where("end_date >= ?", Time.now)) %>
         <% groups = policy_scope(ActionGroup.order(start_date: :desc).limit(2)) unless groups.any? %>
@@ -78,7 +78,7 @@
     </div>
     <div class="col-sm-6 col-md-4">
 
-      <div class="linklist actions">
+      <div id="home-action-list">
         <% if user_signed_in? && (actions = policy_scope(current_user.actions.active).order(:date)).any? %>
           <h2>Deine Aktionen</h2>
         <% elsif (actions = policy_scope(Action.where("date >= ?", Time.now)).limit(5)).any? %>
@@ -87,7 +87,7 @@
           <h2>Letzte Aktionen</h2>
           <% actions = policy_scope(Action.where.not(date: nil).order(date: :desc).limit(4)) %>
         <% end %>
-        <%= render partial: 'actions/action_list', locals: {actions: actions} %>
+        <%= render '/actions/action_list', actions: actions %>
       </div>
 
     </div>
@@ -113,11 +113,11 @@
     </div>
     <div class="col-sm-6 col-md-8">
 
-      <div data-class="LockedIframe" class="video box box-16by9">
-        <iframe class="locked-iframe" allowfullscreen data-frame-src="
+      <div data-class="YoutubeVideo" class="youtube-video box box-16by9">
+        <iframe allowfullscreen data-frame-src="
           https://www.youtube.com/embed/3d6axxum4Vs?rel=0&autoplay=true&autohide=1&iv_load_policy=3&color=white&showinfo=0">
         </iframe>
-        <div class="locked-iframe-trigger">
+        <div class="trigger">
           <div><i class="fa fa-play-circle-o"></i></div>
         </div>
       </div>
@@ -131,7 +131,7 @@
   <h1 class="sr-only">News</h1>
   <div class="swiper-container" data-class="TripleSlider">
     <div class="swiper-wrapper">
-      <%= render partial: '/news_entries/entries', locals: {limit: 7} %>
+      <%= render '/news_entries/entries', limit: 7 %>
     </div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>

@@ -92,10 +92,10 @@ Rails.application.routes.draw do
     jsonapi_resources :action_groups
     jsonapi_resources :galleries
     jsonapi_resources :gallery_pictures do
-        member do
-          get :rotateRight
-          get :rotateLeft
-        end
+      member do
+        get :rotateRight
+        get :rotateLeft
+      end
     end
     jsonapi_resources :news_entries
     jsonapi_resources :users

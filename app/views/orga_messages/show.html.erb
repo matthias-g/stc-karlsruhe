@@ -36,7 +36,7 @@
 
 <div class="admin-mail-body" style="background-color: transparent; padding-left: 8px;">
   <%= @message.body.html_safe %>
-  <%= render partial: 'mailer/footer', locals: { type: @message.content_type } %>
+  <%= render '/mailer/footer', type: @message.content_type %>
 </div>
 
 <div class="section">

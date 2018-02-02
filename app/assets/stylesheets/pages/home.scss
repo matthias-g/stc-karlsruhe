@@ -49,50 +49,38 @@
 
 #home-intro-box {
   margin-bottom: 60px;
-  background: #222;
+  > .row > * {
+    background: #222;
+  }
   h2 {
-    margin-top: 20px;
+    color: $primary;
+    margin: 20px 10px;
   }
 }
 #home-actions-map {
   height: 100%;
   min-height: 300px;
 }
-.linklist {
-  & > h2 {
-    color: $primary;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
+#home-group-list {
   a {
     display: block;
     padding: 10px;
     color: #ccc;
     border-bottom: 1px solid rgba(black, 0.5);
-  }
-  &.action_groups {
-    .title {
-      padding-left: 20px;
-      font-family: CaptionFont;
-      font-size: 24px;
+    &:hover {
+      color: $link-hover-color;
     }
   }
-  &.actions {
-    .image {
-      float: left;
-      margin-right: 20px;
-    }
-    .image img {
-      border-radius: 50%;
-      width: 70px;
-    }
-    .date {
-      font-size: 16px;
-    }
-    .title {
-      font-family: CaptionFont;
-      font-size: 22px;
-    }
+  .title {
+    padding-left: 20px;
+    font-family: CaptionFont;
+    font-size: 24px;
+  }
+}
+#home-action-list a {
+  color: #ccc;
+  &:hover {
+    color: $link-hover-color;
   }
 }
 

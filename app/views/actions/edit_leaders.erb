@@ -1,38 +1,46 @@
 <% provide :title, t('layout.title.manageTeam') %>
+<% wrapper_classes.delete('white-box') %>
 
-<div class="typeHeader">
-  <%= t('action.label.manageTeam') %>
+<div class="white-box record-header">
+  <div class="type">
+    <%= t('action.label.manageTeam') %>
+  </div>
+  <h1><%= @action.title %></h1>
 </div>
-<h1><%= @action.title %></h1>
 
-<div class="row row-sm-eq-height">
+<div class="row align-items-stretch">
+
   <div class="col-sm-6">
-    <h3><%= t('action.label.team') %></h3>
-    <ul>
-      <% @action.volunteers.each do |volunteer| %>
+    <div class="white-box">
+      <h3><%= t('action.label.team') %></h3>
+      <ul>
+        <% @action.volunteers.each do |volunteer| %>
           <li>
             <%= volunteer.full_name %>
             <% if policy(@action).remove_from_volunteers?(volunteer) %>
-                <%= link_to delete_volunteer_action_path(@action, user_id: volunteer.id),
-                            method: 'delete', title:t('action.action.removeVolunteer') do %>
+              <%= link_to delete_volunteer_action_path(@action, user_id: volunteer.id),
+                          method: 'delete', title:t('action.action.removeVolunteer') do %>
                 <span class="fa fa-times" aria-label="<%=t('action.action.removeVolunteer')%>"></span>
-                <% end %>
+              <% end %>
             <% end %>
             <% unless @action.has_leader?(volunteer) %>
-                <%= link_to add_leader_action_path(@action, user_id: volunteer.id),
-                            method: 'post', title:t('action.action.makeLeader') do %>
+              <%= link_to add_leader_action_path(@action, user_id: volunteer.id),
+                          method: 'post', title:t('action.action.makeLeader') do %>
                 <span class="fa fa-arrow-right"
                       aria-label="<%=t('action.action.makeLeader')%>"></span>
-                <% end %>
+              <% end %>
             <% end %>
           </li>
-      <% end %>
-    </ul>
+        <% end %>
+      </ul>
+    </div>
   </div>
+
   <div class="col-sm-6">
-    <h3><%= t('action.label.leaders') %></h3>
-    <ul>
-      <% @action.leaders.each do |leader| %>
+    <div class="white-box">
+      <h3><%= t('action.label.leaders') %></h3>
+      <ul>
+        <% @action.leaders.each do |leader| %>
           <li>
             <%= leader.full_name %>
             <%= link_to delete_leader_action_path(@action, :user_id => leader.id),
@@ -41,17 +49,19 @@
                   aria-label="<%=t('action.action.removeLeader')%>"></span>
             <% end %>
           </li>
-      <% end %>
-    </ul>
-    <% if policy(User).index? %>
+        <% end %>
+      </ul>
+      <% if policy(User).index? %>
         <%= select_tag 'select-new-leader', options_for_user_select,
                        class: 'selectpicker', title: t('action.action.addLeader'),
                        data: { class: 'SelectPicker', handler: 'addNewLeader',
                                live_search: true, action_id: @action.id, size: 5 } %>
-    <% end %>
+      <% end %>
+    </div>
   </div>
+
 </div>
 
-<div class="section">
+<div class="white-box">
   <%= link_to t('action.action.toAction'), @action, class: 'btn btn-secondary' %>
 </div>

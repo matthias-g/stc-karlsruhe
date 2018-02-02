@@ -13,51 +13,16 @@
         <%= link_to action do %>
           <h4 class="card-title"><%= action.title %></h4>
         <% end %>
-        <% if (status = action.visible? ? action.status : :hidden) != :active %>
-          <span class="badge status_<%= status %>"><%= t "action.status.#{status}" %></span>
+        <% unless action.visible? %>
+          <span class="badge status_hidden %>"><%= t 'action.status.hidden' %></span>
         <% end %>
+        <span class="badge status_<%= action.status %>"><%= t "action.status.#{action.status}" %></span>
         <% if (subactions = policy_scope(action.subactions)).any? %>
           <span class="badge badge-secondary"><%= t('action.label.subactions', count: subactions.count) %></span>
         <% end %>
         <p class="card-text"><%= action.short_description.presence || action.description %></p>
       </div>
     </div>
-
-    <%# old markup: %>
-    <% if false %>
-
-      <div class="action">
-        <div class="action-title">
-          <%= link_to action do %>
-            <h2><%= action.title %></h2>
-            <% if policy_scope(action.subactions).count > 0 %>
-              <div><%= t('action.label.subactions', count: policy_scope(action.subactions).count) %></div>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="action-image">
-          <%= link_to action do %>
-            <% if action.show_picture? %>
-              <%= image_tag action.picture_url(:action_list), lazy:true %>
-            <% else %>
-              <%= image_tag 'placeholder.svg' %>
-            <% end %>
-            <% ext_status = action.visible? ? action.status : :hidden %>
-            <div class="action-status status_<%= ext_status %>">
-              <%= t "action.status.#{ext_status}" %>
-            </div>
-          <% end %>
-        </div>
-        <div class="action-description">
-          <% if action.short_description.empty? %>
-            <div><%= action.description %></div>
-          <% else %>
-            <div><%= action.short_description %></div>
-          <% end %>
-        </div>
-      </div>
-
-    <% end %>
 
   <% end %>
 

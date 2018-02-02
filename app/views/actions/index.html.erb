@@ -1,8 +1,8 @@
 <% provide :title, t('layout.title.action.list') %>
 
-<%= render partial: 'action_card_list', locals: { actions: @actions } %>
+<%= render 'action_card_list', actions: @actions %>
 
 <div class="section hidden-md-up">
   <h3>Optionen</h3>
-  <%= link_to t('action.action.new'), new_action_path, class:'btn btn-secondary btn-wide' %>
+  <%= link_to t('action.action.new'), new_action_path, class:'btn btn-secondary btn-block' %>
 </div>

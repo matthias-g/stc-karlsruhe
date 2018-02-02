@@ -1,0 +1,33 @@
+.youtube-video {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #000;
+  iframe {
+    border: none;
+  }
+  .trigger {
+    color: $link-color;
+    font-size: 100px;
+    cursor: pointer;
+    text-align: center;
+    text-shadow: 0 0 15px rgba(#000, 0.8);
+    transition: all 0.4s;
+    background: #000 url("/images/trailer_cover.jpg") center / cover;
+    &:hover {
+      color: $link-hover-color;
+    }
+    div {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 150px;
+      height: 100px;
+      margin: auto auto;
+      * {
+        vertical-align: top;
+      }
+    }
+  }
+}

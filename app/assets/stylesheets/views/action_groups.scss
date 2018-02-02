@@ -20,13 +20,11 @@
     text-align: center;
     padding: 5px;
     margin: 0 5px;
-    &.wide {
-      display: block;
-      margin: 5px 0;
-      text-align: center;
-    }
     span {
       font-size: 25px;
+    }
+    .hidden-actions {
+      color: $status_hidden;
     }
   }
 }
@@ -36,14 +34,6 @@
   font-style: italic;
 }
 
-
-#action_groups {
-
-  .btn-new-action {
-    white-space: normal;
-  }
-
-}
 
 
 

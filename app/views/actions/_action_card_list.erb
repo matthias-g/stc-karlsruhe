@@ -1,25 +1,36 @@
 
-<div class="card-deck">
+<div class="action-card-list card-deck">
 
   <% actions.each do |action| %>
 
     <div class="card action-card" data-class="ClickableCard" data-href="<%= url_for action %>" title="<%= action.title %>">
-      <% if action.show_picture? %>
-        <%= image_tag action.picture_url(:action_list), lazy:true, class: 'card-img-top' %>
-      <% else %>
-        <%= image_tag 'placeholder.svg' %>
-      <% end %>
+
+      <%= image_tag action.show_picture? ? action.picture_url(:action_list) : 'placeholder.svg',
+                    lazy:true, class: 'card-img-top' %>
+
       <div class="card-body">
+
         <%= link_to action do %>
           <h4 class="card-title"><%= action.title %></h4>
         <% end %>
+
         <% unless action.visible? %>
           <span class="badge status_hidden %>"><%= t 'action.status.hidden' %></span>
         <% end %>
-        <span class="badge status_<%= action.status %>"><%= t "action.status.#{action.status}" %></span>
+        <% if action.finished? %>
+          <span class="badge status_finished"><%= t('action.status.finished') %></span>
+        <% elsif action.status == :full %>
+          <span class="badge status_full"><%= t('action.status.full') %></span>
+        <% else %>
+          <span class="badge status_<%= action.status %>">
+            <%= "#{action.total_team_size} / #{action.total_desired_team_size}" %>
+          </span>
+        <% end %>
+
         <% if (subactions = policy_scope(action.subactions)).any? %>
           <span class="badge badge-secondary"><%= t('action.label.subactions', count: subactions.count) %></span>
         <% end %>
+
         <p class="card-text"><%= action.short_description.presence || action.description %></p>
       </div>
     </div>

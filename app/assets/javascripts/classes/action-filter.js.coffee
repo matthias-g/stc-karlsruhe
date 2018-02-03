@@ -7,7 +7,7 @@ class @ActionFilter
       listId = html.data('list')
       $(listId).load '?' + @parametrize(obj) + ' ' + listId + ' > *', ->
         $('img', @).lazyload()
-        $(html.data('info')).text 'Gefundene Aktionen: ' + $(@).children().size()
+        $(html.data('info')).text 'Gefundene Aktionen: ' + $('.action-card', @).size()
 
 
   # create a parameter string of all the values of a form / part form

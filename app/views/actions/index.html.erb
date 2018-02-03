@@ -1,8 +1,16 @@
 <% provide :title, t('layout.title.action.list') %>
+<% wrapper_classes.delete('white-box').delete('container-medium') %>
+
+
+
+<div class="white-box">
+  <h1>Aktionen</h1>
+</div>
+
+<div class="white-box container-small">
+  <h3>Optionen</h3>
+  <%= link_to t('action.action.new'), new_action_path, class:'btn btn-primary btn-block' %>
+</div>
 
 <%= render 'action_card_list', actions: @actions %>
 
-<div class="section hidden-md-up">
-  <h3>Optionen</h3>
-  <%= link_to t('action.action.new'), new_action_path, class:'btn btn-secondary btn-block' %>
-</div>

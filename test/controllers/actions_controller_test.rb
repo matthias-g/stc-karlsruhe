@@ -150,21 +150,21 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
   test 'volunteer should enter action' do
     user = users(:peter)
     sign_in user
-    assert_not @action.has_volunteer?(user)
+    assert_not @action.volunteer?(user)
     get enter_action_url(@action)
     @action = Action.find(@action.id)
     assert_redirected_to action_path(@action)
-    assert @action.has_volunteer?(user)
+    assert @action.volunteer?(user)
   end
 
   test 'volunteer should leave action' do
     user = users(:peter)
     sign_in user
     @action.add_volunteer(user)
-    assert @action.has_volunteer?(user)
+    assert @action.volunteer?(user)
     get leave_action_url(@action)
     assert_redirected_to @action
-    assert_not @action.has_volunteer?(user)
+    assert_not @action.volunteer?(user)
     assert User.exists?(user.id)
   end
 
@@ -172,12 +172,12 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
     user = users(:peter)
     sign_in user
     @action.add_volunteer(user)
-    assert @action.has_volunteer?(user)
+    assert @action.volunteer?(user)
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
       get leave_action_url(@action)
     end
     assert_redirected_to @action
-    assert_not @action.has_volunteer?(user)
+    assert_not @action.volunteer?(user)
   end
 
   test 'admin should make action visible' do

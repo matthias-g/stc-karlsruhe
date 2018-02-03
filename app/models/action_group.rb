@@ -15,7 +15,7 @@ class ActionGroup < ApplicationRecord
   end
 
   def vacancy_count
-    actions.active.to_a.select{|p| p.subactions.count == 0}.map{|p| p.aggregated_desired_team_size - p.aggregated_volunteers.count}.sum
+    actions.toplevel.active.to_a.map { |p| p.total_desired_team_size - p.total_team_size }.sum
   end
 
   def date_range

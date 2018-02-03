@@ -18,8 +18,10 @@
     <% end %>
   <% end %>
 
-  <%= link_to new_registration_path(resource_name), class:'btn btn-link' do %>
-    <%= t('user.action.register') %>
+  <% if params[:action] != 'login_or_register' %>
+    <%= link_to new_registration_path(resource_name), class:'btn btn-link' do %>
+      <%= t('user.action.register') %>
+    <% end %>
   <% end %>
 
   <% if devise_mapping.omniauthable? %>

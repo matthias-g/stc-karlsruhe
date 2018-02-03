@@ -23,7 +23,7 @@
                 <span class="fa fa-times" aria-label="<%=t('action.action.removeVolunteer')%>"></span>
               <% end %>
             <% end %>
-            <% unless @action.has_leader?(volunteer) %>
+            <% unless @action.leader?(volunteer) %>
               <%= link_to add_leader_action_path(@action, user_id: volunteer.id),
                           method: 'post', title:t('action.action.makeLeader') do %>
                 <span class="fa fa-arrow-right"

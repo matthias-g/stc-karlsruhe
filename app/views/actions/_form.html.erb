@@ -14,10 +14,12 @@
   <% end %>
 
   <div class="white-box record-header">
-    <div class="type">
-      &nbsp;<%= isNew ? t('action.label.new') : t('action.label.edit') %>&nbsp;
-    </div>
-    <h1><%= @action.title %></h1>
+    <% if isNew %>
+      <h1><%= t('action.label.new') %></h1>
+    <% else %>
+      <div class="type"><%= t('action.label.edit') %></div>
+      <h1><%= @action.title %></h1>
+    <% end %>
   </div>
 
   <div class="row align-items-stretch">

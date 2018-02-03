@@ -1,10 +1,9 @@
 <% provide :title, t('layout.title.messageContactForm') %>
+<% wrapper_classes.delete('container-medium').add('container-small') %>
 
 <h1><%= t 'contact.orga.title' %></h1>
-<div class="leftCol">
-  <%= t 'contact.orga.text' %>
-</div>
-<div class="rightCol">
+<%= t 'contact.orga.text' %>
+<div class="mt-4">
   <%= bootstrap_form_for @message, url: contact_path do |form| %>
     <%= form.email_field :sender, value: user_signed_in? ? current_user.email : @message.sender, label: t('contact.general.placeholders.sender') %>
     <%= form.text_field :subject, label: t('contact.general.placeholders.subject') %>
@@ -15,7 +14,9 @@
         <%= recaptcha_tags ajax: true, script: false %>
       <% end %>
     <% end %>
-    <%= form.submit t('contact.orga.submit') %>
+    <%= button_tag class: 'btn btn-primary' do %>
+      <span class="fa fa-mail"></span> <%= t('contact.orga.submit') %>
+    <% end %>
   <% end %>
 
 </div>

@@ -36,7 +36,7 @@ class ActionPolicy < ApplicationPolicy
   end
 
   def manageTeam?
-    edit? && !record.closed?
+    edit? && !record.finished?
   end
 
   def change_visibility?
@@ -56,7 +56,7 @@ class ActionPolicy < ApplicationPolicy
   end
 
   def contact_leaders?
-    record.visible? && record.has_volunteer?(user) && !record.closed?
+    record.visible? && record.volunteer?(user) && !record.finished?
   end
 
   def enter?
@@ -64,7 +64,7 @@ class ActionPolicy < ApplicationPolicy
   end
 
   def enter_subaction?
-    !record.closed? && !record.full? && !record.has_volunteer_in_subaction?(user)
+    !record.finished? && !record.full? && !record.volunteer_in_subaction?(user)
   end
 
   def leave?
@@ -110,11 +110,11 @@ class ActionPolicy < ApplicationPolicy
 
 
   def is_leader?
-    record.has_leader?(user)
+    record.leader?(user)
   end
 
   def is_volunteer?(user)
-    record.has_volunteer?(user)
+    record.volunteer?(user)
   end
 
   private

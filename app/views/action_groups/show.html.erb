@@ -1,5 +1,6 @@
 <% provide :title, t('layout.title.actionGroup', year: @action_group.title) %>
 <% wrapper_classes.delete('white-box').delete('container-medium') %>
+<% actions = policy_scope(@action_group.actions.toplevel) %>
 
 <% content_for :head do %>
   <% desc = "Alle Aktionen der Aktionswoche #{@action_group.title} vom #{l @action_group.date_range.begin, format: :only_day} "
@@ -9,29 +10,34 @@
   <meta property="og:description" content="<%= desc %>" />
 <% end %>
 
+
+
 <div id="action-group-header" class="white-box">
   <div class="row align-items-center">
+
+    <%# week title and select dropdown %>
     <div id="action-group-select" class="col-sm-6">
       <h1>Aktionswoche <%= @action_group.title %></h1>
       <%= render '/layouts/week_dropdown', target_path: lambda { |action_group| show_action_group_path(action_group.title) } %>
     </div>
 
     <div id="action-group-info" class="col-sm-6">
+
+      <%# total action count %>
       <div class="infobox">
-        <% all_actions = policy_scope(@action_group.actions.where(parent_action: nil)) %>
-        <% actions_count = all_actions.count %>
-        <% visible_actions_count = all_actions.visible.count %>
         <span>
-          <%= visible_actions_count %>
-          <span class="hidden-actions">
-            <%= ('+ ' + (actions_count - visible_actions_count).to_s) if visible_actions_count < actions_count %>
-          </span>
+          <%= actions_count = actions.visible.count %>
+          <% if (hidden_actions_count = actions.hidden.count) > 0 %>
+            <span class="hidden-actions">+  <%= hidden_actions_count.to_s %></span>
+          <% end %>
         </span>
         <div><%= Action.model_name.human(count: actions_count) %></div>
       </div>
+
+      <%# total unique user count %>
       <% if @action_group.active_user_count > 0 %>
         <% if current_user&.in_orga_team? %>
-          <a href="<%= statistiken_teilnahmen_path %>" style="color: inherit;">
+          <a href="<%= statistiken_teilnahmen_path %>">
         <% end %>
         <div class="infobox">
           <span><%= @action_group.active_user_count %></span>
@@ -41,18 +47,21 @@
           </a>
         <% end %>
       <% end %>
-      <% if @action_group.vacancy_count > 0 %>
+
+      <%# total free places count %>
+      <% if (vacancy_count = @action_group.vacancy_count) > 0 %>
         <% if current_user&.in_orga_team? %>
-          <a href="<%= statistiken_auslastung_path %>" style="color: inherit;">
+          <a href="<%= statistiken_auslastung_path %>">
         <% end %>
         <div class="infobox">
-          <span><%= @action_group.vacancy_count %></span>
+          <span><%= vacancy_count %></span>
           <div><%= t('action.label.vacancies') %></div>
         </div>
         <% if current_user&.in_orga_team? %>
           </a>
         <% end %>
       <% end %>
+
     </div>
   </div>
 </div>
@@ -61,6 +70,7 @@
   <div class="col-md-3 col-lg-2">
     <div class="row align-items-stretch">
 
+      <%# filter module %>
       <div class="col-sm-6 col-md-12">
         <div class="white-box">
           <h3>Filtern</h3>
@@ -82,6 +92,7 @@
         </div>
       </div>
 
+      <%# propose action link %>
       <div class="col-sm-6 col-md-12 hidden-xs-down">
         <div class="white-box">
           <h3>Eigene Aktion</h3>
@@ -90,6 +101,7 @@
         </div>
       </div>
 
+      <%# admin options %>
       <% if policy(:action).new? %>
         <div class="col-sm-6 col-md-12 hidden-xs-down">
           <div class="white-box">

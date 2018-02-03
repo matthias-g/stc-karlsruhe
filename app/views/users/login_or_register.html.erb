@@ -1,14 +1,18 @@
 <% provide :title, t('layout.title.userLogin') %>
-<% wrapper_classes.delete('container-medium').add('container-small') %>
+<% wrapper_classes.delete('white-box').delete('container-medium').add('container-small') %>
 
-<div class="row align-items-stretch align-content-around">
+<div class="row align-items-stretch">
 
-  <section class="col-md-5">
-    <%= render 'login_form' %>
-  </section>
+  <div class="col-sm-6">
+    <div class="white-box">
+      <%= render 'login_form' %>
+    </div>
+  </div>
 
-  <section class="col-md-5">
-    <%= render 'register_form' %>
-  </section>
+  <div class="col-sm-6">
+    <div class="white-box">
+      <%= render 'register_form' %>
+    </div>
+  </div>
 
 </div>

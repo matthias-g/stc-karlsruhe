@@ -28,6 +28,6 @@ end
 
 RSpec::Matchers.define :volunteer_in_action do |action|
   match do |user|
-    action.has_volunteer?(user)
+    action.volunteer?(user)
   end
 end

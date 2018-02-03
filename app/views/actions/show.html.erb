@@ -13,7 +13,7 @@
 <div class="white-box record-header d-print-none">
   <h1><%= @action.title %></h1>
   <div class="type">
-    <% if @action.is_subaction? %>
+    <% if @action.subaction? %>
       <%= t('action.label.subaction_of') %>
       <%= link_to @action.parent_action.title, action_path(@action.parent_action) %>
     <% else %>
@@ -133,22 +133,13 @@
             <% if policy(@action).change_visibility? %>
                 <% if @action.visible %>
                   <%= link_to make_invisible_action_path(@action), class:'btn status_hidden btn-block' do %>
-                    <span class="fa fa-eye-slashed"></span> <%= t('action.action.makeInvisible') %>
+                    <span class="fa fa-eye-slash"></span> <%= t('action.action.makeInvisible') %>
                   <% end %>
                 <% else %>
                   <%= link_to make_visible_action_path(@action), class:'btn status_hidden btn-block' do %>
                     <span class="fa fa-eye"></span> <%= t('action.action.makeVisible') %>
                   <% end %>
                 <% end %>
-            <% end %>
-            <% if @action.closed? %>
-              <%= link_to open_action_path(@action), class:'btn btn-success btn-block' do %>
-                <span class="fa fa-play-circle"></span> <%= t('action.action.open') %>
-              <% end %>
-            <% else %>
-              <%= link_to close_action_path(@action), class:'btn btn-success btn-block' do %>
-                <span class="fa fa-check"></span> <%= t('action.action.close') %>
-              <% end %>
             <% end %>
           </section>
         </div>
@@ -215,16 +206,16 @@
           </div>
           <% unless @action.volunteers_in_subactions.empty? %>
               <div>
-                <h3><%= t('action.label.volunteers_in_subactions', members: @action.volunteers_in_subactions.size,
-                          limit: @action.aggregated_desired_team_size - @action.desired_team_size) %></h3>
+                <h3><%= t('action.label.volunteers_in_subactions') %></h3>
+                <span class="badge badge-primary"><%= @action.volunteers_in_subactions.size.to_s + ' / ' + (@action.total_desired_team_size - @action.desired_team_size).to_s %></span>
                 <%= list_users(@action.volunteers_in_subactions.distinct) %>
               </div>
           <% end %>
 
-          <% if user_signed_in? && @action.has_volunteer?(current_user) %>
+          <% if user_signed_in? && @action.volunteer?(current_user) %>
             <p><%= t('action.message.teamMember') %></p>
           <% end %>
-          <% if user_signed_in? && @action.has_volunteer_in_subaction?(current_user) %>
+          <% if user_signed_in? && @action.volunteer_in_subaction?(current_user) %>
             <p><%= t('action.message.subactionTeamMember') %></p>
           <% end %>
           <% if policy(@action).manageTeam? %>

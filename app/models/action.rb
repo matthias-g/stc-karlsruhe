@@ -20,65 +20,58 @@ class Action < ApplicationRecord
   before_save :adjust_status
   after_save :adjust_parent_status
 
-  scope :visible,  -> { where(actions: {visible: true}) }
-  scope :toplevel, -> { where(parent_action_id: nil) }
-  scope :active,   -> { visible.where('status <> ?', Action.statuses[:closed]) }
+  scope :visible,  -> { where(actions: { visible: true }) }
+  scope :hidden,   -> { where(actions: { visible: false }) }
+  scope :toplevel, -> { where(actions: { parent_action_id: nil }) }
+  scope :active,   -> { where('actions.date >= ?', Date.today) }
 
-  enum status: { open: 1, soon_full: 2, full: 3, closed: 4 }
+  enum status: { empty: 1, soon_full: 2, full: 3, finished: 4 }
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
 
   def volunteers_in_subactions
-    User.joins(:actions_as_volunteer).where("parent_action_id = #{self.id}")
+    User.joins(:actions_as_volunteer).where("actions.parent_action_id = #{id}")
   end
 
   def aggregated_volunteers
-    User.joins(:actions_as_volunteer).where("(actions.id = #{self.id || 'NULL'} or parent_action_id = #{self.id || 'NULL'})")
+    User.joins(:actions_as_volunteer).where("(actions.id = #{id || 'NULL'} or parent_action_id = #{id || 'NULL'})")
   end
 
   def aggregated_leaders
-    User.joins(:actions_as_leader).where("(actions.id = #{self.id || 'NULL'} or parent_action_id = #{self.id || 'NULL'})")
+    User.joins(:actions_as_leader).where("(actions.id = #{id || 'NULL'} or parent_action_id = #{id || 'NULL'})")
   end
 
-  def aggregated_desired_team_size
-    desired_team_size = self.desired_team_size
-    subactions.each { |p| desired_team_size += p.visible? ? p.desired_team_size : 0 }
-    desired_team_size
-  end
-
-
-  def add_volunteer user
+  def add_volunteer(user)
     volunteers << user
-    self.save #adjusts status
+    save
   end
 
-  def has_volunteer? user
+  def delete_volunteer(user)
+    volunteers.destroy user
+    save
+  end
+
+  def volunteer?(user)
     volunteers.include? user
   end
 
-  def has_volunteer_in_subaction? user
+  def volunteer_in_subaction?(user)
     volunteers_in_subactions.include? user
   end
 
-  def delete_volunteer user
-    volunteers.destroy user
-    self.save #adjusts status
-  end
-
-  def add_leader user
+  def add_leader(user)
     leaders << user
   end
 
-  def has_leader? user
+  def leader?(user)
     leaders.include? user
   end
 
-  def delete_leader user
+  def delete_leader(user)
     leaders.destroy user
   end
-
 
   def make_visible!
     update_attribute :visible, true
@@ -88,35 +81,21 @@ class Action < ApplicationRecord
     update_attribute :visible, false
   end
 
-  def close!
-    self.status = :closed
-    subactions.each {|p| p.close!}
-    save
-  end
-
-  def open!
-    self.status = :open
-    subactions.each {|p| p.open!}
-    save
-  end
-
-
   def dates
-    if subactions.count > 0
-      dates = subactions.collect{ |p| p.date }
-    else
-      dates = [date]
-    end
-    dates.reject{ |p| p == nil}
+    dates = subactions.any? ? subactions.collect(&:date) : [date]
+    dates.reject(&:nil?)
   end
 
-
-
-  def has_free_places?
-    desired_team_size - volunteers.count > 0
+  def free_places?
+    desired_team_size > volunteers.count
   end
 
-  def is_subaction?
+  def finished?
+    all_dates = dates
+    !(all_dates.any? && all_dates.max >= Date.today)
+  end
+
+  def subaction?
     parent_action != nil
   end
 
@@ -138,6 +117,20 @@ class Action < ApplicationRecord
     Time.now.change(hour: matches[3], min: matches[4], year: day.year, month: day.month, day: day.day) if matches && matches[3]
   end
 
+  def full_title
+    subaction? ? parent_action.title + ': ' + title : title
+  end
+
+  def status
+    vacancies = total_desired_team_size - total_team_size
+    if finished?
+      :finished
+    elsif vacancies.zero?
+      :full
+    else
+      vacancies < 3 ? :soon_full : :empty
+    end
+  end
 
 
   private
@@ -148,37 +141,18 @@ class Action < ApplicationRecord
 
   def slug_candidates
     candidates = []
-    candidates << :title
+    candidates << [full_title]
     candidates << [:title, action_group.title] if action_group
     candidates
   end
 
-  def available_slots_count
-    desired_team_size = self.desired_team_size
-    volunteer_count = self.volunteers.count
-    subactions.active.each do |action|
-      desired_team_size += action.desired_team_size
-      volunteer_count += action.volunteers.count
-    end
-    desired_team_size - volunteer_count
-  end
-
   def adjust_status
-    if self.status == 'closed'
-      return
-    end
-    free = available_slots_count
-    if free > 2
-      self.status = :open
-    elsif free > 0
-      self.status = :soon_full
-    else
-      self.status = :full
-    end
+    self.total_desired_team_size = desired_team_size + subactions.sum(:desired_team_size)
+    self.total_team_size = volunteers.count + subactions.visible.joins(:participations).count
   end
 
   def adjust_parent_status
-    parent_action.save if parent_action # adjusts status
+    parent_action&.save
   end
 
   def parent_action_cannot_be_same_action
@@ -194,13 +168,13 @@ class Action < ApplicationRecord
   end
 
   def on_volunteer_added(user)
-    return if status == 'closed'
+    return if finished?
     Mailer.action_participate_volunteer_notification(user, self).deliver_now if user.receive_notifications_for_new_participation
     Mailer.action_participate_leader_notification(user, self).deliver_now
   end
 
   def on_volunteer_removed(user)
-    return if status == 'closed'
+    return if finished?
     Mailer.leaving_action_notification(user, self).deliver_now
   end
 

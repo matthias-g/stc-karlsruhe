@@ -112,7 +112,7 @@ class UserTest < ActiveSupport::TestCase
     action = actions(:'kindergarten-music')
     user = users(:peter)
     other_user = users(:birgit)
-    assert action.has_leader?(other_user)
+    assert action.leader?(other_user)
     user.merge_other_users_actions(other_user)
 
     assert action.has_leader?(user)
@@ -123,7 +123,7 @@ class UserTest < ActiveSupport::TestCase
     action = actions(:'kindergarten-kitchen')
     user = users(:birgit)
     other_user = users(:peter)
-    assert action.has_volunteer?(other_user)
+    assert action.volunteer?(other_user)
     user.merge_other_users_actions(other_user)
 
     assert action.has_volunteer?(user)

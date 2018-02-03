@@ -53,12 +53,12 @@ class ActionTest < ActiveSupport::TestCase
     assert usernames.include? 'tabea'
   end
 
-  test "getting aggregated_desired_team_size of action with subactions" do
-    assert_equal 10, actions(:'kindergarten-party').aggregated_desired_team_size
+  test "getting total_desired_team_size of action with subactions" do
+    assert_equal 10, actions(:'kindergarten-party').total_desired_team_size
   end
 
-  test "getting aggregated_desired_team_size of action without subactions" do
-    assert_equal 4, actions(:one).aggregated_desired_team_size
+  test "getting total_desired_team_size of action without subactions" do
+    assert_equal 4, actions(:one).total_desired_team_size
   end
 
   test "adding volunteer" do
@@ -95,14 +95,14 @@ class ActionTest < ActiveSupport::TestCase
   end
 
   test "has_volunteer?" do
-    assert actions(:one).has_volunteer? users(:sabine)
-    assert_not actions(:one).has_volunteer? users(:peter)
+    assert actions(:one).volunteer? users(:sabine)
+    assert_not actions(:one).volunteer? users(:peter)
   end
 
   test "has_volunteer_in_subaction?" do
-    assert actions(:'kindergarten-party').has_volunteer_in_subaction? users(:peter)
-    assert_not actions(:'kindergarten-party').has_volunteer_in_subaction? users(:rolf)
-    assert_not actions(:'kindergarten-party').has_volunteer_in_subaction? users(:sabine)
+    assert actions(:'kindergarten-party').volunteer_in_subaction? users(:peter)
+    assert_not actions(:'kindergarten-party').volunteer_in_subaction? users(:rolf)
+    assert_not actions(:'kindergarten-party').volunteer_in_subaction? users(:sabine)
   end
 
   test "deleting volunteer" do
@@ -156,8 +156,8 @@ class ActionTest < ActiveSupport::TestCase
   end
 
   test "has_leader?" do
-    assert actions(:one).has_leader? users(:rolf)
-    assert_not actions(:one).has_leader? users(:lea)
+    assert actions(:one).leader? users(:rolf)
+    assert_not actions(:one).leader? users(:lea)
   end
 
   test "make visible" do
@@ -175,7 +175,7 @@ class ActionTest < ActiveSupport::TestCase
   test "close action without subactions" do
     assert actions(:one).open?
     actions(:one).close!
-    assert actions(:one).closed?
+    assert actions(:one).finished?
   end
 
   test "close action with subactions" do
@@ -183,34 +183,34 @@ class ActionTest < ActiveSupport::TestCase
     assert actions(:'kindergarten-music').open?
     assert actions(:'kindergarten-kitchen').open?
     actions(:'kindergarten-party').close!
-    assert actions(:'kindergarten-party').reload.closed?
-    assert actions(:'kindergarten-music').reload.closed?
-    assert actions(:'kindergarten-kitchen').reload.closed?
+    assert actions(:'kindergarten-party').reload.finished?
+    assert actions(:'kindergarten-music').reload.finished?
+    assert actions(:'kindergarten-kitchen').reload.finished?
   end
 
   test "open action without subactions" do
-    assert actions(:closed).closed?
+    assert actions(:closed).finished?
     actions(:closed).open!
     assert actions(:closed).open?
   end
 
   test "open action with subactions" do
-    assert actions(:closed_parent_action).closed?
-    assert actions(:closed_subaction).closed?
+    assert actions(:closed_parent_action).finished?
+    assert actions(:closed_subaction).finished?
     actions(:closed_parent_action).open!
     assert actions(:closed_parent_action).reload.open?
     assert actions(:closed_subaction).reload.open?
   end
 
   test "open full action" do
-    assert actions(:full_but_closed).closed?
+    assert actions(:full_but_closed).finished?
     actions(:full_but_closed).open!
     assert actions(:full_but_closed).full?
     assert_not actions(:full_but_closed).open?
   end
 
   test "open soon full action" do
-    assert actions(:soon_full_but_closed).closed?
+    assert actions(:soon_full_but_closed).finished?
     actions(:soon_full_but_closed).open!
     assert actions(:soon_full_but_closed).soon_full?
     assert_not actions(:soon_full_but_closed).open?
@@ -239,16 +239,16 @@ class ActionTest < ActiveSupport::TestCase
   end
 
   test "has_free_places?" do
-    assert actions(:one).has_free_places?
-    assert_not actions(:full).has_free_places?
+    assert actions(:one).free_places?
+    assert_not actions(:full).free_places?
     no_team_size = Action.new title: 'test', desired_team_size: 0
-    assert_not no_team_size.has_free_places?
+    assert_not no_team_size.free_places?
   end
 
   test "is_subaction?" do
-    assert_not actions(:one).is_subaction?
-    assert actions(:'kindergarten-music').is_subaction?
-    assert_not actions(:'kindergarten-party').is_subaction?
+    assert_not actions(:one).subaction?
+    assert actions(:'kindergarten-music').subaction?
+    assert_not actions(:'kindergarten-party').subaction?
   end
 
   test "gallery is created automatically on create" do
@@ -350,7 +350,7 @@ class ActionTest < ActiveSupport::TestCase
   test 'send notification to volunteer when volunteer enters action ' do
     action = actions(:two)
     user = users(:peter)
-    assert_not action.has_volunteer?(user)
+    assert_not action.volunteer?(user)
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
       action.add_volunteer(user)
     end
@@ -362,7 +362,7 @@ class ActionTest < ActiveSupport::TestCase
     user = users(:peter)
     user.receive_notifications_for_new_participation = false
     user.save!
-    assert_not action.has_volunteer?(user)
+    assert_not action.volunteer?(user)
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
       action.add_volunteer(user)
     end
@@ -390,7 +390,7 @@ class ActionTest < ActiveSupport::TestCase
       leader.receive_notifications_about_volunteers = false
       leader.save!
     end
-    assert_not action.has_volunteer?(user)
+    assert_not action.volunteer?(user)
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
       action.add_volunteer(user)
     end

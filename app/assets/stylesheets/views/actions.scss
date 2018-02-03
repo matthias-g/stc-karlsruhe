@@ -61,7 +61,7 @@
     input[type="text"] {
       max-width: 550px;
     }
-    .message_body {
+    textarea {
       max-width: 550px;
       min-height: 150px;
     }
@@ -129,6 +129,9 @@
 }
 
 // action board entry (partial, used on "action group show")
+.action-card-list {
+  justify-content: center;
+}
 .action-card {
   margin-bottom: 1rem !important;
   min-width: 340px;
@@ -148,7 +151,7 @@
 
 
 // general purpose action status classes
-.status_open {
+.status_empty {
   color: $status_open_text;
   background: $status_open;
 }
@@ -160,10 +163,6 @@
   color: $status_full_text;
   background: $status_full;
 }
-.status_closed {  // TODO can be deleted when status refactoring completed
-  color: $status_finished_text;
-  background: $status_finished;
-}
 .status_finished {
   color: $status_finished_text;
   background: $status_finished;
@@ -171,8 +170,4 @@
 .status_hidden {
   color: $status_hidden_text;
   background: $status_hidden;
-}
-.status_active {
-  color: $status_open_text;
-  background: $status_open;
 }

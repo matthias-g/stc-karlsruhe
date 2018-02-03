@@ -26,11 +26,11 @@
         team_size = action.desired_team_size
         unless team_size > 0
           aggr_volunteers = action.aggregated_volunteers.count
-          aggr_team_size = action.aggregated_desired_team_size
+          aggr_team_size = action.total_desired_team_size
         end
       %>
       <td>
-        <%= link_to action.title, action_path(action) %>
+        <%= link_to action.full_title, action_path(action) %>
         <%= content_tag :span, '(Ü)', title: 'Überaktion: Statistiken beinhalten Zahlen für Unteraktionen' unless team_size > 0 %>
       </td>
       <td><%= team_size > 0 ? volunteers : aggr_volunteers %></td>

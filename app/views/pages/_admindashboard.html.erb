@@ -1,68 +1,72 @@
 <% provide :title, 'Admin Dashboard' %>
+<% wrapper_classes.delete('white-box') %>
 
-<h1>Admin Dashboard</h1>
-
-<div class="row">
-  <section class="col-sm-4">
-    <%= link_to statistiken_auslastung_path do %>
-        <h2>Auslastungsstatistik</h2>
-    <% end %>
-    <p>Statistik über Auslastung der Aktionen</p>
-  </section>
-  <section class="col-sm-4">
-    <%= link_to statistiken_teilnahmen_path do %>
-        <h2>Teilnahmenstatistik</h2>
-    <% end %>
-    <p>Statistik über neue Teilnahmen der letzten 60 Tage</p>
-  </section>
-  <section class="col-sm-4">
-    <%= link_to('stats', data: {turbolinks: false}) do %>
-        <h2>Website-Statistiken</h2>
-    <% end %>
-    <p>Statistiken über Websitebesuche</p>
-    <p>Login mit Benutzername '<%= Rails.application.secrets.stats_user %>' und Passwort '<%= Rails.application.secrets.stats_password %>'</p>
-  </section>
+<div class="white-box record-header">
+  <h1>Admin Dashboard</h1>
 </div>
 
-<div class="row">
-  <section class="col-sm-4">
-    <%= link_to orga_messages_path do %>
-        <h2>Orgamails</h2>
-    <% end %>
-    <p>E-Mails an Mitarbeiter und Aktionsleiter schicken</p>
-  </section>
-  <section class="col-sm-4">
-    <%= link_to('webmail', data: {turbolinks: false}) do %>
-        <h2>Webmail</h2>
-    <% end %>
-    <p>Auf eigenen E-Mail-Account zugreifen</p>
-    <% if Rails.application.secrets.change_mail_password_url %>
-        <%= link_to 'Passwort ändern', Rails.application.secrets.change_mail_password_url %>
-    <% end %>
-  </section>
-  <section class="col-sm-4">
-    <%= link_to surveys_templates_path do %>
-        <h2>Umfragen</h2>
-    <% end %>
-    <p>Umfragen erstellen und Einsendungen zu Umfragen ansehen</p>
-  </section>
-</div>
-
-<div class="row">
-  <section class="col-sm-12">
-    <h2>iCal-Feeds</h2>
-    <div class="row">
-      <div class="col-sm-8">
-        <p>
-          Wenn du die Aktionen einer Aktionswoche in deinem Kalender anzeigen willst, kannst du die nebenstehenden URLs benutzen.
-          Per Rechtsklick auf den Link und "Link-Adresse kopieren", dann im Kalender als ICS/iCal-Kalender einrichten.
-        </p>
-      </div>
-      <div class="col-sm-4">
-        <% policy_scope(ActionGroup).order(title: :desc).each do |action_group| %>
-            <%= link_to 'Aktionswoche ' + action_group.title, action_group_ical_path(action_group), data: { 'turbolinks': false } %><br />
-        <% end %>
-      </div>
+<div class="white-box">
+  <div class="row text-center my-5">
+    <div class="col-sm-4">
+      <%= link_to statistiken_auslastung_path do %>
+          <h2>Auslastungsstatistik</h2>
+      <% end %>
+      <p>Statistik über Auslastung der Aktionen</p>
     </div>
-  </section>
+    <div class="col-sm-4">
+      <%= link_to statistiken_teilnahmen_path do %>
+          <h2>Teilnahmenstatistik</h2>
+      <% end %>
+      <p>Statistik über neue Teilnahmen der letzten 60 Tage</p>
+    </div>
+    <div class="col-sm-4">
+      <%= link_to('stats', data: {turbolinks: false}) do %>
+          <h2>Website-Statistiken</h2>
+      <% end %>
+      <p>Statistiken über Websitebesuche</p>
+      <p>Login mit Benutzername '<%= Rails.application.secrets.stats_user %>' und Passwort '<%= Rails.application.secrets.stats_password %>'</p>
+    </div>
+    <div class="col-sm-4">
+      <%= link_to orga_messages_path do %>
+          <h2>Orgamails</h2>
+      <% end %>
+      <p>E-Mails an Mitarbeiter und Aktionsleiter schicken</p>
+    </div>
+    <div class="col-sm-4">
+      <%= link_to('webmail', data: {turbolinks: false}) do %>
+          <h2>Webmail</h2>
+      <% end %>
+      <p>Auf eigenen E-Mail-Account zugreifen</p>
+      <% if Rails.application.secrets.change_mail_password_url %>
+          <%= link_to 'Passwort ändern', Rails.application.secrets.change_mail_password_url %>
+      <% end %>
+    </div>
+    <div class="col-sm-4">
+      <%= link_to surveys_templates_path do %>
+          <h2>Umfragen</h2>
+      <% end %>
+      <p>Umfragen erstellen und Einsendungen zu Umfragen ansehen</p>
+    </div>
+  </div>
+</div>
+
+<div class="white-box">
+  <div class="row">
+    <section class="col-sm-12">
+      <h2>iCal-Feeds</h2>
+      <div class="row">
+        <div class="col-sm-8">
+          <p>
+            Wenn du die Aktionen einer Aktionswoche in deinem Kalender anzeigen willst, kannst du die nebenstehenden URLs benutzen.
+            Per Rechtsklick auf den Link und "Link-Adresse kopieren", dann im Kalender als ICS/iCal-Kalender einrichten.
+          </p>
+        </div>
+        <div class="col-sm-4">
+          <% policy_scope(ActionGroup).order(title: :desc).each do |action_group| %>
+              <%= link_to 'Aktionswoche ' + action_group.title, action_group_ical_path(action_group), data: { 'turbolinks': false } %><br />
+          <% end %>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>

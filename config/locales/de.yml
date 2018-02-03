@@ -320,9 +320,9 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       cropImage: 'Bildausschnitt für %{crop_target} anpassen'
       parent_action: 'Diese Aktion ist Teil von'
       invisible: versteckt
-      volunteers_in_action: 'Team'
       no_volunteers: 'Bisher haben sich noch keine Mitarbeiter für diese Aktion angemeldet.'
-      volunteers_in_subactions: 'Team in Teilaktionen (%{members} von %{limit})'
+      volunteers_in_action: 'Team'
+      volunteers_in_subactions: 'Team in Teilaktionen'
     help:
       picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
       short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Aktionsliste statt der ausführlichen Beschreibung angezeigt.'
@@ -364,10 +364,10 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         participateLeaderNotification:
           subject: Neuer Mitarbeiter bei %{action}
     status:
-      open: Freie Plätze
+      empty: Freie Plätze
       soon_full: Wenige Plätze
       full: Vollbesetzt
-      closed: Abgeschlossen
+      finished: Abgeschlossen
       hidden: Versteckt
 
   news_entry:

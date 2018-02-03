@@ -94,14 +94,14 @@ class User < ApplicationRecord
 
   def merge_other_users_actions(other_user)
     other_user.actions_as_volunteer.to_a.each do |action|
-      unless action.has_volunteer?(self)
+      unless action.volunteer?(self)
         action.delete_volunteer(other_user)
         action.add_volunteer(self)
       end
     end
 
     other_user.actions_as_leader.to_a.each do |action|
-      unless action.has_leader?(self)
+      unless action.leader?(self)
         action.delete_leader(other_user)
         action.add_leader(self)
       end

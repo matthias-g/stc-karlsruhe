@@ -1,5 +1,9 @@
 #!/bin/bash
 
 bundle exec rails test
+RESULT=$?
 bundle exec rspec
+RESULT=$(($RESULT + $?))
 bundle exec codeclimate-test-reporter
+RESULT=$(($RESULT + $?))
+exit $RESULT

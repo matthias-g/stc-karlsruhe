@@ -136,8 +136,6 @@ en:
       toAction: 'Back to Action'
       makeVisible: 'Make visible'
       makeInvisible: 'Make invisible'
-      open: 'Open action'
-      close: 'Close action'
     label:
       action: 'Action'
       status: 'Status'

@@ -16,6 +16,7 @@ one:
   desired_team_size: 4
   action_group: one
   gallery: one
+  date: <%= Date.today %>
 
 two:
   title: Action 2
@@ -30,6 +31,7 @@ two:
   desired_team_size: 7
   action_group: one
   gallery: two
+  date: <%= Date.today %>
 
 three:
   title: Action 3
@@ -44,6 +46,7 @@ three:
   desired_team_size: 7
   action_group: one
   gallery: three
+  date: <%= Date.today %>
 
 four:
   title: Ausflug in den Zoo
@@ -58,6 +61,7 @@ four:
   desired_team_size: 7
   action_group: one
   gallery: four
+  date: <%= Date.today %>
 
 kindergarten-party:
   title: Fest im Kindergarten
@@ -66,6 +70,7 @@ kindergarten-party:
   desired_team_size: 2
   action_group: one
   gallery: five
+  date: <%= Date.today %>
 
 kindergarten-kitchen:
   title: Küche für Kindergarten-Fest
@@ -86,41 +91,45 @@ kindergarten-music:
   action_group: one
   parent_action: kindergarten-party
   gallery: seven
+  date: <%= Date.today %>
 
-closed:
-  title: Geschlossene Aktion
-  status: closed
-  desired_team_size: 5
+undated:
+  title: Undatierte Aktion
+  desired_team_size: 1
 
-closed_parent_action:
-  title: Geschlossene Überaktion
-  status: closed
+finished:
+  title: Beendete Aktion
   desired_team_size: 5
+  date: <%= Date.yesterday %>
 
-closed_subaction:
-  title: Geschlossene Unteraktion
-  status: closed
-  parent_action: closed_parent_action
+finished_parent_action:
+  title: Beendete Überaktion
   desired_team_size: 5
+  date: <%= Date.yesterday %>
+
+finished_subaction:
+  title: Beendete Unteraktion
+  parent_action: finished_parent_action
+  desired_team_size: 5
+  date: <%= Date.yesterday %>
 
 full:
   title: Volle Aktion
-  status: full
   desired_team_size: 1
   action_group: one
   visible: true
+  date: <%= Date.today %>
 
 soon_full:
   title: Fast volle Aktion
-  status: soon_full
   desired_team_size: 3
 
-full_but_closed:
+full_but_finished:
   title: Volle, geschlossene Aktion
-  status: closed
   desired_team_size: 1
+  date: <%= Date.yesterday %>
 
-soon_full_but_closed:
+soon_full_but_finished:
   title: Fast volle, geschlossene Aktion
-  status: closed
   desired_team_size: 3
+  date: <%= Date.yesterday %>

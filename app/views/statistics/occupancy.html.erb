@@ -22,10 +22,10 @@
   <% @actions.each do |action| %>
     <tr>
       <%
-        volunteers = action.volunteers.size
+        volunteers = action.team_size
         team_size = action.desired_team_size
         unless team_size > 0
-          aggr_volunteers = action.aggregated_volunteers.count
+          aggr_volunteers = action.total_team_size
           aggr_team_size = action.total_desired_team_size
         end
       %>

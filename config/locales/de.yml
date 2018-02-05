@@ -277,8 +277,6 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       enter: 'Team beitreten'
       leave: 'Team verlassen'
       delete: 'Aktion löschen'
-      open: 'Öffnen'
-      close: 'Beenden'
       makeVisible: 'Sichtbar machen'
       makeInvisible: 'Verstecken'
       manageTeam: 'Team verwalten'
@@ -344,8 +342,6 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       participationSuccess: 'Du nimmst jetzt an dieser Aktion teil. Die Aktionsleiter werden sich mit dir etwa eine Woche vor der Aktion in Verbindung setzen.'
       madeVisible: 'Aktion wurde sichtbar gemacht.'
       madeInvisible: 'Aktion wurde unsichtbar gemacht.'
-      opened: 'Aktion wurde geöffnet.'
-      closed: 'Aktion wurde geschlossen.'
       galleryPicturesUploaded: 'Vielen Dank für das Hochladen deiner Bilder! Sobald sie jemand aus dem Orgateam freigeschaltet hat,
         sind sie öffentlich sichtbar.'
       mailNewPictures:

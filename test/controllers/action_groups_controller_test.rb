@@ -34,7 +34,7 @@ class ActionGroupsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select 'h1', 'Aktionswoche 2015'
     expected_titles = ['Kostenlose Fahrradreparatur in der Innenstadt', 'Ausflug in den Zoo', 'Fest im Kindergarten', 'Volle Aktion']
-    assert_select '#action-list .action h2' do |titles|
+    assert_select '.action-card .card-title' do |titles|
       assert_equal expected_titles.length, titles.length
       actual_titles = titles.collect{|title| title.text}
       expected_titles.each do |title|
@@ -49,7 +49,7 @@ class ActionGroupsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select 'h1', 'Aktionswoche 2015'
     expected_titles = ['Action 3', 'Kostenlose Fahrradreparatur in der Innenstadt', 'Ausflug in den Zoo', 'Fest im Kindergarten', 'Volle Aktion']
-    assert_select '#action-list .action h2' do |titles|
+    assert_select '.action-card .card-title' do |titles|
       assert_equal expected_titles.length, titles.length
       actual_titles = titles.collect{|title| title.text}
       expected_titles.each do |title|
@@ -64,7 +64,7 @@ class ActionGroupsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select 'h1', 'Aktionswoche 2015'
     expected_titles = ['Action 2', 'Action 3', 'Kostenlose Fahrradreparatur in der Innenstadt', 'Ausflug in den Zoo', 'Fest im Kindergarten', 'Volle Aktion']
-    assert_select '#action-list .action h2' do |titles|
+    assert_select '.action-card .card-title' do |titles|
       assert_equal expected_titles.length, titles.length
       actual_titles = titles.collect{|title| title.text}
       expected_titles.each do |title|
@@ -75,12 +75,12 @@ class ActionGroupsControllerTest < ActionDispatch::IntegrationTest
 
   test "action should show short description if available" do
     get action_group_url(@action_group)
-    assert_select '.action-description', actions(:one).short_description
+    assert_select '.action-card .card-text', actions(:one).short_description
   end
 
   test "action should show description if no short description available" do
     get action_group_url(@action_group)
-    assert_select '.action-description', actions(:four).description
+    assert_select '.action-card .card-text', actions(:four).description
   end
 
   test "should get edit" do

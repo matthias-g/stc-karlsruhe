@@ -40,8 +40,8 @@ shared_examples 'a ActionUserRelationship' do
         end
       end
 
-      context 'action is closed' do
-        let(:action) { actions('Geschlossene Aktion') }
+      context 'action is finished' do
+        let(:action) { actions('Beendete Aktion') }
 
         it 'is false' do
           expect(subject).to be_falsey
@@ -105,8 +105,8 @@ shared_examples 'a ActionUserRelationship' do
         end
       end
 
-      context 'action is closed' do
-        let(:action) { actions('Fast volle, geschlossene Aktion') }
+      context 'action is finished' do
+        let(:action) { actions('Fast volle, beendete Aktion') }
 
         it 'is false' do
           expect(subject).to be_falsey

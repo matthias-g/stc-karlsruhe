@@ -10,14 +10,11 @@ class ActionsController < ApplicationController
 
   def index
     authorize Action.new
-    @actions = policy_scope(Action.all).order(:status)
-    if params[:filter]
-      p = filter_params
-      @actions = @actions.where(visible: (p[:visibility] != 'hidden')) unless p[:visibility].blank?
-      @actions = @actions.where(date: Date.parse(p[:day])) unless p[:day].blank?
-      @actions = @actions.where(status: Action.statuses[p[:status]]) unless p[:status].blank?
-    end
-    @actions = policy_scope(@actions)
+    @actions = policy_scope(Action.toplevel).order(visible: :desc, picture_source: :desc)
+    return unless params[:filter]
+    p = filter_params
+    @actions = @actions.where(visible: (p[:visibility] != 'hidden')) unless p[:visibility].blank?
+    @actions = @actions.where(date: Date.parse(p[:day])) unless p[:day].blank?
   end
 
   def show
@@ -106,16 +103,6 @@ class ActionsController < ApplicationController
     redirect_to @action, notice: t('action.message.madeInvisible')
   end
 
-  def open
-    @action.open!
-    redirect_to @action, notice: t('action.message.opened')
-  end
-
-  def close
-    @action.close!
-    redirect_to @action, notice: t('action.message.closed')
-  end
-
   def crop_picture
     if params.has_key?(:crop_x)
       @action.crop_picture(params[:crop_x].to_i, params[:crop_y].to_i,
@@ -164,7 +151,7 @@ class ActionsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def action_params
-    params.require(:the_action).permit(:title, :user_id, :status,
+    params.require(:the_action).permit(:title, :user_id,
       :location, :latitude, :longitude, :map_latitude, :map_longitude, :map_zoom,
       :description, :short_description, :individual_tasks, :material, :requirements,
       :picture, :picture_source, :desired_team_size,  :action_group_id, :date, :time, :parent_action_id)
@@ -182,7 +169,7 @@ class ActionsController < ApplicationController
   end
 
   def filter_params
-    params.require(:filter).permit(:visibility, :date, :status)
+    params.require(:filter).permit(:visibility, :date)
   end
 
 end

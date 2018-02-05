@@ -15,7 +15,7 @@ class ActionGroup < ApplicationRecord
   end
 
   def vacancy_count
-    actions.toplevel.active.to_a.map { |p| p.total_desired_team_size - p.total_team_size }.sum
+    actions.visible.active.sum(&:free_places)
   end
 
   def date_range

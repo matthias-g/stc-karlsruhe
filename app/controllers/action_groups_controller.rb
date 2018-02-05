@@ -13,19 +13,12 @@ class ActionGroupsController < ApplicationController
   end
 
   def show
-    @actions = @action_group.actions.toplevel
-
-    if params[:filter]
-      p = filter_params
-      @actions = @actions.where(visible: (p[:visibility] != 'hidden')) unless p[:visibility].blank?
-      @actions = @actions.where(date: Date.parse(p[:day])) unless p[:day].blank? || !p[:day].match(/\A\d{2,4}-\d{1,2}-\d{1,2}\z/)
-      @actions = @actions.where(status: Action.statuses[p[:status]]) unless p[:status].blank?
-    end
-
-    @actions = policy_scope(@actions).order(visible: :desc, status: :asc, picture_source: :desc)
-    if params[:filter] && filter_params[:after_17h] == '1'
-      @actions = @actions.to_a.select { |action| action.start_time && action.start_time.hour >= 17 }
-    end
+    @actions = policy_scope(@action_group.actions.toplevel).order(visible: :desc, picture_source: :desc)
+    return unless params[:filter]
+    p = filter_params
+    @actions = @actions.where(visible: (p[:visibility] != 'hidden')) unless p[:visibility].blank?
+    @actions = @actions.where(date: Date.parse(p[:day])) unless p[:day].blank? || !p[:day].match(/\A\d{2,4}-\d{1,2}-\d{1,2}\z/)
+    @actions = @actions.select(&:start_time&.hour >= 17) if p[:after_17h] == '1'
   end
 
   def new
@@ -65,7 +58,7 @@ class ActionGroupsController < ApplicationController
   end
 
   def filter_params
-    params.require(:filter).permit(:visibility, :day, :status, :after_17h)
+    params.require(:filter).permit(:visibility, :day, :after_17h)
   end
 
   def authorize_action_group

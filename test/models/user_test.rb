@@ -115,8 +115,8 @@ class UserTest < ActiveSupport::TestCase
     assert action.leader?(other_user)
     user.merge_other_users_actions(other_user)
 
-    assert action.has_leader?(user)
-    assert_not action.has_leader?(other_user)
+    assert action.leader?(user)
+    assert_not action.leader?(other_user)
   end
 
   test "merge other user's participating actions" do
@@ -126,8 +126,8 @@ class UserTest < ActiveSupport::TestCase
     assert action.volunteer?(other_user)
     user.merge_other_users_actions(other_user)
 
-    assert action.has_volunteer?(user)
-    assert_not action.has_volunteer?(other_user)
+    assert action.volunteer?(user)
+    assert_not action.volunteer?(other_user)
   end
 
 end

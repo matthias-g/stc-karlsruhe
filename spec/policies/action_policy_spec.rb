@@ -201,43 +201,22 @@ RSpec.describe ActionPolicy do
   describe 'contact_leaders?' do
     subject { policy.contact_leaders? }
 
-    context 'if action is open' do
-      context 'for volunteer' do
-        let(:user) { users(:sabine) }
+    context 'for volunteer' do
+      let(:user) { users(:sabine) }
 
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
-      end
-
-      context 'for other users' do
-        let(:user) { users(:peter) }
-
-        it 'is false' do
-          expect(subject).to be_falsey
-        end
+      it 'is true' do
+        expect(subject).to be_truthy
       end
     end
 
-    context 'if action is closed' do
-      before { action.close! }
+    context 'for other users' do
+      let(:user) { users(:peter) }
 
-      context 'for volunteer' do
-        let(:user) { users(:sabine) }
-
-        it 'is false' do
-          expect(subject).to be_falsey
-        end
-      end
-
-      context 'for other users' do
-        let(:user) { users(:peter) }
-
-        it 'is false' do
-          expect(subject).to be_falsey
-        end
+      it 'is false' do
+        expect(subject).to be_falsey
       end
     end
+
   end
 
   describe 'upload_pictures?' do

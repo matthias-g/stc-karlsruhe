@@ -64,7 +64,7 @@ class ActionPolicy < ApplicationPolicy
   end
 
   def enter_subaction?
-    !record.finished? && !record.full? && !record.volunteer_in_subaction?(user)
+    !record.finished? && record.free_places.nonzero? && !record.volunteers_in_subactions.include?(user)
   end
 
   def leave?
@@ -97,8 +97,6 @@ class ActionPolicy < ApplicationPolicy
   alias_method :update?, :edit?
   alias_method :destroy?, :edit?
 
-  alias_method :open?, :edit?
-  alias_method :close?, :edit?
   alias_method :make_visible?, :change_visibility?
   alias_method :make_invisible?, :change_visibility?
 

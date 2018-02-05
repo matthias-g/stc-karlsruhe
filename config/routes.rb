@@ -55,8 +55,6 @@ Rails.application.routes.draw do
       delete :delete_volunteer
       get :make_visible
       get :make_invisible
-      get :open
-      get :close
       get :crop_picture
       post :contact_volunteers
       post :contact_leaders

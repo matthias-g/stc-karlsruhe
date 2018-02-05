@@ -189,34 +189,43 @@
       <%# team info %>
       <div class="col-sm-6 col-md-12 d-print-none">
         <div class="white-box">
+
           <div>
             <h3><%= Action.human_attribute_name('leaders') %></h3>
             <%= list_users(@action.leaders) %>
           </div>
+
           <div>
-            <% if @action.volunteers.empty? && @action.desired_team_size > 0 %>
+            <% if @action.desired_team_size > 0 %>
               <h3><%= t('action.label.volunteers_in_action') %></h3>
-              <span class="badge badge-primary"><%= @action.desired_team_size.to_s %></span>
-              <p class="no-volunteers"><%= t('action.label.no_volunteers') %></p>
-            <% elsif !@action.volunteers.empty? %>
-              <h3><%= t('action.label.volunteers_in_action') %></h3>
-              <span class="badge badge-primary"><%= @action.volunteers.size.to_s + ' / ' + @action.desired_team_size.to_s %></span>
-              <%= list_users(@action.volunteers) %>
+              <span class="badge badge-primary">
+                <%= "#{@action.team_size} / #{@action.desired_team_size}" %>
+              </span>
+              <% if @action.team_size.zero? %>
+                <p class="no-volunteers"><%= t('action.label.no_volunteers') %></p>
+              <% else %>
+                <%= list_users(@action.volunteers) %>
+              <% end %>
             <% end %>
           </div>
-          <% unless @action.volunteers_in_subactions.empty? %>
-              <div>
-                <h3><%= t('action.label.volunteers_in_subactions') %></h3>
-                <span class="badge badge-primary"><%= @action.volunteers_in_subactions.size.to_s + ' / ' + (@action.total_desired_team_size - @action.desired_team_size).to_s %></span>
-                <%= list_users(@action.volunteers_in_subactions.distinct) %>
-              </div>
+
+          <% if (subteam = @action.volunteers_in_subactions).any? %>
+            <div>
+              <h3><%= t('action.label.volunteers_in_subactions') %></h3>
+              <span class="badge badge-primary">
+                <%= "#{subteam.size} / #{@action.total_desired_team_size - @action.desired_team_size}" %>
+              </span>
+              <%= list_users(subteam.distinct) %>
+            </div>
           <% end %>
 
-          <% if user_signed_in? && @action.volunteer?(current_user) %>
-            <p><%= t('action.message.teamMember') %></p>
-          <% end %>
-          <% if user_signed_in? && @action.volunteer_in_subaction?(current_user) %>
-            <p><%= t('action.message.subactionTeamMember') %></p>
+          <% if user_signed_in? %>
+            <% if @action.volunteer?(current_user) %>
+              <p><%= t('action.message.teamMember') %></p>
+            <% end %>
+            <% if subteam.include?(current_user) %>
+              <p><%= t('action.message.subactionTeamMember') %></p>
+            <% end %>
           <% end %>
           <% if policy(@action).manageTeam? %>
             <%= link_to edit_leaders_action_path(@action), class:'btn btn-primary btn-block' do %>

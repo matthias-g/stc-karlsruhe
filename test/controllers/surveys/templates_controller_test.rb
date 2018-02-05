@@ -9,7 +9,7 @@ class Surveys::TemplatesControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:admin)
     get surveys_templates_url
     assert_response :success
-    assert_select '.list-view ul li', 2
+    assert_select '#surveys_templates.index', 1
   end
 
   test "should get new" do
@@ -48,7 +48,7 @@ class Surveys::TemplatesControllerTest < ActionDispatch::IntegrationTest
 
   test "should update surveys_template" do
     sign_in users(:admin)
-    patch surveys_template_url(@template), params: { surveys_template: {title: 'new title' } }
+    patch surveys_template_url(@template), params: { surveys_template: { title: 'new title' } }
     assert_response :redirect
     follow_redirect!
     assert_response :success

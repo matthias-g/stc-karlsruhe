@@ -7,7 +7,7 @@
     text-align: center;
   }
 
-  // badges in the action header, like "hidden" or "closed"
+  // badges in the action header, like "hidden" or "finished"
   .labels {
     text-align: center;
     font-size: 1.7em;
@@ -152,8 +152,8 @@
 
 // general purpose action status classes
 .status_empty {
-  color: $status_open_text;
-  background: $status_open;
+  color: $status_empty_text;
+  background: $status_empty;
 }
 .status_soon_full {
   color: $status_soon_full_text;

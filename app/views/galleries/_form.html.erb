@@ -34,13 +34,21 @@
         <% unless picture.new_record? %>
           <tr>
             <td><%= image_tag picture.picture_url(:preview), class: 'img-responsive' %></td>
-            <td><%= if picture.visible
-                      link_to 'Unsichtbar machen', make_invisible_gallery_picture_path(picture)
-                    else
-                      link_to 'Sichtbar machen', make_visible_gallery_picture_path(picture)
-                    end %></td>
-            <td><%= picture.uploader.full_name %></td>
-            <td><%= link_to 'Bild entfernen', gallery_picture_path(picture), method: :delete %></td>
+            <td>
+              <p>Uploaded by:<br /><%= picture.uploader.full_name %></p>
+              <% if picture.visible %>
+                <%= link_to make_invisible_gallery_picture_path(picture), class: 'btn status_hidden btn-block' do %>
+                  <span class="fa fa-eye-slash"></span> Verstecken
+                <% end %>
+              <% else %>
+                <%= link_to make_visible_gallery_picture_path(picture), class: 'btn btn-success btn-block' do %>
+                  <span class="fa fa-eye"></span> Freischalten
+                <% end %>
+              <% end %>
+              <%= link_to picture, method: :delete, class: 'btn btn-danger btn-block' do %>
+                <span class="fa fa-trash"></span> Löschen
+              <% end %>
+            </td>
           </tr>
         <% end %>
       <% end %>

@@ -38,7 +38,7 @@
     <%= content_for?(:pageHeader) ? content_for(:pageHeader) : render('/layouts/header') -%>
 
     <div id="content">
-      <div id="<%= params[:controller].gsub!('/', '_') %>" class="<%= wrapper_classes.add(params[:action]).to_a.join(' ') %>">
+      <div id="<%= params[:controller].gsub('/', '_') %>" class="<%= wrapper_classes.add(params[:action]).to_a.join(' ') %>">
         <%= yield %>
       </div>
     </div>

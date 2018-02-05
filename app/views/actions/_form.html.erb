@@ -87,8 +87,14 @@
         <%= button_tag class: 'btn btn-success btn-block' do %>
           <span class="fa fa-save"></span> <%= t('general.action.save') %>
         <% end %>
-        <%= link_to @action, class: 'btn btn-warning btn-block' do %>
-          <span class="fa fa-ban"></span> <%= t('general.action.cancel') %>
+        <% if isNew %>
+          <%= link_to :back, class: 'btn btn-warning btn-block' do %>
+            <span class="fa fa-ban"></span> <%= t('general.action.cancel') %>
+          <% end %>
+        <% else %>
+          <%= link_to @action, class: 'btn btn-warning btn-block' do %>
+            <span class="fa fa-ban"></span> <%= t('general.action.cancel') %>
+          <% end %>
         <% end %>
         <% if !isNew && policy(@action).destroy? %>
           <%= link_to @action, method: :delete, class: 'btn btn-danger btn-block',

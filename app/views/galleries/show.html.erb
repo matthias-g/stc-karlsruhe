@@ -1,52 +1,60 @@
+<% wrapper_classes.delete('white-box') %>
 
-<div class="row">
-
-  <div class="col-md-10">
-    <div style='max-width: 600px;'>
+<div class="row align-items-stretch">
+  <div class="col-sm-8">
+    <div class="white-box">
       <%= render 'gallery', gallery: @gallery %>
     </div>
   </div>
+  <div class="col-sm-4">
+    <div class="white-box">
+      <% if @gallery.title %>
+        <h1><%= @gallery.title %></h1>
+      <% end %>
 
-  <% if policy(@gallery).update? %>
-      <div class="col-md-4">
-        Anzahl Bilder: <%= @gallery.gallery_pictures.count %>
-      </div>
-      <div class="col-md-4">
-        davon unsichtbar: <%= @gallery.gallery_pictures.invisible.count %>
-      </div>
+      <% if policy(@gallery).update? %>
+        <div class="section">
+          Anzahl Bilder: <%= @gallery.gallery_pictures.count %><br />
+          davon unsichtbar: <%= @gallery.gallery_pictures.invisible.count %>
+        </div>
 
-      <div class="col-md-6">
-        <%= form_with model: @gallery, html: { multipart: true}, local: true do |f| %>
+        <div class="section">
+          <%= form_with model: @gallery, html: { multipart: true}, local: true do |f| %>
             <%= f.hidden_field :title %>
             <div class="field">
               <%= f.label :picture %><br>
               <%= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
             </div>
-
             <div class="actions">
               <%= f.submit 'Hochladen' %>
             </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="section">
+        <% if policy(@gallery).edit? %>
+          <%= link_to edit_gallery_path(@gallery), class: 'btn btn-primary btn-block' do %>
+            <span class="fa fa-pencil"></span> <%= t('general.action.edit') %>
+          <% end %>
+        <% end %>
+        <% if policy(@gallery).index? %>
+          <%= link_to galleries_path, class: 'btn btn-secondary btn-block' do %>
+            <span class="fa fa-pencil"></span> <%= 'Zur Galerieübersicht' %>
+          <% end %>
+        <% end %>
+        <% @gallery.actions.each do |action| %>
+          <%= link_to action, class: 'btn btn-secondary btn-block' do %>
+            <span class="fa fa-play-circle"></span> <%= 'Zur Aktion' %>
+          <% end %>
+        <% end %>
+        <% @gallery.news_entries.each do |news_entry| %>
+          <%= link_to news_entry, class: 'btn btn-secondary btn-block' do %>
+            <span class="fa fa-play-circle"></span> <%= 'Zum Newseintrag' %>
+          <% end %>
         <% end %>
       </div>
-  <% end %>
+
+    </div>
+  </div>
 </div>
-
-<% unless @gallery.title.blank? %>
-    <p>
-      <strong>Title:</strong>
-      <span id="title"><%= @gallery.title %></span>
-    </p>
-<% end %>
-
-<% if policy(@gallery).edit? %>
-    <%= link_to 'Bearbeiten', edit_gallery_path(@gallery) %> |
-<% end %>
-<% if policy(@gallery).index? %>
-    <%= link_to 'Zur Galerieübersicht', galleries_path %> |
-<% end %>
-<% @gallery.actions.each do |action| %>
-    <%= link_to 'Zur Aktion', action %>
-<% end %>
-<% @gallery.news_entries.each do |news_entry| %>
-    <%= link_to 'Zum Newseintrag', news_entry %>
-<% end %>

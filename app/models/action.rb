@@ -26,8 +26,6 @@ class Action < ApplicationRecord
   scope :active,   -> { where('actions.date >= ?', Date.today) }
   scope :finished, -> { where('actions.date < ?', Date.today) }
 
-  enum status: { empty: 1, soon_full: 2, full: 3, finished: 4 }
-
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 

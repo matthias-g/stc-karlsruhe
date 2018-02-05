@@ -20,7 +20,6 @@ class ApplicationPolicy
     @record = record
   end
 
-
   def index?
     false
   end
@@ -49,21 +48,20 @@ class ApplicationPolicy
     false
   end
 
-
   def scope
     Pundit.policy_scope!(user, record.class)
   end
 
   def is_admin?
-    user && user.admin?
+    user&.admin?
   end
 
   def is_coordinator?
-    user && user.coordinator?
+    user&.coordinator?
   end
 
   def is_admin_or_coordinator?
-    user && (user.admin? || user.coordinator?)
+    user&.admin? || user&.coordinator?
   end
 
 end

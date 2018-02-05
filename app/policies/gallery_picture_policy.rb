@@ -23,17 +23,17 @@ class GalleryPicturePolicy < ApplicationPolicy
   end
 
   def permitted_attributes_for_show
-    public_attributes = [:width, :height, :desktop_width, :desktop_height, :picture, :editable]
+    public_attributes = %i[width height desktop_width desktop_height picture editable]
     return public_attributes unless is_admin?
-    public_attributes + [:visible, :uploader]
+    public_attributes + %i[visible uploader]
   end
 
   def edit?
     is_admin? || is_coordinator?
   end
 
-  alias_method :update?, :edit?
-  alias_method :destroy?, :edit?
+  alias update? edit?
+  alias destroy? edit?
 
   def make_visible?
     is_admin_or_coordinator?

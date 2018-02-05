@@ -79,8 +79,6 @@
             <%#= collection_select(:week, ActionGroup.all, :id, :title,
                    :include_blank => "- - - Aktionswoche egal - - -") %>
             <%= f.select(:day, options_for_day_select(@action_group), include_blank: "- - - Alle Tage - - -", hide_label: true) %>
-            <%= f.select(:status, Action.statuses.keys.map { |s| [t("action.status.#{s}"), s] },
-                         include_blank: "- - - Status egal - - -", hide_label: true) %>
             <% if user_signed_in? && current_user.in_orga_team? %>
               <%= f.select(:visibility, [['Sichtbar', :visible], ['Versteckt', :hidden]],
                            include_blank: "- - - Sichtbarkeit egal - - -", hide_label: true) %>

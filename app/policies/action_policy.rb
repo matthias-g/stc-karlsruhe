@@ -56,7 +56,7 @@ class ActionPolicy < ApplicationPolicy
   end
 
   def contact_leaders?
-    record.visible? && record.volunteer?(user) && !record.finished?
+    record.visible? && is_volunteer?(user) && !record.finished?
   end
 
   def enter?
@@ -72,7 +72,7 @@ class ActionPolicy < ApplicationPolicy
   end
 
   def upload_pictures?
-    is_today_or_past? && (is_volunteer?(user) || is_leader? || is_coordinator? || is_admin? || (user && user.photographer?))
+    is_today_or_past? && (is_volunteer?(user) || is_leader? || is_coordinator? || is_admin? || user&.photographer?)
   end
 
   def add_to_volunteers?(users)
@@ -94,17 +94,17 @@ class ActionPolicy < ApplicationPolicy
     allowed
   end
 
-  alias_method :update?, :edit?
-  alias_method :destroy?, :edit?
+  alias update? edit?
+  alias destroy? edit?
 
-  alias_method :make_visible?, :change_visibility?
-  alias_method :make_invisible?, :change_visibility?
+  alias make_visible? change_visibility?
+  alias make_invisible? change_visibility?
 
-  alias_method :crop_picture?, :edit?
-  alias_method :edit_leaders?, :edit?
-  alias_method :add_leader?, :edit_leaders?
-  alias_method :delete_leader?, :edit_leaders?
-  alias_method :delete_volunteer?, :is_admin?
+  alias crop_picture? edit?
+  alias edit_leaders? edit?
+  alias add_leader? edit_leaders?
+  alias delete_leader? edit_leaders?
+  alias delete_volunteer? is_admin?
 
 
   def is_leader?

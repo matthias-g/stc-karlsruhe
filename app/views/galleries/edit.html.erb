@@ -7,6 +7,9 @@
 
 <div class="row">
   <div class="col-sm-8">
+    <% if @gallery.title %>
+      <h1><%= @gallery.title %></h1>
+    <% end %>
     <%= render 'form' %>
   </div>
   <div class="col-sm-4">
@@ -19,7 +22,7 @@
           <span class="fa fa-play-circle"></span> <%= t('gallery.action.showAction') %>
         <% end %>
       <% end %>
-      <%= link_to make_all_visible_gallery_path(@gallery), class: 'btn status_hidden btn-block' do %>
+      <%= link_to make_all_visible_gallery_path(@gallery), class: 'btn btn-success btn-block' do %>
         <span class="fa fa-eye"></span> <%= t('gallery.action.makeAllVisible') %>
       <% end %>
       <%= link_to make_all_invisible_gallery_path(@gallery), class: 'btn status_hidden btn-block' do %>

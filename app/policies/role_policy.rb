@@ -2,7 +2,7 @@ class RolePolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user && user.admin?
+      if user&.admin?
         scope.all
       else
         scope.none
@@ -26,7 +26,7 @@ class RolePolicy < ApplicationPolicy
     is_admin?
   end
 
-  alias_method :update?, :edit?
-  alias_method :destroy?, :edit?
+  alias update? edit?
+  alias destroy? edit?
 
 end

@@ -22,7 +22,7 @@ class ActionGroupPolicy < ApplicationPolicy
     is_admin?
   end
 
-  alias_method :update?, :edit?
-  alias_method :destroy?, :edit?
+  alias update? edit?
+  alias destroy? edit?
 
 end

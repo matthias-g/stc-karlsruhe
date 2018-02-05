@@ -125,11 +125,11 @@ soon_full:
   desired_team_size: 3
 
 full_but_finished:
-  title: Volle, geschlossene Aktion
+  title: Volle, beendete Aktion
   desired_team_size: 1
   date: <%= Date.yesterday %>
 
 soon_full_but_finished:
-  title: Fast volle, geschlossene Aktion
+  title: Fast volle, beendete Aktion
   desired_team_size: 3
   date: <%= Date.yesterday %>

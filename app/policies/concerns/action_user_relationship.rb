@@ -4,11 +4,11 @@ module ActionUserRelationship
   included do
 
     def allow_add_volunteer_to_action?(volunteer, action)
-      !action.volunteer?(volunteer) && action.free_places.nonzero? && !action.finished? && (user.eql?(volunteer) || (user && user.in_orga_team?))
+      !action.volunteer?(volunteer) && action.free_places.positive? && !action.finished? && ((volunteer == user) || user&.in_orga_team?)
     end
 
     def allow_remove_volunteer_from_action?(volunteer, action)
-      action.volunteer?(volunteer) && !action.finished? && (user.eql?(volunteer) || (user && user.in_orga_team?))
+      action.volunteer?(volunteer) && !action.finished? && ((volunteer == user) || user&.in_orga_team?)
     end
 
   end

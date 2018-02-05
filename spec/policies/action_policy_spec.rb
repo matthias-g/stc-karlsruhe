@@ -263,8 +263,8 @@ RSpec.describe ActionPolicy do
         context 'for admin' do
           let(:user) { users(:admin) }
 
-          it 'is false' do
-            expect(subject).to be_falsey
+          it 'is true' do
+            expect(subject).to be_truthy
           end
         end
       end

@@ -9,7 +9,9 @@ end
 module Fixtures extend ActiveSupport::Concern
 included do
   def actions(title)
-    Action.find_by(title: title)
+    action = Action.find_by(title: title)
+    action.save! # trigger save hooks
+    action
   end
   def roles(title)
     Role.find_by(title: title)

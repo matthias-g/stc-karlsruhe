@@ -1,37 +1,17 @@
 <% flash.each do |msg_type, msg| %>
-  <div class="alert <%= bootstrap_class_for(msg_type) %> alert-dismissible" role="alert">
-    <a href="#" data-dismiss="alert" class="close">×</a>
-    <ul>
-      <% flash = msg.kind_of?(Array) ? msg : [msg] %>
-      <% flash.each do |f| %>
-        <li><%= f %></li>
-      <% end %>
-    </ul>
+  <div class="alert <%= bootstrap_class_for(msg_type) %> alert-dismissible fade show" role="alert">
+    <%= msg.kind_of?(Array) ? msg.join(' ') : msg %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
 <% end %>
 
-<% unless resource.errors.empty? %>
-  <div class="alert alert-danger alert-block alert-dismissible" role="alert">
-    <a href="#" data-dismiss="alert" class="close">×</a>
-    <ul>
-      <% resource.errors.full_messages.each do |msg| %>
-         <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
-<% if false %>
-  <div id="messages">
-    <%# devise errors %>
-    <% if not resource.errors.empty? %>
-      <% resource.errors.full_messages.each do |error| %>
-        <div class="alert-devise"><%= error %></div>
-      <% end %>
-    <% end %>
-    <%# other errors/notifications %>
-    <% flash.each do |key, value| %>
-      <div class="alert-<%= key %>"><%= value %></div>
-    <% end %>
+<% if resource.errors.any? %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <%= resource.errors.full_messages.join(' ') %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
 <% end %>

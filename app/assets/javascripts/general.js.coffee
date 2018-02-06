@@ -16,7 +16,10 @@
   appendFlashMessage $("""
     <div class="alert alert-""" + type + """ alert-dismissible" role="alert">
       <a href="#" data-dismiss="alert" class="close">×</a>
-      <ul><li>""" + str + """</li></ul>
+      """ + str + """
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
   """)
 

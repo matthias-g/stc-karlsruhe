@@ -84,17 +84,13 @@ body {
 #flash-messages {
   z-index: 1001;
   position: fixed;
-  left: 0; top: 70px; right: 0;
+  left: 140px;
+  right: 0;
+  top: 70px;
   margin: 0 auto;
   max-width: 700px;
-
-  .alert-info, .alert-notice {
-    background: $flash_notice;
-    color: $flash_notice_text;
-  }
-  .alert-alert {
-    background: $flash_alert;
-    color: $flash_alert_text;
+  @media(max-width: $grid-float-breakpoint) {
+    left: 0;
   }
 }
 

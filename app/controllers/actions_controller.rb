@@ -18,11 +18,10 @@ class ActionsController < ApplicationController
   end
 
   def show
-    #Message for contact_volunteers or contact_leaders
+    # Message for contact_volunteers or contact_leaders
     @message = Message.new
-    if @action.gallery.gallery_pictures.count == 0
-      @action.gallery.gallery_pictures.build
-    end
+    pics = @action.gallery.gallery_pictures
+    pics.build if pics.any?
   end
 
   def new
@@ -31,8 +30,7 @@ class ActionsController < ApplicationController
     @action.action_group = ActionGroup.all.order(title: :desc).first
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @action = Action.new(action_params)
@@ -52,12 +50,12 @@ class ActionsController < ApplicationController
 
   def enter
     @action.add_volunteer(current_user)
-    redirect_to action_url(@action), notice: t('action.message.participationSuccess')
+    redirect_to action_url(@action), notice: t('action.message.enteredAction')
   end
 
   def leave
     @action.delete_volunteer(current_user)
-    redirect_to action_url(@action)
+    redirect_to action_url(@action), notice: t('action.message.leftAction')
   end
 
   def destroy
@@ -65,8 +63,7 @@ class ActionsController < ApplicationController
     respond_with(@action.action_group)
   end
 
-  def edit_leaders
-  end
+  def edit_leaders; end
 
   def add_leader
     new_leader = User.find(params[:user_id])

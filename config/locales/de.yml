@@ -339,7 +339,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       subactionTeamMember: 'Du bist bei einer Teilaktion dabei.'
       enterOneOfThesubactions: 'Melde dich zu einer der Teilaktionen an!'
       isFull: 'Diese Aktion ist schon vollbesetzt.'
-      participationSuccess: 'Du nimmst jetzt an dieser Aktion teil. Die Aktionsleiter werden sich mit dir etwa eine Woche vor der Aktion in Verbindung setzen.'
+      enteredAction: 'Du nimmst jetzt an dieser Aktion teil. Die Aktionsleiter werden sich mit dir etwa eine Woche vor der Aktion in Verbindung setzen.'
+      leftAction: 'Du hast dich von der Aktion abgemeldet.'
       madeVisible: 'Aktion wurde sichtbar gemacht.'
       madeInvisible: 'Aktion wurde unsichtbar gemacht.'
       galleryPicturesUploaded: 'Vielen Dank für das Hochladen deiner Bilder! Sobald sie jemand aus dem Orgateam freigeschaltet hat,

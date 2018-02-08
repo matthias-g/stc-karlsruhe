@@ -24,6 +24,8 @@ class Action < ApplicationRecord
   scope :active,   -> { where('actions.date >= ?', Date.today) }
   scope :finished, -> { where('actions.date < ?', Date.today) }
 
+  before_save :adjust_team_size
+
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
@@ -155,6 +157,10 @@ class Action < ApplicationRecord
     end
   end
 
+  def adjust_team_size
+    self.team_size = volunteers.count
+    parent_action&.adjust_team_size
+  end
 
   private
 
@@ -182,16 +188,14 @@ class Action < ApplicationRecord
   end
 
   def on_volunteer_added(user)
-    self.team_size = volunteers.count
-    parent_action&.on_volunteer_added(user)
+    adjust_team_size
     return if finished?
     Mailer.action_participate_volunteer_notification(user, self).deliver_now if user.receive_notifications_for_new_participation
     Mailer.action_participate_leader_notification(user, self).deliver_now
   end
 
   def on_volunteer_removed(user)
-    self.team_size = volunteers.count
-    parent_action&.on_volunteer_removed(user)
+    adjust_team_size
     return if finished?
     Mailer.leaving_action_notification(user, self).deliver_now
   end

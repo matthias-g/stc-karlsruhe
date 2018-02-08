@@ -18,7 +18,7 @@ class ActionGroupsController < ApplicationController
     if params[:filter]
       p = filter_params
       @actions = @actions.where(visible: (p[:visibility] != 'hidden')) unless p[:visibility].blank?
-      @actions = @actions.where(date: Date.parse(p[:day])) unless p[:day].blank?
+      @actions = @actions.where(date: Date.parse(p[:day])) unless p[:day].blank? || !p[:day].match(/\A[0-9.-]*\z/)
       @actions = @actions.where(status: Action.statuses[p[:status]]) unless p[:status].blank?
     end
 

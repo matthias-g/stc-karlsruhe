@@ -17,8 +17,6 @@ class Action < ApplicationRecord
   validates_presence_of :title, :desired_team_size
   validates :desired_team_size, numericality: {only_integer: true, greater_than_or_equal_to: 0}
   validate :parent_action_cannot_be_same_action, :parent_action_cannot_be_a_subaction
-  before_save :adjust_status
-  after_save :adjust_parent_status
 
   scope :visible,  -> { where(actions: { visible: true }) }
   scope :hidden,   -> { where(actions: { visible: false }) }
@@ -171,14 +169,6 @@ class Action < ApplicationRecord
     candidates
   end
 
-  def adjust_status
-    self.team_size = volunteers.count
-  end
-
-  def adjust_parent_status
-    parent_action&.save
-  end
-
   def parent_action_cannot_be_same_action
     if parent_action == self
       errors.add(:parent_action, "can't be same action")
@@ -192,12 +182,16 @@ class Action < ApplicationRecord
   end
 
   def on_volunteer_added(user)
+    self.team_size = volunteers.count
+    parent_action&.on_volunteer_added(user)
     return if finished?
     Mailer.action_participate_volunteer_notification(user, self).deliver_now if user.receive_notifications_for_new_participation
     Mailer.action_participate_leader_notification(user, self).deliver_now
   end
 
   def on_volunteer_removed(user)
+    self.team_size = volunteers.count
+    parent_action&.on_volunteer_removed(user)
     return if finished?
     Mailer.leaving_action_notification(user, self).deliver_now
   end

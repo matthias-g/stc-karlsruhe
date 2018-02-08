@@ -190,12 +190,12 @@
       <div class="col-sm-6 col-md-12 d-print-none">
         <div class="white-box">
 
-          <div>
+          <div class="mb-2">
             <h3><%= Action.human_attribute_name('leaders') %></h3>
             <%= list_users(@action.leaders) %>
           </div>
 
-          <div>
+          <div class="mb-2">
             <% if @action.desired_team_size > 0 %>
               <h3><%= t('action.label.volunteers_in_action') %></h3>
               <span class="badge badge-primary">
@@ -210,7 +210,7 @@
           </div>
 
           <% if (subteam = @action.volunteers_in_subactions).any? %>
-            <div>
+            <div class="mb-2">
               <h3><%= t('action.label.volunteers_in_subactions') %></h3>
               <span class="badge badge-primary">
                 <%= "#{subteam.size} / #{@action.total_desired_team_size - @action.desired_team_size}" %>

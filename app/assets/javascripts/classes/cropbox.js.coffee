@@ -1,3 +1,6 @@
+# A wrapper for the JCrop library
+# - Expects to find nested tags: img, input.crop_x/y/w/h
+# - Expects attribute "data-aspect"
 class @Cropbox
   
   constructor: (@html) ->

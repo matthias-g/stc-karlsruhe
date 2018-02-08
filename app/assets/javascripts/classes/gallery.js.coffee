@@ -1,6 +1,10 @@
 #= require swiper
 #= require photoswipe
 
+# A combination of two swiper sliders and a PhotoSwipe slideshow.
+# - Expects to find the nested sliders as div.gallery-top and div.gallery-thumbs
+# - Expects attribute "data-slideshow-id" which points to the Photoswipe structure anywhere on the page
+# - Expects attribute "data-gallery-id" with the record ID of the gallery to be shown
 class @Gallery
 
   constructor: (@html) ->
@@ -73,10 +77,8 @@ class @Gallery
         y = cont.top + (cont.height - (h)) / 2
         return {x: x, y: y + pageYScroll, w: w}
       getImageURLForShare: (shareButtonData) =>
-        @slideshow.currItem.picture.url or @slideshow.currItem.desktop.url or ''
+        @slideshow.currItem.raw_src or @slideshow.currItem.src or ''
     }
-
-
 
     # init and open slideshow
     @slideshow = new PhotoSwipe(@slideshow_html.get(0), PhotoSwipeUI_Default, @items, options)

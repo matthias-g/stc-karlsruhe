@@ -11,6 +11,15 @@ onPageLoad ->
   actionId = html.data('action-id')
   data = 'data': [type: 'users', id: userId]
   window.requestToJsonApi("/api/actions/#{actionId}/relationships/leaders", 'POST', data).done ->
+    createFlashMessage I18n.t 'action.message.leaderAdded'
+    location.reload()
+
+# handler for "add volunteer" select
+@addNewVolunteer = (userId, html) ->
+  actionId = html.data('action-id')
+  data = 'data': [type: 'users', id: userId]
+  window.requestToJsonApi("/api/actions/#{actionId}/relationships/volunteers", 'POST', data).done ->
+    createFlashMessage I18n.t 'action.message.volunteerAdded'
     location.reload()
 
 # action edit: load weekdays of selected week

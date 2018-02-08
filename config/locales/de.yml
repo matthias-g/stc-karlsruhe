@@ -285,9 +285,10 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       makeInvisible: 'Verstecken'
       manageTeam: 'Team verwalten'
       makeLeader: 'als Leiter hinzufügen'
-      addLeader: Aktionsleiter auswählen
+      addLeader: 'Aktionsleiter hinzufügen'
       removeLeader: 'Aktionsleiter entfernen'
-      removeVolunteer: 'Teammitglied entfernen'
+      addVolunteer: 'Mitarbeiter hinzufügen'
+      removeVolunteer: 'Mitarbeiter entfernen'
       toOverview: 'zur Aktionsliste'
       toAction: 'zurück zur Aktion'
       searchActions: 'Aktionen suchen'
@@ -330,12 +331,14 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Aktionsliste statt der ausführlichen Beschreibung angezeigt.'
       uploadPictures: "Hast du während der Aktion Bilder gemacht, die du veröffentlichen möchtest? Dann kannst du sie hier hochladen.
         Hast du andere Personen fotografiert, stelle bitte sicher, dass du ihr Einverständnis für das Veröffentlichen der Bilder hast."
+      addVolunteer: 'Fordere Mitarbeiter nach Möglichkeit auf, sich selbst für die Aktion anzumelden. Und melde nur Leute mit ihrem Einverständnis an.'
     message:
       imageCropped: 'Der Bildausschnitt wurde angepasst.'
       created: 'Aktion wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Aktion wurde erfolgreich aktualisiert.'
       leaderAdded: 'Aktionsleiter erfolgreich hinzugefügt.'
       leaderRemoved: 'Aktionsleiter erfolgreich entfernt.'
+      volunteerAdded: 'Mitarbeiter erfolgreich hinzugefügt.'
       volunteerRemoved: 'Mitarbeiter erfolgreich entfernt.'
       errorList: 'Wegen folgender Fehler konnte die Aktion nicht gespeichert werden:'
       remainingVacancy: '%s freie Plätze'
@@ -357,6 +360,9 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         Anzahl Bilder: %{pictureCount}\n
         Benutzer: %{uploader}\n\n
         Bitte überprüfe die Bilder und schalte sie gegebenenfalls frei."
+      found_actions:
+        one: 'Eine übereinstimmende Aktion wurde gefunden.'
+        other: '%{count} übereinstimmende Aktionen gefunden'
       action:
         leavingNotification:
           subject: Austritt aus Aktionsteam

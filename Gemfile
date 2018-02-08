@@ -7,89 +7,68 @@ git_source(:github) do |repo_name|
 end
 
 ruby '2.3.7'
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.0'
 
+# localization
 gem 'rails-i18n'
 gem 'i18n-js'
 
-group :development, :test do
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
-end
-
-# Use SCSS for stylesheets
-gem 'sass-rails'
-
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails'
-
+# performance
+gem 'turbolinks'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
-gem 'lazyload-rails'
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder'
-
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 
+# documentation (bundle exec rake doc:rails generates the API under doc/api)
 group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
 
-gem 'responders'
-
+# security
 gem 'devise'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'pundit'
+gem 'actionview-encoded_mail_to'
 
-gem 'jsonapi-resources'
-gem 'jsonapi-authorization'
+# asset pipeline
+gem 'sass-rails'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails'
 
-gem 'mini_magick'
-gem 'carrierwave'
-gem 'jssorslider-rails', github: 'matthias-g/jssorslider-rails'
-gem 'photoswipe-rails'
-
-#gem 'bootstrap-sass'
+# asset libraries
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'lazyload-rails'
 gem 'bootstrap', '~> 4.0.0'
 gem 'bootstrap_form'
-
-gem 'bootstrap-select-rails', github: 'matthias-g/bootstrap-select-rails', branch: 'upgrade-1.12.4'
+gem 'bootstrap4-select-rails'
 gem 'bootstrap-datepicker-rails'
-
-gem 'trix'
-
+gem 'photoswipe-rails'
 gem 'groupdate'
 gem 'chartkick'
 
-gem 'dotenv-rails'
-
-gem 'actionview-encoded_mail_to'
+# JSON API
+gem 'jbuilder'
+gem 'jsonapi-resources'
+gem 'jsonapi-authorization'
 gem 'recaptcha', require: 'recaptcha/rails'
 
+# image management
+gem 'mini_magick'
+gem 'carrierwave'
+
+# various
+gem 'trix'
+gem 'responders'
 gem 'premailer-rails'
 gem 'nokogiri'
-
 gem 'icalendar'
-
-gem 'pg'
-
 gem 'friendly_id'
 
+# environment
+gem 'pg'
+gem 'dotenv-rails'
 gem 'unicorn'
 
 group :development do
@@ -119,6 +98,7 @@ group :test do
 end
 
 group :development, :test do
+  gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
 

@@ -18,7 +18,7 @@ class ActionGroupsController < ApplicationController
     p = filter_params
     @actions = @actions.where(visible: (p[:visibility] != 'hidden')) unless p[:visibility].blank?
     @actions = @actions.where(date: Date.parse(p[:day])) unless p[:day].blank? || !p[:day].match(/\A\d{2,4}-\d{1,2}-\d{1,2}\z/)
-    @actions = @actions.select(&:start_time&.hour >= 17) if p[:after_17h] == '1'
+    @actions = @actions.select { |a| a.start_time && a.start_time.hour >= 17 } if p[:after_17h] == '1'
   end
 
   def new

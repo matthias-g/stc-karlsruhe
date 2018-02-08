@@ -73,13 +73,16 @@ section, .section {
 // LAYOUT PARTS
 html {
   height: 100%;
+  // setting bg image on <html> keeps the image when following turbolinks
+  background: image-url("bg.jpg") center/cover fixed;
 }
 body, #page {
   min-height: 100%;
 }
+
 body {
   position: relative;
-  background: image-url("bg.jpg") center/cover fixed;
+  background: none;
 }
 #flash-messages {
   z-index: 2000;

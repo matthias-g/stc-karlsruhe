@@ -33,6 +33,13 @@
           </li>
         <% end %>
       </ul>
+      <% if policy(User).index? %>
+        <%= select_tag 'select-new-volunteer', options_for_user_select,
+                       class: 'selectpicker', title: t('action.action.addVolunteer'),
+                       data: { class: 'SelectPicker', handler: 'addNewVolunteer',
+                               'live-search': true, action_id: @action.id, size: 5 } %>
+        <p><%= t('action.help.addVolunteer') %></p>
+      <% end %>
     </div>
   </div>
 
@@ -55,7 +62,7 @@
         <%= select_tag 'select-new-leader', options_for_user_select,
                        class: 'selectpicker', title: t('action.action.addLeader'),
                        data: { class: 'SelectPicker', handler: 'addNewLeader',
-                               live_search: true, action_id: @action.id, size: 5 } %>
+                               'live-search': true, action_id: @action.id, size: 5 } %>
       <% end %>
     </div>
   </div>

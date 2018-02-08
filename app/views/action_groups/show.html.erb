@@ -1,5 +1,5 @@
 <% provide :title, t('layout.title.actionGroup', year: @action_group.title) %>
-<% wrapper_classes.delete('white-box').delete('container-medium') %>
+<% wrapper_set %>
 <% actions = policy_scope(@action_group.actions.toplevel) %>
 
 <% content_for :head do %>

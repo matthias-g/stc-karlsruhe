@@ -82,7 +82,7 @@ body {
   background: image-url("bg.jpg") center/cover fixed;
 }
 #flash-messages {
-  z-index: 1001;
+  z-index: 2000;
   position: fixed;
   left: 140px;
   right: 0;
@@ -91,6 +91,9 @@ body {
   max-width: 700px;
   @media(max-width: $grid-float-breakpoint) {
     left: 0;
+  }
+  .alert {
+    box-shadow: 0 0 3rem rgba(#000, 0.7)
   }
 }
 

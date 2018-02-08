@@ -15,6 +15,8 @@
 // OTHERS
 //= require jsonapi-datastore
 //= require turbolinks
+//= require i18n
+//= require i18n/translations
 
 // PROJECT
 //= require jsonapi

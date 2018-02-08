@@ -24,6 +24,20 @@ module ApplicationHelper
     BOOTSTRAP_FLASH_MSG.fetch(flash_type.to_sym, flash_type.to_s)
   end
 
+  # Adds all errors for the given resources to the flash messages
+  def show_errors_for(resource)
+    return if resource.errors.empty?
+    resource.errors.full_messages.each do |msg|
+      flash.now[:error] = msg
+    end
+  end
+
+  # Replaces wrapper classes with the given classes
+  def wrapper_set(*new_classes)
+    wrapper_classes.clear.merge(new_classes)
+  end
+
+  # Returns the current wrapper classes as an alterable set.
   def wrapper_classes
     (@wrapper_classes ||= Set['white-box', 'container-medium'])
   end

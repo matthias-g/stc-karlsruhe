@@ -23,7 +23,7 @@
 
         <label class="btn btn-primary btn-file">
           <span class="fa fa-upload"></span> <%= t('gallery.action.uploadPictures') %>
-          <input multiple="multiple" name="gallery_pictures[picture][]" class="form-control-file d-none" id="gallery_picture" type="file" />
+          <input multiple="multiple" name="gallery_pictures[picture][]" class="form-control-file d-none gallery-upload" type="file" />
         </label>
 
         <% if policy(action.gallery).edit? %>

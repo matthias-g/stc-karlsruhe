@@ -1,156 +1,71 @@
-#= require jssor.slider.min
+#= require swiper
 #= require photoswipe
 
 class @Gallery
 
-  EASING_LEFT = { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }
-  EASING_TOP = { $Top: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }
-  EASING_LEFTTOP = { $Left: $JssorEasing$.$EaseInCubic, $Top: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }
-  EASING_CLIP = { $Clip: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }
-  EASING_CLIP_OUT = { $Clip: $JssorEasing$.$EaseOutCubic, $Opacity: $JssorEasing$.$EaseLinear }
-  
-  SLIDER_TRANSITIONS = [
-    #Fade in L
-    { $Duration: 1200, x: 0.3, $During: { $Left: [0.3, 0.7] }, $Easing: EASING_LEFT, $Opacity: 2},
-    #Fade out R
-    { $Duration: 1200, x: -0.3, $SlideOut: true, $Easing: EASING_LEFT, $Opacity: 2},
-    #Fade in R
-    { $Duration: 1200, x: -0.3, $During: { $Left: [0.3, 0.7] }, $Easing: EASING_LEFT, $Opacity: 2},
-    #Fade out L
-    { $Duration: 1200, x: 0.3, $SlideOut: true, $Easing: EASING_LEFT, $Opacity: 2},
-    #Fade in T
-    { $Duration: 1200, y: 0.3, $During: { $Top: [0.3, 0.7] }, $Easing: EASING_TOP, $Opacity: 2, $Outside: true },
-    #Fade out B
-    { $Duration: 1200, y: -0.3, $SlideOut: true, $Easing: EASING_TOP, $Opacity: 2, $Outside: true },
-    #Fade in B
-    { $Duration: 1200, y: -0.3, $During: { $Top: [0.3, 0.7] }, $Easing: EASING_TOP, $Opacity: 2 },
-    #Fade out T
-    { $Duration: 1200, y: 0.3, $SlideOut: true, $Easing: EASING_TOP, $Opacity: 2 },
-    #Fade in LR
-    { $Duration: 1200, x: 0.3, $Cols: 2, $During: { $Left: [0.3, 0.7] }, $ChessMode: { $Column: 3 }, $Easing: EASING_LEFT, $Opacity: 2, $Outside: true },
-    #Fade out LR
-    { $Duration: 1200, x: 0.3, $Cols: 2, $SlideOut: true, $ChessMode: { $Column: 3 }, $Easing: EASING_LEFT, $Opacity: 2, $Outside: true },
-    #Fade in TB
-    { $Duration: 1200, y: 0.3, $Rows: 2, $During: { $Top: [0.3, 0.7] }, $ChessMode: { $Row: 12 }, $Easing: EASING_TOP, $Opacity: 2 },
-    #Fade out TB
-    { $Duration: 1200, y: 0.3, $Rows: 2, $SlideOut: true, $ChessMode: { $Row: 12 }, $Easing: EASING_TOP, $Opacity: 2 },
-    #Fade in LR Chess
-    { $Duration: 1200, y: 0.3, $Cols: 2, $During: { $Top: [0.3, 0.7] }, $ChessMode: { $Column: 12 }, $Easing: EASING_TOP, $Opacity: 2, $Outside: true },
-    #Fade out LR Chess
-    { $Duration: 1200, y: -0.3, $Cols: 2, $SlideOut: true, $ChessMode: { $Column: 12 }, $Easing: EASING_TOP, $Opacity: 2 },
-    #Fade in TB Chess
-    { $Duration: 1200, x: 0.3, $Rows: 2, $During: { $Left: [0.3, 0.7] }, $ChessMode: { $Row: 3 }, $Easing: EASING_LEFT, $Opacity: 2, $Outside: true },
-    #Fade out TB Chess
-    { $Duration: 1200, x: -0.3, $Rows: 2, $SlideOut: true, $ChessMode: { $Row: 3 }, $Easing: EASING_LEFT, $Opacity: 2 },
-    #Fade in Corners
-    { $Duration: 1200, x: 0.3, y: 0.3, $Cols: 2, $Rows: 2, $During: { $Left: [0.3, 0.7], $Top: [0.3, 0.7] }, $ChessMode: { $Column: 3, $Row: 12 }, $Easing: EASING_LEFTTOP, $Opacity: 2, $Outside: true },
-    #Fade out Corners
-    { $Duration: 1200, x: 0.3, y: 0.3, $Cols: 2, $Rows: 2, $During: { $Left: [0.3, 0.7], $Top: [0.3, 0.7] }, $SlideOut: true, $ChessMode: { $Column: 3, $Row: 12 }, $Easing: EASING_LEFTTOP, $Opacity: 2, $Outside: true },
-    #Fade Clip in H
-    { $Duration: 1200, $Delay: 20, $Clip: 3, $Assembly: 260, $Easing: EASING_CLIP, $Opacity: 2 },
-    #Fade Clip out H
-    { $Duration: 1200, $Delay: 20, $Clip: 3, $SlideOut: true, $Assembly: 260, $Easing: EASING_CLIP_OUT, $Opacity: 2 },
-    #Fade Clip in V
-    { $Duration: 1200, $Delay: 20, $Clip: 12, $Assembly: 260, $Easing: EASING_CLIP, $Opacity: 2 },
-    #Fade Clip out V
-    { $Duration: 1200, $Delay: 20, $Clip: 12, $SlideOut: true, $Assembly: 260, $Easing: EASING_CLIP_OUT, $Opacity: 2 }
-  ]
-  @SLIDER_OPTIONS: {
-    $AutoPlay: true,                #[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
-    $Idle: 10000,                   #[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
-    $PauseOnHover: 1,               #[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
-    $DragOrientation: 3,            #[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
-    $ArrowKeyNavigation: true,   		#[Optional] Allows keyboard (arrow key) navigation or not, default value is false
-    $SlideDuration: 800,            #Specifies default duration (swipe) for slide in milliseconds
-    $FillMode: 1,
-    $SlideshowOptions: {            #[Optional] Options to specify and enable slideshow or not
-      $Class: $JssorSlideshowRunner$,   #[Required] Class to create instance of slideshow
-      $Transitions: SLIDER_TRANSITIONS, #[Required] An array of slideshow transitions to play slideshow
-      $TransitionsOrder: 1,             #[Optional] The way to choose transition to play slide, 1 Sequence, 0 Random
-      $ShowLink: true                   #[Optional] Whether to bring slide link on top of the slider when slideshow is running, default value is false
-    },
-    $ArrowNavigatorOptions: {         #[Optional] Options to specify and enable arrow navigator or not
-      $Class: $JssorArrowNavigator$,  #[Requried] Class to create arrow navigator instance
-      $ChanceToShow: 1,               #[Required] 0 Never, 1 Mouse Over, 2 Always
-      $Scale: false,
-      $AutoCenter: 2
-    },
-    $ThumbnailNavigatorOptions: {         #[Optional] Options to specify and enable thumbnail navigator or not
-      $Class: $JssorThumbnailNavigator$,  #[Required] Class to create thumbnail navigator instance
-      $ChanceToShow: 2,                   #[Required] 0 Never, 1 Mouse Over, 2 Always
-      $ActionMode: 1,                     #[Optional] 0 None, 1 act by click, 2 act by mouse hover, 3 both, default value is 1
-      $SpacingX: 6,                       #[Optional] Horizontal space between each thumbnail in pixel, default value is 0
-      $Cols: 7,                           #[Optional] Number of pieces to display, default value is 1
-      $ParkingPosition: 247               #[Optional] The offset position to park thumbnail
-    }
-  }
-  
   constructor: (@html) ->
-    @slider_html_copy = @html.find('.slider-container').clone()
-    @photoswipe_html = @html.find('.pswp').get(0)
-    @slider = @photoswipe = undefined
-    @items = []
-    @loadGalleryItems().done =>
-      @initSlider()
+    @changeNum = 1
 
-  # load picture info with AJAX
-  loadGalleryItems: =>
-    @items = []
-    galleryId = @html.data('gallery-id')
-    parameters = { 'include': 'gallery-pictures' }
-    window.getResource('galleries', galleryId, parameters).done((gallery) =>
-      for gallery_picture in gallery['gallery-pictures']
-        @items.push(
-          src:      gallery_picture.picture.desktop.url,
-          raw_src:  gallery_picture.picture.url,
-          w:        gallery_picture['desktop-width'],
-          h:        gallery_picture['desktop-height'],
-          id:       gallery_picture.id,
-          editable: gallery_picture.editable
-        )
-    ).fail((error) ->
-      console.log('Request failed', error)
+    # get HTML parts for the components
+    @slider_html = @html.find('.gallery-top')
+    @thumbs_html = @html.find('.gallery-thumbs')
+    @slideshow_html = $('#' + @html.data('slideshow-id'))
+
+    # init and connect main and thumbs sliders
+    @slider = new Swiper(@slider_html,
+      spaceBetween: 10
+      navigation:
+        nextEl: '.swiper-button-next'
+        prevEl: '.swiper-button-prev'
+      autoplay:
+        delay: 4000
+        disableOnInteraction: true
+      speed: 800
     )
+    @thumbs = new Swiper(@thumbs_html,
+      spaceBetween: 10
+      centeredSlides: true
+      slidesPerView: 'auto'
+      touchRatio: 0.2
+      slideToClickedSlide: true
+    )
+    @slider.controller.control = @thumbs
+    @thumbs.controller.control = @slider
 
-      
-  # create JSSOR (gallery) view
-  initSlider: =>
-    @html.find('.slider-container').html(@slider_html_copy.children().clone())
-    @slider = new $JssorSlider$("slider_container", Gallery.SLIDER_OPTIONS)
-    @makeSliderResponsive
-    @slider.$On $JssorSlider$.$EVT_CLICK, (itemIdx) =>
-      @openSlideshow(itemIdx)
+    # load gallery pictures JSON, then enable slideshow
+    request = window.getResource 'galleries', @html.data('gallery-id'), include: 'gallery-pictures'
+    request.done (data) =>
+      @items = []
+      for pic in data['gallery-pictures']
+        @items.push(
+          src:      pic.picture.desktop.url,
+          raw_src:  pic.picture.url,
+          sources:  pic.picture
+          w:        pic['desktop-width'],
+          h:        pic['desktop-height'],
+          id:       pic.id,
+          editable: pic.editable
+        )
+      @slider.on 'tap', => @openSlideshow(@slider.clickedIndex)
+    request.fail (error) ->
+      console.log('Request failed', error)
 
-      
-  makeSliderResponsive: =>
-    scaleSlider = =>
-      # TODO: doesn't work any more if initSlider is called a second time
-      parentWidth = @slider.$Elmt.parentNode.clientWidth
-      if (parentWidth)
-        @slider.$ScaleWidth(Math.max(Math.min(parentWidth, 1200), 300))
-      else
-        window.setTimeout(scaleSlider, 30)
-    $(window).bind("load", scaleSlider)
-    $(window).bind("resize", scaleSlider)
-    $(window).bind("orientationchange", scaleSlider)
-    scaleSlider()
-      
-    
-  # create Photoswipe (fullscreen) view and open the given item
+  # Inits the slideshow component and opens the given gallery item
   openSlideshow: (itemIdx) =>   
     options = {
       index: itemIdx
       history: false
       getThumbBoundsFn: (index) =>
         pageYScroll = window.pageYOffset or document.documentElement.scrollTop
-        cont = $('.gallery-slides', @html)[0].getBoundingClientRect()
-        pic = @items[index]
-        if pic.w / pic.h > cont.width / cont.height
+        cont = $('.swiper-wrapper', @slider_html)[0].getBoundingClientRect()
+        pw = @items[index].w
+        ph = @items[index].h
+        if pw / ph > cont.width / cont.height
           w = cont.width
-          h = w * pic.h / pic.w
-        else if pic.w / pic.h < cont.width / cont.height
+          h = w * ph / pw
+        else if pw / ph < cont.width / cont.height
           h = cont.height
-          w = h * pic.w / pic.h
+          w = h * pw / ph
         else
           w = cont.width
           h = cont.height
@@ -158,77 +73,79 @@ class @Gallery
         y = cont.top + (cont.height - (h)) / 2
         return {x: x, y: y + pageYScroll, w: w}
       getImageURLForShare: (shareButtonData) =>
-        @photoswipe.currItem.raw_src or @photoswipe.currItem.src or ''
+        @slideshow.currItem.picture.url or @slideshow.currItem.desktop.url or ''
     }
-    
-    $('.pswp__button--delete').unbind('click').click =>
-      @deleteCurrentImage()
-    $('.pswp__button--rotateright').unbind('click').click =>
-      @rotateCurrentImage(1)
-    $('.pswp__button--rotateleft').unbind('click').click =>
-      @rotateCurrentImage(-1)
-      
-    toggleEditButtons = =>
-      $('.pswp__button--delete, .pswp__button--rotateright, .pswp__button--rotateleft').toggle(@photoswipe.currItem.editable == true)
 
-    # Initializes and opens PhotoSwipe (fullscreen picture viewing)
-    @photoswipe = new PhotoSwipe(@photoswipe_html, PhotoSwipeUI_Default, @items, options)
-    @photoswipe.init()
-    @photoswipe.listen 'close', =>
-      @slider.$GoTo(@photoswipe.getCurrentIndex())
-    @photoswipe.listen 'beforeChange', toggleEditButtons
-    toggleEditButtons()
+
+
+    # init and open slideshow
+    @slideshow = new PhotoSwipe(@slideshow_html.get(0), PhotoSwipeUI_Default, @items, options)
+    @slideshow.init()
+    @slideshow.listen 'close', =>
+      @slider.slideTo @slideshow.getCurrentIndex(), 0
+      @thumbs.slideTo @slideshow.getCurrentIndex(), 0
+
+    # assign appropriate actions to slideshow buttons
+    $('.pswp__button--delete').unbind('click').click => @deleteCurrentImage()
+    $('.pswp__button--rotateright').unbind('click').click => @rotateCurrentImage(1)
+    $('.pswp__button--rotateleft').unbind('click').click => @rotateCurrentImage(-1)
+
+    # show edit buttons only if user may edit the picture
+    @slideshow.listen 'beforeChange', =>
+      $('.pswp__button--delete, .pswp__button--rotateright, .pswp__button--rotateleft').toggle(@slideshow.currItem.editable)
+    @slideshow.shout 'beforeChange'
 
       
-  # closes Photoswipe (fullscreen) view
+  # Closes the slideshow
   closeSlideshow: =>
-    @photoswipe.close()
+    @slideshow.close()
       
     
-  # rotates the image currently opened in Photoswipe (direction = -1 or 1)
+  # Rotates the image currently opened in Photoswipe (direction = -1 or 1)
   rotateCurrentImage: (direction) =>
-    idx = @photoswipe.getCurrentIndex()
+    idx = @slideshow.getCurrentIndex()
     item = @items[idx]
-    
-    # rotate image on server
-    rotationMethod = if direction > 0 then '/rotateRight' else '/rotateLeft'
-    window.getJsonApi('/api/gallery-pictures/' + item.id + rotationMethod).done (data) =>
-      #TODO: show flash message
 
-      # then update local image attributes
+    # rotate image on server
+    method = if direction > 0 then '/rotateRight' else '/rotateLeft'
+    window.getJsonApi('/api/gallery-pictures/' + item.id + method).done (data) =>
+      # inform user
+      createFlashMessage I18n.t 'gallery.message.pictureRotated'
+
+      # update local image attributes
       tmp = item.w
       item.w = item.h
       item.h = tmp
+      item.src = item.sources.desktop.url + '?v=' + @changeNum++;
 
       # restart gallery
-      @initSlider()
-      @closeSlideshow()
-      @openSlideshow(idx)
+      @slider_html.find('.swiper-slide').eq(idx).css('background-image': 'url('+item.sources.preview.url+'?v='+ @changeNum++ +')')
+      @thumbs_html.find('.swiper-slide').eq(idx).css('background-image': 'url('+item.sources.thumb.url+'?v='+ @changeNum++ +')')
+      @slideshow.invalidateCurrItems()
+      @slideshow.updateSize(true)
 
-    
   # deletes the image currently opened in Photoswipe
   deleteCurrentImage: =>
-    if !confirm('Möchtest Du dieses Bild wirklich löschen?')
+    if !confirm I18n.t 'gallery.message.confirmDeletePicture'
       return
-      
-    idx = @photoswipe.getCurrentIndex()
+    idx = @slideshow.getCurrentIndex()
     item = @items[idx]
 
     # remove image on server
     window.requestToJsonApi('/api/gallery-pictures/' + item.id, 'DELETE').done (data) =>
-      #TODO: show flash message
+      # inform user
+      createFlashMessage I18n.t 'gallery.message.pictureDeleted'
 
-      # then remove image from Photoswipe
+      # remove image from slideshow
       @items.splice idx, 1
       if @items.length == 0
-        @photoswipe_html.remove()
         @html.remove()
         return
-      if idx >= @photoswipe.items.length - 1
-        @photoswipe.goTo(0)
-      @photoswipe.invalidateCurrItems()
-      @photoswipe.updateSize(true)
+      if idx >= @slideshow.items.length - 1
+        @slideshow.goTo(0)
+      @slideshow.invalidateCurrItems()
+      @slideshow.updateSize(true)
 
-      # remove image from Slider
-      @slider_html_copy.find('.gallery-slides').children().eq(idx).remove()
-      @initSlider()
+      # remove image from slider
+      @slider.removeSlide(idx)
+      @thumbs.removeSlide(idx)

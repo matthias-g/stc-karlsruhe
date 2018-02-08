@@ -1,5 +1,5 @@
 <% provide :title, @action.title + (@action.parent_action ? (' - ' + @action.parent_action.title) : '') %>
-<% wrapper_classes.delete('white-box') %>
+<% wrapper_set 'container-medium' %>
 <% wrapper_classes.add('action-invisible') unless @action.visible? %>
 
 <% content_for :head do %>

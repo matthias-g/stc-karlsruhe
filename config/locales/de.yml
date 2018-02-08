@@ -195,6 +195,10 @@ de:
       submissionList: 'Umfragebögen'
       submissionNew: 'Umfragebogen ausfüllen: %{template}'
       submissionEdit: 'Umfragebogen ansehen: %{template}'
+    message:
+      downloadLogo: 'Möchtest Du unser Logo herunterladen? Auf unserer <a href="/presse">Presseseite</a> findest
+         Du dafür ein <a href="/downloads/Logos.zip">Archiv</a> mit einer Auswahl verschiedener Versionen.'
+
   contact:
     orga:
       link: 'Serve the City kontaktieren'
@@ -466,6 +470,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       youHaveNoActions: 'Du nimmst noch an keiner Aktion teil.'
       invalidPassword: 'Das Passwort ist falsch'
       accountDeleted: 'Dein Account wurde gelöscht.'
+      fieldEmpty: 'Das Feld darf nicht leer sein.'
+      surveySent: 'Vielen Dank für deine Rückmeldung!'
     help:
       passwordLength: 'Mindestens 6 Zeichen lang.'
 
@@ -510,6 +516,9 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
     message:
       containsInvisiblePictures: 'Einige der Bilder in dieser Galerie wurden noch nicht von jemandem aus dem Orgateam freigeschaltet
               und sind daher noch nicht öffentlich sichtbar.'
+      conformDeletePicture: 'Möchtest Du dieses Bild wirklich löschen?'
+      pictureRotated: 'Das Bild wurde gedreht.'
+      pictureDeleted: 'Das Bild wurde gelöscht.'
 
   surveys:
     action:

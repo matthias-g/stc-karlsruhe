@@ -1,4 +1,4 @@
-<% wrapper_classes.delete('container-medium').add('no-overflow') %>
+<% wrapper_set 'white-box', 'no-overflow' %>
 
 <% content_for :head do %>
   <% desc = 'Du willst Menschen in Karlsruhe begegnen, ihnen Gutes tun?
@@ -171,7 +171,7 @@
   <h1 class="sr-only">Eindrücke</h1>
   <div class="swiper-container" data-class="MultiImageSlider">
     <div class="swiper-wrapper">
-      <% policy_scope(GalleryPicture.visible.order(created_at: :desc).limit(100)).sample(20).each do |pic| %>
+      <% policy_scope(GalleryPicture.visible.order(created_at: :desc).limit(40)).sample(15).each do |pic| %>
         <div class="swiper-slide" style="width: <%= ((pic.width / pic.height.to_f) * 250).round.to_s + 'px' %>">
           <% action = pic.gallery.actions.first %>
           <%= link_to action, title: action.title do %>

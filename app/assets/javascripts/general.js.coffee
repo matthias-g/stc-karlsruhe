@@ -46,7 +46,7 @@
   close = ->
     flash.alert 'close'
   flash.click close
-  window.setInterval close, 5000
+  window.setInterval close, 7000
   $('#flash-messages').append flash
 
 # extract flash messages from the given container and append them
@@ -80,6 +80,11 @@ onPageLoad ->
   uncollapseAccordeonAnchor()
   pageLoaded = true
   $('.g-recaptcha').initRecaptcha()
+  I18n.locale = $('body').data('locale')
+
+  $('.header img, #nav-logo img').on 'contextmenu', ->
+    createFlashMessage I18n.t 'layout.message.downloadLogo'
+    true
 
 onNewContent ->
   extractFlashMessages(@)

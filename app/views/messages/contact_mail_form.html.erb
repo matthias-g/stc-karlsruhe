@@ -1,5 +1,6 @@
 <% provide :title, t('layout.title.messageContactForm') %>
-<% wrapper_classes.delete('container-medium').add('container-small') %>
+<% wrapper_set 'white-box', 'container-small' %>
+<% show_errors_for @message %>
 
 <h1><%= t 'contact.orga.title' %></h1>
 <%= t 'contact.orga.text' %>

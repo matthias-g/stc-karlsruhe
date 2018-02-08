@@ -1,17 +1,11 @@
-<% flash.each do |msg_type, msg| %>
-  <div class="alert <%= bootstrap_class_for(msg_type) %> alert-dismissible fade show" role="alert">
-    <%= msg.kind_of?(Array) ? msg.join(' ') : msg %>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-<% end %>
 
-<% if resource.errors.any? %>
-  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <%= resource.errors.full_messages.join(' ') %>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
+<% flash.each do |msg_type, entry| %>
+  <% (entry.kind_of?(Array) ? entry : [entry]).each do |msg| %>
+    <div class="alert <%= bootstrap_class_for(msg_type) %> alert-dismissible fade show" role="alert">
+      <%= msg %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
 <% end %>

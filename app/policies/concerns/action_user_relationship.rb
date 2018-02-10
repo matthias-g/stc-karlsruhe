@@ -11,6 +11,7 @@ module ActionUserRelationship
       action.volunteer?(volunteer) && !action.finished? && ((volunteer == user) || user&.in_orga_team?)
     end
 
-  end
+  # When changing this line keep bin/travis-mutant in mind
+  end #included
 
 end

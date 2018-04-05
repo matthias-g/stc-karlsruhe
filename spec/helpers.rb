@@ -4,22 +4,32 @@ module Helpers
     request['X-User-Email'] = user.email
     request['X-User-Token'] = user.authentication_token
   end
+
+  def should_fail
+    is_expected.to be_falsey
+  end
+
+  def should_pass
+    is_expected.to be_truthy
+  end
+
 end
 
-module Fixtures extend ActiveSupport::Concern
-included do
-  def actions(title)
-    action = Action.find_by(title: title)
-    action.save! # trigger save hooks
-    action
+module Fixtures
+  extend ActiveSupport::Concern
+  included do
+    def actions(title)
+      Action.find_by(title: title)
+    end
+
+    def roles(title)
+      Role.find_by(title: title)
+    end
+
+    def users(username)
+      User.find_by(username: username)
+    end
   end
-  def roles(title)
-    Role.find_by(title: title)
-  end
-  def users(username)
-    User.find_by(username: username)
-  end
-end
 end
 
 RSpec::Matchers.define :lead_action do |action|

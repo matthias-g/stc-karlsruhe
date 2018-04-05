@@ -14,6 +14,7 @@ one:
   requirements: MyText
   visible: true
   desired_team_size: 4
+  team_size: 1
   action_group: one
   gallery: one
   date: <%= Date.today %>
@@ -29,6 +30,7 @@ two:
   requirements: MyText
   visible: false
   desired_team_size: 7
+  team_size: 1
   action_group: one
   gallery: two
   date: <%= Date.today %>
@@ -44,6 +46,7 @@ three:
   requirements: MyText
   visible: false
   desired_team_size: 7
+  team_size: 0
   action_group: one
   gallery: three
   date: <%= Date.today %>
@@ -59,6 +62,7 @@ four:
   requirements: MyText
   visible: true
   desired_team_size: 7
+  team_size: 0
   action_group: one
   gallery: four
   date: <%= Date.today %>
@@ -68,6 +72,7 @@ kindergarten-party:
   description: In dieser Aktion organisieren wir ein Fest für die Kinder eines Kindergartens.
   visible: true
   desired_team_size: 2
+  team_size: 1
   action_group: one
   gallery: five
   date: <%= Date.today %>
@@ -77,6 +82,7 @@ kindergarten-kitchen:
   description: Wir kochen für das Fest.
   visible: true
   desired_team_size: 5
+  team_size: 1
   action_group: one
   parent_action: kindergarten-party
   gallery: six
@@ -88,6 +94,7 @@ kindergarten-music:
   description: Wir machen Musik beim Fest.
   visible: true
   desired_team_size: 3
+  team_size: 1
   action_group: one
   parent_action: kindergarten-party
   gallery: seven
@@ -96,26 +103,31 @@ kindergarten-music:
 undated:
   title: Undatierte Aktion
   desired_team_size: 1
+  team_size: 0
 
 finished:
   title: Beendete Aktion
   desired_team_size: 5
+  team_size: 0
   date: <%= Date.yesterday %>
 
 finished_parent_action:
   title: Beendete Überaktion
   desired_team_size: 5
+  team_size: 0
   date: <%= Date.yesterday %>
 
 finished_subaction:
   title: Beendete Unteraktion
   parent_action: finished_parent_action
   desired_team_size: 5
+  team_size: 0
   date: <%= Date.yesterday %>
 
 full:
   title: Volle Aktion
   desired_team_size: 1
+  team_size: 1
   action_group: one
   visible: true
   date: <%= Date.today %>
@@ -123,13 +135,16 @@ full:
 soon_full:
   title: Fast volle Aktion
   desired_team_size: 3
+  team_size: 1
 
 full_but_finished:
   title: Volle, beendete Aktion
   desired_team_size: 1
+  team_size: 1
   date: <%= Date.yesterday %>
 
 soon_full_but_finished:
   title: Fast volle, beendete Aktion
   desired_team_size: 3
+  team_size: 1
   date: <%= Date.yesterday %>

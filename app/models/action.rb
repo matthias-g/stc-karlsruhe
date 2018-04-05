@@ -81,31 +81,28 @@ class Action < ApplicationRecord
   # All dates of the action and its sub actions
   # (returns an empty array for undated actions)
   def dates
-    dates = subactions.any? ? subactions.collect(&:date) : [date]
+    dates = subactions.any? ? subactions.collect(&:date) + [date] : [date]
     dates.reject(&:nil?)
   end
 
-  # Number of free volunteer places in this action (without sub actions)
-  def free_places
-    desired_team_size - team_size
+  # Number of available volunteer places in this action (without sub actions)
+  def available_places
+    date >= Date.today ? desired_team_size - team_size : 0
   end
 
-  # Number of free volunteer places in this action and its sub actions
-  # (includes hidden sub actions only if this action is hidden as well)
-  def total_free_places
-    free_places + (visible? ? subactions.visible : subactions).active.sum(&:free_places)
+  # Number of available volunteer places in this action and its sub actions
+  def total_available_places
+    available_places + subactions.visible.active.sum(&:available_places)
   end
 
   # Number of reserved volunteer places in this action and its sub actions
-  # (includes hidden sub actions only if this action is hidden as well)
   def total_team_size
-    team_size + (visible? ? subactions.visible : subactions).sum(&:team_size)
+    team_size + subactions.visible.sum(&:team_size)
   end
 
   # Number of volunteer places in this action and its sub actions
-  # (includes hidden sub actions only if this action is hidden as well)
   def total_desired_team_size
-    desired_team_size + (visible? ? subactions.visible : subactions).sum(&:desired_team_size)
+    desired_team_size + subactions.visible.sum(&:desired_team_size)
   end
 
   # Are the action and its sub actions finished (i.e. in the past)?
@@ -150,10 +147,10 @@ class Action < ApplicationRecord
   def status
     if finished?
       :finished
-    elsif total_free_places.zero?
+    elsif total_available_places.zero?
       :full
     else
-      total_free_places < 3 ? :soon_full : :empty
+      total_available_places < 3 ? :soon_full : :empty
     end
   end
 

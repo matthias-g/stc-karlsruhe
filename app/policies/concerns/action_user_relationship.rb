@@ -4,11 +4,15 @@ module ActionUserRelationship
   included do
 
     def allow_add_volunteer_to_action?(volunteer, action)
-      !action.volunteer?(volunteer) && action.free_places.positive? && !action.finished? && ((volunteer == user) || user&.in_orga_team?)
+      allow_edit_volunteer?(volunteer, action) && !action.volunteer?(volunteer) && action.available_places.positive?
     end
 
     def allow_remove_volunteer_from_action?(volunteer, action)
-      action.volunteer?(volunteer) && !action.finished? && ((volunteer == user) || user&.in_orga_team?)
+      allow_edit_volunteer?(volunteer, action) && action.volunteer?(volunteer)
+    end
+
+    def allow_edit_volunteer?(volunteer, action)
+      user && (user.eql?(volunteer) || user.in_orga_team?) && !action.finished?
     end
 
   # When changing this line keep bin/travis-mutant in mind

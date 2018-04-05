@@ -3,7 +3,6 @@ require 'test_helper'
 class ActionTest < ActiveSupport::TestCase
 
   setup do
-    Action.all.each(&:save!) # trigger save hooks
     @action = actions(:one)
     @parent_action = actions(:'kindergarten-party')
   end
@@ -116,12 +115,12 @@ class ActionTest < ActiveSupport::TestCase
   end
 
   test 'free_places' do
-    assert_equal 3, @action.free_places
+    assert_equal 3, @action.available_places
     @action.add_volunteer users(:lea)
-    assert_equal 2, @action.free_places
-    assert_equal 0, actions(:full).free_places
+    assert_equal 2, @action.available_places
+    assert_equal 0, actions(:full).available_places
     no_team_size = Action.new title: 'test', desired_team_size: 0
-    assert_equal 0, no_team_size.free_places
+    assert_equal 0, no_team_size.available_places
   end
 
   test 'subaction?' do
@@ -169,7 +168,7 @@ class ActionTest < ActiveSupport::TestCase
     parent = Action.create title: 'parent', desired_team_size: 0, date: Date.today
     assert_equal 0, parent.total_desired_team_size
     assert_equal 0, parent.total_team_size
-    assert_equal 0, parent.total_free_places
+    assert_equal 0, parent.total_available_places
     assert_equal :full, parent.status
 
     child1 = Action.create title: 'child1', desired_team_size: 9, parent_action: parent, visible: true, date: Date.today
@@ -177,7 +176,7 @@ class ActionTest < ActiveSupport::TestCase
     parent = parent.reload
     assert_equal 11, parent.total_desired_team_size
     assert_equal 0, parent.total_team_size
-    assert_equal 11, parent.total_free_places
+    assert_equal 11, parent.total_available_places
     assert_equal :empty, parent.status
 
     child1.update_attribute 'date', Date.yesterday

@@ -64,7 +64,7 @@ class ActionPolicy < ApplicationPolicy
   end
 
   def enter_subaction?
-    !record.finished? && record.free_places.nonzero? && !record.volunteers_in_subactions.include?(user)
+    (record.total_available_places > record.available_places) && !record.volunteers_in_subactions.include?(user)
   end
 
   def leave?

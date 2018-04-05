@@ -15,7 +15,7 @@ class ActionGroup < ApplicationRecord
   end
 
   def vacancy_count
-    actions.visible.active.sum(&:free_places)
+    actions.visible.active.sum(&:available_places)
   end
 
   def date_range

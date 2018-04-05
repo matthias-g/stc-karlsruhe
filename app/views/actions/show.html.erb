@@ -227,7 +227,7 @@
               <p><%= t('action.message.subactionTeamMember') %></p>
             <% end %>
           <% end %>
-          <% if policy(@action).manageTeam? %>
+          <% if policy(@action).manage_team? %>
             <%= link_to edit_leaders_action_path(@action), class:'btn btn-primary btn-block' do %>
               <span class="fa fa-users"></span> <%= t('action.action.manageTeam') %>
             <% end %>

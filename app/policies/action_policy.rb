@@ -35,7 +35,7 @@ class ActionPolicy < ApplicationPolicy
     is_admin? || is_coordinator? || is_leader?
   end
 
-  def manageTeam?
+  def manage_team?
     edit? && !record.finished?
   end
 

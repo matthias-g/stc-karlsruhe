@@ -133,30 +133,6 @@ RSpec.describe EventPolicy do
     end
   end
 
-  # describe 'manage_team?' do
-  #   subject { policy.manage_team? }
-  #
-  #   context 'as action leader' do
-  #     let(:user) { users(:rolf) }
-  #     it { should_pass }
-  #   end
-  #
-  #   context 'as admin' do
-  #     let(:user) { users(:admin) }
-  #     it { should_pass }
-  #   end
-  #
-  #   context 'as other user' do
-  #     let(:user) { users(:sabine) }
-  #     it { should_fail }
-  #   end
-  #
-  #   context 'for finished event' do
-  #     before { event.update_attribute :date, Date.yesterday }
-  #     it { should_fail }
-  #   end
-  # end
-
   describe 'updatable_fields' do
     subject { policy.updatable_fields }
     let(:all_fields) { Api::EventResource._updatable_relationships | Api::EventResource._attributes.keys - [:id] }

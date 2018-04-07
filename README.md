@@ -71,3 +71,8 @@ Start server
 ```shell
 $ rails s
 ```
+
+After changing the fixtures run the following command to update the fixtures for the rspec tests.
+```shell
+$ RAILS_ENV=test rails db:fixtures:load
+```

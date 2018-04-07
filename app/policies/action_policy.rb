@@ -57,17 +57,9 @@ class ActionPolicy < ApplicationPolicy
     record.visible? && is_volunteer?(user) && !record.finished?
   end
 
-  # def enter?
-  #   add_to_volunteers? [user]
-  # end
-
   def enter_subaction?
     (record.total_available_places > record.available_places) && !record.volunteers_in_subactions.include?(user)
   end
-
-  # def leave?
-  #   remove_from_volunteers? user
-  # end
 
   def upload_pictures?
     is_today_or_past? && (is_volunteer?(user) || is_leader? || is_coordinator? || is_admin? || user&.photographer?)

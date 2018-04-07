@@ -146,5 +146,33 @@ RSpec.describe GalleryPolicy do
         expect(subject).to be_falsey
       end
     end
+
+    context 'for a gallery without an action' do
+      let(:record) { Gallery.find_by(title: 'No one uses this gallery') }
+
+      context 'for some user' do
+        let(:current_user) { users(:rolf) }
+
+        it 'is false' do
+          expect(subject).to eql(false)
+        end
+      end
+
+      context 'for an admin' do
+        let(:current_user) { users(:admin) }
+
+        it 'is true' do
+          expect(subject).to be_truthy
+        end
+      end
+
+      context 'for a photographer' do
+        let(:current_user) { users(:photographer) }
+
+        it 'is true' do
+          expect(subject).to be_truthy
+        end
+      end
+    end
   end
 end

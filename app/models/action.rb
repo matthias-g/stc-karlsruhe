@@ -18,7 +18,7 @@ class Action < ApplicationRecord
   scope :visible,  -> { where(actions: { visible: true }) }
   scope :hidden,   -> { where(actions: { visible: false }) }
   scope :toplevel, -> { where(actions: { parent_action_id: nil }) }
-  scope :active,   -> { joins(:events).where('events.date >= ?', Date.today) }
+  scope :upcoming, -> { joins(:events).where('events.date >= ?', Date.today) }
   scope :finished, -> { joins(:events).where('events.date < ?', Date.today) }
 
   extend FriendlyId
@@ -91,7 +91,7 @@ class Action < ApplicationRecord
 
   # Number of available volunteer places in this action and its sub actions
   def total_available_places
-    available_places + subactions.visible.active.sum(&:available_places)
+    available_places + subactions.visible.upcoming.sum(&:available_places)
   end
 
   # Number of reserved volunteer places in this action and its sub actions

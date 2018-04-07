@@ -1,0 +1,16 @@
+
+
+<% events.each do |event| %>
+  <% action = event.initiative %>
+  <%= link_to action, class: (action.visible? ? 'action-entry' : 'action-entry hidden-action') do %>
+    <div class="image">
+      <%= image_tag (action.show_picture? ? action.picture_url(:action_list) : 'placeholder.svg') %>
+    </div>
+    <div class="info">
+      <% unless event.date.nil? %>
+        <div class="date"><%= event.date.strftime('%d. %b %Y') %></div>
+      <% end %>
+      <div class="title"><%= action.title %></div>
+    </div>
+  <% end %>
+<% end %>

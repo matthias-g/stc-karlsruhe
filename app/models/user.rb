@@ -62,6 +62,12 @@ class User < ApplicationRecord
         .where('participations.user_id = ?', id).distinct
   end
 
+  def events
+    Event.joins(:participations).where('participations.user_id': id)
+        .joins(:actions).joins('JOIN leaderships ON leaderships.action_id = actions.id')
+        .where('leaderships.user_id': id).distinct
+  end
+
   def events_as_volunteer
     Event.joins(:participations).where('participations.user_id': id).distinct
   end

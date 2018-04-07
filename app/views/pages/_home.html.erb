@@ -45,13 +45,14 @@
 
       <h2 class="sr-only">Karte</h2>
       <div id="home-actions-map" data-class="GoogleMap" data-lat="49.011627" data-lon="8.403869" data-zoom="12">
-        <% actions = policy_scope(Action.active) %>
-        <% actions = policy_scope(Action.where.not(date: nil).order(date: :desc).limit(50)) unless actions.any? %>
-        <% actions.each do |action| %>
-          <% if action.visible? && !action.longitude.nil? && !action.latitude.nil? %>
-            <div data-lon="<%= action.longitude %>" data-lat="<%= action.latitude %>"
-                 data-name="<%= action.title %>" data-href="<%= url_for(action) %>">
-              <%= simple_format(simple_format_urls(action.short_description.empty? ? action.description : action.short_description)) %>
+        <% events = policy_scope(Event.upcoming) %>
+        <% events = policy_scope(Event.where('date > ?', 1.year.ago)) unless events.any? %>
+        <% events.each do |event| %>
+          <% initiative = event.initiative %>
+          <% if initiative.visible? && !initiative.longitude.nil? && !initiative.latitude.nil? %>
+            <div data-lon="<%= initiative.longitude %>" data-lat="<%= initiative.latitude %>"
+                 data-name="<%= initiative.title %>" data-href="<%= url_for(initiative) %>">
+              <%= simple_format(simple_format_urls(initiative.short_description.empty? ? initiative.description : initiative.short_description)) %>
             </div>
           <% end %>
         <% end %>
@@ -79,15 +80,15 @@
     <div class="col-sm-6 col-md-4">
 
       <div id="home-action-list">
-        <% if user_signed_in? && (actions = policy_scope(current_user.actions.active)).any? %>
+        <% if user_signed_in? && (events = policy_scope(current_user.events.upcoming)).any? %>
           <h2>Deine Aktionen</h2>
-        <% elsif (actions = policy_scope(Action.active).limit(5)).any? %>
+        <% elsif (events = policy_scope(Event.upcoming).order(date: :asc).limit(5)).any? %>
           <h2>Nächste Aktionen</h2>
         <% else %>
           <h2>Letzte Aktionen</h2>
-          <% actions = policy_scope(Action.finished.limit(4)) %>
+          <% events = policy_scope(Event.finished).order(date: :desc).limit(4) %>
         <% end %>
-        <%= render '/actions/action_list', actions: actions %>
+        <%= render '/events/event_list', events: events %>
       </div>
 
     </div>

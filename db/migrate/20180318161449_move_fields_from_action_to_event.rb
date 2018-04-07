@@ -14,6 +14,8 @@ class MoveFieldsFromActionToEvent < ActiveRecord::Migration[5.1]
       event.update_column('team_size', action.team_size)
     end
 
+    Event.all.each(&:save!)
+
     remove_column :actions, :date
     remove_column :actions, :time
     remove_column :actions, :desired_team_size

@@ -258,9 +258,14 @@ RSpec.describe ActionPolicy do
   describe 'manage_team?' do
     subject { policy.manage_team? }
 
-    context 'as action leader' do
+    context 'as action leader ' do
       let(:user) { users(:rolf) }
       it { should_pass }
+
+      context 'for finished action' do
+        before { action.events.first.update_attribute :date, Date.yesterday }
+        it { should_fail }
+      end
     end
 
     context 'as admin' do
@@ -270,11 +275,6 @@ RSpec.describe ActionPolicy do
 
     context 'as other user' do
       let(:user) { users(:sabine) }
-      it { should_fail }
-    end
-
-    context 'for finished action' do
-      before { action.events.first.update_attribute :date, Date.yesterday }
       it { should_fail }
     end
 
@@ -337,6 +337,20 @@ RSpec.describe ActionPolicy do
       it 'contains all attributes except status, gallery and visible' do
         expect(subject).to match_array(all_fields - %i[status gallery visible])
       end
+    end
+  end
+
+  describe 'is_volunteer?' do
+    subject { policy.is_volunteer?(some_user) }
+
+    context 'if given user is a volunteer' do
+      let(:some_user) { users(:sabine) }
+      it { is_expected.to be_truthy }
+    end
+
+    context 'if given user is not a volunteer' do
+      let(:some_user) { users(:lea) }
+      it { is_expected.to be_falsey }
     end
   end
 

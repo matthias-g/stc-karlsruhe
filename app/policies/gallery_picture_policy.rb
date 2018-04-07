@@ -32,8 +32,8 @@ class GalleryPicturePolicy < ApplicationPolicy
     is_admin? || is_coordinator?
   end
 
-  alias update? edit?
-  alias destroy? edit?
+  alias_method :update?, :edit?
+  alias_method :destroy?, :edit?
 
   def make_visible?
     is_admin_or_coordinator?

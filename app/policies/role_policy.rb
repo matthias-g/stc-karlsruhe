@@ -26,7 +26,7 @@ class RolePolicy < ApplicationPolicy
     is_admin?
   end
 
-  alias update? edit?
-  alias destroy? edit?
+  alias_method :update?, :edit?
+  alias_method :destroy?, :edit?
 
 end

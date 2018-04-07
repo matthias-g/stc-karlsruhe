@@ -38,9 +38,9 @@ class UserPolicy < ApplicationPolicy
     %i[roles actions_as_volunteer username first_name last_name email phone]
   end
 
-  alias update? edit?
-  alias destroy? edit?
-  alias confirm_delete? destroy?
+  alias_method :update?, :edit?
+  alias_method :destroy?, :edit?
+  alias_method :confirm_delete?, :destroy?
 
   def contact_user?
     return false unless user

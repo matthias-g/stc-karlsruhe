@@ -73,17 +73,17 @@ class ActionPolicy < ApplicationPolicy
     is_today_or_past? && (is_volunteer?(user) || is_leader? || is_coordinator? || is_admin? || user&.photographer?)
   end
 
-  alias update? edit?
-  alias destroy? edit?
+  alias_method :update?, :edit?
+  alias_method :destroy?, :edit?
 
-  alias make_visible? change_visibility?
-  alias make_invisible? change_visibility?
+  alias_method :make_visible?, :change_visibility?
+  alias_method :make_invisible?, :change_visibility?
 
-  alias crop_picture? edit?
-  alias edit_leaders? edit?
-  alias add_leader? edit_leaders?
-  alias delete_leader? edit_leaders?
-  alias delete_volunteer? is_admin?
+  alias_method :crop_picture?, :edit?
+  alias_method :edit_leaders?, :edit?
+  alias_method :add_leader?, :edit_leaders?
+  alias_method :delete_leader?, :edit_leaders?
+  alias_method :delete_volunteer?, :is_admin?
 
 
   def is_leader?

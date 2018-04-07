@@ -8,11 +8,11 @@ class OrgaMessagePolicy < ApplicationPolicy
     (is_admin? || is_coordinator?) && !record.sent?
   end
 
-  alias new? index?
-  alias show? index?
-  alias create? index?
-  alias edit? index?
-  alias destroy? update?
-  alias send_message? update?
+  alias_method :new?, :index?
+  alias_method :show?, :index?
+  alias_method :create?, :index?
+  alias_method :edit?, :index?
+  alias_method :destroy?, :update?
+  alias_method :send_message?, :update?
 
 end

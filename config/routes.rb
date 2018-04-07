@@ -46,8 +46,6 @@ Rails.application.routes.draw do
 
   resources :actions, path: 'aktionen' do
     member do
-      get :enter
-      get :leave
       get :register_for_participation
       get :edit_leaders
       post :add_leader
@@ -62,6 +60,13 @@ Rails.application.routes.draw do
   end
   get 'aktionen-:year', to: 'actions#index'
   get 'aktionswoche-:title', to: 'action_groups#show', as: 'show_action_group'
+
+  resources :events do
+    member do
+      get :enter
+      get :leave
+    end
+  end
 
   devise_for :users, path: '',
              path_names: { sign_in: 'login', sign_out: 'logout',

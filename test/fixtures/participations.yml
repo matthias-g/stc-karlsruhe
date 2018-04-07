@@ -2,37 +2,37 @@
 
 sabine-at-bikerepair:
   user: sabine
-  action: one
+  event: one
 
 sabine-at-two:
   user: sabine
-  action: two
+  event: two
 
 sabine-at-kindergarten-party:
   user: sabine
-  action: kindergarten-party
+  event: kindergarten-party
 
 lea-at-kindergarten-music:
   user: lea
-  action: kindergarten-music
+  event: kindergarten-music
   created_at: <%= 20.months.ago.to_s(:db) %>
 
 peter-at-kindergarten-kitchen:
   user: peter
-  action: kindergarten-kitchen
+  event: kindergarten-kitchen
 
 sabine-at-full:
   user: sabine
-  action: full
+  event: full
 
 sabine-at-soon_full:
   user: sabine
-  action: soon_full
+  event: soon_full
 
 sabine-at-full_but_finished:
   user: sabine
-  action: full_but_finished
+  event: full_but_finished
 
 sabine-at-soon_full_but_finished:
   user: sabine
-  action: soon_full_but_finished
+  event: soon_full_but_finished

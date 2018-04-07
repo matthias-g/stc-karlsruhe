@@ -39,12 +39,15 @@ class Mailer < ActionMailer::Base
     current_actions = ActionGroup.default.actions.visible
     case message.recipient
       when 'current_volunteers_and_leaders'
-        to = current_actions.joins('LEFT OUTER JOIN participations ON actions.id = participations. action_id')
+        to = current_actions.joins(:events).joins('LEFT OUTER JOIN participations ON events.id = participations.event_id')
                  .joins('LEFT OUTER JOIN leaderships ON actions.id = leaderships.action_id')
                  .joins('INNER JOIN "users" ON "users"."id" = "participations"."user_id" OR "users"."id" = "leaderships"."user_id"')
                  .where('users.cleared': false)
       when 'current_volunteers'
-        to = current_actions.joins(:volunteers).where('users.cleared': false)
+        to = current_actions.joins(:events)
+                 .joins('JOIN participations ON events.id = participations.event_id')
+                 .joins('JOIN users ON users.id = participations.user_id')
+                 .where('users.cleared': false)
       when 'current_leaders'
         to = current_actions.joins(:leaders).where('users.cleared': false)
       when 'all_users'

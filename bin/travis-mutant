@@ -1,8 +1,8 @@
 #!/bin/bash
 
-INCLUSION=$(sed -n '/included do/{:a;n;/end #included/b;p;ba}' app/policies/concerns/action_user_relationship.rb | awk '{printf "%s\\n", $0}')
-sed -i "/include ActionUserRelationship/c\ ${INCLUSION}" app/policies/user_policy.rb
-sed -i "/include ActionUserRelationship/c\ ${INCLUSION}" app/policies/action_policy.rb
+INCLUSION=$(sed -n '/included do/{:a;n;/end #included/b;p;ba}' app/policies/concerns/event_user_relationship.rb | awk '{printf "%s\\n", $0}')
+sed -i "/include EventUserRelationship/c\ ${INCLUSION}" app/policies/user_policy.rb
+sed -i "/include EventUserRelationship/c\ ${INCLUSION}" app/policies/event_policy.rb
 
 bundle exec rails db:fixtures:load
 bundle exec mutant -r ./config/environment --use rspec $1 -j 1

@@ -63,9 +63,9 @@ class GalleriesControllerTest < ActionDispatch::IntegrationTest
 
   test 'can update today or past action gallery' do
     @gallery = galleries(:four)
-    action = @gallery.actions.first
-    action.date = 1.day.ago
-    action.save!
+    event = @gallery.actions.first.events.first
+    event.date = 1.day.ago
+    event.save!
     sign_in users(:rolf) # leader
     new_title = 'This is the new title'
     patch gallery_url(@gallery), params: { gallery: { title: new_title } }
@@ -75,9 +75,9 @@ class GalleriesControllerTest < ActionDispatch::IntegrationTest
 
   test 'leader cannot update future action gallery' do
     @gallery = galleries(:four)
-    action = @gallery.actions.first
-    action.date = 1.day.from_now
-    action.save!
+    event = @gallery.actions.first.events.first
+    event.date = 1.day.from_now
+    event.save!
     sign_in users(:rolf)
     new_title = 'This is the new title'
     patch gallery_url(@gallery), params: { gallery: { title: new_title } }
@@ -87,9 +87,9 @@ class GalleriesControllerTest < ActionDispatch::IntegrationTest
 
   test 'admin can update future action gallery' do
     @gallery = galleries(:four)
-    action = @gallery.actions.first
-    action.date = 1.day.from_now
-    action.save!
+    event = @gallery.actions.first.events.first
+    event.date = 1.day.from_now
+    event.save!
     sign_in users(:admin)
     new_title = 'This is the new title'
     patch gallery_url(@gallery), params: { gallery: { title: new_title } }

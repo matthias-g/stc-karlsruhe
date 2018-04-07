@@ -116,9 +116,6 @@
           <%= f.text_field(:date, value: @action.date ? l(@action.date, format: :numeric) : '',
                            data: { 'behaviour': 'datepicker', default: @action.action_group&.start_date }) -%>
         </div>
-        <div class="time">
-          <%= f.text_field :time %>
-        </div>
         <div class="location">
           <%= f.text_area :location %>
         </div>

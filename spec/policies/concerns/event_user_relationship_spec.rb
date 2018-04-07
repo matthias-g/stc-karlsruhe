@@ -11,7 +11,7 @@ shared_examples 'a ActionUserRelationship' do
   let(:action) { actions('Kostenlose Fahrradreparatur in der Innenstadt') }
 
   describe 'allow_add_volunteer_to_action?' do
-    subject { relationship.allow_add_volunteer_to_action?(user, action) }
+    subject { relationship.allow_add_volunteer_to_event?(user, action) }
 
     it 'should be false for no user logged in' do
       expect(subject).to be_falsey
@@ -67,7 +67,7 @@ shared_examples 'a ActionUserRelationship' do
   end
 
   describe 'allow_remove_volunteer_from_action?' do
-    subject { relationship.allow_remove_volunteer_from_action?(user, action) }
+    subject { relationship.allow_remove_volunteer_from_event?(user, action) }
     let(:user) { users(:sabine) }
 
     it 'should be false for no user logged in' do

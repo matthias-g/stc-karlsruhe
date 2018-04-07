@@ -7,11 +7,5 @@ class CreateEvents < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-
-    Action.all.each do |action|
-      if action.desired_team_size > 0
-        Event.create!(date: action.date, time: action.time, initiative: action)
-      end
-    end
   end
 end

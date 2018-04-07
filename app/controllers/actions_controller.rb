@@ -48,16 +48,6 @@ class ActionsController < ApplicationController
     respond_with(@action)
   end
 
-  def enter
-    @action.add_volunteer(current_user)
-    redirect_to action_url(@action), notice: t('action.message.enteredAction')
-  end
-
-  def leave
-    @action.delete_volunteer(current_user)
-    redirect_to action_url(@action), notice: t('action.message.leftAction')
-  end
-
   def destroy
     @action.destroy
     respond_with(@action.action_group)
@@ -159,7 +149,7 @@ class ActionsController < ApplicationController
   end
 
   def authorize_delete_volunteer(volunteer)
-    unless policy(@action).allow_remove_volunteer_from_action?(volunteer, @action)
+    unless policy(@action).allow_remove_volunteer_from_event?(volunteer, @action)
       raise Pundit::NotAuthorizedError, "not allowed to delete #{volunteer.full_name} from #{@action.title}"
     end
     skip_authorization

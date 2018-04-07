@@ -1,0 +1,82 @@
+one:
+  initiative: one
+  desired_team_size: 4
+  date: <%= Date.today %>
+  team_size: 1
+
+two:
+  initiative: two
+  desired_team_size: 7
+  date: <%= Date.today %>
+  team_size: 1
+
+three:
+  initiative: three
+  desired_team_size: 7
+  date: <%= Date.today %>
+
+four:
+  initiative: four
+  desired_team_size: 7
+  date: <%= Date.today %>
+
+kindergarten-party:
+  initiative: kindergarten-party
+  desired_team_size: 2
+  date: <%= Date.today %>
+  team_size: 1
+
+kindergarten-kitchen:
+  initiative: kindergarten-kitchen
+  desired_team_size: 5
+  time: "14:00 - 16:00"
+  date: '2017-07-03'
+  team_size: 1
+
+kindergarten-music:
+  initiative: kindergarten-music
+  desired_team_size: 3
+  date: <%= Date.today %>
+  team_size: 1
+
+undated:
+  initiative: undated
+  desired_team_size: 1
+
+finished:
+  initiative: finished
+  desired_team_size: 5
+  date: <%= Date.yesterday %>
+
+finished_parent_initiative:
+  initiative: finished_parent_action
+  desired_team_size: 5
+  date: <%= Date.yesterday %>
+
+finished_subinitiative:
+  initiative: finished_subaction
+  desired_team_size: 5
+  date: <%= Date.yesterday %>
+
+full:
+  initiative: full
+  desired_team_size: 1
+  date: <%= Date.today %>
+  team_size: 1
+
+soon_full:
+  initiative: soon_full
+  desired_team_size: 3
+  team_size: 1
+
+full_but_finished:
+  initiative: full_but_finished
+  desired_team_size: 1
+  date: <%= Date.yesterday %>
+  team_size: 1
+
+soon_full_but_finished:
+  initiative: soon_full_but_finished
+  desired_team_size: 3
+  date: <%= Date.yesterday %>
+  team_size: 1

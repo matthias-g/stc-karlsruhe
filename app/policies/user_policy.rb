@@ -1,6 +1,6 @@
 class UserPolicy < ApplicationPolicy
 
-  include ActionUserRelationship
+  include EventUserRelationship
 
   class Scope < Scope
     def resolve
@@ -48,7 +48,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def add_to_actions_as_volunteer?(actions)
-    actions.all? { |action| allow_add_volunteer_to_action?(record, action) }
+    actions.all? { |action| allow_add_volunteer_to_event?(record, action) }
   end
 
 end

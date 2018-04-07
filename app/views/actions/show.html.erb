@@ -3,11 +3,11 @@
 <% wrapper_classes.add('action-invisible') unless @action.visible? %>
 
 <% content_for :head do %>
-    <meta name="description" content="<%= @action.short_description %>" />
-    <% if @action.show_picture? %>
-        <meta property="og:image" content="<%= image_url(@action.picture_url) %>" />
-    <% end %>
-    <meta property="og:description" content="<%= @action.short_description %>" />
+  <meta name="description" content="<%= @action.short_description %>" />
+  <% if @action.show_picture? %>
+    <meta property="og:image" content="<%= image_url(@action.picture_url) %>" />
+  <% end %>
+  <meta property="og:description" content="<%= @action.short_description %>" />
 <% end %>
 
 <div class="white-box record-header d-print-none">
@@ -131,15 +131,15 @@
               <span class="fa fa-pencil"></span> <%= t('action.action.edit') %>
             <% end %>
             <% if policy(@action).change_visibility? %>
-                <% if @action.visible %>
-                  <%= link_to make_invisible_action_path(@action), class:'btn status_hidden btn-block' do %>
-                    <span class="fa fa-eye-slash"></span> <%= t('action.action.makeInvisible') %>
-                  <% end %>
-                <% else %>
-                  <%= link_to make_visible_action_path(@action), class:'btn status_hidden btn-block' do %>
-                    <span class="fa fa-eye"></span> <%= t('action.action.makeVisible') %>
-                  <% end %>
+              <% if @action.visible %>
+                <%= link_to make_invisible_action_path(@action), class:'btn status_hidden btn-block' do %>
+                  <span class="fa fa-eye-slash"></span> <%= t('action.action.makeInvisible') %>
                 <% end %>
+              <% else %>
+                <%= link_to make_visible_action_path(@action), class:'btn status_hidden btn-block' do %>
+                  <span class="fa fa-eye"></span> <%= t('action.action.makeVisible') %>
+                <% end %>
+              <% end %>
             <% end %>
           </section>
         </div>
@@ -153,22 +153,19 @@
             <%= @action.dates.collect { |date| l(date, format: :short_with_weekday)}.join('<br />').html_safe %>
           </div>
           <div>
-            <%= simple_format @action.time %>
-          </div>
-          <div>
             <h3><%= Action.human_attribute_name('location') %></h3>
             <%= simple_format @action.location %>
           </div>
           <% unless @action.longitude == 0 %>
-              <div class="map d-print-none" data-class="GoogleMap" data-map-id="action"
-                   data-zoom="<%= @action.map_zoom %>"
-                   data-lon="<%= @action.map_longitude %>"
-                   data-lat="<%= @action.map_latitude %>">
-                <div data-name="<%= @action.title %>"
-                     data-lon="<%= @action.longitude %>"
-                     data-lat="<%= @action.latitude %>">
-                </div>
+            <div class="map d-print-none" data-class="GoogleMap" data-map-id="action"
+                 data-zoom="<%= @action.map_zoom %>"
+                 data-lon="<%= @action.map_longitude %>"
+                 data-lat="<%= @action.map_latitude %>">
+              <div data-name="<%= @action.title %>"
+                   data-lon="<%= @action.longitude %>"
+                   data-lat="<%= @action.latitude %>">
               </div>
+            </div>
           <% end %>
         </div>
       </div>
@@ -232,16 +229,23 @@
               <span class="fa fa-users"></span> <%= t('action.action.manageTeam') %>
             <% end %>
           <% end %>
-          <% if policy(@action).leave? %>
-            <%= link_to leave_action_path(@action), class: 'btn btn-danger btn-block' do %>
-              <span class="fa fa-sign-out"></span> <%= t('action.action.leave') %>
-            <% end %>
-          <% elsif policy(@action).enter? %>
-            <%= link_to enter_action_path(@action), class: 'btn btn-success btn-block' do %>
-              <span class="fa fa-sign-in"></span> <%= t('action.action.enter') %>
-            <% end %>
-          <% elsif policy(@action).enter_subaction? %>
-            <p><%= t('action.message.enterOneOfThesubactions') %></p>
+          <% @action.events.each do |event| %>
+            <div class="event">
+              <div>
+                <%= simple_format event.time %>
+              </div>
+              <% if policy(event).leave? %>
+                <%= link_to leave_event_path(event), class: 'btn btn-danger btn-block' do %>
+                  <span class="fa fa-sign-out"></span> <%= t('action.action.leave') %>
+                <% end %>
+              <% elsif policy(event).enter? %>
+                <%= link_to enter_event_path(event), class: 'btn btn-success btn-block' do %>
+                  <span class="fa fa-sign-in"></span> <%= t('action.action.enter') %>
+                <% end %>
+              <% elsif policy(@action).enter_subaction? %>
+                <p><%= t('action.message.enterOneOfThesubactions') %></p>
+              <% end %>
+            </div>
           <% end %>
         </div>
       </div>
@@ -253,9 +257,9 @@
 <div class="footer d-print-none">
   <%= render '/layouts/share' -%>
   <%= link_to action_ical_path(@action), class: 'float-right', title: t('action.action.exportICal'), data: { 'turbolinks': false } do %>
-      <span class="fa fa-calendar"></span>
+    <span class="fa fa-calendar"></span>
   <% end %>
   <% if @action.action_group %>
-      <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group.title), class: 'btn btn-light' %>
+    <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group.title), class: 'btn btn-light' %>
   <% end %>
 </div>

@@ -114,20 +114,18 @@ class UserTest < ActiveSupport::TestCase
     other_user = users(:birgit)
     assert action.leader?(other_user)
     user.merge_other_users_actions(other_user)
-
     assert action.leader?(user)
     assert_not action.leader?(other_user)
   end
 
-  test "merge other user's participating actions" do
-    action = actions(:'kindergarten-kitchen')
+  test "merge other user's participating events" do
+    event = events(:'kindergarten-kitchen')
     user = users(:birgit)
     other_user = users(:peter)
-    assert action.volunteer?(other_user)
+    assert event.volunteer?(other_user)
     user.merge_other_users_actions(other_user)
-
-    assert action.volunteer?(user)
-    assert_not action.volunteer?(other_user)
+    assert event.volunteer?(user)
+    assert_not event.volunteer?(other_user)
   end
 
 end

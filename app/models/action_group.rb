@@ -10,7 +10,8 @@ class ActionGroup < ApplicationRecord
   def active_user_count
     User.joins('LEFT JOIN "participations" ON "participations"."user_id" = "users"."id"')
         .joins('LEFT JOIN "leaderships" ON "leaderships"."user_id" = "users"."id"')
-        .joins('INNER JOIN "actions" ON "actions"."id" = "leaderships"."action_id" OR "actions"."id" = "participations"."action_id"')
+        .joins('LEFT JOIN "events" ON "events"."id" = "participations"."event_id"')
+        .joins('INNER JOIN "actions" ON "actions"."id" = "leaderships"."action_id" OR "actions"."id" = "events"."initiative_id"')
         .where('actions.visible': true).where('actions.action_group_id': self.id).distinct.count
   end
 

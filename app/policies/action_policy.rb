@@ -1,7 +1,5 @@
 class ActionPolicy < ApplicationPolicy
 
-  include ActionUserRelationship
-
   class Scope < Scope
     def resolve
       if user && (user.admin? || user.coordinator?)
@@ -45,8 +43,8 @@ class ActionPolicy < ApplicationPolicy
 
   def updatable_fields
     all_fields = [:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements,
-                  :visible, :desired_team_size, :time, :short_description, :map_latitude, :map_longitude, :map_zoom,
-                  :picture, :picture_source, :action_group, :parent_action, :volunteers, :leaders]
+                  :visible, :short_description, :map_latitude, :map_longitude, :map_zoom,
+                  :picture, :picture_source, :action_group, :parent_action, :leaders]
     return all_fields - [:visible] unless is_admin? || is_coordinator?
     all_fields
   end
@@ -59,39 +57,20 @@ class ActionPolicy < ApplicationPolicy
     record.visible? && is_volunteer?(user) && !record.finished?
   end
 
-  def enter?
-    add_to_volunteers? [user]
-  end
+  # def enter?
+  #   add_to_volunteers? [user]
+  # end
 
   def enter_subaction?
     (record.total_available_places > record.available_places) && !record.volunteers_in_subactions.include?(user)
   end
 
-  def leave?
-    remove_from_volunteers? user
-  end
+  # def leave?
+  #   remove_from_volunteers? user
+  # end
 
   def upload_pictures?
     is_today_or_past? && (is_volunteer?(user) || is_leader? || is_coordinator? || is_admin? || user&.photographer?)
-  end
-
-  def add_to_volunteers?(users)
-    users.all? { |user| allow_add_volunteer_to_action?(user, record) }
-  end
-
-  def remove_from_volunteers?(user)
-    allow_remove_volunteer_from_action?(user, record)
-  end
-
-  def replace_volunteers?(users)
-    allowed = true
-    record.volunteers.each do |volunteer|
-      allowed &= users.include?(volunteer) || remove_from_volunteers?(volunteer)
-    end
-    users.each do |user|
-      allowed &= is_volunteer?(user) || add_to_volunteers?([user])
-    end
-    allowed
   end
 
   alias update? edit?

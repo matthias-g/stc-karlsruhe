@@ -26,13 +26,13 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
   test 'should create only for admin action' do
     sign_in users(:rolf)
     assert_no_difference('Action.count') do
-      post actions_url, params: {the_action: {description: 'Description', individual_tasks: 'Tasks', title: 'Title', desired_team_size: '6' } }
+      post actions_url, params: {the_action: {description: 'Description', individual_tasks: 'Tasks', title: 'Title' } }
     end
     sign_out users(:rolf)
 
     sign_in users(:admin)
     assert_difference('Action.count') do
-      post actions_url, params: {the_action: {description: 'Description', individual_tasks: 'Tasks', title: 'Title', desired_team_size: '6' } }
+      post actions_url, params: {the_action: {description: 'Description', individual_tasks: 'Tasks', title: 'Title' } }
     end
   end
 
@@ -41,7 +41,6 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
     description = 'This is the description for this new action.'
     post actions_url, params: {the_action: {description: description,
                                         individual_tasks: 'Tasks',
-                                        desired_team_size: '6',
                                         action_group_id: action_groups(:one).id } }
     assert_response :success
     assert_select '#error_explanation' do |elements|
@@ -118,7 +117,7 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update action' do
     sign_in users(:rolf)
-    patch action_url(@action), params: {the_action: {description: 'New Description', title: @action.title, desired_team_size: @action.desired_team_size } }
+    patch action_url(@action), params: {the_action: {description: 'New Description', title: @action.title } }
     assert_equal I18n.t('action.message.updated'), flash[:notice]
     assert_response :redirect
     follow_redirect!
@@ -145,39 +144,6 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to @action.action_group
-  end
-
-  test 'volunteer should enter action' do
-    user = users(:peter)
-    sign_in user
-    assert_not @action.volunteer?(user)
-    get enter_action_url(@action)
-    @action = Action.find(@action.id)
-    assert_redirected_to action_path(@action)
-    assert @action.volunteer?(user)
-  end
-
-  test 'volunteer should leave action' do
-    user = users(:peter)
-    sign_in user
-    @action.add_volunteer(user)
-    assert @action.volunteer?(user)
-    get leave_action_url(@action)
-    assert_redirected_to @action
-    assert_not @action.volunteer?(user)
-    assert User.exists?(user.id)
-  end
-
-  test 'send notification when volunteer leaves action ' do
-    user = users(:peter)
-    sign_in user
-    @action.add_volunteer(user)
-    assert @action.volunteer?(user)
-    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
-      get leave_action_url(@action)
-    end
-    assert_redirected_to @action
-    assert_not @action.volunteer?(user)
   end
 
   test 'admin should make action visible' do

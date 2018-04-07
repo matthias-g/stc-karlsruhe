@@ -8,13 +8,21 @@ class MoveFieldsFromActionToEvent < ActiveRecord::Migration[5.1]
         Event.create!(date: action.date, time: action.time, initiative: action)
       end
       event = action.events.first
-      event.update_column('date', action.date)
-      event.update_column('time', action.time)
-      event.update_column('desired_team_size', action.desired_team_size)
-      event.update_column('team_size', action.team_size)
+      event.update_column('date', action.read_attribute('date'))
+      event.update_column('time', action.read_attribute('time'))
+      event.update_column('desired_team_size', action.read_attribute('desired_team_size'))
     end
 
-    Event.all.each(&:save!)
+    reversible do |dir|
+      dir.up {
+        execute <<-SQL.squish
+        UPDATE events
+           SET team_size = (SELECT count(1)
+                             FROM participations
+                            WHERE participations.event_id = events.id)
+        SQL
+      }
+    end
 
     remove_column :actions, :date
     remove_column :actions, :time

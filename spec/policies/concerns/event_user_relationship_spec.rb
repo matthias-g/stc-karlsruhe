@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'helpers'
 
-shared_examples 'a ActionUserRelationship' do
+shared_examples 'a EventUserRelationship' do
   include Fixtures
 
   let(:relationship) { described_class.new(current_user, nil) }
@@ -125,9 +125,9 @@ shared_examples 'a ActionUserRelationship' do
 end
 
 describe UserPolicy do
-  it_behaves_like 'a ActionUserRelationship'
+  it_behaves_like 'a EventUserRelationship'
 end
 
-describe ActionPolicy do
-  it_behaves_like 'a ActionUserRelationship'
+describe EventPolicy do
+  it_behaves_like 'a EventUserRelationship'
 end

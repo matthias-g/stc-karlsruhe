@@ -174,7 +174,7 @@ RSpec.describe ActionPolicy do
     end
 
     context 'for finished action' do
-      before { action.date = Date.yesterday; action.save! }
+      before { action.events.first.update_attribute :date, Date.yesterday }
 
       context 'as volunteer' do
         let(:user) { users(:sabine) }
@@ -193,7 +193,7 @@ RSpec.describe ActionPolicy do
     subject { policy.upload_pictures? }
 
     context 'for future action' do
-      before { action.date = Date.tomorrow; action.save! }
+      before { action.events.first.update_attribute :date, Date.tomorrow }
 
       context 'when no user is logged in' do
         it { should_fail }
@@ -206,7 +206,7 @@ RSpec.describe ActionPolicy do
     end
 
     context 'for past action' do
-      before { action.date = 1.days.ago; action.save! }
+      before { action.events.first.update_attribute :date, 1.days.ago }
 
       context 'when no user is logged in' do
         it { should_fail }
@@ -244,135 +244,13 @@ RSpec.describe ActionPolicy do
     end
 
     context 'for today action' do
-      before { action.date = 1.seconds.ago; action.save! }
+      before { action.events.first.update_attribute :date, 1.seconds.ago }
       let(:user) { users(:admin) }
       it { should_pass }
     end
 
     context 'for undated action' do
-      before { action.date = nil; action.save! }
-      it { should_fail }
-    end
-  end
-
-  describe 'add_to_volunteers?' do
-    let(:new_volunteers) { [users(:peter)] }
-    subject { policy.add_to_volunteers?(new_volunteers) }
-
-    context 'when no user is logged in' do
-      it { should_fail }
-    end
-
-    context 'as admin' do
-      let(:user) { users(:admin) }
-      it { should_pass }
-    end
-
-    context 'as other user' do
-      let(:user) { users(:sabine) }
-      it { should_fail }
-    end
-
-    context 'when user adds themselves' do
-      let(:user) { users(:peter) }
-      it { should_pass }
-    end
-
-    context 'when multiple users are added' do
-      let(:new_volunteers) { [users(:peter), users(:birgit)] }
-
-      context 'as one of the users to be added' do
-        let(:user) { users(:peter) }
-        it { should_fail }
-      end
-
-      context 'as admin' do
-        let(:user) { users(:admin) }
-        it { should_pass }
-      end
-    end
-  end
-
-  describe 'remove_from_volunteers?' do
-    let(:user_to_remove) { users(:sabine) }
-    subject { policy.remove_from_volunteers?(user_to_remove) }
-
-    context 'as some user' do
-      let(:user) { users(:rolf) }
-      it { should_fail }
-    end
-
-    context 'as admin' do
-      let(:user) { users(:admin) }
-      it { should_pass }
-    end
-
-    context 'when user removes himself' do
-      let(:user) { users(:sabine) }
-      it { should_pass }
-    end
-  end
-
-  describe 'replace_volunteers?' do
-    let(:new_volunteers) { [users(:peter)] }
-    subject { policy.replace_volunteers?(new_volunteers) }
-
-    context 'as admin' do
-      let(:user) { users(:admin) }
-      it { should_pass }
-
-      context 'when adding new volunteers' do
-        let(:new_volunteers) { [users(:sabine), users(:peter)] }
-        it { should_pass }
-      end
-    end
-
-    context 'as other user' do
-      let(:user) { users(:lea) }
-      it { should_fail }
-    end
-
-    context 'when user removes himself but adds someone else' do
-      let(:user) { users(:sabine) }
-      it { should_fail }
-    end
-
-    context 'when user adds himself but removes someone else' do
-      let(:user) { users(:peter) }
-      it { should_fail }
-    end
-
-    context 'when user adds himself' do
-      let(:new_volunteers) { [users(:sabine), users(:peter)] }
-      let(:user) { users(:peter) }
-      it { should_pass }
-    end
-  end
-
-  describe 'enter?' do
-    subject { policy.enter? }
-
-    context 'as volunteer' do
-      let(:user) { users(:sabine) }
-      it { should_fail }
-    end
-
-    context 'as other user' do
-      let(:user) { users(:peter) }
-      it { should_pass }
-    end
-  end
-
-  describe 'leave?' do
-    subject { policy.leave? }
-
-    context 'as volunteer' do
-      let(:user) { users(:sabine) }
-      it { should_pass }
-    end
-
-    context 'as other user' do
-      let(:user) { users(:peter) }
+      before { action.events.first.update_attribute :date, nil }
       it { should_fail }
     end
   end
@@ -396,7 +274,7 @@ RSpec.describe ActionPolicy do
     end
 
     context 'for finished action' do
-      before { action.update_attribute :date, Date.yesterday }
+      before { action.events.first.update_attribute :date, Date.yesterday }
       it { should_fail }
     end
 
@@ -407,20 +285,21 @@ RSpec.describe ActionPolicy do
     let(:action) { actions('Fest im Kindergarten') }
 
     context 'with full sub actions' do
-      before { action.subactions.each { |a| a.update_attribute('desired_team_size', 1) } }
+      before { action.subactions.each { |a| a.events.first.update_attribute('desired_team_size', 1) } }
       it { should_fail }
     end
 
     context 'for finished action' do
-      before { ([action] + action.subactions).each { |a| a.update_attribute :date, Date.yesterday } }
+      before { ([action] + action.subactions).each { |a| a.events.first.update_attribute :date, Date.yesterday } }
       it { should_fail }
     end
 
     context 'for active action' do
-      before { action.date = Date.today; action.save! }
+      before { action.events.first.update_attribute :date, Date.today }
+
 
       context 'with non-full sub actions' do
-        before { action.subactions.each { |a| a.update_attribute('desired_team_size', 2) }  }
+        before { action.subactions.each { |a| a.events.first.update_attribute('desired_team_size', 2) }  }
 
         context 'if user already is in a subaction' do
           let(:user) { users(:lea) }

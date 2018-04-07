@@ -44,7 +44,7 @@ class ActionPolicy < ApplicationPolicy
   def updatable_fields
     all_fields = [:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements,
                   :visible, :short_description, :map_latitude, :map_longitude, :map_zoom,
-                  :picture, :picture_source, :action_group, :parent_action, :leaders]
+                  :picture, :picture_source, :events, :action_group, :parent_action, :leaders, :volunteers]
     return all_fields - [:visible] unless is_admin? || is_coordinator?
     all_fields
   end

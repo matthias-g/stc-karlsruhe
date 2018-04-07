@@ -30,7 +30,11 @@ class EventPolicy < ApplicationPolicy
   end
 
   def updatable_fields
-    [:desired_team_size, :team, :date, :initiative, :volunteers, :visible]
+    [:desired_team_size, :team, :date, :initiative, :volunteers]
+  end
+
+  def is_volunteer?(user)
+    record.volunteer?(user)
   end
 
 end

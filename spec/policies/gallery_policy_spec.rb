@@ -130,8 +130,6 @@ RSpec.describe GalleryPolicy do
       it 'is true' do
         expect(record.actions.count).to eq(1)
         action = record.actions.first
-        action.date = 1.days.ago
-        action.save!
         expect(current_user).to lead_action(action)
         expect(subject).to be_truthy
       end
@@ -143,8 +141,6 @@ RSpec.describe GalleryPolicy do
       it 'is false' do
         expect(record.actions.count).to eq(1)
         action = record.actions.first
-        action.date = 1.days.ago
-        action.save!
         expect(current_user).not_to lead_action(action)
         expect(current_user).not_to volunteer_in_action(action)
         expect(subject).to be_falsey

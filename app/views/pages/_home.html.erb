@@ -72,12 +72,6 @@
         <% groups.order(:start_date).each do |group| %>
           <%= link_to 'Aktionswoche ' + group.title, show_action_group_path(group.title), class: 'title' %>
         <% end %>
-        <%= link_to '/stadtpiraten', class: 'title' do %>
-          <span class="fa fa-cog"></span> Stadtpiraten
-        <% end %>
-        <%= link_to '/spielezeit', class: 'title' do %>
-          <span class="fa fa-trophy"></span> Spielezeit
-        <% end %>
       </div>
 
     </div>

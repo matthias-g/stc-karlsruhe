@@ -33,13 +33,10 @@
       <p>E-Mails an Mitarbeiter und Aktionsleiter schicken</p>
     </div>
     <div class="col-sm-4">
-      <%= link_to('webmail', data: {turbolinks: false}) do %>
+      <%= link_to('https://outlook.office.com/', data: {turbolinks: false}, target: '_blank') do %>
           <h2>Webmail</h2>
       <% end %>
       <p>Auf eigenen E-Mail-Account zugreifen</p>
-      <% if Rails.application.secrets.change_mail_password_url %>
-          <%= link_to 'Passwort ändern', Rails.application.secrets.change_mail_password_url %>
-      <% end %>
     </div>
     <div class="col-sm-4">
       <%= link_to surveys_templates_path do %>

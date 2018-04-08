@@ -26,6 +26,7 @@ class ActionsController < ApplicationController
 
   def new
     @action = Action.new
+    @action.events.build
     authorize_action
     @action.action_group = ActionGroup.all.order(title: :desc).first
   end

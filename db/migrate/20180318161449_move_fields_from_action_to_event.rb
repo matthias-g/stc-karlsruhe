@@ -4,6 +4,7 @@ class MoveFieldsFromActionToEvent < ActiveRecord::Migration[5.1]
     add_column :events, :team_size, :integer
 
     Action.all.each do |action|
+      next if action.subactions.count > 0
       unless action.events.count > 0
         Event.create!(date: action.date, time: action.time, initiative: action)
       end

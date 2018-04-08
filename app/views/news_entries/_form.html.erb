@@ -1,4 +1,13 @@
 
+<% content_for :end_of_body do %>
+  <div id="image_crop_modal" class="modal fade" tabindex="-1" role="dialog" data-class="Modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <%= bootstrap_form_for(@news_entry) do |f| %>
 
     <% if @news_entry.errors.any? %>
@@ -101,12 +110,3 @@
       <% end %>
     </section>
 <% end %>
-
-
-  <div class="modal fade" id="image_crop_modal" data-class="Modal" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      </div>
-    </div>
-  </div>
-

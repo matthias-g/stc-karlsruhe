@@ -1,5 +1,14 @@
 <% wrapper_set 'container-medium' %>
 
+<% content_for :end_of_body do %>
+  <div id="image_crop_modal" class="modal fade" tabindex="-1" role="dialog" data-class="Modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <%= bootstrap_form_for(@action, as: :the_action) do |f| %>
 
   <% if @action.errors.any? %>
@@ -50,6 +59,7 @@
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
                 <span class="fa fa-crop"></span> <%= t('action.action.cropThumbnailImage') %>
               <% end %>
+
             <% end %>
           <% end %>
 
@@ -147,11 +157,3 @@
   </div>
 
 <% end %>
-
-
-<div class="modal fade" id="image_crop_modal" data-class="Modal" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-    </div>
-  </div>
-</div>

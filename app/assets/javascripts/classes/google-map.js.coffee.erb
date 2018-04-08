@@ -6,6 +6,9 @@ class @GoogleMap
     @activeWindow = undefined
     @markers = @windows = []
     @mapID = @html.data('map-id')
+    @icons =
+      red: "<%= asset_path 'marker-red.png' %>"
+      gray: "<%= asset_path 'marker-gray.png' %>"
 
     @map = new (google.maps.Map)(@html.get(0),
       zoom: parseInt(@html.data('zoom'))
@@ -27,7 +30,6 @@ class @GoogleMap
 
     @extractMarkers(markerData)
     @adaptBoundsToMarkers
-    @limitViewableArea(8.2, 8.6, 48.85, 49.25)
 
     google.maps.visualRefresh = true
 
@@ -37,7 +39,7 @@ class @GoogleMap
       lat = e.latLng.lat()
       lon = e.latLng.lng()
       @removeMarkers()
-      @addMarker title, '', '', lat, lon
+      @addMarker title, '', '', lat, lon, 'red'
       $('#' + editID + '_latitude').val lat
       $('#' + editID + '_longitude').val lon
     google.maps.event.addListener @map, 'center_changed', (e) =>
@@ -51,17 +53,18 @@ class @GoogleMap
   extractMarkers: (markerData) =>
     markerData.each (i, ele) =>
       m = $(ele)
-      pos = new (google.maps.LatLng)(parseFloat(m.data('lat')), parseFloat(m.data('lon')))
-      @addMarker(m.data('name') or '', m.data('href') or '', m.prop('innerHTML'), pos.lat(), pos.lng())
+      @addMarker(m.data('name') or '', m.data('href') or '', m.prop('innerHTML'),
+        parseFloat(m.data('lat')), parseFloat(m.data('lon')), m.data('color'))
       if m.data('editable')
         @setEditable(m.data('name'), @mapID)
 
 
-  addMarker: (name, href, desc, lat, lon) =>
+  addMarker: (name, href, desc, lat, lon, color) =>
     marker = new (google.maps.Marker)
       title: name
       map: @map
       position: new (google.maps.LatLng)(lat, lon)
+      icon: @icons[color]
     @markers.push marker
 
     window = new (google.maps.InfoWindow)
@@ -89,12 +92,3 @@ class @GoogleMap
     for marker of @markers
       bounds.extend marker.position
     @map.fitBounds bounds
-
-
-  limitViewableArea: (minX, maxX, minY, maxY) =>
-    google.maps.event.addListener @map, 'center_changed', =>
-      x = @map.getCenter().lng()
-      y = @map.getCenter().lat()
-      @map.panTo new (google.maps.LatLng)(
-        if y < minY then minY else if y > maxY then maxY else y,
-        if x < minX then minX else if x > maxX then maxX else x)

@@ -111,7 +111,7 @@ body {
 
 #content {
   @include clearfix;
-  margin: 0 10px;
+  margin: 0 50px;
   position: relative;
   z-index: 200;
   @include media-breakpoint-down(sm) {

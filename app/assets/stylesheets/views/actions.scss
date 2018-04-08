@@ -135,8 +135,8 @@
 }
 .action-card {
   margin-bottom: 1rem !important;
-  min-width: 340px;
-  max-width: 340px;
+  min-width: 320px;
+  max-width: 320px;
   cursor: pointer;
   box-shadow: 0 0 5px rgba(black, 0.5);
   &:hover {
@@ -171,4 +171,10 @@
 .status_hidden {
   color: $status_hidden_text;
   background: $status_hidden;
+}
+
+
+.cropbox > img {
+  width: 100%;
+  height: auto;
 }

@@ -1,9 +1,24 @@
 
 #action-group-header {
   padding: 10px 20px;
-  h2 {
-    padding: 0;
-    margin: 25px 0 0 10px;
+  text-align: center;
+  h1 {
+    margin-bottom: 0;
+  }
+
+  .previous-group-link {
+    float: left;
+  }
+  .next-group-link {
+    float: right;
+  }
+  a > div {
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+  }
+  .fa {
+    padding: 0 10px;
   }
 }
 
@@ -12,7 +27,7 @@
 }
 
 #action-group-info {
-  text-align: right;
+  text-align: center;
   .infobox {
     display: inline-block;
     padding: 10px;

@@ -13,62 +13,74 @@
 
 
 <div id="action-group-header" class="white-box">
-  <div class="row align-items-center">
+  <% action_groups = ActionGroup.all.order(:start_date) %>
+  <% group_index = action_groups.index(@action_group) %>
+  <% previous_action_group = group_index.positive? ? action_groups[group_index - 1] : nil %>
+  <% next_action_group = action_groups[group_index + 1] %>
 
-    <%# week title and select dropdown %>
-    <div id="action-group-select" class="col-sm-6">
-      <h1>Aktionswoche <%= @action_group.title %></h1>
-      <%= render '/layouts/week_dropdown', target_path: lambda { |action_group| show_action_group_path(action_group.title) } %>
-    </div>
+  <% if previous_action_group %>
+    <%= link_to show_action_group_path(previous_action_group.title), class: 'previous-group-link' do %>
+      <div class="fa fa-2x fa-chevron-left"></div>
+      <div class="h2"><%= previous_action_group.title %></div>
+    <% end %>
+  <% end %>
+  <% if next_action_group %>
+    <%= link_to show_action_group_path(next_action_group.title), class: 'next-group-link' do %>
+      <div class="h2"><%= next_action_group.title %></div>
+      <div class="fa fa-2x fa-chevron-right"></div>
+    <% end %>
+  <% end %>
 
-    <div id="action-group-info" class="col-sm-6">
-
-      <%# total action count %>
-      <div class="infobox">
-        <span>
-          <%= actions_count = actions.visible.count %>
-          <% if (hidden_actions_count = actions.hidden.count) > 0 %>
-            <span class="hidden-actions">+  <%= hidden_actions_count.to_s %></span>
-          <% end %>
-        </span>
-        <div><%= Action.model_name.human(count: actions_count) %></div>
-      </div>
-
-      <%# total unique user count %>
-      <% if @action_group.active_user_count > 0 %>
-        <% if current_user&.in_orga_team? %>
-          <a href="<%= statistiken_teilnahmen_path %>">
-        <% end %>
-        <div class="infobox">
-          <span><%= @action_group.active_user_count %></span>
-          <div><%= t('user.label.countActive') %></div>
-        </div>
-        <% if current_user&.in_orga_team? %>
-          </a>
-        <% end %>
-      <% end %>
-
-      <%# total free places count %>
-      <% if (vacancy_count = @action_group.vacancy_count) > 0 %>
-        <% if current_user&.in_orga_team? %>
-          <a href="<%= statistiken_auslastung_path %>">
-        <% end %>
-        <div class="infobox">
-          <span><%= vacancy_count %></span>
-          <div><%= t('action.label.vacancies') %></div>
-        </div>
-        <% if current_user&.in_orga_team? %>
-          </a>
-        <% end %>
-      <% end %>
-
-    </div>
-  </div>
+  <h1>Aktionswoche <%= @action_group.title %></h1>
 </div>
 
 <div class="row">
   <div class="col-md-3 col-lg-2">
     <div class="row align-items-stretch">
+
+      <%# general info %>
+      <div id="action-group-info" class="col-sm-6 col-md-12">
+        <div class="white-box">
+          <%# total action count %>
+          <div class="infobox">
+            <span>
+              <%= actions_count = actions.visible.count %>
+              <% if (hidden_actions_count = actions.hidden.count) > 0 %>
+                <span class="hidden-actions">+  <%= hidden_actions_count.to_s %></span>
+              <% end %>
+            </span>
+            <div><%= Action.model_name.human(count: actions_count) %></div>
+          </div>
+
+          <%# total unique user count %>
+          <% if @action_group.active_user_count > 0 %>
+            <% if current_user&.in_orga_team? %>
+              <a href="<%= statistiken_teilnahmen_path %>">
+            <% end %>
+            <div class="infobox">
+              <span><%= @action_group.active_user_count %></span>
+              <div><%= t('user.label.countActive') %></div>
+            </div>
+            <% if current_user&.in_orga_team? %>
+              </a>
+            <% end %>
+          <% end %>
+
+          <%# total free places count %>
+          <% if (vacancy_count = @action_group.vacancy_count) > 0 %>
+            <% if current_user&.in_orga_team? %>
+              <a href="<%= statistiken_auslastung_path %>">
+            <% end %>
+            <div class="infobox">
+              <span><%= vacancy_count %></span>
+              <div><%= t('action.label.vacancies') %></div>
+            </div>
+            <% if current_user&.in_orga_team? %>
+              </a>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
 
       <%# filter module %>
       <div class="col-sm-6 col-md-12">

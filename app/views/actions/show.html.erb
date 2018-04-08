@@ -11,7 +11,6 @@
 <% end %>
 
 <div class="white-box record-header d-print-none">
-  <h1><%= @action.title %></h1>
   <div class="type">
     <% if @action.subaction? %>
       <%= t('action.label.subaction_of') %>
@@ -23,6 +22,7 @@
       - <%= link_to @action.action_group.title, show_action_group_path(@action.action_group.title) %>
     <% end %>
   </div>
+  <h1><%= @action.title %></h1>
   <div class="labels">
     <% unless @action.visible? %>
       <span class="badge status_hidden"><%= t('action.status.hidden') %></span>

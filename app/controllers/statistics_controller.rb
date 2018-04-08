@@ -5,7 +5,11 @@ class StatisticsController < ApplicationController
     @end_date = params[:date]&.to_date || Date.tomorrow
     @start_date = @end_date - 60
     @action_group = ActionGroup.all.to_a.select { |action_group| (@start_date..@end_date).cover?(action_group.date_range.begin) }.first
-    @action_group = ActionGroup.default unless @action_group
+    unless @action_group
+      @action_group = ActionGroup.default
+      @end_date = @action_group.end_date
+      @start_date = @end_date - 60
+    end
   end
 
   def participations_on_day

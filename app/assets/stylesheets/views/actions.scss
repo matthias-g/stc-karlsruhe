@@ -120,8 +120,9 @@
     display: none;
   }
   .title {
-    font-family: CaptionFont;
-    font-size: 22px;
+    font-family: CaptionFont, sans-serif;
+    font-size: 20px;
+    font-weight: 300;
   }
   &.hidden-action .title {
     color: $status_hidden !important;

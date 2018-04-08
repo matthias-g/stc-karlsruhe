@@ -6,6 +6,14 @@ onPageLoad ->
   $('[data-behaviour~=datepicker]').datepicker(autoclose: true, format: "dd.mm.yyyy", language: 'de')
 
 
+  # add "remove event" buttons to all events
+  $('.events').on('click', '.remove-link', ->
+    $(this).prev('input[type=hidden]').attr('value', 1)
+    $(this).closest('.event-fields').hide())
+  # don't submit the event prototype
+  $('#event-prototype').closest('form').submit ->
+    $('#event-prototype').remove()
+
 # handler for "add leader" select
 @addNewLeader = (userId, html) ->
   actionId = html.data('action-id')

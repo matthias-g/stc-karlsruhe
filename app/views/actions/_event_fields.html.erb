@@ -1,0 +1,12 @@
+<div class="event-fields row">
+  <div class="col-md-6">
+    <%= f.text_field(:date, value: f.object.date ? l(f.object.date, format: :numeric) : '',
+                       data: { 'behaviour': 'datepicker', default: @action.action_group&.start_date }) -%>
+    <%= f.text_field :desired_team_size %>
+  </div>
+  <div class="col-md-6">
+    <%= f.text_field :time %>
+    <%= f.hidden_field :_destroy %>
+    <%= link_to t('action.action.removeEvent'), "javascript:void(0);", class: 'remove-link btn btn-secondary' %>
+  </div>
+</div>

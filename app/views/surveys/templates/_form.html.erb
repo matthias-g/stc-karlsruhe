@@ -41,14 +41,14 @@
   <%#= link_to 'Show', @template %>
   <%= link_to t('surveys.action.addQuestion'), 'javascript:void(0);',
         class: 'add-link btn btn-secondary',
-        data: {target: '#question-insertion-point'} %>
+        data: {target: '#question-insertion-point', prototype: '#question-prototype'} %>
 </section>
 
 
 <% new_object = f.object.class.reflect_on_association(:questions).klass.new %>
 <div id="question-prototype" style="display: none;">
-    <%= f.fields_for(:questions, new_object, :child_index => :new_question) do |builder|
-      render('question_fields', :f => builder)
+    <%= f.fields_for(:questions, new_object, child_index: :new_item) do |builder|
+      render('question_fields', f: builder)
     end %>
 </div>
 

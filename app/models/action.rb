@@ -7,6 +7,7 @@ class Action < ApplicationRecord
   has_many :leaderships, dependent: :destroy
   has_many :leaders, class_name: 'User', through: :leaderships, source: :user
   has_many :events, foreign_key: :initiative_id
+  accepts_nested_attributes_for :events, reject_if: lambda { |a| a[:desired_team_size].blank? }, allow_destroy: true
   belongs_to :action_group
   has_many :subactions, class_name: 'Action', foreign_key: :parent_action_id
   belongs_to :parent_action, class_name: 'Action', foreign_key: :parent_action_id

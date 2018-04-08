@@ -59,16 +59,17 @@ de:
         visible: 'Sichtbar'
         picture: 'Bild'
         picture_source: 'Bildrechte /-quelle'
-        desired_team_size: 'Gewünschte Teamgröße'
         leaders: 'Leitung'
         volunteers: 'Team'
         status: 'Status'
         action_group_id: Aktionswoche
-        date: Aktionstag
         dates: Aktionstage
-        time: Zeit
         subaction_ids: Teilaktionen
         parent_action_id: Überaktion
+      event:
+        date: Datum
+        time: Uhrzeit
+        desired_team_size: Gewünschte Teamgröße
       news_entry:
         title: 'Newstitel'
         text: 'Text'
@@ -297,6 +298,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       cropActionImage: 'Aktionsbild anpassen'
       cropThumbnailImage: 'Thumbnail anpassen'
       cropImage: 'Zuschneiden'
+      addEvent: Termin hinzufügen
+      removeEvent: Termin löschen
       wantToStartOwnAction: Du möchtest eine eigene Aktion starten?
       weHelpYou: Wir helfen dir dabei!
       startOwnAction: Eigene Aktion starten

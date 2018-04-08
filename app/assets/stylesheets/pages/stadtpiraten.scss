@@ -1,11 +1,16 @@
 #pages.stadtpiraten, #pages.spielezeit {
 
+  h1 {
+    text-align: center;
+    margin: 30px 200px;
+  }
+
   .action-quick-info {
     float: right;
     color: #555;
     font-size: 16px;
     font-family: NormalFont, Helvetica, Arial, sans-serif;
-    margin-top: -5px;
+    margin-top: 10px;
     div {
       text-align: right;
       margin-bottom: 5px;

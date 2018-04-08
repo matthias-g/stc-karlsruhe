@@ -9,7 +9,7 @@ class GalleriesControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:admin)
     get galleries_url
     assert_response :success
-    assert_select '#galleries.index tbody tr', 8
+    assert_select '#galleries.index tbody tr', 9
   end
 
   test 'gallery new' do

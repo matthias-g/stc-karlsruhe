@@ -41,8 +41,8 @@
 
 <section id="home-intro-box" class="full-width top">
   <h1 class="sr-only">Aktionen</h1>
-  <div class="row align-items-stretch">
-    <div class="col-sm-12 col-md-5 mb-0">
+  <div class="row align-items-stretch justify-content-around">
+    <div class="col-sm-12 col-lg-5 mb-0">
 
       <h2 class="sr-only">Karte</h2>
       <div id="home-actions-map" data-class="GoogleMap" data-lat="49.011627" data-lon="8.403869" data-zoom="12">
@@ -66,33 +66,35 @@
       </div>
 
     </div>
-    <div class="col-sm-6 col-md-3">
+    <div class="col-sm-5 col-md-4 col-lg-3">
 
       <div id="home-group-list">
-        <h2>Aktionszeiträume und Projekte</h2>
+        <h3>Aktuell</h3>
         <% groups = policy_scope(ActionGroup.where("end_date >= ?", Time.now)) %>
         <% groups = policy_scope(ActionGroup.order(start_date: :desc).limit(2)) unless groups.any? %>
         <% groups.order(:start_date).each do |group| %>
           <%= link_to 'Aktionswoche ' + group.title, show_action_group_path(group.title), class: 'title' %>
         <% end %>
         <%= link_to '/stadtpiraten', class: 'title' do %>
+          <div class="type">Projekt</div>
           <span class="fa fa-cog"></span> Stadtpiraten
         <% end %>
         <%= link_to '/spielezeit', class: 'title' do %>
+          <div class="type">Projekt</div>
           <span class="fa fa-trophy"></span> Spielezeit
         <% end %>
       </div>
 
     </div>
-    <div class="col-sm-6 col-md-4">
+    <div class="col-sm-7 col-md-6 col-lg-4">
 
       <div id="home-action-list">
         <% if user_signed_in? && (events = policy_scope(current_user.events.upcoming)).any? %>
-          <h2>Deine Aktionen</h2>
+          <h3>Deine Aktionen</h3>
         <% elsif (events = policy_scope(Event.upcoming).order(date: :asc).limit(3)).any? %>
-          <h2>Nächste Aktionen</h2>
+          <h3>Nächste Aktionen</h3>
         <% else %>
-          <h2>Letzte Aktionen</h2>
+          <h3>Vergangene Aktionen</h3>
           <% events = policy_scope(Event.finished).order(date: :desc).limit(3) %>
         <% end %>
         <%= render '/events/event_list', events: events %>
@@ -113,8 +115,8 @@
           Serve the City schafft Gelegenheiten, mit kleinen Beiträgen den sozialen Zusammenhalt in unserer Stadt zu stärken.
         </p>
         <p>
-          <%= link_to '/about' do %>
-            <span class="fa fa-arrow-right"></span> Alles über Serve the City
+          <%= link_to '/about', class: 'h3' do %>
+            <span class="fa fa-arrow-right"></span> über Serve the City...
           <% end %>
         </p>
 

@@ -50,7 +50,7 @@
 #home-intro-box {
   margin-bottom: 60px;
   background: #222;
-  h2 {
+  h3 {
     color: $primary;
     margin: 20px 10px;
   }
@@ -64,7 +64,9 @@
     display: block;
     padding: 10px;
     color: #ccc;
-    border-bottom: 1px solid rgba(black, 0.5);
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(black, 0.5);
+    }
     &:hover {
       color: $link-hover-color;
     }
@@ -72,8 +74,12 @@
   .title {
     padding-left: 20px;
     font-family: CaptionFont;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 300;
+    line-height: 100%;
+  }
+  .type {
+    font-size: 70%;
   }
 }
 #home-action-list a {

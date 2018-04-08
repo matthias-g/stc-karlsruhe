@@ -150,7 +150,7 @@
         <div class="white-box">
           <div>
             <h3><%= Action.human_attribute_name('date'.pluralize(@action.dates.count)) %></h3>
-            <%= @action.dates.collect { |date| l(date, format: :short_with_weekday)}.join('<br />').html_safe %>
+            <%= @action.dates.uniq.sort.collect { |date| l(date, format: :short_with_weekday)}.join('<br />').html_safe %>
           </div>
           <div>
             <h3><%= Action.human_attribute_name('location') %></h3>

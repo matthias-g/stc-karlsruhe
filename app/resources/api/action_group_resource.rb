@@ -7,7 +7,7 @@ class Api::ActionGroupResource < JSONAPI::Resource
 
   def stats
     {
-        'action_count': @model.actions.visible.where.not(desired_team_size: 0).count,
+        'action_count': @model.actions.visible.count,
         'active_user_count': @model.active_user_count,
         'vacancy_count': @model.vacancy_count
     }

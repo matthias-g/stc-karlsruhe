@@ -63,6 +63,7 @@ de:
         volunteers: 'Team'
         status: 'Status'
         action_group_id: Aktionswoche
+        date: Aktionstag
         dates: Aktionstage
         subaction_ids: Teilaktionen
         parent_action_id: Überaktion

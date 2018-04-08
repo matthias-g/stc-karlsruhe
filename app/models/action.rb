@@ -13,7 +13,6 @@ class Action < ApplicationRecord
   belongs_to :parent_action, class_name: 'Action', foreign_key: :parent_action_id
 
   validates_presence_of :title
-  validates :desired_team_size, numericality: {only_integer: true, greater_than_or_equal_to: 0}
   validate :parent_action_cannot_be_same_action, :parent_action_cannot_be_a_subaction
 
   scope :visible,  -> { where(actions: { visible: true }) }

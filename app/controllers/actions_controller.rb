@@ -94,21 +94,21 @@ class ActionsController < ApplicationController
   def crop_picture
     if params.has_key?(:crop_x)
       @action.crop_picture(params[:crop_x].to_i, params[:crop_y].to_i,
-                            params[:crop_w].to_i, params[:crop_h].to_i,
-                            params[:crop_target].to_sym)
+                           params[:crop_w].to_i, params[:crop_h].to_i,
+                           params[:crop_target].to_sym)
       redirect_to @action, notice: t('action.message.imageCropped')
     else
       @crop_target_symbol = params[:crop_target].to_sym
       case @crop_target_symbol
-        when :action_list
-          @crop_target_title = t('action.label.listviewImage')
-          @crop_target_ratio = 200.0/165
-        when :action_view
-          @crop_target_title = t('action.label.actionImage')
-          @crop_target_ratio = 522.0/261
-        when :thumbnail
-          @crop_target_title = t('action.label.thumbnailImage')
-          @crop_target_ratio = 100.0/100
+      when :action_list
+        @crop_target_title = t('action.label.listviewImage')
+        @crop_target_ratio = 200.0/165
+      when :action_view
+        @crop_target_title = t('action.label.actionImage')
+        @crop_target_ratio = 522.0/261
+      when :thumbnail
+        @crop_target_title = t('action.label.thumbnailImage')
+        @crop_target_ratio = 100.0/100
       end
       respond_with @action do |format|
         format.html { render :layout => false}
@@ -140,9 +140,10 @@ class ActionsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def action_params
     params.require(:the_action).permit(:title, :user_id,
-      :location, :latitude, :longitude, :map_latitude, :map_longitude, :map_zoom,
-      :description, :short_description, :individual_tasks, :material, :requirements,
-      :picture, :picture_source, :desired_team_size,  :action_group_id, :date, :time, :parent_action_id)
+                                       :location, :latitude, :longitude, :map_latitude, :map_longitude, :map_zoom,
+                                       :description, :short_description, :individual_tasks, :material, :requirements,
+                                       :picture, :picture_source,  :action_group_id, :parent_action_id,
+                                       events_attributes: [:desired_team_size, :date, :time, :_destroy])
   end
 
   def authorize_action

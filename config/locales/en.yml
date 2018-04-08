@@ -27,13 +27,14 @@ en:
         visible: 'Visible'
         picture: 'Picture'
         picture_source: 'Picture Source'
-        desired_team_size: 'Desired Team Size'
         leaders: 'Leaders'
         volunteers: 'Team'
         status: 'Status'
         action_group_id: 'Action Group'
-        time: Time
         subaction_ids: subactions
+      event:
+        time: Time
+        desired_team_size: 'Desired Team Size'
       user:
         username: 'Username'
         first_name: 'First Name'

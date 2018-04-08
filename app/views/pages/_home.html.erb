@@ -54,7 +54,7 @@
             <div data-lon="<%= initiative.longitude %>" data-lat="<%= initiative.latitude %>"
                  data-name="<%= initiative.title %>" data-href="<%= url_for(initiative) %>">
               <% unless event.date.nil? %>
-                <div class="date"><%= event.date.strftime('%d. %b %Y') %></div>
+                <div class="date"><%= l event.date, format: :date %></div>
               <% end %>
               <%= simple_format(simple_format_urls(initiative.short_description.empty? ? initiative.description : initiative.short_description)) %>
             </div>

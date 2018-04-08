@@ -52,7 +52,7 @@ class @GoogleMap
     markerData.each (i, ele) =>
       m = $(ele)
       pos = new (google.maps.LatLng)(parseFloat(m.data('lat')), parseFloat(m.data('lon')))
-      @addMarker(m.data('name') or '', m.data('href') or '', m.text() or '', pos.lat(), pos.lng())
+      @addMarker(m.data('name') or '', m.data('href') or '', m.prop('innerHTML'), pos.lat(), pos.lng())
       if m.data('editable')
         @setEditable(m.data('name'), @mapID)
 
@@ -64,7 +64,6 @@ class @GoogleMap
       position: new (google.maps.LatLng)(lat, lon)
     @markers.push marker
 
-    desc = if desc and desc.trim().length > 0 then desc.substr(0, 250) + '...' else desc
     window = new (google.maps.InfoWindow)
       maxWidth: 300
       content: '<a href="' + href + '"><h4>' + name + '</h4></a>' + desc

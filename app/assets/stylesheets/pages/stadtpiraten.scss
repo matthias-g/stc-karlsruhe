@@ -1,8 +1,12 @@
 #pages.stadtpiraten, #pages.spielezeit {
 
-  h1 {
+  #spielezeit-caption, #stadtpiraten-caption {
     text-align: center;
-    margin: 30px 200px;
+  }
+
+  h1 {
+    max-width: 800px;
+    margin: 30px auto;
   }
 
   .action-quick-info {

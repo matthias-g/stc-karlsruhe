@@ -115,7 +115,7 @@ body {
   position: relative;
   z-index: 200;
   @include media-breakpoint-down(sm) {
-    margin: 0 5px;
+    margin: 0 8px; // (must be >= $grid-gutter-width / 2)
   }
 }
 

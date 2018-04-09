@@ -74,7 +74,10 @@ section, .section {
 html {
   height: 100%;
   // setting bg image on <html> keeps the image when following turbolinks
-  background: image-url("bg.jpg") center/cover fixed;
+  background: image-url("bg.jpg") center / cover fixed;
+  @media(max-width: $grid-float-breakpoint) {
+    background: image-url("bg_small.jpg") center bottom / cover fixed;
+  }
 }
 body, #page {
   min-height: 100%;

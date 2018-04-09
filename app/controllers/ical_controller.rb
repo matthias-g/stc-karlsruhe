@@ -78,24 +78,25 @@ class IcalController < ApplicationController
   end
 
   def add_action_to_calendar(action, calendar)
-    action.dates.each do |date|
-      calendar.event do |event|
-        if action.start_time
-          event_start = DateTime.new(date.year, date.month, date.day, action.start_time.hour, action.start_time.min, 0)
-          event.dtstart = Values::DateTime.new event_start
+    action.events.each do |event|
+      calendar.event do |cal_event|
+        date = event.date
+        if event.start_time
+          event_start = DateTime.new(date.year, date.month, date.day, event.start_time.hour, event.start_time.min, 0)
+          cal_event.dtstart = Values::DateTime.new event_start
         else
-          event.dtstart = Values::Date.new date
-          event.duration = Values::Duration.new '1D'
+          cal_event.dtstart = Values::Date.new date
+          cal_event.duration = Values::Duration.new '1D'
         end
-        if action.end_time
-          event_end = DateTime.new(date.year, date.month, date.day, action.end_time.hour, action.end_time.min, 0)
-          event.dtend = Values::DateTime.new event_end
+        if event.end_time
+          event_end = DateTime.new(date.year, date.month, date.day, event.end_time.hour, event.end_time.min, 0)
+          cal_event.dtend = Values::DateTime.new event_end
         end
-        event.summary = action.title
-        event.location = action.location.gsub(/\s*\r?\n\s*/, ', ')
-        event.description = format_urls_no_html(action.description)
-        event.categories = action.action_group.title if action.action_group
-        event.url = action_url(action)
+        cal_event.summary = action.title
+        cal_event.location = action.location.gsub(/\s*\r?\n\s*/, ', ')
+        cal_event.description = format_urls_no_html(action.description)
+        cal_event.categories = action.action_group.title if action.action_group
+        cal_event.url = action_url(action)
       end
     end
   end

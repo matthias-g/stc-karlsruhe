@@ -580,3 +580,15 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
     action_policy:
       update?: Du kannst diese Aktion nicht bearbeiten!
       enter?: Leider ist die Teilnahme an dieser Aktion zur Zeit nicht möglich.
+
+  date_range:
+    long:
+      different_months_same_year: "%{from_day}. %{from_month} %{sep} %{until_day}. %{until_month} %{year}"
+      different_years: "%{from_day}. %{from_month} %{from_year} %{sep} %{until_day}. %{until_month} %{until_year}"
+      same_month: "%{from_day}. %{sep} %{until_day}. %{month} %{year}"
+      same_day: "%{day}. %{month} %{year}"
+    short:
+      different_months_same_year: "%{from_day}. %{from_month} %{sep} %{until_day}. %{until_month} %{year}"
+      different_years: "%{from_day}. %{from_month} %{from_year} %{sep} %{until_day}. %{until_month} %{until_year}"
+      same_month: "%{from_day}. %{sep} %{until_day}. %{month} %{year}"
+      same_day: "%{day}. %{month} %{year}"

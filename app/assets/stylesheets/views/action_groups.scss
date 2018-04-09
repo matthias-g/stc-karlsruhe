@@ -1,31 +1,4 @@
 
-#action-group-header {
-  padding: 10px 20px;
-  text-align: center;
-  h1 {
-    margin-bottom: 0;
-  }
-
-  .previous-group-link {
-    float: left;
-  }
-  .next-group-link {
-    float: right;
-  }
-  a > div {
-    display: inline-block;
-    vertical-align: middle;
-    height: 100%;
-  }
-  .fa {
-    padding: 0 10px;
-  }
-}
-
-#action-group-select > * {
-  display: inline-block;
-}
-
 #action-group-info {
   text-align: center;
   .infobox {

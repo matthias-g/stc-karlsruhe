@@ -222,3 +222,15 @@ en:
     default: You cannot perform this action.
     action_policy:
       update?: You cannot edit this action!
+
+  date_range:
+    long:
+      different_months_same_year: "%{from_month} %{from_day} %{sep} %{until_month} %{until_day}, %{year}"
+      different_years: "%{from_month} %{from_day}, %{from_year} %{sep} %{until_month} %{until_day}, %{until_year}"
+      same_month: "%{month} %{from_day} %{sep} %{until_day}, %{year}"
+      same_day: "%{month} %{day}, %{year}"
+    short:
+      different_months_same_year: "%{from_month} %{from_day} %{sep} %{until_month} %{until_day}, %{year}"
+      different_years: "%{from_month} %{from_day}, %{from_year} %{sep} %{until_month} %{until_day}, %{until_year}"
+      same_month: "%{month} %{from_day} %{sep} %{until_day}, %{year}"
+      same_day: "%{month} %{day}, %{year}"

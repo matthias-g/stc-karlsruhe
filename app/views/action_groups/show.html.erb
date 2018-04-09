@@ -12,26 +12,34 @@
 
 
 
-<div id="action-group-header" class="white-box">
-  <% action_groups = ActionGroup.all.order(:start_date) %>
-  <% group_index = action_groups.index(@action_group) %>
-  <% previous_action_group = group_index.positive? ? action_groups[group_index - 1] : nil %>
-  <% next_action_group = action_groups[group_index + 1] %>
+<div id="action-group-header" class="white-box px-5 py-4">
+  <% groups = ActionGroup.all.order(:start_date) %>
+  <% group_index = groups.index(@action_group) %>
+  <% previous_group = group_index.positive? ? groups[group_index - 1] : nil %>
+  <% next_group = groups[group_index + 1] %>
 
-  <% if previous_action_group %>
-    <%= link_to show_action_group_path(previous_action_group.title), class: 'previous-group-link' do %>
-      <div class="fa fa-2x fa-chevron-left"></div>
-      <div class="h2"><%= previous_action_group.title %></div>
-    <% end %>
-  <% end %>
-  <% if next_action_group %>
-    <%= link_to show_action_group_path(next_action_group.title), class: 'next-group-link' do %>
-      <div class="h2"><%= next_action_group.title %></div>
-      <div class="fa fa-2x fa-chevron-right"></div>
-    <% end %>
-  <% end %>
-
-  <h1>Aktionswoche <%= @action_group.title %></h1>
+  <div class="row align-items-center">
+    <div class="col-sm-3 order-first text-left">
+      <% if previous_group %>
+        <%= link_to show_action_group_path(previous_group.title) do %>
+          <span class="fa fa-2x fa-chevron-left pr-2"></span>
+          <span class="h2"><%= previous_group.title %></span>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-sm-3 order-last text-right">
+      <% if next_group %>
+        <%= link_to show_action_group_path(next_group.title) do %>
+          <span class="h2"><%= next_group.title %></span>
+          <span class="fa fa-2x fa-chevron-right pl-2"></span>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-sm-6 text-center">
+      <h1 class="m-0">Aktionswoche <%= @action_group.title %></h1>
+      <div class="date h3 m-0"><%= date_range(@action_group.start_date, @action_group.end_date, format: :long) %></div>
+    </div>
+  </div>
 </div>
 
 <div class="row">
@@ -88,8 +96,6 @@
           <h3>Filtern</h3>
           <%= bootstrap_form_for(:filter, url: actions_path, method:'get', html: {data: {
                 class: 'ActionFilter', list: '#action-list', info: '#action-group-filter-results'}}) do |f| %>
-            <%#= collection_select(:week, ActionGroup.all, :id, :title,
-                   :include_blank => "- - - Aktionswoche egal - - -") %>
             <%= f.select(:day, options_for_day_select(@action_group), include_blank: "- - - Alle Tage - - -", hide_label: true) %>
             <% if user_signed_in? && current_user.in_orga_team? %>
               <%= f.select(:visibility, [['Sichtbar', :visible], ['Versteckt', :hidden]],
@@ -126,8 +132,8 @@
 
     <div id="action-list">
       <%= render '/actions/action_card_list', actions: @actions %>
-      <% if policy_scope(@action_group.actions).toplevel.count == 0 %>
-        <div class="white-box">
+      <% unless actions.any? %>
+        <div class="white-box text-center" style="max-width: 600px; margin: 30px">
           <%= t('action_group.noActions') %>
         </div>
       <% end %>

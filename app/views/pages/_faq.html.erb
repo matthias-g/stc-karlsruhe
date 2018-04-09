@@ -1,4 +1,5 @@
 <% provide :title, t('layout.title.pageAbout') %>
+<% wrapper_set 'container-small' %>
 
 <% content_for :head do %>
   <% desc = "Antworten auf die wichtigsten Fragen zu Serve the City" %>
@@ -7,353 +8,167 @@
   <meta property="og:description" content="<%= desc %>" />
 <% end %>
 
-<h1>Fragen und Antworten zu Serve the City</h1>
-<section>
-  <h2>Serve the City?</h2>
+<div class="white-box">
+  <h1 class="text-center m-3">Fragen und Antworten zu Serve the City</h1>
+</div>
 
-  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<section class="white-box">
+  <h2>Serve the City – Alles was du wissen musst</h2>
 
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading_what">
-        <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-             href="#was-ist-stc" aria-expanded="true" aria-controls="was-ist-stc">
-            Was ist <span class="term">Serve the City</span>?
-          </a>
-        </h4>
-      </div>
-      <div id="was-ist-stc" class="panel-collapse collapse"
-           role="tabpanel" aria-labelledby="heading_what">
-        <div class="panel-body">
-          <p>
-          Viele Menschen würden sich gerne sozial engagieren, wissen allerdings nicht wie bzw.
-          wo und haben häufig auch nur begrenzt Zeit. Hier setzt
-          <span class="term">Serve the City</span> an und erleichtert
-          den Einsteig durch kurze Aktionen ohne Hintergedanken oder Folgeverpflichtungen.
-          </p>
-          <p>
-          Jede/r kann sich nach seinen Begabungen einbringen – Eine <%= link_to 'Aktionswoche', show_action_group_path(ActionGroup.default.title), class: 'black-link' %>,
-          bei der viele Freiwillige Gutes für ihre Stadt tun.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading_why">
-        <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-             href="#warum-stc" aria-expanded="false" aria-controls="warum-stc">
-            Warum <span class="term">Serve the City</span>?
-          </a>
-        </h4>
-      </div>
-      <div id="warum-stc" class="panel-collapse collapse"
-           role="tabpanel" aria-labelledby="heading_why">
-        <div class="panel-body">
-          <p>
-          Wir glauben, dass eine bessere Welt möglich ist und wir konkret in unserer Stadt etwas
-          dafür tun können. <span class="term">Serve the City</span> möchte dazu motivieren,
-          sich für seine Mitmenschen einzusetzen, soziale Barrieren überwinden und den
-          Horizont aller Akteure weiten.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading_history">
-        <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-             href="#seit-wann-gibt-es-stc" aria-expanded="false" aria-controls="seit-wann-gibt-es-stc">
-            Seit wann gibt es <span class="term">Serve the City</span>?
-          </a>
-        </h4>
-      </div>
-      <div id="seit-wann-gibt-es-stc" class="panel-collapse collapse"
-           role="tabpanel" aria-labelledby="heading_history">
-        <div class="panel-body">
-          <p>
-          Das Idee von <span class="term">Serve the City</span> entstand 2005 in
-          <a href="http://www.servethecity.be/brussels/">Brüssel</a>
-          in der Gemeinde <span class="term">The Well</span>.
-          Mittlerweile wurde das Konzept in über 100 Städten weltweit von vielen tausend
-          Freiwilligen aufgegriffen. Die Initiativen in den Städten sind eigenständig
-          und stellen lokale Begebenheiten und Bedürfnisse in der Stadt in den Mittelpunkt.
-          </p>
-          <p>
-          In Deutschland wurden im Rahmen von <span class="term">Serve the City</span> 2011
-          erstmalig in <a href="http://www.servethecity-bremen.de/">Bremen</a> Kurzzeitprojekte
-          durchgeführt. Bis jetzt haben sich dort über 500 Personen in mehr als 90
-          Aktionen ehrenamtlich engagiert.
-
-          Seitdem wächst <span class="term">Serve the City</span> auch in Deutschland beständig,
-          sodass mittlerweile auch in <a href="http://www.servethecity-berlin.de/">Berlin</a>,
-          <a href="http://stc.vmfds.de">Freudenstadt</a>, <a href="http://servethecity-hannover.de/">Hannover</a>,
-          und <a href="http://www.servethecity-verden.de/">Verden</a> Aktionen angeboten werden.
-          <span class="term">Serve the City Karlsruhe</span> ist seit 2013 dabei.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading_actions">
-        <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-             href="#unterstuetzte-projekte" aria-expanded="false" aria-controls="unterstuetzte-projekte">
-            Welche Aktionen werden unterstützt?
-          </a>
-        </h4>
-      </div>
-      <div id="unterstuetzte-projekte" class="panel-collapse collapse"
-           role="tabpanel" aria-labelledby="heading_actions">
-        <div class="panel-body">
-          <p>
-          Teameinsätze von <span class="term">Serve the City</span> finden in der Regel
-          in Kooperation mit einer bestehenden sozialen Einrichtung statt:
-          Garten- oder Renovierungsarbeiten in einem Seniorenzentrum, Ausflüge mit Flüchtlingen,
-          Aktionen mit Kinder- und Jugendtreffs und vieles mehr.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading_when">
-        <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-             href="#wann-laeuft-stc" aria-expanded="false" aria-controls="wann-laeuft-stc">
-            Wann und wie läuft <span class="term">Serve the City</span>?
-          </a>
-        </h4>
-      </div>
-      <div id="wann-laeuft-stc" class="panel-collapse collapse"
-           role="tabpanel" aria-labelledby="heading_when">
-        <div class="panel-body">
-          <p>
-          <span class="term">Serve the City</span> konzentriert sich auf eine jährliche
-          Aktionswoche, die dieses Jahr vom 06. bis zum 12. Juni 2016 stattfinden wird.
-          </p>
-          <p>
-          Wir fördern eine Atmosphäre von Freundlichkeit, Freigiebigkeit und Initiativkraft.
-          Einzelne können ihre Ideen einbringen und die Leitung einer Aktion übernehmen.
-          Sobald die Aktionsidee online ist, finden sich über die Website
-          eigenverantwortlich Teams zusammen.
-          </p>
-          <p>
-          Unser Wunsch ist, dass in keiner Aktion ein "Oben-Unten-Gefälle" aufkommt,
-          sondern vielmehr alles von einer Atmosphäre des gegenseitigen Respekts,
-          der Kooperation und des gegenseitigen Austausches und voneinander Lernens geprägt ist.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading_orga">
-        <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-             href="#orga-team" aria-expanded="false" aria-controls="orga-team">
-            Wer veranstaltet <span class="term">Serve the City</span> in Karlsruhe?
-          </a>
-        </h4>
-      </div>
-      <div id="orga-team" class="panel-collapse collapse"
-           role="tabpanel" aria-labelledby="heading_orga">
-        <div class="panel-body" style="max-width: 100%">
-          <div class="row">
-            <div class="col-md-6">
-              <p>
-                Das Organisationsteam in Karlsruhe setzt sich aus neun Studierenden zusammen.
-                Rechtlich ist <span class="term">Serve the City</span>
-                der <a href="http://nehemia-initiative.de">Nehemia-Initiative</a> angegliedert.
-                Unterstützt wird <span class="term">Serve the City</span> durch viele soziale
-                Einrichtungen und verschiedene Gemeinden in Karlsruhe.
-              </p>
-            </div>
-            <div class="col-md-6">
-                <%= image_tag 'Orgateam.jpg', class: 'img-responsive center-block' %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div id="was-ist-stc">
+    <h4>Was ist <span class="term">Serve the City</span>?</h4>
+    <p>
+      <span class="term">Serve the City Karlsruhe</span> ist eine Rahmenstruktur für soziales Kurzzeit-Engagement.
+      Viele Leute wollen gerne etwas Gutes tun, können sich aber nicht langfristig verpflichten. Serve the City
+      schafft Gelegenheit, mit kleinen Beiträgen den sozialen Zusammenhalt in unserer Stadt zu stärken.
+    </p>
   </div>
+
+  <div id="wie-kann-ich-mich-engagieren">
+    <h4>In welcher Form kann ich mich engagieren?</h4>
+    <p>
+      Einsätze von <span class="term">Serve the City</span> finden in der Regel in Kooperation mit einer
+      bestehenden sozialen Einrichtung statt: Garten- oder Renovierungsarbeiten
+      in einem Seniorenzentrum, Ausflüge mit Flüchtlingen, Aktionen mit
+      Kinder- und Jugendtreffs und vieles mehr. Wir bieten neben einmaligen Aktionen
+      mittlerweile für all diejenigen, die sich doch regelmäßiger ehrenamtlich
+      einsetzen möchten Projekte. Aktionen finden während unserer Aktionstage
+      oder zwei Aktionswochen statt. Projekte gibt es wöchentlich bzw. monatlich.
+    </p>
+  </div>
+
+  <div id="warum-stc">
+    <h4>Warum <span class="term">Serve the City</span>?</h4>
+    <p>
+      Wir glauben, dass eine bessere Welt möglich ist und wir konkret in unserer Stadt etwas
+      dafür tun können. <span class="term">Serve the City</span> möchte dazu motivieren,
+      sich für seine Mitmenschen einzusetzen, soziale Barrieren überwinden und den
+      Horizont aller Akteure weiten.
+    </p>
+  </div>
+
+  <div id="seit-wann-gibt-es-stc">
+    <h4>Seit wann gibt es <span class="term">Serve the City</span>?</h4>
+    <p>
+      Die Idee von <span class="term">Serve the City</span> entstand 2005 in
+      <a href="http://www.servethecity.be/brussels/">Brüssel</a>.
+
+      Mittlerweile wurde das Konzept in über 100 Städten weltweit von vielen
+      tausend Freiwilligen aufgegriffen. Die Initiativen in den Städten sind
+      eigenständig und stellen lokale Begebenheiten und Bedürfnisse in der
+      Stadt in den Mittelpunkt.
+
+      In Deutschland wurden im Rahmen von <span class="term">Serve the City</span>
+      2011 erstmalig in <a href="http://www.servethecity-bremen.de/">Bremen</a>
+      Kurzzeitprojekte durchgeführt. Seitdem wächst <span class="term">Serve the City</span>
+      auch in Deutschland beständig, sodass mittlerweile unter anderem auch in
+      <a href="http://www.servethecity-berlin.de/">Berlin</a>,
+      <a href="http://servethecity-hannover.de/">Hannover</a> und
+      <a href="http://stc-dd.de">Dresden</a> Aktionen angeboten werden.
+      <span class="term">Serve the City Karlsruhe</span> ist seit 2013 dabei.
+    </p>
+  </div>
+
 </section>
 
-<section>
-  <h2>Mitmachen!</h2>
-  <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+<section class="white-box">
+  <h2>Mitmachen und einbringen</h2>
 
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading_who">
-        <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion2"
-             href="#wer-kann-mitmachen" aria-expanded="false" aria-controls="wer-kann-mitmachen">
-            Wer kann mitmachen?
-          </a>
-        </h4>
-      </div>
-      <div id="wer-kann-mitmachen" class="panel-collapse collapse"
-           role="tabpanel" aria-labelledby="heading_who">
-        <div class="panel-body">
-          <p>
-          Jeder ist eingeladen, bei <span class="term">Serve the City</span> mitzumachen.
-          Die Teilnahme an den Aktionen ist nicht auf Schüler oder Studenten begrenzt,
-          wir freuen uns über jede helfende Hand! Religion und Konfession spielen
-          dabei genauso wenig eine Rolle wie das Alter. Auch wer nur wenige Stunden Zeit hat,
-          ist herzlich willkommen – jede Stunde hilft!
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading_csr">
-        <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion2"
-             href="#csr" aria-expanded="false" aria-controls="csr">
-            Wir würden gerne als Firma mitmachen!
-          </a>
-        </h4>
-      </div>
-      <div id="csr" class="panel-collapse collapse"
-           role="tabpanel" aria-labelledby="heading_csr">
-        <div class="panel-body">
-          <p>
-          Sie möchten sich als Firma sozial engagieren und suchen eine geeignete Aktion,
-          um gemeinsam etwas zu bewegen? Dann können Sie uns gerne
-          <a href="/kontakt">kontaktieren</a> und wir suchen gemeinsam eine passende Aktion,
-          das Sie z.B. mit Ihren Mitarbeitern oder ihrer Abteilung übernehmen können.
-          Begleitende, teambildende Maßnahmen können wir allerdings nicht anbieten,
-          bei Interesse helfen wir aber gerne bei der Suche nach einem geeigneten Trainer.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading_donate">
-        <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion2"
-             href="#spenden" aria-expanded="false" aria-controls="spenden">
-            Ich würde gerne etwas spenden!
-          </a>
-        </h4>
-      </div>
-      <div id="spenden" class="panel-collapse collapse"
-           role="tabpanel" aria-labelledby="heading_donate">
-        <div class="panel-body">
-          <p>
-            Für Materialien bei den Aktionen und Werbemittel wie Plakate, Flyer und unsere Webseite
-            benötigen wir finanzielle Mittel. Deine Spende
-            ist also herzlich willkommen! Am einfachsten kannst du über die Spendenplattform
-            <%= link_to 'Betterplace', 'https://www.betterplace.org/de/projects/41347' %> spenden,
-            die dir auch eine Spendenbescheinigung austellt:
-            <%= link_to (image_tag 'Betterplace.jpg', class: 'img-responsive center-block'), 'https://www.betterplace.org/de/projects/41347' %>
-          </p>
-          <p>
-            Alternativ kannst auch per <%= link_to 'Überweisung', '#', id: 'transfer-link' %> spenden.
-          </p>
-          <div id="transfer-details" style="display: none;">
-            <p>
-              Überweise deine Spende einfach an die folgende Bankverbindung:
-
-            <table class="properties">
-              <tr>
-                <td>Inhaber</td>
-                <td>Nehemia-Initiative</td>
-              </tr>
-              <tr>
-                <td>IBAN</td>
-                <td>DE70520604100005010250</td>
-              </tr>
-              <tr>
-                <td>BIC</td>
-                <td>GENODEF1EK1</td>
-              </tr>
-              <tr>
-                <td>Betreff</td>
-                <td>STC Karlsruhe (+ evtl. Aktionsname)</td>
-              </tr>
-            </table>
-            </p>
-            <p>
-              Falls aktionsgebunden gespendet werden soll, kann das im
-              Überweisungsbetreff angemerkt werden. Wir können <%= link_to 'auf Anfrage', 'kontakt' %>
-              auch eine Spendenbescheinigung ausstellen.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading_materials">
-        <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion2"
-             href="#sachspenden" aria-expanded="false" aria-controls="sachspenden">
-            Wir könnten Sachspenden anbieten!
-          </a>
-        </h4>
-      </div>
-      <div id="sachspenden" class="panel-collapse collapse"
-           role="tabpanel" aria-labelledby="heading_materials">
-        <div class="panel-body">
-          <p>
-          Wir sind bei vielen Aktionen auf Sachspenden angewiesen. Ob es um Material,
-          Verpflegung oder Werbemittel geht, wir können vieles gebrauchen und freuen
-          uns daher über jede Spende. <a href="/kontakt">Wende dich einfach an das Orga-Team</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading_proposal">
-        <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion2"
-             href="#projekte-vorschlagen" aria-expanded="false" aria-controls="projekte-vorschlagen">
-            Ich habe einen Aktionsvorschlag!
-          </a>
-        </h4>
-      </div>
-      <div id="projekte-vorschlagen" class="panel-collapse collapse"
-           role="tabpanel" aria-labelledby="heading_proposal">
-        <div class="panel-body">
-          <p>
-          Gerne, immer her damit, wir freuen uns über kreative Ideen –
-          <a href="/kontakt">schreib uns einfach</a>!
-          Habe aber bitte Verständnis dafür, wenn wir die Aktion unter Umständen nicht
-          oder nicht sofort anbieten können, denn das hängt von vielen Faktoren ab.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading_promote">
-        <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion2"
-             href="#fuer-stc-werben" aria-expanded="false" aria-controls="fuer-stc-werben">
-            Ich möchte Werbung für <span class="term">Serve the City</span> machen!
-          </a>
-        </h4>
-      </div>
-      <div id="fuer-stc-werben" class="panel-collapse collapse"
-           role="tabpanel" aria-labelledby="heading_promote">
-        <div class="panel-body">
-          <p>
-          Das freut uns sehr! Wir können dir dazu gerne kostenlose Werbemittel (Flyer, Plakate)
-          zur Verfügung stellen. <a href="/kontakt">Teile uns bitte auch mit</a>, wo und wie
-          du werben willst, damit wir dir das richtige Material in der richtigen Menge zur
-          Verfügung stellen können.
-          </p>
-        </div>
-      </div>
-    </div>
-
-
+  <div id="wer-kann-mitmachen">
+    <h4>Wer kann mitmachen?</h4>
+    <p>
+      Jeder ist eingeladen, bei <span class="term">Serve the City</span> mitzumachen.
+      Die Teilnahme an den Aktionen ist nicht auf Schüler oder Studenten begrenzt,
+      wir freuen uns über jede helfende Hand! Weder dein Hintergrund noch
+      dein Alter spielen eine Rolle. Auch wer nur wenige Stunden Zeit hat,
+      ist herzlich willkommen – jede Stunde hilft!
+    </p>
   </div>
+
+
+  <div id="csr">
+    <h4>Wir würden gerne als Firma mitmachen!</h4>
+    <p>
+      Sie möchten sich als Firma sozial engagieren und suchen eine geeignete Aktion,
+      um gemeinsam etwas zu bewegen? Dann können Sie uns gerne
+      <a href="/kontakt">kontaktieren</a> und wir suchen gemeinsam eine passende Aktion,
+      das Sie z.B. mit Ihren Mitarbeitern oder ihrer Abteilung übernehmen können.
+      Begleitende, teambildende Maßnahmen können wir allerdings nicht anbieten,
+      bei Interesse helfen wir aber gerne bei der Suche nach einem geeigneten Trainer.
+    </p>
+  </div>
+
+  <div id="aktion-vorschlagen">
+    <h4>Ich habe einen Aktionsvorschlag!</h4>
+    <p>
+      Gerne, immer her damit, wir freuen uns über kreative Ideen –
+      <a href="/kontakt">schreib uns einfach</a>!
+      Habe aber bitte Verständnis dafür, wenn wir die Aktion unter Umständen nicht
+      oder nicht sofort anbieten können, denn das hängt von vielen Faktoren ab.
+    </p>
+  </div>
+
+  <div id="fuer-stc-werben">
+    <h4>Ich möchte gerne Werbung für <span class="term">Serve the City</span> machen!</h4>
+    <p>
+      Das freut uns sehr! Wir können dir dazu gerne kostenlose Werbemittel (Flyer, Plakate)
+      zur Verfügung stellen. <a href="/kontakt">Teile uns bitte auch mit</a>, wo und wie
+      du werben willst, damit wir dir das richtige Material in der richtigen Menge zur
+      Verfügung stellen können.
+    </p>
+  </div>
+
+</section>
+
+<section class="white-box">
+  <h2>Spenden und unterstützen</h2>
+
+  <div id="financing">
+    <h4>Wie wird <span class="term">Serve the City</span> finanziert?</h4>
+    <p>
+      Serve the City finanziert sich rein aus Spenden.
+      Hier sind wir sowohl über Sachspenden wie auch Geldspenden dankbar.
+    </p>
+  </div>
+
+  <div id="spenden">
+    <h4>Ich würde gerne finanziell unterstützen!</h4>
+    <p>
+      Für Materialien bei den Aktionen und Werbemittel wie Plakate, Flyer und unsere Webseite
+      benötigen wir finanzielle Mittel. Deine Spende
+      ist also herzlich willkommen! Am einfachsten kannst du über die Spendenplattform
+      <%= link_to 'Betterplace', 'https://www.betterplace.org/de/projects/41347' %> spenden,
+      die dir auch eine Spendenbescheinigung austellt:
+      <%= link_to (image_tag 'Betterplace.jpg', class: 'img-responsive center-block'), 'https://www.betterplace.org/de/projects/41347' %>
+    </p>
+    <p>
+      Alternativ kannst auch per <%= link_to 'Überweisung', '#', id: 'transfer-link' %> spenden.
+    </p>
+    <div id="transfer-details" style="display: none;">
+      <p>
+        Überweise deine Spende einfach an die folgende Bankverbindung:
+        <table class="properties">
+          <tr><td>Inhaber</td><td>Nehemia-Initiative</td></tr>
+          <tr><td>IBAN</td><td>DE70520604100005010250</td></tr>
+          <tr><td>BIC</td><td>GENODEF1EK1</td></tr>
+          <tr><td>Betreff</td><td>STC Karlsruhe (+ evtl. Aktionsname)</td></tr>
+        </table>
+      </p>
+      <p>
+        Falls aktionsgebunden gespendet werden soll, kann das im
+        Überweisungsbetreff angemerkt werden. Wir können <%= link_to 'auf Anfrage', 'kontakt' %>
+        auch eine Spendenbescheinigung ausstellen.
+      </p>
+    </div>
+  </div>
+
+  <div id="sachspenden">
+    <h4>Ich kann Sachspenden anbieten!</h4>
+    <p>
+      Wir sind bei vielen Aktionen auf Sachspenden angewiesen. Ob es um Material,
+      Verpflegung oder Werbemittel geht, wir können vieles gebrauchen und freuen
+      uns daher über jede Spende. <a href="/kontakt">Wende dich einfach an das Orga-Team</a>.
+    </p>
+  </div>
+
 </section>

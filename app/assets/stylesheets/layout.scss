@@ -76,7 +76,7 @@ html {
   // setting bg image on <html> keeps the image when following turbolinks
   background: image-url("bg.jpg") center / cover fixed;
   @media(max-width: $grid-float-breakpoint) {
-    background: image-url("bg_small.jpg") center bottom / cover fixed;
+    background: image-url("bg_small.jpg") center top / 100% auto fixed;
   }
 }
 body, #page {

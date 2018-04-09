@@ -130,7 +130,7 @@ body {
   }
   img {
     width: 500px;
-    max-width: 70%;
+    max-width: 90%;
     transform: rotate(-5deg);
   }
   h2 {
@@ -139,6 +139,9 @@ body {
     text-align: center;
     color: white;
     text-shadow: 0 0 3px #000;
+    @include media-breakpoint-down(sm) {
+      font-size: 5vw !important;
+    }
   }
 }
 

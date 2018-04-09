@@ -28,16 +28,19 @@ $nav-width-mobile: 270px;
     position: fixed;
     left: 5px;
     top: 5px;
-    color: $primary;
     transition: all 0.5s;
-    font-size: 40px;
+    font-size: 45px;
     padding: 15px;
-    background: rgba(white, 0.8);
-    box-shadow: 0 0 5px rgba(black, 0.5);
+    color: #fff;
+    text-shadow: 0 0 10px rgba(black, 0.8);
+    //color: $primary;
+    //background: rgba(white, 0.8);
+    //box-shadow: 0 0 5px rgba(black, 0.5);
     z-index: 998;
     border-radius: 5px;
     &:hover {
-      background-color: rgba(white, 1);
+      color: $primary;
+      background-color: rgba(white, 0.6);
     }
     div {
       display: block;

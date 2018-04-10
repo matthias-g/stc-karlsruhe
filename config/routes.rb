@@ -32,8 +32,7 @@ Rails.application.routes.draw do
   get 'statistiken/auslastung-:title', to: 'statistics#occupancy', as: :occupancy_in_year
 
   resources :action_groups, path: 'aktionsgruppen'
-  #get ':id', to: 'action_groups#show', constraints: { id: /aktions.+/ }, as: 'show_action_group'
-  get 'aktionen-:id', to: 'action_groups#show', as: 'show_action_group'
+  get ':id/aktionen', to: 'action_groups#show', as: 'show_action_group'
 
   resources :roles
 

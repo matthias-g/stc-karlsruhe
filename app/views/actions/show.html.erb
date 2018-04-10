@@ -12,17 +12,12 @@
 
 <div class="white-box record-header d-print-none">
   <div class="type">
-    <% if @action.subaction? %>
-      <%= t('action.label.subaction_of') %>
-      <%= link_to @action.parent_action.title, @action.parent_action %>
-    <% else %>
-      <%= Action.model_name.human %>
-    <% end %>
     <% if @action.action_group %>
-      - <%= link_to @action.action_group.title, show_action_group_path(@action.action_group) %>
+      <%= link_to @action.action_group.title, show_action_group_path(@action.action_group) %> ≫
     <% end %>
+    <%= Action.model_name.human %>
   </div>
-  <h1><%= @action.title %></h1>
+  <h1><%= @action.full_title %></h1>
   <div class="labels">
     <% unless @action.visible? %>
       <span class="badge status_hidden"><%= t('action.status.hidden') %></span>

@@ -10,7 +10,7 @@
       <% unless event.date.nil? %>
         <div class="date"><%= l event.date, format: :date %></div>
       <% end %>
-      <div class="title"><%= action.title %></div>
+      <div class="title"><%= action.full_title %></div>
     </div>
   <% end %>
 <% end %>

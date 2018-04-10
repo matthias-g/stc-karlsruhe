@@ -118,7 +118,7 @@ class Action < ApplicationRecord
 
   # Title of the action, if applicable prepended with the parent action title
   def full_title
-    subaction? ? parent_action.title + ': ' + title : title
+    subaction? ? parent_action.title + ' – ' + title : title
   end
 
   # Status of the action including its subactions.

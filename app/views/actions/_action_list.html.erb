@@ -5,9 +5,9 @@
     </div>
     <div class="info">
       <% unless action.date.nil? %>
-        <div class="date"><%= action.date.strftime('%d. %b %Y') %></div>
+        <div class="date"><%= l action.date, format: :date %></div>
       <% end %>
-      <div class="title"><%= action.title %></div>
+      <div class="title"><%= action.full_title %></div>
     </div>
   <% end %>
 <% end %>

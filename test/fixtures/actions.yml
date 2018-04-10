@@ -104,3 +104,6 @@ full_but_finished:
 
 soon_full_but_finished:
   title: Fast volle, beendete Aktion
+
+no_team_yet:
+  title: Noch keine Mitarbeiter

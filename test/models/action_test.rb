@@ -126,4 +126,11 @@ class ActionTest < ActiveSupport::TestCase
     assert_equal 0, action.dates.size
   end
 
+  test 'team_size is being summed up also when nil' do
+    action = actions(:no_team_yet)
+    assert_nil action.events[0].team_size
+    assert_nil action.events[1].team_size
+    assert_equal 0, action.team_size
+  end
+
 end

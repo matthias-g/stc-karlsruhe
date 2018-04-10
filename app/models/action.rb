@@ -86,7 +86,7 @@ class Action < ApplicationRecord
   end
 
   def team_size
-    events.sum(&:team_size)
+    events.map(&:team_size).compact.sum
   end
 
   # Number of available volunteer places in this action and its sub actions

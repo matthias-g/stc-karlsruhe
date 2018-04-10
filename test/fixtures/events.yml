@@ -80,3 +80,13 @@ soon_full_but_finished:
   desired_team_size: 3
   date: <%= Date.yesterday %>
   team_size: 1
+
+no_team_yet_first:
+  initiative: no_team_yet
+  desired_team_size: 3
+  date: <%= Date.tomorrow %>
+
+no_team_yet_second:
+  initiative: no_team_yet
+  desired_team_size: 3
+  date: <%= Date.tomorrow %>

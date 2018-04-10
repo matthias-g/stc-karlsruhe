@@ -98,11 +98,11 @@
       <div id="home-action-list">
         <% if user_signed_in? && (events = policy_scope(current_user.events.upcoming)).any? %>
           <h3>Deine Aktionen</h3>
-        <% elsif (events = policy_scope(Event.upcoming).order(date: :asc).limit(3)).any? %>
+        <% elsif (events = policy_scope(Event.upcoming).order(date: :asc).limit(4)).any? %>
           <h3>Nächste Aktionen</h3>
         <% else %>
           <h3>Vergangene Aktionen</h3>
-          <% events = policy_scope(Event.finished).order(date: :desc).limit(3) %>
+          <% events = policy_scope(Event.finished).order(date: :desc).limit(4) %>
         <% end %>
         <%= render '/events/event_list', events: events %>
       </div>

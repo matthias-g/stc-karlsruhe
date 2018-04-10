@@ -143,7 +143,7 @@ class ActionsController < ApplicationController
                                        :location, :latitude, :longitude, :map_latitude, :map_longitude, :map_zoom,
                                        :description, :short_description, :individual_tasks, :material, :requirements,
                                        :picture, :picture_source,  :action_group_id, :parent_action_id,
-                                       events_attributes: [:desired_team_size, :date, :time, :_destroy])
+                                       events_attributes: [:id, :desired_team_size, :date, :time, :_destroy])
   end
 
   def authorize_action

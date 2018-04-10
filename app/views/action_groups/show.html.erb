@@ -12,31 +12,39 @@
 
 
 
-<div id="action-group-header" class="white-box px-5 py-4">
+<div id="action-group-header" class="white-box px-2 py-4">
   <% groups = ActionGroup.all.order(:start_date) %>
   <% group_index = groups.index(@action_group) %>
   <% previous_group = group_index.positive? ? groups[group_index - 1] : nil %>
   <% next_group = groups[group_index + 1] %>
 
   <div class="row align-items-center">
-    <div class="col-sm-3 order-first text-left">
+    <div class="col-sm-3 order-first">
       <% if previous_group %>
+        <% split = split_action_group_type_prefix(previous_group.title) %>
         <%= link_to show_action_group_path(previous_group.title) do %>
-          <span class="fa fa-2x fa-chevron-left pr-2"></span>
-          <span class="h2"><%= previous_group.title %></span>
+          <div class="fa fa-2x fa-chevron-left pr-2"></div>
+          <div class="neighbor-linktext">
+            <div class="type"><%= split[:type] %></div>
+            <div class="title"><%= split[:name] %></div>
+          </div>
         <% end %>
       <% end %>
     </div>
-    <div class="col-sm-3 order-last text-right">
+    <div class="col-sm-3 order-last">
       <% if next_group %>
+        <% split = split_action_group_type_prefix(next_group.title) %>
         <%= link_to show_action_group_path(next_group.title) do %>
-          <span class="h2"><%= next_group.title %></span>
-          <span class="fa fa-2x fa-chevron-right pl-2"></span>
+          <div class="neighbor-linktext">
+            <div class="type"><%= split[:type] %></div>
+            <div class="title"><%= split[:name] %></div>
+          </div>
+          <div class="fa fa-2x fa-chevron-right pl-2"></div>
         <% end %>
       <% end %>
     </div>
     <div class="col-sm-6 text-center">
-      <h1 class="m-0">Aktionswoche <%= @action_group.title %></h1>
+      <h1 class="m-0"><%= @action_group.title %></h1>
       <div class="date h3 m-0"><%= date_range(@action_group.start_date, @action_group.end_date, format: :long) %></div>
     </div>
   </div>

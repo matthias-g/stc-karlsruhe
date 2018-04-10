@@ -8,10 +8,15 @@ module ActionGroupsHelper
     dates.map{ |date| [I18n.l(date, format: format), date.strftime("%F")]}
   end
 
+  def split_action_group_type_prefix(title)
+    temp_title = title.dup
+    {type: temp_title.slice!(/Aktionswoche|Aktionstag/), name: temp_title.strip}
+  end
+
   def date_range(from_date, until_date, options = {})
     options.symbolize_keys!
     format = options[:format] || :short
-    separator = options[:separator] || "—"
+    separator = options[:separator] || "-"
 
     if format.to_sym == :short
       month_names = I18n.t("date.abbr_month_names")

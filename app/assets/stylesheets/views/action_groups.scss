@@ -1,10 +1,31 @@
 
+#action-group-header {
+  a {
+    display: flex;
+    align-items: center;
+  }
+  .order-first a {
+    justify-content: left;
+  }
+  .order-last a {
+    justify-content: right;
+  }
+  .neighbor-linktext {
+    font-family: CaptionFont, sans-serif;
+    font-weight: 300;
+    font-size: 1.8rem;
+    line-height: 100%;
+    text-align: center;
+  }
+  .type {
+    font-size: 1.2rem;
+  }
+}
+
 #action-group-info {
   text-align: center;
   .infobox {
     display: inline-block;
-    padding: 10px;
-    margin: 0 5px;
     text-align: center;
     padding: 5px;
     margin: 0 5px;

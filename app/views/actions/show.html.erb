@@ -238,14 +238,15 @@
                 <%= link_to leave_event_path(event), class: 'btn btn-danger btn-block' do %>
                   <span class="fa fa-sign-out"></span> <%= t('action.action.leave') %>
                 <% end %>
-              <% elsif policy(event).enter? %>
+              <% elsif event.available_places.positive? %>
                 <%= link_to enter_event_path(event), class: 'btn btn-success btn-block' do %>
                   <span class="fa fa-sign-in"></span> <%= t('action.action.enter') %>
                 <% end %>
-              <% elsif policy(@action).enter_subaction? %>
-                <p><%= t('action.message.enterOneOfThesubactions') %></p>
               <% end %>
             </div>
+          <% end %>
+          <% if @action.available_places == 0 && @action.total_available_places.positive? %>
+            <p><%= t('action.message.enterOneOfThesubactions') %></p>
           <% end %>
         </div>
       </div>

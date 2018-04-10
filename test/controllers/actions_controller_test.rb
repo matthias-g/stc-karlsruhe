@@ -98,6 +98,11 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should show link to enter team even when no user logged in' do
+    get action_url(@action)
+    assert_select "a[href=\"#{enter_event_path(@action.events.first)}\"]", 1
+  end
+
   test 'should redirect when getting edit with no user logged in' do
     get edit_action_url(@action)
     assert_redirected_to login_or_register_path

@@ -17,7 +17,7 @@ class @GoogleMap
       minZoom: 11
       maxZoom: 17
       zoomControl: true
-      gestureHandling: 'none'
+      gestureHandling: 'cooperative'
       disableDefaultUI: true
       styles: [
         {featureType: 'poi', elementType: 'labels', stylers: [visibility: 'off']},
@@ -30,13 +30,10 @@ class @GoogleMap
     $('.markers > *', @html).each (i, ele) =>
       m = $(ele)
       @addMarker(m.data('name') or '', m.data('href') or '', m.prop('innerHTML'),
-          parseFloat(m.data('lat')), parseFloat(m.data('lon')), m.data('color'))
+          parseFloat(m.data('lat')), parseFloat(m.data('lon')), m.data('color') or 'red')
       if m.data('editable')
         @setEditable(m.data('name'), @mapID)
     @adaptBoundsToMarkers
-
-
-
 
   addMarker: (name, href, desc, lat, lon, color) =>
     marker = new (google.maps.Marker)
@@ -46,16 +43,17 @@ class @GoogleMap
       icon: @icons[color]
     @markers.push marker
 
-    popup = new (google.maps.InfoWindow)
-      maxWidth: 300
-      content: '<a href="' + href + '"><h4>' + name + '</h4></a>' + desc
-    @popups.push popup
+    if desc.trim() != ''
+      popup = new (google.maps.InfoWindow)
+        maxWidth: 300
+        content: '<a href="' + href + '"><h4>' + name + '</h4></a>' + desc
+      @popups.push popup
 
-    google.maps.event.addListener marker, 'click', =>
-      if @activePopup
-        @activePopup.close()
-      popup.open @map, marker
-      @activePopup = popup
+      google.maps.event.addListener marker, 'click', =>
+        if @activePopup
+          @activePopup.close()
+        popup.open @map, marker
+        @activePopup = popup
 
 
   removeMarkers: =>
@@ -65,7 +63,7 @@ class @GoogleMap
 
 
   adaptBoundsToMarkers: =>
-    if @markers.length == 0
+    if @markers.length < 2
       return
     bounds = new (google.maps.LatLngBounds)
     for marker of @markers

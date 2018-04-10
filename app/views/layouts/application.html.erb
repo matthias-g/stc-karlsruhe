@@ -18,7 +18,7 @@
   <%= javascript_include_tag 'https://www.google.com/recaptcha/api.js?onload=recaptchaLoadCallback&render=explicit', defer: true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': true %>
   <%= javascript_include_tag 'editing', 'data-turbolinks-track': true if privileged_user? %>
-  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp' %>
+  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDtdkSuag5OvFbQGveIvrv9WZKJWAk2sNc' %>
 
   <meta property="og:title" content="<%= yield(:title).strip.presence || t('layout.pageTitle') %>" />
   <meta property="og:type" content="website" />

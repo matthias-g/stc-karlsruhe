@@ -11,10 +11,11 @@
   </thead>
   <tbody>
   <% Action.all.each do |action| %>
+    <% participations = @participations.joins(:event).where('events.initiative_id = ?', action.id).count %>
     <tr>
-      <% if @participations.where(action: action).count > 0 %>
-        <td><%= link_to action.title, action_path(action) %></td>
-        <td><%= @participations.where(action: action).count %></td>
+      <% if participations.positive? %>
+        <td><%= link_to action.full_title, action_path(action) %></td>
+        <td><%= participations %></td>
       <% end %>
     </tr>
   <% end %>

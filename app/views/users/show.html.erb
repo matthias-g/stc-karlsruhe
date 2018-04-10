@@ -82,7 +82,7 @@
           <%= t('user.label.actionsAsLeader') %> (<%= @actions_as_leader.size %>
           <%= Action.model_name.human(count: @actions_as_leader.size) %>):
         </h3>
-        <%= render '/actions/action_list', actions: @actions_as_leader %>
+        <%= render '/actions/action_list', actions: @actions_as_leader, simple_titles: false %>
       <% end %>
 
       <% if @actions_as_volunteer.any? %>
@@ -90,7 +90,7 @@
           <%= t('user.label.actionsAsVolunteer') %> (<%= @actions_as_volunteer.size %>
           <%= Action.model_name.human(count: @actions_as_volunteer.size) %>):
         </h3>
-        <%= render '/actions/action_list', actions: @actions_as_volunteer %>
+        <%= render '/actions/action_list', actions: @actions_as_volunteer, simple_titles: false %>
       <% end %>
 
       <% if @past_actions.any? %>
@@ -98,7 +98,7 @@
           <%= t('user.label.pastActions') %> (<%= @past_actions.size %>
           <%= Action.model_name.human(count: @past_actions.size) %>):
         </h3>
-        <%= render '/actions/action_list', actions: @past_actions %>
+        <%= render '/actions/action_list', actions: @past_actions, simple_titles: false %>
       <% end %>
 
       <% if @user.actions_as_volunteer.blank? && @user.actions_as_leader.blank? %>

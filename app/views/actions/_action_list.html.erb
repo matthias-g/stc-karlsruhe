@@ -7,7 +7,7 @@
       <% unless action.date.nil? %>
         <div class="date"><%= l action.date, format: :date %></div>
       <% end %>
-      <div class="title"><%= action.full_title %></div>
+      <div class="title"><%= simple_titles ? action.title : action.full_title %></div>
     </div>
   <% end %>
 <% end %>

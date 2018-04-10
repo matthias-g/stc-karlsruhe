@@ -142,7 +142,7 @@ class Action < ApplicationRecord
   def slug_candidates
     candidates = []
     candidates << [full_title]
-    candidates << [:title, action_group.title] if action_group
+    candidates << [full_title, action_group.title] if action_group
     candidates
   end
 

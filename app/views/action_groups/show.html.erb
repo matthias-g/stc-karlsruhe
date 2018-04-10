@@ -1,4 +1,4 @@
-<% provide :title, t('layout.title.actionGroup', year: @action_group.title) %>
+<% provide :title, @action_group.title %>
 <% wrapper_set %>
 <% actions = policy_scope(@action_group.actions.toplevel) %>
 

@@ -174,7 +174,7 @@
           <div class="white-box">
             <div id="subaction-list">
               <h3><%= Action.human_attribute_name('subaction_ids') %></h3>
-              <%= render 'actions/action_list', actions: subactions %>
+              <%= render 'actions/action_list', actions: subactions, simple_titles: true %>
             </div>
           </div>
         </div>

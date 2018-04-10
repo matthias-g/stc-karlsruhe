@@ -22,7 +22,7 @@
     <div class="col-sm-3 order-first">
       <% if previous_group %>
         <% split = split_action_group_type_prefix(previous_group.title) %>
-        <%= link_to show_action_group_path(previous_group.title) do %>
+        <%= link_to show_action_group_path(previous_group) do %>
           <div class="fa fa-2x fa-chevron-left pr-2"></div>
           <div class="neighbor-linktext">
             <div class="type"><%= split[:type] %></div>
@@ -34,7 +34,7 @@
     <div class="col-sm-3 order-last">
       <% if next_group %>
         <% split = split_action_group_type_prefix(next_group.title) %>
-        <%= link_to show_action_group_path(next_group.title) do %>
+        <%= link_to show_action_group_path(next_group) do %>
           <div class="neighbor-linktext">
             <div class="type"><%= split[:type] %></div>
             <div class="title"><%= split[:name] %></div>

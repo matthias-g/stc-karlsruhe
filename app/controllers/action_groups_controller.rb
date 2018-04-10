@@ -54,7 +54,7 @@ class ActionGroupsController < ApplicationController
   private
 
   def set_action_group
-    @action_group = params[:title] ? ActionGroup.find_by_title(params[:title]) : ActionGroup.find(params[:id])
+    @action_group = ActionGroup.friendly.find(params[:id])
     not_found unless @action_group
   end
 

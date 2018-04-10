@@ -23,9 +23,11 @@
       <div><span></span>Sekunden</div>
       <!--<span class="running">verbleiben bis zur Aktionswoche&nbsp;<%= @next_action_group.title %></span>-->
       <!--<% if Date.today <= @next_action_group.date_range.end %>-->
-        <!--<span class="finished">Die <%= link_to "Aktionswoche&nbsp;#{@next_action_group.title}".html_safe, show_action_group_path(@next_action_group.title), class: 'black-link' %> läuft!</span>-->
+        <!--<span class="finished">Die <%= link_to "Aktionswoche&nbsp;#{@next_action_group.title}".html_safe,
+           show_action_group_path(@next_action_group), class: 'black-link' %> läuft!</span>-->
         <!--<% else %>-->
-        <!--<span class="finished week-finished">Die <%= link_to "Aktionswoche&nbsp;#{@next_action_group.title}".html_safe, show_action_group_path(@next_action_group.title), class: 'black-link' %> ist abgeschlossen. Vielen Dank für euren Einsatz!</span>-->
+        <!--<span class="finished week-finished">Die <%= link_to "Aktionswoche&nbsp;#{@next_action_group.title}".html_safe,
+           show_action_group_path(@next_action_group), class: 'black-link' %> ist abgeschlossen. Vielen Dank für euren Einsatz!</span>-->
         <!--<% end %>-->
       <br />
       <span class="running">bis zum ersten Aktionstag&nbsp;2018</span>
@@ -73,7 +75,10 @@
         <% groups = policy_scope(ActionGroup.where("end_date >= ?", Time.now)) %>
         <% groups = policy_scope(ActionGroup.order(start_date: :desc).limit(2)) unless groups.any? %>
         <% groups.order(:start_date).each do |group| %>
-          <%= link_to 'Aktionswoche ' + group.title, show_action_group_path(group.title), class: 'title' %>
+          <%= link_to show_action_group_path(group), class: 'title' do %>
+            <div class="type"><%= date_range(group.start_date, group.end_date, format: :long) %></div>
+            <span class="fa fa-hand-o-right"></span> <%= group.title %>
+          <% end %>
         <% end %>
         <%= link_to '/stadtpiraten', class: 'title' do %>
           <div class="type">Projekt</div>

@@ -25,8 +25,8 @@
         <% end %>
       </li>
 
-      <li<%= current_page?(show_action_group_path(ActionGroup.default.title)) ? ' class=active' : '' %>>
-        <%= link_to show_action_group_path(ActionGroup.default.title) do %>
+      <li<%= current_page?(show_action_group_path(ActionGroup.default)) ? ' class=active' : '' %>>
+        <%= link_to show_action_group_path(ActionGroup.default) do %>
             <span class="fa fa-hand-o-right"></span>
             <%= ActionGroup.default.title %>
         <% end %>

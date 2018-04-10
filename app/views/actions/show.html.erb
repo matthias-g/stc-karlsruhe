@@ -14,12 +14,12 @@
   <div class="type">
     <% if @action.subaction? %>
       <%= t('action.label.subaction_of') %>
-      <%= link_to @action.parent_action.title, action_path(@action.parent_action) %>
+      <%= link_to @action.parent_action.title, @action.parent_action %>
     <% else %>
       <%= Action.model_name.human %>
     <% end %>
     <% if @action.action_group %>
-      - <%= link_to @action.action_group.title, show_action_group_path(@action.action_group.title) %>
+      - <%= link_to @action.action_group.title, show_action_group_path(@action.action_group) %>
     <% end %>
   </div>
   <h1><%= @action.title %></h1>
@@ -260,6 +260,6 @@
     <span class="fa fa-calendar"></span>
   <% end %>
   <% if @action.action_group %>
-    <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group.title), class: 'btn btn-light' %>
+    <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group), class: 'btn btn-light' %>
   <% end %>
 </div>

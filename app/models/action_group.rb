@@ -7,6 +7,9 @@ class ActionGroup < ApplicationRecord
 
   scope :default, -> { where(default: true).first }
 
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
+
   def active_user_count
     User.joins('LEFT JOIN "participations" ON "participations"."user_id" = "users"."id"')
         .joins('LEFT JOIN "leaderships" ON "leaderships"."user_id" = "users"."id"')
@@ -23,4 +26,16 @@ class ActionGroup < ApplicationRecord
     start_date..end_date
   end
 
+  private
+
+  def should_generate_new_friendly_id?
+    title_changed? || super
+  end
+
+  def slug_candidates
+    candidates = []
+    candidates << [title]
+    candidates << [title, start_date.year]
+    candidates
+  end
 end

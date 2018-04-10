@@ -130,10 +130,12 @@
                data-lon="<%= @action.map_longitude %>"
                data-lat="<%= @action.map_latitude %>"
                data-zoom="<%= @action.map_zoom %>">
-            <div data-lon="<%= @action.longitude %>"
-                 data-lat="<%= @action.latitude %>"
-                 data-name="<%= @action.title %>"
-                 data-editable="true">
+            <div class="markers">
+              <div data-lon="<%= @action.longitude %>"
+                   data-lat="<%= @action.latitude %>"
+                   data-name="<%= @action.title %>"
+                   data-editable="true">
+              </div>
             </div>
           </div>
           <%= f.text_field :longitude, type: :hidden, hide_label: true %>

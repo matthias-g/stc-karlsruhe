@@ -2,38 +2,77 @@ class @GoogleMap
   # the google maps api v3 must be loaded prior to this
 
   constructor: (@html) ->
-    markerData = @html.children().detach()
-    @activeWindow = undefined
-    @markers = @windows = []
+    @activePopup = undefined
+    @markers = @popups = []
     @mapID = @html.data('map-id')
     @icons =
       red: "<%= asset_path 'marker-red.png' %>"
       gray: "<%= asset_path 'marker-gray.png' %>"
 
-    @map = new (google.maps.Map)(@html.get(0),
+    # create map
+    map_element = $('<div class="map-frame">').appendTo(@html).get(0)
+    @map = new (google.maps.Map)(map_element,
+      center: new (google.maps.LatLng)(parseFloat(@html.data('lat')), parseFloat(@html.data('lon')))
       zoom: parseInt(@html.data('zoom'))
-      maxZoom: 17
       minZoom: 11
-      center: new (google.maps.LatLng)(parseFloat(@html.data('lat')), parseFloat(@html.data('lon'))))
-
-    @map.setOptions(
-      disableDefaultUI: true
+      maxZoom: 17
       zoomControl: true
-      scrollwheel: false
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      gestureHandling: 'none'
+      disableDefaultUI: true
       styles: [
-        {featureType: 'poi', elementType: 'labels', stylers: [{'visibility': 'off'}]},
-        {featureType: 'transit', stylers: [{'visibility': 'off'}]},
-        {featureType: 'road', elementType: 'labels.icon', stylers: [{'visibility': 'off'}]}
+        {featureType: 'poi', elementType: 'labels', stylers: [visibility: 'off']},
+        {featureType: 'transit', stylers: [visibility: 'off']},
+        {featureType: 'road', elementType: 'labels.icon', stylers: [visibility: 'off']}
       ]
     )
 
-    @extractMarkers(markerData)
+    # add markers
+    $('.markers > *', @html).each (i, ele) =>
+      m = $(ele)
+      @addMarker(m.data('name') or '', m.data('href') or '', m.prop('innerHTML'),
+          parseFloat(m.data('lat')), parseFloat(m.data('lon')), m.data('color'))
+      if m.data('editable')
+        @setEditable(m.data('name'), @mapID)
     @adaptBoundsToMarkers
 
-    google.maps.visualRefresh = true
 
-    
+
+
+  addMarker: (name, href, desc, lat, lon, color) =>
+    marker = new (google.maps.Marker)
+      title: name
+      map: @map
+      position: new (google.maps.LatLng)(lat, lon)
+      icon: @icons[color]
+    @markers.push marker
+
+    popup = new (google.maps.InfoWindow)
+      maxWidth: 300
+      content: '<a href="' + href + '"><h4>' + name + '</h4></a>' + desc
+    @popups.push popup
+
+    google.maps.event.addListener marker, 'click', =>
+      if @activePopup
+        @activePopup.close()
+      popup.open @map, marker
+      @activePopup = popup
+
+
+  removeMarkers: =>
+    m.setMap(null) for m in @markers
+    w.setMap(null) for w in @popups
+    @markers = @popups = []
+
+
+  adaptBoundsToMarkers: =>
+    if @markers.length == 0
+      return
+    bounds = new (google.maps.LatLngBounds)
+    for marker of @markers
+      bounds.extend marker.position
+    @map.fitBounds bounds
+
+
   setEditable: (title, editID) =>
     google.maps.event.addListener @map, 'click', (e) =>
       lat = e.latLng.lat()
@@ -48,47 +87,3 @@ class @GoogleMap
       $('#' + editID + '_map_longitude').val center.lng()
     google.maps.event.addListener @map, 'zoom_changed', =>
       $('#' + editID + '_map_zoom').val @map.getZoom()
-
-
-  extractMarkers: (markerData) =>
-    markerData.each (i, ele) =>
-      m = $(ele)
-      @addMarker(m.data('name') or '', m.data('href') or '', m.prop('innerHTML'),
-        parseFloat(m.data('lat')), parseFloat(m.data('lon')), m.data('color'))
-      if m.data('editable')
-        @setEditable(m.data('name'), @mapID)
-
-
-  addMarker: (name, href, desc, lat, lon, color) =>
-    marker = new (google.maps.Marker)
-      title: name
-      map: @map
-      position: new (google.maps.LatLng)(lat, lon)
-      icon: @icons[color]
-    @markers.push marker
-
-    window = new (google.maps.InfoWindow)
-      maxWidth: 300
-      content: '<a href="' + href + '"><h4>' + name + '</h4></a>' + desc
-    @windows.push window
-
-    google.maps.event.addListener marker, 'click', =>
-      if @activeWindow
-        @activeWindow.close()
-      window.open @map, marker
-      @activeWindow = window
-
-
-  removeMarkers: =>
-    m.setMap(null) for m in @markers
-    w.setMap(null) for w in @windows
-    @markers = @windows = []
-
-
-  adaptBoundsToMarkers: =>
-    if @markers.length == 0
-      return
-    bounds = new (google.maps.LatLngBounds)
-    for marker of @markers
-      bounds.extend marker.position
-    @map.fitBounds bounds

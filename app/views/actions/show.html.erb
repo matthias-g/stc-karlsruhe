@@ -161,9 +161,11 @@
                  data-zoom="<%= @action.map_zoom %>"
                  data-lon="<%= @action.map_longitude %>"
                  data-lat="<%= @action.map_latitude %>">
-              <div data-name="<%= @action.title %>"
-                   data-lon="<%= @action.longitude %>"
-                   data-lat="<%= @action.latitude %>">
+              <div class="markers">
+                <div data-name="<%= @action.title %>"
+                     data-lon="<%= @action.longitude %>"
+                     data-lat="<%= @action.latitude %>">
+                </div>
               </div>
             </div>
           <% end %>

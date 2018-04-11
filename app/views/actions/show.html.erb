@@ -1,4 +1,4 @@
-<% provide :title, @action.title + (@action.parent_action ? (' - ' + @action.parent_action.title) : '') %>
+<% provide :title, 'Aktion "' + @action.title + (@action.parent_action ? (' - ' + @action.parent_action.title) : '') + '"'%>
 <% wrapper_set 'container-medium' %>
 <% wrapper_classes.add('action-invisible') unless @action.visible? %>
 

@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#28B7AF" />
   <%= csrf_meta_tags %>
 
-  <title><%= (content_for?(:title) ? (content_for(:title).strip + ' - ') : '') + t('layout.pageTitle') %></title>
+  <title><%= (content_for?(:title) ? (sanitize yield(:title).strip + ' - ') : '') + t('layout.pageTitle') %></title>
 
   <%= favicon_link_tag 'favicon.ico', skip_pipeline: true %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true %>

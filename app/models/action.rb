@@ -105,10 +105,10 @@ class Action < ApplicationRecord
   end
 
   # Are the action and its sub actions finished (i.e. in the past)?
-  # (Note: undated actions are never finished)
   def finished?
     all_dates = dates
-    !(all_dates.any? && all_dates.max >= Date.today)
+    return true unless all_dates.any?
+    all_dates.max < Date.today
   end
 
   # Is the action a sub action?

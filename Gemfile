@@ -92,7 +92,6 @@ end
 
 group :test do
   gem 'simplecov', require: false
-  gem 'codeclimate-test-reporter', require: nil
   gem 'mutant'
   gem 'mutant-rspec'
 end

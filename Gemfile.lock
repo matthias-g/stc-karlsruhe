@@ -92,8 +92,6 @@ GEM
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
     chartkick (2.3.3)
-    codeclimate-test-reporter (1.0.8)
-      simplecov (<= 0.13)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -386,7 +384,6 @@ DEPENDENCIES
   capistrano3-unicorn
   carrierwave
   chartkick
-  codeclimate-test-reporter
   coffee-rails
   devise
   dotenv-rails

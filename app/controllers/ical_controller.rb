@@ -15,13 +15,13 @@ class IcalController < ApplicationController
 
     add_action_to_calendar(action, calendar)
 
-    @filename = action.title
+    @filename = action.full_title
     ical_feed = calendar.to_ical
     render plain: ical_feed
   end
 
   def action_groups
-    action_group = ActionGroup.find(params[:action_group_id])
+    action_group = ActionGroup.friendly.find(params[:action_group_id])
     authorize action_group, :show?
     calendar = create_calendar
 
@@ -29,7 +29,7 @@ class IcalController < ApplicationController
       add_action_to_calendar(action, calendar)
     end
 
-    @filename = I18n.t('ical.label.action_groups', action_group: action_group.title)
+    @filename = action_group.title
     ical_feed = calendar.to_ical
     render plain: ical_feed
   end
@@ -92,7 +92,7 @@ class IcalController < ApplicationController
           event_end = DateTime.new(date.year, date.month, date.day, event.end_time.hour, event.end_time.min, 0)
           cal_event.dtend = Values::DateTime.new event_end
         end
-        cal_event.summary = action.title
+        cal_event.summary = action.full_title
         cal_event.location = action.location.gsub(/\s*\r?\n\s*/, ', ')
         cal_event.description = format_urls_no_html(action.description)
         cal_event.categories = action.action_group.title if action.action_group

@@ -1,12 +1,15 @@
 #!/bin/bash
 
 curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-chmod +x ./cc-test-reporter
-./cc-test-reporter before-build
-bundle exec rails test
 RESULT=$?
+chmod +x ./cc-test-reporter
+RESULT=$(($RESULT + $?))
+./cc-test-reporter before-build
+RESULT=$(($RESULT + $?))
+bundle exec rails test
+RESULT=$(($RESULT + $?))
 bundle exec rspec
 RESULT=$(($RESULT + $?))
-./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+./cc-test-reporter after-build --exit-code $RESULT
 RESULT=$(($RESULT + $?))
 exit $RESULT

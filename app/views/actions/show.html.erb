@@ -254,8 +254,8 @@
 
 <div class="footer d-print-none">
   <%= render '/layouts/share' -%>
-  <%= link_to action_ical_path(@action), class: 'float-right', title: t('action.action.exportICal'), data: { 'turbolinks': false } do %>
-    <span class="fa fa-calendar"></span>
+  <%= link_to action_ical_path(@action), class: 'float-right px-1', title: t('action.action.exportICal'), data: { 'turbolinks': false } do %>
+    <span class="fa fa-calendar fa-2x"></span>
   <% end %>
   <% if @action.action_group %>
     <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group), class: 'btn btn-light' %>

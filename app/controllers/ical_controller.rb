@@ -79,8 +79,9 @@ class IcalController < ApplicationController
 
   def add_action_to_calendar(action, calendar)
     action.events.each do |event|
+      date = event.date
+      next unless date
       calendar.event do |cal_event|
-        date = event.date
         if event.start_time
           event_start = DateTime.new(date.year, date.month, date.day, event.start_time.hour, event.start_time.min, 0)
           cal_event.dtstart = Values::DateTime.new event_start
@@ -93,7 +94,7 @@ class IcalController < ApplicationController
           cal_event.dtend = Values::DateTime.new event_end
         end
         cal_event.summary = action.full_title
-        cal_event.location = action.location.gsub(/\s*\r?\n\s*/, ', ')
+        cal_event.location = action.location&.gsub(/\s*\r?\n\s*/, ', ')
         cal_event.description = format_urls_no_html(action.description)
         cal_event.categories = action.action_group.title if action.action_group
         cal_event.url = action_url(action)

@@ -8,4 +8,9 @@ class IcalControllerTest < ActionDispatch::IntegrationTest
   test 'actions' do
     get action_ical_url(actions(:one))
   end
+
+  test 'get action with event without date' do
+    action = actions(:undated)
+    get action_ical_url(action)
+  end
 end

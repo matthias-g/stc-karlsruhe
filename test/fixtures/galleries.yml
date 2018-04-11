@@ -24,5 +24,8 @@ seven:
 eight:
   title: MyString
 
+nine:
+  title: MyString
+
 unreferenced:
   title: No one uses this gallery

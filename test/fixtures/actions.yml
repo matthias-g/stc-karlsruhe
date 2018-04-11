@@ -80,6 +80,9 @@ kindergarten-music:
 
 undated:
   title: Undatierte Aktion
+  description: Ohne Datum
+  visible: true
+  gallery: nine
 
 finished:
   title: Beendete Aktion

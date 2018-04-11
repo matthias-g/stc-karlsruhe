@@ -38,6 +38,7 @@ class Event < ApplicationRecord
   end
 
   def finished?
+    return true unless date
     date < Date.today
   end
 

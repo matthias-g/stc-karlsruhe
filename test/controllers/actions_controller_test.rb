@@ -103,6 +103,11 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=\"#{enter_event_path(@action.events.first)}\"]", 1
   end
 
+  test 'should show undated action' do
+    get action_url(actions(:undated))
+    assert_response :success
+  end
+
   test 'should redirect when getting edit with no user logged in' do
     get edit_action_url(@action)
     assert_redirected_to login_or_register_path

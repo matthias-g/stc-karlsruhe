@@ -84,10 +84,18 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => 'servethecity-karlsruhe.de' }
+  config.action_mailer.default_url_options = { host: 'servethecity-karlsruhe.de' }
+
+  config.action_mailer.smtp_settings = {
+      address:              'smtp-mail.outlook.com',
+      port:                 587,
+      user_name:            ENV['SMTP_USER'],
+      password:             ENV['SMTP_PASSWORD'],
+      authentication:       :plain,
+      enable_starttls_auto: true
+  }
 
   # Deliver mails on exceptions
   config.middleware.use ExceptionNotification::Rack, email: {

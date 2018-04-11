@@ -94,14 +94,13 @@ Rails.application.configure do
       user_name:            ENV['SMTP_USER'],
       password:             ENV['SMTP_PASSWORD'],
       authentication:       :login,
-      domain:               'servethecity-karlsruhe.de',
       enable_starttls_auto: true
   }
 
   # Deliver mails on exceptions
   config.middleware.use ExceptionNotification::Rack, email: {
     email_prefix: '[Exception] ',
-    sender_address: 'error-sendor@servethecity-karlsruhe.de',
+    sender_address: 'no-reply@servethecity-karlsruhe.de',
     exception_recipients: 'failure-notifications@servethecity-karlsruhe.de'
   }
 end

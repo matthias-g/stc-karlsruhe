@@ -15,4 +15,3 @@ env:
   - TESTSCRIPT="bin/travis-mutant UserPolicy"
 script:
   - $TESTSCRIPT
-after_script:

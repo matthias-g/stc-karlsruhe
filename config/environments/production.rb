@@ -89,11 +89,12 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'servethecity-karlsruhe.de' }
 
   config.action_mailer.smtp_settings = {
-      address:              'smtp-mail.outlook.com',
+      address:              'smtp.office365.com',
       port:                 587,
       user_name:            ENV['SMTP_USER'],
       password:             ENV['SMTP_PASSWORD'],
-      authentication:       :plain,
+      authentication:       :login,
+      domain:               'servethecity-karlsruhe.de',
       enable_starttls_auto: true
   }
 

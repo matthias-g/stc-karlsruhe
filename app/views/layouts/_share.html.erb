@@ -1,5 +1,6 @@
 
-<a class="float-right px-1" href="http://www.facebook.com/sharer/sharer.php?u=<%= request.original_url %>"
-   target="_blank" title="<%= t('layout.links.shareOnFacebook') %>">
+<% url = request.original_url %>
+<a class="float-right px-1" title="<%= t('layout.links.shareOnFacebook') %>"
+   href="https://www.facebook.com/dialog/share?display=page&app_id=1632977830272942&href=<%= url %>&redirect_uri=<%= url %>">
   <span class="fa fa-facebook-official fa-2x"></span>
 </a>

@@ -434,7 +434,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
     action:
       login: 'Anmelden'
       logout: 'Abmelden'
-      register: 'Registrieren'
+      register: 'Anmelden'
       confirmAccount: 'Account bestätigen'
       unlockAccount: 'Account freischalten'
       deleteAccount: 'Account löschen'

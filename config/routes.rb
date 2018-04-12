@@ -47,7 +47,6 @@ Rails.application.routes.draw do
 
   resources :actions, path: 'aktionen' do
     member do
-      get :register_for_participation
       get :edit_leaders
       post :add_leader
       delete :delete_leader
@@ -65,6 +64,7 @@ Rails.application.routes.draw do
     member do
       get :enter
       get :leave
+      get :register_for_participation
     end
   end
 

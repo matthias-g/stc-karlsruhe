@@ -236,8 +236,14 @@
                   <span class="fa fa-sign-out"></span> <%= t('action.action.leave') %>
                 <% end %>
               <% elsif event.available_places.positive? %>
-                <%= link_to enter_event_path(event), class: 'btn btn-success btn-block' do %>
-                  <span class="fa fa-sign-in"></span> <%= t('action.action.enter') %>
+                <% if user_signed_in? %>
+                  <%= link_to enter_event_path(event), class: 'btn btn-success btn-block' do %>
+                    <span class="fa fa-sign-in"></span> <%= t('action.action.enter') %>
+                  <% end %>
+                <% else %>
+                  <%= link_to register_for_participation_event_path(event), class: 'btn btn-success btn-block' do %>
+                    <span class="fa fa-sign-in"></span> <%= t('action.action.enter') %>
+                  <% end %>
                 <% end %>
               <% end %>
             </div>

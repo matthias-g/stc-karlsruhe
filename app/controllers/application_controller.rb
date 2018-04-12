@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
     sign_in_url = new_user_session_url
     template = Surveys::Template.where(show_in_user_profile: true).order('RANDOM()').first
     if template && !template.submissions.where(user_id: current_user.id).exists?
-      signed_in_root_path(resource)
+      stored_location_for(resource) || signed_in_root_path(resource)
     elsif request.referer == sign_in_url || request.referer == login_or_register_url || request.referer =~ /.*\/password\/.*/
       super
     else

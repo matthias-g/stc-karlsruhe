@@ -158,17 +158,4 @@ class Action < ApplicationRecord
     end
   end
 
-  def on_volunteer_added(user)
-    adjust_team_size
-    return if finished?
-    Mailer.action_participate_volunteer_notification(user, self).deliver_now if user.receive_notifications_for_new_participation
-    Mailer.action_participate_leader_notification(user, self).deliver_now
-  end
-
-  def on_volunteer_removed(user)
-    adjust_team_size
-    return if finished?
-    Mailer.leaving_action_notification(user, self).deliver_now
-  end
-
 end

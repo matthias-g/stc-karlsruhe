@@ -98,9 +98,9 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should show link to enter team even when no user logged in' do
+  test 'should show link to register for participation when no user logged in' do
     get action_url(@action)
-    assert_select "a[href=\"#{enter_event_path(@action.events.first)}\"]", 1
+    assert_select "a[href=\"#{register_for_participation_event_path(@action.events.first)}\"]", 1
   end
 
   test 'should show undated action' do

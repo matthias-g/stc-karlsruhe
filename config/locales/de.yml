@@ -486,7 +486,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       passwordLength: 'Mindestens 6 Zeichen lang.'
 
   action_group:
-    noActions: 'Wir sind zwar schon bei der Planung der Aktionswoche, aber bisher sind noch keine Aktionen öffentlich. Schau später nochmal vorbei oder kontaktiere uns, wenn du einen Vorschlag für eine Aktion hast!'
+    noActions: 'Wir sind zwar schon bei der Planung, aber bisher sind noch keine Aktionen öffentlich. Schau später nochmal vorbei oder kontaktiere uns, wenn du einen Vorschlag für eine Aktion hast!'
 
   role:
     action:

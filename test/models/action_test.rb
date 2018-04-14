@@ -87,7 +87,7 @@ class ActionTest < ActiveSupport::TestCase
     # parent action
     assert @parent_action.clone.subactions.empty?
     # child action
-    assert actions(:'kindergarten-music').clone.parent_action
+    assert actions(:'kindergarten-music').clone.parent_action.nil?
   end
 
   test 'total_team_size and total_available_places and total_desired_places and status' do

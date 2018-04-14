@@ -6,14 +6,12 @@ class Event < ApplicationRecord
   has_many :volunteers, class_name: 'User', through: :participations, source: :user,
            after_add: :on_volunteer_added, after_remove: :on_volunteer_removed
 
-  # TODO
-  # validates :desired_team_size, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  validates :desired_team_size, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 
   scope :upcoming, -> { where('date >= ?', Date.today) }
   scope :finished, -> { where('date < ?', Date.today) }
 
-  # TODO
-  #validates_presence_of :desired_team_size
+  validates_presence_of :desired_team_size
 
   def add_volunteer(user)
     volunteers << user

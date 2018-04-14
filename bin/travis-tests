@@ -12,7 +12,7 @@ bundle exec rspec
 RESULT=$(($RESULT + $?))
 ./cc-test-reporter after-build --exit-code $RESULT
 RESULT=$(($RESULT + $?))
-if [ $RESULT -eq 0 ]
+if [ $RESULT -eq 0 ]; then
     exit 0
 fi
 exit 1

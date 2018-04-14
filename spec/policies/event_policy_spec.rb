@@ -145,4 +145,30 @@ RSpec.describe EventPolicy do
     end
   end
 
+  describe 'scope' do
+    subject { EventPolicy::Scope.new(user, Event.all).resolve }
+    let(:invisible_event) { actions('Action 3').events.first }
+
+    context 'as admin' do
+      let(:user) { users(:admin) }
+      it 'does contain invisible events' do
+        expect(subject).to include(invisible_event)
+      end
+    end
+
+    context 'as not logged in user' do
+      let(:user) { nil }
+      it 'does not contain invisible events' do
+        expect(subject).not_to include(invisible_event)
+      end
+    end
+
+    context 'as leader' do
+      let(:user) { users(:rolf) }
+      it 'does contain invisible event' do
+        expect(subject).to include(invisible_event)
+      end
+    end
+  end
+
 end

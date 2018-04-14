@@ -2,6 +2,20 @@ class EventPolicy < ApplicationPolicy
 
   include EventUserRelationship
 
+  class Scope < Scope
+    def resolve
+      if user && (user.admin? || user.coordinator?)
+        scope.all
+      elsif user
+        scope.joins('JOIN actions ON events.initiative_id = actions.id')
+            .joins('LEFT JOIN leaderships policyLeaderships on actions.id = policyLeaderships.action_id')
+            .where('policyLeaderships.user_id = ? OR visible', user.id).distinct
+      else
+        scope.joins('JOIN actions ON events.initiative_id = actions.id').where('actions.visible': true).distinct
+      end
+    end
+  end
+
   def enter?
     add_to_volunteers? [user]
   end

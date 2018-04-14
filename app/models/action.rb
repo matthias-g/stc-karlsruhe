@@ -133,6 +133,18 @@ class Action < ApplicationRecord
     end
   end
 
+  def clone
+    action_copy = dup
+    action_copy.events.build
+    action_copy.title = I18n.t('action.label.copyOf') + title
+    action_copy.action_group = ActionGroup.all.order(start_date: :desc).first
+    action_copy.parent_action = nil
+    action_copy.save
+    action_copy.picture = picture.dup
+    action_copy.picture.store!
+    action_copy
+  end
+
   private
 
   def should_generate_new_friendly_id?

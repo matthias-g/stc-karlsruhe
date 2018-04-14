@@ -305,9 +305,11 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       weHelpYou: Wir helfen dir dabei!
       startOwnAction: Eigene Aktion starten
       exportICal: Als iCal/ICS exportieren
+      clone: Aktion klonen
     label:
       action: 'Aktion'
       subaction_of: 'Teilaktion von'
+      copyOf: 'Kopie von '
       subactions:
         one: '1 Teilaktion'
         other: '%{count} Teilaktionen'

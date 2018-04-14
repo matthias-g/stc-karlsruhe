@@ -28,7 +28,11 @@ class ActionsController < ApplicationController
     @action = Action.new
     @action.events.build
     authorize_action
-    @action.action_group = ActionGroup.all.order(title: :desc).first
+    @action.action_group = ActionGroup.all.order(start_date: :desc).first
+  end
+
+  def clone
+    redirect_to edit_action_path(@action.clone)
   end
 
   def edit; end

@@ -56,6 +56,7 @@ Rails.application.routes.draw do
       get :crop_picture
       post :contact_volunteers
       post :contact_leaders
+      get :clone
     end
   end
   get 'aktionen-:year', to: 'actions#index'

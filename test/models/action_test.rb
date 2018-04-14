@@ -81,6 +81,15 @@ class ActionTest < ActiveSupport::TestCase
     assert_not_equal actions(:'kindergarten-music').title, actions(:'kindergarten-music').full_title
   end
 
+  test 'clone' do
+    # single action
+    assert_equal I18n.t('action.label.copyOf') + @action.title, @action.clone.title
+    # parent action
+    assert @parent_action.clone.subactions.empty?
+    # child action
+    assert actions(:'kindergarten-music').clone.parent_action
+  end
+
   test 'total_team_size and total_available_places and total_desired_places and status' do
     parent = Action.create(title: 'parent')
     parent_event = Event.create(desired_team_size: 0, date: Date.today, initiative: parent)

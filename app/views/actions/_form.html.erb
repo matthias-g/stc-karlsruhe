@@ -105,6 +105,9 @@
           <%= link_to @action, class: 'btn btn-warning btn-block' do %>
             <span class="fa fa-ban"></span> <%= t('general.action.cancel') %>
           <% end %>
+          <%= link_to clone_action_path(@action), class: 'btn btn-dark btn-block' do %>
+            <span class="fa fa-copy"></span> <%= t('action.action.clone') %>
+          <% end %>
         <% end %>
         <% if !isNew && policy(@action).destroy? %>
           <%= link_to @action, method: :delete, class: 'btn btn-danger btn-block',

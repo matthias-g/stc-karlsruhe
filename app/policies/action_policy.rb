@@ -65,6 +65,7 @@ class ActionPolicy < ApplicationPolicy
     is_today_or_past? && (is_volunteer?(user) || is_leader? || is_coordinator? || is_admin? || user&.photographer?)
   end
 
+  alias_method :clone?, :edit?
   alias_method :update?, :edit?
   alias_method :destroy?, :edit?
 

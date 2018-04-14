@@ -30,7 +30,7 @@ class Event < ApplicationRecord
   end
 
   def available_places
-    if date && date >= Date.today
+    if date && date >= Date.today && desired_team_size
       desired_team_size - team_size.to_i
     else
       0

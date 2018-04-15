@@ -160,7 +160,7 @@
 
         <% new_object = f.object.class.reflect_on_association(:events).klass.new %>
         <div id="event-prototype" style="display: none;">
-          <%= f.fields_for(:events, new_object, child_index: :new_event) { |builder| render('event_fields', f: builder) } %>
+          <%= f.fields_for(:events, new_object, child_index: :new_item) { |builder| render('event_fields', f: builder) } %>
         </div>
       </div>
 

@@ -63,22 +63,22 @@
     <div class="row">
       <div class="col">
         <%= link_to edit_user_registration_path, class:'btn btn-link btn-block' do %>
-          <span class="fa fa-key"></span> <%= t('user.action.changePassword') %>
+          <span class="fas fa-key"></span> <%= t('user.action.changePassword') %>
         <% end %>
       </div>
       <div class="col">
         <%= link_to confirm_delete_user_path, class:'btn btn-link btn-block' do %>
-          <span class="fa fa-trash"></span> <%= t('user.action.deleteAccount') %>
+          <span class="fas fa-trash"></span> <%= t('user.action.deleteAccount') %>
         <% end %>
       </div>
       <div class="col">
         <%= link_to user_path(@user), class:'btn btn-link btn-block' do %>
-          <span class="fa fa-ban"></span> <%= t('general.action.cancel') %>
+          <span class="fas fa-ban"></span> <%= t('general.action.cancel') %>
         <% end %>
       </div>
       <div class="col">
         <%= button_tag class:'btn btn-success btn-block' do %>
-          <span class="fa fa-save"></span> <%= t('general.action.save') %>
+          <span class="fas fa-save"></span> <%= t('general.action.save') %>
         <% end %>
       </div>
     </div>

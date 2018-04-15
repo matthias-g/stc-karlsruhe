@@ -22,13 +22,13 @@
       <div class="actions">
 
         <label class="btn btn-primary btn-file">
-          <span class="fa fa-upload"></span> <%= t('gallery.action.uploadPictures') %>
+          <span class="fas fa-upload"></span> <%= t('gallery.action.uploadPictures') %>
           <input multiple="multiple" name="gallery_pictures[picture][]" class="form-control-file d-none gallery-upload" type="file" />
         </label>
 
         <% if policy(action.gallery).edit? %>
           <%= link_to edit_gallery_path(action.gallery), class: 'btn btn-secondary' do %>
-            <span class="fa fa-pencil"></span> <%= t('gallery.action.edit') %>
+            <span class="fas fa-pencil-alt"></span> <%= t('gallery.action.edit') %>
           <% end %>
         <% end %>
 

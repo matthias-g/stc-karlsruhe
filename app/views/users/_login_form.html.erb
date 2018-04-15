@@ -11,7 +11,7 @@
   <% end %>
 
   <%= button_tag class: 'btn btn-primary' do %>
-    <span class="fa fa-sign-in"></span> <%= t('user.action.login') %>
+    <span class="fas fa-sign-in-alt"></span> <%= t('user.action.login') %>
   <% end %>
 
   <% if devise_mapping.recoverable? %>
@@ -29,7 +29,7 @@
   <% if devise_mapping.omniauthable? %>
     <% resource_class.omniauth_providers.each do |provider| %>
       <%= link_to omniauth_authorize_path(resource_name, provider), class:'btn btn-secondary' do %>
-        <span class="fa fa-openid"></span> <%= t('user.action.loginWithProvider', provider: provider.to_s.titleize) %>
+        <span class="fab fa-openid"></span> <%= t('user.action.loginWithProvider', provider: provider.to_s.titleize) %>
       <% end %>
     <% end %>
   <% end %>

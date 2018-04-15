@@ -49,15 +49,15 @@
             <% if @action.persisted? %>
               <%= link_to crop_picture_action_path(@action, crop_target: 'action_list'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
-                <span class="fa fa-crop"></span> <%= t('action.action.cropListviewImage') %>
+                <span class="fas fa-crop"></span> <%= t('action.action.cropListviewImage') %>
               <% end %>
               <%= link_to crop_picture_action_path(@action, crop_target: 'action_view'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'}  do %>
-                <span class="fa fa-crop"></span> <%= t('action.action.cropActionImage') %>
+                <span class="fas fa-crop"></span> <%= t('action.action.cropActionImage') %>
               <% end %>
               <%= link_to crop_picture_action_path(@action, crop_target: 'thumbnail'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
-                <span class="fa fa-crop"></span> <%= t('action.action.cropThumbnailImage') %>
+                <span class="fas fa-crop"></span> <%= t('action.action.cropThumbnailImage') %>
               <% end %>
 
             <% end %>
@@ -95,24 +95,24 @@
           <%= t('action.label.manageAction') %>
         </h3>
         <%= button_tag class: 'btn btn-success btn-block' do %>
-          <span class="fa fa-save"></span> <%= t('general.action.save') %>
+          <span class="fas fa-save"></span> <%= t('general.action.save') %>
         <% end %>
         <% if isNew %>
           <%= link_to :back, class: 'btn btn-warning btn-block' do %>
-            <span class="fa fa-ban"></span> <%= t('general.action.cancel') %>
+            <span class="fas fa-ban"></span> <%= t('general.action.cancel') %>
           <% end %>
         <% else %>
           <%= link_to @action, class: 'btn btn-warning btn-block' do %>
-            <span class="fa fa-ban"></span> <%= t('general.action.cancel') %>
+            <span class="fas fa-ban"></span> <%= t('general.action.cancel') %>
           <% end %>
           <%= link_to clone_action_path(@action), class: 'btn btn-dark btn-block' do %>
-            <span class="fa fa-copy"></span> <%= t('action.action.clone') %>
+            <span class="far fa-copy"></span> <%= t('action.action.clone') %>
           <% end %>
         <% end %>
         <% if !isNew && policy(@action).destroy? %>
           <%= link_to @action, method: :delete, class: 'btn btn-danger btn-block',
                       data: { confirm: t('general.message.confirmDelete')} do %>
-            <span class="fa fa-trash"></span> <%= t('general.action.delete') %>
+            <span class="fas fa-trash"></span> <%= t('general.action.delete') %>
           <% end %>
         <% end %>
       </div>

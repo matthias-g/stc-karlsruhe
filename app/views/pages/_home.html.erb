@@ -79,16 +79,16 @@
         <% groups.order(:start_date).each do |group| %>
           <%= link_to show_action_group_path(group), class: 'title' do %>
             <div class="type"><%= date_range(group.start_date, group.end_date, format: :long) %></div>
-            <span class="fa fa-hand-o-right"></span> <%= group.title %>
+            <span class="far fa-hand-point-right"></span> <%= group.title %>
           <% end %>
         <% end %>
         <%= link_to '/stadtpiraten', class: 'title' do %>
           <div class="type">Projekt</div>
-          <span class="fa fa-cog"></span> Stadtpiraten
+          <span class="fas fa-cog"></span> Stadtpiraten
         <% end %>
         <%= link_to '/spielezeit', class: 'title' do %>
           <div class="type">Projekt</div>
-          <span class="fa fa-trophy"></span> Spielezeit
+          <span class="fas fa-trophy"></span> Spielezeit
         <% end %>
       </div>
 
@@ -123,7 +123,7 @@
         </p>
         <p>
           <%= link_to '/about', class: 'h3' do %>
-            <span class="fa fa-arrow-right"></span> über Serve the City...
+            <span class="fas fa-arrow-right"></span> über Serve the City...
           <% end %>
         </p>
 
@@ -135,7 +135,7 @@
           https://www.youtube.com/embed/njiIHf1nlVQ?rel=0&autoplay=true&autohide=1&iv_load_policy=3&color=white&showinfo=0">
         </iframe>
         <div class="trigger">
-          <div><i class="fa fa-play-circle-o"></i></div>
+          <div><i class="far fa-play-circle"></i></div>
         </div>
       </div>
 
@@ -160,7 +160,7 @@
   <section id="home-likebox">
     <h1>
       <%= link_to 'https://www.facebook.com/servethecity.karlsruhe', :target => "_blank" do %>
-        <i class="fa fa-facebook-square" style="font-size: 1.3em;padding-right: 10px;"></i> Serve the City auf Facebook
+        <i class="fab fa-facebook" style="font-size: 1.3em;padding-right: 10px;"></i> Serve the City auf Facebook
       <% end %>
     </h1>
     <div>

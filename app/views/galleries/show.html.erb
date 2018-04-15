@@ -35,22 +35,22 @@
       <div class="section">
         <% if policy(@gallery).edit? %>
           <%= link_to edit_gallery_path(@gallery), class: 'btn btn-primary btn-block' do %>
-            <span class="fa fa-pencil"></span> <%= t('general.action.edit') %>
+            <span class="fas fa-pencil-alt"></span> <%= t('general.action.edit') %>
           <% end %>
         <% end %>
         <% if policy(@gallery).index? %>
           <%= link_to galleries_path, class: 'btn btn-secondary btn-block' do %>
-            <span class="fa fa-pencil"></span> <%= 'Zur Galerieübersicht' %>
+            <span class="fas fa-pencil-alt"></span> <%= 'Zur Galerieübersicht' %>
           <% end %>
         <% end %>
         <% @gallery.actions.each do |action| %>
           <%= link_to action, class: 'btn btn-secondary btn-block' do %>
-            <span class="fa fa-play-circle"></span> <%= 'Zur Aktion' %>
+            <span class="far fa-play-circle"></span> <%= 'Zur Aktion' %>
           <% end %>
         <% end %>
         <% @gallery.news_entries.each do |news_entry| %>
           <%= link_to news_entry, class: 'btn btn-secondary btn-block' do %>
-            <span class="fa fa-play-circle"></span> <%= 'Zum Newseintrag' %>
+            <span class="far fa-play-circle"></span> <%= 'Zum Newseintrag' %>
           <% end %>
         <% end %>
       </div>

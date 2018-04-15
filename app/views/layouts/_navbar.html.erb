@@ -1,5 +1,5 @@
 <a id="nav-button" href="#nav" title="Menü">
-  <div class="fa fa-bars"></div>
+  <div class="fas fa-bars"></div>
 </a>
 
 <nav id="nav" data-class="Navbar">
@@ -13,21 +13,21 @@
     <ul>
       <li<%= current_page?(root_path) ? ' class=active' : '' %>>
         <%= link_to root_path do %>
-          <span class="fa fa-home"></span>
+          <span class="fas fa-home"></span>
           <%= t('layout.links.home') %>
         <% end %>
       </li>
 
       <li<%= current_page?('/about') ? ' class=active' : '' %>>
         <%= link_to '/about' do %>
-            <span class="fa fa-lightbulb-o"></span>
+            <span class="far fa-lightbulb"></span>
             <%= t('layout.links.about') %>
         <% end %>
       </li>
 
       <li<%= current_page?(show_action_group_path(ActionGroup.default)) ? ' class=active' : '' %>>
         <%= link_to show_action_group_path(ActionGroup.default) do %>
-            <span class="fa fa-hand-o-right"></span>
+            <span class="far fa-hand-point-right"></span>
             <%= ActionGroup.default.title %>
         <% end %>
       </li>
@@ -35,7 +35,7 @@
       <% if user_signed_in? %>
         <li<%= current_page?(user_path(current_user)) ? ' class=active' : '' %>>
           <%= link_to user_path(current_user) do %>
-            <span class="fa fa-user"></span>
+            <span class="fas fa-user"></span>
             <%= t('layout.links.profile') %>
             <%#= current_user.full_name %>
           <% end %>
@@ -43,7 +43,7 @@
       <% else %>
         <li<%= current_page?(new_user_session_path) ? ' class=active' : '' %>>
           <%= link_to new_user_session_path do %>
-            <span class="fa fa-sign-in"></span>
+            <span class="fas fa-sign-in-alt"></span>
             <%= t('layout.links.login') %>
           <% end %>
         </li>
@@ -52,7 +52,7 @@
       <% if user_signed_in? && current_user.coordinator? %>
         <li<%= current_page?('/admin-dashboard') ? ' class=active' : '' %>>
           <%= link_to '/admin-dashboard' do %>
-            <span class="fa fa-cogs"></span>
+            <span class="fas fa-cogs"></span>
             <%= t('layout.links.adminDashboard') %>
           <% end %>
         </li>
@@ -60,7 +60,7 @@
 
       <li<%= current_page?(contact_path) ? ' class=active' : '' %>>
         <%= link_to contact_path do %>
-            <span class="fa fa-envelope"></span>
+            <span class="fas fa-envelope"></span>
             <%= t('layout.links.contact') %>
         <% end %>
       </li>

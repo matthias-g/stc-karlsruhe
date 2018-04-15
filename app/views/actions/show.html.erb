@@ -123,16 +123,16 @@
         <div class="col-sm-6 col-md-12 d-print-none">
           <section class="white-box">
             <%= link_to edit_action_path(@action), class:'btn btn-primary btn-block' do %>
-              <span class="fa fa-pencil"></span> <%= t('action.action.edit') %>
+              <span class="fas fa-pencil-alt"></span> <%= t('action.action.edit') %>
             <% end %>
             <% if policy(@action).change_visibility? %>
               <% if @action.visible %>
                 <%= link_to make_invisible_action_path(@action), class:'btn status_hidden btn-block' do %>
-                  <span class="fa fa-eye-slash"></span> <%= t('action.action.makeInvisible') %>
+                  <span class="fas fa-eye-slash"></span> <%= t('action.action.makeInvisible') %>
                 <% end %>
               <% else %>
                 <%= link_to make_visible_action_path(@action), class:'btn status_hidden btn-block' do %>
-                  <span class="fa fa-eye"></span> <%= t('action.action.makeVisible') %>
+                  <span class="fas fa-eye"></span> <%= t('action.action.makeVisible') %>
                 <% end %>
               <% end %>
             <% end %>
@@ -223,7 +223,7 @@
           <% end %>
           <% if policy(@action).manage_team? %>
             <%= link_to edit_leaders_action_path(@action), class:'btn btn-primary btn-block' do %>
-              <span class="fa fa-users"></span> <%= t('action.action.manageTeam') %>
+              <span class="fas fa-users"></span> <%= t('action.action.manageTeam') %>
             <% end %>
           <% end %>
           <% @action.events.each do |event| %>
@@ -233,16 +233,16 @@
               </div>
               <% if policy(event).leave? %>
                 <%= link_to leave_event_path(event), class: 'btn btn-danger btn-block' do %>
-                  <span class="fa fa-sign-out"></span> <%= t('action.action.leave') %>
+                  <span class="fas fa-sign-out-alt"></span> <%= t('action.action.leave') %>
                 <% end %>
               <% elsif event.available_places.positive? %>
                 <% if user_signed_in? %>
                   <%= link_to enter_event_path(event), class: 'btn btn-success btn-block' do %>
-                    <span class="fa fa-sign-in"></span> <%= t('action.action.enter') %>
+                    <span class="fas fa-sign-in-alt"></span> <%= t('action.action.enter') %>
                   <% end %>
                 <% else %>
                   <%= link_to register_for_participation_event_path(event), class: 'btn btn-success btn-block' do %>
-                    <span class="fa fa-sign-in"></span> <%= t('action.action.enter') %>
+                    <span class="fas fa-sign-in-alt"></span> <%= t('action.action.enter') %>
                   <% end %>
                 <% end %>
               <% end %>
@@ -261,7 +261,7 @@
 <div class="footer d-print-none">
   <%= render '/layouts/share' -%>
   <%= link_to action_ical_path(@action), class: 'float-right px-1', title: t('action.action.exportICal'), data: { 'turbolinks': false } do %>
-    <span class="fa fa-calendar fa-2x"></span>
+    <span class="far fa-calendar-alt fa-2x"></span>
   <% end %>
   <% if @action.action_group %>
     <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group), class: 'btn btn-light' %>

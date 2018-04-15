@@ -38,15 +38,15 @@
               <p>Uploaded by:<br /><%= picture.uploader.full_name %></p>
               <% if picture.visible %>
                 <%= link_to make_invisible_gallery_picture_path(picture), class: 'btn status_hidden btn-block' do %>
-                  <span class="fa fa-eye-slash"></span> Verstecken
+                  <span class="fas fa-eye-slash"></span> Verstecken
                 <% end %>
               <% else %>
                 <%= link_to make_visible_gallery_picture_path(picture), class: 'btn btn-success btn-block' do %>
-                  <span class="fa fa-eye"></span> Freischalten
+                  <span class="fas fa-eye"></span> Freischalten
                 <% end %>
               <% end %>
               <%= link_to picture, method: :delete, class: 'btn btn-danger btn-block' do %>
-                <span class="fa fa-trash"></span> Löschen
+                <span class="fas fa-trash"></span> Löschen
               <% end %>
             </td>
           </tr>

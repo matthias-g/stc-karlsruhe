@@ -23,7 +23,7 @@
       <% if previous_group %>
         <% split = split_action_group_type_prefix(previous_group.title) %>
         <%= link_to show_action_group_path(previous_group) do %>
-          <div class="fa fa-2x fa-chevron-left pr-2"></div>
+          <div class="fas fa-2x fa-chevron-left pr-2"></div>
           <div class="neighbor-linktext">
             <div class="type"><%= split[:type] %></div>
             <div class="title"><%= split[:name] %></div>
@@ -39,7 +39,7 @@
             <div class="type"><%= split[:type] %></div>
             <div class="title"><%= split[:name] %></div>
           </div>
-          <div class="fa fa-2x fa-chevron-right pl-2"></div>
+          <div class="fas fa-2x fa-chevron-right pl-2"></div>
         <% end %>
       <% end %>
     </div>

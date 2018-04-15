@@ -44,14 +44,14 @@
             <div class="col">
               <% if policy(@user).edit?  %>
                 <%= link_to edit_user_path, title: t('user.action.edit'), class:'btn btn-primary btn-block' do %>
-                  <span class="fa fa-pencil"></span>
+                  <span class="fas fa-pencil-alt"></span>
                   <%= t('user.action.edit') %>
                 <% end %>
               <% end %>
             </div>
             <div class="col">
               <%= link_to destroy_user_session_path, method: :delete, title: t('user.action.logout'), class:'btn btn-secondary btn-block' do %>
-                <span class="fa fa-sign-out"></span>
+                <span class="fas fa-sign-out-alt"></span>
                 <%= t('user.action.logout') %>
               <% end %>
             </div>
@@ -109,7 +109,7 @@
         <div class="feed">
           <span><%= t('user.action.exportICal') %>:</span>
           <%= link_to user_ical_path(@user.ical_token, @user), data: { 'turbolinks': false } do %>
-              <span class="fa fa-calendar"></span>
+              <span class="far fa-calendar-alt"></span>
           <% end %>
         </div>
       <% end %>

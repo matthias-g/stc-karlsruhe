@@ -112,16 +112,16 @@ $nav-width-mobile: 270px;
       color: #eee !important;
       background: #1a1a1a;
     }
+    span {
+      font-size: 2em;
+      display: block;
+      width: 1em;
+      margin: 5px auto;
+    }
   }
   li.active a {
     background: $primary;
     color: #222;
-  }
-  .fa {
-    font-size: 2em;
-    display: block;
-    width: 1em;
-    margin: 5px auto;
   }
 }
 

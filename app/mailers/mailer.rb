@@ -81,7 +81,7 @@ class Mailer < ActionMailer::Base
     recipients = (to + [message.sender.email]).uniq.join(',')
     @message = message.body
     @type = message.content_type
-    mail from: message.from, bcc: recipients, subject: message.subject
+    mail reply_to: message.from, bcc: recipients, subject: message.subject
   end
 
   def leaving_action_notification(user, action)

@@ -23,11 +23,18 @@
   <%= f.text_field :title %>
   <%= f.check_box :show_in_user_profile %>
 </section>
-<div class="questions">
+
+<div class="questions" data-class="DynamicFormList">
+  <div class="prototype d-none">
+    <% new_object = f.object.class.reflect_on_association(:questions).klass.new %>
+    <%= f.fields_for(:questions, new_object, child_index: :new_item) do |builder|
+      render('question_fields', f: builder)
+    end %>
+  </div>
   <%= f.fields_for :questions do |builder| %>
-      <%= render 'question_fields', f: builder %>
+    <%= render 'question_fields', f: builder %>
   <% end %>
-  <div style="display: none;" id="question-insertion-point"></div>
+  <%= link_to t('surveys.action.addQuestion'), 'javascript:void(0);', class: 'add-link btn btn-secondary' %>
 </div>
 
 <section>
@@ -37,19 +44,6 @@
     <%= link_to t('surveys.action.deleteTemplate'), surveys_template_path(@template), method: :delete,
                 data: { confirm: 'Are you sure?' }, class: 'btn btn-secondary' %>
   <% end %>
-
-  <%#= link_to 'Show', @template %>
-  <%= link_to t('surveys.action.addQuestion'), 'javascript:void(0);',
-        class: 'add-link btn btn-secondary',
-        data: {target: '#question-insertion-point', prototype: '#question-prototype'} %>
 </section>
-
-
-<% new_object = f.object.class.reflect_on_association(:questions).klass.new %>
-<div id="question-prototype" style="display: none;">
-    <%= f.fields_for(:questions, new_object, child_index: :new_item) do |builder|
-      render('question_fields', f: builder)
-    end %>
-</div>
 
 <% end %>

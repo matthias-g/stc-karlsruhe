@@ -7,23 +7,6 @@ onViewLoad 'actions->edit, actions->new', ->
       for action in action_group.actions
         $('<option>').attr(value: action.id).text(action.title).appendTo select_element
 
-  # add "remove event" buttons to all events
-  $('.events').on 'click', '.remove-link', ->
-    $(@).prev('input[type=hidden]').attr('value', 1)
-    $(@).closest('.event-fields').hide()
-
-  # enable "add event" button
-  $('.add-link').click ->
-    prototype_id = $(@).data('prototype')
-    new_id = new Date().getTime()
-    event = $($(prototype_id).html().replace(/new_item/g, new_id))
-    $($(@).data('target')).before(event)
-    registerContent(event)
-
-  # don't submit the event prototype
-  $('#event-prototype').closest('form').submit ->
-    $('#event-prototype').remove()
-
 
 onViewLoad 'actions->show', ->
 

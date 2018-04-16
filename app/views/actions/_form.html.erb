@@ -149,19 +149,15 @@
         </div>
       </div>
 
-      <div class="white-box events">
+      <div class="white-box events" data-class="DynamicFormList">
+        <div class="prototype d-none">
+          <% new_object = f.object.class.reflect_on_association(:events).klass.new %>
+          <%= f.fields_for(:events, new_object, child_index: :new_item) {|builder| render('event_fields', f: builder)} %>
+        </div>
         <%= f.fields_for :events do |builder| %>
           <%= render 'event_fields', f: builder %>
         <% end %>
-        <div style="display: none;" id="event-insertion-point"></div>
-        <%= link_to t('action.action.addEvent'), 'javascript:void(0);',
-                    class: 'add-link btn btn-secondary',
-                    data: {target: '#event-insertion-point', prototype: '#event-prototype'} %>
-
-        <% new_object = f.object.class.reflect_on_association(:events).klass.new %>
-        <div id="event-prototype" style="display: none;">
-          <%= f.fields_for(:events, new_object, child_index: :new_item) { |builder| render('event_fields', f: builder) } %>
-        </div>
+        <%= link_to t('action.action.addEvent'), 'javascript:void(0);', class: 'add-link btn btn-secondary' %>
       </div>
 
     </div>

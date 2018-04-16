@@ -17,8 +17,7 @@ onNewContent ->
 
 onTurbolinksCache ->
   selectMenus = $('.bootstrap-select')
-  selectMenus.find('button.dropdown-toggle').remove()
-  selectMenus.find('div.dropdown-menu').remove()
+  selectMenus.find('button.dropdown-toggle, div.dropdown-menu').remove()
   selectMenus.each ->
     $('select', @).insertAfter($(@))
     $(@).remove()

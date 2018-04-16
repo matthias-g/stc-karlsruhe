@@ -13,31 +13,27 @@
 
 
 <div id="action-group-header" class="white-box px-2 py-4">
-  <% groups = ActionGroup.all.order(:start_date) %>
-  <% group_index = groups.index(@action_group) %>
-  <% previous_group = group_index.positive? ? groups[group_index - 1] : nil %>
-  <% next_group = groups[group_index + 1] %>
-
+  <% previous_group, next_group = get_connected_action_groups(@action_group) %>
   <div class="row align-items-center">
     <div class="col-sm-3 order-first">
       <% if previous_group %>
-        <% split = split_action_group_type_prefix(previous_group.title) %>
+        <% type, name = split_action_group_type_prefix(previous_group.title) %>
         <%= link_to show_action_group_path(previous_group) do %>
           <div class="fas fa-2x fa-chevron-left pr-2"></div>
           <div class="neighbor-linktext">
-            <div class="type"><%= split[:type] %></div>
-            <div class="title"><%= split[:name] %></div>
+            <div class="type"><%= type %></div>
+            <div class="title"><%= name %></div>
           </div>
         <% end %>
       <% end %>
     </div>
     <div class="col-sm-3 order-last">
       <% if next_group %>
-        <% split = split_action_group_type_prefix(next_group.title) %>
+        <% type, name = split_action_group_type_prefix(next_group.title) %>
         <%= link_to show_action_group_path(next_group) do %>
           <div class="neighbor-linktext">
-            <div class="type"><%= split[:type] %></div>
-            <div class="title"><%= split[:name] %></div>
+            <div class="type"><%= type %></div>
+            <div class="title"><%= name %></div>
           </div>
           <div class="fas fa-2x fa-chevron-right pl-2"></div>
         <% end %>

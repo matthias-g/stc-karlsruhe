@@ -10,9 +10,7 @@
 
       <div class="card-body">
 
-        <%= link_to action do %>
-          <h4 class="card-title"><%= action.title %></h4>
-        <% end %>
+        <h4 class="card-title"><%= link_to action.title, action %></h4>
 
         <% unless action.visible? %>
           <span class="badge status_hidden %>"><%= t 'action.status.hidden' %></span>

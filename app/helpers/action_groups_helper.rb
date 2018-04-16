@@ -10,8 +10,18 @@ module ActionGroupsHelper
 
   def split_action_group_type_prefix(title)
     temp_title = title.dup
-    {type: temp_title.slice!(/Aktionswoche|Aktionstag/), name: temp_title.strip}
+    return temp_title.slice!(/Aktionswoche|Aktionstag/), temp_title.strip
   end
+
+  def get_connected_action_groups(action_group)
+    groups = ActionGroup.all.order(:start_date)
+    group_index = groups.index(action_group)
+    previous_group = group_index.positive? ? groups[group_index - 1] : nil
+    next_group = groups[group_index + 1]
+    return previous_group, next_group
+  end
+
+
 
   def date_range(from_date, until_date, options = {})
     options.symbolize_keys!

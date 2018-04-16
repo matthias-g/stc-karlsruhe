@@ -12,6 +12,8 @@ onPageLoad ->
 onNewContent ->
   # lazyload images (must be activated with lazy:true in image_tag helper)
   $('img', @).lazyload threshold: 200
+  # enable datepicker
+  $('[data-behaviour~=datepicker]').datepicker(autoclose: true, format: "dd.mm.yyyy", language: 'de')
 
 onTurbolinksCache ->
   selectMenus = $('.bootstrap-select')

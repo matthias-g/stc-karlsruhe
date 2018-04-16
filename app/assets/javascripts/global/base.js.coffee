@@ -9,6 +9,14 @@
 @onPageLoad = (handler) ->
   document.addEventListener 'turbolinks:load', handler
 
+# register given handler for page load, but only if we are in the given controller/action
+@onViewLoad = (controller_actions, handler) ->
+  actions = controller_actions.replace('->', '.').split(',')
+  @onPageLoad ->
+    for action in actions
+      if $('#content > #' + action.trim()).length
+        handler.call(window)
+
 # register given handler for when new HTML is available
 content_handlers = []
 @onNewContent = (handler) ->
@@ -28,9 +36,9 @@ loadedScripts = []
     $.getScript '/assets/' + path + '.js', callback
 
 # executes all onNewContent handlers for the given content
-@registerContent = (html_element) ->
+@registerContent = (jquery_collection) ->
   for handler in content_handlers
-    handler.call html_element
+    handler.call jquery_collection
 
 # submit the given form with AJAX and extract flash messages from the html response
 @sendFormWithAjax = (form) ->

@@ -1,4 +1,5 @@
-onPageLoad ->
+onViewLoad 'users->show', ->
+
   # enable survey submission
   $('#users #survey form').submit (e) ->
     e.preventDefault()
@@ -22,6 +23,9 @@ onPageLoad ->
       createFlashMessage I18n.t 'user.message.surveySent'
       $('#users #survey').slideUp 800
     $.post ('/api' + $(@).attr('action')), values, callback, 'json'
+
+
+onViewLoad 'users->edit', ->
 
   # (un)check all mail checkboxes if "#emails_from_orga" checkbox is changed
   $('#emails_from_orga').change ->

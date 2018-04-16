@@ -1,4 +1,5 @@
-onPageLoad ->
+onViewLoad 'roles', ->
+
   # enable "delete role from user" button
   $('.role-info .fa-trash').click (event) ->
     event.preventDefault()
@@ -7,7 +8,6 @@ onPageLoad ->
     roleId = removeButton.data('role-id')
     window.removeUserFromRole(userId, roleId).done ->
       removeButton.closest('.user').remove()
-
 
 # Gives a user a role (handler for "add-user-to-role" select)
 @addUserToRole = (userId, html) ->

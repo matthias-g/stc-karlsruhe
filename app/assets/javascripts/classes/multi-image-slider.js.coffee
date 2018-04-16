@@ -1,8 +1,11 @@
+# An image row slider that loops through a set of images
+# - the HTML must conform to Swiper syntax
+
 #= require swiper
 
 class @MultiImageSlider
-  constructor: (@html) ->
-    new Swiper(@html,
+  constructor: (html) ->
+    new Swiper(html,
       slidesPerView: 'auto'
       speed: 1000
       autoplay:

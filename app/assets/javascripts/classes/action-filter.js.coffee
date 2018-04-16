@@ -1,6 +1,7 @@
 # A filter form that updates the action list as soon as any filter input is changed.
 # - The filter request is sent to the current URL
 # - Expects attribute "data-list": ID of container which contains the action list
+
 class @ActionFilter
 
   constructor: (html) ->
@@ -8,7 +9,7 @@ class @ActionFilter
       e.preventDefault()
       listId = html.data('list')
       $(listId).load '?' + @parametrize(html) + ' ' + listId + ' > *', ->
-        $('img', @).lazyload()
+        registerContent(@)
         createFlashMessage I18n.t('action.message.found_actions', count: $('.action-card', @).length)
 
 

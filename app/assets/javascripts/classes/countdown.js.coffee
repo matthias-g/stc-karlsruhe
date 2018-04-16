@@ -1,5 +1,6 @@
 # A timer that counts down to the given date
 # - Expects argument "data-date"
+
 class @Countdown
 
   @SECOND:  1000

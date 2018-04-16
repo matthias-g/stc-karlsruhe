@@ -23,4 +23,3 @@
 //= require_tree ./global
 //= require_tree ./classes
 //= require_tree ./views
-//= require_tree ./pages

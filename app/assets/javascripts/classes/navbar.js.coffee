@@ -1,16 +1,23 @@
+# A navigation bar. Will be closed by default.
 
 class @Navbar
 
-  constructor: (nav) ->
+  constructor: (@nav) ->
+    # activate nav (previously hidden to prevent unstyled flashing)
+    @close()
+    @nav.css(display: 'block')
 
-    $('a', nav).attr(tabindex: -1)
-    nav.css(display: "block")
+    # activate open nav links on the page
+    $("[href='#nav']").click (e) =>
+      e.preventDefault()
+      @open()
 
-    $("[href='#nav']").click (e) ->
-      e.preventDefault();
-      nav.addClass("open");
-      $('a', nav).removeAttr('tabindex')
+    # clicking any nav link or the nav background will close the nav
+    $("#nav-eclipse, a", nav).click =>
+      @close()
 
-    $("#nav-eclipse, a", nav).click ->
-      nav.removeClass("open")
-      $('a', nav).attr(tabindex: -1)
+  open: ->
+    @nav.addClass('open').find('a').removeAttr('tabindex')
+
+  close: ->
+    @nav.removeClass('open').find('a').attr(tabindex: -1)

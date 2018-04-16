@@ -1,10 +1,11 @@
-#= require swiper
-#= require photoswipe
-
 # A combination of two swiper sliders and a PhotoSwipe slideshow.
 # - Expects to find the nested sliders as div.gallery-top and div.gallery-thumbs
 # - Expects attribute "data-slideshow-id" which points to the Photoswipe structure anywhere on the page
 # - Expects attribute "data-gallery-id" with the record ID of the gallery to be shown
+
+#= require swiper
+#= require photoswipe
+
 class @Gallery
 
   constructor: (@html) ->

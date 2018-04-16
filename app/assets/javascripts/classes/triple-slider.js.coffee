@@ -1,3 +1,6 @@
+# A Slider that shows at most 3 elements simultaneously
+# - the HTML must conform to Swiper syntax
+
 #= require swiper
 
 class @TripleSlider

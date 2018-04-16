@@ -33,17 +33,11 @@ $nav-width-mobile: 270px;
     padding: 15px;
     color: #fff;
     text-shadow: 0 0 10px rgba(black, 0.8);
-    //color: $primary;
-    //background: rgba(white, 0.8);
-    //box-shadow: 0 0 5px rgba(black, 0.5);
     z-index: 998;
     border-radius: 5px;
     &:hover {
       color: $primary;
       background-color: rgba(white, 0.6);
-    }
-    div {
-      display: block;
     }
   }
   // this prevents "flash of unstyled content", #nav is later activated by JS
@@ -112,16 +106,29 @@ $nav-width-mobile: 270px;
       color: #eee !important;
       background: #1a1a1a;
     }
-    span {
-      font-size: 2em;
-      display: block;
-      width: 1em;
-      margin: 5px auto;
-    }
   }
   li.active a {
     background: $primary;
     color: #222;
+  }
+  .link-icon {
+    font-size: 2em;
+    width: 1em;
+    margin: 5px auto;
+  }
+  @media(max-width: $grid-float-breakpoint) {
+    li a {
+      display: flex;
+      align-items: center;
+    }
+    .link-icon {
+      flex: 1;
+    }
+    .link-text {
+      flex: 4;
+      text-align: left;
+      padding-left: 20px;
+    }
   }
 }
 

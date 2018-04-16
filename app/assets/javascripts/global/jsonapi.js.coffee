@@ -1,3 +1,6 @@
+### jsonapi.js ###
+# Global methods relating to JSON API
+
 @getJsonApi = (url) ->
   settings = {
     accepts: {

@@ -19,8 +19,8 @@
 //= require i18n/translations
 
 // PROJECT
-//= require jsonapi
-//= require general
+//= require global/base.js.coffee
+//= require_tree ./global
 //= require_tree ./classes
 //= require_tree ./views
 //= require_tree ./pages

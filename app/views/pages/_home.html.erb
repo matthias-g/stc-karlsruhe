@@ -143,19 +143,18 @@
   </div>
 </section>
 
-
-<section id="home-news">
-  <h1 class="sr-only">News</h1>
-  <div class="swiper-container" data-class="TripleSlider">
-    <div class="swiper-wrapper">
-      <%= render '/news_entries/entries', limit: 7 %>
-    </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
-</section>
-
 <% if false %>
+
+  <section id="home-news">
+    <h1 class="sr-only">News</h1>
+    <div class="swiper-container" data-class="TripleSlider">
+      <div class="swiper-wrapper">
+        <%= render '/news_entries/entries', limit: 7 %>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
 
   <section id="home-likebox">
     <h1>

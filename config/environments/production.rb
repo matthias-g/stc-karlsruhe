@@ -101,6 +101,6 @@ Rails.application.configure do
   config.middleware.use ExceptionNotification::Rack, email: {
     email_prefix: '[Exception] ',
     sender_address: 'no-reply@servethecity-karlsruhe.de',
-    exception_recipients: 'failure-notifications@servethecity-karlsruhe.de'
+    exception_recipients: ['failure-notifications@servethecity-karlsruhe.de', 'failure-notifications2@servethecity-karlsruhe.de']
   }
 end

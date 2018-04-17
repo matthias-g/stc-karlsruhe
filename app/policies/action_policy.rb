@@ -53,10 +53,6 @@ class ActionPolicy < ApplicationPolicy
     record.visible? && is_volunteer?(user) && !record.finished?
   end
 
-  def enter_subaction?
-    (record.total_available_places > record.available_places) && !record.volunteers_in_subactions.include?(user)
-  end
-
   def upload_pictures?
     is_today_or_past? && (is_volunteer?(user) || is_leader? || is_coordinator? || is_admin? || user&.photographer?)
   end
@@ -69,11 +65,9 @@ class ActionPolicy < ApplicationPolicy
   alias_method :make_invisible?, :change_visibility?
 
   alias_method :crop_picture?, :edit?
-  alias_method :edit_leaders?, :edit?
-  alias_method :add_leader?, :edit_leaders?
-  alias_method :delete_leader?, :edit_leaders?
-  alias_method :remove_from_volunteers?, :is_admin?
+  alias_method :delete_leader?, :manage_team?
 
+  private
 
   def is_leader?
     record.leader?(user)
@@ -82,8 +76,6 @@ class ActionPolicy < ApplicationPolicy
   def is_volunteer?(user)
     record.volunteer?(user)
   end
-
-  private
 
   def is_today_or_past?
     today_or_future = nil

@@ -277,41 +277,6 @@ RSpec.describe ActionPolicy do
       let(:user) { users(:sabine) }
       it { should_fail }
     end
-
-  end
-
-  describe 'enter_subaction?' do
-    subject { policy.enter_subaction? }
-    let(:action) { actions('Fest im Kindergarten') }
-
-    context 'with full sub actions' do
-      before { action.subactions.each { |a| a.events.first.update_attribute('desired_team_size', 1) } }
-      it { should_fail }
-    end
-
-    context 'for finished action' do
-      before { ([action] + action.subactions).each { |a| a.events.first.update_attribute :date, Date.yesterday } }
-      it { should_fail }
-    end
-
-    context 'for active action' do
-      before { action.events.first.update_attribute :date, Date.today }
-
-
-      context 'with non-full sub actions' do
-        before { action.subactions.each { |a| a.events.first.update_attribute('desired_team_size', 2) }  }
-
-        context 'if user already is in a subaction' do
-          let(:user) { users(:lea) }
-          it { should_fail }
-        end
-
-        context 'if user is in no subaction' do
-          let(:user) { users(:sabine) }
-          it { should_pass }
-        end
-      end
-    end
   end
 
   describe 'updatable_fields' do
@@ -337,20 +302,6 @@ RSpec.describe ActionPolicy do
       it 'contains all attributes except status, gallery and visible' do
         expect(subject).to match_array(all_fields - %i[status gallery visible])
       end
-    end
-  end
-
-  describe 'is_volunteer?' do
-    subject { policy.is_volunteer?(some_user) }
-
-    context 'if given user is a volunteer' do
-      let(:some_user) { users(:sabine) }
-      it { is_expected.to be_truthy }
-    end
-
-    context 'if given user is not a volunteer' do
-      let(:some_user) { users(:lea) }
-      it { is_expected.to be_falsey }
     end
   end
 

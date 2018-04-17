@@ -8,8 +8,9 @@
   <h1><%= @action.title %></h1>
 </div>
 
-<div class="row align-items-stretch">
+<div class="row align-items-stretch justify-content-center">
 
+  <% if false %>
   <div class="col-sm-6">
     <div class="white-box">
       <h3><%= t('action.label.team') %></h3>
@@ -42,6 +43,7 @@
       <% end %>
     </div>
   </div>
+  <% end %>
 
   <div class="col-sm-6">
     <div class="white-box">

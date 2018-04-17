@@ -6,6 +6,6 @@ class @SelectPicker
   constructor: (select) ->
     select.selectpicker 'render'
     handler_name = select.data('handler')
-    handler = window[handler] if handler_name? and window[handler_name]?
     select.on 'changed.bs.select', ->
+      handler = window[handler_name] if handler_name? and window[handler_name]?
       handler(select.val(), select)

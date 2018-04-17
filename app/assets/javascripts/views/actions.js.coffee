@@ -18,7 +18,7 @@ onViewLoad 'actions->show', ->
     $('input[type="submit"]', f).css(visibility: 'hidden')
 
 
-onViewLoad 'actions->edit_leaders', ->
+onViewLoad 'actions->edit_leaders', =>
 
   # handler for "add leader" select
   @addNewLeader = (userId, html) ->

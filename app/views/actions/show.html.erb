@@ -182,76 +182,7 @@
 
       <%# team info %>
       <div class="col-sm-6 col-md-12 d-print-none">
-        <div class="white-box">
-
-          <div class="mb-2">
-            <h3><%= Action.human_attribute_name('leaders') %></h3>
-            <%= list_users(@action.leaders) %>
-          </div>
-
-          <div class="mb-2">
-            <% if @action.desired_team_size > 0 %>
-              <h3><%= t('action.label.volunteers_in_action') %></h3>
-              <span class="badge badge-primary">
-                <%= "#{@action.team_size} / #{@action.desired_team_size}" %>
-              </span>
-              <% if @action.team_size.zero? %>
-                <p class="no-volunteers"><%= t('action.label.no_volunteers') %></p>
-              <% else %>
-                <%= list_users(@action.volunteers) %>
-              <% end %>
-            <% end %>
-          </div>
-
-          <% if (subteam = @action.volunteers_in_subactions).any? %>
-            <div class="mb-2">
-              <h3><%= t('action.label.volunteers_in_subactions') %></h3>
-              <span class="badge badge-primary">
-                <%= "#{subteam.size} / #{@action.total_desired_team_size - @action.desired_team_size}" %>
-              </span>
-              <%= list_users(subteam.distinct) %>
-            </div>
-          <% end %>
-
-          <% if user_signed_in? %>
-            <% if @action.volunteer?(current_user) %>
-              <p><%= t('action.message.teamMember') %></p>
-            <% end %>
-            <% if subteam.include?(current_user) %>
-              <p><%= t('action.message.subactionTeamMember') %></p>
-            <% end %>
-          <% end %>
-          <% if policy(@action).manage_team? %>
-            <%= link_to edit_leaders_action_path(@action), class:'btn btn-primary btn-block' do %>
-              <span class="fas fa-users"></span> <%= t('action.action.manageTeam') %>
-            <% end %>
-          <% end %>
-          <% @action.events.each do |event| %>
-            <div class="event">
-              <div>
-                <%= simple_format event.time %>
-              </div>
-              <% if policy(event).leave? %>
-                <%= link_to leave_event_path(event), class: 'btn btn-danger btn-block' do %>
-                  <span class="fas fa-sign-out-alt"></span> <%= t('action.action.leave') %>
-                <% end %>
-              <% elsif event.available_places.positive? %>
-                <% if user_signed_in? %>
-                  <%= link_to enter_event_path(event), class: 'btn btn-success btn-block' do %>
-                    <span class="fas fa-sign-in-alt"></span> <%= t('action.action.enter') %>
-                  <% end %>
-                <% else %>
-                  <%= link_to register_for_participation_event_path(event), class: 'btn btn-success btn-block' do %>
-                    <span class="fas fa-sign-in-alt"></span> <%= t('action.action.enter') %>
-                  <% end %>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
-          <% if @action.available_places == 0 && @action.total_available_places.positive? %>
-            <p><%= t('action.message.enterOneOfThesubactions') %></p>
-          <% end %>
-        </div>
+        <%= render 'actions/action_team', action: @action %>
       </div>
 
     </div>

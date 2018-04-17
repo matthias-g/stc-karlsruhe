@@ -33,6 +33,10 @@ de:
         zero: 'Aktionen'
         one: 'Aktion'
         other: 'Aktionen'
+      event:
+        zero: 'Events'
+        one: 'Event'
+        other: 'Events'
       news_entry:
         zero: 'News-Einträge'
         one: 'News-Eintrag'

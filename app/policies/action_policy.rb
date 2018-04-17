@@ -72,7 +72,7 @@ class ActionPolicy < ApplicationPolicy
   alias_method :edit_leaders?, :edit?
   alias_method :add_leader?, :edit_leaders?
   alias_method :delete_leader?, :edit_leaders?
-  alias_method :delete_volunteer?, :is_admin?
+  alias_method :remove_from_volunteers?, :is_admin?
 
 
   def is_leader?

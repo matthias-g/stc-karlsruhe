@@ -1,4 +1,4 @@
-class Api::ActionsController < Api::ApiController
+class Api::EventsController < Api::ApiController
 
   include JSONAPI::ActsAsResourceController
 

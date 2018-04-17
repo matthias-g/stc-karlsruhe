@@ -22,6 +22,13 @@ class EventsController < ApplicationController
     store_location_for(:user, enter_event_path(@event))
   end
 
+  def delete_volunteer
+    volunteer = User.find(params[:user_id])
+    authorize_delete_volunteer(volunteer)
+    @event.delete_volunteer(volunteer)
+    redirect_to @event.initiative, notice: t('action.message.volunteerRemoved')
+  end
+
   private
 
   def set_event
@@ -30,6 +37,13 @@ class EventsController < ApplicationController
 
   def authorize_event
     authorize @event
+  end
+
+  def authorize_delete_volunteer(volunteer)
+    unless policy(@event).allow_remove_volunteer_from_event?(volunteer, @event)
+      raise Pundit::NotAuthorizedError, "not allowed to delete #{volunteer.full_name} from #{@event.initiative.title}"
+    end
+    skip_authorization
   end
 
 end

@@ -24,6 +24,11 @@ class EventPolicy < ApplicationPolicy
     remove_from_volunteers? user
   end
 
+  def delete_volunteer?
+    (is_admin? || is_coordinator? || is_leader?) && !record.finished?
+  end
+
+
   def add_to_volunteers?(users)
     users.all? { |user| allow_add_volunteer_to_event?(user, record) }
   end

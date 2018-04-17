@@ -69,6 +69,10 @@ table.properties {
   }
 }
 
+.comma-list > :not(:last-child):after {
+  content: ', ';
+}
+
 
 
 a.black-link {

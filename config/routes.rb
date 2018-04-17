@@ -47,10 +47,7 @@ Rails.application.routes.draw do
 
   resources :actions, path: 'aktionen' do
     member do
-      get :edit_leaders
-      post :add_leader
       delete :delete_leader
-      delete :delete_volunteer
       get :make_visible
       get :make_invisible
       get :crop_picture
@@ -66,6 +63,7 @@ Rails.application.routes.draw do
       get :enter
       get :leave
       get :register_for_participation
+      delete :delete_volunteer
     end
   end
 
@@ -95,6 +93,7 @@ Rails.application.routes.draw do
     jsonapi_resources :actions
     jsonapi_resources :action_groups
     jsonapi_resources :galleries
+    jsonapi_resources :events
     jsonapi_resources :gallery_pictures do
       member do
         get :rotateRight

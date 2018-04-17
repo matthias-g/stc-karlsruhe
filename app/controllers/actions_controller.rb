@@ -58,25 +58,10 @@ class ActionsController < ApplicationController
     respond_with(@action.action_group)
   end
 
-  def edit_leaders; end
-
-  def add_leader
-    new_leader = User.find(params[:user_id])
-    @action.add_leader(new_leader)
-    redirect_to edit_leaders_action_url(@action), notice: t('action.message.leaderAdded')
-  end
-
   def delete_leader
     leader = User.find(params[:user_id])
     @action.delete_leader(leader)
-    redirect_to edit_leaders_action_url(@action), notice: t('action.message.leaderRemoved')
-  end
-
-  def delete_volunteer
-    volunteer = User.find(params[:user_id])
-    authorize_delete_volunteer(volunteer)
-    @action.delete_volunteer(volunteer)
-    redirect_to edit_leaders_action_url(@action), notice: t('action.message.volunteerRemoved')
+    redirect_to @action, notice: t('action.message.leaderRemoved')
   end
 
   def make_visible
@@ -152,13 +137,6 @@ class ActionsController < ApplicationController
 
   def authorize_action
     authorize @action
-  end
-
-  def authorize_delete_volunteer(volunteer)
-    unless policy(@action).allow_remove_volunteer_from_event?(volunteer, @action)
-      raise Pundit::NotAuthorizedError, "not allowed to delete #{volunteer.full_name} from #{@action.title}"
-    end
-    skip_authorization
   end
 
   def filter_params

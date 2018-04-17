@@ -52,8 +52,14 @@ class EventPolicy < ApplicationPolicy
     [:desired_team_size, :team, :date, :initiative, :volunteers]
   end
 
+  private
+
   def is_volunteer?(user)
     record.volunteer?(user)
+  end
+
+  def is_leader?
+    record.initiative.leader?(user)
   end
 
 end

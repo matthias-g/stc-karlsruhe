@@ -133,6 +133,35 @@ RSpec.describe EventPolicy do
     end
   end
 
+  describe 'delete_volunteer?' do
+    subject { policy.delete_volunteer? }
+
+    context 'as leader' do
+      let(:user) { users(:rolf) }
+      it { should_pass }
+    end
+
+    context 'as admin' do
+      let(:user) { users(:admin) }
+      it { should_pass }
+
+      context 'for finished event' do
+        before { event.update_attribute :date, Date.yesterday }
+        it { should_fail }
+      end
+    end
+
+    context 'as coordinator' do
+      let(:user) { users(:coordinator) }
+      it { should_pass }
+    end
+
+    context 'as other user' do
+      let(:user) { users(:peter) }
+      it { should_fail }
+    end
+  end
+
   describe 'updatable_fields' do
     subject { policy.updatable_fields }
     let(:all_fields) { Api::EventResource._updatable_relationships | Api::EventResource._attributes.keys - [:id] }

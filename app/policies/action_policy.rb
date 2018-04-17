@@ -50,11 +50,11 @@ class ActionPolicy < ApplicationPolicy
   end
 
   def contact_leaders?
-    record.visible? && is_volunteer?(user) && !record.finished?
+    record.visible? && is_volunteer? && !record.finished?
   end
 
   def upload_pictures?
-    is_today_or_past? && (is_volunteer?(user) || is_leader? || is_coordinator? || is_admin? || user&.photographer?)
+    is_today_or_past? && (is_volunteer? || is_leader? || is_coordinator? || is_admin? || user&.photographer?)
   end
 
   alias_method :clone?, :edit?
@@ -73,7 +73,7 @@ class ActionPolicy < ApplicationPolicy
     record.leader?(user)
   end
 
-  def is_volunteer?(user)
+  def is_volunteer?
     record.volunteer?(user)
   end
 

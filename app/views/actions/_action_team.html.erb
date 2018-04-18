@@ -30,7 +30,7 @@
     <h4 class="mt-4 mb-0"><%= l(event.date, format: :date) unless event.date.nil? %>, <%= event.time %></h4>
     <div class="event mb-4 ml-2">
 
-      <% unless event.desired_team_size.zero? %>
+      <% if event.desired_team_size&.positive? %>
         <span class="badge badge-primary">
           <%= "#{volunteers.count} / #{event.desired_team_size}" %>
         </span>

@@ -1,112 +1,70 @@
+<% has_upcoming_events = action.events.upcoming.any? %>
 
-<div id="action-leaders" class="white-box mb-2">
-  <h3><%= Action.human_attribute_name('leaders') %></h3>
-  <div class="comma-list">
-    <% action.leaders.each do |leader| %>
-      <span>
-        <%= link_to leader.first_name, leader %>
-        <% if policy(action).manage_team? %>
-          <%= link_to delete_leader_action_path(@action, user_id: leader.id),
-                      method: 'delete', title: t('action.action.removeLeader') do %>
-            <span class="fas fa-times" aria-label="<%= t('action.action.removeLeader') %>"></span>
-          <% end %>
-        <% end %>
-      </span>
+<% action.events.each do |event| %>
+  <% volunteers = event.volunteers %>
+  <% team_size = volunteers.count %>
+  <% desired = event.desired_team_size %>
+
+  <div class="white-box <%= "event_#{event.status}" if has_upcoming_events %>">
+
+    <span class="badge status_<%= event.status %> float-right mt-2"
+          title="<%= t('action.help.remainingVacancy', places: desired - team_size) %>">
+      <%= "#{team_size} / #{desired}" %>
+    </span>
+
+    <% if action.events.count > 1 %>
+      <h4 class="mt-1 mb-2"><%= l(event.date, format: :date) unless event.date.nil? %>, <%= event.time %></h4>
+    <% else %>
+      <h3 class="mb-2"><%= t('action.label.volunteers_in_action') %></h3>
     <% end %>
-  </div>
-  <% if policy(action).manage_team? && policy(User).index? %>
-    <div class="my-2">
-      <%= select_tag 'select-new-leader', options_for_user_select,
-           class: 'selectpicker col-select btn-block', title: t('action.action.addLeader'),
-           data: {class: 'SelectPicker', handler: 'addNewLeader',
-                  'live-search': true, action_id: action.id, size: 5} %>
-    </div>
-  <% end %>
-</div>
 
-<div id="action-volunteers" class="white-box mb-2">
-  <% action.events.each do |event| %>
-    <% volunteers = event.volunteers %>
-    <h4 class="mt-4 mb-0"><%= l(event.date, format: :date) unless event.date.nil? %>, <%= event.time %></h4>
-    <div class="event mb-4 ml-2">
-
-      <% if event.desired_team_size&.positive? %>
-        <span class="badge badge-primary">
-          <%= "#{volunteers.count} / #{event.desired_team_size}" %>
-        </span>
-
-        <div class="comma-list">
-          <% volunteers.each do |volunteer| %>
-            <span>
-              <%= link_to volunteer.first_name, volunteer %>
-              <% if policy(action).manage_team? %>
-                <%= link_to delete_volunteer_event_path(event, user_id: volunteer.id),
-                            method: 'delete', title: t('action.action.removeVolunteer') do %>
-                  <span class="fas fa-times" aria-label="<%= t('action.action.removeVolunteer') %>"></span>
-                <% end %>
+    <% if desired&.positive? %>
+      <div class="comma-list ml-2">
+        <% volunteers.each do |volunteer| %>
+          <span>
+            <%= link_to volunteer.first_name, volunteer %>
+            <% if policy(event).manage_team? %>
+              <%= link_to delete_volunteer_event_path(event, user_id: volunteer.id),
+                          method: 'delete', title: t('action.action.removeVolunteer') do %>
+                <span class="fas fa-times" aria-label="<%= t('action.action.removeVolunteer') %>"></span>
               <% end %>
-            </span>
-          <% end %>
-        </div>
-
-        <% if volunteers.empty? %>
-          <p class="no-volunteers"><%= t('action.label.no_volunteers') %></p>
-        <% end %>
-      <% end %>
-
-      <% if user_signed_in? && event.volunteer?(current_user) %>
-        <p><%= t('action.message.teamMember') %></p>
-      <% end %>
-
-      <div class="my-2">
-        <% if policy(event).leave? %>
-          <%= link_to leave_event_path(event), class: 'btn btn-danger btn-block' do %>
-            <span class="fas fa-sign-out-alt"></span> <%= t('action.action.leave') %>
-          <% end %>
-        <% elsif event.available_places.positive? %>
-          <% if user_signed_in? %>
-            <%= link_to enter_event_path(event), class: 'btn btn-success btn-block' do %>
-              <span class="fas fa-sign-in-alt"></span> <%= t('action.action.enter') %>
             <% end %>
-          <% else %>
-            <%= link_to register_for_participation_event_path(event), class: 'btn btn-success btn-block' do %>
-              <span class="fas fa-sign-in-alt"></span> <%= t('action.action.enter') %>
-            <% end %>
-          <% end %>
+          </span>
         <% end %>
       </div>
+    <% end %>
 
-      <% if policy(action).manage_team? && policy(User).index? %>
-        <%= select_tag 'select-new-volunteer', options_for_user_select,
-             class: 'selectpicker col-select btn-block', title: t('action.action.addVolunteer'),
-             data: {class: 'SelectPicker', handler: 'addNewVolunteer',
-                    'live-search': true, event_id: event.id, size: 5} %>
+    <div class="my-2">
+      <% if policy(event).leave? %>
+        <%= link_to leave_event_path(event), class: 'btn btn-danger btn-block' do %>
+          <span class="fas fa-sign-out-alt"></span> <%= t('action.action.leave') %>
+        <% end %>
+      <% elsif event.available_places.positive? %>
+        <% if user_signed_in? %>
+          <%= link_to enter_event_path(event), class: 'btn btn-success btn-block' do %>
+            <span class="fas fa-sign-in-alt"></span> <%= t('action.action.enter') %>
+          <% end %>
+        <% else %>
+          <%= link_to register_for_participation_event_path(event), class: 'btn btn-success btn-block' do %>
+            <span class="fas fa-sign-in-alt"></span> <%= t('action.action.enter') %>
+          <% end %>
+        <% end %>
       <% end %>
-
     </div>
-  <% end %>
-</div>
 
-<% if action.subactions.any? %>
-  <div class="white-box mb-2">
-    <% subteam = action.volunteers_in_subactions %>
-
-    <% if user_signed_in? && subteam.include?(current_user) %>
-      <p><%= t('action.message.subactionTeamMember') %></p>
+    <% if policy(event).manage_team? && policy(User).index? %>
+      <%= select_tag 'select-new-volunteer', options_for_user_select,
+           class: 'selectpicker col-select btn-block', title: t('action.action.addVolunteer'),
+           data: {class: 'SelectPicker', handler: 'addNewVolunteer',
+                  'live-search': true, event_id: event.id, size: 5} %>
     <% end %>
 
-    <% if action.available_places.zero? && action.total_available_places.positive? %>
-      <p><%= t('action.message.enterOneOfThesubactions') %></p>
-    <% end %>
-
-    <% if subteam.any? %>
-      <div class="mb-2">
-        <h3><%= t('action.label.volunteers_in_subactions') %></h3>
-        <span class="badge badge-primary">
-          <%= "#{subteam.size} / #{action.total_desired_team_size - action.desired_team_size}" %>
-        </span>
-        <%= list_users(subteam.distinct) %>
-      </div>
-    <% end %>
   </div>
+<% end %>
+
+<% if action.events.finished.any? %>
+  <a href="javascript:void(0)" onclick="$('.event_finished').slideToggle(); $(this).hide();"
+     class="btn btn-secondary btn-block">
+    <%= t('action.action.showPastEvents') %>
+  </a>
 <% end %>

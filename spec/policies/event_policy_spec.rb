@@ -133,7 +133,9 @@ RSpec.describe EventPolicy do
     end
   end
 
-  describe 'delete_volunteer?' do
+
+
+  describe 'manage_team?' do
     subject { policy.delete_volunteer? }
 
     context 'as leader' do

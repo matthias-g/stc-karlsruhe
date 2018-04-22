@@ -33,6 +33,10 @@ de:
         zero: 'Aktionen'
         one: 'Aktion'
         other: 'Aktionen'
+      participation:
+        zero: 'Aktionsteilnahmen'
+        one: 'Aktionsteilnahme'
+        other: 'Aktionsteilnahmen'
       event:
         zero: 'Events'
         one: 'Event'
@@ -310,6 +314,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       startOwnAction: Eigene Aktion starten
       exportICal: Als iCal/ICS exportieren
       clone: Aktion klonen
+      showPastEvents: vergangene Zeiträume zeigen
     label:
       action: 'Aktion'
       subaction_of: 'Teilaktion von'
@@ -333,7 +338,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       cropImage: 'Bildausschnitt für %{crop_target} anpassen'
       parent_action: 'Diese Aktion ist Teil von'
       invisible: versteckt
-      no_volunteers: 'Bisher haben sich noch keine Mitarbeiter für diese Aktion angemeldet.'
+      no_volunteers: 'Bisher haben sich noch keine Mitarbeiter angemeldet.'
       volunteers_in_action: 'Team'
       volunteers_in_subactions: 'Team in Teilaktionen'
     help:
@@ -342,6 +347,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       uploadPictures: "Hast du während der Aktion Bilder gemacht, die du veröffentlichen möchtest? Dann kannst du sie hier hochladen.
         Hast du andere Personen fotografiert, stelle bitte sicher, dass du ihr Einverständnis für das Veröffentlichen der Bilder hast."
       addVolunteer: 'Fordere Mitarbeiter nach Möglichkeit auf, sich selbst für die Aktion anzumelden. Und melde nur Leute mit ihrem Einverständnis an.'
+      remainingVacancy: '%{places} freie Plätze'
     message:
       imageCropped: 'Der Bildausschnitt wurde angepasst.'
       created: 'Aktion wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
@@ -351,7 +357,6 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       volunteerAdded: 'Mitarbeiter erfolgreich hinzugefügt.'
       volunteerRemoved: 'Mitarbeiter erfolgreich entfernt.'
       errorList: 'Wegen folgender Fehler konnte die Aktion nicht gespeichert werden:'
-      remainingVacancy: '%s freie Plätze'
       teamMember: 'Du bist im Aktionsteam.'
       subactionTeamMember: 'Du bist bei einer Teilaktion dabei.'
       enterOneOfThesubactions: 'Melde dich zu einer der Teilaktionen an!'

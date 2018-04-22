@@ -24,10 +24,9 @@ class EventPolicy < ApplicationPolicy
     remove_from_volunteers? user
   end
 
-  def delete_volunteer?
+  def manage_team?
     (is_admin? || is_coordinator? || is_leader?) && !record.finished?
   end
-
 
   def add_to_volunteers?(users)
     users.all? { |user| allow_add_volunteer_to_event?(user, record) }
@@ -51,6 +50,8 @@ class EventPolicy < ApplicationPolicy
   def updatable_fields
     [:desired_team_size, :team, :date, :initiative, :volunteers]
   end
+
+  alias_method :delete_volunteer?, :manage_team?
 
   private
 

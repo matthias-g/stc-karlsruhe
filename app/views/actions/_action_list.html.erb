@@ -4,6 +4,16 @@
       <%= image_tag (action.show_picture? ? action.picture_url(:action_list) : 'placeholder.svg') %>
     </div>
     <div class="info">
+      <div class="badges">
+        <% if [:empty, :soon_full, :full].include? action.status %>
+          <% team_size = action.total_team_size %>
+          <% desired_team_size = action.total_desired_team_size %>
+          <span class="badge status_<%= action.status %>"
+                title="<%= t('action.help.remainingVacancy', places: desired_team_size - team_size) %>">
+            <%= "#{team_size} / #{desired_team_size}" %>
+          </span>
+        <% end %>
+      </div>
       <% unless action.date.nil? %>
         <div class="date"><%= l action.date, format: :date %></div>
       <% end %>

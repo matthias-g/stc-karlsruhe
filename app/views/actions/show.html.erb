@@ -142,6 +142,13 @@
 
       <%# action date/location info %>
       <div class="col-sm-6 col-md-12">
+        <% unless @action.parent_action.nil? %>
+          <div class="white-box">
+            <h3>Die Aktion ist ein Teil von</h3>
+            <%= render 'actions/action_list', actions: [@action.parent_action],
+                       simple_titles: true, show_date: false, show_occupancy: false %>
+          </div>
+        <% end %>
         <div class="white-box">
           <div id="action-leaders" class="mb-2">
             <h3><%= Action.human_attribute_name('leaders') %></h3>
@@ -207,7 +214,8 @@
           <div class="white-box">
             <div id="subaction-list">
               <h3><%= Action.human_attribute_name('subaction_ids') %></h3>
-              <%= render 'actions/action_list', actions: subactions, simple_titles: true %>
+              <%= render 'actions/action_list', actions: subactions,
+                         simple_titles: true, show_date: true, show_occupancy: true %> %>
             </div>
           </div>
         </div>
@@ -215,20 +223,19 @@
 
       <%# team info %>
       <div class="col-sm-6 col-md-12 d-print-none">
-
-          <% if @action.desired_team_size.positive? %>
-            <%= render 'actions/action_team', action: @action %>
-          <% elsif user_signed_in? && @action.volunteers_in_subactions.include?(current_user) %>
-            <div class="white-box">
-              <p class="h4 my-0"><%= t('action.message.subactionTeamMember') %></p>
-            </div>
-          <% elsif @action.available_places.zero? && @action.total_available_places.positive? %>
-            <div class="white-box">
-              <p class="h4 my-0"><%= t('action.message.enterOneOfThesubactions') %></p>
-            </div>
-          <% end %>
-
+        <% if @action.desired_team_size.positive? %>
+          <%= render 'actions/action_team', action: @action %>
+        <% elsif user_signed_in? && @action.volunteers_in_subactions.include?(current_user) %>
+          <div class="white-box">
+            <p class="h4 my-0"><%= t('action.message.subactionTeamMember') %></p>
+          </div>
+        <% elsif @action.available_places.zero? && @action.total_available_places.positive? %>
+          <div class="white-box">
+            <p class="h4 my-0"><%= t('action.message.enterOneOfThesubactions') %></p>
+          </div>
+        <% end %>
       </div>
+
     </div>
   </div>
 </div>
@@ -240,5 +247,8 @@
   <% end %>
   <% if @action.action_group %>
     <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group), class: 'btn btn-light' %>
+  <% end %>
+  <% if @action.parent_action %>
+    <%= link_to t('action.action.toParentAction'), @action.parent_action, class: 'btn btn-light' %>
   <% end %>
 </div>

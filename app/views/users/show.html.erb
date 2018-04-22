@@ -78,17 +78,20 @@
       <h2><%= Participation.model_name.human(count: 2) %></h2>
 
       <% if @actions_as_volunteer.any? %>
-        <%= render '/actions/action_list', actions: @actions_as_volunteer, simple_titles: false %>
+        <%= render '/actions/action_list', actions: @actions_as_volunteer,
+                   simple_titles: false, show_date: true, show_occupancy: true %>
       <% end %>
 
       <% if @actions_as_leader.any? %>
         <h3 class="mt-3"><%= t('user.label.actionsAsLeader') %></h3>
-        <%= render '/actions/action_list', actions: @actions_as_leader, simple_titles: false %>
+        <%= render '/actions/action_list', actions: @actions_as_leader,
+                   simple_titles: false, show_date: true, show_occupancy: true %>
       <% end %>
 
       <% if @past_actions.any? %>
         <h3 class="mt-3"><%= t('user.label.pastActions') %></h3>
-        <%= render '/actions/action_list', actions: @past_actions, simple_titles: false %>
+        <%= render '/actions/action_list', actions: @past_actions,
+                   simple_titles: false, show_date: true, show_occupancy: false %>
       <% end %>
 
       <% if @user.actions_as_volunteer.blank? && @user.actions_as_leader.blank? %>

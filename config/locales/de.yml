@@ -301,6 +301,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       removeVolunteer: 'Mitarbeiter entfernen'
       toOverview: 'zur Aktionsliste'
       toAction: 'zurück zur Aktion'
+      toParentAction: 'zur Überaktion'
       searchActions: 'Aktionen suchen'
       findAction: 'Aktion finden'
       cropListviewImage: 'Listenbild anpassen'

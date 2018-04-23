@@ -5,11 +5,11 @@
   }
   .dropdown-menu {
     a {
+      @extend %CaptionFont;
       display: block;
       font-size: 35px;
       padding: 3px 5px;
       color: #333333;
-      font-family: CaptionFont, sans-serif;
     }
   }
 }

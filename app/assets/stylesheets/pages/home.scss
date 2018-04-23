@@ -10,7 +10,7 @@
   position: absolute;
   right: 0;
   top: 0;
-  font-family: Caveat;
+  font-family: Caveat, sans-serif;
   color: white;
   text-shadow: 0 0 2px rgba(black, 0.5);
   div {
@@ -73,10 +73,8 @@
   }
   .title {
     padding-left: 20px;
-    font-family: CaptionFont;
+    @extend %CaptionFont;
     font-size: 30px;
-    font-weight: 300;
-    line-height: 100%;
   }
   .type {
     font-size: 70%;

@@ -179,8 +179,7 @@
             <% if @action.subactions.empty? %>
               <% @action.events.each do |event| %>
                 <div>
-                  <%= l(event.date, format: :short_with_weekday) unless event.date.nil? %>
-                  <%= (', ' + event.time) unless event.time.nil? %>
+                  <%= l(event.date, format: :short_with_weekday) unless event.date.nil? %><%= (', ' + event.time) unless event.time.nil? %>
                 </div>
               <% end %>
             <% else %>

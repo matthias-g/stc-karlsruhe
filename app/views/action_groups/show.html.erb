@@ -15,7 +15,7 @@
 <div id="action-group-header" class="white-box px-2 py-4">
   <% previous_group, next_group = get_connected_action_groups(@action_group) %>
   <div class="row align-items-center">
-    <div class="col-sm-3 order-first">
+    <div class="col-6 col-sm-3 order-first">
       <% if previous_group %>
         <% type, name = split_action_group_type_prefix(previous_group.title) %>
         <%= link_to show_action_group_path(previous_group) do %>
@@ -27,7 +27,7 @@
         <% end %>
       <% end %>
     </div>
-    <div class="col-sm-3 order-last">
+    <div class="col-6 col-sm-3 order-last">
       <% if next_group %>
         <% type, name = split_action_group_type_prefix(next_group.title) %>
         <%= link_to show_action_group_path(next_group) do %>
@@ -39,7 +39,7 @@
         <% end %>
       <% end %>
     </div>
-    <div class="col-sm-6 text-center">
+    <div class="col-sm-6 text-center title">
       <h1 class="m-0"><%= @action_group.title %></h1>
       <div class="date h3 m-0"><%= date_range(@action_group.start_date, @action_group.end_date, format: :long) %></div>
     </div>

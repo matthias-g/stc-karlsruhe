@@ -1,5 +1,10 @@
 
 #action-group-header {
+  @include media-breakpoint-down(xs) {
+    .title {
+      order: 14;
+    }
+  }
   h1 {
     hyphens: auto;
   }
@@ -8,11 +13,12 @@
     align-items: center;
   }
   .order-first a {
-    justify-content: left;
+    justify-content: flex-start;
   }
   .order-last a {
-    justify-content: right;
+    justify-content: flex-end;
   }
+
   .neighbor-linktext {
     @extend %CaptionFont;
     font-size: 1.8rem;

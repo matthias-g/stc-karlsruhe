@@ -138,7 +138,8 @@
 // action board entry (partial, used on "action group show")
 .action-card-list {
   justify-content: center;
-  flex-flow: row wrap;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .action-card {
   margin-bottom: 1rem !important;

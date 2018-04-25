@@ -1,25 +1,4 @@
-
-#news_entries {
-
-  h1 {
-    text-align: center;
-  }
-
-  .news-entry-text {
-    padding: 35px 20px 20px;
-  }
-  .news-entry-picture {
-    float: right;
-    margin: 20px;
-  }
-  .news-entry-gallery {
-    float: right;
-    margin: 20px;
-    max-width: $gallery-width;
-  }
-
-}
-
+// news entries partial optional wrapper class
 .news-teaser {
   padding-top: 10px;
   padding-bottom: 25px;

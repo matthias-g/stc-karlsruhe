@@ -1,17 +1,16 @@
 <% provide :title, @user.full_name %>
 <% wrapper_set 'container-medium' %>
+<% own_profile = (@user == current_user) %>
 
 <div class="white-box record-header">
-  <div class="type">
-    <%= (@user == current_user) ? t('user.label.myProfile') : t('user.label.profile') %>
-  </div>
-  <h1><%= @user.full_name %></h1>
+  <div class="type"><%=  t('user.label.' + (own_profile ? 'myProfile' : 'profile')) %></div>
+  <h1 class="align-center"><%= @user.full_name %></h1>
 </div>
 
 <div class="row align-items-stretch">
   <div class="col-sm-5">
 
-    <% if @user == current_user && @submission %>
+    <% if own_profile && @submission %>
         <section id="survey" class="white-box">
           <h2>Umfrage</h2>
           <%= bootstrap_form_for([@submission.template, @submission]) do |f| %>
@@ -21,20 +20,20 @@
         </section>
     <% end %>
 
-    <% if (current_user == @user) || current_user.in_orga_team? %>
+    <% if own_profile || current_user.in_orga_team? %>
         <section id="user-profile-data" class="white-box">
           <h2><%= t('user.label.userData') %></h2>
-          <table>
+          <table class="table properties">
             <tr>
-              <td><%= t('activerecord.attributes.user.username') %>:</td>
+              <td><%= t('activerecord.attributes.user.username') %></td>
               <td><%= @user.username %></td>
             </tr>
             <tr>
-              <td><%= t('activerecord.attributes.user.email') %>:</td>
+              <td><%= t('activerecord.attributes.user.email') %></td>
               <td><%= @user.email %></td>
             </tr>
             <tr>
-              <td><%= t('activerecord.attributes.user.phone') %>:</td>
+              <td><%= t('activerecord.attributes.user.phone') %></td>
               <td><%= @user.phone %></td>
             </tr>
           </table>
@@ -60,7 +59,7 @@
         </section>
     <% end %>
 
-    <% unless @user == current_user  %>
+    <% unless own_profile  %>
         <section id="contact-user-form" class="white-box">
           <h2><%= t('contact.user.title', recipient: @user.first_name) %></h2>
           <%= bootstrap_form_for @message, url: { action: 'contact_user' } do |f| %>
@@ -74,7 +73,7 @@
   </div>
   <div class="col-sm-7">
 
-    <section id="user-actions" class="white-box">
+    <section class="white-box">
       <h2><%= Participation.model_name.human(count: 2) %></h2>
 
       <% if @actions_as_volunteer.any? %>
@@ -98,13 +97,12 @@
         <%= (current_user == @user) ? t('user.message.youHaveNoActions') : t('user.message.hasNoActions', user: @user.first_name) %>
       <% end %>
 
-      <% if @user == current_user  %>
-        <div class="feed">
-          <span><%= t('user.action.exportICal') %>:</span>
-          <%= link_to user_ical_path(@user.ical_token, @user), data: { 'turbolinks': false } do %>
-              <span class="far fa-calendar-alt"></span>
-          <% end %>
-        </div>
+      <% if own_profile  %>
+        <%= link_to user_ical_path(@user.ical_token, @user),
+                    data: { turbolinks: false }, class: 'btn btn-primary mt-4' do %>
+          <span class="far fa-calendar-alt"></span>
+          <%= t('user.action.exportICal') %>
+        <% end %>
       <% end %>
 
     </section>

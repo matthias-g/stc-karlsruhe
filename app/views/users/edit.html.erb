@@ -1,21 +1,18 @@
 <% provide :title, t('layout.title.userProfileEdit', user:@user.full_name) %>
 <% wrapper_set 'container-medium' %>
-
 <%= devise_error_messages! %>
-
-<div class="white-box record-header">
-  <div class="type">
-    <%= t('user.label.edit') %>
-  </div>
-  <h1><%= @user.full_name %></h1>
-</div>
 
 <%= bootstrap_form_for(@user) do |f| %>
 
-  <div class="row align-items-stretch">
+  <div class="white-box record-header">
+    <div class="type"><%= t('user.label.edit') %></div>
+    <h1 class="align-center"><%= @user.full_name %></h1>
+  </div>
 
+  <div class="row align-items-stretch">
     <div class="col-sm-5">
       <div class="white-box">
+
         <h2><%= t('user.label.userData') %></h2>
         <%= f.text_field :username %>
         <%= f.text_field :first_name %>
@@ -26,13 +23,12 @@
             <div><%= t('user.label.waitingForEmailConfirmation',
                        email: resource.unconfirmed_email) %></div>
         <% end %>
+
       </div>
     </div>
 
     <div class="col-sm-7">
       <div class="white-box">
-        <!--<h2><%= t('user.label.image') %></h2>
-        <p>...coming soon<br><br></p>-->
 
         <h2><%= t('user.label.emailSettings') %></h2>
         <div class="checkbox">
@@ -41,7 +37,7 @@
               <%= t('user.label.receiveEmailsFromOrga') %>
           <% end %>
         </div>
-        <div class="emails-from-orga">
+        <div id="emails-from-orga-subitems" class="ml-4">
           <%= f.check_box :receive_emails_about_action_groups %>
           <%= f.check_box :receive_emails_about_my_action_groups %>
           <%= f.check_box :receive_emails_about_other_projects %>
@@ -53,10 +49,8 @@
             <%= f.check_box :receive_notifications_about_volunteers %>
         <% end %>
 
-
       </div>
     </div>
-
   </div>
 
   <div class="white-box">

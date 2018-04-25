@@ -82,18 +82,7 @@
     width: 100%;
   }
 
-  // no volunteers message
-  .no-volunteers {
-    color: #555;
-    font-style: italic;
-  }
-
-  section.footer span {
-    font-size: 26px;
-    margin-top: 2px;
-    margin-right: 15px;
-  }
-
+  // event list
   .event_finished {
     display: none;
   }
@@ -103,7 +92,27 @@
 
 // NON VIEW RESTRICTED RULES //
 
-// action list entry (partial, used on "page home", "user show" and "action show")
+// a picture plus copyright notice (actions->show, actions->edit)
+.picture-container {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  .copyright {
+    color: white;
+    font-size: 10px;
+    text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000;
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    white-space: nowrap;
+    padding-left: 10px;
+    transform-origin: 0% 100%;
+    -moz-transform: rotate(-90deg);
+    cursor: default;
+  }
+}
+
+// action list partial (pages->home, users->show, actions->show)
 .action-entry {
   display: flex;
   align-items: center;
@@ -128,38 +137,13 @@
   .title {
     @extend %CaptionFont;
     font-size: 20px;
-    line-height: 105%;
   }
   &.hidden-action .title {
     color: $status_hidden !important;
   }
 }
 
-// action board entry (partial, used on "action group show")
-.action-card-list {
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.action-card {
-  margin-bottom: 1rem !important;
-  min-width: 320px;
-  max-width: 320px;
-  cursor: pointer;
-  box-shadow: 0 0 5px rgba(black, 0.5);
-  &:hover {
-    box-shadow: 0 0 10px rgba(black, 0.8);
-  }
-  .card-title {
-    margin-bottom: 0.2rem;
-  }
-  .badge {
-    margin-bottom: 0.5rem;
-  }
-}
-
-
-// general purpose action status classes
+// action status classes (action->show, action list partial, action card list on action_groups->show)
 .status_empty {
   color: $status_empty_text;
   background: $status_empty;
@@ -179,10 +163,4 @@
 .status_hidden {
   color: $status_hidden_text;
   background: $status_hidden;
-}
-
-
-.cropbox > img {
-  width: 100%;
-  height: auto;
 }

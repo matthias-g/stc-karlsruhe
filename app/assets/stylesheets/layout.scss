@@ -37,19 +37,6 @@
   overflow: hidden;
 }
 
-// restricts the content width. caution: this will invalidate horizontal margins
-.container-medium {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.container-small {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
 // use this within white-boxes or BS columns
 section, .section {
   margin-top: 60px;

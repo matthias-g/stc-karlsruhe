@@ -1,3 +1,4 @@
+// VIEW RESTRICTED RULES (all "action_group" views)
 
 #action-group-header {
   @include media-breakpoint-down(xs) {
@@ -18,7 +19,6 @@
   .order-last a {
     justify-content: flex-end;
   }
-
   .neighbor-linktext {
     @extend %CaptionFont;
     font-size: 1.8rem;
@@ -51,7 +51,27 @@
 }
 
 
-
-
+// action card list partial
+.action-card-list {
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.action-card {
+  margin-bottom: 1rem !important;
+  min-width: 320px;
+  max-width: 320px;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(black, 0.5);
+  &:hover {
+    box-shadow: 0 0 10px rgba(black, 0.8);
+  }
+  .card-title {
+    margin-bottom: 0.2rem;
+  }
+  .badge {
+    margin-bottom: 0.5rem;
+  }
+}
 
 

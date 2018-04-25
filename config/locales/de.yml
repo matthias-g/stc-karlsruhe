@@ -46,6 +46,10 @@ de:
         one: 'News-Eintrag'
         other: 'News-Einträge'
       user: Mitarbeiter
+      role:
+        zero: Benutzerrollen
+        one: Benutzerrolle
+        other: Benutzerrollen
       message:
         zero: Nachrichten
         one: Nachricht
@@ -134,19 +138,30 @@ de:
 
   general:
     action:
-      show: 'Anzeigen'
-      edit: 'Bearbeiten'
-      save: 'Speichern'
-      cancel: 'Abbrechen'
-      back: 'Zurück'
-      delete: 'Löschen'
+      show: Anzeigen
+      showLong: '%s anzeigen'
+      edit: Bearbeiten
+      editLong: '%s bearbeiten'
+      save: Speichern
+      saveLong: '%s speichern'
+      add: Hinzufügen
+      addLong: '%s hinzufügen'
+      cancel: Abbrechen
+      back: Zurück
+      delete: Löschen
+      deleteLong: '%s löschen'
+      remove: Entfernen
+      removeLong: '%s entfernen'
     label:
-      actions: 'Aktionen'
-      name: 'Name'
-      error: 'Fehler'
-      notDisplayed: 'wird nicht angezeigt'
+      actions: Aktionen
+      name: Name
+      error: Fehler
+      notDisplayed: '%s wird nicht angezeigt'
     message:
-      confirmDelete: 'Wollen Sie das wirklich tun?'
+      confirmDelete: Willst du das wirklich tun?
+      confirmDeleteLong: 'Willst du %s wirklich löschen?'
+      confirmRmove: Willst du das wirklich tun?
+      confirmRemoveLong: 'Willst du %s wirklich enfernen?'
 
   layout:
     pageTitle: 'Serve the City Karlsruhe'
@@ -501,17 +516,13 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
     noActions: 'Wir sind zwar schon bei der Planung, aber bisher sind noch keine Aktionen öffentlich. Schau später nochmal vorbei oder kontaktiere uns, wenn du einen Vorschlag für eine Aktion hast!'
 
   role:
-    action:
-      addUser: Benutzer hinzufügen
-    new: 'Neue User-Rolle anlegen'
-    save: 'Rolle speichern'
-    list: 'User-Rollen verwalten'
-    role: 'Titel'
-    captionList: 'User-Rollen'
-    captionNew: 'Neue User-Rolle'
-    captionEdit: 'User-Rolle bearbeiten: "%s"'
-    errorsExist: 'Die Rolle konnte wegen folgenden Fehlern nicht gespeichert werden:'
-    confirmDelete: 'Wollen Sie die User-Rolle "%s" wirklich löschen?'
+    label:
+      newRole: Neue User-Rolle
+      editRole: 'Rolle bearbeiten: "%s"'
+      roleAssignments: Rollenzuweisungen an Benutzer
+      editRoles: Rollen bearbeiten
+    message:
+      errorsExist: 'Die Rolle konnte wegen folgenden Fehlern nicht gespeichert werden:'
 
   gallery:
     action:

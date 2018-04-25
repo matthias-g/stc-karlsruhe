@@ -1,31 +1,39 @@
 <% provide :title, t('layout.title.roleList') %>
+<% wrapper_set 'container-medium' %>
 
-<h1><%= t('role.captionList') %></h1>
-
-<div class="row">
-  <% @roles.each do |role| %>
-      <div class="role-info col-md-4">
-        <h2><%= role.title %></h2>
-        <div>
-          <% policy_scope(role.users).order(:first_name, :last_name).each do |user| %>
-              <div class="user">
-                <span><%= user.full_name %></span>
-                <%= link_to '', '', class: 'fas fa-trash', data: {'user-id': user.id, 'role-id': role.id} %>
-              </div>
-          <% end %>
-        </div>
-        <div>
-          <%= select_tag "add-user-to-#{role.title}", options_for_user_select,
-                         class: 'selectpicker', title: t('role.action.addUser'),
-                         data: { class: 'SelectPicker', handler: 'addUserToRole',
-                                 live_search: true, role_id: role.id, size: 5 } %>
-        </div>
-      </div>
-  <% end %>
+<div class="white-box">
+  <h1 class="text-center m-0"><%= Role.model_name.human count: 2 %></h1>
 </div>
 
-<div id="roleList">
-  <table>
+<div class="white-box">
+  <h2><%= t('role.label.roleAssignments') %></h2>
+  <div class="row">
+    <% @roles.each do |role| %>
+        <div class="role-info col-md-4">
+          <h2><%= role.title %></h2>
+          <div>
+            <% policy_scope(role.users).order(:first_name, :last_name).each do |user| %>
+                <div class="user">
+                  <span><%= user.full_name %></span>
+                  <%= link_to '', '', class: 'fas fa-times', title: t('general.action.remove'),
+                      data: {'user-id': user.id, 'role-id': role.id} %>
+                </div>
+            <% end %>
+          </div>
+          <div class="mt-3">
+            <%= select_tag "add-user-to-#{role.title}", options_for_user_select,
+                           class: 'selectpicker', title: t('general.action.add'),
+                           data: { class: 'SelectPicker', handler: 'addUserToRole',
+                                   live_search: true, role_id: role.id, size: 5 } %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="white-box p-4">
+  <h2><%= t('role.label.editRoles') %></h2>
+  <table class="table">
     <thead>
     <tr>
       <th><%= t('general.label.name') %></th>
@@ -36,11 +44,11 @@
     <tbody>
     <% @roles.each do |role| %>
         <tr>
-          <td><%= link_to role.title, role %></td>
+          <td><%= role.title %></td>
           <td>
             <%= link_to t('general.action.edit'), edit_role_path(role) %> |
             <%= link_to t('general.action.delete'), role, method: :delete,
-                        data: { confirm: t('role.confirmDelete') % [role.title]} %>
+                        data: { confirm: t('general.message.confirmDeleteLong') % [role.title]} %>
           </td>
         </tr>
     <% end %>

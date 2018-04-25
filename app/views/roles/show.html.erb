@@ -1,9 +1,0 @@
-<% provide :title, t('layout.title.roleView') %>
-
-<p>
-  <strong><%= t('role.title') %></strong>
-  <span id="title"><%= @role.title %></span>
-</p>
-
-<%= link_to t('general.action.edit'), edit_role_path(@role) %> |
-<%= link_to t('general.action.back'), roles_path %>

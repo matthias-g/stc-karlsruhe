@@ -1,10 +1,7 @@
 $font-normal: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-captions: Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-%NormalFont {
-  font-family: $font-normal;
-}
-
+// headings font mixin
 %CaptionFont {
   font-family: $font-captions;
   font-weight: 300;
@@ -12,12 +9,12 @@ $font-captions: Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 // ACTION STATUS + FLASH MESSAGE COLORS
-$status_empty:           #197435;
+$status_empty:          #197435;
 $status_soon_full:      #D49203;
 $status_full:           #A60000;
 $status_finished:       #999;
 $status_hidden:         #C44ABA;
-$status_empty_text:      white;
+$status_empty_text:     white;
 $status_soon_full_text: white;
 $status_full_text:      white;
 $status_finished_text:  black;
@@ -25,12 +22,8 @@ $status_hidden_text:    white;
 
 // CUSTOM COLORS
 $default_border:      rgba(#777, 0.5);
-$default_image_bg:    #AAA;
-$gallery:             #191919;
-$separator:           #000;
 $footer_text:         #FFF;
 $footer_text_shadow:  #000;
-$unobtrusive_text:    gray;
 
 // OTHER VARIABLES
 $gallery-width:     500px;

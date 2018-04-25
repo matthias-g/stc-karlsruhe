@@ -1,4 +1,5 @@
 <%= form_with model: @role, local: true do |f| %>
+
   <% if @role.errors.any? %>
     <div id="error_explanation">
       <h2><%= t('role.errorsExist') %></h2>
@@ -14,7 +15,9 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+
   <div class="actions">
-    <%= f.submit t('role.save') %>
+    <%= f.submit t('general.action.save'), class: 'btn btn-primary' %>
+    <%= link_to t('general.action.cancel'), roles_path, class: 'btn btn-link' %>
   </div>
 <% end %>

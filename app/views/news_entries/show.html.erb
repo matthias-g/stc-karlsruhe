@@ -13,11 +13,11 @@
     <%= l @news_entry.created_at.to_date, format: :date %>
     <%= '| ' + t('news_entry.label.invisible') unless @news_entry.visible? %>
   </div>
-  <h1><%= @news_entry.title %></h1>
+  <h1 class="text-center"><%= @news_entry.title %></h1>
 </div>
 
 <% if show_gallery?(@news_entry) %>
-    <div class="news-entry-gallery">
+    <div class="news-entry-gallery float-right m-4">
       <%= render '/galleries/gallery', gallery: @news_entry.gallery %>
       <% if current_user && @news_entry.gallery.gallery_pictures.invisible.any? &&
           policy(@news_entry.gallery.gallery_pictures.invisible.first).make_visible? %>
@@ -28,7 +28,7 @@
       <% end %>
     </div>
 <% elsif @news_entry.show_picture? %>
-    <div class="news-entry-picture picture-container">
+    <div class="picture-container float-right m-4">
       <%= image_tag @news_entry.picture_url(:article) %>
       <div class="copyright" title="© <%= @news_entry.picture_source %>">
         © <%= @news_entry.picture_source %>
@@ -51,7 +51,7 @@
       <!--<% end %>-->
     </div>
 <% end %>
-<div class="news-entry-text">
+<div class="m-2 mt-5">
   <%= simple_format( simple_format_urls @news_entry.text ) %>
 </div>
 

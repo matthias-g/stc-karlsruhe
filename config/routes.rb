@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   resources :action_groups, path: 'aktionsgruppen'
   get ':id/aktionen', to: 'action_groups#show', as: 'show_action_group'
 
-  resources :roles
+  resources :roles, except: [:show]
 
   get 'kontakt', to: 'messages#contact_mail_form', as: 'contact'
   post 'kontakt', to: 'messages#send_contact_mail', as: 'send_contact_mail'

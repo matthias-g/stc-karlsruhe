@@ -32,6 +32,16 @@ label {
   font-weight: bold;
 }
 
+// TABLES
+table.properties {
+  margin-left: 10px;
+  td:first-child {
+    text-align: right;
+    padding-right: 10px;
+    font-weight: bold;
+  }
+}
+
 // BUTTONS
 .btn-file {
   position: relative;
@@ -53,8 +63,21 @@ label {
   cursor: inherit;
   display: block;
 }
+.btn > span:first-child {
+  margin-right: 5px;
+}
 
 // GRID
+.container-medium {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.container-small {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
 .row-no-padding > * {
   &:first-child {
     padding-left: 0;

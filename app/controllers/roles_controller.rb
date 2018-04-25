@@ -10,38 +10,31 @@ class RolesController < ApplicationController
 
   def index
     @roles = policy_scope(Role)
-    respond_with(@role)
-  end
-
-  def show
-    respond_with(@role)
   end
 
   def new
     @role = Role.new
     authorize_role
-    respond_with(@role)
   end
 
   def edit
-    respond_with(@role)
   end
 
   def create
     @role = Role.new(role_params)
     authorize_role
     @role.save
-    respond_with(@role)
+    redirect_to roles_path
   end
 
   def update
     @role.update(role_params)
-    respond_with(@role)
+    redirect_to roles_path
   end
 
   def destroy
     @role.destroy
-    respond_with(@role)
+    redirect_to roles_path
   end
 
   private

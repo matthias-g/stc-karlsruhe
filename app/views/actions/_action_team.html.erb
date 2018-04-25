@@ -62,7 +62,7 @@
   </div>
 <% end %>
 
-<% if action.events.finished.any? %>
+<% if action.events.finished.any? && has_upcoming_events %>
   <a href="javascript:void(0)" onclick="$('.event_finished').slideToggle(); $(this).hide();"
      class="btn btn-secondary btn-block">
     <%= t('action.action.showPastEvents') %>

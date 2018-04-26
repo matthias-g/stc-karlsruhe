@@ -12,8 +12,8 @@ class @SelectPicker
       request = window.requestToJsonApi(url, handling.method, data: JSON.parse(payload))
 
       # fire basic response handling
-      request.success (data, status, xhr) ->
+      request.done (data, status, xhr) ->
         select.trigger('ajax:success', [data, status, xhr])
-      request.error (xhr, status, error) ->
+      request.fail (xhr, status, error) ->
         select.trigger('ajax:error', [xhr, status, error])
 

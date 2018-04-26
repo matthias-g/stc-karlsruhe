@@ -14,15 +14,22 @@ class Mailer < ActionMailer::Base
 
   def action_mail(message, sender, action)
     @message = message.body
-    @action_title = action.title
+    @action_title = action.full_title
     @sender = sender
-    recipients = (action.volunteers + action.leaders + [sender]).map{|v| v.email}.uniq.join(',')
-    mail bcc: recipients, reply_to: sender.email, subject: message.subject
+
+    case message.recipient_scope
+    when 'this_action'
+      recipients = action.volunteers + action.leaders + [sender]
+    when 'action_and_subactions'
+      recipients = action.volunteers + action.volunteers_in_subactions +
+          action.leaders + action.leaders_in_subactions + [sender]
+    end
+    mail bcc: recipients.map{|v| v.email}.uniq.join(','), reply_to: sender.email, subject: message.subject
   end
 
   def action_mail_to_leaders(message, sender, action)
     @message = message.body
-    @action_title = action.title
+    @action_title = action.full_title
     @sender = sender
     recipients = (action.leaders + [sender]).map{|v| v.email}.uniq.join(',')
     mail bcc: recipients, reply_to: sender.email, subject: message.subject

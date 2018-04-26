@@ -59,11 +59,10 @@
 
   // communication forms
   #action-communication {
-    input[type="text"] {
+    .form-group {
       max-width: 550px;
     }
     textarea {
-      max-width: 550px;
       min-height: 150px;
     }
   }

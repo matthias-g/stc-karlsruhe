@@ -46,6 +46,11 @@ class Action < ApplicationRecord
     User.joins(:events_as_volunteer).where(["event_id IN (?)", subaction_event_ids])
   end
 
+  def leaders_in_subactions
+    subaction_ids = subactions.collect{ |action| action.id }
+    User.joins(:actions_as_leader).where(["action_id IN (?)", subaction_ids])
+  end
+
   def volunteer?(user)
     events.any? {|event| event.volunteer?(user)}
   end

@@ -92,6 +92,9 @@
               <% if user_signed_in? && current_user.admin? %>
                 <p>(<%= (@action.volunteers + @action.leaders + [current_user]).uniq.map { |v| v.email}.join(', ') %>)</p>
               <% end %>
+              <%= f.select :recipient_scope, [['Teilnehmer dieser Aktion', 'this_action'],
+                                              ['Teilnehmer dieser Aktion inkl. Teilaktionen', 'action_and_subactions']],
+                           {label: t('contact.general.placeholders.recipient_scope')}, class: 'selectpicker' %>
               <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
               <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
               <%= f.submit t('contact.team.submit'), class: 'btn btn-primary' %>

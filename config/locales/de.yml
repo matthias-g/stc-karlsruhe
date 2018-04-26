@@ -260,6 +260,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
         sender: 'Deine E-Mail-Adresse'
         recipient: 'E-Mail-Adresse des Empfängers'
         subject: "Worum geht's?"
+        recipient_scope: 'Empfänger'
         body: 'Deine Nachricht'
     adminMail:
       title: 'Admin-Mailer'

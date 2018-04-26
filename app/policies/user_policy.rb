@@ -8,10 +8,6 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
-  def index?
-    is_admin?
-  end
-
   def show?
     return false unless user
     !record.cleared? || is_admin?
@@ -38,6 +34,7 @@ class UserPolicy < ApplicationPolicy
     %i[roles actions_as_volunteer username first_name last_name email phone]
   end
 
+  alias_method :index?, :is_admin_or_coordinator?
   alias_method :update?, :edit?
   alias_method :destroy?, :edit?
   alias_method :confirm_delete?, :destroy?

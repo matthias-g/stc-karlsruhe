@@ -4,139 +4,118 @@ require 'helpers'
 RSpec.describe UserPolicy do
 
   include Fixtures
+  include Helpers
 
   let(:current_user) { nil }
   let(:record) { users(:rolf) }
   let(:policy) { UserPolicy.new(current_user, record) }
 
+
   describe 'show?' do
     subject { policy.show? }
 
-    it 'does not show for no user logged in' do
-      expect(subject).to be(false)
+    context 'when no user is logged in' do
+      it { should_fail }
     end
 
-    context 'other user logged in' do
+    context 'for some user' do
       let(:current_user) { users(:sabine) }
-
-      it 'does show user' do
-        expect(subject).to be_truthy
-      end
-
-      context 'user has been cleared' do
+      it { should_pass }
+      context 'requesting a cleared profile' do
         let(:record) { users(:deleted) }
-        it 'does not show user' do
-          expect(subject).to be_falsey
-        end
+        it { should_fail }
       end
     end
 
-    context 'admin logged in and user has been cleared' do
+    context 'for admin requesting a cleared profile' do
       let(:record) { users(:deleted) }
       let(:current_user) { users(:admin) }
-
-      it 'does show user' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
   end
+
 
   describe 'index?' do
     subject { policy.index? }
 
-    it 'is false for no user logged in' do
-      expect(subject).to be_falsey
+    context 'when no user is logged in' do
+      it { should_fail }
     end
 
-    context 'other user logged in' do
+    context 'for some user' do
       let(:current_user) { users(:sabine) }
-
-      it 'is false' do
-        expect(subject).to be_falsey
-      end
+      it { should_fail }
     end
 
-    context 'admin logged in' do
-      let(:current_user) { users(:admin) }
+    context 'for coordinator' do
+      let(:current_user) { users(:coordinator) }
+      it { should_pass }
+    end
 
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+    context 'for admin' do
+      let(:current_user) { users(:admin) }
+      it { should_pass }
     end
   end
+
 
   describe 'edit?' do
     subject { policy.edit? }
 
-    it 'is false for no user logged in' do
-      expect(subject).to be(false)
+    context 'when no user is logged in' do
+      it { should_fail }
     end
 
-    context 'other user logged in' do
+    context 'for some user' do
       let(:current_user) { users(:sabine) }
-
-      it 'is false' do
-        expect(subject).to be_falsey
-      end
+      it { should_fail }
     end
 
-    context 'same user logged in' do
+    context 'for same user' do
       let(:current_user) { users(record.username) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
 
-    context 'admin logged in' do
+    context 'for admin' do
       let(:current_user) { users(:admin) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
   end
+
 
   describe 'contact_user?' do
     subject { policy.contact_user? }
 
-    it 'is false for no user logged in' do
-      expect(subject).to be(false)
+    context 'when no user is logged in' do
+      it { should_fail }
     end
 
-    context 'other user logged in' do
+    context 'for some user' do
       let(:current_user) { users(:sabine) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
   end
+
 
   describe 'add_to_actions_as_volunteer?' do
     let(:new_action) { [actions('Kostenlose Fahrradreparatur in der Innenstadt')] }
     subject { policy.add_to_actions_as_volunteer?(new_action) }
 
-    it 'is false for no user logged in' do
-      expect(subject).to be(false)
+    context 'when no user is logged in' do
+      it { should_fail }
     end
 
-    context 'other user logged in' do
+    context 'for some user' do
       let(:current_user) { users(:sabine) }
-
-      it 'is false' do
-        expect(subject).to be_falsey
-      end
+      it { should_fail }
     end
 
-    context 'same user logged in' do
+    context 'for same user' do
       let(:current_user) { users(:rolf) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
   end
+
 
   describe 'permitted_attributes_for_show' do
     subject { policy.permitted_attributes_for_show }

@@ -21,9 +21,6 @@ class UsersController < ApplicationController
       # Message for contact_user
       @message = Message.new
     end
-    @past_actions = @user.actions.finished
-    @actions_as_leader = @user.actions_as_leader - @past_actions
-    @actions_as_volunteer = @user.actions_as_volunteer - @actions_as_leader - @past_actions
     respond_with(@user)
   end
 

@@ -120,10 +120,10 @@
       <div class="white-box">
         <div class="week">
           <%= f.collection_select(:action_group_id, ActionGroup.all.order(title: :desc), :id, :title,
-                                  {selected: @action.action_group&.id, include_blank: true}) -%>
+                                  {selected: @action.action_group&.id, include_blank: true}) %>
         </div>
         <div class="parent_action">
-          <%= f.select(:parent_action_id, available_actions(@action).collect{ |p| [p.title, p.id]}, {include_blank: true}) -%>
+          <%= f.select(:parent_action_id, available_actions(@action).collect{ |p| [p.title, p.id]}, {include_blank: true}) %>
         </div>
         <div class="location">
           <%= f.text_area :location %>
@@ -152,10 +152,11 @@
       <div class="white-box events" data-class="DynamicFormList">
         <div class="prototype d-none">
           <% new_object = f.object.class.reflect_on_association(:events).klass.new %>
-          <%= f.fields_for(:events, new_object, child_index: :new_item) {|builder| render('event_fields', f: builder)} %>
+          <%= f.fields_for(:events, new_object, child_index: :new_item) {
+              |builder| render('events/event_fields', f: builder, default_date: @action.action_group&.start_date)} %>
         </div>
         <%= f.fields_for :events do |builder| %>
-          <%= render 'event_fields', f: builder %>
+          <%= render 'events/event_fields', f: builder, default_date: @action.action_group&.start_date %>
         <% end %>
         <%= link_to t('action.action.addEvent'), 'javascript:void(0);', class: 'add-link btn btn-secondary' %>
       </div>

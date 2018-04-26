@@ -145,8 +145,7 @@
         <% unless @action.parent_action.nil? %>
           <div class="white-box">
             <h3>Die Aktion ist ein Teil von</h3>
-            <%= render 'actions/action_list', actions: [@action.parent_action],
-                       simple_titles: true, show_date: false, show_occupancy: false %>
+            <%= render '/actions/action_entry', action: @action.parent_action, show_date: false, show_occupancy: false %>
           </div>
         <% end %>
         <div class="white-box">
@@ -208,8 +207,9 @@
           <div class="white-box">
             <div id="subaction-list">
               <h3><%= Action.human_attribute_name('subaction_ids') %></h3>
-              <%= render 'actions/action_list', actions: subactions,
-                         simple_titles: true, show_date: true, show_occupancy: true %>
+              <% subactions.each do |action| %>
+                <%= render '/actions/action_entry', action: action, simple_title: true %>
+              <% end %>
             </div>
           </div>
         </div>
@@ -218,7 +218,7 @@
       <%# team info %>
       <div class="col-sm-6 col-md-12 d-print-none">
         <% if @action.desired_team_size.positive? %>
-          <%= render 'actions/action_team', action: @action %>
+          <%= render 'events/event_team_list', events: @action.events %>
         <% elsif user_signed_in? && @action.volunteers_in_subactions.include?(current_user) %>
           <div class="white-box">
             <p class="h4 my-0"><%= t('action.message.subactionTeamMember') %></p>

@@ -303,8 +303,6 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
     action:
       new: 'Neue Aktion erstellen'
       edit: 'Bearbeiten'
-      enter: 'Team beitreten'
-      leave: 'Team verlassen'
       delete: 'Aktion löschen'
       makeVisible: 'Sichtbar machen'
       makeInvisible: 'Verstecken'
@@ -327,7 +325,6 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       startOwnAction: Eigene Aktion starten
       exportICal: Als iCal/ICS exportieren
       clone: Aktion klonen
-      showPastEvents: vergangene Zeiträume zeigen
     label:
       action: 'Aktion'
       subaction_of: 'Teilaktion von'
@@ -360,17 +357,13 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       uploadPictures: "Hast du während der Aktion Bilder gemacht, die du veröffentlichen möchtest? Dann kannst du sie hier hochladen.
         Hast du andere Personen fotografiert, stelle bitte sicher, dass du ihr Einverständnis für das Veröffentlichen der Bilder hast."
       addVolunteer: 'Fordere Mitarbeiter nach Möglichkeit auf, sich selbst für die Aktion anzumelden. Und melde nur Leute mit ihrem Einverständnis an.'
-      remainingVacancy: '%{places} freie Plätze'
+
     message:
       addLeaderSuccess: Leiter erfolgreich hinzugefügt
       removeLeaderSuccess: Leiter erfolgreich entfernt
       imageCropped: 'Der Bildausschnitt wurde angepasst.'
-      created: 'Aktion wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
+      created: 'Aktion wurde erfolgreich erstellt. Sie muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Aktion wurde erfolgreich aktualisiert.'
-      leaderAdded: 'Aktionsleiter erfolgreich hinzugefügt.'
-      leaderRemoved: 'Aktionsleiter erfolgreich entfernt.'
-      volunteerAdded: 'Mitarbeiter erfolgreich hinzugefügt.'
-      volunteerRemoved: 'Mitarbeiter erfolgreich entfernt.'
       errorList: 'Wegen folgender Fehler konnte die Aktion nicht gespeichert werden:'
       teamMember: 'Du bist im Aktionsteam.'
       subactionTeamMember: 'Du bist bei einer Teilaktion dabei.'
@@ -408,6 +401,14 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       hidden: Versteckt
 
   event:
+    action:
+      enter: Team beitreten
+      leave: Team verlassen
+      addVolunteer: Mitarbeiter hinzufügen
+      removeVolunteer: Mitarbeiter entfernen
+      showPastEvents: vergangene Zeiträume zeigen
+    help:
+      remainingVacancy: '%{places} freie Plätze'
     message:
       addVolunteerSuccess: Mitarbeiter erfolgreich hinzugefügt
       removeVolunteerSuccess: Mitarbeiter erfolgreich entfernt

@@ -1,0 +1,42 @@
+<%# expects parameters "action/event", optionally "simple_titles", "show_occupancy" and "show_date" %>
+<% simple_title = local_assigns.fetch :simple_title, false %>
+<% show_occupancy = local_assigns.fetch :show_occupancy, true %>
+<% show_date = local_assigns.fetch :show_date, true %>
+<% action = local_assigns.fetch(:action) {event.initiative} %>
+
+<% if local_assigns.has_key? :event %>
+  <% date, team_size, desired_team_size = event.date, event.team_size, event.desired_team_size %>
+<% else %>
+  <% date, team_size, desired_team_size = action.date, action.total_team_size, action.total_desired_team_size %>
+<% end %>
+
+
+
+<%= link_to action, class: (action.visible? ? 'action-entry' : 'action-entry hidden-action') do %>
+
+  <div class="image">
+    <%= image_tag (action.show_picture? ? action.picture_url(:action_list) : 'placeholder.svg') %>
+  </div>
+
+  <div class="info">
+    <% if show_date && !date.nil? %>
+      <div class="date"><%= l date, format: :date %></div>
+    <% end %>
+    <% if !simple_title && action.subaction? %>
+      <div class="parent-title"><%= action.parent_action.title %></div>
+    <% end %>
+    <div class="title"><%= action.title %></div>
+  </div>
+
+  <% if show_occupancy && desired_team_size.positive? %>
+    <div class="badges">
+      <% if [:empty, :soon_full, :full].include? action.status %>
+          <span class="badge status_<%= action.status %>"
+                title="<%= t('event.help.remainingVacancy', places: desired_team_size - team_size) %>">
+                <%= "#{team_size} / #{desired_team_size}" %>
+              </span>
+      <% end %>
+    </div>
+  <% end %>
+
+<% end %>

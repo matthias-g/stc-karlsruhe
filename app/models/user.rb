@@ -62,9 +62,10 @@ class User < ApplicationRecord
         .where('participations.user_id = ?', id).distinct
   end
 
-  def events
+  def events # TODO sure this works as intended?
     Event.joins(:participations).where('participations.user_id': id)
-        .joins('JOIN actions ON events.initiative_id = actions.id').joins('JOIN leaderships ON leaderships.action_id = actions.id')
+        .joins('JOIN actions ON events.initiative_id = actions.id')
+        .joins('JOIN leaderships ON leaderships.action_id = actions.id')
         .where('leaderships.user_id': id).distinct
   end
 

@@ -1,6 +1,8 @@
-<% has_upcoming_events = action.events.upcoming.any? %>
+<%# expects parameter "events"" %>
 
-<% action.events.each do |event| %>
+<% has_upcoming_events = events.upcoming.any? %>
+
+<% events.each do |event| %>
   <% volunteers = event.volunteers %>
   <% team_size = volunteers.count %>
   <% desired = event.desired_team_size %>
@@ -8,11 +10,11 @@
   <div class="white-box <%= "event_#{event.status}" if has_upcoming_events %>">
 
     <span class="badge status_<%= event.status %> float-right mt-2"
-          title="<%= t('action.help.remainingVacancy', places: desired - team_size) %>">
+          title="<%= t('event.help.remainingVacancy', places: desired - team_size) %>">
       <%= "#{team_size} / #{desired}" %>
     </span>
 
-    <% if action.events.count > 1 %>
+    <% if events.count > 1 %>
       <h4 class="mt-1 mb-2"><%= l(event.date, format: :date) unless event.date.nil? %>, <%= event.time %></h4>
     <% else %>
       <h3 class="mb-2"><%= t('action.label.volunteers_in_action') %></h3>
@@ -34,16 +36,16 @@
     <div class="my-2">
       <% if policy(event).leave? %>
         <%= link_to leave_event_path(event), class: 'btn btn-danger btn-block' do %>
-          <span class="fas fa-sign-out-alt"></span> <%= t('action.action.leave') %>
+          <span class="fas fa-sign-out-alt"></span> <%= t('event.action.leave') %>
         <% end %>
       <% elsif event.available_places.positive? %>
         <% if user_signed_in? %>
           <%= link_to enter_event_path(event), class: 'btn btn-success btn-block' do %>
-            <span class="fas fa-sign-in-alt"></span> <%= t('action.action.enter') %>
+            <span class="fas fa-sign-in-alt"></span> <%= t('event.action.enter') %>
           <% end %>
         <% else %>
           <%= link_to register_for_participation_event_path(event), class: 'btn btn-success btn-block' do %>
-            <span class="fas fa-sign-in-alt"></span> <%= t('action.action.enter') %>
+            <span class="fas fa-sign-in-alt"></span> <%= t('event.action.enter') %>
           <% end %>
         <% end %>
       <% end %>
@@ -51,15 +53,15 @@
 
     <% if policy(event).manage_team? && policy(User).index? %>
       <%= user_select_picker event, 'volunteers', false, class: 'col-select btn-block',
-                             title: t('action.action.addVolunteer'), data: {'success-reload': true} %>
+                             title: t('event.action.addVolunteer'), data: {'success-reload': true} %>
     <% end %>
 
   </div>
 <% end %>
 
-<% if action.events.finished.any? && has_upcoming_events %>
+<% if events.finished.any? && has_upcoming_events %>
   <a href="javascript:void(0)" onclick="$('.event_finished').slideToggle(); $(this).hide();"
      class="btn btn-secondary btn-block">
-    <%= t('action.action.showPastEvents') %>
+    <%= t('event.action.showPastEvents') %>
   </a>
 <% end %>

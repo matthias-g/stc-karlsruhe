@@ -104,7 +104,9 @@
           <h3>Vergangene Aktionen</h3>
           <% events = policy_scope(Event.finished).order(date: :desc).limit(4) %>
         <% end %>
-        <%= render '/events/event_list', events: events %>
+        <% events.each do |event| %>
+          <%= render '/actions/action_entry', event: event %>
+        <% end %>
       </div>
 
     </div>

@@ -112,7 +112,7 @@
   }
 }
 
-// action list partial (pages->home, users->show, actions->show)
+// action/event list partial (pages->home, users->show, actions->show)
 .action-entry {
   display: flex;
   align-items: center;
@@ -131,12 +131,16 @@
     flex: 1;
   }
   .badges {
-    float: right;
     padding: 5px;
+  }
+  .parent-title {
+    @extend %CaptionFont;
+    font-size: 16px;
   }
   .title {
     @extend %CaptionFont;
     font-size: 20px;
+    font-weight: normal;
   }
   &.hidden-action .title {
     color: $status_hidden !important;

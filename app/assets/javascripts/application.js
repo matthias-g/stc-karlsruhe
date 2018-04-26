@@ -5,10 +5,9 @@
 //= require jquery_ujs
 //= require jquery-ui/widgets/sortable
 
-// BOOTSTRAP
-//= require popper
-//#= require bootstrap-sprockets
-//= require bootstrap
+// BOOTSTRAP (already required automatically)
+//#= require popper
+//#= require bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.de.js
 

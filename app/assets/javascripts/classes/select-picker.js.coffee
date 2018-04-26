@@ -5,7 +5,6 @@ class @SelectPicker
 
   constructor: (select) ->
     select.selectpicker 'render'
-    #handler_name = select.data('handler')
     handling = select.data('handling')
     select.on 'changed.bs.select', ->
       url = handling.url.replace('{id}', select.val())

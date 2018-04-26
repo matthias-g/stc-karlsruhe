@@ -18,13 +18,6 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
     follow_redirect!
     assert_response :success
-    assert_select '#title', 'Default'
-  end
-
-  test "should show role" do
-    get role_url(@role)
-    assert_response :success
-    assert_select '#title', @role.title
   end
 
   test "should get edit" do
@@ -38,7 +31,6 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
     assert_equal 'New title', @role.reload.title
-    assert_select '#title', @role.title
   end
 
   test "should destroy role" do

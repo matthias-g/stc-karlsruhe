@@ -53,19 +53,19 @@
           <% unless @action.individual_tasks.blank? %>
             <div class="individual_tasks">
               <h3><%= Action.human_attribute_name(:individual_tasks) %></h3>
-              <%= simple_format @action.individual_tasks %>
+              <%= simple_format( simple_format_urls @action.individual_tasks) %>
             </div>
           <% end %>
           <% unless @action.requirements.blank? %>
             <div class="requirements">
               <h3><%= Action.human_attribute_name(:requirements) %></h3>
-              <%= simple_format @action.requirements %>
+              <%= simple_format( simple_format_urls @action.requirements) %>
             </div>
           <% end %>
           <% unless @action.material.blank? %>
             <div class="material">
               <h3><%= Action.human_attribute_name(:material) %></h3>
-              <%= simple_format @action.material %>
+              <%= simple_format( simple_format_urls @action.material) %>
             </div>
           <% end %>
 

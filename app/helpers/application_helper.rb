@@ -69,4 +69,106 @@ module ApplicationHelper
     end
     options_for_select(options)
   end
+
+  def get_name_for model
+    return 'nil' if model.nil?
+    return model.full_name if model.is_a? User
+    return model.title if model.is_a? Role
+    return model.initiative.full_title if model.is_a? Event
+    return model.full_title if model.is_a? Action
+    'no_idea'
+  end
+
+  # creates a ujs remote link with JSONAPI content
+  def api_link(name, target, action, html_options = nil, &block)
+    html_options, action, target, name = action, target, name, block if block_given?
+    html_options ||= {}
+    model = target[0]
+    model_name = model.model_name
+
+    # map actions to HTTP methods
+    method_map = {create: :put, update: :patch, list: :get, show: :get, delete: :delete, remove: :delete, add: :post}
+    method = method_map[action] || action
+
+    # set basic UJS data attributes, URL and localization key
+    data = html_options[:data] || {}
+    data.merge!(remote: true, method: method, type: :jsonapi)
+    url = '/api/%s/%s' % [model_name.route_key.sub('_', '-'), model.id]
+    i18n_key = action.to_s
+
+    # are we changing an association?
+    if target.length > 1
+      rel_model = target.last
+      rel_name = (target.length == 3) ? target[1] : rel_model.model_name.collection
+      url += '/relationships/' + rel_name
+      i18n_key += rel_name.singularize.camelcase
+      data.merge!(params: [type: rel_model.model_name.route_key, id: rel_model.id])
+    end
+
+    # are we changing an attribute?
+    if (action == :update) && (html_options.key? :attributes)
+      data.merge!(params: {type: model.model_name.route_key, id: model.id,
+                           attributes: html_options[:attributes]})
+    end
+
+    # add success message
+    unless data.key? 'success-message'
+      success_message = t(model_name.singular + '.message.' + i18n_key + 'Success',
+                          model: get_name_for(model), rel_model: get_name_for(rel_model))
+      data.merge!('success-message': success_message)
+    end
+
+    # get link title
+    title = html_options[:title] || t(model_name.singular + '.action.' + i18n_key)
+
+    # set title as linktext
+    name = title if (name == :auto_name)
+
+    # add icon (if set, or choose icon by action)
+    icon_map = {create: 'fas fa-add', update: 'fas fa-save', list: 'fas fa-list', show: 'fas fa-eye',
+                delete: 'fas fa-trash', remove: 'fas fa-times', add: 'fas fa-add'}
+    icon = html_options[:icon] || icon_map[action]
+    name = '<span class="' + icon + '"></span>' + name unless icon.blank?
+
+    link_to sanitize(name), url, html_options.merge(title: title, data: data).except(:icon, :attributes)
+  end
+
+
+  # allows to select a user in order to build a user->model or model->user relation
+  def user_select_picker(model, rel_name, is_user_rel = false, html_options = nil)
+    html_options ||= {}
+    html_options[:class] ||= ''
+
+    # set handler attributes
+    if is_user_rel
+      handling = {
+        url: '/api/%s/{id}/relationships/%s' % [User.model_name.route_key, rel_name],
+        data: [type: model.model_name.plural, id: model.id]
+      }
+      i18n_base = User.model_name.singular
+    else
+      handling = {
+        url: '/api/%s/%s/relationships/%s' % [model.model_name.route_key, model.id, rel_name],
+        data: [type: User.model_name.plural, id: '{id}']
+      }
+      i18n_base = model.model_name.singular
+    end
+
+    # add selectpicker attributes
+    data = html_options[:data] || {}
+    data.merge!(class: 'SelectPicker', live_search: true, size: 5,
+                handling: handling.merge(method: 'POST'), type: 'jsonapi')
+    html_options[:class] += ' selectpicker'
+    html_options[:title] = t('general.action.add') unless html_options.key? :title
+
+    # add success message
+    unless data.key? 'success-message'
+      success_message = t(i18n_base + '.message.add' + rel_name.singularize.camelcase + 'Success')
+      data.merge!('success-message': success_message)
+    end
+
+    id = 'add-'+ model.model_name.singular + '-' + rel_name
+    select_tag id, options_for_user_select, html_options.merge(data: data)
+  end
+
 end

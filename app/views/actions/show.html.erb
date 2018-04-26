@@ -157,20 +157,15 @@
                 <span>
                   <%= link_to leader.first_name, leader %>
                   <% if policy(@action).manage_team? %>
-                    <%= link_to delete_leader_action_path(@action, user_id: leader.id),
-                                method: 'delete', title: t('action.action.removeLeader') do %>
-                      <span class="fas fa-times" aria-label="<%= t('action.action.removeLeader') %>"></span>
-                    <% end %>
+                    <%= api_link '', [@action, 'leaders', leader], :remove, data: {'success-remove': 1} %>
                   <% end %>
                 </span>
               <% end %>
             </div>
             <% if policy(@action).manage_team? && policy(User).index? %>
               <div class="my-2">
-                <%= select_tag 'select-new-leader', options_for_user_select,
-                               class: 'selectpicker col-select btn-block', title: t('action.action.addLeader'),
-                               data: {class: 'SelectPicker', handler: 'addNewLeader',
-                                      'live-search': true, action_id: @action.id, size: 5} %>
+                <%= user_select_picker @action, 'leaders', false, class: 'col-select btn-block',
+                                       title: t('action.action.addLeader'), data: {'success-reload': true} %>
               </div>
             <% end %>
           </div>

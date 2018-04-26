@@ -15,16 +15,12 @@
             <% policy_scope(role.users).order(:first_name, :last_name).each do |user| %>
                 <div class="user">
                   <span><%= user.full_name %></span>
-                  <%= link_to '', '', class: 'fas fa-times', title: t('general.action.remove'),
-                      data: {'user-id': user.id, 'role-id': role.id} %>
+                  <%= api_link '', [user, 'roles', role], :remove, data: {'success-remove': 1} %>
                 </div>
             <% end %>
           </div>
           <div class="mt-3">
-            <%= select_tag "add-user-to-#{role.title}", options_for_user_select,
-                           class: 'selectpicker', title: t('general.action.add'),
-                           data: { class: 'SelectPicker', handler: 'addUserToRole',
-                                   live_search: true, role_id: role.id, size: 5 } %>
+            <%= user_select_picker role, 'roles', true, data: {'success-reload': true} %>
           </div>
         </div>
     <% end %>

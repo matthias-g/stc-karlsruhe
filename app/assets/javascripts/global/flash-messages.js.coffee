@@ -5,12 +5,13 @@
 ### API ###
 
 # create a new flash message and append it
-@createFlashMessage = (str, type) ->
+@createFlashMessage = (desc, heading, type) ->
   type ?= 'info'
+  desc = '<h4>' + heading + '</h4>' + desc if heading && heading.length
   appendFlashMessage $("""
     <div class="alert alert-""" + type + """ alert-dismissible" role="alert">
       <a href="#" data-dismiss="alert" class="close">×</a>
-      """ + str + """
+      """ + desc + """
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>

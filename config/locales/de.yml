@@ -309,11 +309,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       makeVisible: 'Sichtbar machen'
       makeInvisible: 'Verstecken'
       manageTeam: 'Team verwalten'
-      makeLeader: 'als Leiter hinzufügen'
-      addLeader: 'Aktionsleiter hinzufügen'
-      removeLeader: 'Aktionsleiter entfernen'
-      addVolunteer: 'Mitarbeiter hinzufügen'
-      removeVolunteer: 'Mitarbeiter entfernen'
+      addLeader: Aktionsleiter hinzufügen
+      removeLeader: Aktionsleiter entfernen
       toOverview: 'zur Aktionsliste'
       toAction: 'zurück zur Aktion'
       toParentAction: 'zur Überaktion'
@@ -365,6 +362,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       addVolunteer: 'Fordere Mitarbeiter nach Möglichkeit auf, sich selbst für die Aktion anzumelden. Und melde nur Leute mit ihrem Einverständnis an.'
       remainingVacancy: '%{places} freie Plätze'
     message:
+      addLeaderSuccess: Leiter erfolgreich hinzugefügt
+      removeLeaderSuccess: Leiter erfolgreich entfernt
       imageCropped: 'Der Bildausschnitt wurde angepasst.'
       created: 'Aktion wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Aktion wurde erfolgreich aktualisiert.'
@@ -407,6 +406,12 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       full: Vollbesetzt
       finished: Abgeschlossen
       hidden: Versteckt
+
+  event:
+    message:
+      addVolunteerSuccess: Mitarbeiter erfolgreich hinzugefügt
+      removeVolunteerSuccess: Mitarbeiter erfolgreich entfernt
+      confirmDelete: Löschen bestätigen
 
   news_entry:
       action:
@@ -473,6 +478,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       loginWithProvider: 'Anmelden via %{provider}'
       newRole: Neue Rolle auswählen
       exportICal: Aktionen als ICS/iCal-Feed
+      removeRole: 'Rolle entfernen'
     label:
       login: 'Anmelden'
       register: 'Registrieren'
@@ -509,6 +515,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       accountDeleted: 'Dein Account wurde gelöscht.'
       fieldEmpty: 'Das Feld darf nicht leer sein.'
       surveySent: 'Vielen Dank für deine Rückmeldung!'
+      removeRoleSuccess: '%{model} ist nun nicht mehr %{rel_model}'
     help:
       passwordLength: 'Mindestens 6 Zeichen lang.'
 

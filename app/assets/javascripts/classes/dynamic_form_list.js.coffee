@@ -12,6 +12,7 @@ class @DynamicFormList
 
     # enable "remove" buttons on all items
     html.on 'click', '.remove-link', ->
+      return if not $.rails.confirm I18n.t 'event.message.confirmDelete'
       $(@).prev('input[type=hidden]').attr('value', 1)
       $(@).closest('.item').hide()
 

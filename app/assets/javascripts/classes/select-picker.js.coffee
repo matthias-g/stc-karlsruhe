@@ -5,7 +5,16 @@ class @SelectPicker
 
   constructor: (select) ->
     select.selectpicker 'render'
-    handler_name = select.data('handler')
+    #handler_name = select.data('handler')
+    handling = select.data('handling')
     select.on 'changed.bs.select', ->
-      handler = window[handler_name] if handler_name? and window[handler_name]?
-      handler(select.val(), select)
+      url = handling.url.replace('{id}', select.val())
+      payload = JSON.stringify(handling.data).replace('{id}', select.val())
+      request = window.requestToJsonApi(url, handling.method, data: JSON.parse(payload))
+
+      # fire basic response handling
+      request.success (data, status, xhr) ->
+        select.trigger('ajax:success', [data, status, xhr])
+      request.error (xhr, status, error) ->
+        select.trigger('ajax:error', [xhr, status, error])
+

@@ -1,13 +1,11 @@
-module Api
-  class NewsEntriesController < Api::ApiController
+class Api::NewsEntriesController < Api::ApiController
 
-    include JSONAPI::ActsAsResourceController
+  include JSONAPI::ActsAsResourceController
 
-    private
+  private
 
-    def context
-      { user: current_user }
-    end
-
+  def context
+    { user: current_user }
   end
+
 end

@@ -15,7 +15,7 @@ onViewLoad 'users->show', ->
       if (!value || value.trim() == '')
         hasEmptyValue = true
     if (hasEmptyValue)
-      createFlashMessage I18n.t('user.message.fieldEmpty'), 'warning'
+      createFlashMessage I18n.t('user.message.fieldEmpty'), '', 'warning'
       return
 
     # send survey, then hide it

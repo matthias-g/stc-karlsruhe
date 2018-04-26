@@ -24,10 +24,7 @@
           <span>
             <%= link_to volunteer.first_name, volunteer %>
             <% if policy(event).manage_team? %>
-              <%= link_to delete_volunteer_event_path(event, user_id: volunteer.id),
-                          method: 'delete', title: t('action.action.removeVolunteer') do %>
-                <span class="fas fa-times" aria-label="<%= t('action.action.removeVolunteer') %>"></span>
-              <% end %>
+              <%= api_link '', [event, 'volunteers', volunteer], :remove, data: {'success-remove': 1} %>
             <% end %>
           </span>
         <% end %>
@@ -53,10 +50,8 @@
     </div>
 
     <% if policy(event).manage_team? && policy(User).index? %>
-      <%= select_tag 'select-new-volunteer', options_for_user_select,
-           class: 'selectpicker col-select btn-block', title: t('action.action.addVolunteer'),
-           data: {class: 'SelectPicker', handler: 'addNewVolunteer',
-                  'live-search': true, event_id: event.id, size: 5} %>
+      <%= user_select_picker event, 'volunteers', false, class: 'col-select btn-block',
+                             title: t('action.action.addVolunteer'), data: {'success-reload': true} %>
     <% end %>
 
   </div>

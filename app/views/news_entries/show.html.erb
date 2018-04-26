@@ -58,11 +58,17 @@
 
 <% if policy(@news_entry).edit? %>
     <div class="section">
+
       <%= link_to t('news_entry.action.edit'),
                   edit_news_entry_path(@news_entry), class:'btn btn-secondary' %>
-      <%= tag.a (@news_entry.visible? ? t('news_entry.action.makeInvisible') : t('news_entry.action.makeVisible')),
-                class:'btn btn-secondary', id: 'news-entry-visibility-button',
-                data: {'entry-id': @news_entry.id, visible: @news_entry.visible?} %>
+
+      <%= api_link :auto_name, [@news_entry], :update, class: 'btn btn-secondary',
+                   icon: @news_entry.visible? ? 'fas fa-eye-slash' : 'fas fa-eye',
+                   title: @news_entry.visible? ? t('news_entry.action.makeInvisible') :
+                              t('news_entry.action.makeVisible'),
+                   attributes: {visible: !@news_entry.visible?},
+                   data: {'success-reload': true} %>
+
       <%= link_to t('news_entry.action.delete'), @news_entry, method: :delete,
                   data: { confirm: t('general.message.confirmDelete')},
                   class: 'btn btn-secondary' %>

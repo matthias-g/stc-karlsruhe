@@ -273,6 +273,11 @@ RSpec.describe ActionPolicy do
       it { should_pass }
     end
 
+    context 'as coordinator' do
+      let(:user) { users(:coordinator) }
+      it { should_pass }
+    end
+
     context 'as other user' do
       let(:user) { users(:sabine) }
       it { should_fail }

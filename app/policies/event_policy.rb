@@ -25,7 +25,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def manage_team?
-    (is_admin? || is_coordinator? || is_leader?) && !record.finished?
+    is_admin? || is_coordinator? || (is_leader? && !record.finished?)
   end
 
   def add_to_volunteers?(users)

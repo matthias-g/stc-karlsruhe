@@ -141,6 +141,11 @@ RSpec.describe EventPolicy do
     context 'as leader' do
       let(:user) { users(:rolf) }
       it { should_pass }
+
+      context 'for finished event' do
+        before { event.update_attribute :date, Date.yesterday }
+        it { should_fail }
+      end
     end
 
     context 'as admin' do
@@ -149,7 +154,7 @@ RSpec.describe EventPolicy do
 
       context 'for finished event' do
         before { event.update_attribute :date, Date.yesterday }
-        it { should_fail }
+        it { should_pass }
       end
     end
 

@@ -9,7 +9,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    return false unless user
+    return nil unless user
     !record.cleared? || is_admin?
   end
 
@@ -25,7 +25,6 @@ class UserPolicy < ApplicationPolicy
   end
 
   def edit?
-    return false unless user
     user.eql?(record) || is_admin?
   end
 
@@ -40,7 +39,7 @@ class UserPolicy < ApplicationPolicy
   alias_method :confirm_delete?, :destroy?
 
   def contact_user?
-    return false unless user
+    return nil unless user
     true
   end
 

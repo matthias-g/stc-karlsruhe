@@ -83,6 +83,12 @@ class ActionGroupsControllerTest < ActionDispatch::IntegrationTest
     assert_select '.action-card .card-text', actions(:four).description
   end
 
+  test "action should action group when filtering day and a user is logged in" do
+    sign_in users(:rolf)
+    get show_action_group_url(@action_group, filter: {day: '2017-07-03'})
+    assert_response :success
+  end
+
   test "should get edit" do
     sign_in users(:admin)
     get edit_action_group_url(@action_group)

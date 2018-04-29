@@ -6,7 +6,7 @@ class ActionPolicy < ApplicationPolicy
         scope.all
       elsif user
         scope.joins('LEFT JOIN leaderships policyLeaderships on actions.id = policyLeaderships.action_id')
-            .where('policyLeaderships.user_id = ? OR visible', user.id).distinct
+            .where('policyLeaderships.user_id = ? OR actions.visible', user.id).distinct
       else
         scope.where(visible: true).distinct
       end

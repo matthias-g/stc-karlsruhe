@@ -43,8 +43,8 @@ shared_examples 'a EventUserRelationship' do
       context 'action is finished' do
         let(:action) { actions('Beendete Aktion') }
 
-        it 'is false' do
-          expect(subject).to be_falsey
+        it 'is true' do
+          expect(subject).to be_truthy
         end
       end
 
@@ -67,7 +67,7 @@ shared_examples 'a EventUserRelationship' do
   end
 
   describe 'allow_remove_volunteer_from_action?' do
-    subject { relationship.allow_remove_volunteer_from_event?(user, action) }
+    subject { relationship.allow_remove_volunteer_from_event?(user, action.events.first) }
     let(:user) { users(:sabine) }
 
     it 'should be false for no user logged in' do
@@ -108,8 +108,8 @@ shared_examples 'a EventUserRelationship' do
       context 'action is finished' do
         let(:action) { actions('Fast volle, beendete Aktion') }
 
-        it 'is false' do
-          expect(subject).to be_falsey
+        it 'is true' do
+          expect(subject).to be_truthy
         end
       end
     end

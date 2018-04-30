@@ -54,8 +54,13 @@ RSpec.describe EventPolicy do
     subject { policy.remove_from_volunteers?(user_to_remove) }
 
     context 'as some user' do
-      let(:user) { users(:rolf) }
+      let(:user) { users(:peter) }
       it { should_fail }
+    end
+
+    context 'as leader' do
+      let(:user) { users(:rolf) }
+      it { should_pass }
     end
 
     context 'as admin' do

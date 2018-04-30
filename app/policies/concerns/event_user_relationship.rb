@@ -4,7 +4,7 @@ module EventUserRelationship
   included do
 
     def allow_add_volunteer_to_event?(volunteer, event)
-      allow_edit_volunteer?(volunteer, event) && !event.volunteer?(volunteer) && event.available_places.positive?
+      allow_edit_volunteer?(volunteer, event) && !event.volunteer?(volunteer) && (event.team_size < event.desired_team_size)
     end
 
     def allow_remove_volunteer_from_event?(volunteer, event)
@@ -12,7 +12,8 @@ module EventUserRelationship
     end
 
     def allow_edit_volunteer?(volunteer, event)
-      user && (user.eql?(volunteer) || user.in_orga_team?) && !event.finished?
+      return false unless user
+      user.in_orga_team? || ((user.eql?(volunteer) || event.initiative.leader?(user)) && !event.finished?)
     end
 
   # When changing this line keep bin/travis-mutant in mind

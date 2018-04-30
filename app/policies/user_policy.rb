@@ -43,8 +43,4 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
-  def add_to_actions_as_volunteer?(actions)
-    actions.all? { |action| allow_add_volunteer_to_event?(record, action) }
-  end
-
 end

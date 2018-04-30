@@ -97,26 +97,6 @@ RSpec.describe UserPolicy do
   end
 
 
-  describe 'add_to_actions_as_volunteer?' do
-    let(:new_action) { [actions('Kostenlose Fahrradreparatur in der Innenstadt')] }
-    subject { policy.add_to_actions_as_volunteer?(new_action) }
-
-    context 'when no user is logged in' do
-      it { should_fail }
-    end
-
-    context 'for some user' do
-      let(:current_user) { users(:sabine) }
-      it { should_fail }
-    end
-
-    context 'for same user' do
-      let(:current_user) { users(:rolf) }
-      it { should_pass }
-    end
-  end
-
-
   describe 'permitted_attributes_for_show' do
     subject { policy.permitted_attributes_for_show }
 

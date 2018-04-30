@@ -25,7 +25,8 @@ class EventPolicy < ApplicationPolicy
   end
 
   def manage_team?
-    is_admin? || is_coordinator? || (is_leader? && !record.finished?)
+    return false unless user
+    user.in_orga_team? || (record.initiative.leader?(user) && !record.finished?)
   end
 
   def add_to_volunteers?(users)
@@ -42,7 +43,7 @@ class EventPolicy < ApplicationPolicy
       allowed &= users.include?(volunteer) || remove_from_volunteers?(volunteer)
     end
     users.each do |user|
-      allowed &= is_volunteer?(user) || add_to_volunteers?([user])
+      allowed &= record.volunteer?(user) || add_to_volunteers?([user])
     end
     allowed
   end
@@ -52,15 +53,5 @@ class EventPolicy < ApplicationPolicy
   end
 
   alias_method :delete_volunteer?, :manage_team?
-
-  private
-
-  def is_volunteer?(user)
-    record.volunteer?(user)
-  end
-
-  def is_leader?
-    record.initiative.leader?(user)
-  end
 
 end

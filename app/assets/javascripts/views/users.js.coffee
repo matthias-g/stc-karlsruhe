@@ -1,7 +1,7 @@
 onViewLoad 'users->show', ->
 
   # enable survey submission
-  $('#users #survey form').submit (e) ->
+  $('#survey form').submit (e) ->
     e.preventDefault()
 
     # collect values
@@ -21,7 +21,7 @@ onViewLoad 'users->show', ->
     # send survey, then hide it
     callback = (response) ->
       createFlashMessage I18n.t('user.message.surveySent')
-      $('#users #survey').slideUp 800
+      $('#users #survey').slideUp 800, -> $(@).remove()
     $.post ('/api' + $(@).attr('action')), values, callback, 'json'
 
 

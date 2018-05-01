@@ -3,15 +3,29 @@ class UserPolicy < ApplicationPolicy
   include EventUserRelationship
 
   class Scope < Scope
-    def resolve
-      scope
-    end
   end
+
 
   def show?
     return nil unless user
     !record.cleared? || is_admin?
   end
+
+  def edit?
+    user.eql?(record) || is_admin?
+  end
+
+  def contact_user?
+    return nil unless user
+    true
+  end
+
+
+  alias_method :index?, :is_admin_or_coordinator?
+  alias_method :update?, :edit?
+  alias_method :destroy?, :edit?
+  alias_method :confirm_delete?, :destroy?
+
 
   def permitted_attributes_for_show
     return %i[first_name] unless user
@@ -24,23 +38,9 @@ class UserPolicy < ApplicationPolicy
        receive_emails_from_other_users]
   end
 
-  def edit?
-    user.eql?(record) || is_admin?
-  end
-
   def updatable_fields
     return %i[actions_as_volunteer username first_name last_name email phone] unless is_admin?
     %i[roles actions_as_volunteer username first_name last_name email phone]
-  end
-
-  alias_method :index?, :is_admin_or_coordinator?
-  alias_method :update?, :edit?
-  alias_method :destroy?, :edit?
-  alias_method :confirm_delete?, :destroy?
-
-  def contact_user?
-    return nil unless user
-    true
   end
 
 end

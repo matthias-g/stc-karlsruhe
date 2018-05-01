@@ -2,25 +2,26 @@ class GalleryPicturePolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user && (user.admin? || user.coordinator?)
-        scope.all
-      else
-        scope.where(visible: true).or(scope.where(uploader: user))
-      end
+      user&.in_orga_team? ? scope.all : scope.where(visible: true).or(scope.where(uploader: user))
     end
   end
 
-  def index?
-    true
-  end
-
-  def create?
-    is_admin?
-  end
-
   def show?
-    is_admin_or_coordinator? || record.visible || is_uploader?
+    record.visible || is_admin_or_coordinator? || is_uploader?
   end
+
+  def make_invisible?
+    is_admin_or_coordinator? || is_uploader?
+  end
+
+
+  alias_method :index?, :always
+  alias_method :create?, :is_admin?
+  alias_method :edit?, :is_admin_or_coordinator?
+  alias_method :update?, :edit?
+  alias_method :destroy?, :edit?
+  alias_method :make_visible?, :is_admin_or_coordinator?
+
 
   def permitted_attributes_for_show
     public_attributes = %i[width height desktop_width desktop_height picture editable]
@@ -28,20 +29,8 @@ class GalleryPicturePolicy < ApplicationPolicy
     public_attributes + %i[visible uploader]
   end
 
-  def edit?
-    is_admin? || is_coordinator?
-  end
 
-  alias_method :update?, :edit?
-  alias_method :destroy?, :edit?
-
-  def make_visible?
-    is_admin_or_coordinator?
-  end
-
-  def make_invisible?
-    is_admin_or_coordinator? || is_uploader?
-  end
+  private
 
   def is_uploader?
     user.eql?(record.uploader)

@@ -1,13 +1,10 @@
 class OrgaMessagePolicy < ApplicationPolicy
 
-  def index?
-    is_admin? || is_coordinator?
-  end
-
   def update?
-    (is_admin? || is_coordinator?) && !record.sent?
+    edit? && !record.sent?
   end
 
+  alias_method :index?, :is_admin_or_coordinator?
   alias_method :new?, :index?
   alias_method :show?, :index?
   alias_method :create?, :index?

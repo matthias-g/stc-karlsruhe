@@ -1,4 +1,5 @@
 class ApplicationPolicy
+  attr_reader :user, :record
 
   class Scope
     attr_reader :user, :scope
@@ -13,12 +14,16 @@ class ApplicationPolicy
     end
   end
 
-  attr_reader :user, :record
 
   def initialize(user, record)
     @user = user
     @record = record
   end
+
+  def scope
+    Pundit.policy_scope!(user, record.class)
+  end
+
 
   def index?
     false
@@ -48,9 +53,6 @@ class ApplicationPolicy
     false
   end
 
-  def scope
-    Pundit.policy_scope!(user, record.class)
-  end
 
   def is_admin?
     user&.admin?
@@ -61,7 +63,11 @@ class ApplicationPolicy
   end
 
   def is_admin_or_coordinator?
-    user&.admin? || user&.coordinator?
+    user&.in_orga_team?
+  end
+
+  def always
+    true
   end
 
 end

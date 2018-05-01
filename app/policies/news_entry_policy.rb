@@ -1,28 +1,23 @@
 class NewsEntryPolicy < ApplicationPolicy
 
+  class Scope < Scope
+    def resolve
+      user&.in_orga_team? ? scope.all : scope.visible
+    end
+  end
+
+
   def show?
     record.visible? || edit?
   end
 
-  def edit?
-    is_admin? || is_coordinator?
-  end
 
+  alias_method :edit?, :is_admin_or_coordinator?
   alias_method :new?, :edit?
   alias_method :create?, :edit?
   alias_method :update?, :edit?
   alias_method :destroy?, :edit?
   alias_method :upload_pictures?, :edit?
   alias_method :crop_picture?, :edit?
-
-  class Scope < Scope
-    def resolve
-      if user&.admin? || user&.coordinator?
-        scope.all
-      else
-        scope.visible
-      end
-    end
-  end
 
 end

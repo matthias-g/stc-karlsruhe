@@ -4,24 +4,23 @@ class EventPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user && (user.admin? || user.coordinator?)
+      if user&.in_orga_team?
         scope.all
       elsif user
-        scope.joins('JOIN actions ON events.initiative_id = actions.id')
-            .joins('LEFT JOIN leaderships policyLeaderships on actions.id = policyLeaderships.action_id')
-            .where('policyLeaderships.user_id = ? OR visible', user.id).distinct
+        scope.left_outer_joins(initiative: :leaderships).where('actions.visible OR leaderships.user_id = ?', user.id).distinct
       else
-        scope.joins('JOIN actions ON events.initiative_id = actions.id').where('actions.visible': true).distinct
+        scope.joins(:initiative).where(actions: {visible: true}).distinct
       end
     end
   end
 
+
   def enter?
-    add_to_volunteers? [user]
+    allow_add_volunteer_to_event?(user, record)
   end
 
   def leave?
-    remove_from_volunteers? user
+    allow_remove_volunteer_from_event?(user, record)
   end
 
   def manage_team?
@@ -48,10 +47,12 @@ class EventPolicy < ApplicationPolicy
     allowed
   end
 
+
+  alias_method :delete_volunteer?, :manage_team?
+
+
   def updatable_fields
     [:desired_team_size, :team, :date, :initiative, :volunteers]
   end
-
-  alias_method :delete_volunteer?, :manage_team?
 
 end

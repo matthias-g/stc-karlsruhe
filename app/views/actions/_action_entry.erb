@@ -5,9 +5,9 @@
 <% action = local_assigns.fetch(:action) {event.initiative} %>
 
 <% if local_assigns.has_key? :event %>
-  <% date, team_size, desired_team_size = event.date, event.team_size, event.desired_team_size %>
+  <% date, team_size, desired_team_size, status = event.date, event.team_size, event.desired_team_size, event.status %>
 <% else %>
-  <% date, team_size, desired_team_size = action.date, action.total_team_size, action.total_desired_team_size %>
+  <% date, team_size, desired_team_size, status = action.date, action.total_team_size, action.total_desired_team_size, action.status %>
 <% end %>
 
 
@@ -30,8 +30,8 @@
 
   <% if show_occupancy && desired_team_size.positive? %>
     <div class="badges">
-      <% if [:empty, :soon_full, :full].include? action.status %>
-          <span class="badge status_<%= action.status %>"
+      <% if [:empty, :soon_full, :full].include? status %>
+          <span class="badge status_<%= status %>"
                 title="<%= t('event.help.remainingVacancy', places: desired_team_size - team_size) %>">
                 <%= "#{team_size} / #{desired_team_size}" %>
               </span>

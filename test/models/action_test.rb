@@ -26,7 +26,7 @@ class ActionTest < ActiveSupport::TestCase
 
   test 'leaders' do
     assert_equal 2, @action.leaders.count
-    names = @action.leaders.collect(&:username)
+    names = @action.leaders.pluck(:username)
     assert names.include? 'rolf'
     assert names.include? 'tabea'
   end
@@ -37,7 +37,7 @@ class ActionTest < ActiveSupport::TestCase
     # parent action
     users = @parent_action.volunteers_in_subactions
     assert_equal 2, users.count
-    names = users.collect(&:username)
+    names = users.pluck(:username)
     assert names.include? 'lea'
     assert names.include? 'peter'
   end

@@ -37,12 +37,12 @@ class Action < ApplicationRecord
   end
 
   def volunteers
-    event_ids = events.map(&:id)
+    event_ids = events.pluck(:id)
     User.joins(:events_as_volunteer).where(["event_id IN (?)", event_ids])
   end
 
   def volunteers_in_subactions
-    subaction_event_ids = subactions.collect{ |action| action.events.map(&:id) }.flatten
+    subaction_event_ids = subactions.collect{ |action| action.events.pluck(:id) }.flatten
     User.joins(:events_as_volunteer).where(["event_id IN (?)", subaction_event_ids])
   end
 
@@ -77,7 +77,7 @@ class Action < ApplicationRecord
   # (returns an empty array for undated actions)
   def dates
     dates = subactions.any? ? subactions.collect(&:dates).flatten : []
-    dates = dates + events.collect(&:date).flatten
+    dates = dates + events.pluck(:date).compact
     dates.reject(&:nil?)
   end
 
@@ -87,11 +87,11 @@ class Action < ApplicationRecord
   end
 
   def desired_team_size
-    events.sum(&:desired_team_size)
+    events.sum(:desired_team_size)
   end
 
   def team_size
-    events.map(&:team_size).compact.sum
+    events.sum(:team_size)
   end
 
   # Number of available volunteer places in this action and its sub actions

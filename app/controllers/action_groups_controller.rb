@@ -9,7 +9,7 @@ class ActionGroupsController < ApplicationController
   respond_to :html
 
   def index
-    @action_groups = policy_scope(ActionGroup)
+    @action_groups = policy_scope(ActionGroup.all)
   end
 
   def show

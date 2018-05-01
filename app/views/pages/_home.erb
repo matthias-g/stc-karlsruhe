@@ -49,8 +49,8 @@
       <h2 class="sr-only">Karte</h2>
       <div id="home-actions-map" data-class="GoogleMap" data-lat="49.011627" data-lon="8.403869" data-zoom="12">
         <div class="markers">
-          <% events = policy_scope(Event.upcoming) %>
-          <% events = policy_scope(Event.where('date > ?', 1.year.ago).order(date: :desc).limit(45)) unless events.any? %>
+          <% events = policy_scope(Event.upcoming).includes(initiative: [:parent_action, :subactions]).load %>
+          <% events = policy_scope(Event.recent.limit(45)).includes(initiative: [:parent_action, :subactions]) unless events.any? %>
           <% events.each do |event| %>
             <% action = event.initiative %>
             <% if action.visible? && !action.longitude.nil? && !action.latitude.nil? %>
@@ -74,9 +74,9 @@
 
       <div id="home-group-list">
         <h3>Aktuell</h3>
-        <% groups = policy_scope(ActionGroup.where("end_date >= ?", Time.now)) %>
-        <% groups = policy_scope(ActionGroup.order(start_date: :desc).limit(2)) unless groups.any? %>
-        <% groups.order(:start_date).each do |group| %>
+        <% groups = policy_scope(ActionGroup.upcoming).load %>
+        <% groups = policy_scope(ActionGroup.newest.limit(2)).load.sort_by(&:start_date) unless groups.any? %>
+        <% groups.each do |group| %>
           <%= link_to show_action_group_path(group), class: 'title' do %>
             <div class="type"><%= date_range(group.start_date, group.end_date, format: :long) %></div>
             <span class="far fa-hand-point-right"></span> <%= group.title %>
@@ -96,13 +96,13 @@
     <div class="col-sm-7 col-md-6 col-lg-4">
 
       <div id="home-action-list">
-        <% if user_signed_in? && (events = policy_scope(current_user.events.upcoming)).any? %>
+        <% if user_signed_in? && (events = current_user.events.upcoming.includes(initiative: :subactions).load).any? %>
           <h3>Deine Aktionen</h3>
-        <% elsif (events = policy_scope(Event.upcoming).order(date: :asc).limit(4)).any? %>
+        <% elsif (events = policy_scope(Event.upcoming.limit(4)).includes(initiative: :subactions).load).any? %>
           <h3>Nächste Aktionen</h3>
         <% else %>
           <h3>Vergangene Aktionen</h3>
-          <% events = policy_scope(Event.finished).order(date: :desc).limit(4) %>
+          <% events = policy_scope(Event.finished.limit(4)) %>
         <% end %>
         <% events.each do |event| %>
           <%= render '/actions/action_entry', event: event %>
@@ -189,8 +189,9 @@
   <h1 class="sr-only">Eindrücke</h1>
   <div class="swiper-container" data-class="MultiImageSlider">
     <div class="swiper-wrapper">
+      <%# TODO: query is very slow %>
       <% pics = GalleryPicture.visible.where('id IN (SELECT p2.id FROM gallery_pictures AS p2 WHERE p2.gallery_id = gallery_pictures.gallery_id LIMIT 2)') %>
-      <% policy_scope(pics.order(created_at: :desc).limit(20)).shuffle.each do |pic| %>
+      <% policy_scope(pics.includes(gallery: :actions).order(created_at: :desc).limit(20)).shuffle.each do |pic| %>
         <div class="swiper-slide" style="width: <%= ((pic.width / pic.height.to_f) * 250).round.to_s + 'px' %>">
           <% action = pic.gallery.actions.first %>
           <%= link_to action, title: action.title do %>

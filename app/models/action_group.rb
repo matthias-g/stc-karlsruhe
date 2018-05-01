@@ -6,6 +6,8 @@ class ActionGroup < ApplicationRecord
   validates_presence_of :start_date, :end_date
 
   scope :default, -> { where(default: true).first }
+  scope :upcoming, -> { where('end_date >= ?', Date.today).order(:start_date) }
+  scope :newest, -> { order(start_date: :desc) }
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged

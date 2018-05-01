@@ -23,11 +23,11 @@ class ActionGroupTest < ActiveSupport::TestCase
   test 'vacancy count' do
     action_group = ActionGroup.create!(title: 2017, start_date: '2017-06-11', end_date: '2017-06-19')
     parent_action = Action.create!(title: 'parent action', visible: true, action_group: action_group)
-    parent_event = Event.create!(date: Date.today, initiative: parent_action, desired_team_size: 1)
+    parent_event = Event.create!(date: Date.current, initiative: parent_action, desired_team_size: 1)
     child1 = Action.create!(title: 'child 1', parent_action: parent_action, visible: true, action_group: action_group)
-    child1_event = Event.create!(date: Date.today, initiative: child1, desired_team_size: 5)
+    child1_event = Event.create!(date: Date.current, initiative: child1, desired_team_size: 5)
     child2 = Action.create!(title: 'child 2', parent_action: parent_action, visible: true, action_group: action_group)
-    child2_event = Event.create!(date: Date.today, initiative: child2, desired_team_size: 3)
+    child2_event = Event.create!(date: Date.current, initiative: child2, desired_team_size: 3)
     assert_equal 9, action_group.vacancy_count
     child1_event.update_attribute 'date', Date.yesterday
     assert_equal 4, action_group.vacancy_count

@@ -92,7 +92,7 @@ class ActionTest < ActiveSupport::TestCase
 
   test 'total_team_size and total_available_places and total_desired_places and status' do
     parent = Action.create(title: 'parent')
-    parent_event = Event.create(desired_team_size: 0, date: Date.today, initiative: parent)
+    parent_event = Event.create(desired_team_size: 0, date: Date.current, initiative: parent)
     parent.reload
     assert_equal 0, parent.total_desired_team_size
     assert_equal 0, parent.total_team_size
@@ -100,9 +100,9 @@ class ActionTest < ActiveSupport::TestCase
     assert_equal :full, parent.status
 
     child1 = Action.create(title: 'child1', parent_action: parent, visible: true)
-    child1_event = Event.create(desired_team_size: 9, date: Date.today, initiative: child1)
+    child1_event = Event.create(desired_team_size: 9, date: Date.current, initiative: child1)
     child2 = Action.create(title: 'child2', parent_action: parent, visible: true)
-    child2_event = Event.create(desired_team_size: 2, date: Date.today, initiative: child2)
+    child2_event = Event.create(desired_team_size: 2, date: Date.current, initiative: child2)
     parent.reload
     assert_equal 11, parent.total_desired_team_size
     assert_equal 0, parent.total_team_size

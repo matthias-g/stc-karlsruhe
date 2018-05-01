@@ -47,7 +47,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'status' do
     # single event
-    event = Event.create(desired_team_size: 3, date: Date.today, initiative: actions(:one))
+    event = Event.create(desired_team_size: 3, date: Date.current, initiative: actions(:one))
     assert_equal :empty, event.status
     event.add_volunteer users(:lea)
     assert_equal :soon_full, event.status

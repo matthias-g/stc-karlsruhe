@@ -1,29 +1,29 @@
 one:
   initiative: one
   desired_team_size: 4
-  date: <%= Date.today %>
+  date: <%= Date.current %>
   team_size: 1
 
 two:
   initiative: two
   desired_team_size: 7
-  date: <%= Date.today %>
+  date: <%= Date.current %>
   team_size: 1
 
 three:
   initiative: three
   desired_team_size: 7
-  date: <%= Date.today %>
+  date: <%= Date.current %>
 
 four:
   initiative: four
   desired_team_size: 7
-  date: <%= Date.today %>
+  date: <%= Date.current %>
 
 kindergarten-party:
   initiative: kindergarten-party
   desired_team_size: 2
-  date: <%= Date.today %>
+  date: <%= Date.current %>
   team_size: 1
 
 kindergarten-kitchen:
@@ -36,7 +36,7 @@ kindergarten-kitchen:
 kindergarten-music:
   initiative: kindergarten-music
   desired_team_size: 3
-  date: <%= Date.today %>
+  date: <%= Date.current %>
   team_size: 1
 
 undated:
@@ -61,7 +61,7 @@ finished_subinitiative:
 full:
   initiative: full
   desired_team_size: 1
-  date: <%= Date.today %>
+  date: <%= Date.current %>
   team_size: 1
 
 soon_full:

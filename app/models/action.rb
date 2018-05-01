@@ -18,8 +18,8 @@ class Action < ApplicationRecord
   scope :visible,  -> { where(actions: { visible: true }) }
   scope :hidden,   -> { where(actions: { visible: false }) }
   scope :toplevel, -> { where(actions: { parent_action_id: nil }) }
-  scope :upcoming, -> { joins(:events).where('events.date >= ?', Date.today) }
-  scope :finished, -> { joins(:events).where('events.date < ?', Date.today) }
+  scope :upcoming, -> { joins(:events).where('events.date >= ?', Date.current) }
+  scope :finished, -> { joins(:events).where('events.date < ?', Date.current) }
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
@@ -113,7 +113,7 @@ class Action < ApplicationRecord
   def finished?
     all_dates = dates
     return true unless all_dates.any?
-    all_dates.max < Date.today
+    all_dates.max < Date.current
   end
 
   # Is the action a sub action?

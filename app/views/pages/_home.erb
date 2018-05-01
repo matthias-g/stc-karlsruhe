@@ -24,7 +24,7 @@
       <div><span></span>Minuten</div>
       <div><span></span>Sekunden</div>
       <span class="running">bis zum ersten Aktionstag&nbsp;2018</span>
-      <% if Date.today <= countdown_date %>
+      <% if Date.current <= countdown_date %>
         <span class="finished">Der erste Aktionstag&nbsp;2018 läuft!</span>
       <% else %>
         <span class="finished week-finished">Der erste Aktionstag&nbsp;2018 ist abgeschlossen. Vielen Dank für euren Einsatz!</span>

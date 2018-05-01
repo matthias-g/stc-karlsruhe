@@ -8,8 +8,8 @@ class Event < ApplicationRecord
 
   validates :desired_team_size, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 
-  scope :upcoming, -> { where('date >= ?', Date.today).order(date: :asc) }
-  scope :finished, -> { where('date < ?', Date.today).order(date: :desc) }
+  scope :upcoming, -> { where('date >= ?', Date.current).order(date: :asc) }
+  scope :finished, -> { where('date < ?', Date.current).order(date: :desc) }
   scope :recent,   -> { where('date > ?', 1.year.ago).order(date: :desc) }
 
   validates_presence_of :desired_team_size
@@ -29,7 +29,7 @@ class Event < ApplicationRecord
   end
 
   def available_places
-    if date && date >= Date.today && desired_team_size
+    if date && date >= Date.current && desired_team_size
       desired_team_size - team_size.to_i
     else
       0
@@ -38,7 +38,7 @@ class Event < ApplicationRecord
 
   def finished?
     return true unless date
-    date < Date.today
+    date < Date.current
   end
 
   def status

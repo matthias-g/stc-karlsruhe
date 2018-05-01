@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
     template = Surveys::Template.where(show_in_user_profile: true).order('RANDOM()').first
     if template && !template.submissions.where(user_id: current_user.id).exists?
       stored_location_for(resource) || signed_in_root_path(resource)
-    elsif request.referer == sign_in_url || request.referer == login_or_register_url || request.referer =~ /.*\/password\/.*/
+    elsif request.referer == sign_in_url || request.referer == new_user_session_url || request.referer =~ /.*\/password\/.*/
       super
     else
       stored_location_for(resource) || request.referer || signed_in_root_path(resource)
@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
       flash[:error] = t "#{policy_name}.#{exception.query}", scope: 'pundit', default: :default
       redirect_to(request.referrer || root_path)
     else
-      redirect_to login_or_register_url
+      redirect_to new_user_session_path
     end
   end
 

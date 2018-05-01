@@ -60,29 +60,29 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "don't do anything for not logged in users" do
     get orga_messages_url
-    assert_redirected_to login_or_register_url
+    assert_redirected_to new_user_session_url
     get new_orga_message_url
-    assert_redirected_to login_or_register_url
+    assert_redirected_to new_user_session_url
     assert_no_difference 'OrgaMessage.count' do
       post orga_messages_url, params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
                                     subject: @message.subject, body: @message.body} }
     end
-    assert_redirected_to login_or_register_url
+    assert_redirected_to new_user_session_url
     get orga_message_url(@message)
-    assert_redirected_to login_or_register_url
+    assert_redirected_to new_user_session_url
     get edit_orga_message_url(@message)
-    assert_redirected_to login_or_register_url
+    assert_redirected_to new_user_session_url
     patch orga_message_url(@message), params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
                                                  subject: @message.subject, body: @message.body} }
-    assert_redirected_to login_or_register_url
+    assert_redirected_to new_user_session_url
     assert_no_difference 'OrgaMessage.count' do
       delete orga_message_url(@message)
     end
-    assert_redirected_to login_or_register_url
+    assert_redirected_to new_user_session_url
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
       get send_message_orga_message_url(@message)
     end
-    assert_redirected_to login_or_register_url
+    assert_redirected_to new_user_session_url
   end
 
   test "don't do anything for non admins" do

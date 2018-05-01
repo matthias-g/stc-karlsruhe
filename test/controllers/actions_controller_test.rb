@@ -61,7 +61,7 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
     @action = actions(:two)
     assert_not @action.visible
     get action_url(@action)
-    assert_redirected_to login_or_register_url
+    assert_redirected_to new_user_session_url
   end
 
   test 'should show invisible action if current user leads it' do
@@ -110,7 +110,7 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should redirect when getting edit with no user logged in' do
     get edit_action_url(@action)
-    assert_redirected_to login_or_register_path
+    assert_redirected_to new_user_session_path
   end
 
   test "should redirect when getting edit if user doesn't lead action" do
@@ -143,7 +143,7 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
       delete action_url(@action)
     end
 
-    assert_redirected_to login_or_register_path
+    assert_redirected_to new_user_session_path
   end
 
   test 'should destroy action' do
@@ -178,7 +178,7 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
     assert_not @action.visible?
     get make_visible_action_url(@action)
     assert_not @action.visible?
-    assert_redirected_to login_or_register_path
+    assert_redirected_to new_user_session_path
   end
 
   test 'admin should make action invisible' do
@@ -200,7 +200,7 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
     assert @action.visible?
     get make_invisible_action_url(@action)
     assert @action.visible?
-    assert_redirected_to login_or_register_path
+    assert_redirected_to new_user_session_path
   end
 
 end

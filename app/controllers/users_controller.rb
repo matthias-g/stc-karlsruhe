@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, except: [:index, :login_or_register]
-  before_action :authorize_user, except: [:index, :login_or_register]
-  after_action :verify_authorized, except: [:login_or_register]
+  before_action :set_user, except: [:index]
+  before_action :authorize_user, except: [:index]
+  after_action :verify_authorized
 
   respond_to :html
 
@@ -53,9 +53,6 @@ class UsersController < ApplicationController
     Mailer.user_mail(@message, current_user, @user).deliver_now
     flash[:notice] = t('contact.user.success', recipient: @user.full_name)
     redirect_to action: :show
-  end
-
-  def login_or_register
   end
 
   private

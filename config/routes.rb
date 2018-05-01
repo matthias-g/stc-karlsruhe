@@ -78,7 +78,6 @@ Rails.application.routes.draw do
       post :contact_user
     end
   end
-  get :login_or_register, to: 'users#login_or_register'
 
   root 'pages#home'
   get '/eigene-aktion', to: 'pages#own_action', as: :own_action

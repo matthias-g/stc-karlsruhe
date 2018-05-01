@@ -96,7 +96,7 @@ de:
         first_name: 'Vorname'
         last_name: 'Nachname'
         email: 'E-Mail'
-        phone: 'Telefon'
+        phone: 'Handy'
         password: 'Passwort'
         password_confirmation: 'Passwort wiederholen'
         current_password: 'Aktuelles Passwort'
@@ -468,7 +468,8 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
     action:
       login: 'Anmelden'
       logout: 'Abmelden'
-      register: 'Anmelden'
+      showRegistration: 'Noch kein Profil?'
+      register: 'Profil erstellen'
       confirmAccount: 'Account bestätigen'
       unlockAccount: 'Account freischalten'
       deleteAccount: 'Account löschen'
@@ -483,7 +484,7 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       removeRole: 'Rolle entfernen'
     label:
       login: 'Anmelden'
-      register: 'Registrieren'
+      register: 'Profil erstellen'
       countActive: 'Mitarbeiter'
       user: 'User'
       user_or_email: 'Benutzername / E-Mail'
@@ -508,6 +509,9 @@ du hast über Serve the City Karlsruhe eine Nachricht von %{sender_name} (%{send
       image: 'Profilbild'
       otherActions: 'Weitere Aktionen'
       passwordReset: 'Neues Passwort festlegen'
+      passwordSet: 'Passwort festlegen'
+      phoneOptional: 'Handy (optional)'
+      usernameOrEmail: 'Username / E-Mail'
     message:
       profileUpdated: 'Profil erfolgreich aktualisiert.'
       loggedInAs: 'eingeloggt als %s'

@@ -2,9 +2,7 @@
 <% wrapper_set 'container-small' %>
 
 <div class="white-box">
-
   <h2>Zur Mitarbeit anmelden</h2>
-
   <div class="row">
     <div class="col-md-2">
       <% if @event.initiative.show_picture? %>
@@ -12,25 +10,17 @@
       <% end %>
     </div>
     <div class="col-md-6">
-      Schön, dass du bei der Aktion <%= @event.initiative.title %> mitarbeiten willst!
+      Schön, dass du bei der Aktion <i><%= @event.initiative.full_title %></i> mitarbeiten willst!
     </div>
   </div>
+</div>
 
-  <hr />
+<div class="white-box">
+  <h3 class="mb-3">Melde dich an, um an der Aktion teilzunehmen</h3>
+  <%= render 'users/login_form', in_other_form: true %>
+</div>
 
-  <div class="row align-items-stretch">
-
-    <div class="col-sm-5">
-      Damit wir dich kontaktieren können, gib bitte folgende Daten von dir an:
-      <%= render 'users/register_form', in_other_form: true %>
-    </div>
-
-    <div class="col-sm-2"></div>
-
-    <div class="col-sm-5">
-      Oder hast du schon einen Account? Dann logge dich hier ein:
-      <%= render 'users/login_form', in_other_form: true %>
-    </div>
-  </div>
-
+<div class="white-box">
+  <h3 class="mb-3">... oder erstelle dein Profil, wenn du noch keines hast</h3>
+  <%= render 'users/register_form', in_other_form: true %>
 </div>

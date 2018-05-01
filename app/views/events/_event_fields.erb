@@ -3,7 +3,7 @@
 <div class="item row">
   <div class="col-md-6">
     <%= f.text_field(:date, value: f.object.date ? l(f.object.date, format: :numeric) : '',
-                       data: { 'behaviour': 'datepicker', default: default_date }) -%>
+                       data: { 'behaviour': 'datepicker', default: default_date }) %>
     <%= f.text_field :desired_team_size %>
   </div>
   <div class="col-md-6">

@@ -17,7 +17,7 @@
         <%= f.text_field :username %>
         <%= f.text_field :first_name %>
         <%= f.text_field :last_name %>
-        <%= f.text_field :email %>
+        <%= f.email_field :email %>
         <%= f.text_field :phone %>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div><%= t('user.label.waitingForEmailConfirmation',

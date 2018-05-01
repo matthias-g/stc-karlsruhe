@@ -38,7 +38,7 @@
 </div>
 
 <section>
-  <%= f.submit t('surveys.action.saveTemplate') %>
+  <%= f.submit t('surveys.action.saveTemplate'), class: 'btn btn-primary' %>
   <%= link_to t('surveys.action.toTemplateOverview'), surveys_templates_path, class: 'btn btn-secondary' %>
   <% if !isNew %>
     <%= link_to t('surveys.action.deleteTemplate'), surveys_template_path(@template), method: :delete,

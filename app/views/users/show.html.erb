@@ -23,7 +23,7 @@
     <% if own_profile || current_user.in_orga_team? %>
         <section id="user-profile-data" class="white-box">
           <h2><%= t('user.label.userData') %></h2>
-          <table class="table properties">
+          <table class="table table-responsive properties">
             <tr>
               <td><%= t('activerecord.attributes.user.username') %></td>
               <td><%= @user.username %></td>
@@ -103,13 +103,15 @@
         <%= own_profile ? t('user.message.youHaveNoActions') : t('user.message.hasNoActions', user: @user.first_name) %>
       <% end %>
 
-      <% if own_profile  %>
-        <%= link_to user_ical_path(@user.ical_token, @user),
-                    data: { turbolinks: false }, class: 'btn btn-primary mt-4' do %>
-          <span class="far fa-calendar-alt"></span>
-          <%= t('user.action.exportICal') %>
+      <div>
+        <% if own_profile  %>
+          <%= link_to user_ical_path(@user.ical_token, @user),
+                      data: { turbolinks: false }, class: 'btn btn-primary mt-4 float-right' do %>
+            <span class="far fa-calendar-alt"></span>
+            <%= t('user.action.exportICal') %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
 
     </section>
 

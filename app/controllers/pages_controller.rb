@@ -3,7 +3,6 @@ class PagesController < ApplicationController
 
   def home
     @partial_name = 'home'
-    @next_action_group = ActionGroup.all.sort_by{|week| week.start_date }.last
     render 'page'
   end
 

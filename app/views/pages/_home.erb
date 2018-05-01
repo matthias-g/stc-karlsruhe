@@ -16,28 +16,21 @@
       <h2>Helfen bewegt. begeistert. verbindet.</h2>
     <% end %>
 
-    <div id="home-countdown" data-class="Countdown" data-date="<%= Date.parse('2018-04-28').strftime('%m/%d/%Y 00:00') %>">
+    <!--
+    <% countdown_date = Date.parse('2018-04-29') %>
+    <div id="home-countdown" class="mt-3" data-class="Countdown" data-date="<%= countdown_date.strftime('%m/%d/%Y 00:00') %>">
       <div><span></span>Tage</div>
       <div><span></span>Stunden</div>
       <div><span></span>Minuten</div>
       <div><span></span>Sekunden</div>
-      <!--<span class="running">verbleiben bis zur Aktionswoche&nbsp;<%= @next_action_group.title %></span>-->
-      <!--<% if Date.today <= @next_action_group.date_range.end %>-->
-        <!--<span class="finished">Die <%= link_to "Aktionswoche&nbsp;#{@next_action_group.title}".html_safe,
-           show_action_group_path(@next_action_group), class: 'black-link' %> läuft!</span>-->
-        <!--<% else %>-->
-        <!--<span class="finished week-finished">Die <%= link_to "Aktionswoche&nbsp;#{@next_action_group.title}".html_safe,
-           show_action_group_path(@next_action_group), class: 'black-link' %> ist abgeschlossen. Vielen Dank für euren Einsatz!</span>-->
-        <!--<% end %>-->
-      <br />
       <span class="running">bis zum ersten Aktionstag&nbsp;2018</span>
-      <% if Date.today <= Date.parse('2018-04-29') %>
+      <% if Date.today <= countdown_date %>
         <span class="finished">Der erste Aktionstag&nbsp;2018 läuft!</span>
       <% else %>
         <span class="finished week-finished">Der erste Aktionstag&nbsp;2018 ist abgeschlossen. Vielen Dank für euren Einsatz!</span>
       <% end %>
     </div>
-
+    -->
   </header>
 <% end %>
 
@@ -56,7 +49,7 @@
             <% if action.visible? && !action.longitude.nil? && !action.latitude.nil? %>
               <div data-lon="<%= action.longitude %>"
                    data-lat="<%= action.latitude %>"
-                   data-name="<%= action.title %>"
+                   data-name="<%= action.full_title %>"
                    data-href="<%= url_for(action) %>"
                    data-color="<%= action.finished? ? 'gray' : 'red' %>">
                 <% unless event.date.nil? %>

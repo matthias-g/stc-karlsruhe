@@ -13,19 +13,22 @@ class ActionGroupsController < ApplicationController
   end
 
   def show
-    @actions = policy_scope(@action_group.actions.toplevel).order(visible: :desc, picture_source: :desc)
-    return unless params[:filter]
-    p = filter_params
-    @actions = @actions.where(visible: (p[:visibility] != 'hidden')) unless p[:visibility].blank?
-    unless p[:day].blank? || !p[:day].match(/\A\d{2,4}-\d{1,2}-\d{1,2}\z/)
-      @actions = @actions.joins('LEFT JOIN events ON actions.id = events.initiative_id')
-                     .joins('LEFT JOIN actions actions2 ON actions.id = actions2.parent_action_id')
-                     .joins('LEFT JOIN events events2 ON actions2.id = events2.initiative_id')
-                     .where('events.date = ? OR events2.date = ?', Date.parse(p[:day]),  Date.parse(p[:day]))
-                     .uniq
+    @actions = policy_scope(@action_group.actions.toplevel)
+                   .order(visible: :desc, picture_source: :desc)
+                   .includes(:events, subactions: :events)
+
+    if params[:filter]
+      p = filter_params
+      @actions = @actions.where(visible: (p[:visibility] != 'hidden')) unless p[:visibility].blank?
+
+      unless p[:day].blank? || !p[:day].match(/\A\d{2,4}-\d{1,2}-\d{1,2}\z/)
+        date = Date.parse(p[:day])
+        @actions = @actions.left_outer_joins(:events, subactions: [:events])
+                       .where('events.date = ? OR events_actions.date = ?', date, date).distinct
+      end
+
+      @actions = @actions.select { |a| a.start_time && a.start_time.hour >= 17 } if p[:after_17h] == '1'
     end
-    @actions = @actions.select { |a| a.start_time && a.start_time.hour >= 17 } if p[:after_17h] == '1'
-  end
 
   end
 

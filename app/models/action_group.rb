@@ -14,11 +14,11 @@ class ActionGroup < ApplicationRecord
   friendly_id :slug_candidates, use: :slugged
 
   def active_user_count
-    User.joins('LEFT JOIN "participations" ON "participations"."user_id" = "users"."id"')
-        .joins('LEFT JOIN "leaderships" ON "leaderships"."user_id" = "users"."id"')
-        .joins('LEFT JOIN "events" ON "events"."id" = "participations"."event_id"')
-        .joins('INNER JOIN "actions" ON "actions"."id" = "leaderships"."action_id" OR "actions"."id" = "events"."initiative_id"')
-        .where('actions.visible': true).where('actions.action_group_id': self.id).distinct.count
+    # TODO: this is still slow
+    User.left_outer_joins(:actions_as_leader, events_as_volunteer: :initiative)
+        .where('actions.visible OR initiatives_events.visible')
+        .where('actions.action_group_id = ? OR initiatives_events.action_group_id = ?', self.id, self.id)
+        .distinct.count
   end
 
   def vacancy_count

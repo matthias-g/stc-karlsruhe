@@ -12,11 +12,13 @@
 
 <div class="white-box record-header d-print-none">
   <div class="type">
-    <% if @action.action_group %>
-      <%= link_to @action.action_group.title, show_action_group_path(@action.action_group) %> ≫
-    <% end %>
     <%= Action.model_name.human %>
+    <% if @action.action_group %>
+      <%= action_group_declination @action.action_group %>
+      <%= link_to @action.action_group.title, show_action_group_path(@action.action_group) %>
+    <% end %>
   </div>
+
   <h1><%= @action.full_title %></h1>
   <div class="labels">
     <% unless @action.visible? %>

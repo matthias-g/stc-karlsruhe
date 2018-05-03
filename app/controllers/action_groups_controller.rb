@@ -27,6 +27,8 @@ class ActionGroupsController < ApplicationController
     @actions = @actions.select { |a| a.start_time && a.start_time.hour >= 17 } if p[:after_17h] == '1'
   end
 
+  end
+
   def new
     @action_group = ActionGroup.new
     authorize_action_group
@@ -60,7 +62,7 @@ class ActionGroupsController < ApplicationController
   end
 
   def action_group_params
-    params.require(:action_group).permit(:title, :default, :start_date, :end_date)
+    params.require(:action_group).permit(:title, :default, :start_date, :end_date, :declination)
   end
 
   def filter_params

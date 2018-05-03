@@ -29,6 +29,11 @@
     <%= f.text_field(:end_date, value: @action_group.end_date ? l(@action_group.end_date, format: :numeric) : '',
                      data: { 'behaviour': 'datepicker' }) %>
   </div>
+  <div class="field">
+    <%= f.label :declination %><br>
+    <%= f.select :declination, enum_options_for_select(ActionGroup, :declination) %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

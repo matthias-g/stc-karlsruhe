@@ -22,6 +22,13 @@ module ActionGroupsHelper
   end
 
 
+  def action_group_declination(action_group)
+    if (action_group.start_date == action_group.end_date)
+      t 'general.declination.at.' + action_group.declination
+    else
+      t 'general.declination.in.' + action_group.declination
+    end
+  end
 
   def date_range(from_date, until_date, options = {})
     options.symbolize_keys!

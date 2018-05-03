@@ -57,6 +57,13 @@ de:
       orga_message: Orga-Mail
       surveys/template: 'Umfrage-Template'
       surveys/submission: 'Umfrage'
+    enums:
+      action_group:
+        declinations:
+          m_sg: Maskulin Singular
+          m_pl: Maskulin Plural
+          f_sg: Feminin Singular
+          f_pl: Feminin Plural
     attributes:
       action:
         title: 'Aktionstitel'
@@ -162,6 +169,22 @@ de:
       confirmDeleteLong: 'Willst du %s wirklich löschen?'
       confirmRmove: Willst du das wirklich tun?
       confirmRemoveLong: 'Willst du %s wirklich enfernen?'
+    declination:
+      at:
+        m_sg: am
+        m_pl: an den
+        f_sg: an der
+        f_pl: an den
+      in:
+        m_sg: im
+        m_pl: in den
+        f_sg: in der
+        f_pl: in den
+      of:
+        m_sg: vom
+        m_pl: von den
+        f_sg: von der
+        f_pl: von den
 
   layout:
     pageTitle: 'Serve the City Karlsruhe'

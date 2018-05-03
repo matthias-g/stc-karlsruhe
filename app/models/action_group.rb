@@ -4,6 +4,7 @@ class ActionGroup < ApplicationRecord
   has_many :actions
 
   validates_presence_of :start_date, :end_date
+  enum declination: [:m_sg, :m_pl, :f_sg, :f_pl]
 
   scope :default, -> { where(default: true).first }
   scope :upcoming, -> { where('end_date >= ?', Date.current).order(:start_date) }

@@ -1,4 +1,4 @@
-module ActionsHelperc
+module ActionsHelper
 
   # creates a comma separated list of all user names (+ anonymous user count)
   # (currently unused)

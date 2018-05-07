@@ -123,7 +123,7 @@
                                   {selected: @action.action_group&.id, include_blank: true}) %>
         </div>
         <div class="parent_action">
-          <%= f.select(:parent_action_id, available_actions(@action).collect{ |p| [p.title, p.id]}, {include_blank: true}) %>
+          <%= f.select(:parent_action_id, possible_parent_actions(@action), {include_blank: true}) %>
         </div>
         <div class="location">
           <%= f.text_area :location %>

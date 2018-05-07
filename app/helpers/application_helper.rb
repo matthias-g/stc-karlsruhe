@@ -13,6 +13,7 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+
   BOOTSTRAP_FLASH_MSG = {
       success: 'alert-success',
       error: 'alert-danger',
@@ -20,6 +21,7 @@ module ApplicationHelper
       notice: 'alert-info'
   }
 
+  # Converts a rails flash type to a Bootstrap alert type
   def bootstrap_class_for(flash_type)
     BOOTSTRAP_FLASH_MSG.fetch(flash_type.to_sym, flash_type.to_s)
   end
@@ -42,10 +44,12 @@ module ApplicationHelper
     (@wrapper_classes ||= Set['white-box', 'container-medium'])
   end
 
+  # Returns whether the user has any roles or leaderships
   def privileged_user?
     signed_in? && (current_user.roles.any? || current_user.actions_as_leader.any?)
   end
 
+  # Replaces patterns "[Title](URL)" and "<URL>" with a clickable link
   def simple_format_urls text
     markdown_inline_style = %r{\[(.*)\]\(((?:https?|mailto)://\S+)\)}
     text = text.gsub markdown_inline_style, '<a href="\2" target="_blank">\1</a>'
@@ -53,6 +57,7 @@ module ApplicationHelper
     text.gsub angle_brackets, '<a href="\1" target="_blank">\1</a>'
   end
 
+  # Replaces patterns "[Title](URL)" and "<URL>" with "Title (URL)" / just the URL
   def format_urls_no_html text
     markdown_inline_style = %r{\[(.*)\]\(((?:https?|mailto)://\S+)\)}
     text = text.gsub markdown_inline_style, '\1 (\2)'
@@ -60,16 +65,7 @@ module ApplicationHelper
     text.gsub angle_brackets, '\1'
   end
 
-
-
-  def options_for_user_select
-    options = policy_scope(User.all.where(cleared: false)).order(:first_name, :last_name).map do |user|
-      tokens = "#{user.username} #{user.full_name}"
-      [user.full_name, user.id, {data: { tokens: tokens }}]
-    end
-    options_for_select(options)
-  end
-
+  # Returns the name of an ActiveRecord, which may be a User, Role, Event or Action
   def get_name_for model
     return 'nil' if model.nil?
     return model.full_name if model.is_a? User
@@ -79,7 +75,7 @@ module ApplicationHelper
     'no_idea'
   end
 
-  # creates a ujs remote link with JSONAPI content
+  # Creates a ujs remote link with JSONAPI content
   def api_link(name, target, action, html_options = nil, &block)
     html_options, action, target, name = action, target, name, block if block_given?
     html_options ||= {}
@@ -133,8 +129,7 @@ module ApplicationHelper
     link_to sanitize(name), url, html_options.merge(title: title, data: data).except(:icon, :attributes)
   end
 
-
-  # allows to select a user in order to build a user->model or model->user relation
+  # Creates a selectpicker (for adding to a user->model or model->user relation)
   def user_select_picker(model, rel_name, is_user_rel = false, html_options = nil)
     html_options ||= {}
     html_options[:class] ||= ''
@@ -169,6 +164,15 @@ module ApplicationHelper
 
     id = 'add-'+ model.model_name.singular + '-' + rel_name
     select_tag id, options_for_user_select, html_options.merge(data: data)
+  end
+
+  # Creates a list of all registered users for use with a selectpicker
+  def options_for_user_select
+    options = policy_scope(User.all.where(cleared: false)).order(:first_name, :last_name).map do |user|
+      tokens = "#{user.username} #{user.full_name}"
+      [user.full_name, user.id, {data: { tokens: tokens }}]
+    end
+    options_for_select(options)
   end
 
 end

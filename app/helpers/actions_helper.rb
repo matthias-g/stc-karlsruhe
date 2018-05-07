@@ -1,5 +1,7 @@
-module ActionsHelper
+module ActionsHelperc
 
+  # creates a comma separated list of all user names (+ anonymous user count)
+  # (currently unused)
   def list_users(users)
     existing_users = users.where(cleared: false)
     deleted_users_count = users.where(cleared: true).count
@@ -11,22 +13,11 @@ module ActionsHelper
     output.html_safe
   end
 
-  # for actions and news_entries
-  def show_gallery?(item)
-    (item.gallery && policy_scope(item.gallery.gallery_pictures).any?)
-  end
-
-  def show_contains_invisible_pictures_notification?(action)
-    current_user && (action.gallery.gallery_pictures.invisible.where(uploader_id: current_user.id).count > 0 ||
-        ((current_user.admin? || current_user.coordinator?) && action.gallery.gallery_pictures.invisible.any?))
-  end
-
-  def available_actions(action)
-    if action.action_group
-      action.action_group.actions
-    else
-      Action.where(action_group: nil)
-    end
+  # gives a list of all possible parent actions
+  def possible_parent_actions(action)
+    actions = action.action_group ? action.action_group.actions : Action.where(action_group: nil)
+    actions = policy_scope(actions.where(parent_action_id: nil)) - [action]
+    actions.pluck(:title, :id)
   end
 
 end

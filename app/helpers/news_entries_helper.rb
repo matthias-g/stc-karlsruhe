@@ -1,5 +1,6 @@
 module NewsEntriesHelper
 
+  # Returns a list of latest news entries of the given categories
   def list_news(categories, limit = 0)
     news = @news_entries if @news_entries
     unless news

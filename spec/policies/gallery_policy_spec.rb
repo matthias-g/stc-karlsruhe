@@ -4,6 +4,7 @@ require 'helpers'
 RSpec.describe GalleryPolicy do
 
   include Fixtures
+  include Helpers
 
   let(:current_user) { nil }
   let(:record) { Gallery.find_by(title: 'GalleryOne') }
@@ -13,16 +14,13 @@ RSpec.describe GalleryPolicy do
     describe method do
       subject { policy.public_send(method) }
 
-      it 'is false for no user logged in' do
-        expect(subject).to be_falsey
+      context 'as visitor' do
+        it { should_fail }
       end
 
-      context 'admin logged in' do
+      context 'as admin' do
         let(:current_user) { users(:admin) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
     end
   end
@@ -31,24 +29,18 @@ RSpec.describe GalleryPolicy do
     describe method do
       subject { policy.public_send(method) }
 
-      it 'is false for no user logged in' do
-        expect(subject).to be_falsey
+      context 'as visitor' do
+        it { should_fail }
       end
 
-      context 'admin logged in' do
+      context 'as admin' do
         let(:current_user) { users(:admin) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
 
-      context 'coordinator logged in' do
+      context 'as coordinator' do
         let(:current_user) { users(:coordinator) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
     end
   end
@@ -56,47 +48,72 @@ RSpec.describe GalleryPolicy do
   describe 'show?' do
     subject { policy.show? }
 
-    it 'is true for no user logged in' do
-      expect(subject).to be_truthy
+    context 'as visitor' do
+      it { should_pass }
     end
 
-    context 'gallery without pictures' do
+    context 'for a gallery without pictures' do
       let(:record) { Gallery.find_by(title: 'GalleryTwo') }
 
-      it 'is false for no user logged in' do
-        expect(subject).to be_falsey
+      context 'as visitor' do
+        it { should_fail }
       end
 
-      context 'admin logged in' do
+      context 'as admin' do
         let(:current_user) { users(:admin) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
     end
 
-    context 'gallery with invisible pictures only' do
+    context 'for a gallery with invisible pictures only' do
       let(:record) { Gallery.find_by(title: 'GalleryThree') }
 
-      it 'is false for no user logged in' do
-        expect(subject).to be_falsey
+      context 'as visitor' do
+        it { should_fail }
       end
 
-      context 'when admin logged in' do
+      context 'as admin' do
         let(:current_user) { users(:admin) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
 
-      context 'when uploader of gallery pictures logged in' do
+      context 'as uploader' do
         let(:current_user) { users(:sabine) }
+        it { should_pass }
+      end
+    end
+  end
 
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+  describe 'show_gallery_partial?' do
+    subject { policy.show_gallery_partial? }
+
+    context 'as visitor' do
+      it { should_pass }
+    end
+
+    context 'for a gallery without pictures' do
+      let(:record) { Gallery.find_by(title: 'GalleryTwo') }
+
+      context 'as visitor' do
+        it { should_fail }
+      end
+
+      context 'as admin' do
+        let(:current_user) { users(:admin) }
+        it { should_fail }
+      end
+    end
+
+    context 'for a gallery with invisible pictures only' do
+      let(:record) { Gallery.find_by(title: 'GalleryThree') }
+
+      context 'as visitor' do
+        it { should_fail }
+      end
+
+      context 'as admin' do
+        let(:current_user) { users(:admin) }
+        it { should_pass }
       end
     end
   end
@@ -104,38 +121,31 @@ RSpec.describe GalleryPolicy do
   describe 'update?' do
     subject { policy.update? }
 
-    it 'is false for no user logged in' do
-      expect(subject).to be(false)
+    context 'as visitor' do
+      it { should_fail }
     end
 
-    context 'for an admin' do
+    context 'as admin' do
       let(:current_user) { users(:admin) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
 
-    context 'for a photographer' do
+    context 'as photographer' do
       let(:current_user) { users(:photographer) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
 
-    context 'for user leading related action' do
+    context 'as leader of related action' do
       let(:current_user) { users(:rolf) }
 
       it 'is true' do
         expect(record.actions.count).to eq(1)
-        action = record.actions.first
-        expect(current_user).to lead_action(action)
-        expect(subject).to be_truthy
+        expect(current_user).to lead_action(record.actions.first)
+        should_pass
       end
     end
 
-    context 'for an unrelated user to related action' do
+    context 'as unrelated user' do
       let(:current_user) { users(:peter) }
 
       it 'is false' do
@@ -143,35 +153,26 @@ RSpec.describe GalleryPolicy do
         action = record.actions.first
         expect(current_user).not_to lead_action(action)
         expect(current_user).not_to volunteer_in_action(action)
-        expect(subject).to be_falsey
+        should_fail
       end
     end
 
     context 'for a gallery without an action' do
       let(:record) { Gallery.find_by(title: 'No one uses this gallery') }
 
-      context 'for some user' do
+      context 'as some user' do
         let(:current_user) { users(:rolf) }
-
-        it 'is false' do
-          expect(subject).to eql(false)
-        end
+        it { should_fail }
       end
 
-      context 'for an admin' do
+      context 'as admin' do
         let(:current_user) { users(:admin) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
 
-      context 'for a photographer' do
+      context 'as photographer' do
         let(:current_user) { users(:photographer) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
     end
   end

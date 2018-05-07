@@ -1,8 +1,8 @@
 <div class="gallery">
   <h3><%= t('action.label.gallery') %></h3>
-  <% if show_gallery?(action) %>
+  <% if policy(action.gallery).show? %>
     <%= render '/galleries/gallery', gallery: action.gallery %>
-    <% if show_contains_invisible_pictures_notification?(action) %>
+    <% if policy(action.gallery).show_invisible_pictures_notification? %>
       <i><%= t('gallery.message.containsInvisiblePictures') %></i>
     <% end %>
   <% end %>

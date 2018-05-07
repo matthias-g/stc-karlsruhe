@@ -1,5 +1,6 @@
 module StatisticsHelper
 
+  # Add a sort link to a table column heading
   def sortable_column(column, title = nil)
     title ||= column.titleize
     direction = (column == params[:sort] && params[:direction] == 'asc') ? 'desc' : 'asc'

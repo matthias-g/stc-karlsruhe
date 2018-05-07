@@ -1,5 +1,6 @@
 module ActionGroupsHelper
 
+  # Gives a list of all days (date + label) within the action group
   def options_for_day_select(action_group)
     action_groups = [action_group].flatten
     dates = action_groups.collect{ |group| group.date_range.to_a }.flatten
@@ -8,11 +9,13 @@ module ActionGroupsHelper
     dates.map{ |date| [I18n.l(date, format: format), date.strftime("%F")]}
   end
 
+  # Splits the action group title, separating a possible "Aktionswoche" or "Aktionstag" prefix
   def split_action_group_type_prefix(title)
     temp_title = title.dup
     return temp_title.slice!(/Aktionswoche|Aktionstag/), temp_title.strip
   end
 
+  # Gives the (chronologically) previous and next action groups
   def get_connected_action_groups(action_group)
     groups = ActionGroup.all.order(:start_date)
     group_index = groups.index(action_group)
@@ -21,7 +24,7 @@ module ActionGroupsHelper
     return previous_group, next_group
   end
 
-
+  # Gives the correct preposition for "action *in* action group"
   def action_group_declination(action_group)
     if (action_group.start_date == action_group.end_date)
       t 'general.declination.at.' + action_group.declination
@@ -30,6 +33,7 @@ module ActionGroupsHelper
     end
   end
 
+  # Smartly formats and localizes a date range
   def date_range(from_date, until_date, options = {})
     options.symbolize_keys!
     format = options[:format] || :short

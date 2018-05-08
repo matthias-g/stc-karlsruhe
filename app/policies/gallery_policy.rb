@@ -9,9 +9,9 @@ class GalleryPolicy < ApplicationPolicy
   end
 
   def update?
-    return false unless user
+    return nil unless user
     return true if user.admin? || user.photographer?
-    return false if record.actions.empty?
+    return nil if record.actions.empty?
     record.actions.all? { |action| Pundit.policy!(user, action).upload_pictures? }
   end
 

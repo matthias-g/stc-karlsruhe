@@ -80,6 +80,14 @@ shared_examples 'a EventUserRelationship' do
       it 'is true' do
         expect(subject).to be_truthy
       end
+
+      context 'action is finished' do
+        let(:action) { actions('Fast volle, beendete Aktion') }
+
+        it 'is false' do
+          expect(subject).to be_falsey
+        end
+      end
     end
 
     context 'other user is logged in' do

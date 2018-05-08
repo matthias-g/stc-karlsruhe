@@ -12,7 +12,7 @@ module EventUserRelationship
     end
 
     def allow_edit_volunteer?(volunteer, event)
-      return false unless user
+      return nil unless user
       user.in_orga_team? || ((user.eql?(volunteer) || event.initiative.leader?(user)) && !event.finished?)
     end
 

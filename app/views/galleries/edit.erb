@@ -2,7 +2,7 @@
 <% wrapper_set 'container-medium' %>
 
 <div class="white-box">
-  <h1><%= t('gallery.label.editGallery') %></h1>
+  <h1><%= t('gallery.heading.edit') %></h1>
 </div>
 
 <div class="row">
@@ -16,22 +16,22 @@
     <div class="white-box">
       <% if policy(@gallery).show? %>
         <%= link_to @gallery, class: 'btn btn-primary btn-block' do %>
-          <span class="far fa-play-circle"></span> <%= t('gallery.action.show') %>
+          <span class="far fa-play-circle"></span> <%= t('gallery.button.show') %>
         <% end %>
       <% end %>
       <% @gallery.actions.each do |action| %>
         <%= link_to action, class: 'btn btn-primary btn-block' do %>
-          <span class="far fa-play-circle"></span> <%= t('gallery.action.showAction') %>
+          <span class="far fa-play-circle"></span> <%= t('gallery.button.showAction') %>
         <% end %>
       <% end %>
       <%= link_to make_all_visible_gallery_path(@gallery), class: 'btn btn-success btn-block' do %>
-        <span class="fas fa-eye"></span> <%= t('gallery.action.makeAllVisible') %>
+        <span class="fas fa-eye"></span> <%= t('gallery.button.makeAllVisible') %>
       <% end %>
       <%= link_to make_all_invisible_gallery_path(@gallery), class: 'btn status_hidden btn-block' do %>
-        <span class="fas fa-eye-slash"></span> <%= t('gallery.action.makeAllInvisible') %>
+        <span class="fas fa-eye-slash"></span> <%= t('gallery.button.makeAllInvisible') %>
       <% end %>
       <%= link_to galleries_path, class: 'btn btn-secondary btn-block' do %>
-        <span class="fas fa-list"></span> <%= t('gallery.action.index') %>
+        <span class="fas fa-list"></span> <%= t('gallery.button.index') %>
       <% end %>
     </div>
   </div>

@@ -19,16 +19,15 @@ de:
       edit: 'Galerie bearbeiten'
 
     button:
-      goto:
-        previous: "Vorheriges Bild"
-        next: "Nächstes Bild (Pfeil rechts)"
-      close: "Schließen (Esc)"
-      share: "Share"
-      toggleFullscreen: "Vollbild an/aus"
-      zoom: "Vergrößern / Verkleinern"
-      delete: "Löschen"
-      rotateRight: "Nach rechts drehen"
-      rotateLeft: "Nach links drehen"
+      gotoPrevious: 'Vorheriges Bild'
+      gotoNext: 'Nächstes Bild (Pfeil rechts)'
+      close: 'Schließen (Esc)'
+      share: 'Share'
+      toggleFullscreen: 'Vollbild an/aus'
+      zoom: 'Vergrößern / Verkleinern'
+      delete: 'Löschen'
+      rotateRight: 'Nach rechts drehen'
+      rotateLeft: 'Nach links drehen'
       uploadPictures: 'Bilder hochladen'
       uploadSelectedPictures: 'Ausgewählte Bilder hochladen'
       edit: 'Galerie bearbeiten'

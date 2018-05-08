@@ -144,13 +144,13 @@
 
 <div class="white-box hidden-sm-up">
   <h3>Eigene Aktion</h3>
-  <span><%= t('action.action.wantToStartOwnAction') %></span>
-  <%= link_to t('action.action.weHelpYou'), own_action_path, class:'btn btn-secondary btn-new-action' %>
+  <span><%= t('action_group.help.wantToStartOwnAction') %></span>
+  <%= link_to t('action_group.help.weHelpYou'), own_action_path, class:'btn btn-secondary btn-new-action' %>
 </div>
 
 <% if policy(:action).new? %>
   <div class="white-box hidden-sm-up">
     <h3>Optionen</h3>
-    <%= link_to t('action.action.new'), new_action_path, class:'btn btn-secondary btn-block' %>
+    <%= link_to t('action_group.button.newAction'), new_action_path, class:'btn btn-secondary btn-block' %>
   </div>
 <% end %>

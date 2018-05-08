@@ -26,4 +26,8 @@ module ActionsHelper
         (current_user&.in_orga_team? && gallery.gallery_pictures.invisible.any?)
   end
 
+  def has_gallery_pictures?(gallery)
+    gallery && policy_scope(gallery.gallery_pictures).any?
+  end
+
 end

@@ -140,10 +140,14 @@ class @Gallery
       createFlashMessage I18n.t 'gallery.message.pictureDeleted'
 
       # remove image from slideshow
-      @items.splice idx, 1
-      if @items.length == 0
+      if @items.length == 1
+        @slideshow.close()
+        @items.splice idx, 1
         @html.remove()
         return
+
+      @items.splice idx, 1
+
       if idx >= @slideshow.items.length - 1
         @slideshow.goTo(0)
       @slideshow.invalidateCurrItems()

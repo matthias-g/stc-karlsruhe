@@ -84,40 +84,6 @@ RSpec.describe GalleryPolicy do
     end
   end
 
-  describe 'show_gallery_partial?' do
-    subject { policy.show_gallery_partial? }
-
-    context 'as visitor' do
-      it { should_pass }
-    end
-
-    context 'for a gallery without pictures' do
-      let(:record) { Gallery.find_by(title: 'GalleryTwo') }
-
-      context 'as visitor' do
-        it { should_fail }
-      end
-
-      context 'as admin' do
-        let(:current_user) { users(:admin) }
-        it { should_fail }
-      end
-    end
-
-    context 'for a gallery with invisible pictures only' do
-      let(:record) { Gallery.find_by(title: 'GalleryThree') }
-
-      context 'as visitor' do
-        it { should_fail }
-      end
-
-      context 'as admin' do
-        let(:current_user) { users(:admin) }
-        it { should_pass }
-      end
-    end
-  end
-
   describe 'update?' do
     subject { policy.update? }
 

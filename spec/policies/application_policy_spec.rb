@@ -123,4 +123,11 @@ RSpec.describe ApplicationPolicy do
       end
     end
   end
+
+  describe 'always' do
+    subject { policy.always }
+    it 'is true' do
+      expect(subject).to be(true)
+    end
+  end
 end

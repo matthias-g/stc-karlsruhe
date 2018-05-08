@@ -20,4 +20,10 @@ module ActionsHelper
     actions.pluck(:title, :id)
   end
 
+  def show_invisible_pictures_notification?(gallery)
+    return false unless current_user
+    gallery.gallery_pictures.invisible.where(uploader_id: current_user.id).any? ||
+        (current_user&.in_orga_team? && gallery.gallery_pictures.invisible.any?)
+  end
+
 end

@@ -16,7 +16,7 @@
   <h1 class="text-center"><%= @news_entry.title %></h1>
 </div>
 
-<% if @news_entry.gallery && policy(@news_entry.gallery).show_gallery_partial? %>
+<% if @news_entry.gallery && policy_scope(@news_entry.gallery.gallery_pictures).any? %>
     <div class="news-entry-gallery float-right m-4">
       <%= render '/galleries/gallery', gallery: @news_entry.gallery %>
       <% if current_user && @news_entry.gallery.gallery_pictures.invisible.any? &&

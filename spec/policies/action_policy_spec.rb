@@ -45,6 +45,11 @@ RSpec.describe ActionPolicy do
     context 'as leader' do
       let(:user) { users(:rolf) }
       it { should_pass }
+
+      context 'for finished action' do
+        before { action.events.first.update_attribute :date, Date.yesterday }
+        it { should_fail }
+      end
     end
 
     context 'as admin' do
@@ -280,6 +285,11 @@ RSpec.describe ActionPolicy do
 
     context 'as other user' do
       let(:user) { users(:sabine) }
+      it { should_fail }
+    end
+
+    context 'for no user logged in' do
+      let(:user) { nil }
       it { should_fail }
     end
   end

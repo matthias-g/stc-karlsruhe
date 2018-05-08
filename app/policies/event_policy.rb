@@ -24,8 +24,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def manage_team?
-    return false unless user
-    user.in_orga_team? || (record.initiative.leader?(user) && !record.finished?)
+    ActionPolicy.new(user, record.initiative).manage_team?
   end
 
   def add_to_volunteers?(users)

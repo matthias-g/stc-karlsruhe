@@ -2,7 +2,7 @@
   <h3><%= t('action.label.gallery') %></h3>
   <% if policy(action.gallery).show? %>
     <%= render '/galleries/gallery', gallery: action.gallery %>
-    <% if policy(action.gallery).show_invisible_pictures_notification? %>
+    <% if show_invisible_pictures_notification?(action.gallery) %>
       <i><%= t('gallery.message.containsInvisiblePictures') %></i>
     <% end %>
   <% end %>

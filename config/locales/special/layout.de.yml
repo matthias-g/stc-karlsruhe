@@ -1,0 +1,69 @@
+de:
+
+  layout:
+
+    siteTitle: 'Serve the City Karlsruhe'
+
+    header:
+      downloadLogo: 'Möchtest Du unser Logo herunterladen? Auf unserer <a href="/presse">Presseseite</a> findest
+         Du dafür ein <a href="/downloads/Logos.zip">Archiv</a> mit einer Auswahl verschiedener Versionen.'
+
+    navbar:
+      home: 'Startseite'
+      about: 'Die Idee'
+      actions: 'Aktionen'
+      profile: 'Dein Account'
+      login: 'Anmelden'
+      contact: 'Kontakt'
+      adminDashboard: 'Admin'
+
+    footer:
+      contact: 'Kontakt'
+      aboutUs: 'Impressum'
+      privacy: 'Datenschutz'
+      press: 'Presseinformationen'
+      stcInternational: 'Serve the City international'
+      shareOnFacebook: 'auf Facebook teilen'
+
+    title:
+      actionGroup: 'Aktionswoche %{year}'
+      action:
+        list: 'Aktionen'
+        new: 'Neue Aktion'
+        edit: 'Aktion bearbeiten: %{action}'
+      newsEntryList: 'Newseinträge'
+      newsEntryNew: 'Neuer Newseintrag'
+      newsEntryEdit: 'News bearbeiten: %{news_entry}'
+      newsEntryCropPicture: 'Bildausschnitte festlegen: %{news_entry}'
+      newsEntryView: '%{news_entry}'
+      roleList: 'Rollen'
+      roleNew: 'Neue Benutzerrolle'
+      roleEdit: 'Rolle bearbeiten'
+      roleView: 'Benutzerrolle'
+      userEdit: 'Benutzer bearbeiten: %{user}'
+      userList: 'Registrierte Benutzer'
+      userLogin: 'Login'
+      userRegister: 'Registrierung'
+      userProfileEdit: 'Profil bearbeiten: %{user}'
+      userPasswordReset: 'Passwort zurücksetzen'
+      userPasswordChange: 'Passwort ändern: %{user}'
+      userEmailConfirmation: 'E-Mail-Adressen-Bestätigung'
+      userUnlocking: 'Account-Freischaltung'
+      userDeleteAccount: 'Account löschen: %{user}'
+      galleryEdit: 'Galerie bearbeiten'
+      messageContactForm: 'Kontakt'
+      messageAdminMailForm: 'Admin-Mailer'
+      manageTeam: 'Team verwalten'
+      pageAbout: 'Was ist Serve the City?'
+      pagePressInfo: 'Presseinformationen'
+      pageLegalNotice: 'Impressum'
+      pagePrivacy: 'Datenschutzerklärung'
+      statistics: 'Statistiken'
+      pageSupporters: 'Unterstützer'
+      templateNew: 'Neue Umfrage erstellen'
+      templateEdit: 'Umfrage bearbeiten: %{template}'
+      templateList: 'Umfragen'
+      templateView: 'Umfrage %{template}'
+      submissionList: 'Umfragebögen'
+      submissionNew: 'Umfragebogen ausfüllen: %{template}'
+      submissionEdit: 'Umfragebogen ansehen: %{template}'

@@ -1,5 +1,5 @@
 <% unless defined? in_other_form %>
-  <h2><%= t('user.label.register') %></h2>
+  <h2><%= t('user.heading.register') %></h2>
 <% end %>
 
 <%= bootstrap_form_for(resource, as: resource_name, namespace: 'page_reg', url: registration_path(resource_name)) do |f| %>
@@ -20,13 +20,13 @@
       <%= f.email_field :email %>
     </div>
     <div class="col-sm-6">
-      <%= f.text_field :phone, label: t('user.label.phoneOptional') %>
+      <%= f.text_field :phone, label: t('user.form.phoneOptional') %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-sm-6">
-      <%= f.password_field :password, help: t('user.help.passwordLength'), label: t('user.label.passwordSet') %>
+      <%= f.password_field :password, help: t('user.help.passwordLength'), label: t('user.form.passwordSet') %>
     </div>
     <div class="col-sm-6">
       <%= f.form_group do %>
@@ -48,6 +48,6 @@
   </p>
 
   <%= button_tag class: 'btn btn-primary' do %>
-    <span class="fas fa-user-plus"></span> <%= t('user.action.register') %>
+    <span class="fas fa-user-plus"></span> <%= t('user.button.register') %>
   <% end %>
 <% end %>

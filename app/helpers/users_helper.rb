@@ -9,13 +9,13 @@ module UsersHelper
   # Summarizes orga mail settings for the user profile page
   def email_reception_description user
     if receive_email_from_orga(user) && user.receive_emails_from_other_users
-      t('user.label.emailReception.orgaAndUser')
+      t('user.info.emailReception.orgaAndUser')
     elsif receive_email_from_orga user
-      t('user.label.emailReception.orga')
+      t('user.info.emailReception.orga')
     elsif user.receive_emails_from_other_users
-      t('user.label.emailReception.user')
+      t('user.info.emailReception.user')
     else
-      t('user.label.emailReception.none')
+      t('user.info.emailReception.none')
     end
   end
   

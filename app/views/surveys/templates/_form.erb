@@ -13,7 +13,7 @@
 
 <div class="record-header">
   <div class="type">
-    &nbsp;<%= isNew ? t('surveys.label.newTemplate') : t('surveys.label.editTemplate') %>&nbsp;
+    &nbsp;<%= isNew ? t('surveys.heading.newTemplate') : t('surveys.heading.editTemplate') %>&nbsp;
   </div>
   <h1><%= @template.title %></h1>
 </div>
@@ -34,15 +34,15 @@
   <%= f.fields_for :questions do |builder| %>
     <%= render 'question_fields', f: builder %>
   <% end %>
-  <%= link_to t('surveys.action.addQuestion'), 'javascript:void(0);', class: 'add-link btn btn-secondary' %>
+  <%= link_to t('surveys.button.addQuestion'), 'javascript:void(0);', class: 'add-link btn btn-secondary' %>
 </div>
 
 <section>
-  <%= f.submit t('surveys.action.saveTemplate'), class: 'btn btn-primary' %>
-  <%= link_to t('surveys.action.toTemplateOverview'), surveys_templates_path, class: 'btn btn-secondary' %>
+  <%= f.submit t('surveys.button.saveTemplate'), class: 'btn btn-primary' %>
+  <%= link_to t('surveys.navigation.toTemplateOverview'), surveys_templates_path, class: 'btn btn-secondary' %>
   <% if !isNew %>
-    <%= link_to t('surveys.action.deleteTemplate'), surveys_template_path(@template), method: :delete,
-                data: { confirm: 'Are you sure?' }, class: 'btn btn-secondary' %>
+    <%= link_to t('surveys.button.deleteTemplate'), surveys_template_path(@template), method: :delete,
+                data: { confirm: t('general.message.confirmDelete') }, class: 'btn btn-secondary' %>
   <% end %>
 </section>
 

@@ -3,7 +3,7 @@
 <% own_profile = (@user == current_user) %>
 
 <div class="white-box record-header">
-  <div class="type"><%=  t('user.label.' + (own_profile ? 'myProfile' : 'profile')) %></div>
+  <div class="type"><%=  t('user.heading.' + (own_profile ? 'myProfile' : 'profile')) %></div>
   <h1 class="align-center"><%= @user.full_name %></h1>
 </div>
 
@@ -15,25 +15,25 @@
           <h2>Umfrage</h2>
           <%= bootstrap_form_for([@submission.template, @submission]) do |f| %>
               <%= render '/surveys/submissions/form_questions', f: f %>
-              <%= f.submit t('surveys.action.saveSubmission'), class:'submit btn btn-secondary float-right' %>
+              <%= f.submit t('surveys.button.saveSubmission'), class:'submit btn btn-secondary float-right' %>
           <% end %>
         </section>
     <% end %>
 
     <% if own_profile || current_user.in_orga_team? %>
         <section id="user-profile-data" class="white-box">
-          <h2><%= t('user.label.userData') %></h2>
+          <h2><%= t('user.heading.userData') %></h2>
           <table class="table table-responsive properties">
             <tr>
-              <td><%= t('activerecord.attributes.user.username') %></td>
+              <td><%= User.human_attribute_name :username %></td>
               <td><%= @user.username %></td>
             </tr>
             <tr>
-              <td><%= t('activerecord.attributes.user.email') %></td>
+              <td><%= User.human_attribute_name :email %></td>
               <td><%= @user.email %></td>
             </tr>
             <tr>
-              <td><%= t('activerecord.attributes.user.phone') %></td>
+              <td><%= User.human_attribute_name :phone %></td>
               <td><%= @user.phone %></td>
             </tr>
           </table>
@@ -42,16 +42,16 @@
           <div class="row mt-5">
             <div class="col">
               <% if policy(@user).edit?  %>
-                <%= link_to edit_user_path, title: t('user.action.edit'), class:'btn btn-primary btn-block' do %>
+                <%= link_to edit_user_path, title: t('user.button.edit'), class:'btn btn-primary btn-block' do %>
                   <span class="fas fa-pencil-alt"></span>
-                  <%= t('user.action.edit') %>
+                  <%= t('user.button.edit') %>
                 <% end %>
               <% end %>
             </div>
             <div class="col">
-              <%= link_to destroy_user_session_path, method: :delete, title: t('user.action.logout'), class:'btn btn-secondary btn-block' do %>
+              <%= link_to destroy_user_session_path, method: :delete, title: t('user.button.logout'), class:'btn btn-secondary btn-block' do %>
                 <span class="fas fa-sign-out-alt"></span>
-                <%= t('user.action.logout') %>
+                <%= t('user.button.logout') %>
               <% end %>
             </div>
           </div>
@@ -61,11 +61,11 @@
 
     <% unless own_profile  %>
         <section id="contact-user-form" class="white-box">
-          <h2><%= t('contact.user.title', recipient: @user.first_name) %></h2>
+          <h2><%= t('user.heading.user_mail', recipient: @user.first_name) %></h2>
           <%= bootstrap_form_for @message, url: { action: 'contact_user' } do |f| %>
-              <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
-              <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
-              <%= f.submit t('contact.user.submit') %>
+              <%= f.text_field :subject, label: t('general.form.subject') %>
+              <%= f.text_area :body, label: t('general.form.body') %>
+              <%= f.submit t('user.button.user_mail') %>
           <% end %>
         </section>
     <% end %>
@@ -86,21 +86,21 @@
       <% end %>
 
       <% if actions_as_leader.any? %>
-        <h3 class="mt-3"><%= t('user.label.actionsAsLeader') %></h3>
+        <h3 class="mt-3"><%= t('user.heading.actionsAsLeader') %></h3>
         <% actions_as_leader.each do |action| %>
           <%= render '/actions/action_entry', action: action %>
         <% end %>
       <% end %>
 
       <% if past_events.any? %>
-        <h3 class="mt-3"><%= t('user.label.pastActions') %></h3>
+        <h3 class="mt-3"><%= t('user.heading.pastActions') %></h3>
         <% past_events.sort_by {|e| e.date}.each do |event| %>
           <%= render '/actions/action_entry', event: event, show_occupancy: false %>
         <% end %>
       <% end %>
 
       <% if @user.actions_as_volunteer.blank? && @user.actions_as_leader.blank? %>
-        <%= own_profile ? t('user.message.youHaveNoActions') : t('user.message.hasNoActions', user: @user.first_name) %>
+        <%= own_profile ? t('user.info.youHaveNoActions') : t('user.info.hasNoActions', user: @user.first_name) %>
       <% end %>
 
       <div>
@@ -108,7 +108,7 @@
           <%= link_to user_ical_path(@user.ical_token, @user),
                       data: { turbolinks: false }, class: 'btn btn-primary mt-4 float-right' do %>
             <span class="far fa-calendar-alt"></span>
-            <%= t('user.action.exportICal') %>
+            <%= t('user.button.exportICal') %>
           <% end %>
         <% end %>
       </div>

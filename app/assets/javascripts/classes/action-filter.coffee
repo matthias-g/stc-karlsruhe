@@ -10,7 +10,7 @@ class @ActionFilter
       listId = html.data('list')
       $(listId).load '?' + @parametrize(html) + ' ' + listId + ' > *', ->
         registerContent(@)
-        createFlashMessage I18n.t('action.message.found_actions', count: $('.action-card', @).length)
+        createFlashMessage I18n.t('action_group.message.found_actions', count: $('.action-card', @).length)
 
 
   # create a parameter string of all the values of a form / part form

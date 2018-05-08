@@ -71,7 +71,7 @@
             <% end %>
             <div class="infobox">
               <span><%= @action_group.active_user_count %></span>
-              <div><%= t('user.label.countActive') %></div>
+              <div><%= t('action_group.info.volunteers') %></div>
             </div>
             <% if current_user&.in_orga_team? %>
               </a>
@@ -85,7 +85,7 @@
             <% end %>
             <div class="infobox">
               <span><%= vacancy_count %></span>
-              <div><%= t('action.label.vacancies') %></div>
+              <div><%= t('action_group.info.vacancies') %></div>
             </div>
             <% if current_user&.in_orga_team? %>
               </a>
@@ -97,16 +97,12 @@
       <%# filter module %>
       <div class="col-sm-6 col-md-12">
         <div class="white-box">
-          <h3>Filtern</h3>
+          <h3><%= t 'action_group.heading.filter' %></h3>
           <%= bootstrap_form_for(:filter, url: actions_path, method:'get', html: {data: {
                 class: 'ActionFilter', list: '#action-list', info: '#action-group-filter-results'}}) do |f| %>
-            <%= f.select(:day, options_for_day_select(@action_group), include_blank: "- - - Alle Tage - - -", hide_label: true) %>
-            <% if user_signed_in? && current_user.in_orga_team? %>
-              <%= f.select(:visibility, [['Sichtbar', :visible], ['Versteckt', :hidden]],
-                           include_blank: "- - - Sichtbarkeit egal - - -", hide_label: true) %>
-            <% end %>
-            <%= f.check_box :after_17h, label: 'Nur Aktionen ab 17 Uhr anzeigen' %>
-            <%= f.submit 'Aktionen filtern', class:'btn btn-secondary btn-block' %>
+            <%= f.select(:day, options_for_day_select(@action_group), include_blank: t('action_group.form.day_filter_blank'), hide_label: true) %>
+            <%= f.check_box :after_17h, label: t('action_group.form.actionsAfter5pm') %>
+            <%= f.submit t('action_group.button.filter'), class:'btn btn-secondary btn-block' %>
           <% end %>
         </div>
       </div>
@@ -115,8 +111,8 @@
       <div class="col-sm-6 col-md-12 hidden-xs-down">
         <div class="white-box">
           <h3>Eigene Aktion</h3>
-          <span><%= t('action.action.wantToStartOwnAction') %></span>
-          <%= link_to t('action.action.weHelpYou'), own_action_path %>
+          <span><%= t('action_group.help.wantToStartOwnAction') %></span>
+          <%= link_to t('action_group.help.weHelpYou'), own_action_path %>
         </div>
       </div>
 
@@ -125,7 +121,7 @@
         <div class="col-sm-6 col-md-12 hidden-xs-down">
           <div class="white-box">
             <h3>Optionen</h3>
-            <%= link_to t('action.action.new'), new_action_path, class:'btn btn-secondary btn-block' %>
+            <%= link_to t('action_group.button.newAction'), new_action_path, class:'btn btn-secondary btn-block' %>
           </div>
         </div>
       <% end %>
@@ -138,7 +134,7 @@
       <%= render '/actions/action_card_list', actions: @actions %>
       <% unless actions.any? %>
         <div class="white-box text-center" style="max-width: 600px; margin: 30px">
-          <%= t('action_group.noActions') %>
+          <%= t('action_group.info.noActions') %>
         </div>
       <% end %>
     </div>

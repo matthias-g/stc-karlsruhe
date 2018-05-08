@@ -1,0 +1,118 @@
+# users & roles
+
+de:
+  activerecord:
+
+    models:
+      user: 'Mitarbeiter'
+      role:
+        one: 'Benutzerrolle'
+        other: 'Benutzerrollen'
+      participation:
+        zero: 'Aktionsteilnahmen'
+        one: 'Aktionsteilnahme'
+        other: 'Aktionsteilnahmen'
+
+    attributes:
+      user:
+        username: 'Benutzername'
+        first_name: 'Vorname'
+        last_name: 'Nachname'
+        email: 'E-Mail'
+        phone: 'Handy'
+        password: 'Passwort'
+        password_confirmation: 'Passwort wiederholen'
+        current_password: 'Aktuelles Passwort'
+        remember_me: 'merken'
+        receive_emails_about_action_groups: 'Informationen zu Aktionswochen allgemein (z.B. Ankündigungen der Aktionswochen)'
+        receive_emails_about_my_action_groups: 'Informationen zu Aktionswochen, an denen ich teilnehme'
+        receive_emails_about_other_projects: 'Informationen zu weiteren Serve the City Projekten'
+        receive_other_emails_from_orga: 'Sonstige E-Mails vom Orgateam'
+        receive_emails_from_other_users: 'Andere Nutzer können mich über ein Kontaktformular kontaktieren'
+        receive_notifications_for_new_participation: 'Erhalte eine Benachrichtigung per E-Mail, wenn du bei einer Aktion teilnimmst'
+        receive_notifications_about_volunteers: 'Erhalte eine Benachrichtigung, wenn Mitarbeiter einem von dir geleiteten Aktionsteam beitreten oder es verlassen'
+
+  user:
+
+    heading:
+      login: 'Anmelden'
+      register: 'Profil erstellen'
+      profile: 'Profil'
+      myProfile: 'Mein Profil'
+      userList: 'Userliste'
+      edit: 'Profil bearbeiten'
+      deleteAccount: 'Account löschen'
+      resendInstructions: 'Anleitung zur Bestätigung nochmal senden'
+      passwordReset: 'Neues Passwort festlegen'
+
+      userData: 'Profildaten'
+      user_mail: 'Kontaktiere %{recipient}'
+      emailSettings: 'E-Mail-Einstellungen'
+      actionsAsLeader: 'Leitung'
+      actionsAsVolunteer: 'Teilnahme'
+      pastActions: 'Abgeschlossen'
+
+    button:
+      login: 'Anmelden'
+      loginWithProvider: 'Anmelden via %{provider}'
+      logout: 'Abmelden'
+      register: 'Profil erstellen'
+      recoverPassword: 'Passwort vergessen?'
+      showRegistration: 'Noch kein Profil?'
+      confirmAccount: 'Account bestätigen'
+      unlockAccount: 'Account freischalten'
+      deleteAccount: 'Account löschen'
+      resendInstructions: 'Nochmal senden'
+      changePassword: 'Passwort ändern'
+
+      user_mail: 'Nachricht senden'
+      exportICal: 'Aktionen als ICS/iCal-Feed'
+      edit: 'Profil bearbeiten'
+      newRole: 'Neue Rolle auswählen'
+      removeRole: 'Rolle entfernen'
+
+    form:
+      user: 'User'
+      user_or_email: 'Benutzername / E-Mail'
+      confirmDeletePassword: 'Dein Passwort, zur Bestätigung'
+
+      passwordSet: 'Passwort festlegen'
+      phoneOptional: 'Handy (optional)'
+      usernameOrEmail: 'Username / E-Mail'
+      receiveEmailsFromOrga: 'E-Mails vom Orgateam erhalten'
+
+    info:
+      waitingForEmailConfirmation: 'Ihre E-Mail-Adresse %{email} ist noch nicht bestätigt.'
+      hasNoActions: '%{user} nimmt noch an keiner Aktion teil.'
+      youHaveNoActions: 'Du nimmst noch an keiner Aktion teil.'
+      emailReception:
+        orga: 'Du erhältst E-Mails vom Orgateam.'
+        orgaAndUser: 'Du erhältst E-Mails vom Orgateam und anderen Nutzern.'
+        user: 'Du erhältst E-Mails von anderen Nutzern.'
+        none: 'Du erhältst keine E-Mails vom Orgateam oder anderen Nutzern.'
+
+    help:
+      passwordLength: 'Mindestens 6 Zeichen lang.'
+
+    label:
+      roles: 'Rollen'
+
+    message:
+      profileUpdated: 'Profil erfolgreich aktualisiert.'
+      loggedInAs: 'eingeloggt als %s'
+      invalidPassword: 'Das Passwort ist falsch'
+      accountDeleted: 'Dein Account wurde gelöscht.'
+      fieldEmpty: 'Das Feld darf nicht leer sein.'
+      surveySent: 'Vielen Dank für deine Rückmeldung!'
+      addRoleSuccess: 'Der User hat jetzt die Rolle %{model}'
+      removeRoleSuccess: '%{model} ist nun nicht mehr %{rel_model}'
+
+
+  role:
+    label:
+      newRole: 'Neue User-Rolle'
+      editRole: 'Rolle bearbeiten: "%s"'
+      roleAssignments: 'Rollenzuweisungen an Benutzer'
+      editRoles: 'Rollen bearbeiten'
+    message:
+      errorsExist: 'Die Rolle konnte wegen folgenden Fehlern nicht gespeichert werden:'

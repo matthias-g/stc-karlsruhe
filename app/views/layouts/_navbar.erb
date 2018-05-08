@@ -14,14 +14,14 @@
       <li<%= current_page?(root_path) ? ' class=active' : '' %>>
         <%= link_to root_path do %>
           <div class="link-icon"><span class="fas fa-home"></span></div>
-          <div class="link-text"><%= t('layout.links.home') %></div>
+          <div class="link-text"><%= t('layout.navbar.home') %></div>
         <% end %>
       </li>
 
       <li<%= current_page?('/about') ? ' class=active' : '' %>>
         <%= link_to '/about' do %>
           <div class="link-icon"><span class="far fa-lightbulb"></span></div>
-          <div class="link-text"><%= t('layout.links.about') %></div>
+          <div class="link-text"><%= t('layout.navbar.about') %></div>
         <% end %>
       </li>
 
@@ -37,23 +37,23 @@
         <li<%= current_page?(user_path(current_user)) ? ' class=active' : '' %>>
           <%= link_to user_path(current_user) do %>
             <div class="link-icon"><span class="fas fa-user"></span></div>
-            <div class="link-text"><%= t('layout.links.profile') %></div>
+            <div class="link-text"><%= t('layout.navbar.profile') %></div>
           <% end %>
         </li>
       <% else %>
         <li<%= current_page?(new_user_session_path) ? ' class=active' : '' %>>
           <%= link_to new_user_session_path do %>
             <div class="link-icon"><span class="fas fa-sign-in-alt"></span></div>
-            <div class="link-text"><%= t('layout.links.login') %></div>
+            <div class="link-text"><%= t('layout.navbar.login') %></div>
           <% end %>
         </li>
       <% end %>
 
-      <% if user_signed_in? && current_user.coordinator? %>
+      <% if current_user&.in_orga_team? %>
         <li<%= current_page?('/admin-dashboard') ? ' class=active' : '' %>>
           <%= link_to '/admin-dashboard' do %>
             <div class="link-icon"><span class="fas fa-cogs"></span></div>
-            <div class="link-text"><%= t('layout.links.adminDashboard') %></div>
+            <div class="link-text"><%= t('layout.navbar.adminDashboard') %></div>
           <% end %>
         </li>
       <% end %>
@@ -61,7 +61,7 @@
       <li<%= current_page?(contact_path) ? ' class=active' : '' %>>
         <%= link_to contact_path do %>
           <div class="link-icon"><span class="fas fa-envelope"></span></div>
-          <div class="link-text"><%= t('layout.links.contact') %></div>
+          <div class="link-text"><%= t('layout.navbar.contact') %></div>
         <% end %>
       </li>
     </ul>

@@ -54,14 +54,13 @@ class Mailer < ActionMailer::Base
     recipients = (action.leaders.where('users.receive_notifications_about_volunteers': true).pluck(:email) +
         [StcKarlsruhe::Application::NOTIFICATION_RECIPIENT])
                      .uniq.join(',')
-    mail bcc: recipients, subject: t('action.message.action.leavingNotification.subject')
+    mail bcc: recipients, subject: t('mailer.leaving_action_notification.subject')
   end
 
   def action_participate_volunteer_notification(user, action)
     @user = user
     @action = action
-    recipients = user.email
-    mail bcc: recipients, subject: t('action.message.action.participateVolunteerNotification.subject')
+    mail to: user.email, subject: t('mailer.action_participate_volunteer_notification.subject')
   end
 
   def action_participate_leader_notification(user, action)
@@ -69,7 +68,7 @@ class Mailer < ActionMailer::Base
     @action = action
     recipients = action.leaders.where('users.receive_notifications_about_volunteers': true).pluck(:email).uniq.join(',')
     return if recipients.blank?
-    mail bcc: recipients, subject: t('action.message.action.participateLeaderNotification.subject', {action: action.title})
+    mail bcc: recipients, subject: t('mailer.action_participate_leader_notification.subject', {action: action.title})
   end
 
   def gallery_picture_uploaded_notification(gallery, picture_count, uploader)
@@ -79,9 +78,10 @@ class Mailer < ActionMailer::Base
     @title = gallery.title
     @title = gallery.actions.collect{ |p| p.title }.join(', ') if @title.blank?
     @title = gallery.news_entries.collect{ |p| p.title }.join(', ') if @title.blank?
-    @type = 'Projekts' if gallery.actions.any?
-    @type = 'Newseintrags' if gallery.news_entries.any?
-    mail to: StcKarlsruhe::Application::NOTIFICATION_RECIPIENT, subject: t('action.message.mailNewPictures.subject', pictureCount: picture_count)
+    @type = 'einer Aktion' if gallery.actions.any?
+    @type = 'eines Newseintrags' if gallery.news_entries.any?
+    mail to: StcKarlsruhe::Application::NOTIFICATION_RECIPIENT, subject:
+        t('mailer.gallery_picture_uploaded_notification.subject', pictureCount: picture_count)
   end
 
 end

@@ -1,4 +1,6 @@
-<%= t('contact.team.body', title: @action_title,
-      sender_name: @sender.full_name, sender_email: @sender.email) %>
+Hallo,
+
+du hast über Serve the City Karlsruhe eine Nachricht von <%= @sender.full_name %>
+(<%= @sender.email %>, Aktionsleiter von '<%= @action_title %>') bekommen:
 
 <%= @message %>

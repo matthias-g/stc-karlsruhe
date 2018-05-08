@@ -18,6 +18,12 @@ class PagesController < ApplicationController
     render 'page'
   end
 
+  def contact
+    @message = Message.new
+    @partial_name = 'contact'
+    render 'page'
+  end
+
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def page_params

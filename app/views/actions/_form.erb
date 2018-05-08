@@ -24,9 +24,9 @@
 
   <div class="white-box record-header">
     <% if isNew %>
-      <h1><%= t('action.label.new') %></h1>
+      <h1><%= t('action.heading.new') %></h1>
     <% else %>
-      <div class="type"><%= t('action.label.edit') %></div>
+      <div class="type"><%= t('action.heading.edit') %></div>
       <h1><%= @action.title %></h1>
     <% end %>
   </div>
@@ -38,7 +38,7 @@
         <%= f.text_field :title %>
         <div class="form-group">
           <label class="control-label" for="action_picture_source">
-            <%= Action.human_attribute_name('picture') %>
+            <%= Action.human_attribute_name(:picture) %>
           </label>
           <%= f.file_field :picture, hide_label: true %>
 
@@ -49,29 +49,27 @@
             <% if @action.persisted? %>
               <%= link_to crop_picture_action_path(@action, crop_target: 'action_list'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
-                <span class="fas fa-crop"></span> <%= t('action.action.cropListviewImage') %>
+                <span class="fas fa-crop"></span> <%= t('action.button.cropListviewImage') %>
               <% end %>
               <%= link_to crop_picture_action_path(@action, crop_target: 'action_view'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'}  do %>
-                <span class="fas fa-crop"></span> <%= t('action.action.cropActionImage') %>
+                <span class="fas fa-crop"></span> <%= t('action.button.cropActionImage') %>
               <% end %>
               <%= link_to crop_picture_action_path(@action, crop_target: 'thumbnail'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
-                <span class="fas fa-crop"></span> <%= t('action.action.cropThumbnailImage') %>
+                <span class="fas fa-crop"></span> <%= t('action.button.cropThumbnailImage') %>
               <% end %>
 
             <% end %>
           <% end %>
 
         </div>
-        <%= f.text_field :picture_source,
-                         help: t('action.help.picture_source') %>
+        <%= f.text_field :picture_source, help: t('action.help.picture_source') %>
       </div>
 
       <div class="white-box">
         <div class="short_description">
-          <%= f.text_area :short_description,
-                          help: t('action.help.short_description') %>
+          <%= f.text_area :short_description, help: t('action.help.short_description') %>
         </div>
         <div class="description">
           <%= f.text_area :description %>
@@ -92,27 +90,27 @@
 
       <div class="white-box">
         <h3>
-          <%= t('action.label.manageAction') %>
+          <%= t('action.heading.management') %>
         </h3>
         <%= button_tag class: 'btn btn-success btn-block' do %>
-          <span class="fas fa-save"></span> <%= t('general.action.save') %>
+          <span class="fas fa-save"></span> <%= t('general.button.save') %>
         <% end %>
         <% if isNew %>
           <%= link_to :back, class: 'btn btn-warning btn-block' do %>
-            <span class="fas fa-ban"></span> <%= t('general.action.cancel') %>
+            <span class="fas fa-ban"></span> <%= t('general.button.cancel') %>
           <% end %>
         <% else %>
           <%= link_to @action, class: 'btn btn-warning btn-block' do %>
-            <span class="fas fa-ban"></span> <%= t('general.action.cancel') %>
+            <span class="fas fa-ban"></span> <%= t('general.button.cancel') %>
           <% end %>
           <%= link_to clone_action_path(@action), class: 'btn btn-dark btn-block' do %>
-            <span class="far fa-copy"></span> <%= t('action.action.clone') %>
+            <span class="far fa-copy"></span> <%= t('action.button.clone') %>
           <% end %>
         <% end %>
         <% if !isNew && policy(@action).destroy? %>
           <%= link_to @action, method: :delete, class: 'btn btn-danger btn-block',
                       data: { confirm: t('general.message.confirmDelete')} do %>
-            <span class="fas fa-trash"></span> <%= t('general.action.delete') %>
+            <span class="fas fa-trash"></span> <%= t('general.button.delete') %>
           <% end %>
         <% end %>
       </div>
@@ -158,7 +156,7 @@
         <%= f.fields_for :events do |builder| %>
           <%= render 'events/event_fields', f: builder, default_date: @action.action_group&.start_date %>
         <% end %>
-        <%= link_to t('action.action.addEvent'), 'javascript:void(0);', class: 'add-link btn btn-secondary' %>
+        <%= link_to t('action.button.addEvent'), 'javascript:void(0);', class: 'add-link btn btn-secondary' %>
       </div>
 
     </div>

@@ -1,0 +1,51 @@
+# gallery & gallery partial
+
+de:
+
+  activerecord:
+    models:
+      gallery:
+        one: 'Fotogalerie'
+        other: 'Fotogalerien'
+
+    attributes:
+      gallery:
+        picture: 'Bilder'
+        title: 'Titel'
+
+  gallery:
+    heading:
+      actionGallery: 'Fotogalerie'
+      edit: 'Galerie bearbeiten'
+
+    button:
+      goto:
+        previous: "Vorheriges Bild"
+        next: "Nächstes Bild (Pfeil rechts)"
+      close: "Schließen (Esc)"
+      share: "Share"
+      toggleFullscreen: "Vollbild an/aus"
+      zoom: "Vergrößern / Verkleinern"
+      delete: "Löschen"
+      rotateRight: "Nach rechts drehen"
+      rotateLeft: "Nach links drehen"
+      uploadPictures: 'Bilder hochladen'
+      uploadSelectedPictures: 'Ausgewählte Bilder hochladen'
+      edit: 'Galerie bearbeiten'
+      show: 'Galerie anzeigen'
+      showAction: 'Aktion anzeigen'
+      index: 'Alle Galerien auflisten'
+      makeAllVisible: 'Alle Bilder sichtbar machen'
+      makeAllInvisible: 'Alle Bilder verstecken'
+
+    help:
+      uploadPictures: 'Hast du während der Aktion Bilder gemacht, die du veröffentlichen möchtest? Dann kannst du sie hier hochladen.
+              Hast du andere Personen fotografiert, stelle bitte sicher, dass du ihr Einverständnis für das Veröffentlichen der Bilder hast.'
+
+    message:
+      uploading: 'Bitte warten, die Bilder werden hochgeladen...'
+      containsInvisiblePictures: 'Einige der Bilder in dieser Galerie wurden noch nicht von jemandem aus dem Orgateam freigeschaltet
+                          und sind daher noch nicht öffentlich sichtbar.'
+      confirmDeletePicture: 'Möchtest Du dieses Bild wirklich löschen?'
+      pictureRotated: 'Das Bild wurde gedreht.'
+      pictureDeleted: 'Das Bild wurde gelöscht.'

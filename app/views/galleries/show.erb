@@ -35,7 +35,7 @@
       <div class="section">
         <% if policy(@gallery).edit? %>
           <%= link_to edit_gallery_path(@gallery), class: 'btn btn-primary btn-block' do %>
-            <span class="fas fa-pencil-alt"></span> <%= t('general.action.edit') %>
+            <span class="fas fa-pencil-alt"></span> <%= t('general.button.edit') %>
           <% end %>
         <% end %>
         <% if policy(@gallery).index? %>

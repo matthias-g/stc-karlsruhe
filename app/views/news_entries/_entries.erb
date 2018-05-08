@@ -16,7 +16,7 @@
       <div class="news-date">
         <%= l news.created_at.to_date, format: :date %>
       </div>
-      <h2><%= link_to news.title, news %><%= ' (' + t('news_entry.label.invisible') + ')' unless news.visible? %></h2>
+      <h2><%= link_to news.title, news %><%= ' (' + t('news_entry.info.invisible') + ')' unless news.visible? %></h2>
       <% if news.teaser.blank? %>
           <div><%= simple_format(simple_format_urls news.text) %></div>
       <% else %>

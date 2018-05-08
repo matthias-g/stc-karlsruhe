@@ -26,8 +26,8 @@
 <% end %>
 
 <div class="section">
-  <%= link_to t('surveys.action.editTemplate'), edit_surveys_template_path(@template), class: 'btn btn-secondary' %>
-  <%= link_to t('surveys.action.toTemplateOverview'), surveys_templates_path, class: 'btn btn-secondary'%>
-  <%= link_to t('surveys.action.newSubmission'), new_surveys_template_surveys_submission_path(@template), class: 'btn btn-secondary'%>
-  <%= link_to t('surveys.action.showSubmissions'), surveys_template_surveys_submissions_path(@template), class: 'btn btn-secondary'%>
+  <%= link_to t('surveys.button.editTemplate'), edit_surveys_template_path(@template), class: 'btn btn-secondary' %>
+  <%= link_to t('surveys.navigation.toTemplateOverview'), surveys_templates_path, class: 'btn btn-secondary'%>
+  <%= link_to t('surveys.button.newSubmission'), new_surveys_template_surveys_submission_path(@template), class: 'btn btn-secondary'%>
+  <%= link_to t('surveys.button.showSubmissions'), surveys_template_surveys_submissions_path(@template), class: 'btn btn-secondary'%>
 </div>

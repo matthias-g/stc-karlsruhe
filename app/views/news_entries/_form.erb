@@ -23,7 +23,7 @@
 
     <div class="record-header">
       <div class="type">
-        &nbsp;<%= isNew ? t('news_entry.label.new') : t('news_entry.label.edit') %>&nbsp;
+        &nbsp;<%= isNew ? t('news_entry.heading.new') : t('news_entry.heading.edit') %>&nbsp;
       </div>
       <h1><%= @news_entry.title %></h1>
     </div>
@@ -43,15 +43,15 @@
                 <%= image_tag @news_entry.picture_url(:article) %>
               </div>
               <br />
-              <%= link_to t('news_entry.action.cropArticleImage'),
+              <%= link_to t('news_entry.button.cropArticleImage'),
                           crop_picture_news_entry_path(@news_entry, crop_target: 'article'),
                           class: 'btn btn-secondary',
                           data: {toggle: 'modal', target: '#image_crop_modal'}  %>
-              <%= link_to t('news_entry.action.cropFullscreenImage'),
+              <%= link_to t('news_entry.button.cropFullscreenImage'),
                           crop_picture_news_entry_path(@news_entry, crop_target: 'fullscreen'),
                           class: 'btn btn-secondary',
                           data: {toggle: 'modal', target: '#image_crop_modal'}  %>
-              <%= link_to t('news_entry.action.cropThumbnailImage'),
+              <%= link_to t('news_entry.button.cropThumbImage'),
                           crop_picture_news_entry_path(@news_entry, crop_target: 'thumb'),
                           class: 'btn btn-secondary',
                           data: {toggle: 'modal', target: '#image_crop_modal'}  %>
@@ -62,8 +62,7 @@
                          help: t('action.help.picture_source') %>
 
         <div class="teaser">
-          <%= f.text_area :teaser,
-                          help: t('news_entry.help.teaser') %>
+          <%= f.text_area :teaser, help: t('news_entry.help.teaser') %>
         </div>
         <div class="text">
           <%= f.text_area :text %>
@@ -76,13 +75,10 @@
           <%= f.check_box :visible %>
         </section>
         <section>
-          <h3>
-            <%= t('news_entry.label.manageNewsEntry') %>
-          </h3>
-          <%= f.submit t('general.action.save'), class: 'btn btn-secondary btn-block' %>
-          <%= link_to t('general.action.cancel'), @news_entry, class: 'btn btn-secondary btn-block' %>
+          <%= f.submit t('general.button.save'), class: 'btn btn-secondary btn-block' %>
+          <%= link_to t('general.button.cancel'), @news_entry, class: 'btn btn-secondary btn-block' %>
           <% if !isNew && policy(@news_entry).destroy? %>
-              <%= link_to t('news_entry.action.delete'), @news_entry, method: :delete,
+              <%= link_to t('news_entry.button.delete'), @news_entry, method: :delete,
                           data: { confirm: t('general.message.confirmDelete')},
                           class: 'btn btn-secondary btn-block' %>
           <% end %>
@@ -101,11 +97,11 @@
           <div class="field">
             <%= t('news_entry.help.uploadPictures') %>
             <%= gallery_form.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]' %>
-            <p class="waitinfo">Bitte warten, die Bilder werden hochgeladen...</p>
+            <p class="waitinfo"><%= t('gallery.message.uploading') %></p>
           </div>
 
           <div class="actions">
-            <%= gallery_form.submit t('gallery.action.uploadSelectedPictures') %>
+            <%= gallery_form.submit t('gallery.button.uploadSelectedPictures') %>
           </div>
       <% end %>
     </section>

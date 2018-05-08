@@ -22,10 +22,10 @@
   <h1><%= @action.full_title %></h1>
   <div class="labels">
     <% unless @action.visible? %>
-      <span class="badge status_hidden"><%= t('action.status.hidden') %></span>
+      <span class="badge status_hidden"><%= t('action.info.status.hidden') %></span>
     <% end %>
     <span class="badge status_<%= @action.status %>">
-        <%= t "action.status.#{@action.status}" %>
+        <%= t "action.info.status.#{@action.status}" %>
       </span>
   </div>
 </div>
@@ -79,7 +79,7 @@
       <% if policy(@action.gallery).show? || policy(@action).upload_pictures? %>
         <div class="col-12">
           <section id="actions-gallery" class="white-box d-print-none">
-            <%= render 'action_gallery', action: @action %>
+            <%= render 'galleries/action_gallery', gallery: @action.gallery %>
           </section>
         </div>
       <% end %>
@@ -89,17 +89,18 @@
         <div class="col-12">
           <section id="action-communication" class="white-box d-print-none">
             <%= bootstrap_form_for(@message, url: {action: 'contact_volunteers'}) do |f| %>
-              <h3><%= t('contact.team.title') %></h3>
-              <p><%= t('contact.team.text') %></p>
+              <h3><%= t('action.heading.contactTeam') %></h3>
+              <p><%= t('action.help.contactTeam') %></p>
               <% if user_signed_in? && current_user.admin? %>
                 <p>(<%= (@action.volunteers + @action.leaders + [current_user]).uniq.map { |v| v.email}.join(', ') %>)</p>
               <% end %>
-              <%= f.select :recipient_scope, [['Teilnehmer dieser Aktion', 'this_action'],
-                                              ['Teilnehmer dieser Aktion inkl. Teilaktionen', 'action_and_subactions']],
-                           {label: t('contact.general.placeholders.recipient_scope')}, class: 'selectpicker' %>
-              <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
-              <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
-              <%= f.submit t('contact.team.submit'), class: 'btn btn-primary' %>
+              <%= f.select :recipient_scope, [
+                  [t('action.form.contactTeam.recipient_scopes.this_action'), 'this_action'],
+                  [t('action.form.contactTeam.recipient_scopes.action_and_subactions'), 'action_and_subactions']],
+                           {label: t('action.form.contactTeam.recipient_scope')}, class: 'selectpicker' %>
+              <%= f.text_field :subject, label: t('action.form.contactTeam.subject') %>
+              <%= f.text_area :body, label: t('action.form.contactTeam.message') %>
+              <%= f.submit t('action.button.contactTeam'), class: 'btn btn-primary' %>
             <% end %>
           </section>
         </div>
@@ -107,11 +108,11 @@
         <div class="col-12">
           <section id="action-communication" class="white-box d-print-none">
             <%= bootstrap_form_for(@message, url: {action: 'contact_leaders'}) do |f| %>
-              <h3><%= t('contact.leaders.title') %></h3>
-              <p><%= t('contact.leaders.text') %></p>
-              <%= f.text_field :subject, label: t('contact.general.placeholders.subject') %>
-              <%= f.text_area :body, label: t('contact.general.placeholders.body') %>
-              <%= f.submit t('contact.leaders.submit'), class: 'btn btn-primary' %>
+              <h3><%= t('action.heading.contactLeader') %></h3>
+              <p><%= t('action.help.contactLeader') %></p>
+              <%= f.text_field :subject, label: t('action.form.contactLeader.subject') %>
+              <%= f.text_area :body, label: t('action.form.contactLeader.body') %>
+              <%= f.submit t('action.button.contactLeader'), class: 'btn btn-primary' %>
             <% end %>
           </section>
         </div>
@@ -128,16 +129,16 @@
         <div class="col-sm-6 col-md-12 d-print-none">
           <section class="white-box">
             <%= link_to edit_action_path(@action), class:'btn btn-primary btn-block' do %>
-              <span class="fas fa-pencil-alt"></span> <%= t('action.action.edit') %>
+              <span class="fas fa-pencil-alt"></span> <%= t('action.button.edit') %>
             <% end %>
             <% if policy(@action).change_visibility? %>
               <% if @action.visible %>
                 <%= link_to make_invisible_action_path(@action), class:'btn status_hidden btn-block' do %>
-                  <span class="fas fa-eye-slash"></span> <%= t('action.action.makeInvisible') %>
+                  <span class="fas fa-eye-slash"></span> <%= t('action.button.makeInvisible') %>
                 <% end %>
               <% else %>
                 <%= link_to make_visible_action_path(@action), class:'btn status_hidden btn-block' do %>
-                  <span class="fas fa-eye"></span> <%= t('action.action.makeVisible') %>
+                  <span class="fas fa-eye"></span> <%= t('action.button.makeVisible') %>
                 <% end %>
               <% end %>
             <% end %>
@@ -169,7 +170,7 @@
             <% if policy(@action).manage_team? && policy(User).index? %>
               <div class="my-2">
                 <%= user_select_picker @action, 'leaders', false, class: 'col-select btn-block',
-                                       title: t('action.action.addLeader'), data: {'success-reload': true} %>
+                                       title: t('action.button.addLeader'), data: {'success-reload': true} %>
               </div>
             <% end %>
           </div>
@@ -186,7 +187,7 @@
             <% end %>
           </div>
           <div>
-            <h3><%= Action.human_attribute_name('location') %></h3>
+            <h3><%= Action.human_attribute_name(:location) %></h3>
             <%= simple_format @action.location %>
           </div>
           <% unless @action.longitude == 0 %>
@@ -211,7 +212,7 @@
         <div class="col-sm6 col-md-12">
           <div class="white-box">
             <div id="subaction-list">
-              <h3><%= Action.human_attribute_name('subaction_ids') %></h3>
+              <h3><%= Action.human_attribute_name(:subaction_ids) %></h3>
               <% subactions.each do |action| %>
                 <%= render '/actions/action_entry', action: action, simple_title: true %>
               <% end %>
@@ -226,11 +227,11 @@
           <%= render 'events/event_team_list', events: @action.events %>
         <% elsif user_signed_in? && @action.volunteers_in_subactions.include?(current_user) %>
           <div class="white-box">
-            <p class="h4 my-0"><%= t('action.message.subactionTeamMember') %></p>
+            <p class="h4 my-0"><%= t('action.info.subactionTeamMember') %></p>
           </div>
         <% elsif @action.available_places.zero? && @action.total_available_places.positive? %>
           <div class="white-box">
-            <p class="h4 my-0"><%= t('action.message.enterOneOfThesubactions') %></p>
+            <p class="h4 my-0"><%= t('action.info.enterOneOfThesubactions') %></p>
           </div>
         <% end %>
       </div>
@@ -241,13 +242,14 @@
 
 <div class="footer d-print-none">
   <%= render '/layouts/share' %>
-  <%= link_to action_ical_path(@action), class: 'float-right px-1', title: t('action.action.exportICal'), data: { 'turbolinks': false } do %>
+  <%= link_to action_ical_path(@action), class: 'float-right px-1',
+              title: t('action.button.exportICal'), data: { 'turbolinks': false } do %>
     <span class="far fa-calendar-alt fa-2x"></span>
   <% end %>
   <% if @action.action_group %>
-    <%= link_to t('action.action.toOverview'), show_action_group_path(@action.action_group), class: 'btn btn-light' %>
+    <%= link_to t('action.navigation.toOverview'), show_action_group_path(@action.action_group), class: 'btn btn-light' %>
   <% end %>
   <% if @action.parent_action %>
-    <%= link_to t('action.action.toParentAction'), @action.parent_action, class: 'btn btn-light' %>
+    <%= link_to t('action.navigation.toParentAction'), @action.parent_action, class: 'btn btn-light' %>
   <% end %>
 </div>

@@ -11,7 +11,7 @@
 <div class="record-header">
   <div class="type">
     <%= l @news_entry.created_at.to_date, format: :date %>
-    <%= '| ' + t('news_entry.label.invisible') unless @news_entry.visible? %>
+    <%= '| ' + t('news_entry.info.invisible') unless @news_entry.visible? %>
   </div>
   <h1 class="text-center"><%= @news_entry.title %></h1>
 </div>
@@ -24,7 +24,7 @@
           <i><%= t('gallery.message.containsInvisiblePictures') %></i>
       <% end %>
       <% if policy(@news_entry.gallery).edit? %>
-          <%= link_to 'Galerie bearbeiten', edit_gallery_path(@news_entry.gallery) %>
+          <%= link_to t('gallery.button.edit'), edit_gallery_path(@news_entry.gallery) %>
       <% end %>
     </div>
 <% elsif @news_entry.show_picture? %>
@@ -44,7 +44,7 @@
                 <!--</div>-->
 
                 <!--<div class="actions">-->
-                  <!--<%= f.submit t('gallery.action.uploadSelectedPictures') %>-->
+                  <!--<%= f.submit t('gallery.button.uploadSelectedPictures') %>-->
                 <!--</div>-->
             <!--<% end %>-->
           <!--</div>-->
@@ -59,17 +59,17 @@
 <% if policy(@news_entry).edit? %>
     <div class="section">
 
-      <%= link_to t('news_entry.action.edit'),
+      <%= link_to t('news_entry.button.edit'),
                   edit_news_entry_path(@news_entry), class:'btn btn-secondary' %>
 
       <%= api_link :auto_name, [@news_entry], :update, class: 'btn btn-secondary',
                    icon: @news_entry.visible? ? 'fas fa-eye-slash' : 'fas fa-eye',
-                   title: @news_entry.visible? ? t('news_entry.action.makeInvisible') :
-                              t('news_entry.action.makeVisible'),
+                   title: @news_entry.visible? ? t('news_entry.button.makeInvisible') :
+                              t('news_entry.button.makeVisible'),
                    attributes: {visible: !@news_entry.visible?},
                    data: {'success-reload': true} %>
 
-      <%= link_to t('news_entry.action.delete'), @news_entry, method: :delete,
+      <%= link_to t('news_entry.button.delete'), @news_entry, method: :delete,
                   data: { confirm: t('general.message.confirmDelete')},
                   class: 'btn btn-secondary' %>
     </div>

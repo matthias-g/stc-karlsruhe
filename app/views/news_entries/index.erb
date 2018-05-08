@@ -1,8 +1,9 @@
 <% provide :title, t('layout.title.newsEntryList') %>
 
 <% if policy(NewsEntry).new? %>
-  <div style="float:right">
-    <%= link_to t('news_entry.action.new'), new_news_entry_path %>
+  <div class="text-right">
+    <%= link_to t('news_entry.button.new'), new_news_entry_path, class: 'btn btn-primary' %>
   </div>
 <% end %>
+
 <%= render 'entries' %>

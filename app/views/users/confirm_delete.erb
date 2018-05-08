@@ -1,14 +1,14 @@
 <% provide :title, t('layout.title.userDeleteAccount', user:@user.full_name) %>
 <% wrapper_set 'white-box', 'container-small' %>
 
-<h1><%= t('user.action.deleteAccount') %></h1>
+<h1><%= t('user.heading.deleteAccount') %></h1>
 
 <%= bootstrap_form_tag url: user_path(@user), method: :delete do |f| %>
 
-  <%= f.password_field :confirm_delete_password, label: t('user.label.confirmDeletePassword') %>
+  <%= f.password_field :confirm_delete_password, label: t('user.form.confirmDeletePassword') %>
 
   <%= button_tag class: 'btn btn-danger' do %>
-    <span class="fas fa-trash"></span> <%= t('user.action.deleteAccount') %>
+    <span class="fas fa-trash"></span> <%= t('user.button.deleteAccount') %>
   <% end %>
 
 <% end %>

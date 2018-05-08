@@ -40,10 +40,10 @@
 </div>
 
 <div class="section">
-  <%= link_to t('general.action.back'), orga_messages_path, class: 'btn-secondary btn' %>
-  <%= link_to t('general.action.edit'), edit_orga_message_path(@message), class: 'btn-secondary btn' unless @message.sent? %>
-  <%= link_to t('general.action.delete'), orga_message_path(@message), method: :delete, class: 'btn-secondary btn',
+  <%= link_to t('general.button.back'), orga_messages_path, class: 'btn-secondary btn' %>
+  <%= link_to t('general.button.edit'), edit_orga_message_path(@message), class: 'btn-secondary btn' unless @message.sent? %>
+  <%= link_to t('general.button.delete'), orga_message_path(@message), method: :delete, class: 'btn-secondary btn',
               data: { confirm: t('orga_message.message.really_destroy') } if policy(@message).destroy? %>
-  <%= link_to t('orga_message.action.send_now'), send_message_orga_message_path(@message), class: 'btn-secondary btn',
+  <%= link_to t('orga_message.button.send_now'), send_message_orga_message_path(@message), class: 'btn-secondary btn',
               data: { confirm: t('orga_message.message.really_send') } unless @message.sent? %>
 </div>

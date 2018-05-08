@@ -7,7 +7,7 @@
 
 <p>Hallo,</p>
 
-<p>soeben wurden neue Bilder zur <%= link_to 'Fotogalerie', @gallery %> <%= 'eines ' + @type + ' ' if @type %>hinzugefügt:</p>
+<p>soeben wurden neue Bilder zur <%= link_to 'Fotogalerie', @gallery %> <%= @type + ' ' if @type %>hinzugefügt:</p>
 
 <p>Titel: <%= @title %><br />
   Anzahl Bilder: <%= @picture_count %><br />

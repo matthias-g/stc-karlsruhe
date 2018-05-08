@@ -32,8 +32,8 @@
   <table class="table">
     <thead>
     <tr>
-      <th><%= t('general.label.name') %></th>
-      <th><%= t('general.label.actions') %></th>
+      <th><%= Role.human_attribute_name :title %></th>
+      <th></th>
     </tr>
     </thead>
 
@@ -42,8 +42,8 @@
         <tr>
           <td><%= role.title %></td>
           <td>
-            <%= link_to t('general.action.edit'), edit_role_path(role) %> |
-            <%= link_to t('general.action.delete'), role, method: :delete,
+            <%= link_to t('general.button.edit'), edit_role_path(role) %> |
+            <%= link_to t('general.button.delete'), role, method: :delete,
                         data: { confirm: t('general.message.confirmDeleteLong') % [role.title]} %>
           </td>
         </tr>

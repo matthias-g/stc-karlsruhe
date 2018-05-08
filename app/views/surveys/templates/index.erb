@@ -1,6 +1,6 @@
 <% provide :title, t('layout.title.templateList') %>
 
-<h1><%= t('surveys.label.templateList') %></h1>
+<h1><%= t('surveys.heading.templateList') %></h1>
 
 <ul>
   <% @templates.each do |template| %>
@@ -12,5 +12,5 @@
 
 <br>
 
-<%= link_to t('surveys.action.newTemplate'), new_surveys_template_path, class: 'btn btn-secondary' %>
+<%= link_to t('surveys.button.newTemplate'), new_surveys_template_path, class: 'btn btn-secondary' %>
 

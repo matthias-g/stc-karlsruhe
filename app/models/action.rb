@@ -140,7 +140,7 @@ class Action < ApplicationRecord
 
   def clone
     action_copy = dup
-    action_copy.title = I18n.t('action.label.copyOf') + title
+    action_copy.title = I18n.t('general.label.copyOf', title: title)
     action_copy.action_group = ActionGroup.all.order(start_date: :desc).first
     action_copy.parent_action = nil
     action_copy.save!

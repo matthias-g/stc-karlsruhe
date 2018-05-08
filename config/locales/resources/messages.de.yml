@@ -1,0 +1,76 @@
+# mailing (orga messages, other messages, labels used by mailer)
+
+de:
+  activerecord:
+    models:
+      message:
+        one: 'Nachricht'
+        other: 'Nachrichten'
+      orga_message: 'Orga-Mail'
+
+    attributes:
+      message:
+        sender: 'Sender'
+        recipient: 'Empfänger'
+        subject: 'Betreff'
+        body: 'Nachricht'
+      orga_message:
+        from: 'Absender'
+        recipient: 'Empfänger'
+        content_type: 'Typ'
+        subject: 'Betreff'
+        body: 'Nachricht'
+        created_at: 'Erstellt'
+        author: 'Autor'
+        sent_at: 'Versandt'
+        sender: 'Sender'
+
+  orga_message:
+
+    heading:
+      write_new_mail: 'Neue Mail verfassen'
+      edit_mail: 'Mail bearbeiten'
+
+    button:
+      write_new: 'Neue Mail verfassen'
+      send_now: 'Jetzt senden'
+
+    form:
+      groups:
+        current_volunteers_and_leaders: "Aktionsleiter und Mitarbeiter der Aktionswoche %{action_group}"
+        current_volunteers: "Mitarbeiter der Aktionswoche %{action_group}"
+        current_leaders: "Aktionsleiter der Aktionswoche %{action_group}"
+        all_users: 'Alle angemeldeten Benutzer'
+        active_users: 'Aktive Benutzer (Registrierung < 6 M oder Aktionsteilnahme < 18 M)'
+        me: "Ich <%{user_email}>"
+      types:
+        about_action_groups: 'Informationen zur Aktionswoche'
+        about_other_projects: 'Informationen zu weiteren Serve the City Aktionen'
+        other_email_from_orga: 'Sonstige E-Mail vom Orgateam'
+
+    message:
+      updated: 'Die Mail wurde erfolgreich geändert.'
+      message_already_sent: 'Diese Nachricht wurde bereits versandt!'
+      send_success: 'Die Nachricht wurde erfolgreich versandt.'
+      really_destroy: 'Willst du die Nachricht wirklich löschen?'
+      really_send: 'Willst du die Nachricht wirklich versenden?'
+
+  mailer:
+    contact_mail:
+      success: 'Vielen Dank für deine Nachricht! Wir werden sie so schnell wie möglich beantworten.'
+    action_mail:
+      success: 'Die Nachricht wurde an dich und alle Mitarbeiter geschickt.'
+    action_mail_to_leaders:
+      success: 'Die Nachricht wurde an die Aktionsleiter und an dich geschickt.'
+    user_mail:
+      success: 'Die Nachricht wurde an %{recipient} geschickt.'
+    orga_mail:
+      success: 'Die Nachricht wurde erfolgreich gesendet.'
+    leaving_action_notification:
+      subject: 'Austritt aus Aktionsteam'
+    action_participate_volunteer_notification:
+      subject: 'Willkommen im Aktionsteam'
+    action_participate_leader_notification:
+      subject: 'Neuer Mitarbeiter bei %{action}'
+    gallery_picture_uploaded_notification:
+      subject: '%{pictureCount} neue Bilder hochgeladen'

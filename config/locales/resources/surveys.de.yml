@@ -1,0 +1,59 @@
+# surveys
+
+de:
+  activerecord:
+
+    models:
+      surveys/template: 'Umfrage-Template'
+      surveys/submission: 'Umfrage'
+
+    attributes:
+      surveys/template:
+        title: 'Titel der Umfrage'
+        show_in_user_profile: 'In Benutzerprofil anzeigen'
+      surveys/question:
+        text: 'Frage'
+        explanation: 'Erklärung'
+        question_type: 'Art der Frage'
+        answer_options: 'Optionen'
+        is_subquestion: 'Unterfrage'
+
+  surveys:
+
+    navigation:
+      toTemplateOverview: 'zur Übersicht'
+      toSubmissionOverview: 'zur Übersicht'
+
+    heading:
+      submissionList: 'Einsendungen zur Umfrage "%{survey_title}"'
+      templateList: 'Umfragen'
+      newTemplate: 'Neue Umfrage'
+      editTemplate: 'Umfrage bearbeiten'
+
+    button:
+      showSubmissions: 'Antworten ansehen'
+      showSubmission: 'Einsendung %{id}'
+      downloadAsCSV: 'Im CSV-Format herunterladen'
+
+      newTemplate: 'Neue Umfrage erstellen'
+      editTemplate: 'Umfrage bearbeiten'
+      saveTemplate: 'Umfrage speichern'
+      deleteTemplate: 'Umfrage löschen'
+      addQuestion: 'Frage hinzufügen'
+      removeQuestion: 'Frage entfernen'
+
+      newSubmission: 'Umfrage ausfüllen'
+      editSubmission: 'Einsendung bearbeiten'
+      saveSubmission: 'Abschicken'
+
+    message:
+      errorList: 'Wegen folgender Fehler konnte die Umfrage nicht gespeichert werden:'
+      answerCreated: 'Vielen Dank für dein Feedback!'
+
+    question:
+      type:
+        text: 'Freitext'
+        choice: 'Auswahl'
+        choice_or_text: 'Auswahl oder Freitext'
+        text_line: 'Freitextzeile'
+        info: 'Infotext'

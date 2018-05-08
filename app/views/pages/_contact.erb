@@ -2,16 +2,16 @@
 <% wrapper_set 'white-box', 'container-small' %>
 <% show_errors_for @message %>
 
-<h1><%= t 'contact.orga.title' %></h1>
-<%= t 'contact.orga.text' %>
+<h1>Kontakt aufnehmen</h1>
+<p>Du hast die eine oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei Dir.</p>
 
 <%= bootstrap_form_for @message, url: contact_path do |form| %>
 
   <div class="mt-4 row justify-content-center">
     <div class="col-sm-8">
-        <%= form.email_field :sender, value: user_signed_in? ? current_user.email : @message.sender, label: t('contact.general.placeholders.sender') %>
-        <%= form.text_field :subject, label: t('contact.general.placeholders.subject') %>
-        <%= form.text_area :body, label: t('contact.general.placeholders.body'), rows: 8 %>
+        <%= form.email_field :sender, value: user_signed_in? ? current_user.email : @message.sender, label: t('general.form.sender') %>
+        <%= form.text_field :subject, label: t('general.form.subject') %>
+        <%= form.text_area :body, label: t('general.form.body'), rows: 8 %>
         <%= form.hidden_field :recipient, value: 'default@servethecity-karlsruhe.de' %>
         <% unless user_signed_in? %>
           <%= form.form_group do %>
@@ -22,7 +22,7 @@
   </div>
 
   <%= button_tag type: 'submit', class: 'btn btn-primary' do %>
-    <span class="fas fa-envelope"></span> <%= t('contact.orga.submit') %>
+    <span class="fas fa-envelope"></span> Nachricht senden
   <% end %>
 
 <% end %>

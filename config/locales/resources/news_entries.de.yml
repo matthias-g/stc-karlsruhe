@@ -1,0 +1,79 @@
+# news entries
+
+de:
+  activerecord:
+
+    models:
+      news_entry:
+        one: 'News-Eintrag'
+        other: 'News-Einträge'
+
+    attributes:
+      news_entry:
+        title: 'Newstitel'
+        text: 'Text'
+        teaser: 'Teaser'
+        visible: 'Sichtbar'
+        picture: 'Bild'
+        picture_source: 'Bildrechte /-quelle'
+        category: 'News-Kategorie'
+
+  news_entry:
+
+    heading:
+      new: 'Neuer News-Eintrag'
+      edit: 'News bearbeiten'
+      cropImage: 'Bildausschnitt für %{crop_target} anpassen'
+      cropTarget:
+        article: 'Artikelbild'
+        fullscreen: 'Vollbild'
+        thumb: 'Thumbnail'
+
+    button:
+      new: 'Neuer Eintrag'
+      edit: 'News bearbeiten'
+      delete: 'News löschen'
+      open: 'News anzeigen'
+      makeVisible: 'Sichtbar machen'
+      makeInvisible: 'News verstecken'
+      toOverview: 'alle News anzeigen'
+      toNews: 'zurück zum News-Eintrag'
+      searchNews: 'News suchen'
+      findNews: 'Newseintrag finden'
+      cropImage: 'Zuschneiden'
+      cropArticleImage: 'Artikelbild anpassen'
+      cropFullscreenImage: 'Vollbild anpassen'
+      cropThumbImage: 'Thumbnail anpassen'
+      uploadPictures: 'Bilder hochladen'
+      uploadSelectedPictures: 'Ausgewählte Bilder hochladen'
+
+    label:
+      news_entry: 'News-Eintrag'
+
+
+      gallery: 'Fotogalerie'
+      uploadImage: 'Bild hochladen'
+
+    info:
+      invisible: 'versteckt'
+
+    help:
+      picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
+      teaser: 'Wenn Du dieses Feld ausfüllst, wird in Listen statt des ausführlichen Texts angezeigt.'
+      uploadPictures: 'Hier kannst du Bilder hochladen, die in einer Galerie anstelle des Artikelbildes angezeigt werden.'
+
+    message:
+      imageCropped: 'Der Bildausschnitt wurde angepasst.'
+      created: 'Newseintrag wurde erfolgreich erstellt.'
+      updated: 'Newseintrag wurde erfolgreich aktualisiert.'
+      deleted: 'Newseintrag wurde erfolgreich gelöscht.'
+      errorList: 'Wegen folgender Fehler konnte der Newseintrag nicht gespeichert werden:'
+      madeVisible: 'Newseintrag wurde sichtbar gemacht.'
+      madeInvisible: 'Newseintrag wurde unsichtbar gemacht.'
+
+    category:
+      general: 'Allgemein'
+      partners: 'Partner'
+      actions: 'Aktionen'
+      media: 'Medien'
+      insight: 'Einblicke'

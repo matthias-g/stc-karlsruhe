@@ -83,7 +83,7 @@ class ActionTest < ActiveSupport::TestCase
 
   test 'clone' do
     # single action
-    assert_equal I18n.t('action.label.copyOf') + @action.title, @action.clone.title
+    assert_equal I18n.t('general.label.copyOf', title: @action.title), @action.clone.title
     # parent action
     assert @parent_action.clone.subactions.empty?
     # child action

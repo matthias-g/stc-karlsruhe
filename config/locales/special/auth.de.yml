@@ -1,12 +1,24 @@
-# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
-
 de:
+
+  recaptcha:
+    errors:
+      verification_failed: 'Bitte bestätige im Formular das Feld zum Spamschutz.'
+      recaptcha_unreachable: 'Die Server zum Spamschutz sind zur Zeit leider nicht erreichbar.'
+
+  pundit:
+    default: 'Du hast keine Berechtigung für diese Aktion.'
+    not_logged_in:
+    action_policy:
+      update?: 'Du kannst diese Aktion nicht bearbeiten!'
+      enter?: 'Leider ist die Teilnahme an dieser Aktion zur Zeit nicht möglich.'
+
   devise:
     basic:
       sign_up: 'Registrieren'
       sign_in: 'zur Anmeldung'
       sign_out: 'Logout'
       edit: 'Account bearbeiten'
+
     confirmations:
       confirmed: 'Vielen Dank für Deine Registrierung. Bitte melde dich jetzt an.'
       confirmed_and_signed_in: 'Vielen Dank für Deine Registrierung. Du bist jetzt angemeldet.'
@@ -14,6 +26,7 @@ de:
       send_paranoid_instructions: 'Falls Deine E-Mail-Adresse in unserer Datenbank existiert erhältst Du in wenigen Minuten eine E-Mail mit der Du Deine Registrierung bestätigen kannst.'
       new:
         resend_confirmation_instructions: 'Anleitung zur Bestätigung noch mal schicken'
+
     failure:
       already_authenticated: 'Du bist bereits angemeldet.'
       inactive: 'Dein Account ist nicht aktiv.'
@@ -24,6 +37,7 @@ de:
       timeout: 'Deine Sitzung ist abgelaufen, bitte melde Dich erneut an.'
       unauthenticated: 'Du musst Dich anmelden, bevor Du fortfahren kannst.'
       unconfirmed: 'Du musst Deinen Account bestätigen, bevor Du fortfahren kannst.'
+
     mailer:
       confirmation_instructions:
         action: 'Mein Konto bestätigen'
@@ -43,9 +57,11 @@ de:
         instruction: ! 'Folge dem untenstehenden Link, um dein Konto zu entsperren:'
         message: 'Dein Konto wurde aufgrund einer großen Anzahl von fehlgeschlagenen Anmeldeversuchen gesperrt.'
         subject: 'Anleitung um deinen Account freizuschalten'
+
     omniauth_callbacks:
-      failure: "Du konntest nicht Deinem %{kind}-Account angemeldet werden, weil '%{reason}'."
+      failure: 'Du konntest nicht Deinem %{kind}-Account angemeldet werden, weil "%{reason}".'
       success: 'Du hast Dich erfolgreich mit Deinem %{kind}-Account angemeldet.'
+
     passwords:
       no_token: 'Du kannst diese Seite nur von dem Link aus einer E-Mail zum Passwort-Zurücksetzen aufrufen. Wenn du einen solchen Link aufgerufen hast stelle bitte sicher, dass du die vollständige Adresse aufrufst.'
       send_instructions: 'Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Dein Passwort zurücksetzen kannst.'
@@ -54,6 +70,7 @@ de:
       updated_not_active: 'Dein Passwort wurde geändert.'
       forgot_your_password: 'Hast du dein Passwort vergessen?'
       send_me_reset_password_instructions: 'Passwort zurücksetzen'
+
     registrations:
       destroyed: 'Dein Account wurde gelöscht.'
       signed_up: 'Du hast dich erfolgreich registriert.'
@@ -69,23 +86,27 @@ de:
         title: ! '%{resource} bearbeiten'
         we_need_your_current_password_to_confirm_your_changes: 'wir benötigen dein aktuelles Passwort, um die Änderung zu bestätigen'
         unhappy: 'Konto nicht mehr benötigt'
+
     sessions:
       signed_in: 'Erfolgreich angemeldet.'
       signed_out: 'Erfolgreich abgemeldet.'
       user:
         already_signed_out: 'Du bist schon abgemeldet.'
+
     unlocks:
       send_instructions: 'Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Deinen Account entsperren können.'
       send_paranoid_instructions: 'Falls Deine E-Mail-Adresse in unserer Datenbank existiert erhältst Du in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Deinen Account entsperren kannst.'
       unlocked: 'Dein Account wurde entsperrt. Du bist jetzt angemeldet.'
       new:
         resend_unlock_instructions: 'Anleitung zum Entsperren noch mal schicken'
+
     shared:
       links:
         didn_t_receive_confirmation_instructions: 'Keine Anleitung zur Bestätigung erhalten?'
         didn_t_receive_unlock_instructions: 'Keine Anleitung zum Entsperren erhalten?'
         forgot_your_password: 'Passwort vergessen?'
         sign_in_with_provider: 'Mit %{provider} einloggen'
+
   errors:
     messages:
       already_confirmed: 'wurde bereits bestätigt'
@@ -96,3 +117,21 @@ de:
       not_saved:
         one: 'Konnte %{resource} nicht speichern: ein Fehler.'
         other: 'Konnte %{resource} nicht speichern: %{count} Fehler.'
+
+  activerecord:
+    errors:
+      messages:
+        blank: 'darf nicht leer sein'
+        onlyLetters: 'darf nur Buchstaben enthalten'
+        onlyWordsAndInnerSpace: 'darf nur Wortzeichen und Leerzeichen in der Mitte enthalten'
+      models:
+        user:
+          attributes:
+            current_password:
+              invalid: 'Falsches Passwort'
+            email:
+              taken: 'wird bereits von einem anderen Konto verwendet'
+            password_confirmation:
+              confirmation: 'Passwörter stimmen nicht überein'
+            username:
+              taken: 'ist bereits vergeben'

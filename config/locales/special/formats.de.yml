@@ -1,0 +1,26 @@
+de:
+
+  date:
+    formats:
+      only_day: ! '%d.'
+      short_date: ! '%d. %B'
+      short_with_weekday: ! '%A, %d. %B'
+      weekday_and_year: ! '%A, %d. %B %Y'
+      date: ! '%d. %B %Y'
+      numeric: ! '%d.%m.%Y'
+
+  time:
+    formats:
+      short_with_year: '%d. %b %Y, %H:%M Uhr'
+
+  date_range:
+    long:
+      different_months_same_year: '%{from_day}. %{from_month} %{sep} %{until_day}. %{until_month} %{year}'
+      different_years: '%{from_day}. %{from_month} %{from_year} %{sep} %{until_day}. %{until_month} %{until_year}'
+      same_month: '%{from_day}. %{sep} %{until_day}. %{month} %{year}'
+      same_day: '%{day}. %{month} %{year}'
+    short:
+      different_months_same_year: '%{from_day}. %{from_month} %{sep} %{until_day}. %{until_month} %{year}'
+      different_years: '%{from_day}. %{from_month} %{from_year} %{sep} %{until_day}. %{until_month} %{until_year}'
+      same_month: '%{from_day}. %{sep} %{until_day}. %{month} %{year}'
+      same_day: '%{day}. %{month} %{year}'

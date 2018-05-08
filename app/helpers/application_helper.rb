@@ -115,7 +115,7 @@ module ApplicationHelper
     end
 
     # get link title
-    title = html_options[:title] || t(model_name.singular + '.action.' + i18n_key)
+    title = html_options[:title] || t(model_name.singular + '.button.' + i18n_key)
 
     # set title as linktext
     name = title if (name == :auto_name)
@@ -154,11 +154,11 @@ module ApplicationHelper
     data.merge!(class: 'SelectPicker', live_search: true, size: 5,
                 handling: handling.merge(method: 'POST'), type: 'jsonapi')
     html_options[:class] += ' selectpicker'
-    html_options[:title] = t('general.action.add') unless html_options.key? :title
+    html_options[:title] = t('general.button.add') unless html_options.key? :title
 
     # add success message
     unless data.key? 'success-message'
-      success_message = t(i18n_base + '.message.add' + rel_name.singularize.camelcase + 'Success')
+      success_message = t(i18n_base + '.message.add' + rel_name.singularize.camelcase + 'Success', model: get_name_for(model))
       data.merge!('success-message': success_message)
     end
 

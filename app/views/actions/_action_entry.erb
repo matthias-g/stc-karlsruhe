@@ -32,7 +32,7 @@
     <div class="badges">
       <% if [:empty, :soon_full, :full].include? status %>
           <span class="badge status_<%= status %>"
-                title="<%= t('event.help.remainingVacancy', places: desired_team_size - team_size) %>">
+                title="<%= t('action.info.remainingVacancy', places: desired_team_size - team_size) %>">
                 <%= "#{team_size} / #{desired_team_size}" %>
               </span>
       <% end %>

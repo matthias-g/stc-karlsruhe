@@ -1,0 +1,50 @@
+de:
+  activerecord:
+
+    models:
+      action_group:
+        one: 'Aktionsgruppe'
+        other: 'Aktionsgruppen'
+
+    attributes:
+      action_group:
+        title: 'Titel'
+        default: 'Ist Default-Aktionsgruppe'
+        start_date: 'Startdatum'
+        end_date: 'Enddatum'
+        declination: 'Deklination'
+
+    enums:
+      action_group:
+        declinations:
+          m_sg: 'Maskulin Singular'
+          m_pl: 'Maskulin Plural'
+          f_sg: 'Feminin Singular'
+          f_pl: 'Feminin Plural'
+
+  action_group:
+
+    heading:
+      filter: 'Filtern'
+
+    button:
+      newAction: 'Neue Aktion erstellen'
+      filter: 'Aktionen filtern'
+
+    info:
+      noActions: 'Wir sind zwar schon bei der Planung, aber bisher sind noch keine Aktionen öffentlich. Schau später nochmal vorbei oder kontaktiere uns, wenn du einen Vorschlag für eine Aktion hast!'
+      vacancies: 'freie Plätze'
+      volunteers: 'Mitarbeiter'
+
+    help:
+      wantToStartOwnAction: 'Du möchtest eine eigene Aktion starten?'
+      weHelpYou: 'Wir helfen dir dabei!'
+
+    message:
+      found_actions:
+        one: 'Eine übereinstimmende Aktion wurde gefunden.'
+        other: '%{count} übereinstimmende Aktionen gefunden'
+
+    form:
+      day_filter_blank: '- - - Alle Tage - - -'
+      actionsAfter5pm: 'Nur Aktionen ab 17 Uhr anzeigen'

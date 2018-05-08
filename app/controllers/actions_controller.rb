@@ -90,13 +90,13 @@ class ActionsController < ApplicationController
       @crop_target_symbol = params[:crop_target].to_sym
       case @crop_target_symbol
       when :action_list
-        @crop_target_title = t('action.label.listviewImage')
+        @crop_target_title = t('action.heading.cropTarget.action_list')
         @crop_target_ratio = 200.0/165
       when :action_view
-        @crop_target_title = t('action.label.actionImage')
+        @crop_target_title = t('action.heading.cropTarget.action_view')
         @crop_target_ratio = 522.0/261
       when :thumbnail
-        @crop_target_title = t('action.label.thumbnailImage')
+        @crop_target_title = t('action.heading.cropTarget.thumbnail')
         @crop_target_ratio = 100.0/100
       end
       respond_with @action do |format|
@@ -108,14 +108,14 @@ class ActionsController < ApplicationController
   def contact_leaders
     @message = Message.new(params[:message])
     Mailer.action_mail_to_leaders(@message, current_user, @action).deliver_now
-    flash[:notice] = t('contact.leaders.success')
+    flash[:notice] = t('mailer.action_mail_to_leaders.success')
     redirect_to action: :show
   end
 
   def contact_volunteers
     @message = Message.new(params[:message])
     Mailer.action_mail(@message, current_user, @action).deliver_now
-    flash[:notice] = t('contact.team.success')
+    flash[:notice] = t('mailer.action_mail.success')
     redirect_to action: :show
   end
 

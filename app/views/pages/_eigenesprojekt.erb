@@ -26,16 +26,16 @@
   <div class="col-md-6">
     <%= bootstrap_form_for @message, url: contact_path do |form| %>
         <div>
-          <%= form.text_area :body, label: t('contact.general.placeholders.body'), rows: 7 %>
-          <%= form.email_field :sender, value: user_signed_in? ? current_user.email : @message.sender, label: t('contact.general.placeholders.sender') %>
-          <%= form.hidden_field :subject, value: t('contact.ownAction.subject') %>
+          <%= form.text_area :body, label: t('general.form.body'), rows: 7 %>
+          <%= form.email_field :sender, value: user_signed_in? ? current_user.email : @message.sender, label: t('general.form.sender') %>
+          <%= form.hidden_field :subject, value: 'Vorschlag für eigene Aktion' %>
           <%= form.hidden_field :recipient, value: 'default@servethecity-karlsruhe.de' %>
           <% unless user_signed_in? %>
               <%= form.form_group do %>
                   <%= recaptcha_tags ajax: true, script: false %>
               <% end %>
           <% end %>
-          <%= form.submit t('contact.orga.submit') %>
+          <%= form.submit t('general.button.send') %>
         </div>
     <% end %>
   </div>

@@ -1,13 +1,13 @@
 <% provide :title, t('layout.title.userList') %>
 
-<h1><%= t('user.label.userList') %></h1>
+<h1><%= t('user.heading.userList') %></h1>
 
 <table class="table">
   <thead>
     <tr>
-      <th><%= t('activerecord.attributes.user.username') %></th>
-      <th><%= t('activerecord.attributes.user.first_name') +' & '+ t('activerecord.attributes.user.last_name') %></th>
-      <th><%= t('activerecord.attributes.user.email') %> & <%= t('activerecord.attributes.user.phone') %></th>
+      <th><%= User.human_attribute_name(:username) %></th>
+      <th><%= User.human_attribute_name(:first_name) +' & '+ User.human_attribute_name(:last_name) %></th>
+      <th><%= User.human_attribute_name(:email) %> & <%= User.human_attribute_name(:phone) %></th>
     </tr>
   </thead>
 

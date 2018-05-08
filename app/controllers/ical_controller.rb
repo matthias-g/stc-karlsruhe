@@ -43,7 +43,7 @@ class IcalController < ApplicationController
       add_action_to_calendar(action, calendar)
     end
 
-    @filename = I18n.t('ical.label.users', name: user.first_name)
+    @filename = I18n.t('ical.heading.users', name: user.first_name)
     ical_feed = calendar.to_ical
     render plain: ical_feed
   end
@@ -55,7 +55,7 @@ class IcalController < ApplicationController
       add_action_to_calendar(action, calendar)
     end
 
-    @filename = I18n.t('ical.label.all_actions')
+    @filename = I18n.t('ical.heading.all_actions')
     ical_feed = calendar.to_ical
     render plain: ical_feed
   end

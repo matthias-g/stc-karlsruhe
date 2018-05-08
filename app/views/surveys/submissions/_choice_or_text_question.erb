@@ -7,6 +7,5 @@
 
       <% custom_value = options.include?(answer.text) ? 'other' : (answer.text || 'other') %>
       <%= f.radio_button :text, custom_value, class: 'text-choice', label: '' %>
-      <%# placeholder: t('surveys.label.custom_choice_placeholder')%>
   <% end %>
 </div>

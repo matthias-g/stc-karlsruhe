@@ -1,0 +1,42 @@
+<div class="gallery">
+  <h3><%= t('gallery.heading.actionGallery') %></h3>
+  <% if policy(gallery).show? %>
+    <%= render '/galleries/gallery', gallery: gallery %>
+    <% if show_invisible_pictures_notification?(gallery) %>
+      <i><%= t('gallery.message.containsInvisiblePictures') %></i>
+    <% end %>
+  <% end %>
+</div>
+
+<% if policy(gallery.actions.first).upload_pictures? %>
+  <div class="picture-upload">
+    <%= bootstrap_form_for gallery, html: { multipart: true}, local: true do |f| %>
+
+      <%= f.hidden_field :title %>
+      <p><%= t('gallery.help.uploadPictures') %></p>
+      <p class="waitinfo"><%= t('gallery.message.uploading') %></p>
+
+      <%# This has been included into a button (see below) %>
+      <%#= f.file_field :picture, multiple: true, name: 'gallery_pictures[picture][]', class: 'form-control-file' %>
+
+      <div class="actions">
+
+        <label class="btn btn-primary btn-file">
+          <span class="fas fa-upload"></span> <%= t('gallery.button.uploadPictures') %>
+          <input multiple="multiple" name="gallery_pictures[picture][]" class="form-control-file d-none gallery-upload" type="file" />
+        </label>
+
+        <% if policy(gallery).edit? %>
+          <%= link_to edit_gallery_path(gallery), class: 'btn btn-secondary' do %>
+            <span class="fas fa-pencil-alt"></span> <%= t('gallery.button.edit') %>
+          <% end %>
+        <% end %>
+
+        <%= f.submit t('gallery.button.uploadSelectedPictures') %>
+
+      </div>
+
+    <% end %>
+  </div>
+<% end %>
+

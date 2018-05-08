@@ -1,0 +1,139 @@
+de:
+  activerecord:
+
+    models:
+      action:
+        one: 'Aktion'
+        other: 'Aktionen'
+      event:
+        one: 'Event'
+        other: 'Events'
+
+    attributes:
+      action:
+        title: 'Aktionstitel'
+        description: 'Beschreibung'
+        short_description: 'Kurzbeschreibung'
+        location: 'Aktionsort'
+        latitude: 'Breitengrad'
+        longitude: 'Längengrad'
+        individual_tasks: 'Einzelne Arbeiten'
+        material: 'Benötigtes Material'
+        requirements: 'Voraussetzungen'
+        visible: 'Sichtbar'
+        picture: 'Bild'
+        picture_source: 'Bildrechte /-quelle'
+        leaders: 'Leitung'
+        volunteers: 'Team'
+        status: 'Status'
+        action_group_id: 'Aktionswoche'
+        date: 'Aktionstag'
+        dates: 'Aktionstage'
+        subaction_ids: 'Teilaktionen'
+        parent_action_id: 'Überaktion'
+      event:
+        date: 'Datum'
+        time: 'Uhrzeit'
+        desired_team_size: 'Gewünschte Teamgröße'
+
+  action:
+    navigation:
+      toOverview: 'zur Aktionsliste'
+      toAction: 'zurück zur Aktion'
+      toParentAction: 'zur Überaktion'
+
+    heading:
+      new: 'Neue Aktion'
+      edit: 'Aktion bearbeiten'
+      parentAction: 'Diese Aktion ist Teil von'
+
+      management: 'Aktionsverwaltung'
+      leaders: 'Leitung'
+      days: 'Aktionstage'
+      locations: 'Aktionsort'
+      team: 'Team'
+      contactTeam: 'Mitarbeiter der Aktion benachrichtigen'
+      contactLeader: 'Aktionsleiter kontaktieren'
+
+      cropImage: 'Bildausschnitt für %{crop_target} anpassen'
+      cropTarget:
+        action_list: 'Vorschau'
+        action_view: 'Aktionsansicht'
+        thumbnail: 'Thumbnail'
+
+    button:
+      edit: 'Bearbeiten'
+      makeVisible: 'Sichtbar machen'
+      makeInvisible: 'Verstecken'
+      clone: 'Aktion klonen'
+
+      addLeader: 'Aktionsleiter hinzufügen'
+      removeLeader: 'Aktionsleiter entfernen'
+      addVolunteer: 'Mitarbeiter hinzufügen'
+      removeVolunteer: 'Mitarbeiter entfernen'
+      addEvent: 'Termin hinzufügen'
+      removeEvent: 'Termin löschen'
+      enter: 'Team beitreten'
+      leave: 'Team verlassen'
+      cropListviewImage: 'Listenbild anpassen'
+      cropActionImage: 'Aktionsbild anpassen'
+      cropThumbnailImage: 'Thumbnail anpassen'
+      crop: 'Zuschneiden'
+
+      exportICal: 'Als iCal/ICS exportieren'
+      showPastEvents: 'vergangene Zeiträume zeigen'
+      contactTeam: 'Nachricht verteilen'
+      contactLeader: 'Nachricht senden'
+
+    info:
+      status:
+        empty: 'Freie Plätze'
+        soon_full: 'Wenige Plätze'
+        full: 'Vollbesetzt'
+        finished: 'Abgeschlossen'
+        hidden: 'Versteckt'
+      subactions:
+        one: '1 Teilaktion'
+        other: '%{count} Teilaktionen'
+      vacancies: 'freie Plätze'
+      no_volunteers: 'Bisher haben sich noch keine Mitarbeiter angemeldet.'
+      teamMember: 'Du bist im Aktionsteam.'
+      subactionTeamMember: 'Du bist bei einer Teilaktion dabei.'
+      enterOneOfThesubactions: 'Melde dich zu einer der Teilaktionen an!'
+      remainingVacancy: '%{places} freie Plätze'
+
+    help:
+      picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
+      short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Aktionsliste statt der ausführlichen Beschreibung angezeigt.'
+      contactTeam: 'Hier kannst du den Mitarbeitern der Aktion eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
+      contactLeader: 'Hier kannst du den Aktionsleitern eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
+
+    message:
+      addLeaderSuccess: 'Leiter erfolgreich hinzugefügt'
+      removeLeaderSuccess: 'Leiter erfolgreich entfernt'
+      addVolunteerSuccess: 'Mitarbeiter erfolgreich hinzugefügt'
+      removeVolunteerSuccess: 'Mitarbeiter erfolgreich entfernt'
+      imageCropped: 'Der Bildausschnitt wurde angepasst.'
+      created: 'Aktion wurde erfolgreich erstellt. Sie muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
+      updated: 'Aktion wurde erfolgreich aktualisiert.'
+      errorList: 'Wegen folgender Fehler konnte die Aktion nicht gespeichert werden:'
+      isFull: 'Diese Aktion ist schon vollbesetzt.'
+      enteredAction: 'Du nimmst jetzt an dieser Aktion teil. Die Aktionsleiter werden sich mit dir etwa eine Woche vor der Aktion in Verbindung setzen.'
+      leftAction: 'Du hast dich von der Aktion abgemeldet.'
+      madeVisible: 'Aktion wurde sichtbar gemacht.'
+      madeInvisible: 'Aktion wurde unsichtbar gemacht.'
+      galleryPicturesUploaded: 'Vielen Dank für das Hochladen deiner Bilder! Sobald sie jemand aus dem Orgateam freigeschaltet hat,
+        sind sie öffentlich sichtbar.'
+      confirmDeleteEvent: 'Löschen bestätigen'
+
+    form:
+      contactTeam:
+        subject: 'Worum geht''s?'
+        message: 'Deine Nachricht'
+        recipient_scope: 'Empfänger'
+        recipient_scopes:
+          this_action: 'Teilnehmer dieser Aktion'
+          action_and_subactions: 'Teilnehmer dieser Aktion inkl. Teilaktionen'
+      contactLeader:
+        subject: 'Worum geht''s?'
+        message: 'Deine Nachricht'

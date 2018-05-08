@@ -10,8 +10,8 @@ shared_examples 'a EventUserRelationship' do
   let(:user) { users(:birgit) }
   let(:action) { actions('Kostenlose Fahrradreparatur in der Innenstadt') }
 
-  describe 'allow_add_volunteer_to_action?' do
-    subject { relationship.allow_add_volunteer_to_event?(user, action) }
+  describe 'allow_add_volunteer_to_event?' do
+    subject { relationship.allow_add_volunteer_to_event?(user, action.events.first) }
 
     it 'should be false for no user logged in' do
       expect(subject).to be_falsey
@@ -22,6 +22,22 @@ shared_examples 'a EventUserRelationship' do
 
       it 'is true' do
         expect(subject).to be_truthy
+      end
+    end
+
+    context 'leader is logged in' do
+      let(:current_user) { users(:rolf) }
+
+      it 'is true' do
+        expect(subject).to be_truthy
+      end
+
+      context 'action is finished' do
+        before { action.events.first.update_attribute :date, Date.yesterday }
+
+        it 'is false' do
+          expect(subject).to be_falsey
+        end
       end
     end
 
@@ -66,7 +82,7 @@ shared_examples 'a EventUserRelationship' do
     end
   end
 
-  describe 'allow_remove_volunteer_from_action?' do
+  describe 'allow_remove_volunteer_from_event?' do
     subject { relationship.allow_remove_volunteer_from_event?(user, action.events.first) }
     let(:user) { users(:sabine) }
 

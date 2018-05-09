@@ -25,11 +25,10 @@
         <% volunteers.each do |volunteer| %>
           <span>
             <%= link_to volunteer.first_name, volunteer %>
-            <%# TODO temporarily disabled because this doesn't decrease team_size %>
-            <%# if policy(event).manage_team? %>
-              <%#= api_link '', [event, 'volunteers', volunteer], :remove,
+            <% if policy(event).manage_team? %>
+  	      <%= api_link '', [event, 'volunteers', volunteer], :remove,
                 data: {'success-remove': 1}, title: t('action.button.removeVolunteer') %>
-            <%# end %>
+            <% end %>
           </span>
         <% end %>
       </div>

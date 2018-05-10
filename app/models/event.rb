@@ -51,7 +51,7 @@ class Event < ApplicationRecord
     end
   end
 
-  TIME_REGEX = /(\d{1,2})[:\.-]?(\d{1,2})?[^\d\/]*(\d{1,2})?[:\.-]?(\d{1,2})?.*/
+  TIME_REGEX = /(\d{1,2})[:\.]?(\d{1,2})?[^\d\/]*(\d{1,2})?[:\.-]?(\d{1,2})?.*/
 
   # Start time of the action, parsed from the time string
   def start_time

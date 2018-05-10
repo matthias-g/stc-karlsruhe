@@ -164,6 +164,18 @@ class EventTest < ActiveSupport::TestCase
     assert_equal 19, event.end_time.hour
     assert_equal 00, event.end_time.min
 
+    event.time = '17-19:30 Uhr'
+    assert_equal 17, event.start_time.hour
+    assert_equal 00, event.start_time.min
+    assert_equal 19, event.end_time.hour
+    assert_equal 30, event.end_time.min
+
+    event.time = '17:30-19 Uhr'
+    assert_equal 17, event.start_time.hour
+    assert_equal 30, event.start_time.min
+    assert_equal 19, event.end_time.hour
+    assert_equal 00, event.end_time.min
+
     event.time = 'zwischen 14:00 - 21:00 Uhr '
     assert_equal 14, event.start_time.hour
     assert_equal 00, event.start_time.min

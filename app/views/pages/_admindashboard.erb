@@ -24,7 +24,7 @@
           <h2>Website-Statistiken</h2>
       <% end %>
       <p>Statistiken über Websitebesuche</p>
-      <p>Login mit Benutzername '<%= Rails.application.secrets[:stats][:user] %>' und Passwort '<%= Rails.application.secrets[:stats][:password] %>'</p>
+      <p>Login mit Benutzername '<%= Rails.application.credentials[:stats][:user] %>' und Passwort '<%= Rails.application.credentials[:stats][:password] %>'</p>
     </div>
     <div class="col-sm-4">
       <%= link_to orga_messages_path do %>

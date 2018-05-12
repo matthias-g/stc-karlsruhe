@@ -67,8 +67,9 @@ class ActionTest < ActiveSupport::TestCase
     assert actions(:'kindergarten-music').subaction?
   end
 
-  test 'gallery' do
-    action = Action.create title: 'test'
+  test 'gallery is created automatically on create' do
+    action_group = action_groups(:one)
+    action = Action.create!(title: 'test', action_group: action_group)
     assert_not_nil action.gallery
   end
 
@@ -91,18 +92,19 @@ class ActionTest < ActiveSupport::TestCase
   end
 
   test 'total_team_size and total_available_places and total_desired_places and status' do
-    parent = Action.create(title: 'parent')
-    parent_event = Event.create(desired_team_size: 0, date: Date.current, initiative: parent)
+    action_group = action_groups(:one)
+    parent = Action.create!(title: 'parent', action_group: action_group)
+    parent_event = Event.create!(desired_team_size: 0, date: Date.current, initiative: parent)
     parent.reload
     assert_equal 0, parent.total_desired_team_size
     assert_equal 0, parent.total_team_size
     assert_equal 0, parent.total_available_places
     assert_equal :full, parent.status
 
-    child1 = Action.create(title: 'child1', parent_action: parent, visible: true)
-    child1_event = Event.create(desired_team_size: 9, date: Date.current, initiative: child1)
-    child2 = Action.create(title: 'child2', parent_action: parent, visible: true)
-    child2_event = Event.create(desired_team_size: 2, date: Date.current, initiative: child2)
+    child1 = Action.create!(title: 'child1', parent_action: parent, visible: true, action_group: action_group)
+    child1_event = Event.create!(desired_team_size: 9, date: Date.current, initiative: child1)
+    child2 = Action.create!(title: 'child2', parent_action: parent, visible: true, action_group: action_group)
+    child2_event = Event.create!(desired_team_size: 2, date: Date.current, initiative: child2)
     parent.reload
     assert_equal 11, parent.total_desired_team_size
     assert_equal 0, parent.total_team_size

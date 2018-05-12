@@ -14,6 +14,11 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+  # Attempt to read encrypted secrets from `config/secrets.yml.enc`.
+  # Requires an encryption key in `ENV["RAILS_MASTER_KEY"]` or
+  # `config/secrets.yml.key`.
+  config.read_encrypted_secrets = true
+
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
@@ -57,6 +62,19 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "stc_karlsruhe_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: 'servethecity-karlsruhe.de' }
+
+  config.action_mailer.smtp_settings = {
+      address:              'smtp.office365.com',
+      port:                 587,
+      user_name:            ENV['SMTP_USER'],
+      password:             ENV['SMTP_PASSWORD'],
+      authentication:       :login,
+      enable_starttls_auto: true
+  }
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
@@ -78,24 +96,11 @@ Rails.application.configure do
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
-    config.logger = ActiveSupport::TaggedLogging.new(logger)
+    config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { host: 'servethecity-karlsruhe.de' }
-
-  config.action_mailer.smtp_settings = {
-      address:              'smtp.office365.com',
-      port:                 587,
-      user_name:            ENV['SMTP_USER'],
-      password:             ENV['SMTP_PASSWORD'],
-      authentication:       :login,
-      enable_starttls_auto: true
-  }
 
   # Deliver mails on exceptions
   config.middleware.use ExceptionNotification::Rack, email: {

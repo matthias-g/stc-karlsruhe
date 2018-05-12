@@ -2,7 +2,7 @@ class OrgaMessage < ApplicationRecord
   include OrgaMessagesHelper
 
   belongs_to :author, class_name: 'User'
-  belongs_to :sender, class_name: 'User'
+  belongs_to :sender, class_name: 'User', optional: true
 
   validates :from, :recipient, :content_type, :subject, :body, :author, presence: true, allow_blank: false
 

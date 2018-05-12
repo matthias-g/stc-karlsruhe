@@ -25,14 +25,15 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create only for admin action' do
     sign_in users(:rolf)
+    action_group = action_groups(:one)
     assert_no_difference('Action.count') do
-      post actions_url, params: {the_action: {description: 'Description', individual_tasks: 'Tasks', title: 'Title' } }
+      post actions_url, params: {the_action: {description: 'Description', individual_tasks: 'Tasks', title: 'Title', action_group_id: action_group.id } }
     end
     sign_out users(:rolf)
 
     sign_in users(:admin)
     assert_difference('Action.count') do
-      post actions_url, params: {the_action: {description: 'Description', individual_tasks: 'Tasks', title: 'Title' } }
+      post actions_url, params: {the_action: {description: 'Description', individual_tasks: 'Tasks', title: 'Title', action_group_id: action_group.id } }
     end
   end
 

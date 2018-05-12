@@ -10,7 +10,7 @@ class Action < ApplicationRecord
   accepts_nested_attributes_for :events, allow_destroy: true
   belongs_to :action_group
   has_many :subactions, class_name: 'Action', foreign_key: :parent_action_id
-  belongs_to :parent_action, class_name: 'Action', foreign_key: :parent_action_id
+  belongs_to :parent_action, class_name: 'Action', foreign_key: :parent_action_id, optional: true
 
   validates_presence_of :title
   validate :parent_action_cannot_be_same_action, :parent_action_cannot_be_a_subaction

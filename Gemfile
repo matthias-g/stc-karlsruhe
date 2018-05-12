@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
 end
 
 ruby '2.3.7'
-gem 'rails', '~> 5.1.0'
+gem 'rails', '~> 5.2.0'
 
 # localization
 gem 'rails-i18n'
@@ -59,12 +59,15 @@ gem 'mini_magick'
 gem 'carrierwave'
 
 # various
-gem 'trix'
+# TODO remove the github: when gem is compatible with Rails 5.2
+# see https://github.com/maclover7/trix/pull/62 or https://github.com/maclover7/trix/pull/64
+gem 'trix', github: 'DRBragg/trix', ref: :c8ca738
 gem 'responders'
 gem 'premailer-rails'
 gem 'nokogiri'
 gem 'icalendar'
 gem 'friendly_id'
+gem 'bootsnap'
 
 # environment
 gem 'pg'

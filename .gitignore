@@ -10,3 +10,6 @@ public/uploads/news_entry
 public/downloads
 coverage/
 .ruby-gemset
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key

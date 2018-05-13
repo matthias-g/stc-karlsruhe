@@ -8,4 +8,12 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
   test 'kontakt' do
     get '/kontakt'
   end
+
+  test 'about' do
+    get '/about'
+  end
+
+  test 'faq' do
+    get '/faq'
+  end
 end

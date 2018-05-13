@@ -66,6 +66,7 @@ de:
       success: 'Die Nachricht wurde an %{recipient} geschickt.'
     orga_mail:
       success: 'Die Nachricht wurde erfolgreich gesendet.'
+      captcha_failed: Nachricht wurde nicht versandt, da das Captcha ungültig war.
     leaving_action_notification:
       subject: 'Austritt aus Aktionsteam'
     action_participate_volunteer_notification:

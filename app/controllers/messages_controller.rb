@@ -19,7 +19,8 @@ class MessagesController < ApplicationController
 
   def block_spam
     unless user_signed_in? || verify_recaptcha(model: @message)
-      render :contact_mail_form
+      flash[:alert] = t('mailer.orga_mail.captcha_failed')
+      redirect_to contact_path
     end
   end
 

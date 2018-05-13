@@ -75,13 +75,13 @@ class Event < ApplicationRecord
   private
 
   def on_volunteer_added(user)
-    return if initiative.finished?
+    return if finished?
     Mailer.action_participate_volunteer_notification(user, initiative).deliver_now if user.receive_notifications_for_new_participation
     Mailer.action_participate_leader_notification(user, initiative).deliver_now
   end
 
   def on_volunteer_removed(user)
-    return if initiative.finished?
+    return if finished?
     Mailer.leaving_action_notification(user, initiative).deliver_now
   end
 

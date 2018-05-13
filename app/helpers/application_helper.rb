@@ -66,13 +66,20 @@ module ApplicationHelper
   end
 
   # Returns the name of an ActiveRecord, which may be a User, Role, Event or Action
-  def get_name_for model
-    return 'nil' if model.nil?
-    return model.full_name if model.is_a? User
-    return model.title if model.is_a? Role
-    return model.initiative.full_title if model.is_a? Event
-    return model.full_title if model.is_a? Action
-    'no_idea'
+  def get_name_for(model)
+    if model.nil?
+      'nil'
+    elsif model.is_a? User
+      model.full_name
+    elsif model.is_a? Role
+      model.title
+    elsif model.is_a? Event
+      model.initiative.full_title
+    elsif model.is_a? Action
+      model.full_title
+    else
+      'unknown'
+    end
   end
 
   # Creates a ujs remote link with JSONAPI content
@@ -137,14 +144,14 @@ module ApplicationHelper
     # set handler attributes
     if is_user_rel
       handling = {
-        url: '/api/%s/{id}/relationships/%s' % [User.model_name.route_key, rel_name],
-        data: [type: model.model_name.plural, id: model.id]
+          url: '/api/%s/{id}/relationships/%s' % [User.model_name.route_key, rel_name],
+          data: [type: model.model_name.plural, id: model.id]
       }
       i18n_base = User.model_name.singular
     else
       handling = {
-        url: '/api/%s/%s/relationships/%s' % [model.model_name.route_key, model.id, rel_name],
-        data: [type: User.model_name.plural, id: '{id}']
+          url: '/api/%s/%s/relationships/%s' % [model.model_name.route_key, model.id, rel_name],
+          data: [type: User.model_name.plural, id: '{id}']
       }
       i18n_base = model.model_name.singular
     end

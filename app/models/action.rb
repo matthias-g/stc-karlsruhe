@@ -143,6 +143,7 @@ class Action < ApplicationRecord
     action_copy.title = I18n.t('general.label.copyOf', title: title)
     action_copy.action_group = ActionGroup.all.order(start_date: :desc).first
     action_copy.parent_action = nil
+    action_copy.gallery = Gallery.create!
     action_copy.save!
     action_copy.picture = picture.dup
     action_copy.picture.store!

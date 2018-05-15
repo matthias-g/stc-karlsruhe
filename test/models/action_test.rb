@@ -18,17 +18,19 @@ class ActionTest < ActiveSupport::TestCase
     end
   end
 
-  test 'delete_leader' do
+  test 'delete_leader removes user from leaders' do
+    user = users(:rolf)
     assert_difference '@action.leaders.count', -1 do
-      @action.delete_leader users(:rolf)
+      @action.delete_leader(user)
     end
+    assert_not_includes(@action.leaders, user)
   end
 
   test 'leaders' do
     assert_equal 2, @action.leaders.count
     names = @action.leaders.pluck(:username)
-    assert names.include? 'rolf'
-    assert names.include? 'tabea'
+    assert_includes(names, 'rolf')
+    assert_includes(names, 'tabea')
   end
 
   test 'volunteers_in_subactions' do
@@ -38,8 +40,8 @@ class ActionTest < ActiveSupport::TestCase
     users = @parent_action.volunteers_in_subactions
     assert_equal 2, users.count
     names = users.pluck(:username)
-    assert names.include? 'lea'
-    assert names.include? 'peter'
+    assert_includes(names, 'lea')
+    assert_includes(names, 'peter')
   end
 
   test 'total_desired_team_size' do
@@ -90,6 +92,19 @@ class ActionTest < ActiveSupport::TestCase
     # child action
     assert actions(:'kindergarten-music').clone.parent_action.nil?
   end
+
+  test 'action should remain the same after cloning action and deleting clone' do
+    leaders_count = @action.leaders.count
+    events_count = @action.events.count
+    assert_not_nil @action.gallery
+    cloned_action = @action.clone
+    cloned_action.destroy!
+    @action.reload
+    assert_equal leaders_count, @action.leaders.count
+    assert_equal events_count, @action.events.count
+    assert_not_nil @action.gallery
+  end
+
 
   test 'total_team_size and total_available_places and total_desired_places and status' do
     action_group = action_groups(:one)

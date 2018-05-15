@@ -42,6 +42,7 @@ class ActionsController < ApplicationController
     authorize_action
     @action.add_leader(current_user)
     @action.visible = false
+    @action.events.each {|event| event.initiative = @action}
     @action.save
     respond_with(@action)
   end

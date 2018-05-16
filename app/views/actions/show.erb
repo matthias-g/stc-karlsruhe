@@ -76,7 +76,7 @@
       </div>
 
       <%# gallery %>
-      <% if !@action.gallery.nil? && (has_gallery_pictures?(@action.gallery) || policy(@action).upload_pictures?) %>
+      <% if has_gallery_pictures?(@action.gallery) || policy(@action).upload_pictures? %>
         <div class="col-12">
           <section id="actions-gallery" class="white-box d-print-none">
             <%= render 'galleries/action_gallery', gallery: @action.gallery %>

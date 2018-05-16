@@ -6,6 +6,7 @@ one:
   category: 1
   visible: true
   slug: online
+  gallery: one
 
 two:
   title: Short
@@ -14,6 +15,7 @@ two:
   category: 1
   visible: true
   slug: short
+  gallery: one
 
 invisible:
   title: Invisible
@@ -22,3 +24,4 @@ invisible:
   category: 1
   visible: false
   slug: invisible
+  gallery: one

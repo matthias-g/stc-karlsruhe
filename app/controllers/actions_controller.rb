@@ -20,10 +20,8 @@ class ActionsController < ApplicationController
   def show
     # Message for contact_volunteers or contact_leaders
     @message = Message.new
-    unless @action.gallery.nil?
-      pics = @action.gallery.gallery_pictures
-      pics.build if pics.any?
-    end
+    pics = @action.gallery.gallery_pictures
+    pics.build if pics.any?
   end
 
   def new

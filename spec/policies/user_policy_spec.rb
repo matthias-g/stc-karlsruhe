@@ -96,6 +96,19 @@ RSpec.describe UserPolicy do
     end
   end
 
+  describe 'unsubscribe?' do
+    subject { policy.unsubscribe? }
+
+    context 'when no user is logged in' do
+      it { should_pass }
+    end
+
+    context 'for some user' do
+      let(:current_user) { users(:sabine) }
+      it { should_pass }
+    end
+  end
+
 
   describe 'permitted_attributes_for_show' do
     subject { policy.permitted_attributes_for_show }

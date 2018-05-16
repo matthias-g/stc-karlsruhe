@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-</head>
-<body>
+
+<% action = @event.initiative %>
 
 <p>Hallo <%= @user.first_name %>,</p>
 
-<p>du bist jetzt bei der Aktion "<%= @action.title %>" als Mitarbeiter eingetragen.
-  Auf der <%= link_to 'Aktionsseite', action_url(@action) %> kannst du alle wichtigen Daten dazu einsehen.<br/>
+<p>du bist jetzt bei der Aktion "<%= action.title %>" als Mitarbeiter eingetragen.
+  Auf der <%= link_to 'Aktionsseite', action %> kannst du alle wichtigen Daten dazu einsehen.<br/>
   Bei Fragen zu der Aktion kannst du dich an die Aktionsleiter wenden, die auf der Aktionsseite verlinkt sind.<br/>
   Solltest du doch nicht bei der Aktion mitarbeiten können, kannst du dich auf der Aktionsseite auch wieder abmelden.</p>
 
@@ -17,6 +13,3 @@
 <p>Herzliche Grüße</p>
 
 <p>Dein Serve the City Team</p>
-
-</body>
-</html>

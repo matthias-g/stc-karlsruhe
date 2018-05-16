@@ -87,11 +87,11 @@ class EventTest < ActiveSupport::TestCase
     user = users(:peter)
     user.receive_notifications_for_new_participation = false
     user.save!
-    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+    assert_changes 'ActionMailer::Base.deliveries.size' do
       event.add_volunteer(user)
     end
     notification_email = ActionMailer::Base.deliveries.last
-    assert_equal event.initiative.leaders.first.email, notification_email.bcc.first
+    assert event.initiative.leaders.pluck(:email).to_set.superset? notification_email.to.to_set
   end
 
   test "don't send notification to leader when volunteer enters event when user doesn't want that" do

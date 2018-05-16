@@ -8,7 +8,7 @@
 
 <%= @message.html_safe %>
 
-<%= render 'footer', type: @type %>
+<%= (render 'footer', content_type: @type, user: @recipient).gsub(/\n/, '').squish().html_safe %>
 
 </body>
 </html>

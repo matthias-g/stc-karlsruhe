@@ -62,11 +62,10 @@ class OrgaMessage < ApplicationRecord
       else
         to = to.where('users.receive_other_emails_from_orga': true)
       end
-      to = to.pluck(:email)
     end
-    recipients = (to + [self.sender.email]).uniq
-    recipients.in_groups_of(400) do |some_recipients|
-      Mailer.orga_mail(self, some_recipients.join(',')).deliver_now
+    recipients = to.select('users.*') + [self.sender]
+    recipients.uniq.each do |recipient|
+      Mailer.orga_mail(self, recipient).deliver_now
     end
   end
 

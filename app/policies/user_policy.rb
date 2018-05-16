@@ -20,6 +20,10 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def unsubscribe?
+    true
+  end
+
 
   alias_method :index?, :is_admin_or_coordinator?
   alias_method :update?, :edit?

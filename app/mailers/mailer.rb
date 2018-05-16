@@ -1,38 +1,33 @@
 class Mailer < ActionMailer::Base
   default from: StcKarlsruhe::Application::NO_REPLY_SENDER
+  layout false, only: 'orga_mail'
+  add_template_helper(OrgaMessagesHelper)
 
-  def contact_mail(message)
+  def contact_orga_mail(message)
     @message = message.body
     recipient = StcKarlsruhe::Application::CONTACT_FORM_RECIPIENT
     mail to: recipient, reply_to: message.sender, subject: message.subject
   end
 
-  def contact_mail_copy_for_sender(message)
+  def contact_orga_mail_copy_for_sender(message)
     @message = message.body
-    mail to: message.sender, subject: message.subject
+    mail to: message.sender, subject: t('mailer.contact_orga_mail_copy_for_sender.subject', subject: message.subject)
   end
 
-  def action_mail(message, sender, action)
-    @message = message.body
+  def contact_volunteers_mail(message, sender, recipient, action)
+    @message = message.body.gsub('{user}', recipient.first_name)
     @action_title = action.full_title
     @sender = sender
-
-    case message.recipient_scope
-    when 'this_action'
-      recipients = action.volunteers + action.leaders + [sender]
-    when 'action_and_subactions'
-      recipients = action.volunteers + action.volunteers_in_subactions +
-          action.leaders + action.leaders_in_subactions + [sender]
-    end
-    mail bcc: recipients.map{|v| v.email}.uniq.join(','), reply_to: sender.email, subject: message.subject
+    @recipient = recipient
+    mail to: recipient.email, reply_to: sender.email, subject: message.subject.gsub('{user}', recipient.first_name)
   end
 
-  def action_mail_to_leaders(message, sender, action)
+  def contact_leaders_mail(message, sender, recipient, action)
     @message = message.body
-    @action_title = action.full_title
     @sender = sender
-    recipients = (action.leaders + [sender]).map{|v| v.email}.uniq.join(',')
-    mail bcc: recipients, reply_to: sender.email, subject: message.subject
+    @recipient = recipient
+    @action_title = action.full_title
+    mail to: recipient.email, reply_to: sender.email, subject: message.subject
   end
 
   def user_mail(message, sender, recipient)
@@ -42,35 +37,37 @@ class Mailer < ActionMailer::Base
     mail to: recipient.email, reply_to: sender.email, subject: message.subject
   end
 
-  def orga_mail(message, recipients)
-    @message = message.body
+  def orga_mail(message, recipient)
+    @message = message.body.gsub('{user}', recipient.first_name)
+    @recipient = recipient
     @type = message.content_type
-    mail reply_to: message.from, bcc: recipients, subject: message.subject
+    mail to: recipient.email, reply_to: message.from, subject: message.subject.gsub('{user}', recipient.first_name)
   end
 
-  def leaving_action_notification(user, action)
+  # reminder email to a user when he/she joins an action
+  def event_join_reminder(user, event)
     @user = user
-    @action = action
-    recipients = (action.leaders.where('users.receive_notifications_about_volunteers': true).pluck(:email) +
-        [StcKarlsruhe::Application::NOTIFICATION_RECIPIENT])
-                     .uniq.join(',')
-    mail bcc: recipients, subject: t('mailer.leaving_action_notification.subject')
+    @event = event
+    mail to: user.email, subject: t('mailer.event_join_reminder.subject')
   end
 
-  def action_participate_volunteer_notification(user, action)
+  # notification when a user joins an action
+  def event_join_notification(recipient, user, event)
+    @recipient = recipient
     @user = user
-    @action = action
-    mail to: user.email, subject: t('mailer.action_participate_volunteer_notification.subject')
+    @event = event
+    mail to: recipient.email, subject: t('mailer.event_join_notification.subject', action: event.initiative.title)
   end
 
-  def action_participate_leader_notification(user, action)
+  # notification when a user leaves an action
+  def event_leave_notification(recipient, user, event)
+    @recipient = recipient
     @user = user
-    @action = action
-    recipients = action.leaders.where('users.receive_notifications_about_volunteers': true).pluck(:email).uniq.join(',')
-    return if recipients.blank?
-    mail bcc: recipients, subject: t('mailer.action_participate_leader_notification.subject', {action: action.title})
+    @event = event
+    mail to: recipient.email, subject: t('mailer.event_leave_notification.subject')
   end
 
+  # notification when uploader uploads some pictures
   def gallery_picture_uploaded_notification(gallery, picture_count, uploader)
     @uploader = uploader
     @gallery = gallery
@@ -80,8 +77,8 @@ class Mailer < ActionMailer::Base
     @title = gallery.news_entries.collect{ |p| p.title }.join(', ') if @title.blank?
     @type = 'einer Aktion' if gallery.actions.any?
     @type = 'eines Newseintrags' if gallery.news_entries.any?
-    mail to: StcKarlsruhe::Application::NOTIFICATION_RECIPIENT, subject:
-        t('mailer.gallery_picture_uploaded_notification.subject', pictureCount: picture_count)
+    recipient = StcKarlsruhe::Application::NOTIFICATION_RECIPIENT
+    mail to: recipient, subject: t('mailer.gallery_picture_uploaded_notification.subject', pictureCount: picture_count)
   end
 
 end

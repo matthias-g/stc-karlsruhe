@@ -1,7 +1,12 @@
 <div class="footer">
-  <p>--</p>
-  <span>Du erhältst diese E-Mail an die Adresse, mit der du dich auf
-    <%= link_to 'servethecity-karlsruhe.de', 'https://servethecity-karlsruhe.de' %> registriert hast.<br />
-    Möchtest du in Zukunft keine Mails mehr in der Kategorie "<%= t('orga_message.form.types.' + type) %>" erhalten?
-    Dann kannst du das online in deinem <%= link_to 'Profil', 'https://servethecity-karlsruhe.de/login' %> einstellen.</span>
+  <p>
+  --<br />
+  In deinem Profil kannst du deine E-Mail-Einstellungen anpassen. Alternativ kannst du hier direkt
+    <%= link_to unsubscribe_url(type: mail_type_to_subscription(content_type),
+                sgid: user.to_sgid_param(for: :unsubscribe_user, expires_in: 2.months)) do %>
+      <%= t("orga_message.form.content_types.#{content_type}") %> abbestellen
+    <% end %> oder gleich
+    <%= link_to 'alle E-Mails vom Orga-Team abbestellen', unsubscribe_url(type: :all_emails,
+                sgid: user.to_sgid_param(for: :unsubscribe_user, expires_in: 2.months)) %>.
+  </p>
 </div>

@@ -61,6 +61,7 @@ Rails.application.routes.draw do
       post :contact_user
     end
   end
+  get :unsubscribe, to: 'users#unsubscribe'
 
 
   # surveys

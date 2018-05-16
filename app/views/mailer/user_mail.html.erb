@@ -1,6 +1,6 @@
 
-Hallo <%= @recipient.first_name %>,
+Hallo <%= @recipient.first_name %>,<br /><br />
 
 du hast über Serve the City Karlsruhe eine Nachricht von <%= @sender.full_name %> (<%= @sender.email %>) bekommen:
 
-<%= @message %>
+<%= simple_format @message %>

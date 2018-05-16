@@ -35,8 +35,8 @@
 </table>
 
 <div class="admin-mail-body" style="background-color: transparent; padding-left: 8px;">
-  <%= @message.body.html_safe %>
-  <%= render '/mailer/footer', type: @message.content_type %>
+  <%= @message.body.gsub('{user}', current_user.first_name).html_safe %>
+  <%= render '/mailer/footer', content_type: @message.content_type, user: current_user %>
 </div>
 
 <div class="section">

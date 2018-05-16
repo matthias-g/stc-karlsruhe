@@ -41,6 +41,7 @@ de:
       myProfile: 'Mein Profil'
       userList: 'Userliste'
       edit: 'Profil bearbeiten'
+      unsubscribed: 'Deine E-Mail-Einstellungen wurden geändert'
       deleteAccount: 'Account löschen'
       resendInstructions: 'Anleitung zur Bestätigung nochmal senden'
       passwordReset: 'Neues Passwort festlegen'
@@ -90,6 +91,12 @@ de:
         orgaAndUser: 'Du erhältst E-Mails vom Orgateam und anderen Nutzern.'
         user: 'Du erhältst E-Mails von anderen Nutzern.'
         none: 'Du erhältst keine E-Mails vom Orgateam oder anderen Nutzern.'
+      unsubscribed:
+        receive_emails_about_action_groups: 'Du erhältst nun keine Informationen zu neuen Aktionswochen mehr.'
+        receive_emails_about_my_action_groups: 'Du erhältst nun keine allgemeinen Informationen zu deinen Aktionswochen mehr.'
+        receive_emails_about_other_projects: 'Du erhältst nun keine Informationen zu "Serve the City"-Projekten mehr.'
+        receive_other_emails_from_orga: 'Du erhältst nun keine allgemeinen Newsletter von Serve the City mehr.'
+        all_emails: 'Du erhältst nun nicht mehr regelmäßige E-Mails vom Orga-Team.'
 
     help:
       passwordLength: 'Mindestens 6 Zeichen lang.'

@@ -76,13 +76,22 @@ class Event < ApplicationRecord
 
   def on_volunteer_added(user)
     return if finished?
-    Mailer.action_participate_volunteer_notification(user, initiative).deliver_now if user.receive_notifications_for_new_participation
-    Mailer.action_participate_leader_notification(user, initiative).deliver_now
+    if user.receive_notifications_for_new_participation
+      Mailer.event_join_reminder(user, self).deliver_now
+    end
+    recipients = initiative.leaders.where(receive_notifications_about_volunteers: true)
+    return if recipients.blank?
+    recipients.uniq.each do |recipient|
+      Mailer.event_join_notification(recipient, user, self).deliver_now
+    end
   end
 
   def on_volunteer_removed(user)
     return if finished?
-    Mailer.leaving_action_notification(user, initiative).deliver_now
+    recipients = initiative.leaders.where(receive_notifications_about_volunteers: true)
+    recipients.uniq.each do |recipient|
+      Mailer.event_leave_notification(recipient, user, self).deliver_now
+    end
   end
 
 end

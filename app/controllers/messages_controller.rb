@@ -4,9 +4,9 @@ class MessagesController < ApplicationController
 
   def send_contact_mail
     if @message.valid?
-      Mailer.contact_mail(@message).deliver_now
-      Mailer.contact_mail_copy_for_sender(@message).deliver_now
-      redirect_to root_path, notice: t('mailer.orga_mail.success')
+      Mailer.contact_orga_mail(@message).deliver_now
+      Mailer.contact_orga_mail_copy_for_sender(@message).deliver_now
+      redirect_to root_path, notice: t('mailer.contact_orga_mail.success')
     else
       flash[:alert] = @message.errors.full_messages
       redirect_to contact_path
@@ -19,7 +19,7 @@ class MessagesController < ApplicationController
 
   def block_spam
     unless user_signed_in? || verify_recaptcha(model: @message)
-      flash[:alert] = t('mailer.orga_mail.captcha_failed')
+      flash[:alert] = t('mailer.contact_orga_mail.captcha_failed')
       redirect_to contact_path
     end
   end

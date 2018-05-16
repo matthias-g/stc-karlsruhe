@@ -31,7 +31,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in user
     @event.add_volunteer(user)
     assert @event.volunteer?(user)
-    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+    assert_changes 'ActionMailer::Base.deliveries.size' do
       get leave_event_url(@event)
     end
     assert_redirected_to @event.initiative

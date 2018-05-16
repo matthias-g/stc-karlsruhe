@@ -108,15 +108,24 @@ class ActionsController < ApplicationController
 
   def contact_leaders
     @message = Message.new(params[:message])
-    Mailer.action_mail_to_leaders(@message, current_user, @action).deliver_now
-    flash[:notice] = t('mailer.action_mail_to_leaders.success')
+    recipients = @action.leaders + [sender]
+    recipients.uniq.each do |recipient|
+      Mailer.contact_leaders_mail(@message, current_user, recipient, @action).deliver_now
+    end
+    flash[:notice] = t('mailer.contact_leaders_mail.success')
     redirect_to action: :show
   end
 
   def contact_volunteers
     @message = Message.new(params[:message])
-    Mailer.action_mail(@message, current_user, @action).deliver_now
-    flash[:notice] = t('mailer.action_mail.success')
+    recipients = @action.volunteers + @action.leaders + [current_user]
+    if @message.recipient_scope == 'action_and_subactions'
+      recipients += @action.volunteers_in_subactions + @action.leaders_in_subactions
+    end
+    recipients.uniq.each do |recipient|
+      Mailer.contact_volunteers_mail(@message, current_user, recipient, @action).deliver_now
+    end
+    flash[:notice] = t('mailer.contact_volunteers_mail.success')
     redirect_to action: :show
   end
 

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, except: [:index]
-  before_action :authorize_user, except: [:index]
+  before_action :set_user, except: [:index, :unsubscribe]
+  before_action :authorize_user, except: [:index, :unsubscribe]
   after_action :verify_authorized
 
   respond_to :html
@@ -34,6 +34,24 @@ class UsersController < ApplicationController
   end
 
   def confirm_delete
+    respond_with(@user)
+  end
+
+  def unsubscribe
+    @user = SignedGlobalID.find(params[:sgid], for: :unsubscribe_user)
+    @type = params[:type].to_sym
+    authorize_user
+    allowed_types = [:receive_emails_about_action_groups,
+                     :receive_emails_about_my_action_groups,
+                     :receive_emails_about_other_projects,
+                     :receive_other_emails_from_orga]
+    if @type == :all_emails
+      allowed_types.each do |t|
+        @user.update_attribute t, false
+      end
+    elsif allowed_types.include? @type
+      @user.update_attribute @type, false
+    end
     respond_with(@user)
   end
 

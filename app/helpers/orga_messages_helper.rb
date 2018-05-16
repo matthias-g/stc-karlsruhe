@@ -23,7 +23,16 @@ module OrgaMessagesHelper
   # Returns allowed options for orga mail topics
   def content_type_options
     %w(about_action_groups about_other_projects other_email_from_orga)
-        .map{|type| [t('orga_message.form.types.' + type), type]}
+        .map{|type| [t('orga_message.form.content_types.' + type), type]}
+  end
+
+  def mail_type_to_subscription(type)
+    mapping = {
+        about_action_groups: 'receive_emails_about_action_groups',
+        about_other_projects: 'receive_emails_about_other_projects',
+        other_email_from_orga: 'receive_other_emails_form_orga'
+    }
+    mapping[type.to_sym]
   end
 
 end

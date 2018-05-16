@@ -1,0 +1,10 @@
+
+<% action = @event.initiative %>
+
+<p>Hallo <%= @recipient.first_name %>,</p>
+
+<p>soeben hat <%= @user.full_name %> das Aktionsteam von "<%= link_to action.title, action %>" verlassen.</p>
+
+<p>Du erhältst diese E-Mail, weil du bei dieser Aktion als Leiter eingetragen bist.</p>
+
+<p>Falls du bei Austritten aus dem Aktionsteam nicht mehr benachrichtigt werden möchtest, kannst du das in deinem Profil ausschalten.</p>

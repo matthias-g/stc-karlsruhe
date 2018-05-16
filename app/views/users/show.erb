@@ -65,7 +65,7 @@
           <%= bootstrap_form_for @message, url: { action: 'contact_user' } do |f| %>
               <%= f.text_field :subject, label: t('general.form.subject') %>
               <%= f.text_area :body, label: t('general.form.body') %>
-              <%= f.submit t('user.button.user_mail') %>
+              <%= f.submit t('user.button.user_mail'), class: 'btn btn-primary' %>
           <% end %>
         </section>
     <% end %>

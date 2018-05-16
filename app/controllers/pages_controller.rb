@@ -8,6 +8,9 @@ class PagesController < ApplicationController
 
   def page
     @partial_name = params[:page].gsub('-', '')
+    return home if @partial_name == 'home'
+    return own_action if @partial_name == 'eigenesprojekt'
+    return contact if @partial_name == 'contact'
     authorize :page, @partial_name if restricted_partials.include?(@partial_name)
     lookup_context.find_all("pages/_#{@partial_name}").any? or not_found
   end

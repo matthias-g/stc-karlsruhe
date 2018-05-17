@@ -39,6 +39,7 @@ de:
     help:
       wantToStartOwnAction: 'Du möchtest eine eigene Aktion starten?'
       weHelpYou: 'Wir helfen dir dabei!'
+      description: "%{date} findet %{action_group} statt. Welche Aktion passt zu dir?"
 
     message:
       found_actions:

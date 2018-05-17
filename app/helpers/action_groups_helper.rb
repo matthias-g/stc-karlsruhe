@@ -24,12 +24,16 @@ module ActionGroupsHelper
     return previous_group, next_group
   end
 
-  # Gives the correct preposition for "action *in* action group"
-  def action_group_declination(action_group)
-    if (action_group.start_date == action_group.end_date)
-      t 'general.declination.at.' + action_group.declination
-    else
-      t 'general.declination.in.' + action_group.declination
+  # Gives the correct preposition for the group title (or date) depending on usage
+  def action_group_declination(action_group, usage)
+    is_day = (action_group.start_date == action_group.end_date)
+    case usage
+    when :temporal
+      t('general.declination.' + (is_day ? 'at.' : 'in.')  + action_group.declination)
+    when :nominative
+      t('general.declination.the.' + action_group.declination)
+    when :date_range
+      t('general.declination.' + (is_day ? 'at.m_sg' : 'from.m_sg'))
     end
   end
 

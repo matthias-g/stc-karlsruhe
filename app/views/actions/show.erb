@@ -3,18 +3,18 @@
 <% wrapper_classes.add('action-invisible') unless @action.visible? %>
 
 <% content_for :head do %>
-  <meta name="description" content="<%= @action.short_description %>" />
+  <meta name="description" content="<%= strip_tags @action.short_description %>" />
   <% if @action.show_picture? %>
     <meta property="og:image" content="<%= image_url(@action.picture_url) %>" />
   <% end %>
-  <meta property="og:description" content="<%= @action.short_description %>" />
+  <meta property="og:description" content="<%= strip_tags @action.short_description %>" />
 <% end %>
 
 <div class="white-box record-header d-print-none">
   <div class="type">
     <%= Action.model_name.human %>
     <% if @action.action_group %>
-      <%= action_group_declination @action.action_group %>
+      <%= action_group_declination(@action.action_group, :temporal) %>
       <%= link_to @action.action_group.title, show_action_group_path(@action.action_group) %>
     <% end %>
   </div>

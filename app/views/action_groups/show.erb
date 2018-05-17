@@ -1,13 +1,15 @@
 <% provide :title, @action_group.title %>
 <% wrapper_set %>
 <% actions = policy_scope(@action_group.actions.toplevel) %>
+<% date_range_str = date_range(@action_group.start_date, @action_group.end_date, format: :long) %>
 
 <% content_for :head do %>
-  <% desc = "Alle Aktionen der Aktionswoche #{@action_group.title} vom #{l @action_group.date_range.begin, format: :only_day} "
-     + "bis #{l @action_group.date_range.end, format: :short_date} findest du hier. Welche Aktion passt zu dir?" %>
-  <meta name="description" content="<%= desc %>" />
+  <% desc_date = action_group_declination(@action_group, :date_range).sub(/^./, &:upcase) + ' ' + date_range_str %>
+  <% desc = t('action_group.help.description', date: desc_date,
+              action_group: action_group_declination(@action_group, :nominative) + ' ' + @action_group.title) %>
+  <meta name="description" content="<%= strip_tags desc %>" />
   <meta property="og:image" content="https://www.servethecity-karlsruhe.de/images/share.jpg" />
-  <meta property="og:description" content="<%= desc %>" />
+  <meta property="og:description" content="<%= strip_tags desc %>" />
 <% end %>
 
 
@@ -41,7 +43,7 @@
     </div>
     <div class="col-sm-6 text-center title">
       <h1 class="m-0"><%= @action_group.title %></h1>
-      <div class="date h3 m-0"><%= date_range(@action_group.start_date, @action_group.end_date, format: :long) %></div>
+      <div class="date h3 m-0"><%= date_range_str %></div>
     </div>
   </div>
 </div>

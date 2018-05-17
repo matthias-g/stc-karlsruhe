@@ -45,3 +45,13 @@ de:
         m_pl: 'in den'
         f_sg: 'in der'
         f_pl: 'in den'
+      the:
+        m_sg: 'der'
+        m_pl: 'die'
+        f_sg: 'die'
+        f_pl: 'die'
+      from:
+        m_sg: 'vom'
+        m_pl: 'von den'
+        f_sg: 'von der'
+        f_pl: 'von den'

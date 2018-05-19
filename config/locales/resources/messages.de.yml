@@ -37,12 +37,13 @@ de:
 
     form:
       groups:
-        current_volunteers_and_leaders: "Aktionsleiter und Mitarbeiter der Aktionswoche %{action_group}"
-        current_volunteers: "Mitarbeiter der Aktionswoche %{action_group}"
-        current_leaders: "Aktionsleiter der Aktionswoche %{action_group}"
+        current_volunteers_and_leaders: 'Aktionsleiter und Mitarbeiter - %{action_group}'
+        current_volunteers: 'Mitarbeiter - %{action_group}'
+        current_leaders: "Aktionsleiter - %{action_group}"
         all_users: 'Alle angemeldeten Benutzer'
         active_users: 'Aktive Benutzer (Registrierung < 6 M oder Aktionsteilnahme < 18 M)'
-        me: "Ich <%{user_email}>"
+        me: 'Ich <%{user_email}>'
+        test: 'Test (ACHTUNG: sendet dir 1000 E-Mails!!!)'
       content_types:
         about_action_groups: 'Informationen zur Aktionswoche'
         about_other_projects: 'Informationen zu weiteren Serve the City Aktionen'
@@ -65,6 +66,8 @@ de:
       success: 'Die Nachricht wurde an dich und alle Mitarbeiter geschickt.'
     contact_leaders_mail:
       success: 'Die Nachricht wurde an die Aktionsleiter und an dich geschickt.'
+    orga_mail_notification:
+      subject: 'Orga-Mail "%{subject}" wurde erfolgreich versendet'
     user_mail:
       success: 'Die Nachricht wurde an %{recipient} geschickt.'
     event_join_reminder:

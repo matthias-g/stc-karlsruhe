@@ -41,7 +41,14 @@ class Mailer < ActionMailer::Base
     @message = message.body.gsub('{user}', recipient.first_name)
     @recipient = recipient
     @type = message.content_type
-    mail to: recipient.email, reply_to: message.from, subject: message.subject.gsub('{user}', recipient.first_name)
+    mail to: recipient.email, reply_to: message.from,
+         subject: message.subject.gsub('{user}', recipient.first_name)
+  end
+
+  def orga_mail_notification(message, recipient)
+    @recipient = recipient
+    mail to: recipient.email, reply_to: message.from,
+         subject: t('mailer.orga_mail_notification.subject', subject: message.subject)
   end
 
   # reminder email to a user when he/she joins an action

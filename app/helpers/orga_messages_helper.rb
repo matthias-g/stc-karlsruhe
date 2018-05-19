@@ -16,7 +16,7 @@ module OrgaMessagesHelper
 
   # Returns allowed options for orga mail recipients
   def recipient_options
-    %w(current_volunteers_and_leaders current_volunteers current_leaders all_users active_users me)
+    %w(current_volunteers_and_leaders current_volunteers current_leaders all_users active_users me test)
         .map{|group| [render_recipient_group(group, current_user), group]}
   end
 

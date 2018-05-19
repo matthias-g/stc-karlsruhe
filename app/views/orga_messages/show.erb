@@ -1,4 +1,6 @@
 
+<% recipients = @message.recipients(current_user) %>
+
 <table class="table">
   <tbody>
   <tr>
@@ -7,7 +9,12 @@
   </tr>
   <tr>
     <th><%= OrgaMessage.human_attribute_name('recipient') %></th>
-    <td><%= @message.sent? ? @message.recipient : render_recipient_group(@message.recipient, current_user) %></td>
+    <td><%= @message.sent? ? @message.sent_to : render_recipient_group(@message.recipient, current_user) %>
+      (<%= link_to recipients.count.to_s, '#', data: {toggle: 'collapse', target: '#recipient-list'} %>)
+      <div id="recipient-list" class="collapse">
+        <%= recipients.pluck(:email).join(', ') %>
+      </div>
+    </td>
   </tr>
   <tr>
     <th><%= OrgaMessage.human_attribute_name('created_at') %></th>
@@ -19,7 +26,7 @@
   </tr>
   <tr>
     <th><%= OrgaMessage.human_attribute_name('subject') %></th>
-    <td id="subject"><%= @message.subject %></td>
+    <td id="subject"><%= strip_tags @message.subject.gsub('{user}', current_user.first_name) %></td>
   </tr>
   <% if @message.sent? %>
       <tr>

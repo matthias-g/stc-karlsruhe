@@ -31,6 +31,10 @@ class User < ApplicationRecord
 
   before_validation :set_default_username_if_blank!, on: :create
 
+  scope :valid,  -> { where(users: { cleared: false }) }
+
+
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     login = conditions.delete(:login)

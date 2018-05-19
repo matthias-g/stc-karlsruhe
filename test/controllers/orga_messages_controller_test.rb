@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
+
   setup do
     @message = orga_messages(:one)
     ActionMailer::Base.deliveries = []
@@ -8,6 +9,14 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
 
   def get_recipients
     ActionMailer::Base.deliveries.map(&:to).flatten
+  end
+
+  def sent_and_assert_orga_message(message)
+    assert_changes 'ActionMailer::Base.deliveries.size' do
+      perform_enqueued_jobs do
+        get send_message_orga_message_url(message)
+      end
+    end
   end
 
   test "should get index" do
@@ -120,14 +129,12 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "send mail about action groups to all users" do
     sign_in users(:admin)
-    assert_changes 'ActionMailer::Base.deliveries.size' do
-      get send_message_orga_message_url(@message)
-    end
+    sent_and_assert_orga_message @message
     assert_redirected_to orga_message_path(@message.reload)
     assert_equal users(:admin).id, @message.sender.id
     assert @message.sent?
     recipients = get_recipients
-    assert_equal (User.count - 2), recipients.count
+    assert_equal (User.count - 2) + 1, recipients.count
     assert_not_includes recipients, users(:deleted).email
     assert_includes recipients, users(:sabine).email
   end
@@ -135,14 +142,12 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
   test "send other email from orga to all users" do
     sign_in users(:admin)
     message = orga_messages(:two)
-    assert_changes 'ActionMailer::Base.deliveries.size' do
-      get send_message_orga_message_url(message)
-    end
+    sent_and_assert_orga_message message
     assert_redirected_to orga_message_path(message.reload)
     assert_equal users(:admin).id, message.sender.id
     assert message.sent?
     recipients = get_recipients
-    assert_equal (User.count - 2), recipients.count
+    assert_equal (User.count - 2) + 1, recipients.count
     assert_not_includes recipients, users(:deleted).email
     assert_not_includes recipients, users(:sabine).email
   end
@@ -152,14 +157,12 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     message = orga_messages(:two)
     message.recipient = :active_users
     message.save!
-    assert_changes 'ActionMailer::Base.deliveries.size' do
-      get send_message_orga_message_url(message)
-    end
+    sent_and_assert_orga_message message
     assert_redirected_to orga_message_path(message.reload)
     assert_equal users(:admin).id, message.sender.id
     assert message.sent?
     recipients = get_recipients
-    assert_equal (User.count - 3), recipients.count
+    assert_equal (User.count - 3) + 1, recipients.count
     assert_not_includes recipients, users(:deleted).email
     assert_not_includes recipients, users(:sabine).email
     assert_not_includes recipients, users(:lea).email  # is old user
@@ -170,9 +173,7 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     message = orga_messages(:two)
     message.recipient = :current_volunteers
     message.save!
-    assert_changes 'ActionMailer::Base.deliveries.size' do
-      get send_message_orga_message_url(message)
-    end
+    sent_and_assert_orga_message message
     assert_redirected_to orga_message_path(message.reload)
     assert_equal users(:admin).id, message.sender.id
     assert message.sent?
@@ -189,9 +190,7 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     message = orga_messages(:two)
     message.recipient = :current_leaders
     message.save!
-    assert_changes 'ActionMailer::Base.deliveries.size' do
-      get send_message_orga_message_url(message)
-    end
+    sent_and_assert_orga_message message
     assert_redirected_to orga_message_path(message.reload)
     assert_equal users(:admin).id, message.sender.id
     assert message.sent?
@@ -208,9 +207,7 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     message = orga_messages(:two)
     message.recipient = :current_volunteers_and_leaders
     message.save!
-    assert_changes 'ActionMailer::Base.deliveries.size' do
-      get send_message_orga_message_url(message)
-    end
+    sent_and_assert_orga_message message
     assert_redirected_to orga_message_path(message.reload)
     assert_equal users(:admin).id, message.sender.id
     assert message.sent?
@@ -231,14 +228,12 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     message.recipient = :all_users
     message.content_type = :about_action_groups
     message.save!
-    assert_changes 'ActionMailer::Base.deliveries.size' do
-      get send_message_orga_message_url(message)
-    end
+    sent_and_assert_orga_message message
     assert_redirected_to orga_message_path(message.reload)
     assert_equal users(:admin).id, message.sender.id
     assert message.sent?
     recipients = get_recipients
-    assert_equal (User.count - 2), recipients.count
+    assert_equal (User.count - 2) + 1, recipients.count
     assert_not_includes recipients, users(:deleted).email
     assert_not_includes recipients, users(:peter).email
   end

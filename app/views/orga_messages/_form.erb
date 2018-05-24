@@ -6,9 +6,9 @@
       <%= form.text_field :subject, tabindex: 4 %>
       <%= form.label OrgaMessage.human_attribute_name('body') %>
       <%= form.trix_editor :body, class: 'admin-mail-body', tabindex: 5 %>
-      <div>
-        <%= form.submit t('general.button.save'), class: 'btn-secondary btn', tabindex: 11 %>
-        <%= link_to t('general.button.cancel'), orga_messages_path, class: 'btn-secondary btn', tabindex: 12 %>
+      <div class="mt-3">
+        <%= form.submit t('general.button.save'), class: 'btn-primary btn', tabindex: 11 %>
+        <%= link_to t('general.button.cancel'), orga_messages_path, class: 'btn-link btn', tabindex: 12 %>
       </div>
   <% end %>
 </section>

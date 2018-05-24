@@ -8,40 +8,29 @@
 <div class="white-box">
   <div class="row text-center my-5">
     <div class="col-sm-4">
-      <%= link_to statistiken_auslastung_path do %>
-          <h2>Auslastungsstatistik</h2>
-      <% end %>
+      <h2><%= link_to 'Auslastungsstatistik', statistiken_auslastung_path %></h2>
       <p>Statistik über Auslastung der Aktionen</p>
     </div>
     <div class="col-sm-4">
-      <%= link_to statistiken_teilnahmen_path do %>
-          <h2>Teilnahmenstatistik</h2>
-      <% end %>
+      <h2><%= link_to 'Teilnahmenstatistik', statistiken_teilnahmen_path %></h2>
       <p>Statistik über neue Teilnahmen der letzten 60 Tage</p>
     </div>
     <div class="col-sm-4">
-      <%= link_to('stats', data: {turbolinks: false}) do %>
-          <h2>Website-Statistiken</h2>
-      <% end %>
+      <h2><%= link_to 'Website-Statistiken', 'stats', data: {turbolinks: false} %></h2>
       <p>Statistiken über Websitebesuche</p>
-      <p>Login mit Benutzername '<%= Rails.application.credentials[:stats][:user] %>' und Passwort '<%= Rails.application.credentials[:stats][:password] %>'</p>
+      <p><i>Login mit Benutzername '<%= Rails.application.credentials[:stats][:user] %>'
+        und Passwort '<%= Rails.application.credentials[:stats][:password] %>'</i></p>
     </div>
     <div class="col-sm-4">
-      <%= link_to orga_messages_path do %>
-          <h2>Orgamails</h2>
-      <% end %>
+      <h2><%= link_to 'Orgamails', orga_messages_path %></h2>
       <p>E-Mails an Mitarbeiter und Aktionsleiter schicken</p>
     </div>
     <div class="col-sm-4">
-      <%= link_to('https://outlook.office.com/', data: {turbolinks: false}, target: '_blank') do %>
-          <h2>Webmail</h2>
-      <% end %>
+      <h2><%= link_to 'Webmail', 'https://outlook.office.com/', data: {turbolinks: false}, target: '_blank' %></h2>
       <p>Auf eigenen E-Mail-Account zugreifen</p>
     </div>
     <div class="col-sm-4">
-      <%= link_to surveys_templates_path do %>
-          <h2>Umfragen</h2>
-      <% end %>
+      <h2><%= link_to 'Umfragen', surveys_templates_path %></h2>
       <p>Umfragen erstellen und Einsendungen zu Umfragen ansehen</p>
     </div>
   </div>

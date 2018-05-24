@@ -83,9 +83,9 @@ Rails.application.routes.draw do
 
   # statistics
   get 'statistiken/teilnahmen', to: 'statistics#participations'
-  get 'statistiken/teilnahmen/:date', to: 'statistics#participations_on_day', as: :participations_on_day
+  get 'statistiken/teilnahmen/:action_group/:date', to: 'statistics#participations_on_day', as: :participations_on_day
   get 'statistiken/auslastung', to: 'statistics#occupancy'
-  get 'statistiken/auslastung-:title', to: 'statistics#occupancy', as: :occupancy_in_year
+  get 'statistiken/auslastung/:action_group', to: 'statistics#occupancy', as: :occupancy_in_year
 
 
   # pages

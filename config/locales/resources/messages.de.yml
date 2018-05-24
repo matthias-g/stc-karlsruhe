@@ -6,7 +6,9 @@ de:
       message:
         one: 'Nachricht'
         other: 'Nachrichten'
-      orga_message: 'Orga-Mail'
+      orga_message:
+        one: 'Orgamail'
+        other: 'Orgamails'
 
     attributes:
       message:

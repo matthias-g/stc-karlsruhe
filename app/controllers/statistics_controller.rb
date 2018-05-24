@@ -1,24 +1,18 @@
 class StatisticsController < ApplicationController
   before_action :authenticate_admin_or_coordinator!
+  before_action :set_action_group
 
   def participations
-    @end_date = params[:date]&.to_date || Date.tomorrow
-    @start_date = @end_date - 60
-    @action_group = ActionGroup.all.to_a.select { |action_group| (@start_date..@end_date).cover?(action_group.date_range.begin) }.first
-    unless @action_group
-      @action_group = ActionGroup.default
-      @end_date = @action_group.end_date
-      @start_date = @end_date - 60
-    end
+    @participations = participations_for(@action_group).group_by_day('participations.created_at').count
   end
 
   def participations_on_day
     @date = params[:date].to_date
-    @participations = Participation.where(created_at: @date.beginning_of_day..@date.end_of_day)
+    @participations = participations_for(@action_group).where(
+        participations: {created_at: @date.beginning_of_day..@date.end_of_day})
   end
 
   def occupancy
-    @action_group = ActionGroup.find_by_title(params[:title]) || ActionGroup.default
     @actions = @action_group.actions.visible.sort_by { |action| sort_column(action) }
     if params[:direction] == 'desc'
       @actions.reverse!
@@ -26,6 +20,7 @@ class StatisticsController < ApplicationController
   end
 
   private
+
   def sort_column(action)
     case params[:sort]
       when 'volunteer_count'
@@ -45,6 +40,14 @@ class StatisticsController < ApplicationController
       else
         action.title
     end
+  end
+
+  def participations_for(action_group)
+    Participation.left_joins(event: :initiative).where(actions: {action_group_id: action_group})
+  end
+
+  def set_action_group
+    @action_group = params[:action_group] ? ActionGroup.friendly.find(params[:action_group]) : ActionGroup.default
   end
 
 end

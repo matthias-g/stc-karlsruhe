@@ -1,5 +1,5 @@
 
-<% if (@weeks = ActionGroup.all.order(title: :desc)).any? %>
+<% if (@weeks = ActionGroup.all.order(start_date: :desc)).any? %>
   <div class="dropdown week-dropdown">
     <a class="dropdown-toggle h1"  href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
     <div class="dropdown-menu">

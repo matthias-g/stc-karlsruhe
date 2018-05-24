@@ -41,7 +41,7 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
     follow_redirect!
     assert_response :success
-    assert_select '#subject', @message.subject
+    assert_select 'h1', /#{Regexp.quote(@message.subject)}/
   end
 
   test "should show orga_message" do

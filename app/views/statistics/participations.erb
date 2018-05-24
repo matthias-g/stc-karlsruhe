@@ -1,21 +1,19 @@
 <% provide :title, t('layout.title.statistics') %>
 
-<%# content_for :appendToHeader do %>
-    <%#= javascript_include_tag 'highcharts', 'data-turbolinks-track': true %>
-    <%#= javascript_include_tag 'chartkick', 'data-turbolinks-track': true %>
-<%# end %>
-
-
 <div id="statistics-header" class="section">
   <div class="select-year">
     <h1>Neue Aktionsteilnahmen <%= @action_group.title %></h1>
-    <%= render '/statistics/week_dropdown', target_path: lambda { |action_group| statistiken_teilnahmen_path(date: action_group.date_range.end) } %>
+    <%= render '/statistics/week_dropdown', target_path: lambda { |action_group| statistiken_teilnahmen_path(action_group: action_group) } %>
   </div>
-  <div class="clearfix"></div>
 </div>
 
 <div class="section">
-  <%= line_chart Participation.where(created_at: @start_date..@end_date).group_by_day(:created_at).count, colors: ['#229c95'] %>
+  <% chart_data = @participations %>
+  <% if chart_data.any? %>
+    <% chart_data[chart_data.keys.min - 1] = 0  %>
+    <% chart_data[chart_data.keys.max + 1] = 0  %>
+  <% end %>
+  <%= line_chart chart_data, colors: ['#229c95'] %>
 </div>
 
 <table class="table table-hover">
@@ -26,15 +24,14 @@
   </tr>
   </thead>
   <tbody>
-  <% @end_date.downto(@start_date) do |date| %>
-      <% participations_on_date = Participation.where(created_at: date.beginning_of_day..date.end_of_day).count %>
-      <% if participations_on_date > 0 %>
-          <tr>
-            <td><%= l date, format: :default %></td>
-            <td><%= participations_on_date %></td>
-            <td><%= link_to 'Details', participations_on_day_path(date: date)  %></td>
-          </tr>
-      <% end %>
+  <% @participations.each do |date, count| %>
+    <% if count > 0 %>
+        <tr>
+          <td><%= l date, format: :default %></td>
+          <td><%= count %></td>
+          <td><%= link_to 'Details', participations_on_day_path(action_group: @action_group, date: date)  %></td>
+        </tr>
+    <% end %>
   <% end %>
   </tbody>
 </table>

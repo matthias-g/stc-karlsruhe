@@ -1,7 +1,11 @@
 
-<h1>Orgamails</h1>
+<h1><%= OrgaMessage.model_name.human(count: 2) %></h1>
 
-<table class="table">
+<div class="my-3">
+  <%= link_to t('orga_message.button.write_new'), new_orga_message_path, class: 'btn-secondary btn' %>
+</div>
+
+<table class="table table-striped">
   <thead>
   <tr>
     <th><%= OrgaMessage.human_attribute_name('created_at') %></th>
@@ -25,7 +29,3 @@
   <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to t('orga_message.button.write_new'), new_orga_message_path, class: 'btn-secondary btn' %>

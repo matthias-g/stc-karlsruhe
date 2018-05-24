@@ -50,11 +50,11 @@ class OrgaMessage < ApplicationRecord
       when :me
         return User.where(id: sender.id)
       else
-        return User.where(id: self.recipient.split(/\s*,\s*/).map(&:to_i))
+        return self.recipient.split(/\s*,\s*/).map(&:to_i).collect {|id| User.find(id) }
     end
 
     # filter users by email preferences
-    user_query = case self.content_type.to_sym
+    filtered_user_query = case self.content_type.to_sym
     when :about_action_groups
       if %w(current_volunteers_and_leaders current_volunteers current_leaders).include?(self.recipient)
         user_query.where('users.receive_emails_about_my_action_groups': true)
@@ -63,13 +63,11 @@ class OrgaMessage < ApplicationRecord
       end
     when :about_other_actions
       user_query.where('users.receive_emails_about_other_actions': true)
-    when :other_email_from_orga
-      user_query.where('users.receive_other_emails_from_orga': true)
     else
       user_query.where('users.receive_other_emails_from_orga': true)
     end
 
-    return user_query.valid.uniq
+    return filtered_user_query.valid.order(:id).uniq
   end
 
 end

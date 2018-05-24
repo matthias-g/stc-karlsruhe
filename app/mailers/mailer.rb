@@ -15,11 +15,11 @@ class Mailer < ActionMailer::Base
   end
 
   def contact_volunteers_mail(message, sender, recipient, action)
-    @message = message.body.gsub('{user}', recipient.first_name)
+    @message = replace_variables(message.body, recipient)
     @action_title = action.full_title
     @sender = sender
     @recipient = recipient
-    mail to: recipient.email, reply_to: sender.email, subject: message.subject.gsub('{user}', recipient.first_name)
+    mail to: recipient.email, reply_to: sender.email, subject: replace_variables(message.subject, recipient)
   end
 
   def contact_leaders_mail(message, sender, recipient, action)
@@ -38,11 +38,11 @@ class Mailer < ActionMailer::Base
   end
 
   def orga_mail(message, recipient)
-    @message = message.body.gsub('{user}', recipient.first_name)
+    @message = replace_variables(message.body, recipient)
     @recipient = recipient
     @type = message.content_type
     mail to: recipient.email, reply_to: message.from,
-         subject: message.subject.gsub('{user}', recipient.first_name)
+         subject: replace_variables(message.subject, recipient)
   end
 
   def orga_mail_notification(message, recipient)
@@ -86,6 +86,12 @@ class Mailer < ActionMailer::Base
     @type = 'eines Newseintrags' if gallery.news_entries.any?
     recipient = StcKarlsruhe::Application::NOTIFICATION_RECIPIENT
     mail to: recipient, subject: t('mailer.gallery_picture_uploaded_notification.subject', pictureCount: picture_count)
+  end
+
+  private
+
+  def replace_variables(text, recipient)
+    text.gsub('{user}', recipient.first_name.titleize)
   end
 
 end

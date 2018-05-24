@@ -138,8 +138,10 @@
       benötigen wir finanzielle Mittel. Deine Spende
       ist also herzlich willkommen! Am einfachsten kannst du über die Spendenplattform
       <%= link_to 'Betterplace', 'https://www.betterplace.org/de/projects/41347' %> spenden,
-      die dir auch eine Spendenbescheinigung austellt:
-      <%= link_to (image_tag '/images/Betterplace.jpg', class: 'img-fluid center-block'), 'https://www.betterplace.org/de/projects/41347' %>
+      die dir auch eine Spendenbescheinigung ausstellt:
+      <%= link_to 'https://www.betterplace.org/de/projects/41347' do %>
+        <img src="/images/logo_betterplace.png" class="img-fluid center-block" />
+      <% end %>
     </p>
     <p>
       Alternativ kannst auch per <%= link_to 'Überweisung', '#', data: {toggle: 'collapse', target: '#transfer-details'} %> spenden.
@@ -155,8 +157,8 @@
         </table>
       </p>
       <p>
-        Falls aktionsgebunden gespendet werden soll, kann das im
-        Überweisungsbetreff angemerkt werden. Wir können <%= link_to 'auf Anfrage', 'kontakt' %>
+        Falls du für eine konkrete Aktion spenden willst, kannst du das im
+        Überweisungsbetreff anmerken. Wir können <%= link_to 'auf Anfrage', 'kontakt' %>
         auch eine Spendenbescheinigung ausstellen.
       </p>
     </div>

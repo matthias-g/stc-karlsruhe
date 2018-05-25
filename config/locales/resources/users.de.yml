@@ -1,4 +1,4 @@
-# users & roles
+# users, roles and participations
 
 de:
   activerecord:
@@ -24,6 +24,7 @@ de:
         password_confirmation: 'Passwort wiederholen'
         current_password: 'Aktuelles Passwort'
         remember_me: 'merken'
+        privacy_consent: 'Datenverwendung'
         receive_emails_about_action_groups: 'Informationen zu Aktionswochen allgemein (z.B. Ankündigungen der Aktionswochen)'
         receive_emails_about_my_action_groups: 'Informationen zu Aktionswochen, an denen ich teilnehme'
         receive_emails_about_other_projects: 'Informationen zu weiteren Serve the City Projekten'
@@ -76,11 +77,11 @@ de:
       user: 'User'
       user_or_email: 'Benutzername / E-Mail'
       confirmDeletePassword: 'Dein Passwort, zur Bestätigung'
-
       passwordSet: 'Passwort festlegen'
       phoneOptional: 'Handy (optional)'
       usernameOrEmail: 'Username / E-Mail'
       receiveEmailsFromOrga: 'E-Mails vom Orgateam erhalten'
+      privacy_consent: 'Ich stimme der Verwendung meiner Daten gemäß der Datenschutzerklärung zu'
 
     info:
       waitingForEmailConfirmation: 'Ihre E-Mail-Adresse %{email} ist noch nicht bestätigt.'

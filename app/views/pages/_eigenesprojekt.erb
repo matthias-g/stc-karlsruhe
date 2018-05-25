@@ -1,4 +1,5 @@
 <% provide :title, 'Eigene Aktion vorschlagen' %>
+<% show_errors_for @message %>
 
 <h1>Eigene Aktion vorschlagen</h1>
 <div class="row">
@@ -31,9 +32,10 @@
           <%= form.hidden_field :subject, value: 'Vorschlag für eigene Aktion' %>
           <%= form.hidden_field :recipient, value: 'default@servethecity-karlsruhe.de' %>
           <% unless user_signed_in? %>
-              <%= form.form_group do %>
-                  <%= recaptcha_tags ajax: true, script: false %>
-              <% end %>
+            <%= form.form_group do %>
+                <%= recaptcha_tags ajax: true, script: false %>
+            <% end %>
+            <%= form.check_box :privacy_consent, label: t('general.form.privacy_consent') %>
           <% end %>
           <%= form.submit t('general.button.send') %>
         </div>

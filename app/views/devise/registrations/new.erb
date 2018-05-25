@@ -1,4 +1,5 @@
 <% provide :title, t('layout.title.userRegister') %>
 <% wrapper_set 'white-box', 'container-small' %>
+<% show_errors_for resource %>
 
 <%= render '/users/register_form' %>

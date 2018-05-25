@@ -1,4 +1,5 @@
 <% provide :title, t('layout.title.userLogin') %>
 <% wrapper_set 'white-box', 'container-small' %>
+<% show_errors_for resource %>
 
 <%= render '/users/login_form' %>

@@ -45,6 +45,7 @@
     Wenn du deine Handynummer angibst, kann dich der Leiter besser erreichen,
     falls du dich z.B. verspätest oder es organisatorische Änderungen gibt.
     Weitere Infos findest du auf unserer <a href="/datenschutz" target="_blank">Datenschutz-Seite</a>.
+    <%= f.check_box :privacy_consent, label: t('user.form.privacy_consent') %>
   </p>
 
   <%= button_tag class: 'btn btn-primary' do %>

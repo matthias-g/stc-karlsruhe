@@ -16,6 +16,7 @@ de:
         recipient: 'Empfänger'
         subject: 'Betreff'
         body: 'Nachricht'
+        privacy_consent: 'Datenverarbeitung'
       orga_message:
         from: 'Absender'
         recipient: 'Empfänger'
@@ -62,6 +63,7 @@ de:
     contact_orga_mail:
       success: 'Vielen Dank für deine Nachricht! Wir werden sie so schnell wie möglich beantworten.'
       captcha_failed: 'Nachricht wurde nicht versandt, da das Captcha ungültig war.'
+      privacy_consent_missing: 'Bitte akzeptiere die Datenverarbeitung deiner Anfrage'
     contact_orga_mail_copy_for_sender:
       subject: 'Deine Nachricht "%{subject}"'
     contact_volunteers_mail:

@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
   respond_to :html
 
+  before_action :set_message, only: [:contact, :own_action]
+
   def home
     @partial_name = 'home'
     render 'page'
@@ -16,18 +18,17 @@ class PagesController < ApplicationController
   end
 
   def own_action
-    @message = Message.new
     @partial_name = 'eigenesprojekt'
     render 'page'
   end
 
   def contact
-    @message = Message.new
     @partial_name = 'contact'
     render 'page'
   end
 
   private
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def page_params
     params.require(:page)
@@ -35,6 +36,15 @@ class PagesController < ApplicationController
 
   def restricted_partials
     ['admindashboard']
+  end
+
+  def set_message
+    if session[:message]
+      @message = Message.new(session[:message])
+      session[:message] = nil
+    else
+      @message = Message.new
+    end
   end
 
 end

@@ -33,6 +33,7 @@ de:
       recipient: 'E-Mail-Adresse des Empfängers'
       subject: 'Worum geht''s?'
       body: 'Deine Nachricht'
+      privacy_consent: 'Ich stimme der Verarbeitung der oben angegebenen Daten zum Zweck der Beantwortung meiner Anfrage zu'
 
     declination:
       at:

@@ -26,7 +26,9 @@ class User < ApplicationRecord
   validates :last_name,
             length: { in: 2..50 },
             format: { with: /\A[[[:word:]]-\.]+( [[[:word:]]-\.]+)*\z/, message: I18n.t('activerecord.errors.messages.onlyWordsAndInnerSpace') }
-  attr_accessor :login
+  validates :privacy_consent, acceptance: true
+
+  attr_accessor :login, :privacy_consent
   has_secure_token :ical_token
 
   before_validation :set_default_username_if_blank!, on: :create

@@ -17,6 +17,7 @@
           <%= form.form_group do %>
             <%= recaptcha_tags ajax: true, script: false %>
           <% end %>
+          <%= form.check_box :privacy_consent, label: t('general.form.privacy_consent') %>
         <% end %>
     </div>
   </div>

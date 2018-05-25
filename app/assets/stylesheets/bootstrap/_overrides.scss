@@ -31,6 +31,18 @@
 label {
   font-weight: bold;
 }
+.checkbox > label {
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  input[type=checkbox] {
+    margin-right: 10px;
+    transform: scale(1.5);
+    padding: 10px;
+  }
+}
+
+
 
 // TABLES
 table.properties {

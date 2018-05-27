@@ -38,7 +38,6 @@ after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
   task :restart do
     invoke 'unicorn:stop'
-    invoke 'delayed_job:restart'
   end
 end
 

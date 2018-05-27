@@ -43,4 +43,4 @@ end
 
 # Number of delayed_job workers
 # default value: 1
-set :delayed_job_workers, 2
+set :delayed_job_workers, 5

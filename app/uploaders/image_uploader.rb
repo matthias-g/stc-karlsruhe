@@ -40,17 +40,17 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   version :action_list do
     process :crop_pic
-    process :resize_to_fill => [200, 165]
+    process :resize_to_fill => [70, 58]
   end
 
   version :action_card_list do
     process :crop_pic
-    process :resize_to_fill => [250, 100]
+    process :resize_to_fill => [318, 262]
   end
 
   version :action_view do
     process :crop_pic
-    process :resize_to_fill => [522, 261]
+    process :resize_to_fill => [773, 386]
   end
 
 

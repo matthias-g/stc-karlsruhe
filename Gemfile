@@ -74,12 +74,15 @@ gem 'pg'
 gem 'dotenv-rails'
 gem 'unicorn'
 
+gem 'delayed_job_active_record'
+
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
   gem 'capistrano3-unicorn'
+  gem 'capistrano3-delayed-job'
 
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'

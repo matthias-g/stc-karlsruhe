@@ -38,5 +38,10 @@ after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
   task :restart do
     invoke 'unicorn:stop'
+    invoke 'delayed_job:restart'
   end
 end
+
+# Number of delayed_job workers
+# default value: 1
+set :delayed_job_workers, 2

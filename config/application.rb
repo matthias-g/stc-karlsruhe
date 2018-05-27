@@ -27,5 +27,7 @@ module StcKarlsruhe
 
     # autoload lib directory (for Devise::CustomFailure)
     config.autoload_paths << Rails.root.join('lib')
+
+    config.active_job.queue_adapter = :delayed_job
   end
 end

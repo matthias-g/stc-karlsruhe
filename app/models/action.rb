@@ -18,8 +18,8 @@ class Action < ApplicationRecord
   scope :visible,  -> { where(actions: { visible: true }) }
   scope :hidden,   -> { where(actions: { visible: false }) }
   scope :toplevel, -> { where(actions: { parent_action_id: nil }) }
-  scope :upcoming, -> { joins(:events).where('events.date >= ?', Date.current) }
-  scope :finished, -> { joins(:events).where('events.date < ?', Date.current) }
+  scope :upcoming, -> { joins(:events).where('events.date >= ?', Date.current).distinct }
+  scope :finished, -> { joins(:events).where('events.date < ?', Date.current).distinct }
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged

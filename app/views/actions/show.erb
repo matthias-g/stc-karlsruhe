@@ -175,7 +175,7 @@
             <% end %>
           </div>
           <div>
-            <h3><%= Action.human_attribute_name('date'.pluralize(@action.dates.count)) %></h3>
+            <h3><%= Action.human_attribute_name('date'.pluralize(@action.all_dates.count)) %></h3>
             <% if @action.subactions.empty? %>
               <% @action.events.each do |event| %>
                 <div>
@@ -183,7 +183,7 @@
                 </div>
               <% end %>
             <% else %>
-              <%= @action.dates.uniq.sort.collect { |date| l(date, format: :short_with_weekday)}.join('<br />').html_safe %>
+              <%= @action.all_dates.collect { |date| l(date, format: :short_with_weekday)}.join('<br />').html_safe %>
             <% end %>
           </div>
           <div>

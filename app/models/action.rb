@@ -37,22 +37,19 @@ class Action < ApplicationRecord
   end
 
   def volunteers
-    event_ids = events.pluck(:id)
-    User.joins(:events_as_volunteer).where(["event_id IN (?)", event_ids])
+    User.joins(:events_as_volunteer).where(events: {initiative_id: id})
   end
 
   def volunteers_in_subactions
-    subaction_event_ids = subactions.collect{ |action| action.events.pluck(:id) }.flatten
-    User.joins(:events_as_volunteer).where(["event_id IN (?)", subaction_event_ids])
+    User.joins(events_as_volunteer: :initiative).where(actions: {parent_action_id: id})
   end
 
   def leaders_in_subactions
-    subaction_ids = subactions.collect{ |action| action.id }
-    User.joins(:actions_as_leader).where(["action_id IN (?)", subaction_ids])
+    User.joins(:actions_as_leader).where(actions: {parent_action_id: id})
   end
 
   def volunteer?(user)
-    events.any? {|event| event.volunteer?(user)}
+    user.present? && user.events_as_volunteer.where(initiative_id: id).any?
   end
 
   def make_visible!
@@ -73,15 +70,6 @@ class Action < ApplicationRecord
     events.count == 1 ? events.first.start_time : nil
   end
 
-  # All dates of the action and its sub actions
-  # (returns an empty array for undated actions)
-  def dates
-    dates = subactions.any? ? subactions.collect(&:dates).flatten : []
-    dates = dates + events.pluck(:date).compact
-    dates.reject(&:nil?)
-  end
-
-  # Number of available volunteer places in this action (without sub actions)
   def available_places
     events.sum(&:available_places)
   end
@@ -94,42 +82,40 @@ class Action < ApplicationRecord
     events.sum(:team_size)
   end
 
-  # Number of available volunteer places in this action and its sub actions
   def total_available_places
-    available_places + subactions.visible.upcoming.sum(&:available_places)
+    all_events.sum(&:available_places)
   end
 
-  # Number of reserved volunteer places in this action and its sub actions
   def total_team_size
-    team_size + subactions.visible.sum(&:team_size)
+    all_events.sum(:team_size)
   end
 
-  # Number of volunteer places in this action and its sub actions
   def total_desired_team_size
-    desired_team_size + subactions.visible.sum(&:desired_team_size)
+    all_events.sum(:desired_team_size)
   end
 
-  # Are the action and its sub actions finished (i.e. in the past)?
+  def all_dates
+    all_events.pluck(:date).compact.uniq.sort
+  end
+
+  def all_events
+    Event.joins(:initiative).where('initiative_id = ? OR (actions.parent_action_id = ? AND actions.visible)', id, id)
+  end
+
   def finished?
-    all_dates = dates
-    return true unless all_dates.any?
-    all_dates.max < Date.current
+    all_events.upcoming.empty?
   end
 
-  # Is the action a sub action?
   def subaction?
     parent_action != nil
   end
 
-  # Title of the action, if applicable prepended with the parent action title
   def full_title
     subaction? ? parent_action.title + ' – ' + title : title
   end
 
-  # Status of the action including its subactions.
-  # can be: finished, full, soon_full or empty (i.e. >2 free places)
-  def status # TODO test this
-    if events.all? { |event| event.finished? } && subactions.all? { |action| action.finished? }
+  def status
+    if finished?
       :finished
     elsif total_available_places.zero?
       :full
@@ -149,6 +135,7 @@ class Action < ApplicationRecord
     action_copy.picture.store!
     action_copy
   end
+
 
   private
 

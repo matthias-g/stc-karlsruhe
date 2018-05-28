@@ -70,11 +70,7 @@ class ActionPolicy < ApplicationPolicy
   end
 
   def is_today_or_past?
-    today_or_future = nil
-    record.dates.each do |date|
-      today_or_future ||= date.today? || date.past?
-    end
-    today_or_future
+    record.all_events.today_or_past.any?
   end
 
 end

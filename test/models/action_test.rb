@@ -148,8 +148,8 @@ class ActionTest < ActiveSupport::TestCase
   test "dates doesn't include nil" do
     action = actions(:undated)
     assert_nil action.date
-    assert_not_nil action.dates
-    assert_equal 0, action.dates.size
+    assert_not_nil action.all_dates
+    assert_equal 0, action.all_dates.size
   end
 
 end

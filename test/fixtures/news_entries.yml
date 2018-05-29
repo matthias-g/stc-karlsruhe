@@ -15,4 +15,4 @@ no_teaser:
   category: 1
   visible: true
   slug: short-news
-  gallery: dummy
+  gallery: no_actions

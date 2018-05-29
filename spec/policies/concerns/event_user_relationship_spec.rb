@@ -4,7 +4,7 @@ require 'helpers'
 shared_examples 'a EventUserRelationship' do
 
   include Helpers
-  fixtures :all
+  fixtures :users, :actions, :events
 
   let(:relationship) { described_class.new(current_user, nil) }
 
@@ -21,7 +21,11 @@ shared_examples 'a EventUserRelationship' do
     end
 
     context 'as same user' do
-      let(:current_user) { user }
+
+      # this tests for correct execution when user and current_user are equal but not identical (eql? but not equal?)
+      # so we can't use 'user' or 'users(:subaction_volunteer)'
+      let(:current_user) { User.find_by_username(:subaction_volunteer) }
+
       it { should_pass }
     end
 

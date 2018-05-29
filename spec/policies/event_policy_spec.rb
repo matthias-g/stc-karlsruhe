@@ -4,7 +4,7 @@ require 'helpers'
 RSpec.describe EventPolicy do
 
   include Helpers
-  fixtures :all
+  fixtures :events, :actions, :users
 
 
   let(:user) { nil }

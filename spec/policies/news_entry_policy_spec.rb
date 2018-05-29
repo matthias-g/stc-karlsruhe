@@ -4,7 +4,7 @@ require 'helpers'
 RSpec.describe NewsEntryPolicy do
 
   include Helpers
-  fixtures :all
+  fixtures :users, :news_entries
 
   let(:current_user) { nil }
   let(:record) { news_entries(:default) }

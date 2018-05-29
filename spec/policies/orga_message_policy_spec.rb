@@ -4,7 +4,7 @@ require 'helpers'
 RSpec.describe OrgaMessagePolicy do
 
   include Helpers
-  fixtures :all
+  fixtures :users, :orga_messages
 
   let(:current_user) { nil }
   let(:record) { orga_messages(:default) }

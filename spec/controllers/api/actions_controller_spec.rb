@@ -3,7 +3,7 @@ require 'helpers'
 
 RSpec.describe Api::ActionsController, type: :controller do
 
-  fixtures :all
+  fixtures :actions, :users, :leaderships, :participations, :roles
 
   describe 'GET #show' do
     let(:user) { :nil }

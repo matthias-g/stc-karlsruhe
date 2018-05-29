@@ -4,7 +4,7 @@ require 'helpers'
 RSpec.describe ActionPolicy do
 
   include Helpers
-  fixtures :all
+  fixtures :users, :actions, :events
 
   let(:user) { nil }
   let(:action) { actions(:default) }

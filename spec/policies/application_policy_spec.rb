@@ -4,7 +4,7 @@ require 'helpers'
 RSpec.describe ApplicationPolicy do
 
   include Helpers
-  fixtures :all
+  fixtures :users, :actions
 
   let(:current_user) { nil }
   let(:record) { nil }
@@ -69,10 +69,10 @@ RSpec.describe ApplicationPolicy do
     end
   end
 
-  %w(index? new? edit? create? destroy?).each do |method|
+  %w(index? new? edit? create? update? destroy?).each do |method|
     describe method do
       subject { policy.public_send(method) }
-      it { should_fail }
+      it { expect(subject).to be(false) } # expects false and not just falsey value as expected by should_fail
     end
   end
 

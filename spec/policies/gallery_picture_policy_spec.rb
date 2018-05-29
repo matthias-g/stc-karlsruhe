@@ -4,7 +4,7 @@ require 'helpers'
 RSpec.describe GalleryPicturePolicy do
 
   include Helpers
-  fixtures :all
+  fixtures :users, :gallery_pictures
 
   let(:current_user) { nil }
   let(:record) { gallery_pictures(:default_1) }

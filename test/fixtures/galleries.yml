@@ -11,3 +11,6 @@ invisible_gallery:
 
 dummy:
   title: Dummy Gallery
+
+no_actions:
+  title: This gallery is not referenced by an action but only by a news entry

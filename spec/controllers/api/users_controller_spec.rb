@@ -3,7 +3,7 @@ require 'helpers'
 
 RSpec.describe Api::UsersController, type: :controller do
 
-  fixtures :all
+  fixtures :actions, :users, :leaderships, :participations, :roles
 
   describe 'add role to user' do
     let(:current_user) { :nil }

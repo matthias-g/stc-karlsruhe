@@ -4,7 +4,7 @@ require 'helpers'
 RSpec.describe ActionGroupPolicy do
 
   include Helpers
-  fixtures :all
+  fixtures :action_groups, :users
 
   let(:current_user) { nil }
   let(:record) { action_groups(:default) }

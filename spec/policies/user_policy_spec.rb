@@ -4,7 +4,7 @@ require 'helpers'
 RSpec.describe UserPolicy do
 
   include Helpers
-  fixtures :all
+  fixtures :users
 
   let(:current_user) { nil }
   let(:record) { users(:volunteer) }
@@ -72,7 +72,11 @@ RSpec.describe UserPolicy do
     end
 
     context 'as same user' do
-      let(:current_user) { users(record.username) }
+
+      # this tests for correct execution when user and current_user are equal but not identical (eql? but not equal?)
+      # so we can't use 'user' or 'users(record.username)'
+      let(:current_user) { User.find_by_username(record.username) }
+
       it { should_pass }
     end
 
@@ -127,7 +131,11 @@ RSpec.describe UserPolicy do
     end
 
     context 'as same user' do
-      let(:current_user) { users(record.username) }
+
+      # this tests for correct execution when user and current_user are equal but not identical (eql? but not equal?)
+      # so we can't use 'user' or 'users(record.username)'
+      let(:current_user) { User.find_by_username(record.username) }
+
       it 'contains other attributes' do
         expect(subject).to contain_exactly(:username, :first_name, :last_name, :email, :phone,
                                            :receive_emails_about_action_groups, :receive_emails_about_my_action_groups,

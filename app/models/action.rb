@@ -41,11 +41,11 @@ class Action < ApplicationRecord
   end
 
   def volunteers_in_subactions
-    User.joins(events_as_volunteer: :initiative).where(actions: {parent_action_id: id})
+    User.joins(events_as_volunteer: :initiative).where(actions: {parent_action_id: id, visible: true})
   end
 
   def leaders_in_subactions
-    User.joins(:actions_as_leader).where(actions: {parent_action_id: id})
+    User.joins(:actions_as_leader).where(actions: {parent_action_id: id, visible: true})
   end
 
   def volunteer?(user)

@@ -1,6 +1,5 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+default:
   from: Serve the City Karlsruhe <contact@servethecity-karlsruhe.de>
   recipient: all_users
   content_type: about_action_groups
@@ -8,18 +7,11 @@ one:
   body: Bald findet eine neue Aktionswoche statt!
   author: admin
 
-two:
+already_sent:
   from: Serve the City Karlsruhe <contact@servethecity-karlsruhe.de>
-  recipient: all_users
-  content_type: other_email_from_orga
-  subject: Neue Aktionswoche
-  body: Bald findet eine neue Aktionswoche statt!
-  author: admin
-
-three:
-  from: Serve the City Karlsruhe <contact@servethecity-karlsruhe.de>
-  recipient: MyString
-  content_type:
+  recipient: e1@example.org,e2@example.org
+  sent_to: Alle Benutzer
+  content_type: about_action_groups
   subject: Sent message
   body: MyText
   author: admin

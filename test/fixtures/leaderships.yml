@@ -1,25 +1,20 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-rolf-at-one:
-  user: rolf
-  action: one
+leader:
+  user: leader
+  action: default
 
-rolf-at-three:
-  user: rolf
-  action: three
+parent_action_leader:
+  user: leader
+  action: parent_action
 
-rolf-at-four:
-  user: rolf
-  action: four
+subaction_leader:
+  user: subaction_leader
+  action: subaction
 
-rolf-at-kindergarten-party:
-  user: rolf
-  action: kindergarten-party
+subaction_2_leader:
+  user: subaction_leader
+  action: subaction_2
 
-birgit-at-kindergarten-music:
-  user: birgit
-  action: kindergarten-music
-
-tabea-at-one:
-  user: tabea
-  action: one
+subaction_3_leader:
+  user: subaction_leader
+  action: subaction_3_invisible

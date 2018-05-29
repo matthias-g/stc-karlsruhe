@@ -3,7 +3,7 @@ require 'helpers'
 
 RSpec.describe Api::ActionsController, type: :controller do
 
-  fixtures :actions, :users, :leaderships, :participations, :roles
+  fixtures :all
 
   describe 'GET #show' do
     let(:user) { :nil }
@@ -15,7 +15,7 @@ RSpec.describe Api::ActionsController, type: :controller do
     end
 
     context 'action is visible' do
-      let(:action) { actions(:one) }
+      let(:action) { actions(:default) }
 
       it 'should be successful' do
         expect(response.status).to eq(200)
@@ -28,14 +28,14 @@ RSpec.describe Api::ActionsController, type: :controller do
     end
 
     context 'action is invisible' do
-      let(:action) { actions(:three) }
+      let(:action) { actions(:subaction_3_invisible) }
 
       it 'should not be found' do
         expect(response.status).to be 404
       end
 
       context 'action leader is signed in' do
-        let(:user) { users(:rolf) }
+        let(:user) { users(:subaction_leader) }
 
         it 'should be successful' do
           expect(response.status).to be 200

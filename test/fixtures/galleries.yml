@@ -1,31 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: GalleryOne
+default:
+  title: Default Gallery
 
-two:
-  title: GalleryTwo
+empty_gallery:
+  title: Empty Gallery
 
-three:
-  title: GalleryThree
+invisible_gallery:
+  title: Invisible Gallery
 
-four:
-  title: MyString
-
-five:
-  title: MyString
-
-six:
-  title: MyString
-
-seven:
-  title: MyString
-
-eight:
-  title: MyString
-
-nine:
-  title: MyString
-
-unreferenced:
-  title: No one uses this gallery
+dummy:
+  title: Dummy Gallery

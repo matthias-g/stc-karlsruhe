@@ -3,34 +3,29 @@ require 'helpers'
 
 RSpec.describe OrgaMessagePolicy do
 
-  include Fixtures
+  include Helpers
+  fixtures :all
 
   let(:current_user) { nil }
-  let(:record) { OrgaMessage.find_by(subject: 'Neue Aktionswoche') }
+  let(:record) { orga_messages(:default) }
   let(:policy) { OrgaMessagePolicy.new(current_user, record) }
 
   %w(index? new? create? edit?).each do |method|
     describe method do
       subject { policy.public_send(method) }
 
-      it 'is false for no user logged in' do
-        expect(subject).to be_falsey
+      context 'as visitor' do
+        it { should_fail }
       end
 
-      context 'admin logged in' do
+      context 'as admin' do
         let(:current_user) { users(:admin) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
 
-      context 'coordinator logged in' do
+      context 'as coordinator' do
         let(:current_user) { users(:coordinator) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
     end
   end
@@ -39,32 +34,27 @@ RSpec.describe OrgaMessagePolicy do
     describe method do
       subject { policy.public_send(method) }
 
-      it 'is false for no user logged in' do
-        expect(subject).to be_falsey
+      context 'as visitor' do
+        it { should_fail }
       end
 
-      context 'admin logged in' do
+      context 'as admin' do
         let(:current_user) { users(:admin) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
 
-      context 'coordinator logged in' do
+      context 'as coordinator' do
         let(:current_user) { users(:coordinator) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
 
-      context 'admin logged in and message is sent' do
-        let(:current_user) { users(:admin) }
-        let(:record) { OrgaMessage.find_by(subject: 'Sent message') }
+      context 'for already sent message' do
+        let(:record) { orga_messages(:already_sent) }
+        it { should_fail }
 
-        it 'is false' do
-          expect(subject).to be_falsey
+        context 'as admin' do
+          let(:current_user) { users(:admin) }
+          it { should_fail }
         end
       end
     end

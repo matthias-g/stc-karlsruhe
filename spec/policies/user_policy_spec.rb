@@ -3,23 +3,23 @@ require 'helpers'
 
 RSpec.describe UserPolicy do
 
-  include Fixtures
   include Helpers
+  fixtures :all
 
   let(:current_user) { nil }
-  let(:record) { users(:rolf) }
+  let(:record) { users(:volunteer) }
   let(:policy) { UserPolicy.new(current_user, record) }
 
 
   describe 'show?' do
     subject { policy.show? }
 
-    context 'when no user is logged in' do
+    context 'as visitor' do
       it { should_fail }
     end
 
-    context 'for some user' do
-      let(:current_user) { users(:sabine) }
+    context 'as other user' do
+      let(:current_user) { users(:unrelated) }
       it { should_pass }
       context 'requesting a cleared profile' do
         let(:record) { users(:deleted) }
@@ -27,7 +27,7 @@ RSpec.describe UserPolicy do
       end
     end
 
-    context 'for admin requesting a cleared profile' do
+    context 'as admin requesting a cleared profile' do
       let(:record) { users(:deleted) }
       let(:current_user) { users(:admin) }
       it { should_pass }
@@ -38,21 +38,21 @@ RSpec.describe UserPolicy do
   describe 'index?' do
     subject { policy.index? }
 
-    context 'when no user is logged in' do
+    context 'as visitor' do
       it { should_fail }
     end
 
-    context 'for some user' do
-      let(:current_user) { users(:sabine) }
+    context 'as other user' do
+      let(:current_user) { users(:unrelated) }
       it { should_fail }
     end
 
-    context 'for coordinator' do
+    context 'as coordinator' do
       let(:current_user) { users(:coordinator) }
       it { should_pass }
     end
 
-    context 'for admin' do
+    context 'as admin' do
       let(:current_user) { users(:admin) }
       it { should_pass }
     end
@@ -62,21 +62,21 @@ RSpec.describe UserPolicy do
   describe 'edit?' do
     subject { policy.edit? }
 
-    context 'when no user is logged in' do
+    context 'as visitor' do
       it { should_fail }
     end
 
-    context 'for some user' do
-      let(:current_user) { users(:sabine) }
+    context 'as other user' do
+      let(:current_user) { users(:unrelated) }
       it { should_fail }
     end
 
-    context 'for same user' do
+    context 'as same user' do
       let(:current_user) { users(record.username) }
       it { should_pass }
     end
 
-    context 'for admin' do
+    context 'as admin' do
       let(:current_user) { users(:admin) }
       it { should_pass }
     end
@@ -86,12 +86,12 @@ RSpec.describe UserPolicy do
   describe 'contact_user?' do
     subject { policy.contact_user? }
 
-    context 'when no user is logged in' do
+    context 'as visitor' do
       it { should_fail }
     end
 
-    context 'for some user' do
-      let(:current_user) { users(:sabine) }
+    context 'as other user' do
+      let(:current_user) { users(:unrelated) }
       it { should_pass }
     end
   end
@@ -99,12 +99,12 @@ RSpec.describe UserPolicy do
   describe 'unsubscribe?' do
     subject { policy.unsubscribe? }
 
-    context 'when no user is logged in' do
+    context 'as visitor' do
       it { should_pass }
     end
 
-    context 'for some user' do
-      let(:current_user) { users(:sabine) }
+    context 'as other user' do
+      let(:current_user) { users(:unrelated) }
       it { should_pass }
     end
   end
@@ -113,21 +113,21 @@ RSpec.describe UserPolicy do
   describe 'permitted_attributes_for_show' do
     subject { policy.permitted_attributes_for_show }
 
-    it 'contains only first name for no user logged in' do
-      expect(subject).to contain_exactly(:first_name)
+    context 'as visitor' do
+      it 'contains only first name' do
+        expect(subject).to contain_exactly(:first_name)
+      end
     end
 
-    context 'other user logged in' do
-      let(:current_user) { users(:sabine) }
-
+    context 'as other user' do
+      let(:current_user) { users(:unrelated) }
       it 'contains first name and last name' do
         expect(subject).to contain_exactly(:first_name, :last_name)
       end
     end
 
-    context 'same user logged in' do
+    context 'as same user' do
       let(:current_user) { users(record.username) }
-
       it 'contains other attributes' do
         expect(subject).to contain_exactly(:username, :first_name, :last_name, :email, :phone,
                                            :receive_emails_about_action_groups, :receive_emails_about_my_action_groups,
@@ -136,9 +136,8 @@ RSpec.describe UserPolicy do
       end
     end
 
-    context 'admin logged in' do
+    context 'as admin' do
       let(:current_user) { users(:admin) }
-
       it 'contains other attributes' do
         expect(subject).to contain_exactly(:username, :first_name, :last_name, :email, :phone,
                                            :receive_emails_about_action_groups, :receive_emails_about_my_action_groups,
@@ -152,17 +151,15 @@ RSpec.describe UserPolicy do
     subject { policy.updatable_fields }
     let(:all_fields) { Api::UserResource._updatable_relationships | Api::UserResource._attributes.keys - [:id] }
 
-    context 'same user logged in' do
+    context 'as same user' do
       let(:current_user) { users(record.username) }
-
       it 'contains other attributes' do
         expect(subject).to match_array(all_fields - [:roles])
       end
     end
 
-    context 'admin logged in' do
+    context 'as admin' do
       let(:current_user) { users(:admin) }
-
       it 'contains other attributes' do
         expect(subject).to match_array(all_fields)
       end

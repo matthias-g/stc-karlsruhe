@@ -3,12 +3,12 @@ require 'helpers'
 
 RSpec.describe Api::UsersController, type: :controller do
 
-  fixtures :actions, :users, :leaderships, :participations, :roles
+  fixtures :all
 
   describe 'add role to user' do
     let(:current_user) { :nil }
     let(:role) { roles(:admin) }
-    let(:user) { users(:rolf) }
+    let(:user) { users(:leader) }
 
     before do
       sign_in(current_user) if current_user
@@ -17,15 +17,15 @@ RSpec.describe Api::UsersController, type: :controller do
       post :create_relationship, params: {data: [ {type: 'roles', id: role.id} ], relationship: 'roles', action: 'create_relationship', user_id: user.id}
     end
 
-    context 'no user logged in' do
+    context 'as visitor' do
       it 'should be unauthorized or bad request' do
         expect(response.status).to eq(401).or eq(400)
         expect(user.reload.has_role?(role.title)).to be_falsey
       end
     end
 
-    context 'same user logged in' do
-      let(:current_user) { users(:rolf) }
+    context 'as same user' do
+      let(:current_user) { user }
 
       it 'should be forbidden or bad request' do
         expect(response.status).to eq(403).or eq(400)
@@ -33,8 +33,8 @@ RSpec.describe Api::UsersController, type: :controller do
       end
     end
 
-    context 'other user logged in' do
-      let(:current_user) { users(:sabine) }
+    context 'as other user' do
+      let(:current_user) { users(:unrelated) }
 
       it 'should be forbidden or bad request' do
         expect(response.status).to eq(403).or eq(400)
@@ -42,7 +42,7 @@ RSpec.describe Api::UsersController, type: :controller do
       end
     end
 
-    context 'admin logged in' do
+    context 'as admin' do
       let(:current_user) { users(:admin) }
 
       it 'should be successful' do

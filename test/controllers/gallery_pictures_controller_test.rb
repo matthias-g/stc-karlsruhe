@@ -3,13 +3,13 @@ require 'test_helper'
 class GalleryPicturesControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:admin)
-    @gallery_picture = gallery_pictures(:one)
+    @gallery_picture = gallery_pictures(:default_1)
   end
 
   test "should get index" do
     get gallery_pictures_url
     assert_response :success
-    assert_select 'tbody tr', 3
+    assert_select 'tbody tr', GalleryPicture.all.count
   end
 
   test "should get new" do

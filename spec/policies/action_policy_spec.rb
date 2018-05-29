@@ -3,34 +3,31 @@ require 'helpers'
 
 RSpec.describe ActionPolicy do
 
-  include Fixtures
   include Helpers
-
+  fixtures :all
 
   let(:user) { nil }
-  let(:action) { actions('Kostenlose Fahrradreparatur in der Innenstadt') }
+  let(:action) { actions(:default) }
+  let(:event) { events(:default) }
   let(:policy) { ActionPolicy.new(user, action) }
 
   permissions :show? do
     subject { described_class }
 
-    it 'grants access if action is visible and no user logged in' do
-      expect(subject).to permit(user, action)
+    context 'for visible action' do
+      it { grants_access }
     end
 
     context 'for invisible action' do
-      let(:action) { actions('Action 3') }
+      before { hide_action(action) }
 
-      it 'denies access if no user is logged in' do
-        expect(subject).not_to permit(user, action)
+      context 'as visitor' do
+        it { denies_access }
       end
 
       context 'as leader' do
-        let(:user) { users(:rolf) }
-
-        it 'grants access' do
-          expect(subject).to permit(user, action)
-        end
+        let(:user) { users(:leader) }
+        it { grants_access }
       end
     end
   end
@@ -38,16 +35,16 @@ RSpec.describe ActionPolicy do
   describe 'edit?' do
     subject { policy.edit? }
 
-    context 'when no user is logged in' do
+    context 'as visitor' do
       it { should_fail }
     end
 
     context 'as leader' do
-      let(:user) { users(:rolf) }
+      let(:user) { users(:leader) }
       it { should_pass }
 
       context 'for finished action' do
-        before { action.events.first.update_attribute :date, Date.yesterday }
+        before { finish_action(action) }
         it { should_fail }
       end
     end
@@ -63,7 +60,7 @@ RSpec.describe ActionPolicy do
     end
 
     context 'as other user' do
-      let(:user) { users(:sabine) }
+      let(:user) { users(:volunteer) }
       it { should_fail }
     end
 
@@ -72,33 +69,27 @@ RSpec.describe ActionPolicy do
   permissions :create?, :change_visibility? do
     subject { described_class }
 
-    context 'for some user' do
-      let(:user) { users(:rolf) }
-      it 'denies access' do
-        expect(subject).not_to permit(user, action)
-      end
+    context 'for other user' do
+      let(:user) { users(:leader) }
+      it { denies_access }
     end
 
     context 'as admin' do
       let(:user) { users(:admin) }
-      it 'grants access' do
-        expect(subject).to permit(user, action)
-      end
+      it { grants_access }
     end
 
     context 'as coordinator' do
       let(:user) { users(:coordinator) }
-      it 'grants access' do
-        expect(subject).to permit(user, action)
-      end
+      it { grants_access }
     end
   end
 
   describe 'index?' do
     subject { policy.index? }
 
-    context 'as some user' do
-      let(:user) { users(:rolf) }
+    context 'as other user' do
+      let(:user) { users(:leader) }
       it { should_fail }
     end
 
@@ -117,7 +108,7 @@ RSpec.describe ActionPolicy do
     subject { policy.contact_volunteers? }
 
     context 'as leader' do
-      let(:user) { users(:rolf) }
+      let(:user) { users(:leader) }
       it { should_pass }
     end
 
@@ -127,7 +118,7 @@ RSpec.describe ActionPolicy do
     end
 
     context 'as other user' do
-      let(:user) { users(:sabine) }
+      let(:user) { users(:volunteer) }
       it { should_fail }
     end
 
@@ -135,7 +126,7 @@ RSpec.describe ActionPolicy do
       before { action.visible = false }
 
       context 'as leader' do
-        let(:user) { users(:rolf) }
+        let(:user) { users(:leader) }
         it { should_fail }
       end
 
@@ -145,7 +136,7 @@ RSpec.describe ActionPolicy do
       end
 
       context 'as other user' do
-        let(:user) { users(:sabine) }
+        let(:user) { users(:volunteer) }
         it { should_fail }
       end
     end
@@ -155,12 +146,12 @@ RSpec.describe ActionPolicy do
     subject { policy.contact_leaders? }
 
     context 'as volunteer' do
-      let(:user) { users(:sabine) }
+      let(:user) { users(:volunteer) }
       it { should_pass }
     end
 
     context 'as other user' do
-      let(:user) { users(:peter) }
+      let(:user) { users(:unrelated) }
       it { should_fail }
     end
 
@@ -168,26 +159,26 @@ RSpec.describe ActionPolicy do
       before { action.visible = false }
 
       context 'as volunteer' do
-        let(:user) { users(:sabine) }
+        let(:user) { users(:volunteer) }
         it { should_fail }
       end
 
       context 'as other user' do
-        let(:user) { users(:peter) }
+        let(:user) { users(:unrelated) }
         it { should_fail }
       end
     end
 
     context 'for finished action' do
-      before { action.events.first.update_attribute :date, Date.yesterday }
+      before { finish_action(action) }
 
       context 'as volunteer' do
-        let(:user) { users(:sabine) }
+        let(:user) { users(:volunteer) }
         it { should_fail }
       end
 
       context 'as other user' do
-        let(:user) { users(:peter) }
+        let(:user) { users(:unrelated) }
         it { should_fail }
       end
     end
@@ -198,27 +189,27 @@ RSpec.describe ActionPolicy do
     subject { policy.upload_pictures? }
 
     context 'for future action' do
-      before { action.events.first.update_attribute :date, Date.tomorrow }
+      before { event.update_attribute :date, Date.tomorrow }
 
-      context 'when no user is logged in' do
+      context 'as visitor' do
         it { should_fail }
       end
 
-      context 'for admin' do
+      context 'as admin' do
         let(:user) { users(:admin) }
         it { should_fail }
       end
     end
 
     context 'for past action' do
-      before { action.events.first.update_attribute :date, 1.days.ago }
+      before { finish_action(action) }
 
-      context 'when no user is logged in' do
+      context 'as visitor' do
         it { should_fail }
       end
 
       context 'as leader' do
-        let(:user) { users(:rolf) }
+        let(:user) { users(:leader) }
         it { should_pass }
       end
 
@@ -233,7 +224,7 @@ RSpec.describe ActionPolicy do
       end
 
       context 'as volunteer' do
-        let(:user) { users(:sabine) }
+        let(:user) { users(:volunteer) }
         it { should_pass }
       end
 
@@ -243,19 +234,19 @@ RSpec.describe ActionPolicy do
       end
 
       context 'as other user' do
-        let(:user) { users(:peter) }
+        let(:user) { users(:unrelated) }
         it { should_fail }
       end
     end
 
     context 'for today action' do
-      before { action.events.first.update_attribute :date, 1.seconds.ago }
+      before { event.update_attribute :date, 1.seconds.ago }
       let(:user) { users(:admin) }
       it { should_pass }
     end
 
     context 'for undated action' do
-      before { action.events.first.update_attribute :date, nil }
+      before { event.update_attribute :date, nil }
       it { should_fail }
     end
   end
@@ -263,12 +254,12 @@ RSpec.describe ActionPolicy do
   describe 'manage_team?' do
     subject { policy.manage_team? }
 
-    context 'as action leader ' do
-      let(:user) { users(:rolf) }
+    context 'as leader' do
+      let(:user) { users(:leader) }
       it { should_pass }
 
       context 'for finished action' do
-        before { action.events.first.update_attribute :date, Date.yesterday }
+        before { finish_action(action) }
         it { should_fail }
       end
     end
@@ -284,11 +275,11 @@ RSpec.describe ActionPolicy do
     end
 
     context 'as other user' do
-      let(:user) { users(:sabine) }
+      let(:user) { users(:volunteer) }
       it { should_fail }
     end
 
-    context 'for no user logged in' do
+    context 'as visitor' do
       let(:user) { nil }
       it { should_fail }
     end
@@ -313,7 +304,7 @@ RSpec.describe ActionPolicy do
     end
 
     context 'as leader' do
-      let(:user) { users(:rolf) }
+      let(:user) { users(:leader) }
       it 'contains all attributes except status, gallery and visible' do
         expect(subject).to match_array(all_fields - %i[status gallery visible])
       end

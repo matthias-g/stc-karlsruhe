@@ -3,7 +3,8 @@ require 'helpers'
 
 RSpec.describe ApplicationPolicy do
 
-  include Fixtures
+  include Helpers
+  fixtures :all
 
   let(:current_user) { nil }
   let(:record) { nil }
@@ -12,90 +13,66 @@ RSpec.describe ApplicationPolicy do
   describe 'is_admin?' do
     subject { policy.is_admin? }
 
-    it 'is false for no user logged in' do
-      expect(subject).to be_falsey
+    context 'as visitor' do
+      it { should_fail }
     end
 
-    context 'for an admin' do
+    context 'as admin' do
       let(:current_user) { users(:admin) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
 
-    context 'for another user' do
-      let(:current_user) { users(:rolf) }
-
-      it 'is false' do
-        expect(subject).to be_falsey
-      end
+    context 'as other user' do
+      let(:current_user) { users(:leader) }
+      it { should_fail }
     end
   end
 
   describe 'is_coordinator?' do
     subject { policy.is_coordinator? }
 
-    it 'is false for no user logged in' do
-      expect(subject).to be_falsey
+    context 'as visitor' do
+      it { should_fail }
     end
 
-    context 'for a coordinator' do
+    context 'as coordinator' do
       let(:current_user) { users(:coordinator) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
 
-    context 'for another user' do
-      let(:current_user) { users(:rolf) }
-
-      it 'is false' do
-        expect(subject).to be_falsey
-      end
+    context 'as other user' do
+      let(:current_user) { users(:leader) }
+      it { should_fail }
     end
   end
 
   describe 'is_admin_or_coordinator?' do
     subject { policy.is_admin_or_coordinator? }
 
-    it 'is false for no user logged in' do
-      expect(subject).to be_falsey
+    context 'as visitor' do
+      it { should_fail }
     end
 
-    context 'for an admin' do
+    context 'as admin' do
       let(:current_user) { users(:admin) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
 
-    context 'for a coordinator' do
+    context 'as coordinator' do
       let(:current_user) { users(:coordinator) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
 
-    context 'for another user' do
-      let(:current_user) { users(:rolf) }
-
-      it 'is false' do
-        expect(subject).to be_falsey
-      end
+    context 'as other user' do
+      let(:current_user) { users(:leader) }
+      it { should_fail }
     end
   end
 
   %w(index? new? edit? create? destroy?).each do |method|
     describe method do
       subject { policy.public_send(method) }
-
-      it 'is false' do
-        expect(subject).to be(false)
-      end
+      it { should_fail }
     end
   end
 
@@ -103,31 +80,25 @@ RSpec.describe ApplicationPolicy do
     subject { policy.show? }
 
     context 'for existing record' do
-      let(:record) { actions('Kostenlose Fahrradreparatur in der Innenstadt') }
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      let(:record) { actions(:default) }
+      it { should_pass }
     end
 
-    context 'for not visible record' do
-      let(:record) { actions('Action 2') }
-      it 'is false' do
-        expect(subject).to be_falsey
-      end
+    context 'for invisible record' do
+      let(:record) { actions(:default) }
+      before { record.update_attribute(:visible, false) }
+      it { should_fail }
 
-      context 'for admin' do
+      context 'as admin' do
         let(:current_user) { users(:admin) }
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
     end
   end
 
   describe 'always' do
     subject { policy.always }
-    it 'is true' do
-      expect(subject).to be(true)
-    end
+    it { should_pass }
   end
+
 end

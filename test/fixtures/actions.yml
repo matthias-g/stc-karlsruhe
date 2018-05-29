@@ -1,112 +1,74 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 # TODO 'Use YAML to DRY Out Your Fixtures' http://chriskottom.com/blog/2014/11/fixing-fixtures/
 
-one:
-  title: Kostenlose Fahrradreparatur in der Innenstadt
-  short_description: Hast du Lust auf eine Aktion unter freiem Himmel? Wir bieten eine kostenlose Fahrradreparatur an.
-  description: Wir werden einen kleinen Pavillion in der Innenstadt aufbauen und eine kostenlose Fahrradreparatur für die vorbeifahrenden Leute anbieten.
+default:
+  title: Default Action
+  short_description: Default short description
+  description: Default description
   location: MyString
   latitude: 1.5
   longitude: 1.5
-  individual_tasks: MyText
-  material: MyText
-  requirements: MyText
+  individual_tasks: Default tasks
+  material: Default material
+  requirements: Default requirements
   visible: true
-  action_group: one
-  gallery: one
+  action_group: default
+  gallery: default
 
-two:
-  title: Action 2
-  description: MyText
+parent_action:
+  title: Parent Action
+  short_description: Default short description
+  description: Default description
   location: MyString
   latitude: 1.5
   longitude: 1.5
-  individual_tasks: MyText
-  material: MyText
-  requirements: MyText
+  individual_tasks: Default tasks
+  material: Default material
+  requirements: Default requirements
+  visible: true
+  action_group: default
+  gallery: dummy
+
+subaction:
+  title: Sub Action
+  short_description: Default short description
+  description: Default description
+  location: MyString
+  latitude: 1.5
+  longitude: 1.5
+  individual_tasks: Default tasks
+  material: Default material
+  requirements: Default requirements
+  visible: true
+  action_group: default
+  gallery: dummy
+  parent_action: parent_action
+
+subaction_2:
+  title: Sub Action 2
+  short_description: Default short description
+  description: Default description
+  location: MyString
+  latitude: 1.5
+  longitude: 1.5
+  individual_tasks: Default tasks
+  material: Default material
+  requirements: Default requirements
+  visible: true
+  action_group: default
+  gallery: dummy
+  parent_action: parent_action
+
+subaction_3_invisible:
+  title: Sub Action 3
+  short_description: Default short description
+  description: Default description
+  location: MyString
+  latitude: 1.5
+  longitude: 1.5
+  individual_tasks: Default tasks
+  material: Default material
+  requirements: Default requirements
   visible: false
-  action_group: one
-  gallery: two
-
-three:
-  title: Action 3
-  description: MyText
-  location: MyString
-  latitude: 1.5
-  longitude: 1.5
-  individual_tasks: MyText
-  material: MyText
-  requirements: MyText
-  visible: false
-  action_group: one
-  gallery: three
-
-four:
-  title: Ausflug in den Zoo
-  description: Du hast Lust auf einen unvergesslichen Zoobesuch? Dann sei dabei! :)
-  location: MyString
-  latitude: 1.5
-  longitude: 1.5
-  individual_tasks: MyText
-  material: MyText
-  requirements: MyText
-  visible: true
-  action_group: one
-  gallery: four
-
-kindergarten-party:
-  title: Fest im Kindergarten
-  description: In dieser Aktion organisieren wir ein Fest für die Kinder eines Kindergartens.
-  visible: true
-  action_group: one
-  gallery: five
-
-kindergarten-kitchen:
-  title: Küche für Kindergarten-Fest
-  description: Wir kochen für das Fest.
-  visible: true
-  action_group: one
-  parent_action: kindergarten-party
-  gallery: six
-
-kindergarten-music:
-  title: Musik bei Kindergarten-Fest
-  description: Wir machen Musik beim Fest.
-  visible: true
-  action_group: one
-  parent_action: kindergarten-party
-  gallery: seven
-
-undated:
-  title: Undatierte Aktion
-  description: Ohne Datum
-  visible: true
-  gallery: nine
-
-finished:
-  title: Beendete Aktion
-
-finished_parent_action:
-  title: Beendete Überaktion
-
-finished_subaction:
-  title: Beendete Unteraktion
-  parent_action: finished_parent_action
-
-full:
-  title: Volle Aktion
-  action_group: one
-  visible: true
-
-soon_full:
-  title: Fast volle Aktion
-
-full_but_finished:
-  title: Volle, beendete Aktion
-
-soon_full_but_finished:
-  title: Fast volle, beendete Aktion
-
-no_team_yet:
-  title: Noch keine Mitarbeiter
+  action_group: default
+  gallery: dummy
+  parent_action: parent_action

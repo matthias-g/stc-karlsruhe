@@ -1,17 +1,58 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-rolf:
-  username: rolf
-  first_name: Rolf
-  last_name: Meier
-  email: rolf@meiers.com
+leader:
+  username: leader
+  first_name: Default
+  last_name: Leader
+  email: leader@example.com
 
-sabine:
-  username: sabine
-  first_name: Sabine
-  last_name: Schultz
-  email: sabine.schultz@example.de
-  receive_other_emails_from_orga: false
+subaction_leader:
+  username: subaction_leader
+  first_name: Subaction
+  last_name: Leader
+  email: subleader@example.com
+
+volunteer:
+  username: volunteer
+  first_name: Default
+  last_name: Volunteer
+  email: volunteer0@example.com
+
+subaction_volunteer:
+  username: subaction_volunteer
+  first_name: Subaction
+  last_name: Volunteer
+  email: volunteer1@example.com
+
+subaction_2_volunteer:
+  username: subaction_2_volunteer
+  first_name: Subaction Two
+  last_name: Volunteer
+  email: volunteer2@example.com
+
+subaction_3_volunteer:
+  username: subaction_3_volunteer
+  first_name: Subaction Three
+  last_name: Volunteer
+  email: volunteer3@example.com
+
+unrelated:
+  username: unrelated
+  first_name: Unrelated
+  last_name: User
+  email: unrelated@example.com
+
+unrelated_2:
+  username: unrelated2
+  first_name: Unrelated
+  last_name: User 2
+  email: unrelated2@example.com
+
+ancient_user:
+  username: ancient
+  first_name: Ancient
+  last_name: User
+  email: ancient@example.com
+  created_at: <%= 33.months.ago.to_s(:db) %>
 
 admin:
   username: admin
@@ -41,28 +82,8 @@ deleted:
   email: deleted@nothing.com
   cleared: true
 
-peter:
-  username: peter
-  first_name: Peter
-  last_name: Petersen
-  email: peter@peter.sen
-  receive_emails_about_action_groups: false
-
-lea:
-  username: lea
-  first_name: Lea
-  last_name: Lustig
-  email: lea@lustig.de
-  created_at: <%= 33.months.ago.to_s(:db) %>
-
-birgit:
-  username: birgit
-  first_name: Birgit
-  last_name: Bender
-  email: birgit@mail.de
-
-tabea:
-  username: tabea
-  first_name: Tabea
-  last_name: Tischler
-  email: tabea@tischlers.de
+picture_uploader:
+  username: picture_uploader
+  first_name: Up
+  last_name: Loader
+  email: uploader@example.com

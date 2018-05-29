@@ -11,79 +11,65 @@ class UserTest < ActiveSupport::TestCase
     'homer' + @email_index.to_s + '@simpsons.org'
   end
 
-  test "getting full name" do
-    assert_equal 'Rolf Meier', users(:rolf).full_name
+
+  test "full_name returns first name plus last name" do
+    assert_equal 'Unrelated User', users(:unrelated).full_name
   end
 
-  test "user leads action" do
-    assert users(:rolf).leads_action?(actions(:one))
+  test "leads_action? is true for action leader" do
+    assert users(:leader).leads_action?(actions(:default))
   end
 
-  test "user doesn't lead action, but participates in action" do
-    assert_not users(:sabine).leads_action?(actions(:two))
+  test "leads_action? is false for volunteer" do
+    assert_not users(:volunteer).leads_action?(actions(:default))
   end
 
-  test "user doesn't lead action" do
-    assert_not users(:lea).leads_action?(actions(:one))
+  test "leads_action? is false for unrelated user" do
+    assert_not users(:unrelated).leads_action?(actions(:default))
   end
 
-  test "actions as leader" do
-    actions = users(:rolf).actions_as_leader
-    assert_equal 4, actions.count
+  test "actions_as_leader is 4 for leader" do
+    assert_equal 2, users(:leader).actions_as_leader.count
   end
 
-  test "actions as volunteer is zero" do
-    actions = users(:rolf).actions_as_volunteer
-    assert_equal 0, actions.count
+  test "actions_as_volunteer is 0 for unrelated user" do
+    assert_equal 0, users(:unrelated).actions_as_volunteer.count
   end
 
-  test "actions as volunteer" do
-    actions = users(:lea).actions_as_volunteer
-    assert_equal 1, actions.count
-    assert_equal 'Musik bei Kindergarten-Fest', actions.first.title
+  test "actions_as_volunteer is 1 for volunteer" do
+    assert_equal 1, users(:volunteer).actions_as_volunteer.count
+    assert_equal actions(:default), users(:volunteer).actions_as_volunteer.first
   end
 
-  test "has_role? given a String" do
+  test "has_role?('admin') is true for admin" do
     assert users(:admin).has_role?('admin')
   end
 
-  test "has_role? given a Role" do
-    assert_raise ArgumentError do
-      users(:admin).has_role?(roles(:admin))
-    end
+  test "has_role? is false for user without a role" do
+    assert_not users(:unrelated).has_role?('admin')
   end
 
-  test "has_role? if user doesn't have role" do
-    assert_not users(:rolf).has_role?('admin')
-  end
-
-  test "add_role given a String" do
-    assert_not users(:rolf).admin?
-    users(:rolf).add_role('admin')
-    assert users(:rolf).admin?
-  end
-
-  test "add_role given a Role" do
-    assert_raise ArgumentError do
-      users(:rolf).add_role(roles(:admin))
-    end
+  test "add_role('admin') adds the role" do
+    users(:unrelated).add_role('admin')
+    assert users(:unrelated).admin?
   end
 
   test "photographer?" do
-    assert_not users(:sabine).has_role?(:photographer)
-    assert_not users(:sabine).photographer?
-    users(:sabine).add_role('photographer')
-    assert users(:sabine).has_role?(:photographer)
-    assert users(:sabine).photographer?
+    user = users(:unrelated)
+    assert_not user.has_role?(:photographer)
+    assert_not user.photographer?
+    user.add_role('photographer')
+    assert user.has_role?(:photographer)
+    assert user.photographer?
   end
 
   test "clear! cleans personal data" do
-    user = users(:rolf)
+    user = users(:unrelated)
     user.clear!
     assert_equal 'cleared', user.first_name
     assert_equal 'cleared', user.last_name
     assert_equal '', user.phone
-    assert_not_equal 'rolf', user.username
+    assert_not_equal 'unrelated', user.username
     assert user.email.ends_with?('@cleared.servethecity-karlsruhe.de')
     assert user.cleared
   end
@@ -109,23 +95,21 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "merge other user's lead actions" do
-    action = actions(:'kindergarten-music')
-    user = users(:peter)
-    other_user = users(:birgit)
-    assert action.leader?(other_user)
-    user.merge_other_users_actions(other_user)
-    assert action.leader?(user)
-    assert_not action.leader?(other_user)
+    subaction = actions(:subaction)
+    subaction_leader = users(:subaction_leader)
+    user = users(:leader)
+    user.merge_other_users_actions(subaction_leader)
+    assert subaction.leader?(user)
+    assert_not subaction.leader?(subaction_leader)
   end
 
   test "merge other user's participating events" do
-    event = events(:'kindergarten-kitchen')
-    user = users(:birgit)
-    other_user = users(:peter)
-    assert event.volunteer?(other_user)
-    user.merge_other_users_actions(other_user)
-    assert event.volunteer?(user)
-    assert_not event.volunteer?(other_user)
+    subevent = events(:subaction_event)
+    subaction_volunteer = users(:subaction_volunteer)
+    user = users(:volunteer)
+    user.merge_other_users_actions(subaction_volunteer)
+    assert subevent.volunteer?(user)
+    assert_not subevent.volunteer?(subaction_volunteer)
   end
 
 end

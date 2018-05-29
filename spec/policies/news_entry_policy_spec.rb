@@ -3,34 +3,29 @@ require 'helpers'
 
 RSpec.describe NewsEntryPolicy do
 
-  include Fixtures
+  include Helpers
+  fixtures :all
 
   let(:current_user) { nil }
-  let(:record) { NewsEntry.find_by(title: 'Online') }
+  let(:record) { news_entries(:default) }
   let(:policy) { NewsEntryPolicy.new(current_user, record) }
 
   %w(new? update? edit? destroy? upload_pictures? crop_picture?).each do |method|
     describe method do
       subject { policy.public_send(method) }
 
-      it 'is false for no user logged in' do
-        expect(subject).to be_falsey
+      context 'as visitor' do
+        it { should_fail }
       end
 
-      context 'admin logged in' do
+      context 'as admin' do
         let(:current_user) { users(:admin) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
 
-      context 'coordinator logged in' do
+      context 'as coordinator' do
         let(:current_user) { users(:coordinator) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
     end
   end
@@ -38,32 +33,29 @@ RSpec.describe NewsEntryPolicy do
   describe 'show?' do
     subject { policy.show? }
 
-    it 'is true for visible entry' do
-      expect(subject).to be_truthy
+    context 'for visible news entry' do
+      it { should_pass }
     end
 
-    context 'for invisible entry' do
-      let(:record) { NewsEntry.find_by(title: 'Invisible') }
+    context 'for invisible news entry' do
+      before { record.update_attribute :visible, false }
+      it { should_fail }
 
-      it 'is false' do
-        expect(subject).to be_falsey
+      context 'as user' do
+        let(:current_user) { users(:unrelated) }
+        it { should_fail }
       end
 
-      context 'for an admin' do
+      context 'as admin' do
         let(:current_user) { users(:admin) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
 
-      context 'for a coordinator' do
+      context 'as coordinator' do
         let(:current_user) { users(:coordinator) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
     end
   end
+
 end

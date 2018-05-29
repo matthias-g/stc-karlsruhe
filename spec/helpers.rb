@@ -13,24 +13,26 @@ module Helpers
     is_expected.to be_truthy
   end
 
-end
+  def grants_access
+    expect(subject).to permit(user, action)
+  end
 
-module Fixtures
-  extend ActiveSupport::Concern
-  included do
-    def actions(title)
-      Action.find_by(title: title)
-    end
+  def denies_access
+    expect(subject).not_to permit(user, action)
+  end
 
-    def roles(title)
-      Role.find_by(title: title)
-    end
-
-    def users(username)
-      User.find_by(username: username)
+  def finish_action(action)
+    action.events.each do |event|
+      event.update_attribute :date, 2.days.ago
     end
   end
+
+  def hide_action(action)
+    action.update_attribute :visible, false
+  end
+
 end
+
 
 RSpec::Matchers.define :lead_action do |action|
   match do |user|

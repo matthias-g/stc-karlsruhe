@@ -3,7 +3,7 @@ require 'helpers'
 
 RSpec.describe RolePolicy do
 
-  include Fixtures
+  fixtures :all
 
   let(:current_user) { nil }
   let(:record) { roles(:default) }

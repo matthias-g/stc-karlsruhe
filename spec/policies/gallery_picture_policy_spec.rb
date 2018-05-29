@@ -3,26 +3,24 @@ require 'helpers'
 
 RSpec.describe GalleryPicturePolicy do
 
-  include Fixtures
+  include Helpers
+  fixtures :all
 
   let(:current_user) { nil }
-  let(:record) { GalleryPicture.find_by(picture: 'VisiblePicture') }
+  let(:record) { gallery_pictures(:default_1) }
   let(:policy) { GalleryPicturePolicy.new(current_user, record) }
 
   %w(create? update? destroy?).each do |method|
     describe method do
       subject { policy.public_send(method) }
 
-      it 'is false for no user logged in' do
-        expect(subject).to be_falsey
+      context 'as visitor' do
+        it { should_fail }
       end
 
-      context 'admin logged in' do
+      context 'as admin' do
         let(:current_user) { users(:admin) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
     end
   end
@@ -31,80 +29,59 @@ RSpec.describe GalleryPicturePolicy do
     describe method do
       subject { policy.public_send(method) }
 
-      it 'is false for no user logged in' do
-        expect(subject).to be_falsey
+      context 'as visitor' do
+        it { should_fail }
       end
 
-      context 'admin logged in' do
+      context 'as admin' do
         let(:current_user) { users(:admin) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
 
-      context 'coordinator logged in' do
+      context 'as coordinator' do
         let(:current_user) { users(:coordinator) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
     end
   end
 
   describe 'index?' do
     subject { policy.index? }
-
-    it 'is true' do
-      expect(subject).to be_truthy
-    end
+    it { should_pass }
   end
 
   describe 'show?' do
     subject { policy.show? }
 
-    it 'is true for visible picture' do
-      expect(subject).to be_truthy
+    context 'for visible picture' do
+      it { should_pass }
     end
 
     context 'for invisible picture' do
-      let(:record) { GalleryPicture.find_by(picture: 'InvisiblePicture') }
+      let(:record) { gallery_pictures(:invisible) }
 
-      it 'is false' do
-        expect(subject).to be_falsey
+      context 'as visitor' do
+        it { should_fail }
       end
 
-      context 'for an admin' do
+      context 'as admin' do
         let(:current_user) { users(:admin) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
 
-      context 'for an coordinator' do
+      context 'as coordinator' do
         let(:current_user) { users(:coordinator) }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+        it { should_pass }
       end
 
-      context 'for uploader' do
-        let(:current_user) { record.uploader }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+      context 'as uploader' do
+        let(:current_user) { users(:picture_uploader) }
+        it { should_pass }
       end
 
-      context 'for other user' do
-        let(:current_user) { users(:peter) }
-
-        it 'is false' do
-          expect(subject).to be_falsey
-        end
+      context 'as other user' do
+        let(:current_user) { users(:unrelated) }
+        it { should_fail }
       end
     end
   end
@@ -112,31 +89,23 @@ RSpec.describe GalleryPicturePolicy do
   describe 'make_invisible?' do
     subject { policy.make_invisible? }
 
-    it 'is false when no user logged in' do
-      expect(subject).to be_falsey
+    context 'for a visitor' do
+      it { should_fail }
     end
 
     context 'for an admin' do
       let(:current_user) { users(:admin) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
+
     context 'for an coordinator' do
       let(:current_user) { users(:coordinator) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
 
     context 'for uploader' do
-      let(:current_user) { users(:sabine) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      let(:current_user) { users(:picture_uploader) }
+      it { should_pass }
     end
   end
 

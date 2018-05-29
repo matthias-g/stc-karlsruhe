@@ -3,114 +3,135 @@ require 'test_helper'
 class EventTest < ActiveSupport::TestCase
 
   setup do
-    @event = events(:one)
+    @event = events(:default)
   end
 
-  test 'volunteer?' do
-    assert @event.volunteer? users(:sabine)
-    assert_not @event.volunteer? users(:peter)
+
+  # BOOLEAN QUERIES
+
+  test "volunteer? is true for volunteer" do
+    assert @event.volunteer? users(:volunteer)
   end
 
-  test 'add_volunteer' do
-    assert_difference '@event.volunteers.count', +1 do
-      @event.add_volunteer users(:lea)
-    end
-    assert_equal @event.team_size, @event.volunteers.count
+  test "volunteer? is false for non-volunteers" do
+    assert_not @event.volunteer? users(:unrelated)
+    assert_not @event.volunteer? users(:leader)
   end
 
-  test 'delete_volunteer' do
-    assert_difference '@event.volunteers.count', -1 do
-      @event.delete_volunteer users(:sabine)
-    end
-    assert_equal @event.team_size, @event.volunteers.count
-  end
-
-  test 'volunteers' do
-    assert_equal 1, @event.volunteers.count
-    assert_equal 'sabine', @event.volunteers.first.username
-  end
-
-  test 'available_places' do
-    assert_equal 3, @event.available_places
-    @event.add_volunteer users(:lea)
-    assert_equal 2, @event.available_places
-    assert_equal 0, events(:full).available_places
-    no_team_size = Event.new(desired_team_size: 0)
-    assert_equal 0, no_team_size.available_places
-  end
-
-  test 'finished?' do
+  test "finished? is false for upcoming event" do
     assert_not @event.finished?
-    @event.update_attribute :date, Date.yesterday
+  end
+
+  test "finished? is true for past event" do
+    @event.update_attribute :date, Date.current - 1
     assert @event.finished?
   end
 
-  test 'status' do
-    # single event
-    event = Event.create(desired_team_size: 3, date: Date.current, initiative: actions(:one))
-    assert_equal :empty, event.status
-    event.add_volunteer users(:lea)
-    assert_equal :soon_full, event.status
-    event.update_attribute :desired_team_size, 1
-    assert_equal :full, event.status
-    event.delete_volunteer users(:lea)
-    assert_equal :soon_full, event.status
-    event.update_attribute :date, Date.yesterday
-    assert_equal :finished, event.status
+
+  # LIST QUERIES
+
+  test "volunteers includes all volunteers" do
+    assert_equal Set[users(:volunteer), users(:ancient_user)], @event.volunteers.to_set
   end
 
 
-  test 'send notification to volunteer when volunteer enters event ' do
-    event = events(:two)
-    user = users(:peter)
-    assert_not event.volunteer?(user)
-    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
-      event.add_volunteer(user)
+  # TEAM NUMBERS QUERIES
+
+  test "available_places excludes taken places" do
+    assert_equal @event.desired_team_size - @event.volunteers.count, @event.available_places
+  end
+
+  test "available_places is zero for past event" do
+    @event.update_attribute :date, Date.current - 1
+    assert_equal 0, @event.available_places
+  end
+
+
+  # OTHER QUERIES
+
+  test "status is 'finished' for past event" do
+    @event.update_attribute :date, Date.current - 1
+    assert_equal :finished, @event.status
+  end
+
+  test "status is 'full' for full action" do
+    @event.update_attribute :desired_team_size, @event.volunteers.count
+    assert_equal :full, @event.status
+  end
+
+  test "status is 'soon_full' for action with < 3 places" do
+    @event.update_attribute :desired_team_size, 3
+    assert_equal :soon_full, @event.status
+  end
+
+  test "status is 'empty' for action with >= 3 places" do
+    assert_equal :empty, @event.status
+  end
+
+
+
+  # SETTERS
+
+  test "add_volunteer" do
+    assert_difference '@event.volunteers.count', +1 do
+      @event.add_volunteer users(:unrelated)
     end
-    assert event.volunteer?(user)
+    assert_equal 3, @event.volunteers.count
+    assert_equal 3, @event.team_size
+  end
+
+  test "delete_volunteer" do
+    assert_difference '@event.volunteers.count', -1 do
+      @event.delete_volunteer users(:volunteer)
+    end
+    assert_equal 1, @event.volunteers.count
+    assert_equal 1, @event.team_size
+  end
+
+
+
+  # HOOKS AND VALIDATIONS
+
+  test "send notification to volunteer when volunteer enters event" do
+    user = users(:unrelated)
+    assert_difference 'ActionMailer::Base.deliveries.size', +2 do
+      @event.add_volunteer user
+    end
+    assert @event.volunteer?(user)
   end
 
   test "don't send notification to volunteer when volunteer enters event when user doesn't want that" do
-    event = events(:two)
-    user = users(:peter)
-    user.receive_notifications_for_new_participation = false
-    user.save!
-    assert_not event.volunteer?(user)
-    assert_no_difference 'ActionMailer::Base.deliveries.size' do
-      event.add_volunteer(user)
+    user = users(:unrelated)
+    user.update_attribute :receive_notifications_for_new_participation, false
+    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+      @event.add_volunteer user
     end
-    assert event.volunteer?(user)
+    assert @event.volunteer?(user)
   end
 
-  test 'send notification to leaders when volunteer enters event ' do
-    event = @event
-    user = users(:peter)
-    user.receive_notifications_for_new_participation = false
-    user.save!
-    assert_changes 'ActionMailer::Base.deliveries.size' do
-      event.add_volunteer(user)
+  test "send notification to leaders when volunteer enters event" do
+    leaders = @event.initiative.leaders.pluck(:email).to_set
+    user = users(:unrelated)
+    user.update_attribute :receive_notifications_for_new_participation, false
+    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+      @event.add_volunteer user
     end
     notification_email = ActionMailer::Base.deliveries.last
-    assert event.initiative.leaders.pluck(:email).to_set.superset? notification_email.to.to_set
+    assert leaders.superset? notification_email.to.to_set
   end
 
   test "don't send notification to leader when volunteer enters event when user doesn't want that" do
-    event = @event
-    user = users(:peter)
-    user.receive_notifications_for_new_participation = false
-    user.save!
-    event.initiative.leaders.each do |leader|
-      leader.receive_notifications_about_volunteers = false
-      leader.save!
-    end
-    assert_not event.volunteer?(user)
+    user = users(:unrelated)
+    user.update_attribute :receive_notifications_for_new_participation, false
+    leader = users(:leader)
+    leader.update_attribute :receive_notifications_about_volunteers, false
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
-      event.add_volunteer(user)
+      @event.add_volunteer user
     end
-    assert event.volunteer?(user)
+    assert @event.volunteer?(user)
   end
 
-  test 'parsing of start and end times' do
+  test "parsing of start and end times" do
     event = @event
     assert_nil event.start_time
     assert_nil event.end_time

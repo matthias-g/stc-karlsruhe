@@ -1,38 +1,21 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-sabine-at-bikerepair:
-  user: sabine
-  event: one
+volunteer:
+  user: volunteer
+  event: default
 
-sabine-at-two:
-  user: sabine
-  event: two
+subaction_volunteer:
+  user: subaction_volunteer
+  event: subaction_event
 
-sabine-at-kindergarten-party:
-  user: sabine
-  event: kindergarten-party
+subaction_2_volunteer:
+  user: subaction_2_volunteer
+  event: subaction_2_event
 
-lea-at-kindergarten-music:
-  user: lea
-  event: kindergarten-music
-  created_at: <%= 20.months.ago.to_s(:db) %>
+subaction_3_volunteer:
+  user: subaction_3_volunteer
+  event: subaction_3_event
 
-peter-at-kindergarten-kitchen:
-  user: peter
-  event: kindergarten-kitchen
-
-sabine-at-full:
-  user: sabine
-  event: full
-
-sabine-at-soon_full:
-  user: sabine
-  event: soon_full
-
-sabine-at-full_but_finished:
-  user: sabine
-  event: full_but_finished
-
-sabine-at-soon_full_but_finished:
-  user: sabine
-  event: soon_full_but_finished
+ancient_participation:
+  user: ancient_user
+  event: default
+  created_at: <%= 33.months.ago.to_s(:db) %>

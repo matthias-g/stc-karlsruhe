@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Surveys::SubmissionTest < ActiveSupport::TestCase
 
-  test 'create for template' do
+  test "create for template" do
     template = surveys_templates(:one)
     submission = Surveys::Submission.create_for_template template
     assert_equal template, submission.template

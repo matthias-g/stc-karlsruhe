@@ -1,17 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  gallery: one
+default_1:
+  gallery: default
   picture: VisiblePicture
-  uploader: sabine
+  uploader: picture_uploader
   visible: true
 
-two:
-  gallery: one
+default_2:
+  gallery: default
   picture: InvisiblePicture
-  uploader: sabine
+  uploader: picture_uploader
+  visible: false
 
-three:
-  gallery: three
-  picture: InvisiblePicture3
-  uploader: sabine
+invisible:
+  gallery: invisible_gallery
+  picture: InvisiblePicture2
+  uploader: picture_uploader
+  visible: false

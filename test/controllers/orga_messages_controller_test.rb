@@ -3,8 +3,16 @@ require 'test_helper'
 class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
-    @message = orga_messages(:one)
+    @message = orga_messages(:default)
     ActionMailer::Base.deliveries = []
+  end
+
+  def all_emails(*user_fixtures)
+    user_fixtures.map{|u| users(u).email}.to_set
+  end
+
+  def all_emails_minus(*user_fixtures)
+    (User.all - user_fixtures.map{|u| users(u)}).pluck(:email).to_set
   end
 
   def get_recipients
@@ -19,11 +27,13 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+
+
   test "should get index" do
     sign_in users(:admin)
     get orga_messages_url
     assert_response :success
-    assert_select 'tbody tr', 3
+    assert_select 'tbody tr', 2
   end
 
   test "should get new" do
@@ -100,7 +110,7 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "don't do anything for non admins" do
-    sign_in users(:rolf)
+    sign_in users(:leader)
     get orga_messages_url
     assert_redirected_to root_url
     get new_orga_message_url
@@ -129,113 +139,67 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "send mail about action groups to all users" do
     sign_in users(:admin)
+    @message.update_attributes recipient: :all_users, content_type: :about_action_groups
     sent_and_assert_orga_message @message
     assert_redirected_to orga_message_path(@message.reload)
     assert_equal users(:admin).id, @message.sender.id
     assert @message.sent?
-    recipients = get_recipients
-    assert_equal (User.count - 2) + 1, recipients.count
-    assert_not_includes recipients, users(:deleted).email
-    assert_includes recipients, users(:sabine).email
+    assert_equal all_emails_minus(:deleted), get_recipients.to_set
   end
 
   test "send other email from orga to all users" do
     sign_in users(:admin)
-    message = orga_messages(:two)
-    sent_and_assert_orga_message message
-    assert_redirected_to orga_message_path(message.reload)
-    assert_equal users(:admin).id, message.sender.id
-    assert message.sent?
-    recipients = get_recipients
-    assert_equal (User.count - 2) + 1, recipients.count
-    assert_not_includes recipients, users(:deleted).email
-    assert_not_includes recipients, users(:sabine).email
+    @message.update_attributes recipient: :all_users, content_type: :other_email_from_orga
+    sent_and_assert_orga_message @message
+    assert_redirected_to orga_message_path(@message.reload)
+    assert_equal users(:admin), @message.sender
+    assert @message.sent?
+    assert_equal all_emails_minus(:deleted), get_recipients.to_set
   end
 
   test "send other email from orga to active users" do
     sign_in users(:admin)
-    message = orga_messages(:two)
-    message.recipient = :active_users
-    message.save!
-    sent_and_assert_orga_message message
-    assert_redirected_to orga_message_path(message.reload)
-    assert_equal users(:admin).id, message.sender.id
-    assert message.sent?
-    recipients = get_recipients
-    assert_equal (User.count - 3) + 1, recipients.count
-    assert_not_includes recipients, users(:deleted).email
-    assert_not_includes recipients, users(:sabine).email
-    assert_not_includes recipients, users(:lea).email  # is old user
+    @message.update_attributes recipient: :active_users, content_type: :other_email_from_orga
+    sent_and_assert_orga_message @message
+    assert_redirected_to orga_message_path(@message.reload)
+    assert_equal users(:admin).id, @message.sender.id
+    assert @message.sent?
+    assert_equal all_emails_minus(:deleted, :ancient_user), get_recipients.to_set
   end
 
   test "send other email from orga to current volunteers" do
     sign_in users(:admin)
-    message = orga_messages(:two)
-    message.recipient = :current_volunteers
-    message.save!
-    sent_and_assert_orga_message message
-    assert_redirected_to orga_message_path(message.reload)
-    assert_equal users(:admin).id, message.sender.id
-    assert message.sent?
-    recipients = get_recipients
-    assert_equal 3, recipients.count
-    assert_not_includes recipients, users(:sabine).email # is disabled
-    assert_includes recipients, users(:lea).email
-    assert_includes recipients, users(:peter).email
-    assert_includes recipients, users(:admin).email
+    @message.update_attributes recipient: :current_volunteers, content_type: :other_email_from_orga
+    sent_and_assert_orga_message @message
+    assert_redirected_to orga_message_path(@message.reload)
+    assert_equal users(:admin).id, @message.sender.id
+    assert @message.sent?
+    assert_equal all_emails(:volunteer, :subaction_volunteer, :subaction_2_volunteer, :ancient_user, :admin),
+                 get_recipients.to_set
   end
 
   test "send other email from orga to current leaders" do
     sign_in users(:admin)
-    message = orga_messages(:two)
-    message.recipient = :current_leaders
-    message.save!
-    sent_and_assert_orga_message message
-    assert_redirected_to orga_message_path(message.reload)
-    assert_equal users(:admin).id, message.sender.id
-    assert message.sent?
-    recipients = get_recipients
-    assert_equal 4, recipients.count
-    assert_includes recipients,  users(:tabea).email
-    assert_includes recipients,  users(:birgit).email
-    assert_includes recipients,  users(:rolf).email
-    assert_includes recipients,  users(:admin).email
+    @message.update_attributes recipient: :current_leaders, content_type: :other_email_from_orga
+    sent_and_assert_orga_message @message
+    assert_redirected_to orga_message_path(@message.reload)
+    assert_equal users(:admin).id, @message.sender.id
+    assert @message.sent?
+    assert_equal all_emails(:leader, :subaction_leader, :admin), get_recipients.to_set
   end
 
   test "send other email from orga to current volunteers and leaders" do
     sign_in users(:admin)
-    message = orga_messages(:two)
-    message.recipient = :current_volunteers_and_leaders
-    message.save!
-    sent_and_assert_orga_message message
-    assert_redirected_to orga_message_path(message.reload)
-    assert_equal users(:admin).id, message.sender.id
-    assert message.sent?
-    recipients = get_recipients
-    assert_equal 6, recipients.count
-    assert_not_includes recipients, users(:sabine).email # is disabled
-    assert_includes recipients, users(:lea).email
-    assert_includes recipients, users(:peter).email
-    assert_includes recipients, users(:tabea).email
-    assert_includes recipients, users(:birgit).email
-    assert_includes recipients, users(:rolf).email
-    assert_includes recipients, users(:admin).email
+    @message.update_attributes recipient: :current_volunteers_and_leaders, content_type: :other_email_from_orga
+    sent_and_assert_orga_message @message
+    assert_redirected_to orga_message_path(@message.reload)
+    assert_equal users(:admin).id, @message.sender.id
+    assert @message.sent?
+    assert_equal all_emails(:volunteer, :subaction_volunteer, :subaction_2_volunteer,
+                            :ancient_user, :leader, :subaction_leader, :admin),
+                 get_recipients.to_set
   end
 
-  test "send email about action groups from orga to all users" do
-    sign_in users(:admin)
-    message = orga_messages(:two)
-    message.recipient = :all_users
-    message.content_type = :about_action_groups
-    message.save!
-    sent_and_assert_orga_message message
-    assert_redirected_to orga_message_path(message.reload)
-    assert_equal users(:admin).id, message.sender.id
-    assert message.sent?
-    recipients = get_recipients
-    assert_equal (User.count - 2) + 1, recipients.count
-    assert_not_includes recipients, users(:deleted).email
-    assert_not_includes recipients, users(:peter).email
-  end
+
 
 end

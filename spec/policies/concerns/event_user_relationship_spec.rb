@@ -2,150 +2,109 @@ require 'rails_helper'
 require 'helpers'
 
 shared_examples 'a EventUserRelationship' do
-  include Fixtures
+
+  include Helpers
+  fixtures :all
 
   let(:relationship) { described_class.new(current_user, nil) }
 
   let(:current_user) { nil }
-  let(:user) { users(:birgit) }
-  let(:action) { actions('Kostenlose Fahrradreparatur in der Innenstadt') }
+  let(:user) { users(:subaction_volunteer) }
+  let(:action) { actions(:default) }
+  let(:event) { events(:default) }
 
   describe 'allow_add_volunteer_to_event?' do
-    subject { relationship.allow_add_volunteer_to_event?(user, action.events.first) }
+    subject { relationship.allow_add_volunteer_to_event?(user, event) }
 
-    it 'should be false for no user logged in' do
-      expect(subject).to be_falsey
+    context 'as visitor' do
+      it { should_fail }
     end
 
-    context 'user adds themselves' do
-      let(:current_user) { users(:birgit) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+    context 'as same user' do
+      let(:current_user) { user }
+      it { should_pass }
     end
 
-    context 'leader is logged in' do
-      let(:current_user) { users(:rolf) }
+    context 'as leader' do
+      let(:current_user) { users(:leader) }
+      it { should_pass }
 
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
-
-      context 'action is finished' do
+      context 'for finished action' do
         before { action.events.first.update_attribute :date, Date.yesterday }
-
-        it 'is false' do
-          expect(subject).to be_falsey
-        end
+        it { should_fail }
       end
     end
 
-    context 'admin is logged in' do
+    context 'as admin' do
       let(:current_user) { users(:admin) }
+      it { should_pass }
 
-      it 'is true' do
-        expect(subject).to be_truthy
+      context 'for volunteer' do
+        let(:user) { users(:volunteer) }
+        it { should_fail }
       end
 
-      context 'user is already volunteer' do
-        let(:user) { users(:sabine) }
-
-        it 'is false' do
-          expect(subject).to be_falsey
-        end
+      context 'for finished action' do
+        before { event.update_attribute :date, Date.yesterday }
+        it { should_pass }
       end
 
-      context 'action is finished' do
-        let(:action) { actions('Beendete Aktion') }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
-      end
-
-      context 'action is full' do
-        let(:action) { actions('Volle Aktion') }
-
-        it 'is false' do
-          expect(subject).to be_falsey
-        end
+      context 'for full action' do
+        before { event.update_attribute :desired_team_size, event.volunteers.count }
+        it { should_fail }
       end
     end
 
-    context 'coordinator is logged in' do
+    context 'as coordinator' do
       let(:current_user) { users(:coordinator) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
   end
 
   describe 'allow_remove_volunteer_from_event?' do
-    subject { relationship.allow_remove_volunteer_from_event?(user, action.events.first) }
-    let(:user) { users(:sabine) }
+    subject { relationship.allow_remove_volunteer_from_event?(user, event) }
+    let(:user) { users(:volunteer) }
 
-    it 'should be false for no user logged in' do
-      expect(subject).to be_falsey
+    context 'as visitor' do
+      it { should_fail }
     end
 
-    context 'user removes themselves' do
-      let(:current_user) { users(:sabine) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+    context 'as same user' do
+      let(:current_user) { user }
+      it { should_pass }
 
       context 'action is finished' do
-        let(:action) { actions('Fast volle, beendete Aktion') }
-
-        it 'is false' do
-          expect(subject).to be_falsey
-        end
+        before { event.update_attribute :date, Date.yesterday }
+        it { should_fail }
       end
     end
 
-    context 'other user is logged in' do
-      let(:current_user) { users(:peter) }
-
-      it 'is false' do
-        expect(subject).to be_falsey
-      end
+    context 'as other user' do
+      let(:current_user) { users(:unrelated) }
+      it { should_fail }
     end
 
-    context 'admin is logged in' do
+    context 'as admin' do
       let(:current_user) { users(:admin) }
+      it { should_pass }
 
-      it 'is true' do
-        expect(subject).to be_truthy
+      context 'for non-volunteer' do
+        let(:user) { users(:subaction_volunteer) }
+        it { should_fail }
       end
 
-      context 'user is not a volunteer' do
-        let(:user) { users(:birgit) }
-
-        it 'is false' do
-          expect(subject).to be_falsey
-        end
-      end
-
-      context 'action is finished' do
-        let(:action) { actions('Fast volle, beendete Aktion') }
-
-        it 'is true' do
-          expect(subject).to be_truthy
-        end
+      context 'for finished action' do
+        before { event.update_attribute :date, Date.yesterday }
+        it { should_pass }
       end
     end
 
-    context 'coordinator is logged in' do
+    context 'as coordinator' do
       let(:current_user) { users(:coordinator) }
-
-      it 'is true' do
-        expect(subject).to be_truthy
-      end
+      it { should_pass }
     end
   end
+
 end
 
 describe UserPolicy do

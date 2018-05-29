@@ -9,62 +9,31 @@ class Api::ActionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   setup do
-    @action = actions(:one)
+    @action = actions(:default)
+    @event = @action.events.first
     @headers = { Accept: 'application/vnd.api+json', 'Content-Type': 'application/vnd.api+json' }
   end
 
-  test 'should show visible action' do
-    assert @action.visible
+
+  # VISITOR ACCESS
+
+  test "should show visible action" do
     get api_action_path(@action), headers: @headers
     assert_response :success
     response_data = JSON.parse(@response.body)['data']
     assert_equal @action.id, response_data['id'].to_i
   end
 
-  test 'should not show invisible action' do
-    @action = actions(:three)
+  test "should not show invisible action" do
+    @action.update_attribute :visible, false
     assert_not @action.visible
     get api_action_path(@action), headers: @headers
     assert_response :not_found
   end
 
-  test 'should show invisible action if current user leads it' do
-    user = users(:rolf)
-    sign_in user
-    @action = actions(:three)
-    assert user.leads_action?(@action)
-    assert_not @action.visible
-    get api_action_path(@action), headers: @headers
-    assert_response :success
-  end
-
-  test 'action leader should be able to update title' do
-    user = users(:rolf)
-    sign_in user
-    @action = actions(:three)
-    assert user.leads_action?(@action)
-    assert_not @action.visible
-    new_title = 'New title'
-    data = {
-        'data': {
-            'type': 'actions',
-            'id': @action.id,
-            'attributes': {
-                'title': new_title
-            }
-        }
-    }
-    patch api_action_path(@action), params: data, headers: @headers, as: :json
-    assert_response :success
-    assert_equal new_title, @action.reload.title
-  end
-
-  test 'unrelated user should not be able to update title' do
-    user = users(:sabine)
-    sign_in user
-    @action = actions(:three)
-    assert_not user.leads_action?(@action)
-    assert_not @action.visible
+  test "volunteer should not update invisible action" do
+    @action.update_attribute :visible, false
+    sign_in users(:volunteer)
     new_title = 'New title'
     old_title = @action.title
     data = {
@@ -80,4 +49,69 @@ class Api::ActionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
     assert_equal old_title, @action.reload.title
   end
+
+
+
+  # LEADER ACCESS
+
+  test "leader should show invisible action" do
+    sign_in users(:leader)
+    @action.update_attribute :visible, false
+    get api_action_path(@action), headers: @headers
+    assert_response :success
+  end
+
+  test "leader should update invisible action" do
+    @action.update_attribute :visible, false
+    sign_in users(:leader)
+    new_title = 'New title'
+    data = {
+        'data': {
+            'type': 'actions',
+            'id': @action.id,
+            'attributes': {
+                'title': new_title
+            }
+        }
+    }
+    patch api_action_path(@action), params: data, headers: @headers, as: :json
+    assert_response :success
+    assert_equal new_title, @action.reload.title
+  end
+
+  test "leader should add volunteer" do
+    sign_in users(:leader)
+    params = {data: [type: User.model_name.plural, id: users(:unrelated).id]}
+    post api_event_relationships_volunteers_path(@event), params: params, headers: @headers, as: :json
+    assert_response :success
+    assert_equal 3, @event.reload.volunteers.count
+    assert_equal 3, @event.team_size
+  end
+
+  test "leader should remove volunteer" do
+    sign_in users(:leader)
+    params = {data: [type: User.model_name.plural, id: users(:volunteer).id]}
+    delete api_event_relationships_volunteers_path(@event), params: params, headers: @headers, as: :json
+    assert_response :success
+    assert_equal 1, @event.reload.volunteers.count
+    assert_equal 1, @event.team_size
+  end
+
+  test "leader should add other leader" do
+    sign_in users(:leader)
+    params = {data: [type: User.model_name.plural, id: users(:unrelated).id]}
+    post api_action_relationships_leaders_path(@action), params: params, headers: @headers, as: :json
+    assert_response :success
+    assert_equal 2, @action.reload.leaders.count
+  end
+
+  test "leader should remove self" do
+    sign_in users(:leader)
+    params = {data: [type: User.model_name.plural, id: users(:leader).id]}
+    delete api_action_relationships_leaders_path(@action), params: params, headers: @headers, as: :json
+    assert_response :success
+    assert_equal 0, @action.reload.leaders.count
+  end
+
+
 end

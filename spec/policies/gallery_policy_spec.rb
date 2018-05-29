@@ -3,11 +3,11 @@ require 'helpers'
 
 RSpec.describe GalleryPolicy do
 
-  include Fixtures
   include Helpers
+  fixtures :all
 
   let(:current_user) { nil }
-  let(:record) { Gallery.find_by(title: 'GalleryOne') }
+  let(:record) { galleries(:default) }
   let(:policy) { GalleryPolicy.new(current_user, record) }
 
   %w(index? new? create? destroy?).each do |method|
@@ -53,7 +53,7 @@ RSpec.describe GalleryPolicy do
     end
 
     context 'for a gallery without pictures' do
-      let(:record) { Gallery.find_by(title: 'GalleryTwo') }
+      let(:record) { galleries(:empty_gallery) }
 
       context 'as visitor' do
         it { should_fail }
@@ -66,7 +66,7 @@ RSpec.describe GalleryPolicy do
     end
 
     context 'for a gallery with invisible pictures only' do
-      let(:record) { Gallery.find_by(title: 'GalleryThree') }
+      let(:record) { galleries(:invisible_gallery) }
 
       context 'as visitor' do
         it { should_fail }
@@ -78,7 +78,7 @@ RSpec.describe GalleryPolicy do
       end
 
       context 'as uploader' do
-        let(:current_user) { users(:sabine) }
+        let(:current_user) { users(:picture_uploader) }
         it { should_pass }
       end
     end
@@ -102,7 +102,7 @@ RSpec.describe GalleryPolicy do
     end
 
     context 'as leader of related action' do
-      let(:current_user) { users(:rolf) }
+      let(:current_user) { users(:leader) }
 
       it 'is true' do
         expect(record.actions.count).to eq(1)
@@ -112,7 +112,7 @@ RSpec.describe GalleryPolicy do
     end
 
     context 'as unrelated user' do
-      let(:current_user) { users(:peter) }
+      let(:current_user) { users(:unrelated) }
 
       it 'is false' do
         expect(record.actions.count).to eq(1)
@@ -122,24 +122,6 @@ RSpec.describe GalleryPolicy do
         should_fail
       end
     end
-
-    context 'for a gallery without an action' do
-      let(:record) { Gallery.find_by(title: 'No one uses this gallery') }
-
-      context 'as some user' do
-        let(:current_user) { users(:rolf) }
-        it { should_fail }
-      end
-
-      context 'as admin' do
-        let(:current_user) { users(:admin) }
-        it { should_pass }
-      end
-
-      context 'as photographer' do
-        let(:current_user) { users(:photographer) }
-        it { should_pass }
-      end
-    end
   end
+
 end

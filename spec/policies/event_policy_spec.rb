@@ -3,19 +3,19 @@ require 'helpers'
 
 RSpec.describe EventPolicy do
 
-  include Fixtures
   include Helpers
+  fixtures :all
 
 
   let(:user) { nil }
-  let(:event) { actions('Kostenlose Fahrradreparatur in der Innenstadt').events.first }
+  let(:event) { events(:default) }
   let(:policy) { EventPolicy.new(user, event) }
 
   describe 'add_to_volunteers?' do
-    let(:new_volunteers) { [users(:peter)] }
+    let(:new_volunteers) { [users(:unrelated)] }
     subject { policy.add_to_volunteers?(new_volunteers) }
 
-    context 'when no user is logged in' do
+    context 'as visitor' do
       it { should_fail }
     end
 
@@ -25,20 +25,20 @@ RSpec.describe EventPolicy do
     end
 
     context 'as other user' do
-      let(:user) { users(:sabine) }
+      let(:user) { users(:volunteer) }
       it { should_fail }
     end
 
-    context 'when user adds themselves' do
-      let(:user) { users(:peter) }
+    context 'as same user' do
+      let(:user) { users(:unrelated) }
       it { should_pass }
     end
 
     context 'when multiple users are added' do
-      let(:new_volunteers) { [users(:peter), users(:birgit)] }
+      let(:new_volunteers) { [users(:unrelated), users(:unrelated_2)] }
 
       context 'as one of the users to be added' do
-        let(:user) { users(:peter) }
+        let(:user) { users(:unrelated) }
         it { should_fail }
       end
 
@@ -50,16 +50,16 @@ RSpec.describe EventPolicy do
   end
 
   describe 'remove_from_volunteers?' do
-    let(:user_to_remove) { users(:sabine) }
+    let(:user_to_remove) { users(:volunteer) }
     subject { policy.remove_from_volunteers?(user_to_remove) }
 
     context 'as some user' do
-      let(:user) { users(:peter) }
+      let(:user) { users(:unrelated) }
       it { should_fail }
     end
 
     context 'as leader' do
-      let(:user) { users(:rolf) }
+      let(:user) { users(:leader) }
       it { should_pass }
     end
 
@@ -68,44 +68,45 @@ RSpec.describe EventPolicy do
       it { should_pass }
     end
 
-    context 'when user removes himself' do
-      let(:user) { users(:sabine) }
+    context 'as same user' do
+      let(:user) { users(:volunteer) }
       it { should_pass }
     end
   end
 
   describe 'replace_volunteers?' do
-    let(:new_volunteers) { [users(:peter)] }
+    let(:new_volunteers) { [users(:unrelated)] }
     subject { policy.replace_volunteers?(new_volunteers) }
 
     context 'as admin' do
       let(:user) { users(:admin) }
       it { should_pass }
 
-      context 'when adding new volunteers' do
-        let(:new_volunteers) { [users(:sabine), users(:peter)] }
+      context 'when adding volunteers' do
+        let(:new_volunteers) { [users(:unrelated), users(:unrelated_2)] }
         it { should_pass }
       end
     end
 
     context 'as other user' do
-      let(:user) { users(:lea) }
+      let(:user) { users(:photographer) }
       it { should_fail }
     end
 
     context 'when user removes himself but adds someone else' do
-      let(:user) { users(:sabine) }
+      let(:user) { users(:volunteer) }
+      let(:new_volunteers) { [users(:ancient_user), users(:unrelated)] }
       it { should_fail }
     end
 
-    context 'when user adds himself but removes someone else' do
-      let(:user) { users(:peter) }
+    context 'when user adds himself but removes others' do
+      let(:user) { users(:unrelated) }
       it { should_fail }
     end
 
     context 'when user adds himself' do
-      let(:new_volunteers) { [users(:sabine), users(:peter)] }
-      let(:user) { users(:peter) }
+      let(:new_volunteers) { [users(:volunteer), users(:ancient_user), users(:unrelated)] }
+      let(:user) { users(:unrelated) }
       it { should_pass }
     end
   end
@@ -114,12 +115,12 @@ RSpec.describe EventPolicy do
     subject { policy.enter? }
 
     context 'as volunteer' do
-      let(:user) { users(:sabine) }
+      let(:user) { users(:volunteer) }
       it { should_fail }
     end
 
     context 'as other user' do
-      let(:user) { users(:peter) }
+      let(:user) { users(:unrelated) }
       it { should_pass }
     end
   end
@@ -128,12 +129,12 @@ RSpec.describe EventPolicy do
     subject { policy.leave? }
 
     context 'as volunteer' do
-      let(:user) { users(:sabine) }
+      let(:user) { users(:volunteer) }
       it { should_pass }
     end
 
     context 'as other user' do
-      let(:user) { users(:peter) }
+      let(:user) { users(:unrelated) }
       it { should_fail }
     end
   end
@@ -144,11 +145,11 @@ RSpec.describe EventPolicy do
     subject { policy.manage_team? }
 
     context 'as leader' do
-      let(:user) { users(:rolf) }
+      let(:user) { users(:leader) }
       it { should_pass }
 
       context 'for finished event' do
-        before { event.update_attribute :date, Date.yesterday }
+        before { finish_action(event.initiative) }
         it { should_fail }
       end
     end
@@ -158,7 +159,7 @@ RSpec.describe EventPolicy do
       it { should_pass }
 
       context 'for finished event' do
-        before { event.update_attribute :date, Date.yesterday }
+        before { finish_action(event.initiative) }
         it { should_pass }
       end
     end
@@ -169,7 +170,7 @@ RSpec.describe EventPolicy do
     end
 
     context 'as other user' do
-      let(:user) { users(:peter) }
+      let(:user) { users(:volunteer) }
       it { should_fail }
     end
   end
@@ -188,7 +189,8 @@ RSpec.describe EventPolicy do
 
   describe 'scope' do
     subject { EventPolicy::Scope.new(user, Event.all).resolve }
-    let(:invisible_event) { actions('Action 3').events.first }
+    let(:invisible_event) { actions(:default).events.first }
+    before { invisible_event.initiative.update_attribute :visible, false }
 
     context 'as admin' do
       let(:user) { users(:admin) }
@@ -197,7 +199,7 @@ RSpec.describe EventPolicy do
       end
     end
 
-    context 'as not logged in user' do
+    context 'as visitor' do
       let(:user) { nil }
       it 'does not contain invisible events' do
         expect(subject).not_to include(invisible_event)
@@ -205,7 +207,7 @@ RSpec.describe EventPolicy do
     end
 
     context 'as leader' do
-      let(:user) { users(:rolf) }
+      let(:user) { users(:leader) }
       it 'does contain invisible event' do
         expect(subject).to include(invisible_event)
       end

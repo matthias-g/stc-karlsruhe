@@ -2,7 +2,7 @@ require 'test_helper'
 
 class NewsEntriesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @news_entry = news_entries(:one)
+    @news_entry = news_entries(:default)
   end
 
   test "should get index" do
@@ -13,12 +13,12 @@ class NewsEntriesControllerTest < ActionDispatch::IntegrationTest
 
   test "should show teaser in index if available" do
     get news_entries_url
-    assert_select '.news-teaser div p', news_entries(:one).teaser
+    assert_select '.news-teaser div p', @news_entry.teaser
   end
 
   test "should show text in index if no teaser available" do
     get news_entries_url
-    assert_select '.news-teaser div p', news_entries(:two).text
+    assert_select '.news-teaser div p', news_entries(:no_teaser).text
   end
 
   test "should get new" do

@@ -1,92 +1,30 @@
-one:
-  initiative: one
-  desired_team_size: 4
-  date: <%= Date.current %>
-  team_size: 1
 
-two:
-  initiative: two
-  desired_team_size: 7
-  date: <%= Date.current %>
-  team_size: 1
-
-three:
-  initiative: three
-  desired_team_size: 7
-  date: <%= Date.current %>
-
-four:
-  initiative: four
-  desired_team_size: 7
-  date: <%= Date.current %>
-
-kindergarten-party:
-  initiative: kindergarten-party
-  desired_team_size: 2
-  date: <%= Date.current %>
-  team_size: 1
-
-kindergarten-kitchen:
-  initiative: kindergarten-kitchen
+default:
+  initiative: default
   desired_team_size: 5
-  time: "14:00 - 16:00"
-  date: '2017-07-03'
-  team_size: 1
+  date: <%= Date.current %>
+  team_size: 2
 
-kindergarten-music:
-  initiative: kindergarten-music
-  desired_team_size: 3
+subaction_event:
+  initiative: subaction
+  desired_team_size: 5
   date: <%= Date.current %>
   team_size: 1
 
-undated:
-  initiative: undated
-  desired_team_size: 1
-
-finished:
-  initiative: finished
+subaction_event_2:
+  initiative: subaction
   desired_team_size: 5
-  date: <%= Date.yesterday %>
+  date: <%= Date.current + 1 %>
+  team_size: 0
 
-finished_parent_initiative:
-  initiative: finished_parent_action
+subaction_2_event:
+  initiative: subaction_2
   desired_team_size: 5
-  date: <%= Date.yesterday %>
+  date: <%= Date.current + 2 %>
+  team_size: 1
 
-finished_subinitiative:
-  initiative: finished_subaction
+subaction_3_event:
+  initiative: subaction_3_invisible
   desired_team_size: 5
-  date: <%= Date.yesterday %>
-
-full:
-  initiative: full
-  desired_team_size: 1
-  date: <%= Date.current %>
+  date: <%= Date.current + 3 %>
   team_size: 1
-
-soon_full:
-  initiative: soon_full
-  desired_team_size: 3
-  team_size: 1
-
-full_but_finished:
-  initiative: full_but_finished
-  desired_team_size: 1
-  date: <%= Date.yesterday %>
-  team_size: 1
-
-soon_full_but_finished:
-  initiative: soon_full_but_finished
-  desired_team_size: 3
-  date: <%= Date.yesterday %>
-  team_size: 1
-
-no_team_yet_first:
-  initiative: no_team_yet
-  desired_team_size: 3
-  date: <%= Date.tomorrow %>
-
-no_team_yet_second:
-  initiative: no_team_yet
-  desired_team_size: 3
-  date: <%= Date.tomorrow %>

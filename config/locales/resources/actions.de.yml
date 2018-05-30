@@ -57,9 +57,9 @@ de:
 
       cropImage: 'Bildausschnitt für %{crop_target} anpassen'
       cropTarget:
-        action_list: 'Vorschau'
-        action_view: 'Aktionsansicht'
-        thumbnail: 'Thumbnail'
+        action_list: 'Listenansicht'
+        action_view: 'Aktionsseite'
+        action_card_list: 'Aktionskarten auf der Wochenansicht'
 
     button:
       edit: 'Bearbeiten'
@@ -75,9 +75,9 @@ de:
       removeEvent: 'Termin löschen'
       enter: 'Team beitreten'
       leave: 'Team verlassen'
-      cropListviewImage: 'Listenbild anpassen'
+      cropListImage: 'Listenbild anpassen'
       cropActionImage: 'Aktionsbild anpassen'
-      cropThumbnailImage: 'Thumbnail anpassen'
+      cropActionCardImage: 'Aktionskartenbild anpassen'
       crop: 'Zuschneiden'
 
       exportICal: 'Als iCal/ICS exportieren'

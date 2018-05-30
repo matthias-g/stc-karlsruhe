@@ -92,13 +92,13 @@ class ActionsController < ApplicationController
       case @crop_target_symbol
       when :action_list
         @crop_target_title = t('action.heading.cropTarget.action_list')
-        @crop_target_ratio = 200.0/165
+        @crop_target_ratio = 75.0/60
       when :action_view
         @crop_target_title = t('action.heading.cropTarget.action_view')
-        @crop_target_ratio = 522.0/261
-      when :thumbnail
-        @crop_target_title = t('action.heading.cropTarget.thumbnail')
-        @crop_target_ratio = 100.0/100
+        @crop_target_ratio = 775.0/350
+      when :action_card_list
+        @crop_target_title = t('action.heading.cropTarget.action_card_list')
+        @crop_target_ratio = 318.0/220
       end
       respond_with @action do |format|
         format.html { render :layout => false}

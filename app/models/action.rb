@@ -2,7 +2,7 @@ class Action < ApplicationRecord
 
   include PhotoGallery
   include CroppablePicture
-  mount_uploader :picture, ImageUploader
+  mount_uploader :picture, ActionPictureUploader
 
   has_many :leaderships, dependent: :destroy
   has_many :leaders, class_name: 'User', through: :leaderships, source: :user

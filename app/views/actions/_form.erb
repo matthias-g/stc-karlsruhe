@@ -49,15 +49,15 @@
             <% if @action.persisted? %>
               <%= link_to crop_picture_action_path(@action, crop_target: 'action_list'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
-                <span class="fas fa-crop"></span> <%= t('action.button.cropListviewImage') %>
+                <span class="fas fa-crop"></span> <%= t('action.button.cropListImage') %>
               <% end %>
               <%= link_to crop_picture_action_path(@action, crop_target: 'action_view'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'}  do %>
                 <span class="fas fa-crop"></span> <%= t('action.button.cropActionImage') %>
               <% end %>
-              <%= link_to crop_picture_action_path(@action, crop_target: 'thumbnail'),
+              <%= link_to crop_picture_action_path(@action, crop_target: 'action_card_list'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
-                <span class="fas fa-crop"></span> <%= t('action.button.cropThumbnailImage') %>
+                <span class="fas fa-crop"></span> <%= t('action.button.cropActionCardImage') %>
               <% end %>
 
             <% end %>

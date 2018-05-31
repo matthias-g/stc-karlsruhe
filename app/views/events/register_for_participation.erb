@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-md-2">
       <% if @event.initiative.show_picture? %>
-        <%= image_tag @event.initiative.picture.thumb.url, class: 'img-responsive' %>
+        <%= image_tag @event.initiative.picture.action_list.url, class: 'img-responsive' %>
       <% end %>
     </div>
     <div class="col-md-6">

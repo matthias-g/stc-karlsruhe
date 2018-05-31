@@ -108,7 +108,7 @@ class ActionsController < ApplicationController
 
   def contact_leaders
     @message = Message.new(params[:message])
-    recipients = @action.leaders + [sender]
+    recipients = @action.leaders + [current_user]
     recipients.uniq.each do |recipient|
       Mailer.contact_leaders_mail(@message, current_user, recipient, @action).deliver_now
     end

@@ -45,8 +45,11 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
   test "should create orga_message" do
     sign_in users(:admin)
     assert_difference('OrgaMessage.count') do
-      post orga_messages_url, params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
-                                    subject: @message.subject, body: @message.body} }
+      post orga_messages_url, params: {
+          orga_message: { from: @message.from, recipient: @message.recipient,
+                          content_type: @message.content_type,
+                          action_group_id: @message.action_group.id,
+                          subject: @message.subject, body: @message.body} }
     end
     assert_response :redirect
     follow_redirect!
@@ -68,8 +71,11 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "should update orga_message" do
     sign_in users(:admin)
-    patch orga_message_url(@message), params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
-                                                  subject: 'new subject', body: @message.body} }
+    patch orga_message_url(@message), params: {
+        orga_message: { from: @message.from, recipient: @message.recipient,
+                        content_type: @message.content_type,
+                        action_group_id: @message.action_group.id,
+                        subject: 'new subject', body: @message.body} }
     assert_redirected_to orga_message_path(@message.reload)
     assert_equal 'new subject', @message.subject
   end
@@ -88,16 +94,22 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     get new_orga_message_url
     assert_redirected_to new_user_session_url
     assert_no_difference 'OrgaMessage.count' do
-      post orga_messages_url, params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
-                                    subject: @message.subject, body: @message.body} }
+      post orga_messages_url, params: {
+          orga_message: { from: @message.from, recipient: @message.recipient,
+                          content_type: @message.content_type,
+                          action_group_id: @message.action_group.id,
+                          subject: @message.subject, body: @message.body} }
     end
     assert_redirected_to new_user_session_url
     get orga_message_url(@message)
     assert_redirected_to new_user_session_url
     get edit_orga_message_url(@message)
     assert_redirected_to new_user_session_url
-    patch orga_message_url(@message), params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
-                                                 subject: @message.subject, body: @message.body} }
+    patch orga_message_url(@message), params: {
+        orga_message: { from: @message.from, recipient: @message.recipient,
+                        content_type: @message.content_type,
+                        action_group_id: @message.action_group.id,
+                        subject: @message.subject, body: @message.body} }
     assert_redirected_to new_user_session_url
     assert_no_difference 'OrgaMessage.count' do
       delete orga_message_url(@message)
@@ -116,16 +128,22 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     get new_orga_message_url
     assert_redirected_to root_url
     assert_no_difference 'OrgaMessage.count' do
-      post orga_messages_url, params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
-                                                        subject: @message.subject, body: @message.body} }
+      post orga_messages_url, params: {
+          orga_message: { from: @message.from, recipient: @message.recipient,
+                          content_type: @message.content_type,
+                          action_group_id: @message.action_group.id,
+                          subject: @message.subject, body: @message.body} }
     end
     assert_redirected_to root_url
     get orga_message_url(@message)
     assert_redirected_to root_url
     get edit_orga_message_url(@message)
     assert_redirected_to root_url
-    patch orga_message_url(@message), params: { orga_message: { from: @message.from, recipient: @message.recipient, content_type: @message.content_type,
-                                                                subject: @message.subject, body: @message.body} }
+    patch orga_message_url(@message), params: {
+        orga_message: { from: @message.from, recipient: @message.recipient,
+                        content_type: @message.content_type,
+                        action_group_id: @message.action_group.id,
+                        subject: @message.subject, body: @message.body} }
     assert_redirected_to root_url
     assert_no_difference 'OrgaMessage.count' do
       delete orga_message_url(@message)

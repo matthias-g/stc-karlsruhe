@@ -73,7 +73,7 @@ class OrgaMessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:orga_message).permit(:from, :recipient, :content_type, :subject, :body)
+    params.require(:orga_message).permit(:from, :recipient, :action_group_id, :content_type, :subject, :body)
   end
 
   def authorize_message

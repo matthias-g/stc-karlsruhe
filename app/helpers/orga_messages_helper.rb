@@ -10,14 +10,20 @@ module OrgaMessagesHelper
   end
 
   # Returns the translation for an orga mail recipient group
-  def render_recipient_group group, user
-    I18n.t('orga_message.form.groups.' + group, user_email: user.email, action_group: ActionGroup.default.title)
+  def render_recipient_group_abstract recipient_group
+    I18n.t('orga_message.form.recipients.' + recipient_group)
+  end
+
+  # Returns the translation for an orga mail recipient group
+  def render_recipient_group message
+    sender = message.sender.present? ? message.sender : current_user
+    I18n.t('orga_message.form.groups.' + message.recipient, user_email: sender.email, action_group: message.action_group.title)
   end
 
   # Returns allowed options for orga mail recipients
   def recipient_options
-    %w(current_volunteers_and_leaders current_volunteers current_leaders all_users active_users me test)
-        .map{|group| [render_recipient_group(group, current_user), group]}
+    %w(current_volunteers_and_leaders current_volunteers current_leaders all_users active_users sender test)
+        .map{|group| [render_recipient_group_abstract(group), group]}
   end
 
   # Returns allowed options for orga mail topics

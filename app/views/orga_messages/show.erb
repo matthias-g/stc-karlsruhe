@@ -11,7 +11,7 @@
   </tr>
   <tr>
     <th><%= OrgaMessage.human_attribute_name('recipient') %></th>
-    <td><%= @message.sent? ? @message.sent_to : render_recipient_group(@message.recipient, current_user) %>
+    <td><%= render_recipient_group(@message) %>
       (<%= link_to recipients.count.to_s, '#', data: {toggle: 'collapse', target: '#recipient-list'} %>)
       <div id="recipient-list" class="collapse">
         <%= recipients.pluck(:email).join(', ') %>
@@ -46,9 +46,9 @@
 
 <div class="mt-3">
   <%= link_to t('general.button.back'), orga_messages_path, class: 'btn-secondary btn' %>
-  <%= link_to t('general.button.edit'), edit_orga_message_path(@message), class: 'btn-secondary btn' unless @message.sent? %>
+  <%= link_to t('general.button.edit'), edit_orga_message_path(@message), class: 'btn-secondary btn' if policy(@message).edit? %>
   <%= link_to t('general.button.delete'), orga_message_path(@message), method: :delete, class: 'btn-secondary btn',
               data: { confirm: t('orga_message.message.really_destroy') } if policy(@message).destroy? %>
   <%= link_to t('orga_message.button.send_now'), send_message_orga_message_path(@message), class: 'btn-secondary btn',
-              data: { confirm: t('orga_message.message.really_send') } unless @message.sent? %>
+              data: { confirm: t('orga_message.message.really_send') } if policy(@message).send_message? %>
 </div>

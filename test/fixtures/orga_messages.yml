@@ -2,6 +2,7 @@
 default:
   from: Serve the City Karlsruhe <contact@servethecity-karlsruhe.de>
   recipient: all_users
+  action_group: default
   content_type: about_action_groups
   subject: 'Bald: Neue Aktionswoche'
   body: Bald findet eine neue Aktionswoche statt!
@@ -9,8 +10,9 @@ default:
 
 already_sent:
   from: Serve the City Karlsruhe <contact@servethecity-karlsruhe.de>
-  recipient: e1@example.org,e2@example.org
-  sent_to: Alle Benutzer
+  recipient: all_users
+  action_group: default
+  sent_to: 1,2
   content_type: about_action_groups
   subject: Sent message
   body: MyText

@@ -68,7 +68,7 @@ class OrgaMessageTest < ActiveSupport::TestCase
     assert_equal 1000, @message.recipients(sender).count
     assert_equal all_emails(:coordinator), get_message_recipient_set(sender)
 
-    @message.recipient = :me
+    @message.recipient = :sender
     assert_equal 1, @message.recipients(sender).count
     assert_equal all_emails(:coordinator), get_message_recipient_set(sender)
   end

@@ -30,7 +30,7 @@ RSpec.describe OrgaMessagePolicy do
     end
   end
 
-  %w(update? destroy? send_message?).each do |method|
+  %w(update? send_message?).each do |method|
     describe method do
       subject { policy.public_send(method) }
 
@@ -59,4 +59,38 @@ RSpec.describe OrgaMessagePolicy do
       end
     end
   end
+
+  describe 'destroy?' do
+    subject { policy.destroy? }
+
+    context 'as visitor' do
+      it { should_fail }
+    end
+
+    context 'as admin' do
+      let(:current_user) { users(:admin) }
+      it { should_pass }
+    end
+
+    context 'as coordinator' do
+      let(:current_user) { users(:coordinator) }
+      it { should_pass }
+    end
+
+    context 'for already sent message' do
+      let(:record) { orga_messages(:already_sent) }
+      it { should_fail }
+
+      context 'as coordinator' do
+        let(:current_user) { users(:coordinator) }
+        it { should_fail }
+      end
+
+      context 'as admin' do
+        let(:current_user) { users(:admin) }
+        it { should_pass }
+      end
+    end
+  end
+
 end

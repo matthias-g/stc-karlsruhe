@@ -81,4 +81,9 @@ module ActionGroupsHelper
     I18n.t("date_range.#{format}.#{date_format}", dates.merge(sep: separator))
   end
 
+  def action_order(action)
+    return 5 if !action.visible?
+    {empty: 1, soon_full: 1, full: 3, finished: 4}[action.status]
+  end
+
 end

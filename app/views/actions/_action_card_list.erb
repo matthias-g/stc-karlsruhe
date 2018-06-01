@@ -1,7 +1,7 @@
 
 <div class="action-card-list card-deck">
 
-  <% actions.each do |action| %>
+  <% actions.sort_by{|a| action_order(a)}.each do |action| %>
 
     <div class="card action-card" data-class="ClickableCard" data-href="<%= url_for action %>" title="<%= action.title %>">
 

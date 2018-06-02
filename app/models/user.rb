@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :participations, dependent: :destroy
   has_many :events_as_volunteer, through: :participations, source: :event
   has_many :leaderships, dependent: :destroy
-  has_many :actions_as_leader, through: :leaderships, source: :action
+  has_many :initiatives_as_leader, through: :leaderships, source: :initiative
   has_and_belongs_to_many :roles
 
   USERNAME_FORMAT = /\A[\w]+\z/
@@ -53,25 +53,25 @@ class User < ApplicationRecord
   end
 
   def leads_action?(action)
-    actions_as_leader.include? action
+    initiatives_as_leader.include? action
   end
 
   def actions
-    Action.joins(:leaderships).joins('JOIN events eventsUser ON eventsUser.initiative_id = actions.id')
+    Action.joins(:leaderships).joins('JOIN events eventsUser ON eventsUser.initiative_id = initiatives.id')
         .joins('JOIN participations ON participations.event_id = eventsUser.id')
         .where('participations.user_id = ? OR leaderships.user_id = ?', id, id).distinct
   end
 
   def actions_as_volunteer
-    Action.joins('JOIN events ON events.initiative_id = actions.id')
+    Action.joins('JOIN events ON events.initiative_id = initiatives.id')
         .joins('JOIN participations ON participations.event_id = events.id')
         .where('participations.user_id = ?', id).distinct
   end
 
   def events # TODO sure this works as intended?
     Event.joins(:participations).where('participations.user_id': id)
-        .joins('JOIN actions ON events.initiative_id = actions.id')
-        .joins('JOIN leaderships ON leaderships.action_id = actions.id')
+        .joins('JOIN initiatives ON events.initiative_id = initiatives.id')
+        .joins('JOIN leaderships ON leaderships.initiative_id = initiatives.id')
         .where('leaderships.user_id': id).distinct
   end
 
@@ -125,7 +125,7 @@ class User < ApplicationRecord
       end
     end
 
-    other_user.actions_as_leader.to_a.each do |action|
+    other_user.initiatives_as_leader.to_a.each do |action|
       unless action.leader?(self)
         action.delete_leader(other_user)
         action.add_leader(self)

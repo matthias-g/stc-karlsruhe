@@ -28,8 +28,8 @@ class UserTest < ActiveSupport::TestCase
     assert_not users(:unrelated).leads_action?(actions(:default))
   end
 
-  test "actions_as_leader is 4 for leader" do
-    assert_equal 2, users(:leader).actions_as_leader.count
+  test "initiatives_as_leader is 4 for leader" do
+    assert_equal 2, users(:leader).initiatives_as_leader.count
   end
 
   test "actions_as_volunteer is 0 for unrelated user" do

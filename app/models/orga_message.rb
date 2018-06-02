@@ -38,12 +38,12 @@ class OrgaMessage < ApplicationRecord
     user_query = case recipient.to_sym
       when :current_volunteers_and_leaders
         User.left_joins(:leaderships, :events_as_volunteer)
-            .where('leaderships.action_id IN (?) OR events.initiative_id IN (?)',
+            .where('leaderships.initiative_id IN (?) OR events.initiative_id IN (?)',
                    current_action_ids, current_action_ids)
       when :current_volunteers
         User.joins(:events_as_volunteer).where(events: {initiative_id: current_action_ids})
       when :current_leaders
-        User.joins(:leaderships).where(leaderships: {action_id: current_action_ids})
+        User.joins(:leaderships).where(leaderships: {initiative_id: current_action_ids})
       when :all_users
         User.all
       when :active_users
@@ -71,7 +71,7 @@ class OrgaMessage < ApplicationRecord
       user_query.where('users.receive_other_emails_from_orga': true)
     end
 
-    return filtered_user_query.valid.order(:id).uniq
+    filtered_user_query.valid.order(:id).uniq
   end
 
 end

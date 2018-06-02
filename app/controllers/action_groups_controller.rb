@@ -24,7 +24,7 @@ class ActionGroupsController < ApplicationController
       unless p[:day].blank? || !p[:day].match(/\A\d{2,4}-\d{1,2}-\d{1,2}\z/)
         date = Date.parse(p[:day])
         @actions = @actions.left_outer_joins(:events, subactions: [:events])
-                       .where('events.date = ? OR events_actions.date = ?', date, date).distinct
+                       .where('events.date = ? OR events_initiatives.date = ?', date, date).distinct
       end
 
       @actions = @actions.select { |a| a.start_time && a.start_time.hour >= 17 } if p[:after_17h] == '1'

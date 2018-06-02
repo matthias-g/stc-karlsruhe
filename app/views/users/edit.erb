@@ -45,7 +45,7 @@
         </div>
         <%= f.check_box :receive_emails_from_other_users %>
         <%= f.check_box :receive_notifications_for_new_participation %>
-        <% if @user.actions_as_leader.count > 0 %>
+        <% if @user.initiatives_as_leader.count > 0 %>
             <%= f.check_box :receive_notifications_about_volunteers %>
         <% end %>
 

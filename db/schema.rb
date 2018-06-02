@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_01_173134) do
+ActiveRecord::Schema.define(version: 2018_06_02_133702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,32 +25,6 @@ ActiveRecord::Schema.define(version: 2018_06_01_173134) do
     t.string "slug"
     t.integer "declination", default: 0
     t.index ["slug"], name: "index_action_groups_on_slug", unique: true
-  end
-
-  create_table "actions", id: :serial, force: :cascade do |t|
-    t.string "title", limit: 255
-    t.text "description"
-    t.string "location", limit: 255
-    t.float "latitude"
-    t.float "longitude"
-    t.text "individual_tasks"
-    t.text "material"
-    t.text "requirements"
-    t.boolean "visible"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string "picture", limit: 255
-    t.text "short_description", default: ""
-    t.float "map_latitude", default: 49.01347014
-    t.float "map_longitude", default: 8.40445518
-    t.integer "map_zoom", default: 12
-    t.text "picture_source"
-    t.integer "action_group_id"
-    t.string "slug", limit: 255
-    t.integer "parent_action_id"
-    t.integer "gallery_id"
-    t.index ["gallery_id"], name: "index_actions_on_gallery_id"
-    t.index ["slug"], name: "index_actions_on_slug", unique: true
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -110,12 +84,39 @@ ActiveRecord::Schema.define(version: 2018_06_01_173134) do
     t.index ["visible"], name: "index_gallery_pictures_on_visible"
   end
 
-  create_table "leaderships", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "action_id"
+  create_table "initiatives", id: :serial, force: :cascade do |t|
+    t.string "title", limit: 255
+    t.text "description"
+    t.string "location", limit: 255
+    t.float "latitude"
+    t.float "longitude"
+    t.text "individual_tasks"
+    t.text "material"
+    t.text "requirements"
+    t.boolean "visible"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["user_id", "action_id"], name: "index_leaderships_on_user_id_and_action_id", unique: true
+    t.string "picture", limit: 255
+    t.text "short_description", default: ""
+    t.float "map_latitude", default: 49.01347014
+    t.float "map_longitude", default: 8.40445518
+    t.integer "map_zoom", default: 12
+    t.text "picture_source"
+    t.integer "action_group_id"
+    t.string "slug", limit: 255
+    t.integer "parent_action_id"
+    t.integer "gallery_id"
+    t.string "type"
+    t.index ["gallery_id"], name: "index_initiatives_on_gallery_id"
+    t.index ["slug"], name: "index_initiatives_on_slug", unique: true
+  end
+
+  create_table "leaderships", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "initiative_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["user_id", "initiative_id"], name: "index_leaderships_on_user_id_and_initiative_id", unique: true
   end
 
   create_table "news_entries", id: :serial, force: :cascade do |t|

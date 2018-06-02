@@ -1,20 +1,20 @@
 
 leader:
   user: leader
-  action: default
+  initiative: default
 
 parent_action_leader:
   user: leader
-  action: parent_action
+  initiative: parent_action
 
 subaction_leader:
   user: subaction_leader
-  action: subaction
+  initiative: subaction
 
 subaction_2_leader:
   user: subaction_leader
-  action: subaction_2
+  initiative: subaction_2
 
 subaction_3_leader:
   user: subaction_leader
-  action: subaction_3_invisible
+  initiative: subaction_3_invisible

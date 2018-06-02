@@ -46,7 +46,7 @@ module ApplicationHelper
 
   # Returns whether the user has any roles or leaderships
   def privileged_user?
-    signed_in? && (current_user.roles.any? || current_user.actions_as_leader.any?)
+    signed_in? && (current_user.roles.any? || current_user.initiatives_as_leader.any?)
   end
 
   # Replaces patterns "[Title](URL)" and "<URL>" with a clickable link

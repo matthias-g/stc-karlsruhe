@@ -7,9 +7,9 @@ class EventPolicy < ApplicationPolicy
       if user&.in_orga_team?
         scope.all
       elsif user
-        scope.left_outer_joins(initiative: :leaderships).where('actions.visible OR leaderships.user_id = ?', user.id).distinct
+        scope.left_outer_joins(initiative: :leaderships).where('initiatives.visible OR leaderships.user_id = ?', user.id).distinct
       else
-        scope.joins(:initiative).where(actions: {visible: true}).distinct
+        scope.joins(:initiative).where(initiatives: {visible: true}).distinct
       end
     end
   end

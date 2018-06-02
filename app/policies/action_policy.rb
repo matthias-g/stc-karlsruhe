@@ -5,7 +5,7 @@ class ActionPolicy < ApplicationPolicy
       if user&.in_orga_team?
         scope.all
       elsif user
-        scope.left_outer_joins(:leaderships).where('actions.visible OR leaderships.user_id = ?', user.id).distinct
+        scope.left_outer_joins(:leaderships).where('initiatives.visible OR leaderships.user_id = ?', user.id).distinct
       else
         scope.where(visible: true).distinct
       end

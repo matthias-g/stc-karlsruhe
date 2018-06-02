@@ -15,9 +15,9 @@ class ActionGroup < ApplicationRecord
 
   def active_user_count
     # TODO: this is still slow
-    User.left_outer_joins(:actions_as_leader, events_as_volunteer: :initiative)
-        .where('actions.visible OR initiatives_events.visible')
-        .where('actions.action_group_id = ? OR initiatives_events.action_group_id = ?', self.id, self.id)
+    User.left_outer_joins(:initiatives_as_leader, events_as_volunteer: :initiative)
+        .where('initiatives.visible OR initiatives_events.visible')
+        .where('initiatives.action_group_id = ? OR initiatives_events.action_group_id = ?', self.id, self.id)
         .distinct.count
   end
 

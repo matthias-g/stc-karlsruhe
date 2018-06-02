@@ -43,7 +43,7 @@ class StatisticsController < ApplicationController
   end
 
   def participations_for(action_group)
-    Participation.left_joins(event: :initiative).where(actions: {action_group_id: action_group})
+    Participation.left_joins(event: :initiative).where(initiatives: {action_group_id: action_group})
   end
 
   def set_action_group

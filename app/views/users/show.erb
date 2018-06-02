@@ -76,7 +76,7 @@
     <section class="white-box">
       <h2><%= Participation.model_name.human(count: 2) %></h2>
       <% past_events = @user.events_as_volunteer.finished %>
-      <% actions_as_leader = @user.actions_as_leader %>
+      <% initiatives_as_leader = @user.initiatives_as_leader %>
       <% events_as_volunteer = @user.events_as_volunteer.upcoming %>
 
       <% if events_as_volunteer.any? %>
@@ -85,9 +85,9 @@
         <% end %>
       <% end %>
 
-      <% if actions_as_leader.any? %>
+      <% if initiatives_as_leader.any? %>
         <h3 class="mt-3"><%= t('user.heading.actionsAsLeader') %></h3>
-        <% actions_as_leader.each do |action| %>
+        <% initiatives_as_leader.each do |action| %>
           <%= render '/actions/action_entry', action: action %>
         <% end %>
       <% end %>
@@ -99,7 +99,7 @@
         <% end %>
       <% end %>
 
-      <% if @user.actions_as_volunteer.blank? && @user.actions_as_leader.blank? %>
+      <% if @user.actions_as_volunteer.blank? && @user.initiatives_as_leader.blank? %>
         <%= own_profile ? t('user.info.youHaveNoActions') : t('user.info.hasNoActions', user: @user.first_name) %>
       <% end %>
 

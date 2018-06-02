@@ -10,6 +10,7 @@ class Initiative < ApplicationRecord
   accepts_nested_attributes_for :events, allow_destroy: true
 
   validates_presence_of :title
+  validates_presence_of :type
 
   scope :visible,  -> { where(initiatives: { visible: true }) }
   scope :hidden,   -> { where(initiatives: { visible: false }) }

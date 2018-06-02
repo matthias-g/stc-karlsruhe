@@ -110,7 +110,7 @@ class ActionsController < ApplicationController
     @message = Message.new(params[:message])
     recipients = @action.leaders + [current_user]
     recipients.uniq.each do |recipient|
-      Mailer.contact_leaders_mail(@message, current_user, recipient, @action).deliver_now
+      Mailer.contact_leaders_mail(@message, current_user, recipient, @action).deliver_later
     end
     flash[:notice] = t('mailer.contact_leaders_mail.success')
     redirect_to action: :show
@@ -123,7 +123,7 @@ class ActionsController < ApplicationController
       recipients += @action.volunteers_in_subactions + @action.leaders_in_subactions
     end
     recipients.uniq.each do |recipient|
-      Mailer.contact_volunteers_mail(@message, current_user, recipient, @action).deliver_now
+      Mailer.contact_volunteers_mail(@message, current_user, recipient, @action).deliver_later
     end
     flash[:notice] = t('mailer.contact_volunteers_mail.success')
     redirect_to action: :show

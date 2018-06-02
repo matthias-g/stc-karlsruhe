@@ -95,7 +95,9 @@ class EventTest < ActiveSupport::TestCase
   test "send notification to volunteer when volunteer enters event" do
     user = users(:unrelated)
     assert_difference 'ActionMailer::Base.deliveries.size', +2 do
-      @event.add_volunteer user
+      perform_enqueued_jobs do
+        @event.add_volunteer user
+      end
     end
     assert @event.volunteer?(user)
   end
@@ -104,7 +106,9 @@ class EventTest < ActiveSupport::TestCase
     user = users(:unrelated)
     user.update_attribute :receive_notifications_for_new_participation, false
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
-      @event.add_volunteer user
+      perform_enqueued_jobs do
+        @event.add_volunteer user
+      end
     end
     assert @event.volunteer?(user)
   end
@@ -114,7 +118,9 @@ class EventTest < ActiveSupport::TestCase
     user = users(:unrelated)
     user.update_attribute :receive_notifications_for_new_participation, false
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
-      @event.add_volunteer user
+      perform_enqueued_jobs do
+        @event.add_volunteer user
+      end
     end
     notification_email = ActionMailer::Base.deliveries.last
     assert leaders.superset? notification_email.to.to_set

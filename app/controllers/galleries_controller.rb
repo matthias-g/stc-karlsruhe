@@ -82,7 +82,7 @@ class GalleriesController < ApplicationController
 
   def send_notice_mail
     picture_count = params[:gallery_pictures][:picture].size
-    Mailer.gallery_picture_uploaded_notification(@gallery, picture_count, current_user).deliver_now
+    Mailer.gallery_picture_uploaded_notification(@gallery, picture_count, current_user).deliver_later
   end
 
   def authorize_gallery

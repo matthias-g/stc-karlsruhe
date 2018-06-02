@@ -3,7 +3,9 @@ require 'test_helper'
 class MessagesControllerTest < ActionDispatch::IntegrationTest
 
   def assert_mails_sent(count, &block)
-    assert_difference('ActionMailer::Base.deliveries.size', count, &block)
+    assert_difference 'ActionMailer::Base.deliveries.size', count do
+      perform_enqueued_jobs(&block)
+    end
   end
 
   test "send contact mail" do

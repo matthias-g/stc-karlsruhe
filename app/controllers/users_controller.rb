@@ -68,7 +68,7 @@ class UsersController < ApplicationController
 
   def contact_user
     @message = Message.new(params[:message])
-    Mailer.user_mail(@message, current_user, @user).deliver_now
+    Mailer.user_mail(@message, current_user, @user).deliver_later
     flash[:notice] = t('mailer.user_mail.success', recipient: @user.full_name)
     redirect_to action: :show
   end

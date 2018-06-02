@@ -26,7 +26,9 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     user = users(:volunteer)
     sign_in user
     assert_changes 'ActionMailer::Base.deliveries.size' do
-      get leave_event_url(@event)
+      perform_enqueued_jobs do
+        get leave_event_url(@event)
+      end
     end
     assert_redirected_to @event.reload.initiative
     assert_not @event.volunteer?(user)

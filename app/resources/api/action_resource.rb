@@ -1,4 +1,6 @@
 module Api
+  # TODO move Initiative related methods to respective resource
+  #      see http://jsonapi-resources.com/v0.9/guide/resources.html#Immutable-Resources
   class ActionResource < JSONAPI::Resource
     include JSONAPI::Authorization::PunditScopedResource
 

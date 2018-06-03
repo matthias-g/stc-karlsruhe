@@ -6,14 +6,6 @@ class OrgaMessageTest < ActiveSupport::TestCase
     @message = orga_messages(:default)
   end
 
-  def all_emails(*user_fixtures)
-    user_fixtures.map{|u| users(u).email}.to_set
-  end
-
-  def all_emails_minus(*user_fixtures)
-    (User.all - user_fixtures.map{|u| users(u)}).pluck(:email).to_set
-  end
-
   def get_message_recipient_set(sender)
     @message.recipients(sender).pluck(:email).to_set
   end
@@ -42,35 +34,35 @@ class OrgaMessageTest < ActiveSupport::TestCase
     sender = users(:coordinator)
 
     @message.recipient = :current_volunteers_and_leaders
-    assert_equal all_emails(:volunteer, :subaction_volunteer,
-                            :subaction_2_volunteer, :ancient_user,
-                            :leader, :subaction_leader),
+    assert_equal all_mails(:volunteer, :subaction_volunteer,
+                           :subaction_2_volunteer, :ancient_user,
+                           :leader, :subaction_leader),
                  get_message_recipient_set(sender)
 
     @message.recipient = :current_volunteers
-    assert_equal all_emails(:volunteer, :subaction_volunteer,
-                            :subaction_2_volunteer, :ancient_user),
+    assert_equal all_mails(:volunteer, :subaction_volunteer,
+                           :subaction_2_volunteer, :ancient_user),
                  get_message_recipient_set(sender)
 
     @message.recipient = :current_leaders
-    assert_equal all_emails(:leader, :subaction_leader),
+    assert_equal all_mails(:leader, :subaction_leader),
                  get_message_recipient_set(sender)
 
     @message.recipient = :all_users
-    assert_equal all_emails_minus(:deleted),
+    assert_equal all_other_mails(:deleted),
                  get_message_recipient_set(sender)
 
     @message.recipient = :active_users
-    assert_equal all_emails_minus(:deleted, :ancient_user),
+    assert_equal all_other_mails(:deleted, :ancient_user),
                  get_message_recipient_set(sender)
 
     @message.recipient = :test
     assert_equal 1000, @message.recipients(sender).count
-    assert_equal all_emails(:coordinator), get_message_recipient_set(sender)
+    assert_equal all_mails(:coordinator), get_message_recipient_set(sender)
 
     @message.recipient = :sender
     assert_equal 1, @message.recipients(sender).count
-    assert_equal all_emails(:coordinator), get_message_recipient_set(sender)
+    assert_equal all_mails(:coordinator), get_message_recipient_set(sender)
   end
 
   test "recipients doesn't include users who dont want the mails" do

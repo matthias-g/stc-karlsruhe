@@ -4,26 +4,11 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @message = orga_messages(:default)
-    ActionMailer::Base.deliveries = []
   end
 
-  def all_emails(*user_fixtures)
-    user_fixtures.map{|u| users(u).email}.to_set
-  end
-
-  def all_emails_minus(*user_fixtures)
-    (User.all - user_fixtures.map{|u| users(u)}).pluck(:email).to_set
-  end
-
-  def get_recipients
-    ActionMailer::Base.deliveries.map(&:to).flatten
-  end
-
-  def sent_and_assert_orga_message(message)
-    assert_changes 'ActionMailer::Base.deliveries.size' do
-      perform_enqueued_jobs do
-        get send_message_orga_message_url(message)
-      end
+  def send_and_assert_orga_message(message, count)
+    assert_mails_sent(count) do
+      get send_message_orga_message_url(message)
     end
   end
 
@@ -115,7 +100,7 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
       delete orga_message_url(@message)
     end
     assert_redirected_to new_user_session_url
-    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+    assert_mails_sent 0 do
       get send_message_orga_message_url(@message)
     end
     assert_redirected_to new_user_session_url
@@ -149,73 +134,62 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
       delete orga_message_url(@message)
     end
     assert_redirected_to root_url
-    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+    assert_mails_sent 0 do
       get send_message_orga_message_url(@message)
     end
     assert_redirected_to root_url
   end
 
-  test "send mail about action groups to all users" do
+  test "sending an orga mail marks it as sent and redirects to 'show'" do
+    sign_in users(:admin)
+    get send_message_orga_message_url @message
+    assert_redirected_to orga_message_path(@message.reload)
+    assert_equal users(:admin).id, @message.sender.id
+    assert @message.sent?
+  end
+
+  test "send 'mail about action groups' to all users" do
     sign_in users(:admin)
     @message.update_attributes recipient: :all_users, content_type: :about_action_groups
-    sent_and_assert_orga_message @message
-    assert_redirected_to orga_message_path(@message.reload)
-    assert_equal users(:admin).id, @message.sender.id
-    assert @message.sent?
-    assert_equal all_emails_minus(:deleted), get_recipients.to_set
+    send_and_assert_orga_message(@message, (User.all.count - 1) + 1)
+    assert_equal all_other_mails(:deleted), mail_recipients
   end
 
-  test "send other email from orga to all users" do
+  test "send 'other email from orga' to all users" do
     sign_in users(:admin)
     @message.update_attributes recipient: :all_users, content_type: :other_email_from_orga
-    sent_and_assert_orga_message @message
-    assert_redirected_to orga_message_path(@message.reload)
-    assert_equal users(:admin), @message.sender
-    assert @message.sent?
-    assert_equal all_emails_minus(:deleted), get_recipients.to_set
+    send_and_assert_orga_message(@message, (User.all.count - 1) + 1)
+    assert_equal all_other_mails(:deleted), mail_recipients
   end
 
-  test "send other email from orga to active users" do
+  test "send 'other email from orga' to active users" do
     sign_in users(:admin)
     @message.update_attributes recipient: :active_users, content_type: :other_email_from_orga
-    sent_and_assert_orga_message @message
-    assert_redirected_to orga_message_path(@message.reload)
-    assert_equal users(:admin).id, @message.sender.id
-    assert @message.sent?
-    assert_equal all_emails_minus(:deleted, :ancient_user), get_recipients.to_set
+    send_and_assert_orga_message(@message, (User.all.count - 2) + 1)
+    assert_equal all_other_mails(:deleted, :ancient_user), mail_recipients
   end
 
-  test "send other email from orga to current volunteers" do
+  test "send 'other email from orga' to current volunteers" do
     sign_in users(:admin)
     @message.update_attributes recipient: :current_volunteers, content_type: :other_email_from_orga
-    sent_and_assert_orga_message @message
-    assert_redirected_to orga_message_path(@message.reload)
-    assert_equal users(:admin).id, @message.sender.id
-    assert @message.sent?
-    assert_equal all_emails(:volunteer, :subaction_volunteer, :subaction_2_volunteer, :ancient_user, :admin),
-                 get_recipients.to_set
+    send_and_assert_orga_message(@message, 4 + 1)
+    assert_equal all_mails(:volunteer, :subaction_volunteer, :subaction_2_volunteer,
+                           :ancient_user, :admin), mail_recipients
   end
 
-  test "send other email from orga to current leaders" do
+  test "send 'other email from orga' to current leaders" do
     sign_in users(:admin)
     @message.update_attributes recipient: :current_leaders, content_type: :other_email_from_orga
-    sent_and_assert_orga_message @message
-    assert_redirected_to orga_message_path(@message.reload)
-    assert_equal users(:admin).id, @message.sender.id
-    assert @message.sent?
-    assert_equal all_emails(:leader, :subaction_leader, :admin), get_recipients.to_set
+    send_and_assert_orga_message(@message, 2 + 1)
+    assert_equal all_mails(:leader, :subaction_leader, :admin), mail_recipients
   end
 
-  test "send other email from orga to current volunteers and leaders" do
+  test "send 'other email from orga' to current volunteers and leaders" do
     sign_in users(:admin)
     @message.update_attributes recipient: :current_volunteers_and_leaders, content_type: :other_email_from_orga
-    sent_and_assert_orga_message @message
-    assert_redirected_to orga_message_path(@message.reload)
-    assert_equal users(:admin).id, @message.sender.id
-    assert @message.sent?
-    assert_equal all_emails(:volunteer, :subaction_volunteer, :subaction_2_volunteer,
-                            :ancient_user, :leader, :subaction_leader, :admin),
-                 get_recipients.to_set
+    send_and_assert_orga_message(@message, 6 + 1)
+    assert_equal all_mails(:volunteer, :subaction_volunteer, :subaction_2_volunteer,
+                           :ancient_user, :leader, :subaction_leader, :admin), mail_recipients
   end
 
 

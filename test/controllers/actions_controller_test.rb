@@ -54,24 +54,24 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
 
   # VISITOR ACCESS
 
-  test "should get single action" do
+  test "visitor should get single action" do
     get action_url(@action)
     assert_response :success
   end
 
-  test "should get parent action" do
+  test "visitor should get parent action" do
     action = actions(:parent_action)
     get action_url(action)
     assert_response :success
   end
 
-  test "should get subaction" do
+  test "visitor should get subaction" do
     action = actions(:subaction)
     get action_url(action)
     assert_response :success
   end
 
-  test "should get undated action" do
+  test "visitor should get undated action" do
     @action.events.first.destroy!
     get action_url(@action.reload)
     assert_response :success
@@ -85,10 +85,11 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
 
   # VOLUNTEER ACCESS
 
-  test "should send message to leaders" do
+  test "volunteer should send message to leaders" do
     sign_in users(:volunteer)
     assert_mails_sent(2) do
-      post contact_leaders_action_path(@action), params: {message: { subject: 'Test', body: 'Hey, how are you?' } }
+      post contact_leaders_action_path(@action),
+           params: { message: { subject: 'Test', body: 'Hey, how are you?' } }
     end
   end
 
@@ -141,21 +142,23 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
     assert @action.visible?
   end
 
-  test "should send message to volunteers" do
+  test "leader should send message to volunteers" do
     sign_in users(:leader)
     assert_mails_sent(3) do
       post contact_volunteers_action_path(@action), params: {
           message: { subject: 'Test', body: 'Hey, how are you?', recipient_scope: 'this_action' } }
     end
+    assert_equal all_mails(:volunteer, :ancient_user, :leader), mail_recipients
   end
 
-  test "should send message to volunteers of action and subactions" do
+  test "leader should send message to volunteers of action and subactions" do
     @action = actions(:parent_action)
     sign_in users(:leader)
     assert_mails_sent(4) do
       post contact_volunteers_action_path(@action), params: {
           message: { subject: 'Test', body: 'Hey, how are you?', recipient_scope: 'action_and_subactions' } }
     end
+    assert_equal all_mails(:subaction_volunteer, :subaction_2_volunteer, :leader, :subaction_leader), mail_recipients
   end
 
 
@@ -163,8 +166,8 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
   # ADMIN / COORDINATOR ACCESS
 
   test "coordinator should show past action" do
-    @action.events.first.update_attribute :date, 2.days.ago
     sign_in users(:coordinator)
+    @action.events.first.update_attribute :date, 2.days.ago
     get action_url(@action.reload)
     assert_response :success
   end

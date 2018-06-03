@@ -17,11 +17,29 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 
+  # asserts that a given number of emails is sent in the block
   def assert_mails_sent(count, &block)
+    ActionMailer::Base.deliveries = []
     assert_difference 'ActionMailer::Base.deliveries.size', count do
       perform_enqueued_jobs(&block)
     end
   end
+
+  # set of all mail addresses that received an email
+  def mail_recipients
+    ActionMailer::Base.deliveries.map(&:to).flatten.to_set
+  end
+
+  # set of all mail addresses of the given user fixtures
+  def all_mails(*user_fixtures)
+    user_fixtures.map{|u| users(u).email}.to_set
+  end
+
+  # set of all registered user mail addresses, minus the given user fixtures
+  def all_other_mails(*user_fixtures)
+    (User.all - user_fixtures.map{|u| users(u)}).pluck(:email).to_set
+  end
+
 end
 
 class ActionDispatch::IntegrationTest

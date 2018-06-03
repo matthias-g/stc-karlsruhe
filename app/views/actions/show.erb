@@ -151,7 +151,7 @@
         <% unless @action.parent_action.nil? %>
           <div class="white-box">
             <h3>Die Aktion ist ein Teil von</h3>
-            <%= render '/actions/action_entry', action: @action.parent_action, show_date: false, show_occupancy: false %>
+            <%= render '/initiatives/entry', initiative: @action.parent_action, show_date: false, show_occupancy: false %>
           </div>
         <% end %>
         <div class="white-box">
@@ -213,8 +213,8 @@
           <div class="white-box">
             <div id="subaction-list">
               <h3><%= Action.human_attribute_name(:subaction_ids) %></h3>
-              <% subactions.each do |action| %>
-                <%= render '/actions/action_entry', action: action, simple_title: true %>
+              <% subactions.each do |subaction| %>
+                <%= render '/initiatives/entry', initiative: subaction, simple_title: true %>
               <% end %>
             </div>
           </div>

@@ -98,7 +98,7 @@
           <% events = policy_scope(Event.finished.limit(4)) %>
         <% end %>
         <% events.each do |event| %>
-          <%= render '/actions/action_entry', event: event %>
+          <%= render '/events/entry', event: event %>
         <% end %>
       </div>
 

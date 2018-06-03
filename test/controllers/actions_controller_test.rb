@@ -8,43 +8,43 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
 
   # REDIRECTS
 
-  test "should redirect 'new' to root as non-admin user" do
+  test "should redirect 'new' to root (as non-admin)" do
     sign_in users(:leader)
     get new_action_url
     assert_redirected_to root_path
   end
 
-  test "should redirect 'edit' as non-leader" do
+  test "should redirect 'edit' (as non-leader)" do
     sign_in users(:volunteer)
     get edit_action_url(@action)
     assert_response :redirect
   end
 
-  test "should redirect 'show' to login for invisible action as visitor" do
+  test "should redirect 'show' to login for invisible action (as visitor)" do
     get action_url(actions(:subaction_3_invisible))
     assert_redirected_to new_user_session_url
   end
 
-  test "should redirect 'edit' to login as visitor" do
+  test "should redirect 'edit' to login (as visitor)" do
     get edit_action_url(@action)
     assert_redirected_to new_user_session_path
   end
 
-  test "should redirect 'destroy' to login as visitor" do
+  test "should redirect 'destroy' to login (as visitor)" do
     assert_no_difference('Action.count') do
       delete action_url(@action)
     end
     assert_redirected_to new_user_session_path
   end
 
-  test "should redirect 'make visible' to login as visitor" do
+  test "should redirect 'make visible' to login (as visitor)" do
     action = actions(:subaction_3_invisible)
     get make_invisible_action_url(action)
     assert_not action.visible?
     assert_redirected_to new_user_session_path
   end
 
-  test "should redirect 'make invisible' to login as visitor" do
+  test "should redirect 'make invisible' to login (as visitor)" do
     get make_invisible_action_url(@action)
     assert @action.visible?
     assert_redirected_to new_user_session_path
@@ -82,6 +82,15 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=\"#{register_for_participation_event_path(@action.events.first)}\"]", 1
   end
 
+
+  # VOLUNTEER ACCESS
+
+  test "should send message to leaders" do
+    sign_in users(:volunteer)
+    assert_mails_sent(2) do
+      post contact_leaders_action_path(@action), params: {message: { subject: 'Test', body: 'Hey, how are you?' } }
+    end
+  end
 
 
   # LEADER ACCESS
@@ -130,6 +139,23 @@ class ActionsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:leader)
     get make_invisible_action_url(@action)
     assert @action.visible?
+  end
+
+  test "should send message to volunteers" do
+    sign_in users(:leader)
+    assert_mails_sent(3) do
+      post contact_volunteers_action_path(@action), params: {
+          message: { subject: 'Test', body: 'Hey, how are you?', recipient_scope: 'this_action' } }
+    end
+  end
+
+  test "should send message to volunteers of action and subactions" do
+    @action = actions(:parent_action)
+    sign_in users(:leader)
+    assert_mails_sent(4) do
+      post contact_volunteers_action_path(@action), params: {
+          message: { subject: 'Test', body: 'Hey, how are you?', recipient_scope: 'action_and_subactions' } }
+    end
   end
 
 

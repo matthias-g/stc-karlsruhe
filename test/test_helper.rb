@@ -16,6 +16,12 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  def assert_mails_sent(count, &block)
+    assert_difference 'ActionMailer::Base.deliveries.size', count do
+      perform_enqueued_jobs(&block)
+    end
+  end
 end
 
 class ActionDispatch::IntegrationTest

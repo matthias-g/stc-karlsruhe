@@ -75,8 +75,8 @@
 
     <section class="white-box">
       <h2><%= Participation.model_name.human(count: 2) %></h2>
-      <% past_events = @user.events_as_volunteer.finished %>
-      <% initiatives_as_leader = @user.initiatives_as_leader %>
+      <% past_events = @user.events.finished %>
+      <% initiatives_as_leader = @user.initiatives_as_leader.upcoming %>
       <% events_as_volunteer = @user.events_as_volunteer.upcoming %>
 
       <% if events_as_volunteer.any? %>

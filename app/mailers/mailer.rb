@@ -3,52 +3,53 @@ class Mailer < ActionMailer::Base
   layout false, only: 'orga_mail'
   add_template_helper(OrgaMessagesHelper)
 
-  def contact_orga_mail(body, sender, subject)
+  def contact_orga_mail(body, subject, sender)
     @message = body
     recipient = StcKarlsruhe::Application::CONTACT_FORM_RECIPIENT
     mail to: recipient, reply_to: sender, subject: subject
   end
 
-  def contact_orga_mail_copy_for_sender(body, sender, subject)
+  def contact_orga_mail_copy_for_sender(body, subject, sender)
     @message = body
     mail to: sender, subject: t('mailer.contact_orga_mail_copy_for_sender.subject', subject: subject)
   end
 
-  def contact_volunteers_mail(message, sender, recipient, action)
-    @message = replace_variables(message.body, recipient)
+  def contact_volunteers_mail(body, subject, sender, recipient, action)
+    @message = replace_variables(body, recipient)
     @action_title = action.full_title
     @sender = sender
     @recipient = recipient
-    mail to: recipient.email, reply_to: sender.email, subject: replace_variables(message.subject, recipient)
+    mail to: recipient.email, reply_to: sender.email,
+         subject: replace_variables(subject, recipient)
   end
 
-  def contact_leaders_mail(message, sender, recipient, action)
-    @message = message.body
+  def contact_leaders_mail(body, subject, sender, recipient, action)
+    @message = body
     @sender = sender
     @recipient = recipient
     @action_title = action.full_title
-    mail to: recipient.email, reply_to: sender.email, subject: message.subject
+    mail to: recipient.email, reply_to: sender.email, subject: subject
   end
 
-  def user_mail(message, sender, recipient)
-    @message = message.body
+  def user_mail(body, subject, sender, recipient)
+    @message = body
     @sender = sender
     @recipient = recipient
-    mail to: recipient.email, reply_to: sender.email, subject: message.subject
+    mail to: recipient.email, reply_to: sender.email, subject: subject
   end
 
-  def orga_mail(message, recipient)
-    @message = replace_variables(message.body, recipient)
+  def orga_mail(orga_message, recipient)
+    @message = replace_variables(orga_message.body, recipient)
     @recipient = recipient
-    @type = message.content_type
-    mail to: recipient.email, reply_to: message.from,
-         subject: replace_variables(message.subject, recipient)
+    @type = orga_message.content_type
+    mail to: recipient.email, reply_to: orga_message.from,
+         subject: replace_variables(orga_message.subject, recipient)
   end
 
-  def orga_mail_notification(message, recipient)
+  def orga_mail_notification(orga_message, recipient)
     @recipient = recipient
-    mail to: recipient.email, reply_to: message.from,
-         subject: t('mailer.orga_mail_notification.subject', subject: message.subject)
+    mail to: recipient.email, reply_to: orga_message.from,
+         subject: t('mailer.orga_mail_notification.subject', subject: orga_message.subject)
   end
 
   # reminder email to a user when he/she joins an action

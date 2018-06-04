@@ -39,23 +39,22 @@
           </table>
           <span><%= email_reception_description @user %></span>
 
-          <div class="row mt-5">
-            <div class="col">
-              <% if policy(@user).edit?  %>
-                <%= link_to edit_user_path, title: t('user.button.edit'), class:'btn btn-primary btn-block' do %>
-                  <span class="fas fa-pencil-alt"></span>
-                  <%= t('user.button.edit') %>
-                <% end %>
-              <% end %>
+          <% if policy(@user).edit?  %>
+            <div class="row mt-5">
+                <div class="col">
+                    <%= link_to edit_user_path, title: t('user.button.edit'), class:'btn btn-primary btn-block' do %>
+                      <span class="fas fa-pencil-alt"></span>
+                      <%= t('user.button.edit') %>
+                    <% end %>
+                </div>
+                <div class="col">
+                  <%= link_to destroy_user_session_path, method: :delete, title: t('user.button.logout'), class:'btn btn-secondary btn-block' do %>
+                    <span class="fas fa-sign-out-alt"></span>
+                    <%= t('user.button.logout') %>
+                  <% end %>
+                </div>
             </div>
-            <div class="col">
-              <%= link_to destroy_user_session_path, method: :delete, title: t('user.button.logout'), class:'btn btn-secondary btn-block' do %>
-                <span class="fas fa-sign-out-alt"></span>
-                <%= t('user.button.logout') %>
-              <% end %>
-            </div>
-          </div>
-
+          <% end %>
         </section>
     <% end %>
 

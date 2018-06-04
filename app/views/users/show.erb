@@ -98,6 +98,7 @@
       <% end %>
 
       <% if past_initiatives_as_leader.any? %>
+        <h3 class="mt-3"><%= t('user.heading.pastActionsAsLeader') %></h3>
         <% past_initiatives_as_leader.sort_by {|e| e.date}.each do |initiative| %>
           <%= render '/initiatives/entry', initiative: initiative, show_occupancy: false %>
         <% end %>

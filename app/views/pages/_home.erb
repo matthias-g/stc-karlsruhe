@@ -42,8 +42,8 @@
       <h2 class="sr-only">Karte</h2>
       <div id="home-actions-map" data-class="GoogleMap" data-lat="49.011627" data-lon="8.403869" data-zoom="12">
         <div class="markers">
-          <% events = policy_scope(Event.upcoming).includes(initiative: [:parent_action, :subactions]).load %>
-          <% events = policy_scope(Event.recent.limit(45)).includes(initiative: [:parent_action, :subactions]) unless events.any? %>
+          <% events = policy_scope(Event.upcoming).load %>
+          <% events = policy_scope(Event.recent.limit(45)) unless events.any? %>
           <% events.each do |event| %>
             <% action = event.initiative %>
             <% if action.visible? && !action.longitude.nil? && !action.latitude.nil? %>
@@ -89,9 +89,9 @@
     <div class="col-sm-7 col-md-6 col-lg-4">
 
       <div id="home-action-list">
-        <% if user_signed_in? && (events = current_user.events.upcoming.includes(initiative: :subactions).load).any? %>
+        <% if user_signed_in? && (events = current_user.events.upcoming.load).any? %>
           <h3>Deine Aktionen</h3>
-        <% elsif (events = policy_scope(Event.upcoming.limit(4)).includes(initiative: :subactions).load).any? %>
+        <% elsif (events = policy_scope(Event.upcoming.limit(4)).load).any? %>
           <h3>Nächste Aktionen</h3>
         <% else %>
           <h3>Vergangene Aktionen</h3>

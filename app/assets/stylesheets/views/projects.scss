@@ -1,0 +1,88 @@
+// VIEW RESTRICTED RULES (all "action" views)
+
+#projects {
+
+  // action title
+  h1 {
+    text-align: center;
+    hyphens: auto;
+  }
+
+  // badges in the action header, like "hidden" or "finished"
+  .labels {
+    text-align: center;
+    font-size: 1.7em;
+  }
+
+  // section headers
+  h3 {
+    margin: 5px 0;
+  }
+
+  // picture
+  .action-picture {
+    width: 100%;
+    img {
+      width: 100%;
+      height: auto;
+      border: 1px solid $default_border;
+    }
+  }
+
+  // description
+  .description {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    textarea {
+      min-height: 300px;
+    }
+  }
+  .short_description textarea {
+    min-height: 120px;
+  }
+  .individual_tasks, .requirements, .material {
+    text-align: justify;
+    margin-top: 15px;
+    textarea {
+      min-height: 80px;
+    }
+  }
+
+  // gallery
+  #actions-gallery {
+    background: #222;
+    color: #eee;
+    .picture-upload, #gallery_picture {
+      padding-top: 20px;
+    }
+  }
+
+  // communication forms
+  #action-communication {
+    .form-group {
+      max-width: 550px;
+    }
+    textarea {
+      min-height: 150px;
+    }
+  }
+
+  // time and location
+  .days select {
+    min-height: 90px;
+  }
+  .location textarea {
+    min-height: 80px;
+  }
+  .map {
+    border-radius: 6px;
+    border: 1px solid $default_border;
+    height: 150px;
+    width: 100%;
+  }
+
+  // event list
+  .event_finished {
+    display: none;
+  }
+}

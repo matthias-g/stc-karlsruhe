@@ -44,18 +44,18 @@
 
           <% if @project.picture.file %>
             <div class="action-picture picture-container">
-              <%= image_tag @action.picture_url(:action_view) %>
+              <%= image_tag @project.picture_url(:action_view) %>
             </div>
             <% if @project.persisted? %>
-              <%= link_to crop_picture_modal_action_path(@action, crop_target: 'action_list'),
+              <%= link_to crop_picture_modal_action_path(@project, crop_target: 'action_list'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
                 <span class="fas fa-crop"></span> <%= t('project.button.cropListImage') %>
               <% end %>
-              <%= link_to crop_picture_modal_action_path(@action, crop_target: 'action_view'),
+              <%= link_to crop_picture_modal_action_path(@project, crop_target: 'action_view'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'}  do %>
                 <span class="fas fa-crop"></span> <%= t('project.button.cropActionImage') %>
               <% end %>
-              <%= link_to crop_picture_modal_action_path(@action, crop_target: 'action_card_list'),
+              <%= link_to crop_picture_modal_action_path(@project, crop_target: 'action_card_list'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
                 <span class="fas fa-crop"></span> <%= t('project.button.cropActionCardImage') %>
               <% end %>

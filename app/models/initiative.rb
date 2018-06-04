@@ -62,6 +62,14 @@ class Initiative < ApplicationRecord
     title
   end
 
+  def finished?
+    events.upcoming.empty?
+  end
+
+  def date
+    nil
+  end
+
 
   protected
 

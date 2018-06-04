@@ -53,6 +53,7 @@ de:
       actionsAsLeader: 'Leitung'
       actionsAsVolunteer: 'Teilnahme'
       pastActions: 'Abgeschlossen'
+      pastActionsAsLeader: 'Abgeschlossene Aktionsleitungen'
 
     button:
       login: 'Anmelden'

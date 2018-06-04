@@ -10,12 +10,12 @@ class EventsController < ApplicationController
 
   def enter
     @event.add_volunteer(current_user)
-    redirect_to action_url(@event.initiative), notice: t('action.message.enteredAction')
+    redirect_to @event.initiative, notice: t('action.message.enteredAction')
   end
 
   def leave
     @event.delete_volunteer(current_user)
-    redirect_to action_url(@event.initiative), notice: t('action.message.leftAction')
+    redirect_to @event.initiative, notice: t('action.message.leftAction')
   end
 
   def register_for_participation

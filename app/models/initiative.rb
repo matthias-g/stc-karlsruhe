@@ -20,6 +20,16 @@ class Initiative < ApplicationRecord
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
+  def is_action?
+    type == 'Action'
+  end
+
+  def contact_leaders(message, sender)
+    (leaders + [current_user]).uniq.each do |recipient|
+      Mailer.contact_leaders_mail(message.body, message.subject, sender, recipient, self).deliver_later
+    end
+  end
+
   def leader?(user)
     leaders.include? user
   end
@@ -48,68 +58,23 @@ class Initiative < ApplicationRecord
     update_attribute :visible, false
   end
 
-  def available_places
-    events.sum(&:available_places)
-  end
-
-  def desired_team_size
-    events.sum(:desired_team_size)
-  end
-
-  def team_size
-    events.sum(:team_size)
-  end
-
-  def total_available_places
-    all_events.sum(&:available_places)
-  end
-
-  def total_team_size
-    all_events.sum(:team_size)
-  end
-
-  def total_desired_team_size
-    all_events.sum(:desired_team_size)
-  end
-
-  def all_dates
-    all_events.pluck(:date).compact.uniq.sort
-  end
-
-  def all_events
-    Event.joins(:initiative).where('initiative_id = ?', id)
-  end
-
-  def finished?
-    all_events.upcoming.empty?
-  end
-
   def full_title
     title
   end
 
-  def status
-    if finished?
-      :finished
-    elsif total_available_places.zero?
-      :full
-    else
-      total_available_places < 3 ? :soon_full : :empty
-    end
-  end
 
+  protected
+
+  def slug_candidates
+    candidates = []
+    candidates << [full_title]
+    candidates
+  end
 
   private
 
   def should_generate_new_friendly_id?
     title_changed? || super
-  end
-
-  def slug_candidates
-    candidates = []
-    candidates << [full_title]
-    candidates << [full_title, action_group.title] if action_group
-    candidates
   end
 
 end

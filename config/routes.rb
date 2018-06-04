@@ -5,16 +5,28 @@ Rails.application.routes.draw do
   get ':id/aktionen', to: 'action_groups#show', as: 'show_action_group'
 
 
-  # actions & events
+  # actions, projects & events
   resources :actions, path: 'aktionen' do
     member do
       delete :delete_leader
       get :make_visible
       get :make_invisible
-      get :crop_picture
+      get :crop_picture_modal
+      post :crop_picture
       post :contact_volunteers
       post :contact_leaders
       get :clone
+    end
+  end
+  resources :projects, path: 'projekte' do
+    member do
+      delete :delete_leader
+      get :make_visible
+      get :make_invisible
+      get :crop_picture_modal
+      post :crop_picture
+      post :contact_volunteers
+      post :contact_leaders
     end
   end
   resources :events do
@@ -30,7 +42,8 @@ Rails.application.routes.draw do
   # news entries
   resources :news_entries, path: 'news' do
     member do
-      get :crop_picture
+      get :crop_picture_modal
+      post :crop_picture
     end
   end
 
@@ -97,6 +110,7 @@ Rails.application.routes.draw do
 
   # iCal
   get 'ical/aktionen/:action_id.ics', to: 'ical#actions', as: :action_ical
+  get 'ical/projekte/:project_id.ics', to: 'ical#projects', as: :project_ical
   get 'ical/aktionswochen/:action_group_id.ics', to: 'ical#action_groups', as: :action_group_ical
   get 'ical/users/:ical_token/:user_id.ics', to: 'ical#users', as: :user_ical
   get 'ical/aktionen.ics', to: 'ical#all_actions', as: :all_actions_ical
@@ -106,6 +120,7 @@ Rails.application.routes.draw do
   namespace :api, constraints: { format: 'json' } do
     jsonapi_resources :action_groups
     jsonapi_resources :actions
+    jsonapi_resources :projects
     jsonapi_resources :events
     jsonapi_resources :news_entries
     jsonapi_resources :users

@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
 
-  belongs_to :initiative, class_name: 'Action'
+  belongs_to :initiative, class_name: 'Initiative'
 
   has_many :participations, dependent: :destroy, counter_cache: :team_size
   has_many :volunteers, class_name: 'User', through: :participations, source: :user,

@@ -13,9 +13,21 @@ class IcalController < ApplicationController
     authorize action, :show?
     calendar = create_calendar
 
-    add_action_to_calendar(action, calendar)
+    add_initiative_to_calendar(action, calendar)
 
     @filename = action.full_title
+    ical_feed = calendar.to_ical
+    render plain: ical_feed
+  end
+
+  def projects
+    project = Project.friendly.find(params[:project_id])
+    authorize project, :show?
+    calendar = create_calendar
+
+    add_initiative_to_calendar(project, calendar)
+
+    @filename = project.full_title
     ical_feed = calendar.to_ical
     render plain: ical_feed
   end
@@ -26,7 +38,7 @@ class IcalController < ApplicationController
     calendar = create_calendar
 
     policy_scope(action_group.actions).each do |action|
-      add_action_to_calendar(action, calendar)
+      add_initiative_to_calendar(action, calendar)
     end
 
     @filename = action_group.title
@@ -40,7 +52,7 @@ class IcalController < ApplicationController
     calendar = create_calendar
 
     policy_scope(user.actions).each do |action|
-      add_action_to_calendar(action, calendar)
+      add_initiative_to_calendar(action, calendar)
     end
 
     @filename = I18n.t('ical.heading.users', name: user.first_name)
@@ -52,7 +64,7 @@ class IcalController < ApplicationController
     calendar = create_calendar
 
     policy_scope(Action).each do |action|
-      add_action_to_calendar(action, calendar)
+      add_initiative_to_calendar(action, calendar)
     end
 
     @filename = I18n.t('ical.heading.all_actions')
@@ -77,8 +89,8 @@ class IcalController < ApplicationController
     end
   end
 
-  def add_action_to_calendar(action, calendar)
-    action.events.each do |event|
+  def add_initiative_to_calendar(initiative, calendar)
+    initiative.events.each do |event|
       date = event.date
       next unless date
       calendar.event do |cal_event|
@@ -93,11 +105,15 @@ class IcalController < ApplicationController
           event_end = DateTime.new(date.year, date.month, date.day, event.end_time.hour, event.end_time.min, 0)
           cal_event.dtend = Values::DateTime.new event_end
         end
-        cal_event.summary = action.full_title
-        cal_event.location = action.location&.gsub(/\s*\r?\n\s*/, ', ')
-        cal_event.description = format_urls_no_html(action.description)
-        cal_event.categories = action.action_group.title if action.action_group
-        cal_event.url = action_url(action)
+        cal_event.summary = initiative.full_title
+        cal_event.location = initiative.location&.gsub(/\s*\r?\n\s*/, ', ')
+        cal_event.description = format_urls_no_html(initiative.description)
+        if initiative.is_action?
+          cal_event.categories = initiative.action_group.title if initiative.action_group
+          cal_event.url = action_url(initiative)
+        else
+          cal_event.url = project_url(initiative)
+        end
       end
     end
   end

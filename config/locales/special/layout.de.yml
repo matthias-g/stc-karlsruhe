@@ -31,6 +31,10 @@ de:
         list: 'Aktionen'
         new: 'Neue Aktion'
         edit: 'Aktion bearbeiten: %{action}'
+      project:
+        list: 'Projekte'
+        new: 'Neues Projekt'
+        edit: 'Projekt bearbeiten: %{project}'
       newsEntryList: 'Newseinträge'
       newsEntryNew: 'Neuer Newseintrag'
       newsEntryEdit: 'News bearbeiten: %{news_entry}'

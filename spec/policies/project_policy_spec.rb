@@ -1,33 +1,33 @@
 require 'rails_helper'
 require 'helpers'
 
-RSpec.describe ActionPolicy do
+RSpec.describe ProjectPolicy do
 
   include Helpers
-  fixtures :users, :actions, :events
+  fixtures :users, :projects, :events
 
   let(:user) { nil }
-  let(:action) { actions(:default) }
+  let(:project) { projects(:default) }
   let(:event) { events(:default) }
-  let(:policy) { ActionPolicy.new(user, action) }
+  let(:policy) { ProjectPolicy.new(user, project) }
 
   permissions :show? do
     subject { described_class }
 
-    context 'for visible action' do
-      it { grants_access }
+    context 'for visible project' do
+      it { grants_access_to_project }
     end
 
-    context 'for invisible action' do
-      before { hide_initiative(action) }
+    context 'for invisible project' do
+      before { hide_initiative(project) }
 
       context 'as visitor' do
-        it { denies_access }
+        it { denies_access_to_project }
       end
 
       context 'as leader' do
         let(:user) { users(:leader) }
-        it { grants_access }
+        it { grants_access_to_project }
       end
     end
   end
@@ -43,9 +43,9 @@ RSpec.describe ActionPolicy do
       let(:user) { users(:leader) }
       it { should_pass }
 
-      context 'for finished action' do
-        before { finish_initiative(action) }
-        it { should_fail }
+      context 'for finished project' do
+        before { finish_initiative(project) }
+        it { should_pass }
       end
     end
 
@@ -71,17 +71,17 @@ RSpec.describe ActionPolicy do
 
     context 'for other user' do
       let(:user) { users(:leader) }
-      it { denies_access }
+      it { denies_access_to_project }
     end
 
     context 'as admin' do
       let(:user) { users(:admin) }
-      it { grants_access }
+      it { grants_access_to_project }
     end
 
     context 'as coordinator' do
       let(:user) { users(:coordinator) }
-      it { grants_access }
+      it { grants_access_to_project }
     end
   end
 
@@ -122,8 +122,8 @@ RSpec.describe ActionPolicy do
       it { should_fail }
     end
 
-    context 'for invisible action' do
-      before { hide_initiative(action) }
+    context 'for invisible project' do
+      before { hide_initiative(project) }
 
       context 'as leader' do
         let(:user) { users(:leader) }
@@ -155,8 +155,8 @@ RSpec.describe ActionPolicy do
       it { should_fail }
     end
 
-    context 'for invisible action' do
-      before { action.visible = false }
+    context 'for invisible project' do
+      before { project.visible = false }
 
       context 'as volunteer' do
         let(:user) { users(:volunteer) }
@@ -169,12 +169,12 @@ RSpec.describe ActionPolicy do
       end
     end
 
-    context 'for finished action' do
-      before { finish_initiative(action) }
+    context 'for finished project' do
+      before { finish_initiative(project) }
 
       context 'as volunteer' do
         let(:user) { users(:volunteer) }
-        it { should_fail }
+        it { should_pass }
       end
 
       context 'as other user' do
@@ -188,7 +188,7 @@ RSpec.describe ActionPolicy do
   describe 'upload_pictures?' do
     subject { policy.upload_pictures? }
 
-    context 'for future action' do
+    context 'for future project' do
       before { event.update_attribute :date, Date.tomorrow }
 
       context 'as visitor' do
@@ -197,12 +197,12 @@ RSpec.describe ActionPolicy do
 
       context 'as admin' do
         let(:user) { users(:admin) }
-        it { should_fail }
+        it { should_pass }
       end
     end
 
-    context 'for past action' do
-      before { finish_initiative(action) }
+    context 'for past project' do
+      before { finish_initiative(project) }
 
       context 'as visitor' do
         it { should_fail }
@@ -239,13 +239,13 @@ RSpec.describe ActionPolicy do
       end
     end
 
-    context 'for today action' do
+    context 'for today project' do
       before { event.update_attribute :date, 1.seconds.ago }
       let(:user) { users(:admin) }
       it { should_pass }
     end
 
-    context 'for undated action' do
+    context 'for undated project' do
       before { event.update_attribute :date, nil }
       it { should_fail }
     end
@@ -258,9 +258,9 @@ RSpec.describe ActionPolicy do
       let(:user) { users(:leader) }
       it { should_pass }
 
-      context 'for finished action' do
-        before { finish_initiative(action) }
-        it { should_fail }
+      context 'for finished project' do
+        before { finish_initiative(project) }
+        it { should_pass }
       end
     end
 
@@ -287,7 +287,7 @@ RSpec.describe ActionPolicy do
 
   describe 'updatable_fields' do
     subject { policy.updatable_fields }
-    let(:all_fields) { Api::ActionResource._updatable_relationships | Api::ActionResource._attributes.keys - [:id] }
+    let(:all_fields) { Api::ProjectResource._updatable_relationships | Api::ProjectResource._attributes.keys - [:id] }
 
     context 'as admin' do
       let(:user) { users(:admin) }

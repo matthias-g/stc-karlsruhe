@@ -1,0 +1,18 @@
+<% provide :title, t('layout.title.project.list') %>
+<% wrapper_set %>
+
+
+
+<div class="white-box">
+  <h1>Projekte</h1>
+</div>
+
+<div class="white-box container-small">
+  <h3>Optionen</h3>
+  <%= link_to 'Neues Projekt', new_project_path, class:'btn btn-primary btn-block' %>
+</div>
+<% @projects.each do |project| %>
+  <%= render 'initiatives/entry', initiative: project %>
+<% end %>
+
+

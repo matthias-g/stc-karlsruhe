@@ -5,8 +5,6 @@
 <% show_occupancy = local_assigns.fetch :show_occupancy, true %>
 <% show_date = local_assigns.fetch :show_date, true %>
 
-<% is_action = (initiative.type == 'Action') %>
-
 <%= link_to initiative, class: (initiative.visible? ? 'action-entry' : 'action-entry hidden-action') do %>
 
   <div class="image">
@@ -14,16 +12,16 @@
   </div>
 
   <div class="info">
-    <% if show_date && is_action && !initiative.nil? %>
+    <% if show_date && initiative.is_action? && !initiative.date.nil? %>
       <div class="date"><%= l initiative.date, format: :date %></div>
     <% end %>
-    <% if !simple_title && is_action && initiative.subaction? %>
+    <% if !simple_title && initiative.is_action? && initiative.subaction? %>
       <div class="parent-title"><%= initiative.parent_action.title %></div>
     <% end %>
     <div class="title"><%= initiative.title %></div>
   </div>
 
-  <% if is_action %>
+  <% if initiative.is_action? %>
     <% team_size, desired_team_size, status = initiative.total_team_size, initiative.total_desired_team_size, initiative.status %>
 
     <% if show_occupancy && desired_team_size.positive? %>

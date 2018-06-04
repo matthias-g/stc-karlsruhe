@@ -1,4 +1,4 @@
-class ActionPolicy < ApplicationPolicy
+class ProjectPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
@@ -18,7 +18,7 @@ class ActionPolicy < ApplicationPolicy
   end
 
   def edit?
-    is_admin_or_coordinator? || (is_leader? && !record.finished?)
+    is_admin_or_coordinator? || is_leader?
   end
 
   def contact_volunteers?
@@ -26,18 +26,17 @@ class ActionPolicy < ApplicationPolicy
   end
 
   def contact_leaders?
-    record.visible? && is_volunteer? && !record.finished?
+    record.visible? && is_volunteer?
   end
 
   def upload_pictures?
-    is_today_or_past? && (is_volunteer? || is_leader? || is_admin_or_coordinator? || user&.photographer?)
+    is_volunteer? || is_leader? || is_admin_or_coordinator? || user&.photographer?
   end
 
 
   alias_method :index?, :is_admin_or_coordinator?
   alias_method :create?, :is_admin_or_coordinator?
 
-  alias_method :clone?, :edit?
   alias_method :update?, :edit?
   alias_method :destroy?, :edit?
   alias_method :crop_picture?, :edit?
@@ -54,8 +53,8 @@ class ActionPolicy < ApplicationPolicy
   def updatable_fields
     all_fields = [:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements,
                   :visible, :short_description, :map_latitude, :map_longitude, :map_zoom,
-                  :picture, :picture_source, :events, :action_group, :parent_action, :leaders, :volunteers]
-    return all_fields - [:visible] unless is_admin? || is_coordinator?
+                  :picture, :picture_source, :events, :leaders, :volunteers]
+    return all_fields - [:visible] unless is_admin_or_coordinator?
     all_fields
   end
 
@@ -68,10 +67,6 @@ class ActionPolicy < ApplicationPolicy
 
   def is_volunteer?
     record.volunteer?(user)
-  end
-
-  def is_today_or_past?
-    record.all_events.today_or_past.any?
   end
 
 end

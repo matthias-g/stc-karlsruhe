@@ -21,14 +21,22 @@ module Helpers
     expect(subject).not_to permit(user, action)
   end
 
-  def finish_action(action)
-    action.events.each do |event|
+  def grants_access_to_project
+    expect(subject).to permit(user, project)
+  end
+
+  def denies_access_to_project
+    expect(subject).not_to permit(user, project)
+  end
+
+  def finish_initiative(initiative)
+    initiative.events.each do |event|
       event.update_attribute :date, 2.days.ago
     end
   end
 
-  def hide_action(action)
-    action.update_attribute :visible, false
+  def hide_initiative(initiative)
+    initiative.update_attribute :visible, false
   end
 
 end

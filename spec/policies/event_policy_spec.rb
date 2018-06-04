@@ -149,7 +149,7 @@ RSpec.describe EventPolicy do
       it { should_pass }
 
       context 'for finished event' do
-        before { finish_action(event.initiative) }
+        before { finish_initiative(event.initiative) }
         it { should_fail }
       end
     end
@@ -159,7 +159,7 @@ RSpec.describe EventPolicy do
       it { should_pass }
 
       context 'for finished event' do
-        before { finish_action(event.initiative) }
+        before { finish_initiative(event.initiative) }
         it { should_pass }
       end
     end

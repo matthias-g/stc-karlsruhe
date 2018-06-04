@@ -1,0 +1,121 @@
+de:
+  activerecord:
+
+    models:
+      project:
+        one: 'Projekt'
+        other: 'Projekte'
+
+    attributes:
+      project:
+        title: 'Projektname'
+        description: 'Beschreibung'
+        short_description: 'Kurzbeschreibung'
+        location: 'Projektort'
+        latitude: 'Breitengrad'
+        longitude: 'Längengrad'
+        individual_tasks: 'Einzelne Arbeiten'
+        material: 'Benötigtes Material'
+        requirements: 'Voraussetzungen'
+        visible: 'Sichtbar'
+        picture: 'Bild'
+        picture_source: 'Bildrechte /-quelle'
+        leaders: 'Leitung'
+        volunteers: 'Team'
+        status: 'Status'
+        date: 'Projekttag'
+        dates: 'Projekttage'
+      event:
+        date: 'Datum'
+        time: 'Uhrzeit'
+        desired_team_size: 'Gewünschte Teamgröße'
+
+  project:
+    navigation:
+      toOverview: 'zur Projektliste'
+      toAction: 'zurück zum Projekt'
+
+    heading:
+      new: 'Neues Projekt'
+      edit: 'Projekt bearbeiten'
+
+      management: 'Projektverwaltung'
+      leaders: 'Leitung'
+      days: 'Projekttage'
+      locations: 'Projektort'
+      team: 'Team'
+      contactTeam: 'Mitarbeiter des Projekts benachrichtigen'
+      contactLeader: 'Projektleiter kontaktieren'
+
+      cropImage: 'Bildausschnitt für %{crop_target} anpassen'
+      cropTarget:
+        action_list: 'Listenansicht'
+        action_view: 'Projektseite'
+        action_card_list: 'Projekt-Übersicht'
+
+    button:
+      edit: 'Bearbeiten'
+      makeVisible: 'Sichtbar machen'
+      makeInvisible: 'Verstecken'
+
+      addLeader: 'Projektleiter hinzufügen'
+      removeLeader: 'Projektleiter entfernen'
+      addVolunteer: 'Mitarbeiter hinzufügen'
+      removeVolunteer: 'Mitarbeiter entfernen'
+      addEvent: 'Termin hinzufügen'
+      removeEvent: 'Termin löschen'
+      enter: 'Team beitreten'
+      leave: 'Team verlassen'
+      cropListImage: 'Listenbild anpassen'
+      cropActionImage: 'Projektbild anpassen'
+      cropActionCardImage: 'Übersichtsbild anpassen'
+      crop: 'Zuschneiden'
+
+      exportICal: 'Als iCal/ICS exportieren'
+      showPastEvents: 'vergangene Zeiträume zeigen'
+      contactTeam: 'Nachricht verteilen'
+      contactLeader: 'Nachricht senden'
+
+    info:
+      status:
+        empty: 'Freie Plätze'
+        soon_full: 'Wenige Plätze'
+        full: 'Vollbesetzt'
+        finished: 'Abgeschlossen'
+        hidden: 'Versteckt'
+      vacancies: 'freie Plätze'
+      no_volunteers: 'Bisher haben sich noch keine Mitarbeiter angemeldet.'
+      teamMember: 'Du bist im Projektteam.'
+      remainingVacancy: '%{places} freie Plätze'
+
+    help:
+      picture_source: 'Bitte gib hier die Quelle des hochgeladenen Bildes an. Wenn Du dieses Feld frei lässt, wird das Bild nicht angezeigt.'
+      short_description: 'Wenn Du dieses Feld ausfüllst, wird es in der Projektliste statt der ausführlichen Beschreibung angezeigt.'
+      contactTeam: 'Hier kannst du den Mitarbeitern der Projekt eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
+      contactLeader: 'Hier kannst du den Projektleitern eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
+
+    message:
+      addLeaderSuccess: 'Leiter erfolgreich hinzugefügt'
+      removeLeaderSuccess: 'Leiter erfolgreich entfernt'
+      addVolunteerSuccess: 'Mitarbeiter erfolgreich hinzugefügt'
+      removeVolunteerSuccess: 'Mitarbeiter erfolgreich entfernt'
+      imageCropped: 'Der Bildausschnitt wurde angepasst.'
+      created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
+      updated: 'Projekt wurde erfolgreich aktualisiert.'
+      errorList: 'Wegen folgender Fehler konnte das Projekt nicht gespeichert werden:'
+      isFull: 'Dieses Projekt ist schon vollbesetzt.'
+      enteredAction: 'Du nimmst jetzt an diesem Projekt teil.'
+      leftAction: 'Du hast dich vom Projekt abgemeldet.'
+      madeVisible: 'Projekt wurde sichtbar gemacht.'
+      madeInvisible: 'Projekt wurde unsichtbar gemacht.'
+      galleryPicturesUploaded: 'Vielen Dank für das Hochladen deiner Bilder! Sobald sie jemand aus dem Orgateam freigeschaltet hat,
+        sind sie öffentlich sichtbar.'
+      confirmDeleteEvent: 'Löschen bestätigen'
+
+    form:
+      contactTeam:
+        subject: 'Worum geht''s?'
+        message: 'Deine Nachricht'
+      contactLeader:
+        subject: 'Worum geht''s?'
+        message: 'Deine Nachricht'

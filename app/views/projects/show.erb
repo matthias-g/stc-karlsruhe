@@ -1,0 +1,195 @@
+<% provide :title, "Projekt ""#{@project.title}"""%>
+<% wrapper_set 'container-medium' %>
+<% wrapper_classes.add('action-invisible') unless @project.visible? %>
+
+<% content_for :head do %>
+  <meta name="description" content="<%= strip_tags @project.short_description %>" />
+  <% if @project.show_picture? %>
+    <meta property="og:image" content="<%= image_url(@project.picture_url) %>" />
+  <% end %>
+  <meta property="og:description" content="<%= strip_tags @project.short_description %>" />
+<% end %>
+
+<div class="white-box record-header d-print-none">
+  <div class="type">
+    <%= Project.model_name.human %>
+  </div>
+
+  <h1><%= @project.full_title %></h1>
+  <div class="labels">
+    <% unless @project.visible? %>
+      <span class="badge status_hidden"><%= t('project.info.status.hidden') %></span>
+    <% end %>
+  </div>
+</div>
+
+<div class="row align-items-stretch">
+  <div class="col-md-8">
+    <div class="row parent-height align-items-stretch">
+      <div class="col-12">
+
+        <section class="white-box">
+          <h2 class="d-print-only"><%= @project.title %></h2>
+
+          <%# picture %>
+          <% if @project.show_picture? && @project.picture.file %>
+            <div class="action-picture picture-container">
+              <%= image_tag @project.picture_url(:action_view) %>
+              <div class="copyright" title="© <%= @project.picture_source %>">
+                © <%= @project.picture_source %>
+              </div>
+            </div>
+          <% end %>
+
+          <%# description %>
+          <div class="description">
+            <%= simple_format( simple_format_urls @project.description ) %>
+          </div>
+          <% unless @project.individual_tasks.blank? %>
+            <div class="individual_tasks">
+              <h3><%= Project.human_attribute_name(:individual_tasks) %></h3>
+              <%= simple_format( simple_format_urls @project.individual_tasks) %>
+            </div>
+          <% end %>
+          <% unless @project.requirements.blank? %>
+            <div class="requirements">
+              <h3><%= Project.human_attribute_name(:requirements) %></h3>
+              <%= simple_format( simple_format_urls @project.requirements) %>
+            </div>
+          <% end %>
+          <% unless @project.material.blank? %>
+            <div class="material">
+              <h3><%= Project.human_attribute_name(:material) %></h3>
+              <%= simple_format( simple_format_urls @project.material) %>
+            </div>
+          <% end %>
+
+        </section>
+
+      </div>
+
+      <%# gallery %>
+      <% if has_gallery_pictures?(@project.gallery) || policy(@project).upload_pictures? %>
+        <div class="col-12">
+          <section id="actions-gallery" class="white-box d-print-none">
+            <%#= render 'galleries/action_gallery', gallery: @project.gallery %>
+          </section>
+        </div>
+      <% end %>
+
+      <%# communication %>
+      <% if policy(@project).contact_volunteers? %>
+        <div class="col-12">
+          <section id="action-communication" class="white-box d-print-none">
+            <%= bootstrap_form_for(@message, url: {project: 'contact_volunteers'}) do |f| %>
+              <h3><%= t('project.heading.contactTeam') %></h3>
+              <p><%= t('project.help.contactTeam') %></p>
+              <% if user_signed_in? && current_user.admin? %>
+                <p>(<%= (@project.volunteers + @project.leaders + [current_user]).uniq.map { |v| v.email}.join(', ') %>)</p>
+              <% end %>
+              <%= f.text_field :subject, label: t('project.form.contactTeam.subject') %>
+              <%= f.text_area :body, label: t('project.form.contactTeam.message') %>
+              <%= f.submit t('project.button.contactTeam'), class: 'btn btn-primary' %>
+            <% end %>
+          </section>
+        </div>
+      <% elsif policy(@project).contact_leaders? %>
+        <div class="col-12">
+          <section id="action-communication" class="white-box d-print-none">
+            <%= bootstrap_form_for(@message, url: {project: 'contact_leaders'}) do |f| %>
+              <h3><%= t('project.heading.contactLeader') %></h3>
+              <p><%= t('project.help.contactLeader') %></p>
+              <%= f.text_field :subject, label: t('project.form.contactLeader.subject') %>
+              <%= f.text_area :body, label: t('project.form.contactLeader.body') %>
+              <%= f.submit t('project.button.contactLeader'), class: 'btn btn-primary' %>
+            <% end %>
+          </section>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="row align-items-stretch">
+
+      <%# control panel %>
+      <% if policy(@project).edit? %>
+        <div class="col-sm-6 col-md-12 d-print-none">
+          <section class="white-box">
+            <%= link_to edit_project_path(@project), class:'btn btn-primary btn-block' do %>
+              <span class="fas fa-pencil-alt"></span> <%= t('project.button.edit') %>
+            <% end %>
+            <% if policy(@project).change_visibility? %>
+              <% if @project.visible %>
+                <%= link_to make_invisible_project_path(@project), class:'btn status_hidden btn-block' do %>
+                  <span class="fas fa-eye-slash"></span> <%= t('project.button.makeInvisible') %>
+                <% end %>
+              <% else %>
+                <%= link_to make_visible_project_path(@project), class:'btn status_hidden btn-block' do %>
+                  <span class="fas fa-eye"></span> <%= t('project.button.makeVisible') %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </section>
+        </div>
+      <% end %>
+
+      <%# action date/location info %>
+      <div class="col-sm-6 col-md-12">
+        <div class="white-box">
+          <div id="action-leaders" class="mb-2">
+            <h3><%= Project.human_attribute_name('leaders') %></h3>
+            <div class="comma-list">
+              <% @project.leaders.each do |leader| %>
+                <span>
+                  <%= link_to leader.first_name, leader %>
+                  <% if policy(@project).manage_team? %>
+                    <%= api_link '', [@project, 'leaders', leader], :remove, data: {'success-remove': 1} %>
+                  <% end %>
+                </span>
+              <% end %>
+            </div>
+            <% if policy(@project).manage_team? && policy(User).index? %>
+              <div class="my-2">
+                <%= user_select_picker @project, 'leaders', false, class: 'col-select btn-block',
+                                       title: t('project.button.addLeader'), data: {'success-reload': true} %>
+              </div>
+            <% end %>
+          </div>
+          <div>
+            <h3><%= Project.human_attribute_name(:location) %></h3>
+            <%= simple_format @project.location %>
+          </div>
+          <% unless @project.longitude == 0 %>
+            <div class="map d-print-none" data-class="GoogleMap" data-map-id="project"
+                 data-zoom="<%= @project.map_zoom %>"
+                 data-lon="<%= @project.map_longitude %>"
+                 data-lat="<%= @project.map_latitude %>">
+              <div class="markers">
+                <div data-name="<%= @project.title %>"
+                     data-lon="<%= @project.longitude %>"
+                     data-lat="<%= @project.latitude %>">
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <%# team info %>
+      <div class="col-sm-6 col-md-12 d-print-none">
+        <%= render 'events/event_team_list', events: @project.events %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="footer d-print-none">
+  <%= render '/layouts/share' %>
+  <%= link_to project_ical_path(@project), class: 'float-right px-1',
+              title: t('project.button.exportICal'), data: { 'turbolinks': false } do %>
+    <span class="far fa-calendar-alt fa-2x"></span>
+  <% end %>
+</div>

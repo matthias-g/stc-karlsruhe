@@ -9,13 +9,13 @@
   </div>
 <% end %>
 
-<%= bootstrap_form_for(@action, as: :the_action) do |f| %>
+<%= bootstrap_form_for(@project, as: :the_project) do |f| %>
 
-  <% if @action.errors.any? %>
+  <% if @project.errors.any? %>
     <section id="error_explanation">
-      <h2><%= t('action.message.errorList') %></h2>
+      <h2><%= t('project.message.errorList') %></h2>
       <ul>
-        <% @action.errors.full_messages.each do |msg| %>
+        <% @project.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>
@@ -24,10 +24,10 @@
 
   <div class="white-box record-header">
     <% if isNew %>
-      <h1><%= t('action.heading.new') %></h1>
+      <h1><%= t('project.heading.new') %></h1>
     <% else %>
-      <div class="type"><%= t('action.heading.edit') %></div>
-      <h1><%= @action.title %></h1>
+      <div class="type"><%= t('project.heading.edit') %></div>
+      <h1><%= @project.title %></h1>
     <% end %>
   </div>
 
@@ -42,34 +42,34 @@
           </label>
           <%= f.file_field :picture, hide_label: true %>
 
-          <% if @action.picture.file %>
+          <% if @project.picture.file %>
             <div class="action-picture picture-container">
               <%= image_tag @action.picture_url(:action_view) %>
             </div>
-            <% if @action.persisted? %>
+            <% if @project.persisted? %>
               <%= link_to crop_picture_modal_action_path(@action, crop_target: 'action_list'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
-                <span class="fas fa-crop"></span> <%= t('action.button.cropListImage') %>
+                <span class="fas fa-crop"></span> <%= t('project.button.cropListImage') %>
               <% end %>
               <%= link_to crop_picture_modal_action_path(@action, crop_target: 'action_view'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'}  do %>
-                <span class="fas fa-crop"></span> <%= t('action.button.cropActionImage') %>
+                <span class="fas fa-crop"></span> <%= t('project.button.cropActionImage') %>
               <% end %>
               <%= link_to crop_picture_modal_action_path(@action, crop_target: 'action_card_list'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
-                <span class="fas fa-crop"></span> <%= t('action.button.cropActionCardImage') %>
+                <span class="fas fa-crop"></span> <%= t('project.button.cropActionCardImage') %>
               <% end %>
 
             <% end %>
           <% end %>
 
         </div>
-        <%= f.text_field :picture_source, help: t('action.help.picture_source') %>
+        <%= f.text_field :picture_source, help: t('project.help.picture_source') %>
       </div>
 
       <div class="white-box">
         <div class="short_description">
-          <%= f.text_area :short_description, help: t('action.help.short_description') %>
+          <%= f.text_area :short_description, help: t('project.help.short_description') %>
         </div>
         <div class="description">
           <%= f.text_area :description %>
@@ -90,7 +90,7 @@
 
       <div class="white-box">
         <h3>
-          <%= t('action.heading.management') %>
+          <%= t('project.heading.management') %>
         </h3>
         <%= button_tag class: 'btn btn-success btn-block' do %>
           <span class="fas fa-save"></span> <%= t('general.button.save') %>
@@ -100,15 +100,12 @@
             <span class="fas fa-ban"></span> <%= t('general.button.cancel') %>
           <% end %>
         <% else %>
-          <%= link_to @action, class: 'btn btn-warning btn-block' do %>
+          <%= link_to @project, class: 'btn btn-warning btn-block' do %>
             <span class="fas fa-ban"></span> <%= t('general.button.cancel') %>
           <% end %>
-          <%= link_to clone_action_path(@action), class: 'btn btn-dark btn-block' do %>
-            <span class="far fa-copy"></span> <%= t('action.button.clone') %>
-          <% end %>
         <% end %>
-        <% if !isNew && policy(@action).destroy? %>
-          <%= link_to @action, method: :delete, class: 'btn btn-danger btn-block',
+        <% if !isNew && policy(@project).destroy? %>
+          <%= link_to @project, method: :delete, class: 'btn btn-danger btn-block',
                       data: { confirm: t('general.message.confirmDelete')} do %>
             <span class="fas fa-trash"></span> <%= t('general.button.delete') %>
           <% end %>
@@ -116,25 +113,18 @@
       </div>
 
       <div class="white-box">
-        <div class="week">
-          <%= f.collection_select(:action_group_id, ActionGroup.all.order(title: :desc), :id, :title,
-                                  {selected: @action.action_group&.id, include_blank: true}) %>
-        </div>
-        <div class="parent_action">
-          <%= f.select(:parent_action_id, possible_parent_actions(@action), {include_blank: true}) %>
-        </div>
         <div class="location">
           <%= f.text_area :location %>
         </div>
         <div>
-          <div class="map" data-class="GoogleMap" data-map-id="the_action"
-               data-lon="<%= @action.map_longitude %>"
-               data-lat="<%= @action.map_latitude %>"
-               data-zoom="<%= @action.map_zoom %>">
+          <div class="map" data-class="GoogleMap" data-map-id="the_project"
+               data-lon="<%= @project.map_longitude %>"
+               data-lat="<%= @project.map_latitude %>"
+               data-zoom="<%= @project.map_zoom %>">
             <div class="markers">
-              <div data-lon="<%= @action.longitude %>"
-                   data-lat="<%= @action.latitude %>"
-                   data-name="<%= @action.title %>"
+              <div data-lon="<%= @project.longitude %>"
+                   data-lat="<%= @project.latitude %>"
+                   data-name="<%= @project.title %>"
                    data-editable="true">test
               </div>
             </div>
@@ -151,12 +141,12 @@
         <div class="prototype d-none">
           <% new_object = f.object.class.reflect_on_association(:events).klass.new %>
           <%= f.fields_for(:events, new_object, child_index: :new_item) {
-              |builder| render('events/event_fields', f: builder, default_date: @action.action_group&.start_date)} %>
+              |builder| render('events/event_fields', f: builder, default_date: Date.current)} %>
         </div>
         <%= f.fields_for :events do |builder| %>
-          <%= render 'events/event_fields', f: builder, default_date: @action.action_group&.start_date %>
+          <%= render 'events/event_fields', f: builder, default_date: Date.current %>
         <% end %>
-        <%= link_to t('action.button.addEvent'), 'javascript:void(0);', class: 'add-link btn btn-secondary' %>
+        <%= link_to t('project.button.addEvent'), 'javascript:void(0);', class: 'add-link btn btn-secondary' %>
       </div>
 
     </div>

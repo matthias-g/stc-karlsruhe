@@ -118,7 +118,7 @@ de:
       updated: 'Aktion wurde erfolgreich aktualisiert.'
       errorList: 'Wegen folgender Fehler konnte die Aktion nicht gespeichert werden:'
       isFull: 'Diese Aktion ist schon vollbesetzt.'
-      enteredAction: 'Du nimmst jetzt an dieser Aktion teil. Die Aktionsleiter werden sich mit dir etwa eine Woche vor der Aktion in Verbindung setzen.'
+      enteredAction: 'Du nimmst jetzt an dieser Aktion teil. Der Aktionsleiter wird dich vor der Aktion nochmal kontaktieren, um die Details zu klären.'
       leftAction: 'Du hast dich von der Aktion abgemeldet.'
       madeVisible: 'Aktion wurde sichtbar gemacht.'
       madeInvisible: 'Aktion wurde unsichtbar gemacht.'

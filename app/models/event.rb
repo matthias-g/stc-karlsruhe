@@ -5,13 +5,14 @@ class Event < ApplicationRecord
   has_many :participations, dependent: :destroy, counter_cache: :team_size
   has_many :volunteers, class_name: 'User', through: :participations, source: :user,
            after_add: :on_volunteer_added, after_remove: :on_volunteer_removed
+  before_save :set_datetime_fields
 
   validates :desired_team_size, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 
-  scope :upcoming, -> { where('date >= ?', Date.current).order(date: :asc) }
-  scope :today_or_past, -> { where('date <= ?', Date.current).order(date: :asc) }
-  scope :finished, -> { where('date < ?', Date.current).order(date: :desc) }
-  scope :recent,   -> { where('date > ?', 1.year.ago).order(date: :desc) }
+  scope :upcoming, -> { where('events.end_time >= ?', Time.now).order(date: :asc) }
+  scope :today_or_past, -> { where('events.date <= ?', Date.current).order(date: :asc) }
+  scope :finished, -> { where('events.end_time < ?', Time.now).order(date: :desc) }
+  scope :recent,   -> { where('events.date > ?', 1.year.ago).order(date: :desc) }
 
   validates_presence_of :desired_team_size
 
@@ -39,7 +40,7 @@ class Event < ApplicationRecord
 
   def finished?
     return true unless date
-    date < Date.current
+    end_time < Time.now
   end
 
   def status
@@ -51,27 +52,6 @@ class Event < ApplicationRecord
       available_places < 3 ? :soon_full : :empty
     end
   end
-
-  TIME_REGEX = /(\d{1,2})[:\.]?(\d{1,2})?[^\d\/]*(\d{1,2})?[:\.-]?(\d{1,2})?.*/
-
-  # Start time of the action, parsed from the time string
-  def start_time
-    return nil unless date
-    day = date
-    return nil unless time
-    matches = time.match(TIME_REGEX)
-    Time.now.change(hour: matches[1], min: matches[2], year: day.year, month: day.month, day: day.day) if matches
-  end
-
-  # End time of the action, parsed from the time string
-  def end_time
-    return nil unless date
-    day = date
-    return nil unless time
-    matches = time.match(TIME_REGEX)
-    Time.now.change(hour: matches[3], min: matches[4], year: day.year, month: day.month, day: day.day) if matches && matches[3]
-  end
-
 
   private
 
@@ -95,4 +75,28 @@ class Event < ApplicationRecord
     end
   end
 
+  def set_datetime_fields
+    self.start_time = parse_start_time || self.date&.at_beginning_of_day
+    self.end_time = parse_end_time || parse_start_time&.advance(hours: 4) || self.date&.at_end_of_day
+  end
+
+  TIME_REGEX = /(\d{1,2})[:\.]?(\d{1,2})?[^\d\/]*(\d{1,2})?[:\.-]?(\d{1,2})?.*/
+
+  # Start time of the action, parsed from the time string
+  def parse_start_time
+    return nil unless date
+    day = date
+    return nil unless time
+    matches = time.match(TIME_REGEX)
+    Time.now.change(hour: matches[1], min: matches[2], year: day.year, month: day.month, day: day.day) if matches
+  end
+
+  # End time of the action, parsed from the time string
+  def parse_end_time
+    return nil unless date
+    day = date
+    return nil unless time
+    matches = time.match(TIME_REGEX)
+    Time.now.change(hour: matches[3], min: matches[4], year: day.year, month: day.month, day: day.day) if matches && matches[3]
+  end
 end

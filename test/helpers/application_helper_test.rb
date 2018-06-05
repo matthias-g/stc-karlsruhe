@@ -12,4 +12,9 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal 'join <a href="https://servethecity-karlsruhe.de" target="_blank">https://servethecity-karlsruhe.de</a>!', html
   end
 
+  test "simple format mailto urls in angle brackets" do
+    html = simple_format_urls 'join [Mail](mailto:test@example.com)!'
+    assert_equal 'join <a href="mailto:test@example.com" target="_blank">Mail</a>!', html
+  end
+
 end

@@ -91,9 +91,6 @@
             <%= bootstrap_form_for(@message, url: {action: 'contact_volunteers'}) do |f| %>
               <h3><%= t('action.heading.contactTeam') %></h3>
               <p><%= t('action.help.contactTeam') %></p>
-              <% if user_signed_in? && current_user.admin? %>
-                <p>(<%= (@action.volunteers + @action.leaders + [current_user]).uniq.map { |v| v.email}.join(', ') %>)</p>
-              <% end %>
               <%= f.select :recipient_scope, [
                   [t('action.form.contactTeam.recipient_scopes.this_action'), 'this_action'],
                   [t('action.form.contactTeam.recipient_scopes.action_and_subactions'), 'action_and_subactions']],

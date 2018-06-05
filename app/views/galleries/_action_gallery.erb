@@ -8,7 +8,7 @@
   <% end %>
 </div>
 
-<% if policy(gallery.actions.first).upload_pictures? %>
+<% if policy(gallery).update? %>
   <div class="picture-upload">
     <%= bootstrap_form_for gallery, html: { multipart: true}, local: true do |f| %>
 

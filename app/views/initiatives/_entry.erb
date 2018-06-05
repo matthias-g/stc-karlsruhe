@@ -12,6 +12,9 @@
   </div>
 
   <div class="info">
+    <% unless initiative.is_action? %>
+      <div class="type"><%= Project.model_name.human %></div>
+    <% end %>
     <% if show_date && initiative.is_action? && !initiative.date.nil? %>
       <div class="date"><%= l initiative.date, format: :date %></div>
     <% end %>

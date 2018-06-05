@@ -80,11 +80,10 @@ class Mailer < ActionMailer::Base
     @uploader = uploader
     @gallery = gallery
     @picture_count = picture_count
-    @title = gallery.title
-    @title = gallery.actions.collect{ |p| p.title }.join(', ') if @title.blank?
-    @title = gallery.news_entries.collect{ |p| p.title }.join(', ') if @title.blank?
-    @type = 'einer Aktion' if gallery.actions.any?
-    @type = 'eines Newseintrags' if gallery.news_entries.any?
+    @title = gallery.owner&.title || gallery.title
+    @type = 'einer Aktion' if gallery.owner_type == 'Action'
+    @type = 'eines Projekts' if gallery.owner_type == 'Project'
+    @type = 'eines Newseintrags' if gallery.owner_type == 'NewsEntry'
     recipient = StcKarlsruhe::Application::NOTIFICATION_RECIPIENT
     mail to: recipient, subject: t('mailer.gallery_picture_uploaded_notification.subject', pictureCount: picture_count)
   end

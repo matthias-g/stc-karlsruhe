@@ -1,18 +1,19 @@
 <% provide :title, t('layout.title.project.list') %>
-<% wrapper_set %>
+<% wrapper_set 'container-small' %>
 
 
 
 <div class="white-box">
-  <h1>Projekte</h1>
+  <h1 class="mb-0">Projekte</h1>
 </div>
 
-<div class="white-box container-small">
-  <h3>Optionen</h3>
-  <%= link_to 'Neues Projekt', new_project_path, class:'btn btn-primary btn-block' %>
+<div class="white-box">
+  <%= link_to 'Neues Projekt', new_project_path, class: 'btn btn-primary m-2' %>
+
+  <% @projects.each do |project| %>
+    <%= render 'initiatives/entry', initiative: project %>
+  <% end %>
 </div>
-<% @projects.each do |project| %>
-  <%= render 'initiatives/entry', initiative: project %>
-<% end %>
+
 
 

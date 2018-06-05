@@ -88,7 +88,7 @@
                 <p>(<%= (@project.volunteers + @project.leaders + [current_user]).uniq.map { |v| v.email}.join(', ') %>)</p>
               <% end %>
               <%= f.text_field :subject, label: t('project.form.contactTeam.subject') %>
-              <%= f.text_area :body, label: t('project.form.contactTeam.message') %>
+              <%= f.text_area :body, label: t('project.form.contactTeam.body') %>
               <%= f.submit t('project.button.contactTeam'), class: 'btn btn-primary' %>
             <% end %>
           </section>

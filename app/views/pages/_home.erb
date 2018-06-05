@@ -193,10 +193,10 @@
     <div class="swiper-wrapper">
       <%# TODO: query is very slow %>
       <% pics = GalleryPicture.visible.where('id IN (SELECT p2.id FROM gallery_pictures AS p2 WHERE p2.gallery_id = gallery_pictures.gallery_id LIMIT 2)') %>
-      <% policy_scope(pics.includes(gallery: :actions).order(created_at: :desc).limit(20)).shuffle.each do |pic| %>
+      <% policy_scope(pics.includes(gallery: :owner).order(created_at: :desc).limit(20)).shuffle.each do |pic| %>
         <div class="swiper-slide" style="width: <%= ((pic.width / pic.height.to_f) * 250).round.to_s + 'px' %>">
-          <% action = pic.gallery.actions.first %>
-          <%= link_to action, title: action.title do %>
+          <% initiative = pic.gallery.owner %>
+          <%= link_to initiative, title: initiative.title do %>
             <img class="swiper-lazy" data-src="<%= pic.picture.large.url %>" />
             <div class="swiper-lazy-preloader"></div>
           <% end %>

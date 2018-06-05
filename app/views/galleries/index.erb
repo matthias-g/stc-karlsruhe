@@ -1,6 +1,8 @@
 
 <h1>Galerieübersicht</h1>
 
+<%= link_to 'New Gallery', new_gallery_path, class: 'btn btn-primary m-2' %>
+
 <table class="table">
   <thead>
   <tr>
@@ -13,22 +15,16 @@
   </thead>
 
   <tbody>
-  <% @galleries.each do |gallery| %>
-    <tr>
-      <td><%= gallery.title %></td>
-      <td><%= gallery.gallery_pictures.count %></td>
-      <td><%= gallery.gallery_pictures.invisible.count %></td>
-      <td><%= link_to 'Show', gallery %></td>
-      <td><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
-      <td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% gallery.actions.each do |action| %>
-        <td><%= link_to action.title, action %></td>
-      <% end %>
-    </tr>
-  <% end %>
+    <% @galleries.each do |gallery| %>
+      <tr>
+        <td><%= gallery.title %></td>
+        <td><%= gallery.gallery_pictures.count %></td>
+        <td><%= gallery.gallery_pictures.invisible.count %></td>
+        <td><%= link_to 'Show', gallery %></td>
+        <td><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
+        <td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to(gallery.owner.title + " (#{gallery.owner.model_name.human})", gallery.owner) if gallery.owner %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Gallery', new_gallery_path %>

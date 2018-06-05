@@ -3,28 +3,46 @@ default:
   initiative: default
   desired_team_size: 5
   date: <%= Date.current %>
+  start_time: <%= Date.current.at_beginning_of_day %>
+  end_time: <%= Date.current.at_end_of_day %>
   team_size: 2
 
 subaction_event:
   initiative: subaction
   desired_team_size: 5
   date: <%= Date.current %>
+  start_time: <%= Date.current.at_beginning_of_day %>
+  end_time: <%= Date.current.at_end_of_day %>
   team_size: 1
 
 subaction_event_2:
   initiative: subaction
   desired_team_size: 5
   date: <%= Date.current + 1 %>
+  start_time: <%= (Date.current + 1).at_beginning_of_day %>
+  end_time: <%= (Date.current + 1).at_end_of_day %>
   team_size: 0
 
 subaction_2_event:
   initiative: subaction_2
   desired_team_size: 5
   date: <%= Date.current + 2 %>
+  start_time: <%= (Date.current + 2).at_beginning_of_day %>
+  end_time: <%= (Date.current + 2).at_end_of_day %>
   team_size: 1
 
 subaction_3_event:
   initiative: subaction_3_invisible
   desired_team_size: 5
   date: <%= Date.current + 3 %>
+  start_time: <%= (Date.current + 3).at_beginning_of_day %>
+  end_time: <%= (Date.current + 3).at_end_of_day %>
   team_size: 1
+
+project_event:
+  initiative: default_project
+  desired_team_size: 5
+  date: <%= Date.current + 3 %>
+  start_time: <%= (Date.current + 3).at_beginning_of_day %>
+  end_time: <%= (Date.current + 3).at_end_of_day %>
+  team_size: 0

@@ -90,7 +90,7 @@ class GalleriesControllerTest < ActionDispatch::IntegrationTest
 
   test "gallery update redirects to referer" do
     sign_in users(:leader)
-    referer = action_path(@gallery.actions.first)
+    referer = action_path(@gallery.owner)
     patch gallery_url(@gallery), params: { gallery: { title: @gallery.title } }, headers: { 'HTTP_REFERER': referer}
     assert_redirected_to referer
   end

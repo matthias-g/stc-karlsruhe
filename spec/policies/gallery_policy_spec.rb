@@ -105,8 +105,8 @@ RSpec.describe GalleryPolicy do
       let(:current_user) { users(:leader) }
 
       it 'is true' do
-        expect(record.actions.count).to eq(1)
-        expect(current_user).to lead_action(record.actions.first)
+        expect(record.owner).not_to eq(nil)
+        expect(current_user).to lead_action(record.owner)
         should_pass
       end
     end
@@ -115,16 +115,16 @@ RSpec.describe GalleryPolicy do
       let(:current_user) { users(:unrelated) }
 
       it 'is false' do
-        expect(record.actions.count).to eq(1)
-        action = record.actions.first
-        expect(current_user).not_to lead_action(action)
-        expect(current_user).not_to volunteer_in_action(action)
+        expect(record.owner).not_to eq(nil)
+        initiative = record.owner
+        expect(current_user).not_to lead_action(initiative)
+        expect(current_user).not_to volunteer_in_action(initiative)
         should_fail
       end
     end
 
-    context 'for a gallery without an action' do
-      let(:record) { galleries(:no_actions) }
+    context 'for a news entry gallery' do
+      let(:record) { galleries(:news_entry_gallery) }
 
       context 'as some user' do
         let(:current_user) { users(:volunteer) }

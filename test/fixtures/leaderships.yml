@@ -18,3 +18,7 @@ subaction_2_leader:
 subaction_3_leader:
   user: subaction_leader
   initiative: subaction_3_invisible
+
+project_leader:
+  user: leader
+  initiative: default_project

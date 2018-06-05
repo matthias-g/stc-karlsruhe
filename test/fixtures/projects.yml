@@ -1,6 +1,5 @@
-# TODO 'Use YAML to DRY Out Your Fixtures' http://chriskottom.com/blog/2014/11/fixing-fixtures/
 
-default:
+default_project:
   title: Default Project
   short_description: Default short description
   description: Default description
@@ -11,5 +10,4 @@ default:
   material: Default material
   requirements: Default requirements
   visible: true
-  gallery: default
   type: Project

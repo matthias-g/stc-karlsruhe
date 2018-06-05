@@ -7,8 +7,8 @@ RSpec.describe ProjectPolicy do
   fixtures :users, :projects, :events
 
   let(:user) { nil }
-  let(:project) { projects(:default) }
-  let(:event) { events(:default) }
+  let(:project) { projects(:default_project) }
+  let(:event) { events(:project_event) }
   let(:policy) { ProjectPolicy.new(user, project) }
 
   permissions :show? do

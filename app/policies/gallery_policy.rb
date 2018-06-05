@@ -11,8 +11,8 @@ class GalleryPolicy < ApplicationPolicy
   def update?
     return nil unless user
     return true if user.admin? || user.photographer?
-    return nil if record.actions.empty?
-    record.actions.all? { |action| Pundit.policy!(user, action).upload_pictures? }
+    return nil unless record.owner
+    Pundit.policy!(user, record.owner).upload_pictures?
   end
 
   alias_method :index?, :is_admin?

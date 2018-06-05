@@ -6,7 +6,6 @@ default:
   category: 1
   visible: true
   slug: news-online
-  gallery: dummy
 
 no_teaser:
   title: Short News
@@ -15,4 +14,3 @@ no_teaser:
   category: 1
   visible: true
   slug: short-news
-  gallery: no_actions

@@ -19,3 +19,7 @@ ancient_participation:
   user: ancient_user
   event: default
   created_at: <%= 33.months.ago.to_s(:db) %>
+
+project_volunteer:
+  user: volunteer
+  event: project_event

@@ -43,15 +43,8 @@
             <span class="fas fa-pencil-alt"></span> <%= 'Zur Galerieübersicht' %>
           <% end %>
         <% end %>
-        <% @gallery.actions.each do |action| %>
-          <%= link_to action, class: 'btn btn-secondary btn-block' do %>
-            <span class="far fa-play-circle"></span> <%= 'Zur Aktion' %>
-          <% end %>
-        <% end %>
-        <% @gallery.news_entries.each do |news_entry| %>
-          <%= link_to news_entry, class: 'btn btn-secondary btn-block' do %>
-            <span class="far fa-play-circle"></span> <%= 'Zum Newseintrag' %>
-          <% end %>
+        <%= link_to @gallery.owner, class: 'btn btn-secondary btn-block' do %>
+          <span class="far fa-play-circle"></span> <%= 'Zum Kontextobjekt' %>
         <% end %>
       </div>
 

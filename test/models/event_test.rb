@@ -139,91 +139,91 @@ class EventTest < ActiveSupport::TestCase
 
   test "parsing of start and end times" do
     event = @event
-    assert_nil event.start_time
-    assert_nil event.end_time
+    assert_nil event.send(:parse_start_time)
+    assert_nil event.send(:parse_end_time)
     event.date = '2017-05-13'
     event.time = '10:00 - 17:00 Uhr'
 
-    assert_equal event.date.year, event.start_time.year
-    assert_equal event.date.month, event.start_time.month
-    assert_equal event.date.day, event.start_time.day
-    assert_equal event.date.year, event.end_time.year
-    assert_equal event.date.month, event.end_time.month
-    assert_equal event.date.day, event.end_time.day
-    assert_equal 10, event.start_time.hour
-    assert_equal 0, event.start_time.min
-    assert_equal 17, event.end_time.hour
-    assert_equal 0, event.end_time.min
+    assert_equal event.date.year, event.send(:parse_start_time).year
+    assert_equal event.date.month, event.send(:parse_start_time).month
+    assert_equal event.date.day, event.send(:parse_start_time).day
+    assert_equal event.date.year, event.send(:parse_end_time).year
+    assert_equal event.date.month, event.send(:parse_end_time).month
+    assert_equal event.date.day, event.send(:parse_end_time).day
+    assert_equal 10, event.send(:parse_start_time).hour
+    assert_equal 0, event.send(:parse_start_time).min
+    assert_equal 17, event.send(:parse_end_time).hour
+    assert_equal 0, event.send(:parse_end_time).min
 
     event.time = '10:30 - 17:45 Uhr'
-    assert_equal 10, event.start_time.hour
-    assert_equal 30, event.start_time.min
-    assert_equal 17, event.end_time.hour
-    assert_equal 45, event.end_time.min
+    assert_equal 10, event.send(:parse_start_time).hour
+    assert_equal 30, event.send(:parse_start_time).min
+    assert_equal 17, event.send(:parse_end_time).hour
+    assert_equal 45, event.send(:parse_end_time).min
 
     event.time = '10:30 - 17:45'
-    assert_equal 10, event.start_time.hour
-    assert_equal 30, event.start_time.min
-    assert_equal 17, event.end_time.hour
-    assert_equal 45, event.end_time.min
+    assert_equal 10, event.send(:parse_start_time).hour
+    assert_equal 30, event.send(:parse_start_time).min
+    assert_equal 17, event.send(:parse_end_time).hour
+    assert_equal 45, event.send(:parse_end_time).min
 
     event.time = '10:30 bis 17:45'
-    assert_equal 10, event.start_time.hour
-    assert_equal 30, event.start_time.min
-    assert_equal 17, event.end_time.hour
-    assert_equal 45, event.end_time.min
+    assert_equal 10, event.send(:parse_start_time).hour
+    assert_equal 30, event.send(:parse_start_time).min
+    assert_equal 17, event.send(:parse_end_time).hour
+    assert_equal 45, event.send(:parse_end_time).min
 
     event.time = '10:30-17:45'
-    assert_equal 10, event.start_time.hour
-    assert_equal 30, event.start_time.min
-    assert_equal 17, event.end_time.hour
-    assert_equal 45, event.end_time.min
+    assert_equal 10, event.send(:parse_start_time).hour
+    assert_equal 30, event.send(:parse_start_time).min
+    assert_equal 17, event.send(:parse_end_time).hour
+    assert_equal 45, event.send(:parse_end_time).min
 
     event.time = '10.30 - 17-45'
-    assert_equal 10, event.start_time.hour
-    assert_equal 30, event.start_time.min
-    assert_equal 17, event.end_time.hour
-    assert_equal 45, event.end_time.min
+    assert_equal 10, event.send(:parse_start_time).hour
+    assert_equal 30, event.send(:parse_start_time).min
+    assert_equal 17, event.send(:parse_end_time).hour
+    assert_equal 45, event.send(:parse_end_time).min
 
     event.time = '17:00 - ca. 19:00 Uhr'
-    assert_equal 17, event.start_time.hour
-    assert_equal 00, event.start_time.min
-    assert_equal 19, event.end_time.hour
-    assert_equal 00, event.end_time.min
+    assert_equal 17, event.send(:parse_start_time).hour
+    assert_equal 00, event.send(:parse_start_time).min
+    assert_equal 19, event.send(:parse_end_time).hour
+    assert_equal 00, event.send(:parse_end_time).min
 
     event.time = '17-19:30 Uhr'
-    assert_equal 17, event.start_time.hour
-    assert_equal 00, event.start_time.min
-    assert_equal 19, event.end_time.hour
-    assert_equal 30, event.end_time.min
+    assert_equal 17, event.send(:parse_start_time).hour
+    assert_equal 00, event.send(:parse_start_time).min
+    assert_equal 19, event.send(:parse_end_time).hour
+    assert_equal 30, event.send(:parse_end_time).min
 
     event.time = '17:30-19 Uhr'
-    assert_equal 17, event.start_time.hour
-    assert_equal 30, event.start_time.min
-    assert_equal 19, event.end_time.hour
-    assert_equal 00, event.end_time.min
+    assert_equal 17, event.send(:parse_start_time).hour
+    assert_equal 30, event.send(:parse_start_time).min
+    assert_equal 19, event.send(:parse_end_time).hour
+    assert_equal 00, event.send(:parse_end_time).min
 
     event.time = 'zwischen 14:00 - 21:00 Uhr '
-    assert_equal 14, event.start_time.hour
-    assert_equal 00, event.start_time.min
-    assert_equal 21, event.end_time.hour
-    assert_equal 00, event.end_time.min
+    assert_equal 14, event.send(:parse_start_time).hour
+    assert_equal 00, event.send(:parse_start_time).min
+    assert_equal 21, event.send(:parse_end_time).hour
+    assert_equal 00, event.send(:parse_end_time).min
 
     event.time = 'Zwischen 12 und 16 Uhr'
-    assert_equal 12, event.start_time.hour
-    assert_equal 00, event.start_time.min
-    assert_equal 16, event.end_time.hour
-    assert_equal 00, event.end_time.min
+    assert_equal 12, event.send(:parse_start_time).hour
+    assert_equal 00, event.send(:parse_start_time).min
+    assert_equal 16, event.send(:parse_end_time).hour
+    assert_equal 00, event.send(:parse_end_time).min
 
     event.time = '17:30'
-    assert_equal 17, event.start_time.hour
-    assert_equal 30, event.start_time.min
-    assert_nil event.end_time
+    assert_equal 17, event.send(:parse_start_time).hour
+    assert_equal 30, event.send(:parse_start_time).min
+    assert_nil event.send(:parse_end_time)
 
     event.time = 'Montag 19 Uhr / Mittwoch + Samstag 11 Uhr'
-    assert_equal 19, event.start_time.hour
-    assert_equal 00, event.start_time.min
-    assert_nil event.end_time
+    assert_equal 19, event.send(:parse_start_time).hour
+    assert_equal 00, event.send(:parse_start_time).min
+    assert_nil event.send(:parse_end_time)
   end
 
 end

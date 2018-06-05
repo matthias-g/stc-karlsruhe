@@ -97,8 +97,6 @@ de:
     message:
       addLeaderSuccess: 'Leiter erfolgreich hinzugefügt'
       removeLeaderSuccess: 'Leiter erfolgreich entfernt'
-      addVolunteerSuccess: 'Mitarbeiter erfolgreich hinzugefügt'
-      removeVolunteerSuccess: 'Mitarbeiter erfolgreich entfernt'
       imageCropped: 'Der Bildausschnitt wurde angepasst.'
       created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'
@@ -115,7 +113,7 @@ de:
     form:
       contactTeam:
         subject: 'Worum geht''s?'
-        message: 'Deine Nachricht'
+        body: 'Deine Nachricht'
       contactLeader:
         subject: 'Worum geht''s?'
-        message: 'Deine Nachricht'
+        body: 'Deine Nachricht'

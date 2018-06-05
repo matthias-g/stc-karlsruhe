@@ -111,8 +111,6 @@ de:
     message:
       addLeaderSuccess: 'Leiter erfolgreich hinzugefügt'
       removeLeaderSuccess: 'Leiter erfolgreich entfernt'
-      addVolunteerSuccess: 'Mitarbeiter erfolgreich hinzugefügt'
-      removeVolunteerSuccess: 'Mitarbeiter erfolgreich entfernt'
       imageCropped: 'Der Bildausschnitt wurde angepasst.'
       created: 'Aktion wurde erfolgreich erstellt. Sie muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Aktion wurde erfolgreich aktualisiert.'
@@ -129,11 +127,16 @@ de:
     form:
       contactTeam:
         subject: 'Worum geht''s?'
-        message: 'Deine Nachricht'
+        body: 'Deine Nachricht'
         recipient_scope: 'Empfänger'
         recipient_scopes:
           this_action: 'Teilnehmer dieser Aktion'
           action_and_subactions: 'Teilnehmer dieser Aktion inkl. Teilaktionen'
       contactLeader:
         subject: 'Worum geht''s?'
-        message: 'Deine Nachricht'
+        body: 'Deine Nachricht'
+
+  event:
+    message:
+      addVolunteerSuccess: 'Mitarbeiter erfolgreich hinzugefügt'
+      removeVolunteerSuccess: 'Mitarbeiter erfolgreich entfernt'

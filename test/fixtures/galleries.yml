@@ -1,16 +1,36 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 default:
   title: Default Gallery
+  owner: default (Initiative)
+
+news_entry_gallery:
+  title: This gallery is owned by a news entry
+  owner: default (NewsEntry)
+
+project_gallery:
+  title: This gallery is owned by a project
+  owner: default_project (Initiative)
+
+
+dummy_1:
+  title: Dummy Gallery 1
+  owner: parent_action (Initiative)
+
+dummy_2:
+  title: Dummy Gallery 2
+  owner: subaction (Initiative)
+
+dummy_3:
+  title: Dummy Gallery 3
+  owner: subaction_2 (Initiative)
+
+dummy_4:
+  title: Dummy Gallery 4
+  owner: subaction_3_invisible (Initiative)
+
 
 empty_gallery:
   title: Empty Gallery
 
 invisible_gallery:
   title: Invisible Gallery
-
-dummy:
-  title: Dummy Gallery
-
-no_actions:
-  title: This gallery is not referenced by an action but only by a news entry

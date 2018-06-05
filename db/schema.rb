@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_04_212056) do
+ActiveRecord::Schema.define(version: 2018_06_05_153707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,9 @@ ActiveRecord::Schema.define(version: 2018_06_04_212056) do
     t.string "title", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.index ["owner_type", "owner_id"], name: "index_galleries_on_owner_type_and_owner_id"
   end
 
   create_table "gallery_pictures", id: :serial, force: :cascade do |t|
@@ -107,9 +110,7 @@ ActiveRecord::Schema.define(version: 2018_06_04_212056) do
     t.integer "action_group_id"
     t.string "slug", limit: 255
     t.integer "parent_action_id"
-    t.integer "gallery_id"
     t.string "type"
-    t.index ["gallery_id"], name: "index_initiatives_on_gallery_id"
     t.index ["slug"], name: "index_initiatives_on_slug", unique: true
   end
 
@@ -132,8 +133,6 @@ ActiveRecord::Schema.define(version: 2018_06_04_212056) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "gallery_id"
-    t.index ["gallery_id"], name: "index_news_entries_on_gallery_id"
     t.index ["slug"], name: "index_news_entries_on_slug"
   end
 

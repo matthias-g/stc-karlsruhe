@@ -8,7 +8,7 @@
 
 <div class="modal-content">
 
-  <%= form_tag({controller: 'actions', action: 'crop_picture'}, method: 'post',
+  <%= form_tag({controller: 'projects', action: 'crop_picture'}, method: 'post',
                onsubmit: "$('#image_crop_modal').modal('hide'); return sendFormWithAjax(this);") do %>
 
     <div class="modal-header">
@@ -21,7 +21,7 @@
     </div>
 
     <div class="modal-body cropbox" data-class="Cropbox" data-aspect="<%= @crop_target_ratio %>">
-      <%= image_tag @action.picture_url(:precrop), id: "cropbox" %>
+      <%= image_tag @project.picture_url(:precrop), id: "cropbox" %>
       <% %w[x y w h].each do |a| %>
           <%= hidden_field_tag "crop_#{a}", '', class: "crop_#{a}" %>
       <% end %>

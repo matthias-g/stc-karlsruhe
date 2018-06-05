@@ -49,9 +49,9 @@ de:
 
       cropImage: 'Bildausschnitt für %{crop_target} anpassen'
       cropTarget:
-        action_list: 'Listenansicht'
-        action_view: 'Projektseite'
-        action_card_list: 'Projekt-Übersicht'
+        thumb: 'Listenansicht'
+        large: 'Projektseite'
+        card: 'Projekt-Übersicht'
 
     button:
       edit: 'Bearbeiten'
@@ -66,9 +66,9 @@ de:
       removeEvent: 'Termin löschen'
       enter: 'Team beitreten'
       leave: 'Team verlassen'
-      cropListImage: 'Listenbild anpassen'
-      cropActionImage: 'Projektbild anpassen'
-      cropActionCardImage: 'Übersichtsbild anpassen'
+      cropThumbImage: 'Thumbnail anpassen'
+      cropLargeImage: 'Projektbild anpassen'
+      cropCardImage: 'Übersichtsbild anpassen'
       crop: 'Zuschneiden'
 
       exportICal: 'Als iCal/ICS exportieren'

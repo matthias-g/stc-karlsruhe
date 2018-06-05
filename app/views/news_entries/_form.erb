@@ -43,8 +43,8 @@
                 <%= image_tag @news_entry.picture_url(:large) %>
               </div>
               <br />
-              <%= link_to t('news_entry.button.cropArticleImage'),
-                          crop_picture_news_entry_path(@news_entry, crop_target: 'article'),
+              <%= link_to t('news_entry.button.cropLargeImage'),
+                          crop_picture_news_entry_path(@news_entry, crop_target: 'large'),
                           class: 'btn btn-secondary',
                           data: {toggle: 'modal', target: '#image_crop_modal'}  %>
               <%= link_to t('news_entry.button.cropFullscreenImage'),

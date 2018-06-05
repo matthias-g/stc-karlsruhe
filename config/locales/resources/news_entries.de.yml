@@ -25,7 +25,7 @@ de:
       edit: 'News bearbeiten'
       cropImage: 'Bildausschnitt für %{crop_target} anpassen'
       cropTarget:
-        article: 'Artikelbild'
+        large: 'Artikelbild'
         fullscreen: 'Vollbild'
         thumb: 'Thumbnail'
 
@@ -41,7 +41,7 @@ de:
       searchNews: 'News suchen'
       findNews: 'Newseintrag finden'
       cropImage: 'Zuschneiden'
-      cropArticleImage: 'Artikelbild anpassen'
+      cropLargeImage: 'Artikelbild anpassen'
       cropFullscreenImage: 'Vollbild anpassen'
       cropThumbImage: 'Thumbnail anpassen'
       uploadPictures: 'Bilder hochladen'
@@ -49,8 +49,6 @@ de:
 
     label:
       news_entry: 'News-Eintrag'
-
-
       gallery: 'Fotogalerie'
       uploadImage: 'Bild hochladen'
 

@@ -4,7 +4,7 @@ require 'helpers'
 RSpec.describe GalleryPolicy do
 
   include Helpers
-  fixtures :users, :galleries
+  fixtures :users, :galleries, :actions, :news_entries
 
   let(:current_user) { nil }
   let(:record) { galleries(:default) }
@@ -125,6 +125,25 @@ RSpec.describe GalleryPolicy do
 
     context 'for a news entry gallery' do
       let(:record) { galleries(:news_entry_gallery) }
+
+      context 'as some user' do
+        let(:current_user) { users(:volunteer) }
+        it { should_fail }
+      end
+
+      context 'as admin' do
+        let(:current_user) { users(:admin) }
+        it { should_pass }
+      end
+
+      context 'as photographer' do
+        let(:current_user) { users(:photographer) }
+        it { should_pass }
+      end
+    end
+
+    context 'for a gallery without owner' do
+      let(:record) { galleries(:empty_gallery) }
 
       context 'as some user' do
         let(:current_user) { users(:volunteer) }

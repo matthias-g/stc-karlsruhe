@@ -41,7 +41,7 @@
           <%# action picture %>
           <% if @action.show_picture? && @action.picture.file %>
             <div class="action-picture picture-container">
-              <%= image_tag @action.picture_url(:action_view) %>
+              <%= image_tag @action.picture_url(:large) %>
               <div class="copyright" title="© <%= @action.picture_source %>">
                 © <%= @action.picture_source %>
               </div>

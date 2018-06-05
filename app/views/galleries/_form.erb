@@ -33,7 +33,7 @@
       <% @gallery.gallery_pictures.each do |picture| %>
         <% unless picture.new_record? %>
           <tr>
-            <td><%= image_tag picture.picture_url(:preview), class: 'img-fluid' %></td>
+            <td><%= image_tag picture.picture_url(:large), class: 'img-fluid' %></td>
             <td>
               <p>Uploaded by:<br /><%= picture.uploader.full_name %></p>
               <% if picture.visible %>

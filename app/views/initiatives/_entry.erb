@@ -8,7 +8,7 @@
 <%= link_to initiative, class: (initiative.visible? ? 'action-entry' : 'action-entry hidden-action') do %>
 
   <div class="image">
-    <%= image_tag (initiative.show_picture? ? initiative.picture_url(:action_list) : 'placeholder.svg') %>
+    <%= image_tag (initiative.show_picture? ? initiative.picture_url(:thumb) : 'placeholder.svg') %>
   </div>
 
   <div class="info">

@@ -74,15 +74,15 @@ class ProjectsController < ApplicationController
   def crop_picture_modal
     @crop_target_symbol = params[:crop_target].to_sym
     case @crop_target_symbol
-    when :action_list
-      @crop_target_title = t('project.heading.cropTarget.action_list')
+    when :thumb
+      @crop_target_title = t('project.heading.cropTarget.thumb')
       @crop_target_ratio = 75.0/60
-    when :action_view
-      @crop_target_title = t('project.heading.cropTarget.action_view')
-      @crop_target_ratio = 775.0/350
-    when :action_card_list
-      @crop_target_title = t('project.heading.cropTarget.action_card_list')
+    when :card
+      @crop_target_title = t('project.heading.cropTarget.card')
       @crop_target_ratio = 318.0/220
+    when :large
+      @crop_target_title = t('project.heading.cropTarget.large')
+      @crop_target_ratio = 775.0/350
     end
     respond_with @project do |format|
       format.html { render layout: false }

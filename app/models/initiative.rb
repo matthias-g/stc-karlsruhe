@@ -2,7 +2,7 @@ class Initiative < ApplicationRecord
 
   include PhotoGallery
   include CroppablePicture
-  mount_uploader :picture, ActionPictureUploader
+  mount_uploader :picture, InitiativePictureUploader
 
   has_many :leaderships, dependent: :destroy
   has_many :leaders, class_name: 'User', through: :leaderships, source: :user

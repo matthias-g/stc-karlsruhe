@@ -5,7 +5,7 @@
 
     <div class="card action-card" data-class="ClickableCard" data-href="<%= url_for action %>" title="<%= action.title %>">
 
-      <%= image_tag action.show_picture? ? action.picture_url(:action_card_list) : 'placeholder.svg',
+      <%= image_tag action.show_picture? ? action.picture_url(:card) : 'placeholder.svg',
                     lazy:true, class: 'card-img-top' %>
 
       <div class="card-body">

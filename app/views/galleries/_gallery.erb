@@ -5,7 +5,7 @@
   <div class="swiper-container gallery-top">
     <div class="swiper-wrapper">
       <% pics.each do |pic| %>
-        <div class="swiper-slide" style="background-image:url(<%= pic.picture.preview.url %>)"></div>
+        <div class="swiper-slide" style="background-image:url(<%= pic.picture.large.url %>)"></div>
       <% end %>
     </div>
     <div class="swiper-button-next swiper-button-white"></div>

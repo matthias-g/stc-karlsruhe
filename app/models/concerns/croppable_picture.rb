@@ -1,9 +1,10 @@
+# including model must have a mounted uploader "picture" and a text field "picture_source"
 module CroppablePicture extend ActiveSupport::Concern
 
   included do
     attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
-    def crop_picture(x,y,w,h,version)
+    def crop_picture(x, y, w, h, version)
       self.crop_x = x
       self.crop_y = y
       self.crop_w = w
@@ -14,6 +15,7 @@ module CroppablePicture extend ActiveSupport::Concern
     def show_picture?
       !picture_source.blank? && picture&.file
     end
+
   end
 
 end

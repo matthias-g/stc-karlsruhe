@@ -44,7 +44,7 @@
 
           <% if @action.picture.file %>
             <div class="action-picture picture-container">
-              <%= image_tag @action.picture_url(:action_view) %>
+              <%= image_tag @action.picture_url(:large) %>
             </div>
             <% if @action.persisted? %>
               <%= link_to crop_picture_modal_action_path(@action, crop_target: 'action_list'),

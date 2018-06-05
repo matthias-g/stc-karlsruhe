@@ -54,15 +54,15 @@ class NewsEntriesController < ApplicationController
     else
       @crop_target_symbol = params[:crop_target].to_sym
       case @crop_target_symbol
-        when :article
-          @crop_target_title = t('news_entry.heading.cropTarget.article')
-          @crop_target_ratio = 300.0/250
-        when :fullscreen
-          @crop_target_title = t('news_entry.heading.cropTarget.fullscreen')
-          @crop_target_ratio = 800.0/600
-        when :thumb
-          @crop_target_title = t('news_entry.heading.cropTarget.thumb')
-          @crop_target_ratio = 120.0/120
+      when :thumb
+        @crop_target_title = t('news_entry.heading.cropTarget.thumb')
+        @crop_target_ratio = 120.0/120
+      when :large
+        @crop_target_title = t('news_entry.heading.cropTarget.large')
+        @crop_target_ratio = 300.0/250
+      when :fullscreen
+        @crop_target_title = t('news_entry.heading.cropTarget.fullscreen')
+        @crop_target_ratio = 800.0/600
       end
       respond_with @news_entry do |format|
         format.html { render :layout => false}

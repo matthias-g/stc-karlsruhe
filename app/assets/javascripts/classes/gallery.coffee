@@ -43,7 +43,7 @@ class @Gallery
       @items = []
       for pic in data['gallery-pictures']
         @items.push(
-          src:      pic.picture.desktop.url,
+          src:      pic.picture.fullscreen.url,
           raw_src:  pic.picture.url,
           sources:  pic.picture
           w:        pic['desktop-width'],

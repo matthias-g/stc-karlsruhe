@@ -75,6 +75,14 @@
             <span class="far fa-hand-point-right"></span> <%= group.title %>
           <% end %>
         <% end %>
+        <% projects = policy_scope(Project.all) %>
+        <% projects.each do |project| %>
+          <%= link_to project, class: 'title' do %>
+            <div class="type">Projekt</div>
+            <span class="fas fa-cog"></span> <%= project.title %>
+          <% end %>
+        <% end %>
+        <!--
         <%= link_to '/stadtpiraten', class: 'title' do %>
           <div class="type">Projekt</div>
           <span class="fas fa-cog"></span> Stadtpiraten
@@ -83,6 +91,7 @@
           <div class="type">Projekt</div>
           <span class="fas fa-trophy"></span> Spielezeit
         <% end %>
+        -->
       </div>
 
     </div>
@@ -188,7 +197,7 @@
         <div class="swiper-slide" style="width: <%= ((pic.width / pic.height.to_f) * 250).round.to_s + 'px' %>">
           <% action = pic.gallery.actions.first %>
           <%= link_to action, title: action.title do %>
-            <img class="swiper-lazy" data-src="<%= pic.picture.preview.url %>" />
+            <img class="swiper-lazy" data-src="<%= pic.picture.large.url %>" />
             <div class="swiper-lazy-preloader"></div>
           <% end %>
         </div>

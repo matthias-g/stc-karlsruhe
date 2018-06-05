@@ -40,7 +40,7 @@
 
           <% if @news_entry.picture.file %>
               <div class="news-entry-picture picture-container">
-                <%= image_tag @news_entry.picture_url(:article) %>
+                <%= image_tag @news_entry.picture_url(:large) %>
               </div>
               <br />
               <%= link_to t('news_entry.button.cropArticleImage'),

@@ -29,7 +29,7 @@
     </div>
 <% elsif @news_entry.show_picture? %>
     <div class="picture-container float-right m-4">
-      <%= image_tag @news_entry.picture_url(:article) %>
+      <%= image_tag @news_entry.picture_url(:large) %>
       <div class="copyright" title="© <%= @news_entry.picture_source %>">
         © <%= @news_entry.picture_source %>
       </div>

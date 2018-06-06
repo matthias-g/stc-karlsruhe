@@ -159,7 +159,9 @@
                 <span>
                   <%= link_to leader.first_name, leader %>
                   <% if policy(@action).manage_team? %>
-                    <%= api_link '', [@action, 'leaders', leader], :remove, data: {'success-remove': 1} %>
+                    <%= api_link '', [@action, :leaders, leader], :remove,
+                                 data: {confirm: t('general.message.confirmRemoveLong') % [leader.full_name], 'success-remove': 1},
+                                 title: t('action.button.removeLeader') %>
                   <% end %>
                 </span>
               <% end %>

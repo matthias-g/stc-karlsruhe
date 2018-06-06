@@ -145,7 +145,7 @@
                 <span>
                   <%= link_to leader.first_name, leader %>
                   <% if policy(@project).manage_team? %>
-                    <%= api_link '', [@project, 'leaders', leader], :remove, data: {'success-remove': 1} %>
+                    <%= api_link '', [@project, :leaders, leader], :remove, data: {'success-remove': 1} %>
                   <% end %>
                 </span>
               <% end %>

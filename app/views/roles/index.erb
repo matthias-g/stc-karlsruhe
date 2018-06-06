@@ -15,7 +15,7 @@
             <% policy_scope(role.users).order(:first_name, :last_name).each do |user| %>
                 <div class="user">
                   <span><%= user.full_name %></span>
-                  <%= api_link '', [user, 'roles', role], :remove, data: {'success-remove': 1} %>
+                  <%= api_link '', [user, role], :remove, data: {'success-remove': 1} %>
                 </div>
             <% end %>
           </div>

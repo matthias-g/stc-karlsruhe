@@ -81,6 +81,7 @@
       <% end %>
 
       <%# communication %>
+      <!--
       <% if policy(@project).contact_volunteers? %>
         <div class="col-12">
           <section id="action-communication" class="white-box d-print-none">
@@ -93,7 +94,9 @@
             <% end %>
           </section>
         </div>
-      <% elsif policy(@project).contact_leaders? %>
+      <% end %>
+      -->
+      <% if policy(@project).contact_leaders? %>
         <div class="col-12">
           <section id="action-communication" class="white-box d-print-none">
             <%= bootstrap_form_for(@message, url: {project: 'contact_leaders'}) do |f| %>

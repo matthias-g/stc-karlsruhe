@@ -86,3 +86,31 @@
     display: none;
   }
 }
+
+.project-entry {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #ccc;
+  @extend %CaptionFont;
+  font-size: 30px;
+  &:hover {
+    color: $link-hover-color;
+  }
+  .image {
+    text-align: center;
+    width: 70px;
+    margin-right: 20px;
+    img {
+      border-radius: 50%;
+      width: 100%;
+      height: auto;
+    }
+  }
+  .info {
+    flex: 1;
+  }
+  .type {
+    font-size: 70%;
+  }
+}

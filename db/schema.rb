@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_05_153707) do
+ActiveRecord::Schema.define(version: 2018_06_06_080125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 2018_06_05_153707) do
     t.string "slug", limit: 255
     t.integer "parent_action_id"
     t.string "type"
+    t.string "icon"
     t.index ["slug"], name: "index_initiatives_on_slug", unique: true
   end
 

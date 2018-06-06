@@ -60,24 +60,23 @@
   min-height: 300px;
 }
 #home-group-list {
-  a {
+  .home-group-entry {
     display: block;
-    padding: 10px;
+    padding: 10px 10px 10px 20px;
     color: #ccc;
-    &:not(:last-child) {
-      border-bottom: 1px solid rgba(black, 0.5);
-    }
+
+    @extend %CaptionFont;
+    font-size: 30px;
     &:hover {
       color: $link-hover-color;
     }
+    .type {
+      font-size: 70%;
+    }
   }
-  .title {
-    padding-left: 20px;
-    @extend %CaptionFont;
-    font-size: 30px;
-  }
-  .type {
-    font-size: 70%;
+
+  & > *:not(:last-child) {
+    border-bottom: 1px solid rgba(black, 0.5);
   }
 }
 #home-action-list a {

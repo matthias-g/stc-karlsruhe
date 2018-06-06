@@ -37,7 +37,12 @@
       <div class="white-box">
         <%= f.text_field :title %>
         <div class="form-group">
-          <label class="control-label" for="action_picture_source">
+          <label class="control-label">
+            <%= Action.human_attribute_name(:icon) %>
+          </label>
+          <%= f.file_field :icon, hide_label: true %>
+
+          <label class="control-label">
             <%= Action.human_attribute_name(:picture) %>
           </label>
           <%= f.file_field :picture, hide_label: true %>

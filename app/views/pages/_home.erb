@@ -70,28 +70,27 @@
         <% groups = policy_scope(ActionGroup.upcoming).load %>
         <% groups = policy_scope(ActionGroup.newest.limit(2)).load.sort_by(&:start_date) unless groups.any? %>
         <% groups.each do |group| %>
-          <%= link_to show_action_group_path(group), class: 'title' do %>
+          <%= link_to show_action_group_path(group), class: 'home-group-entry' do %>
             <div class="type"><%= date_range(group.start_date, group.end_date, format: :long) %></div>
             <span class="far fa-hand-point-right"></span> <%= group.title %>
           <% end %>
         <% end %>
         <% projects = policy_scope(Project.all) %>
         <% projects.each do |project| %>
-          <%= link_to project, class: 'title' do %>
-            <div class="type">Projekt</div>
-            <span class="fas fa-cog"></span> <%= project.title %>
+          <%= link_to project, class: 'project-entry' do %>
+            <div class="image">
+              <% if project.icon.file %>
+                <%= image_tag project.icon_url(:thumb) %>
+              <% else %>
+                <span class="fas fa-cog fa-2x"></span>
+              <% end %>
+            </div>
+            <div class="info">
+              <div class="type">Projekt</div>
+              <div class="title"><%= project.title %></div>
+            </div>
           <% end %>
         <% end %>
-        <!--
-        <%= link_to '/stadtpiraten', class: 'title' do %>
-          <div class="type">Projekt</div>
-          <span class="fas fa-cog"></span> Stadtpiraten
-        <% end %>
-        <%= link_to '/spielezeit', class: 'title' do %>
-          <div class="type">Projekt</div>
-          <span class="fas fa-trophy"></span> Spielezeit
-        <% end %>
-        -->
       </div>
 
     </div>

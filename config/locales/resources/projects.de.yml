@@ -20,6 +20,7 @@ de:
         visible: 'Sichtbar'
         picture: 'Bild'
         picture_source: 'Bildrechte /-quelle'
+        icon: 'Icon'
         leaders: 'Leitung'
         volunteers: 'Team'
         status: 'Status'

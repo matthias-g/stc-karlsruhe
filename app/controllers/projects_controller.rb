@@ -123,7 +123,7 @@ class ProjectsController < ApplicationController
     params.require(:the_project).permit(:title, :user_id,
        :location, :latitude, :longitude, :map_latitude, :map_longitude, :map_zoom,
        :description, :short_description, :individual_tasks, :material, :requirements,
-       :picture, :picture_source,
+       :picture, :picture_source, :icon,
        events_attributes: [:id, :desired_team_size, :date, :time, :_destroy])
   end
 

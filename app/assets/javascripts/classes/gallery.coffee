@@ -51,7 +51,9 @@ class @Gallery
           id:       pic.id,
           editable: pic.editable
         )
-      @slider.on 'tap', => @openSlideshow(@slider.clickedIndex)
+      @slider_html.on 'click', '.swiper-slide-active', =>
+        @openSlideshow(@slider.clickedIndex)
+
     request.fail (error) ->
       console.log('Request failed', error)
 
@@ -62,7 +64,7 @@ class @Gallery
       history: false
       getThumbBoundsFn: (index) =>
         pageYScroll = window.pageYOffset or document.documentElement.scrollTop
-        cont = $('.swiper-wrapper', @slider_html)[0].getBoundingClientRect()
+        cont = $('.swiper-slide-active', @slider_html)[0].getBoundingClientRect()
         pw = @items[index].w
         ph = @items[index].h
         if pw / ph > cont.width / cont.height

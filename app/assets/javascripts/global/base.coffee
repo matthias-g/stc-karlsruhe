@@ -11,7 +11,7 @@
 
 # register given handler for page load, but only if we are in the given controller/action
 @onViewLoad = (controller_actions, handler) ->
-  actions = controller_actions.replace('->', '.').split(',')
+  actions = controller_actions.replace(/->/g, '.').split(',')
   @onPageLoad ->
     for action in actions
       if $('#content > #' + action.trim()).length

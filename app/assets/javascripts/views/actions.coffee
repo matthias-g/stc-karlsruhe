@@ -8,7 +8,7 @@ onViewLoad 'actions->edit, actions->new', ->
         $('<option>').attr(value: action.id).text(action.title).appendTo select_element
 
 
-onViewLoad 'actions->show', =>
+onViewLoad 'actions->show, projects->show', =>
 
   # auto submit uploaded images
   $('form.edit_gallery').each (i, f) ->

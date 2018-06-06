@@ -10,12 +10,15 @@
   <meta property="og:description" content="<%= strip_tags @project.short_description %>" />
 <% end %>
 
-<div class="white-box record-header d-print-none">
-  <div class="type">
-    <%= Project.model_name.human %>
-  </div>
-
-  <h1><%= @project.full_title %></h1>
+<div class="white-box record-header d-print-none" style="background-color: rgba(31, 166, 122, 0.7)">
+  <% if @project.icon.file %>
+    <div class="icon">
+      <%= image_tag @project.icon_url(:medium), title: Project.model_name.human + ' ' + @project.full_title  %>
+    </div>
+  <% else %>
+    <div class="type"><%= Project.model_name.human %> </div>
+    <h1><%= @project.full_title %></h1>
+  <% end %>
   <div class="labels">
     <% unless @project.visible? %>
       <span class="badge status_hidden"><%= t('project.info.status.hidden') %></span>
@@ -84,9 +87,6 @@
             <%= bootstrap_form_for(@message, url: {project: 'contact_volunteers'}) do |f| %>
               <h3><%= t('project.heading.contactTeam') %></h3>
               <p><%= t('project.help.contactTeam') %></p>
-              <% if user_signed_in? && current_user.admin? %>
-                <p>(<%= (@project.volunteers + @project.leaders + [current_user]).uniq.map { |v| v.email}.join(', ') %>)</p>
-              <% end %>
               <%= f.text_field :subject, label: t('project.form.contactTeam.subject') %>
               <%= f.text_area :body, label: t('project.form.contactTeam.body') %>
               <%= f.submit t('project.button.contactTeam'), class: 'btn btn-primary' %>

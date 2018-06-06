@@ -73,8 +73,8 @@ class ActionsController < ApplicationController
   end
 
   def crop_picture
-    @action.crop_picture(params[:crop_x].to_i, params[:crop_y].to_i,
-                         params[:crop_w].to_i, params[:crop_h].to_i,
+    @action.crop_picture(params[:crop_x].to_f, params[:crop_y].to_f,
+                         params[:crop_w].to_f, params[:crop_h].to_f,
                          params[:crop_target].to_sym)
     redirect_to @action, notice: t('action.message.imageCropped')
   end

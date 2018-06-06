@@ -47,8 +47,8 @@ class NewsEntriesController < ApplicationController
 
   def crop_picture
     if params.has_key?(:crop_x)
-      @news_entry.crop_picture(params[:crop_x].to_i, params[:crop_y].to_i,
-                               params[:crop_w].to_i, params[:crop_h].to_i,
+      @news_entry.crop_picture(params[:crop_x].to_f, params[:crop_y].to_f,
+                               params[:crop_w].to_f, params[:crop_h].to_f,
                                params[:crop_target].to_sym)
       redirect_to @news_entry, notice: t('news_entry.message.imageCropped')
     else

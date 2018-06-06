@@ -20,13 +20,12 @@ class BaseImageUploader  < CarrierWave::Uploader::Base
   def crop
     if model.crop_x.present?
       real_w, real_h = ::MiniMagick::Image.open(model.picture.file.file)[:dimensions]
-      precrop_w, precrop_h = ::MiniMagick::Image.open(model.picture.precrop.file.file)[:dimensions]
       manipulate! do |img|
-        x = model.crop_x / precrop_w * real_w
-        y = model.crop_y / precrop_h * real_h
-        w = model.crop_w / precrop_w * real_w
-        h = model.crop_h / precrop_h * real_h
-        img.crop "#{w}x#{h}+#{x}+#{y}"
+        x = model.crop_x * real_w
+        y = model.crop_y * real_h
+        w = model.crop_w * real_w
+        h = model.crop_h * real_h
+        img.crop "#{w.to_i}x#{h.to_i}+#{x.to_i}+#{y.to_i}"
         img
       end
     end

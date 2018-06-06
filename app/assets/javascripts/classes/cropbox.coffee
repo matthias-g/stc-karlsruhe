@@ -5,14 +5,15 @@
 class @Cropbox
   
   constructor: (@html) ->
-    $('img', @html).Jcrop
+    @img = $('img', @html)
+    @img.Jcrop
       aspectRatio: @html.data('aspect')
       setSelect: [0, 0, 500, 500]
       onSelect: @update
       onChange: @update
       
   update: (coords) =>
-    $('.crop_x', @html).val(coords.x)
-    $('.crop_y', @html).val(coords.y)
-    $('.crop_w', @html).val(coords.w)
-    $('.crop_h', @html).val(coords.h)
+    $('.crop_x', @html).val(coords.x / @img.width())
+    $('.crop_y', @html).val(coords.y / @img.height())
+    $('.crop_w', @html).val(coords.w / @img.width())
+    $('.crop_h', @html).val(coords.h / @img.height())

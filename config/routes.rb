@@ -121,10 +121,12 @@ Rails.application.routes.draw do
     jsonapi_resources :action_groups
     jsonapi_resources :actions
     jsonapi_resources :projects
+    jsonapi_resources :tags
     jsonapi_resources :events
     jsonapi_resources :news_entries
     jsonapi_resources :users
     jsonapi_resources :galleries
+    jsonapi_resources :roles
 
     jsonapi_resources :gallery_pictures do
       member do

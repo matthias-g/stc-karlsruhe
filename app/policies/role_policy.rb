@@ -13,4 +13,9 @@ class RolePolicy < ApplicationPolicy
   alias_method :update?, :edit?
   alias_method :destroy?, :edit?
 
+  def updatable_fields
+    return [] unless is_admin_or_coordinator?
+    [:title, :users]
+  end
+
 end

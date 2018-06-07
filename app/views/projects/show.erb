@@ -148,15 +148,15 @@
                 <span>
                   <%= link_to leader.first_name, leader %>
                   <% if policy(@project).manage_team? %>
-                    <%= api_link '', [@project, :leaders, leader], :remove, data: {'success-remove': 1} %>
+                    <%= api_remove_link '', @project, :leaders, leader, true, data: {'success-remove': 1} %>
                   <% end %>
                 </span>
               <% end %>
             </div>
             <% if policy(@project).manage_team? && policy(User).index? %>
               <div class="my-2">
-                <%= user_select_picker @project, 'leaders', false, class: 'col-select btn-block',
-                                       title: t('project.button.addLeader'), data: {'success-reload': true} %>
+                <%= api_add_select @project, :leaders, User, options_for_user_select,
+                                   class: 'col-select btn-block', data: {'success-reload': true} %>
               </div>
             <% end %>
           </div>

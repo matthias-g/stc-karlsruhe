@@ -5,4 +5,8 @@ class Api::RoleResource < JSONAPI::Resource
 
   has_many :users
 
+  def self.updatable_fields(context)
+    Pundit.policy(context[:user], @model).updatable_fields
+  end
+
 end

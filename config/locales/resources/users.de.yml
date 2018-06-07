@@ -113,9 +113,6 @@ de:
       accountDeleted: 'Dein Account wurde gelöscht.'
       fieldEmpty: 'Das Feld darf nicht leer sein.'
       surveySent: 'Vielen Dank für deine Rückmeldung!'
-      addRoleSuccess: 'Der User hat jetzt die Rolle %{model}'
-      removeRoleSuccess: '%{model} ist nun nicht mehr %{rel_model}'
-
 
   role:
     label:
@@ -123,5 +120,9 @@ de:
       editRole: 'Rolle bearbeiten: "%s"'
       roleAssignments: 'Rollenzuweisungen an Benutzer'
       editRoles: 'Rollen bearbeiten'
+    button:
+      addUser: 'User auswählen'
     message:
       errorsExist: 'Die Rolle konnte wegen folgenden Fehlern nicht gespeichert werden:'
+      addUserSuccess: 'Der User hat jetzt die Rolle %{model}'
+      removeUserSuccess: '%{association} ist nun nicht mehr %{model}'

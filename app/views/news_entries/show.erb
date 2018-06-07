@@ -61,14 +61,9 @@
 
       <%= link_to t('news_entry.button.edit'),
                   edit_news_entry_path(@news_entry), class:'btn btn-secondary' %>
-
-      <%= api_link :auto_name, [@news_entry], :update, class: 'btn btn-secondary',
-                   icon: @news_entry.visible? ? 'fas fa-eye-slash' : 'fas fa-eye',
-                   title: @news_entry.visible? ? t('news_entry.button.makeInvisible') :
-                              t('news_entry.button.makeVisible'),
-                   attributes: {visible: !@news_entry.visible?},
-                   data: {'success-reload': true} %>
-
+      <%= api_update_link @news_entry.visible? ? :hide : :show,
+                          @news_entry, {visible: !@news_entry.visible?},
+                          class: 'btn btn-secondary', data: {'success-reload': true} %>
       <%= link_to t('news_entry.button.delete'), @news_entry, method: :delete,
                   data: { confirm: t('general.message.confirmDelete')},
                   class: 'btn btn-secondary' %>

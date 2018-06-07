@@ -15,12 +15,12 @@
             <% policy_scope(role.users).order(:first_name, :last_name).each do |user| %>
                 <div class="user">
                   <span><%= user.full_name %></span>
-                  <%= api_link '', [user, role], :remove, data: {'success-remove': 1} %>
+                  <%= api_remove_link '', role, :users, user, true, data: {'success-remove': 1} %>
                 </div>
             <% end %>
           </div>
           <div class="mt-3">
-            <%= user_select_picker role, 'roles', true, data: {'success-reload': true} %>
+            <%= api_add_select role, :users, User, options_for_user_select, data: {'success-reload': true} %>
           </div>
         </div>
     <% end %>

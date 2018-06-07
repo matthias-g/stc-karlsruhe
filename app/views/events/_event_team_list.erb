@@ -26,9 +26,7 @@
           <span>
             <%= link_to volunteer.first_name, volunteer %>
             <% if policy(event).manage_team? %>
-  	      <%= api_link '', [event, :volunteers, volunteer], :remove,
-                       data: {confirm: t('general.message.confirmRemoveLong') % [volunteer.full_name], 'success-remove': 1},
-                       title: t('event.button.removeVolunteer') %>
+              <%= api_remove_link '', event, :volunteers, volunteer, true, data: {'success-remove': 1} %>
             <% end %>
           </span>
         <% end %>
@@ -54,8 +52,8 @@
     </div>
 
     <% if policy(event).manage_team? && policy(User).index? %>
-      <%= user_select_picker event, :volunteers, false, class: 'col-select btn-block',
-                             title: t('event.button.addVolunteer'), data: {'success-reload': true} %>
+      <%= api_add_select event, :volunteers, User, options_for_user_select,
+                         class: 'col-select btn-block', data: {'success-reload': true} %>
     <% end %>
 
   </div>

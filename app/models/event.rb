@@ -31,25 +31,20 @@ class Event < ApplicationRecord
   end
 
   def available_places
-    if date && date >= Date.current && desired_team_size
-      desired_team_size - team_size
-    else
-      0
-    end
+    finished? ? 0 : (desired_team_size - team_size)
   end
 
   def finished?
-    return true unless date
-    end_time < Time.now
+    date.nil? || (end_time < Time.now) || (date < Date.current)
   end
 
   def status
     if finished?
       :finished
-    elsif available_places.zero?
+    elsif team_size == desired_team_size
       :full
     else
-      available_places < 3 ? :soon_full : :empty
+      (desired_team_size - team_size) < 3 ? :soon_full : :empty
     end
   end
 

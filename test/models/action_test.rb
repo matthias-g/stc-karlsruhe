@@ -161,6 +161,12 @@ class ActionTest < ActiveSupport::TestCase
     assert_equal :empty, @action.status
   end
 
+  test "date is not nil for action with multiple events" do
+    action = actions(:subaction)
+    assert_operator action.events.count, :>, 1
+    assert_not_nil action.date
+  end
+
 
 
   # SETTERS

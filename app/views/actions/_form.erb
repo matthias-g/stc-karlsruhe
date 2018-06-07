@@ -68,6 +68,19 @@
       </div>
 
       <div class="white-box">
+        <div class="tags">
+          <span id="action-tag-list">
+            <% @action.tags.each do |tag| %>
+              <span>
+                <%= tag.title %>
+                <% if policy(@action).edit? %>
+                  <%= api_remove_link '', @action, :tags, tag, false, data: {'success-remove': 1} %>
+                <% end %>
+              </span>
+            <% end %>
+          </span>
+          <%= api_add_select @action, :tags, Tag, options_for_tag_select, class: 'col-select' %>
+        </div>
         <div class="short_description">
           <%= f.text_area :short_description, help: t('action.help.short_description') %>
         </div>

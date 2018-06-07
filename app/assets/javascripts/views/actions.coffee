@@ -7,6 +7,13 @@ onViewLoad 'actions->edit, actions->new', ->
       for action in action_group.actions
         $('<option>').attr(value: action.id).text(action.title).appendTo select_element
 
+  $('#add-action-tag').on 'ajax:success', ->
+    list = $('#action-tag-list').empty()
+    window.getJsonApi('/api/actions/242/tags').done (response) ->
+      for tag in response.data
+        list.append('<span>'+tag.attributes.title+'</span>')
+
+
 
 onViewLoad 'actions->show, projects->show', =>
 

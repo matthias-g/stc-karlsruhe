@@ -53,7 +53,7 @@ class ProjectPolicy < ApplicationPolicy
   def updatable_fields
     all_fields = [:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements,
                   :visible, :short_description, :map_latitude, :map_longitude, :map_zoom,
-                  :picture, :picture_source, :events, :leaders, :volunteers]
+                  :picture, :picture_source, :events, :leaders, :volunteers, :tags]
     return all_fields - [:visible] unless is_admin_or_coordinator?
     all_fields
   end

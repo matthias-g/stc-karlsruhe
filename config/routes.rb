@@ -38,7 +38,6 @@ Rails.application.routes.draw do
     end
   end
 
-
   # news entries
   resources :news_entries, path: 'news' do
     member do
@@ -47,6 +46,8 @@ Rails.application.routes.draw do
     end
   end
 
+  # tags
+  resources :tags
 
   # galleries
   resources :galleries do

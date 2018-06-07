@@ -71,6 +71,8 @@ de:
       removeLeader: 'Aktionsleiter entfernen'
       addEvent: 'Termin hinzufügen'
       removeEvent: 'Termin löschen'
+      addTag: 'Tag hinzufügen'
+      removeTag: 'Tag entfernen'
       enter: 'Team beitreten'
       leave: 'Team verlassen'
       cropThumbImage: 'Thumbnail anpassen'
@@ -109,6 +111,8 @@ de:
     message:
       addLeaderSuccess: 'Leiter erfolgreich hinzugefügt'
       removeLeaderSuccess: 'Leiter erfolgreich entfernt'
+      addTagSuccess: 'Tag hinzugefügt'
+      removeTagSuccess: 'Tag entfernt'
       imageCropped: 'Der Bildausschnitt wurde angepasst.'
       created: 'Aktion wurde erfolgreich erstellt. Sie muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Aktion wurde erfolgreich aktualisiert.'

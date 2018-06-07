@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_06_080125) do
+ActiveRecord::Schema.define(version: 2018_06_07_111449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,13 @@ ActiveRecord::Schema.define(version: 2018_06_06_080125) do
     t.index ["slug"], name: "index_initiatives_on_slug", unique: true
   end
 
+  create_table "initiatives_tags", id: false, force: :cascade do |t|
+    t.bigint "initiative_id", null: false
+    t.bigint "tag_id", null: false
+    t.index ["initiative_id"], name: "index_initiatives_tags_on_initiative_id"
+    t.index ["tag_id"], name: "index_initiatives_tags_on_tag_id"
+  end
+
   create_table "leaderships", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "initiative_id"
@@ -209,6 +216,14 @@ ActiveRecord::Schema.define(version: 2018_06_06_080125) do
     t.string "slug", limit: 255
     t.boolean "show_in_user_profile", default: false
     t.index ["slug"], name: "index_surveys_templates_on_slug", unique: true
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "title"
+    t.string "icon"
+    t.string "color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :serial, force: :cascade do |t|

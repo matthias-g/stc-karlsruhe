@@ -1,0 +1,5 @@
+
+default:
+  title: Default Tag
+  icon: fa fa-eye
+  color: 232323

@@ -10,6 +10,7 @@ class Api::InitiativeResource < JSONAPI::Resource
   attribute :picture
 
   has_one :gallery
+  has_many :tags
   has_many :volunteers, class_name: 'User', through: :participations
   has_many :events, always_include_linkage_data: true
   has_many :leaders, class_name: 'User', through: :leaderships, always_include_linkage_data: true

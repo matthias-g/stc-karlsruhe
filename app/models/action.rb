@@ -131,7 +131,7 @@ class Action < Initiative
   end
 
   def set_default_values
-    self.action_group ||= ActionGroup.default if action_group.nil?
+    self.action_group ||= ActionGroup.default.load if action_group.nil?
   end
 
 end

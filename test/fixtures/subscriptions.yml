@@ -1,0 +1,7 @@
+volunteer:
+  email: volunteer0@example.com
+  name: Default
+
+other_volunteer:
+  email: volunteer1@example.com
+  name: Default2

@@ -182,6 +182,20 @@ ActiveRecord::Schema.define(version: 2018_06_28_150550) do
     t.index ["user_id", "role_id"], name: "index_roles_users_on_user_id_and_role_id"
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.string "email"
+    t.string "name"
+    t.boolean "receive_emails_about_action_groups", default: true
+    t.boolean "receive_emails_about_other_projects", default: true
+    t.boolean "receive_other_emails_from_orga", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_subscriptions_on_email"
+    t.index ["receive_emails_about_action_groups"], name: "index_subscriptions_on_receive_emails_about_action_groups"
+    t.index ["receive_emails_about_other_projects"], name: "index_subscriptions_on_receive_emails_about_other_projects"
+    t.index ["receive_other_emails_from_orga"], name: "index_subscriptions_on_receive_other_emails_from_orga"
+  end
+
   create_table "surveys_answers", id: :serial, force: :cascade do |t|
     t.integer "submission_id"
     t.integer "question_id"

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, except: [:index, :unsubscribe]
-  before_action :authorize_user, except: [:index, :unsubscribe]
+  before_action :set_user, except: [:index]
+  before_action :authorize_user, except: [:index]
   after_action :verify_authorized
 
   respond_to :html
@@ -37,24 +37,6 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
-  def unsubscribe
-    @user = SignedGlobalID.find(params[:sgid], for: :unsubscribe_user)
-    @type = params[:type].to_sym
-    authorize_user
-    allowed_types = [:receive_emails_about_action_groups,
-                     :receive_emails_about_my_action_groups,
-                     :receive_emails_about_other_projects,
-                     :receive_other_emails_from_orga]
-    if @type == :all_emails
-      allowed_types.each do |t|
-        @user.update_attribute t, false
-      end
-    elsif allowed_types.include? @type
-      @user.update_attribute @type, false
-    end
-    respond_with(@user)
-  end
-
   def destroy
     if @user.valid_password?(params[:confirm_delete_password]) || current_user.admin?
       @user.clear!
@@ -82,8 +64,7 @@ class UsersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     params.require(:user).permit(:username, :first_name, :last_name, :email, :phone,
-                                 :receive_emails_about_action_groups, :receive_emails_about_my_action_groups, :receive_emails_about_other_projects,
-                                 :receive_other_emails_from_orga, :receive_emails_from_other_users)
+                                 :receive_emails_about_my_action_groups, :receive_emails_from_other_users)
   end
 
   def authorize_user

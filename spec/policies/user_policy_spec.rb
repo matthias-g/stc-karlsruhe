@@ -138,9 +138,7 @@ RSpec.describe UserPolicy do
 
       it 'contains other attributes' do
         expect(subject).to contain_exactly(:username, :first_name, :last_name, :email, :phone,
-                                           :receive_emails_about_action_groups, :receive_emails_about_my_action_groups,
-                                           :receive_emails_about_other_projects, :receive_other_emails_from_orga,
-                                           :receive_emails_from_other_users)
+                                           :receive_emails_about_my_action_groups, :receive_emails_from_other_users)
       end
     end
 
@@ -148,9 +146,7 @@ RSpec.describe UserPolicy do
       let(:current_user) { users(:admin) }
       it 'contains other attributes' do
         expect(subject).to contain_exactly(:username, :first_name, :last_name, :email, :phone,
-                                           :receive_emails_about_action_groups, :receive_emails_about_my_action_groups,
-                                           :receive_emails_about_other_projects, :receive_other_emails_from_orga,
-                                           :receive_emails_from_other_users)
+                                           :receive_emails_about_my_action_groups, :receive_emails_from_other_users)
       end
     end
   end

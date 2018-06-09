@@ -35,9 +35,8 @@ class ActiveSupport::TestCase
     user_fixtures.map{|u| users(u).email}.to_set
   end
 
-  # set of all registered user mail addresses, minus the given user fixtures
-  def all_other_mails(*user_fixtures)
-    (User.all - user_fixtures.map{|u| users(u)}).pluck(:email).to_set
+  def all_subscription_mails
+    Subscription.all.pluck(:email).to_set
   end
 
 end

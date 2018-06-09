@@ -13,7 +13,11 @@ class OrgaMessagesController < ApplicationController
   end
 
   def show
-
+    if @message.newsletter?
+      @subscription = Subscription.find_by_email(current_user.email)
+    else
+      @user = current_user
+    end
   end
 
   def new

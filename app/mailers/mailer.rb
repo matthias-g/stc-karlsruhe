@@ -15,12 +15,12 @@ class Mailer < ActionMailer::Base
   end
 
   def contact_volunteers_mail(body, subject, sender, recipient, action)
-    @message = replace_variables(body, recipient)
+    @message = replace_user_placeholder(body, recipient.first_name)
     @action_title = action.full_title
     @sender = sender
     @recipient = recipient
     mail to: recipient.email, reply_to: sender.email,
-         subject: replace_variables(subject, recipient)
+         subject: replace_user_placeholder(subject, recipient.first_name)
   end
 
   def contact_leaders_mail(body, subject, sender, recipient, action)
@@ -38,12 +38,20 @@ class Mailer < ActionMailer::Base
     mail to: recipient.email, reply_to: sender.email, subject: subject
   end
 
-  def orga_mail(orga_message, recipient)
-    @message = replace_variables(orga_message.body, recipient)
-    @recipient = recipient
+  def orga_user_mail(orga_message, user)
+    @message = replace_user_placeholder(orga_message.body, user.first_name)
+    @user = user
     @type = orga_message.content_type
-    mail to: recipient.email, reply_to: orga_message.from,
-         subject: replace_variables(orga_message.subject, recipient)
+    mail to: user.email, reply_to: orga_message.from,
+         subject: replace_user_placeholder(orga_message.subject, user.first_name)
+  end
+
+  def orga_subscription_mail(orga_message, subscription)
+    @message = replace_user_placeholder(orga_message.body, subscription.name)
+    @subscription = subscription
+    @type = orga_message.content_type
+    mail to: subscription.email, reply_to: orga_message.from,
+         subject: replace_user_placeholder(orga_message.subject, subscription.name)
   end
 
   def orga_mail_notification(orga_message, recipient)
@@ -90,8 +98,8 @@ class Mailer < ActionMailer::Base
 
   private
 
-  def replace_variables(text, recipient)
-    text.gsub('{user}', recipient.first_name.titleize)
+  def replace_user_placeholder(text, name)
+    text.gsub('{user}', name.titleize)
   end
 
 end

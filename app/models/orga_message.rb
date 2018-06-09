@@ -15,7 +15,11 @@ class OrgaMessage < ApplicationRecord
     self.sender = sender
     recipient_list = recipients(sender)
     recipient_list.each do |recipient|
-      Mailer.orga_mail(self, recipient).deliver_later
+      if newsletter?
+        Mailer.orga_subscription_mail(self, recipient).deliver_later
+      else
+        Mailer.orga_user_mail(self, recipient).deliver_later
+      end
     end
     # completion email
     Mailer.orga_mail_notification(self, sender).deliver_later
@@ -28,50 +32,60 @@ class OrgaMessage < ApplicationRecord
   end
 
   def recipients(sender)
-    # reconstruct recipients if message was already sent
-    if sent?
-      return sent_to.split(/\s*,\s*/).map(&:to_i).collect {|id| User.find(id) }
-    end
+    return recipients_for_sent_mail if sent?
+    return recipients_for_newsletter if newsletter?
+    recipients_for_user_mail(sender)
+  end
 
-    # find users by recipient group
+  def newsletter?
+    :all_users == recipient.to_sym
+  end
+
+  private
+
+  def recipients_for_sent_mail
+    sent_to.split(/\s*,\s*/).map(&:to_i).collect {|id| User.find(id) }
+  end
+
+  def recipients_for_newsletter
+    query = Subscription.all
+    query = case content_type.to_sym
+            when :about_action_groups
+              query.where('subscriptions.receive_emails_about_action_groups': true)
+            when :about_other_actions
+              query.where('subscriptions.receive_emails_about_other_actions': true)
+            else
+              query.where('subscriptions.receive_other_emails_from_orga': true)
+            end
+
+    query.order(:id).uniq
+  end
+
+  def recipients_for_user_mail(sender)
     current_action_ids = ActionGroup.default.actions.visible.pluck(:id)
-    user_query = case recipient.to_sym
-      when :current_volunteers_and_leaders
-        User.left_joins(:leaderships, :events_as_volunteer)
-            .where('leaderships.initiative_id IN (?) OR events.initiative_id IN (?)',
-                   current_action_ids, current_action_ids)
-      when :current_volunteers
-        User.joins(:events_as_volunteer).where(events: {initiative_id: current_action_ids})
-      when :current_leaders
-        User.joins(:leaderships).where(leaderships: {initiative_id: current_action_ids})
-      when :all_users
-        User.all
-      when :active_users
-        User.left_joins(:participations)
-            .where('participations.created_at > ? OR users.created_at > ?', 18.months.ago, 6.months.ago)
-      when :test
-        return User.where(id: sender.id).to_a * 1000
-      when :sender
-        return User.where(id: sender.id)
-      else
-        return User.none
+    query = case recipient.to_sym
+            when :current_volunteers_and_leaders
+              User.left_joins(:leaderships, :events_as_volunteer)
+                  .where('leaderships.initiative_id IN (?) OR events.initiative_id IN (?)',
+                         current_action_ids, current_action_ids)
+            when :current_volunteers
+              User.joins(:events_as_volunteer).where(events: {initiative_id: current_action_ids})
+            when :current_leaders
+              User.joins(:leaderships).where(leaderships: {initiative_id: current_action_ids})
+            when :sender
+              return User.where(id: sender.id)
+            when :test
+              return User.where(id: sender.id).to_a * 1000
+            else
+              return User.none
+            end
+
+    if content_type.to_sym == :about_action_groups &&
+        %w(current_volunteers_and_leaders current_volunteers current_leaders).include?(recipient)
+      query = query.where('users.receive_emails_about_my_action_groups': true)
     end
 
-    # filter users by email preferences
-    filtered_user_query = case content_type.to_sym
-    when :about_action_groups
-      if %w(current_volunteers_and_leaders current_volunteers current_leaders).include?(recipient)
-        user_query.where('users.receive_emails_about_my_action_groups': true)
-      else
-        user_query.where('users.receive_emails_about_action_groups': true)
-      end
-    when :about_other_actions
-      user_query.where('users.receive_emails_about_other_actions': true)
-    else
-      user_query.where('users.receive_other_emails_from_orga': true)
-    end
-
-    filtered_user_query.valid.order(:id).uniq
+    query.valid.order(:id).uniq
   end
 
 end

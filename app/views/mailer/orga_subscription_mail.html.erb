@@ -8,7 +8,7 @@
 
 <%= @message.html_safe %>
 
-<%= (render 'footer', content_type: @type, user: @recipient).gsub(/\n/, '').squish().html_safe %>
+<%= (render 'orga_subscription_footer', content_type: @type, subscription: @subscription).gsub(/\n/, '').squish().html_safe %>
 
 </body>
 </html>

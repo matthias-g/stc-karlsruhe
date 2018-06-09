@@ -149,24 +149,19 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "send 'mail about action groups' to all users" do
-    sign_in users(:admin)
+    sender = users(:admin)
+    sign_in sender
     @message.update_attributes recipient: :all_users, content_type: :about_action_groups
-    send_and_assert_orga_message(@message, (User.all.count - 1) + 1)
-    assert_equal all_other_mails(:deleted), mail_recipients
+    send_and_assert_orga_message(@message, Subscription.all.count + 1)
+    assert_equal all_subscription_mails + [sender.email], mail_recipients
   end
 
   test "send 'other email from orga' to all users" do
-    sign_in users(:admin)
+    sender = users(:admin)
+    sign_in sender
     @message.update_attributes recipient: :all_users, content_type: :other_email_from_orga
-    send_and_assert_orga_message(@message, (User.all.count - 1) + 1)
-    assert_equal all_other_mails(:deleted), mail_recipients
-  end
-
-  test "send 'other email from orga' to active users" do
-    sign_in users(:admin)
-    @message.update_attributes recipient: :active_users, content_type: :other_email_from_orga
-    send_and_assert_orga_message(@message, (User.all.count - 2) + 1)
-    assert_equal all_other_mails(:deleted, :ancient_user), mail_recipients
+    send_and_assert_orga_message(@message, Subscription.all.count + 1)
+    assert_equal all_subscription_mails + [sender.email], mail_recipients
   end
 
   test "send 'other email from orga' to current volunteers" do

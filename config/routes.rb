@@ -75,7 +75,6 @@ Rails.application.routes.draw do
       post :contact_user
     end
   end
-  get :unsubscribe, to: 'users#unsubscribe'
 
 
   # surveys
@@ -93,6 +92,7 @@ Rails.application.routes.draw do
       get :send_message
     end
   end
+  get :unsubscribe, to: 'subscriptions#unsubscribe'
 
 
   # statistics
@@ -126,6 +126,7 @@ Rails.application.routes.draw do
     jsonapi_resources :events
     jsonapi_resources :news_entries
     jsonapi_resources :users
+    jsonapi_resources :subscriptions
     jsonapi_resources :galleries
     jsonapi_resources :roles
 

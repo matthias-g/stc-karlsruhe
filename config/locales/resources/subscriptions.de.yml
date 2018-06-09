@@ -1,0 +1,18 @@
+de:
+  activerecord:
+    models:
+      subscription:
+        one: Abonnement
+        other: Abonnements
+    attributes:
+      subscription:
+        email: E-Mail-Adresse
+        name: Vorname
+
+  subscription:
+    creation:
+      success: Abonnement erfolgreich erstellt.
+      captcha_failed: Ungültiges Captcha! Abonnement konnte nicht erstellt werden.
+    removal:
+      success: Abonnement wurde erfolgreich beendet.
+      failed: Fehler beim Beenden des Abonnements. Bitte melde dich über das Kontaktformular.

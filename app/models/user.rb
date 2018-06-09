@@ -32,6 +32,8 @@ class User < ApplicationRecord
   has_secure_token :ical_token
 
   before_validation :set_default_username_if_blank!, on: :create
+  around_update :update_email_in_subscription
+  around_update :update_name_in_subscription
 
   scope :valid,  -> { where(users: { cleared: false }) }
 
@@ -159,6 +161,32 @@ class User < ApplicationRecord
 
   def username_exists_in_database?(username)
     User.where('lower(username) = ?', username.downcase).count > 0 || !USERNAME_FORMAT.match(username)
+  end
+
+  def update_email_in_subscription
+    old_email = nil
+    old_email = self.email_was if self.email_changed?
+
+    yield
+
+    return unless old_email
+    subscription = Subscription.find_by_email(old_email)
+    return unless subscription
+    subscription.email = self.email
+    subscription.save!
+  end
+
+  def update_name_in_subscription
+    old_name = nil
+    old_name = self.first_name_was if self.first_name_changed?
+
+    yield
+
+    return unless old_name
+    subscription = Subscription.find_by_email(self.email)
+    return unless subscription
+    subscription.name = self.first_name
+    subscription.save!
   end
 
 end

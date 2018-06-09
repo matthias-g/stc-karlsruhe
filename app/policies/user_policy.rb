@@ -20,10 +20,6 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
-  def unsubscribe?
-    true
-  end
-
 
   alias_method :index?, :is_admin_or_coordinator?
   alias_method :update?, :edit?
@@ -35,10 +31,7 @@ class UserPolicy < ApplicationPolicy
     return %i[first_name] unless user
     return %i[first_name last_name] unless user.eql?(record) || user.admin?
     %i[username first_name last_name email phone
-       receive_emails_about_action_groups
        receive_emails_about_my_action_groups
-       receive_emails_about_other_projects
-       receive_other_emails_from_orga
        receive_emails_from_other_users]
   end
 

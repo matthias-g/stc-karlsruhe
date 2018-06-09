@@ -112,4 +112,27 @@ class UserTest < ActiveSupport::TestCase
     assert_not subevent.volunteer?(subaction_volunteer)
   end
 
+  test "changing email also changes subscription" do
+    user = users(:volunteer)
+    old_email = user.email
+    new_email = 'volunteers-new-email@example.com'
+    assert_not_nil Subscription.find_by_email(user.email)
+    assert_nil Subscription.find_by_email(new_email)
+    user.email = new_email
+    user.save!
+    assert_nil Subscription.find_by_email(old_email)
+    assert_not_nil Subscription.find_by_email(new_email)
+  end
+
+  test "changing first name also changes subscription" do
+    user = users(:volunteer)
+    new_name = 'Alice'
+    subscription = Subscription.find_by_email(user.email)
+    assert_equal user.first_name, subscription.name
+    user.first_name = new_name
+    user.save!
+    subscription.reload
+    assert_equal user.first_name, subscription.name
+  end
+
 end

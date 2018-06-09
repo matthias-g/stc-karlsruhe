@@ -21,7 +21,7 @@ de:
         from: 'Absender'
         recipient: 'Empfänger'
         action_group: 'Aktionsgruppe'
-        content_type: 'Typ'
+        content_type: 'Typ (bei Newsletter)'
         subject: 'Betreff'
         body: 'Nachricht'
         created_at: 'Erstellt'
@@ -46,6 +46,7 @@ de:
         current_leaders: "Aktionsleiter - %{action_group}"
         all_users: 'Alle angemeldeten Benutzer'
         active_users: 'Aktive Benutzer (Registrierung < 6 M oder Aktionsteilnahme < 18 M)'
+        newsletter: 'Newsletter'
         sender: 'Sender <%{user_email}>'
         test: 'Test'
 
@@ -55,11 +56,12 @@ de:
         current_leaders: "Aktionsleiter"
         all_users: 'Alle angemeldeten Benutzer'
         active_users: 'Aktive Benutzer (Registrierung < 6 M oder Aktionsteilnahme < 18 M)'
+        newsletter: 'Newsletter'
         sender: 'Sender'
         test: 'Test (ACHTUNG: sendet dir 1000 E-Mails!!!)'
 
       content_types:
-        about_action_groups: 'Informationen zur Aktionswoche'
+        about_action_groups: 'Informationen zu Aktionswochen'
         about_other_projects: 'Informationen zu weiteren Serve the City Aktionen'
         other_email_from_orga: 'Sonstige E-Mail vom Orgateam'
 

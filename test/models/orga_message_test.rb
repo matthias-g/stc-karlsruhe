@@ -49,11 +49,7 @@ class OrgaMessageTest < ActiveSupport::TestCase
                  get_message_recipient_set(sender)
 
     @message.recipient = :all_users
-    assert_equal all_other_mails(:deleted),
-                 get_message_recipient_set(sender)
-
-    @message.recipient = :active_users
-    assert_equal all_other_mails(:deleted, :ancient_user),
+    assert_equal all_subscription_mails,
                  get_message_recipient_set(sender)
 
     @message.recipient = :test

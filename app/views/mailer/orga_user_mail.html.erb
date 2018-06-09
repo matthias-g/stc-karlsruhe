@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <%= stylesheet_link_tag 'views/admin_mail' %>
+</head>
+<body class="admin-mail-body">
+
+<%= @message.html_safe %>
+
+<%= (render 'orga_user_footer', content_type: @type, user: @user).gsub(/\n/, '').squish().html_safe %>
+
+</body>
+</html>

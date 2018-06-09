@@ -1,6 +1,6 @@
 module UsersHelper
 
-  # Infers the value of the "Receive orga mails" checkbox in the user profile edit page
+  # Infers the value of the "Receive orga mails" checkbox in the user profile edit page TODO this is outdated since subscriptions
   def receive_email_from_orga user
     user.receive_emails_about_action_groups || user.receive_emails_about_my_action_groups ||
         user.receive_emails_about_other_projects || user.receive_other_emails_from_orga

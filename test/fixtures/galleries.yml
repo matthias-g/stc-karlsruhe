@@ -28,6 +28,10 @@ dummy_4:
   title: Dummy Gallery 4
   owner: subaction_3_invisible (Initiative)
 
+dummy_5:
+  title: Dummy Gallery 5
+  owner: without_events (Initiative)
+
 
 empty_gallery:
   title: Empty Gallery

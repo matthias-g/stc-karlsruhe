@@ -134,7 +134,7 @@ class ActionTest < ActiveSupport::TestCase
   end
 
   test "all_dates includes visible subaction dates" do
-    assert_nil @parent_action.date
+    assert_equal 0, @parent_action.events.count
     assert_equal 3, @parent_action.all_dates.count
   end
 
@@ -165,6 +165,12 @@ class ActionTest < ActiveSupport::TestCase
     action = actions(:subaction)
     assert_operator action.events.count, :>, 1
     assert_not_nil action.date
+  end
+
+  test "date is not nil for action without events" do
+    action = actions(:without_events)
+    assert_equal 0, action.events.count
+    assert_nil action.date
   end
 
 

@@ -71,3 +71,11 @@ subaction_3_invisible:
   action_group: default
   parent_action: parent_action
   type: Action
+
+without_events:
+  title: Without events
+  short_description: Default short description
+  description: Default description
+  action_group: default
+  visible: true
+  type: Action

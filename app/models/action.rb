@@ -42,13 +42,11 @@ class Action < Initiative
   end
 
   def date
-    # TODO other cases
-    events.count == 1 ? events.first.date : nil
+    all_events.first&.date
   end
 
   def start_time
-    # TODO other cases
-    events.count == 1 ? events.first.start_time : nil
+    all_events.first&.start_time
   end
 
 
@@ -131,7 +129,7 @@ class Action < Initiative
   end
 
   def set_default_values
-    self.action_group ||= ActionGroup.default.load if action_group.nil?
+    self.action_group ||= ActionGroup.default if action_group.nil?
   end
 
 end

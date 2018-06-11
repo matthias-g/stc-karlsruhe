@@ -5,16 +5,17 @@ class Event < ApplicationRecord
   has_many :participations, dependent: :destroy, counter_cache: :team_size
   has_many :volunteers, class_name: 'User', through: :participations, source: :user,
            after_add: :on_volunteer_added, after_remove: :on_volunteer_removed
-  before_save :set_datetime_fields
 
   validates :desired_team_size, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  validates_presence_of :date
+
+  before_save :set_datetime_fields
 
   scope :upcoming, -> { where('events.end_time >= ?', Time.now).order(date: :asc) }
   scope :today_or_past, -> { where('events.date <= ?', Date.current).order(date: :asc) }
   scope :finished, -> { where('events.end_time < ?', Time.now).order(date: :desc) }
   scope :recent,   -> { where('events.date > ?', 1.year.ago).order(date: :desc) }
 
-  validates_presence_of :desired_team_size
 
   def add_volunteer(user)
     volunteers << user
@@ -71,8 +72,8 @@ class Event < ApplicationRecord
   end
 
   def set_datetime_fields
-    self.start_time = parse_start_time || self.date&.at_beginning_of_day
-    self.end_time = parse_end_time || parse_start_time&.advance(hours: 4) || self.date&.at_end_of_day
+    self.start_time = parse_start_time || self.date.at_beginning_of_day
+    self.end_time = parse_end_time || parse_start_time&.advance(hours: 4) || self.date.at_end_of_day
   end
 
   TIME_REGEX = /(\d{1,2})[:\.]?(\d{1,2})?[^\d\/]*(\d{1,2})?[:\.-]?(\d{1,2})?.*/

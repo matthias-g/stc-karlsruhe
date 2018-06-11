@@ -26,4 +26,30 @@ RSpec.describe RolePolicy do
       end
     end
   end
+
+  describe 'updatable_fields' do
+    subject { policy.updatable_fields }
+    let(:all_fields) { Api::RoleResource._updatable_relationships | Api::RoleResource._attributes.keys - [:id] }
+
+    context 'as admin' do
+      let(:current_user) { users(:admin) }
+      it 'contains all attributes' do
+        expect(subject).to match_array(all_fields)
+      end
+    end
+
+    context 'as coordinator' do
+      let(:current_user) { users(:coordinator) }
+      it 'contains all attributes' do
+        expect(subject).to match_array(all_fields)
+      end
+    end
+
+    context 'as leader' do
+      let(:current_user) { users(:leader) }
+      it 'is empty' do
+        expect(subject).to match_array([])
+      end
+    end
+  end
 end

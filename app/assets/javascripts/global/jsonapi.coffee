@@ -81,6 +81,19 @@ addParametersToUrl = (url, params) ->
   )
   return deferred.promise()
 
+# adds to or removes from a given association
+@updateRelationship = (model_type, model_id, relationship, item_type, item_id, action) ->
+  url = '/api/' + model_type +  '/' + model_id + '/relationships/' + relationship;
+  method = {remove: 'DELETE', add: 'POST'}[action]
+  settings = {
+    accepts: {jsonapi: 'application/vnd.api+json'},
+    contentType: 'application/vnd.api+json',
+    converters: {'text jsonapi': (result) => JSON.parse(result)},
+    dataType: 'jsonapi',
+    data: JSON.stringify({data: [{type: item_type, id: item_id}]}),
+    method: method
+  };
+  $.ajax(url, settings);
 
 
 # extend rails ujs remote calls to send params JSONAPI call

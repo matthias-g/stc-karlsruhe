@@ -30,7 +30,7 @@ module ApiHelper
                                  model: get_name_for(model), association: get_name_for(object))
         }
     }
-    new_options[:data][:confirm] = t('general.message.confirmRemoveLong') % [get_name_for(object)] if confirm
+    new_options[:data][:confirm] = t('general.message.confirmRemoveLong', subject: get_name_for(object)) if confirm
     render_button(name, :remove, i18n_key, url, html_options.deep_merge(new_options))
   end
 

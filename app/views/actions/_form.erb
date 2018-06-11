@@ -69,6 +69,7 @@
 
       <div class="white-box">
         <div class="tags">
+          <!--
           <span id="action-tag-list">
             <% @action.tags.each do |tag| %>
               <span>
@@ -80,6 +81,12 @@
             <% end %>
           </span>
           <%= api_add_select @action, :tags, Tag, options_for_tag_select, class: 'col-select' %>
+          -->
+          <% pool = policy_scope(Tag.all).map{|tag| {id: tag.id, name: tag.title, tokens: "#{tag.title}"}} %>
+          <%= react_component 'RelationshipList', {
+              model_type: 'actions', model_id: @action.id, relationship: 'tags',
+              item_type: 'tags', items: @action.tags.map{|tag| {name: tag.title, id: tag.id}},
+              pool: pool} %>
         </div>
         <div class="short_description">
           <%= f.text_area :short_description, help: t('action.help.short_description') %>

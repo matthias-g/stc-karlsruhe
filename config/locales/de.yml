@@ -26,7 +26,7 @@ de:
       confirmDelete: 'Willst du das wirklich tun?'
       confirmDeleteLong: 'Willst du %s wirklich löschen?'
       confirmRemove: 'Willst du das wirklich tun?'
-      confirmRemoveLong: 'Willst du %s wirklich enfernen?'
+      confirmRemoveLong: 'Willst du %{subject} wirklich enfernen?'
 
     form:
       sender: 'Deine E-Mail-Adresse'

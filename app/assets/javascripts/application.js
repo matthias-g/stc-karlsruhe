@@ -19,6 +19,9 @@
 
 // PROJECT
 //= require global/base.js.coffee
+//= require react
+//= require react_ujs
 //= require_tree ./global
 //= require_tree ./classes
 //= require_tree ./views
+//= require_tree ./components

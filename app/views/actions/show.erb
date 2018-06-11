@@ -170,6 +170,13 @@
                                    class: 'col-select btn-block', data: {'success-reload': true} %>
               </div>
             <% end %>
+
+            <%# pool = policy_scope(User.all.where(cleared: false)).order(:first_name, :last_name).map{|user|
+                {id: user.id, name: user.full_name, tokens: "#{user.username} #{user.full_name}"}} %>
+            <%#= react_component 'RelationshipList', {
+                model_type: 'actions', model_id: @action.id, relationship: 'leaders',
+                item_type: 'users', items: @action.leaders.map{|leader| {name: leader.full_name, id: leader.id}},
+                pool: pool} %>
           </div>
           <div>
             <h3><%= Action.human_attribute_name('date'.pluralize(@action.all_dates.count)) %></h3>

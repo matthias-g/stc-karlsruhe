@@ -244,11 +244,6 @@ RSpec.describe ActionPolicy do
       let(:user) { users(:admin) }
       it { should_pass }
     end
-
-    context 'for undated action' do
-      before { event.update_attribute :date, nil }
-      it { should_fail }
-    end
   end
 
   describe 'manage_team?' do

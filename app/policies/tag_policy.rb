@@ -8,7 +8,7 @@ class TagPolicy < ApplicationPolicy
 
   def updatable_fields
     return [] unless is_admin_or_coordinator?
-    [:title, :icon, :color]
+    [:title, :initiatives, :icon, :color]
   end
 
 end

@@ -244,11 +244,6 @@ RSpec.describe ProjectPolicy do
       let(:user) { users(:admin) }
       it { should_pass }
     end
-
-    context 'for undated project' do
-      before { event.update_attribute :date, nil }
-      it { should_fail }
-    end
   end
 
   describe 'manage_team?' do

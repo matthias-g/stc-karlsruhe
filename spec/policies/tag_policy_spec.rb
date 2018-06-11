@@ -15,21 +15,21 @@ RSpec.describe TagPolicy do
     let(:all_fields) { Api::TagResource._updatable_relationships | Api::TagResource._attributes.keys - [:id] }
 
     context 'as admin' do
-      let(:user) { users(:admin) }
+      let(:current_user) { users(:admin) }
       it 'contains all attributes' do
         expect(subject).to match_array(all_fields)
       end
     end
 
     context 'as coordinator' do
-      let(:user) { users(:coordinator) }
+      let(:current_user) { users(:coordinator) }
       it 'contains all attributes' do
         expect(subject).to match_array(all_fields)
       end
     end
 
     context 'as leader' do
-      let(:user) { users(:leader) }
+      let(:current_user) { users(:leader) }
       it 'is empty' do
         expect(subject).to match_array([])
       end

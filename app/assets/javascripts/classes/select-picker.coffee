@@ -9,7 +9,7 @@ class @SelectPicker
     select.on 'changed.bs.select', ->
       url = handling.url.replace('{id}', select.val())
       payload = JSON.stringify(handling.data).replace('{id}', select.val())
-      request = window.requestToJsonApi(url, handling.method, data: JSON.parse(payload))
+      request = apiRequest(url, handling.method, data: JSON.parse(payload))
 
       # fire basic response handling
       request.done (data, status, xhr) ->

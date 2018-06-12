@@ -8,6 +8,7 @@
  *  [{<string> name, <int> id, <string> tokens}] pool: all possible items for the select
  */
 class RelationshipList extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {items: props.items};
@@ -56,22 +57,20 @@ class RelationshipList extends React.Component {
         )
     }
 
-    removeItem(id) {
-        var request = window.updateRelationship(this.props.model_type, this.props.model_id,
-            this.props.relationship, this.props.item_type, id, 'remove');
-        request.done(() => {
-            var items = this.state.items.slice().filter((item) => item.id !== id);
+    addItem(id) {
+        apiAdd(this.props.model_type, this.props.model_id,
+            this.props.relationship, this.props.item_type, id).done(() => {
+            var name = find_in_object_array(id, this.props.pool).name,
+                items = this.state.items.slice();
+            items.push({name: name, id: id});
             this.setState({items: items});
         });
     }
 
-    addItem(id) {
-        var request = window.updateRelationship(this.props.model_type, this.props.model_id,
-            this.props.relationship, this.props.item_type, id, 'add');
-        request.done(() => {
-            var name = window.find_in_object_array(id, this.props.pool).name;
-            var items = this.state.items.slice();
-            items.push({name: name, id: id});
+    removeItem(id) {
+        apiRemove(this.props.model_type, this.props.model_id,
+                  this.props.relationship, this.props.item_type, id).done(() => {
+            var items = this.state.items.slice().filter((item) => (item.id !== id));
             this.setState({items: items});
         });
     }

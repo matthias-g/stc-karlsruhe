@@ -1,115 +1,98 @@
 ### jsonapi.js ###
 # Global methods relating to JSON API
 
-@getJsonApi = (url) ->
-  settings = {
-    accepts: {
-      jsonapi: 'application/vnd.api+json'
-    },
-    converters: {
-      'text jsonapi': (result) -> JSON.parse(result)
-    },
+# generic JSONAPI call (uncached and lowlevel, use other methods below where possible)
+@apiRequest = (url, method = 'GET', payload = {}) ->
+  settings =
+    accepts: {jsonapi: 'application/vnd.api+json'}
+    contentType: 'application/vnd.api+json'
+    converters: {'text jsonapi': (result) -> result}
     dataType: 'jsonapi'
-  }
-  $.ajax(url, settings)
-
-@updateJsonApi = (url, payload) ->
-  settings = {
-    accepts: {
-      jsonapi: 'application/vnd.api+json'
-    },
-    contentType: 'application/vnd.api+json',
-    converters: {
-      'text jsonapi': (result) -> JSON.parse(result)
-    },
-    dataType: 'jsonapi',
-    data: JSON.stringify(payload),
-    method: 'PATCH'
-  }
-  $.ajax(url, settings)
-@requestToJsonApi = (url, method, payload = {}) ->
-  settings = {
-    accepts: {
-      jsonapi: 'application/vnd.api+json'
-    },
-    contentType: 'application/vnd.api+json',
-    converters: {
-      'text jsonapi': (result) -> result
-    },
-    dataType: 'jsonapi',
-    data: JSON.stringify(payload),
     method: method
-  }
-  $.ajax(url, settings)
+  unless $.isEmptyObject(payload)
+    settings.data = JSON.stringify(payload)
+  $.ajax(url, settings).fail(handleJsonApiError)
 
-@getJsonApiStore = ->
-  unless window.jsonApiStore
-    window.jsonApiStore = new JsonApiDataStore()
-  return window.jsonApiStore
+# calls a controller action on the resource
+@apiCallAction = (type, id, action, method = 'GET', payload = {}) ->
+  apiRequest("/api/#{type}/#{id}/#{action}", method, payload)
 
-addParametersToUrl = (url, params) ->
-  separator = '?'
-  for key, value of params
-    url += separator + key + '=' + value
-    separator = '&'
-  return url
+# adds an item to an association
+@apiAdd = (type, id, relationship, item_type, item_id) ->
+  apiRequest("/api/#{type}/#{id}/relationships/#{relationship}",
+    'POST', {data: [{type: item_type, id: item_id}]})
 
-@getResource = (type, resourceId, parameters = {}) ->
-  object = window.getJsonApiStore().find(type, resourceId)
-  if object && (!parameters['include'] || object[parameters['include']])
-    return $.when(object)
+# removes an item from an association
+@apiRemove = (type, id, relationship, item_type, item_id) ->
+  apiRequest("/api/#{type}/#{id}/relationships/#{relationship}",
+    'DELETE', {data: [{type: item_type, id: item_id}]})
+
+# deletes a resource
+@apiDelete = (type, id) ->
+  apiRequest("/api/#{type}/#{id}", 'DELETE')
+
+# gets a resource
+@apiGet = (type, id, params = {}) ->
+  # try to get it from the store
+  store = getApiStore()
+  res = store.find(type, id)
+  if res && (!params['include'] || res[params['include']])
+    return $.when(res)
+  # otherwise get it via JSONAPI
   deferred = $.Deferred()
-  url = addParametersToUrl("/api/#{type}/#{resourceId}", parameters)
-  window.getJsonApi(url, 'GET').done((response) =>
-    window.getJsonApiStore().sync response
-    deferred.resolve(window.getJsonApiStore().find(type, resourceId))
+  $.ajax("/api/#{type}/#{id}?#{$.param(params)}",
+    accepts: {jsonapi: 'application/vnd.api+json'}
+    converters: {'text jsonapi': (result) -> JSON.parse(result)}
+    dataType: 'jsonapi'
+  ).done((data) =>
+    store.sync data
+    deferred.resolve(store.find(type, id))
   ).fail((error) ->
     console.log("Failed getting resource #{resourceId} of type #{type}", error)
     deferred.reject(error)
-  )
-  return deferred.promise()
+  ).fail(handleJsonApiError)
+  deferred.promise()
 
-@getResources = (type, parameters = {}) ->
+# gets all resources of a type
+@apiGetAll = (type, params = {}) ->
+  # try to get it from the store
+  store = getApiStore()
+  res = store.find(type)
+  if res && (!params['include'] || res[params['include']])
+    return $.when(res)
+  # otherwise get it via JSONAPI
   deferred = $.Deferred()
-  url = addParametersToUrl("/api/#{type}", parameters)
-  window.getJsonApi(url, 'GET').done((response) =>
-    window.getJsonApiStore().sync response
-    deferred.resolve(window.getJsonApiStore().findAll(type))
+  $.ajax("/api/#{type}?#{$.param(params)}",
+    accepts: {jsonapi: 'application/vnd.api+json'}
+    converters: {'text jsonapi': (result) -> JSON.parse(result)}
+    dataType: 'jsonapi'
+  ).done((data) =>
+    store.sync data
+    deferred.resolve(store.findAll(type))
   ).fail((error) ->
     console.log("Failed getting resources of type #{type}", error)
     deferred.reject(error)
-  )
-  return deferred.promise()
-
-# adds to or removes from a given association
-@updateRelationship = (model_type, model_id, relationship, item_type, item_id, action) ->
-  url = '/api/' + model_type +  '/' + model_id + '/relationships/' + relationship;
-  method = {remove: 'DELETE', add: 'POST'}[action]
-  settings = {
-    accepts: {jsonapi: 'application/vnd.api+json'},
-    contentType: 'application/vnd.api+json',
-    converters: {'text jsonapi': (result) => JSON.parse(result)},
-    dataType: 'jsonapi',
-    data: JSON.stringify({data: [{type: item_type, id: item_id}]}),
-    method: method
-  };
-  $.ajax(url, settings);
+  ).fail(handleJsonApiError)
+  deferred.promise()
 
 
-# extend rails ujs remote calls to send params JSONAPI call
-$.rails.ajax = (options) ->
-  if (options.dataType == 'jsonapi')
-    $.extend options,
+### UJS: links/forms with data-remote=true ###
+
+# send all UJS calls via JSONAPI
+$.rails.ajax = (settings) ->
+  if (settings.dataType == 'jsonapi')
+    $.extend settings,
       accepts: {jsonapi: 'application/vnd.api+json'}
       contentType: 'application/vnd.api+json'
       converters: {'text jsonapi': (result) -> JSON.parse(result)}
-      data: JSON.stringify({data: options.data})
-  $.ajax(options)
+      data: JSON.stringify({data: settings.data})
+  $.ajax(settings)
 
 
 onNewContent ->
 
-  # basic ujs JSONAPI success handling
+  # basic UJS JSONAPI error/success handling
+  $('[data-type=jsonapi]').on 'ajax:error', handleJsonApiError
   $('[data-type=jsonapi]').on 'ajax:success', ->
     link = $(@)
 
@@ -120,16 +103,28 @@ onNewContent ->
     # remove link and parents up to nth level (min 1)
     if link.data('success-remove')
       level = parseInt(link.data('success-remove')) - 1
-      link.parents().eq(level).slideUp 'fast', ->
-        $(@).remove()
+      link.parents().eq(level).slideUp 'fast', -> $(@).remove()
 
     # reload page
     if link.data('success-reload')
       location.reload()
 
-  # basic ujs JSONAPI error handling
-  $('[data-type=jsonapi]').on 'ajax:error', (event, xhr, status, error) ->
-    response = JSON.parse(xhr.responseText)
-    console.log(response)
-    for error in response.errors
-      createFlashMessage error.detail, error.title, 'danger'
+
+# PRIVATE
+
+# singleton getter for the JSONAPI store
+getApiStore = ->
+  unless window.jsonApiStore
+    window.jsonApiStore = new JsonApiDataStore()
+  window.jsonApiStore
+
+# handler for all JSONAPI errors
+handleJsonApiError = (event, xhr, status, error) ->
+  switch status.trim()
+    when 'Forbidden'
+      createFlashMessage 'You have no permission for this action', 'You shall not pass', 'danger'
+    else
+      response = JSON.parse(xhr.responseText)
+      console.log(response)
+      for error in response.errors
+        createFlashMessage error.detail, error.title, 'danger'

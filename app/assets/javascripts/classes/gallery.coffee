@@ -38,7 +38,7 @@ class @Gallery
     @thumbs.controller.control = @slider
 
     # load gallery pictures JSON, then enable slideshow
-    request = window.getResource 'galleries', @html.data('gallery-id'), include: 'gallery-pictures'
+    request = apiGet('galleries', @html.data('gallery-id'), include: 'gallery-pictures')
     request.done (data) =>
       @items = []
       for pic in data['gallery-pictures']
@@ -112,8 +112,8 @@ class @Gallery
     item = @items[idx]
 
     # rotate image on server
-    method = if direction > 0 then '/rotateRight' else '/rotateLeft'
-    window.getJsonApi('/api/gallery-pictures/' + item.id + method).done (data) =>
+    action = if direction > 0 then 'rotateRight' else 'rotateLeft'
+    apiCallAction('gallery-pictures', item.id, action).done (data) =>
       # inform user
       createFlashMessage I18n.t 'gallery.message.pictureRotated'
 
@@ -137,7 +137,7 @@ class @Gallery
     item = @items[idx]
 
     # remove image on server
-    window.requestToJsonApi('/api/gallery-pictures/' + item.id, 'DELETE').done (data) =>
+    apiDelete('gallery-pictures', item.id).done (data) =>
       # inform user
       createFlashMessage I18n.t 'gallery.message.pictureDeleted'
 

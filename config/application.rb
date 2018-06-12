@@ -20,6 +20,7 @@ module StcKarlsruhe
     config.i18n.enforce_available_locales = true
     config.i18n.available_locales = [ :en, :de ]
     config.i18n.default_locale = :de
+    config.time_zone = 'Berlin'
 
     CONTACT_FORM_RECIPIENT = 'contact@servethecity-karlsruhe.de'
     NOTIFICATION_RECIPIENT = 'notifications@servethecity-karlsruhe.de'

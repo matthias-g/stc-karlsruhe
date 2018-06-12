@@ -7,7 +7,7 @@ class Initiative < ApplicationRecord
   has_and_belongs_to_many :tags
   has_many :leaderships, dependent: :destroy
   has_many :leaders, class_name: 'User', through: :leaderships, source: :user
-  has_many :events, -> { order 'date ASC' }, foreign_key: :initiative_id, dependent: :destroy # TODO: order by date + time
+  has_many :events, -> { order 'date ASC, start_time ASC' }, foreign_key: :initiative_id, dependent: :destroy
   accepts_nested_attributes_for :events, allow_destroy: true
 
   validates_presence_of :title

@@ -32,9 +32,9 @@ de:
         subaction_ids: 'Teilaktionen'
         parent_action_id: 'Überaktion'
       event:
-        date: 'Datum'
+        date: 'Tag'
         time: 'Uhrzeit'
-        desired_team_size: 'Gewünschte Teamgröße'
+        desired_team_size: 'Plätze'
 
   action:
     navigation:
@@ -81,7 +81,7 @@ de:
       crop: 'Zuschneiden'
 
       exportICal: 'Als iCal/ICS exportieren'
-      showPastEvents: 'vergangene Zeiträume zeigen'
+      showAllEvents: 'alle Events anzeigen'
       contactTeam: 'Nachricht verteilen'
       contactLeader: 'Nachricht senden'
 

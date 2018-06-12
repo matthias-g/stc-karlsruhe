@@ -1,13 +1,15 @@
 <%# expects parameter "events"" %>
 
-<% has_upcoming_events = events.upcoming.any? %>
+<% show_toggle_button = false %>
 
-<% events.each do |event| %>
+<% events.each_with_index do |event, index| %>
   <% volunteers = event.volunteers %>
   <% team_size = volunteers.count %>
   <% desired = event.desired_team_size %>
+  <% event_hidden = events.upcoming.any? && (event.finished? || (index - events.finished.count > 4)) %>
+  <% show_toggle_button = true if event_hidden %>
 
-  <div class="white-box <%= "event_#{event.status}" if has_upcoming_events %>">
+  <div class="white-box event <%= 'hidden' if event_hidden %>">
 
     <% if desired.positive? %>
       <span class="badge status_<%= event.status %> float-right mt-2"
@@ -17,7 +19,18 @@
     <% end %>
 
     <% if events.count > 1 %>
-      <h4 class="mt-1 mb-2"><%= l(event.date, format: :date) unless event.date.nil? %>, <%= event.time %></h4>
+      <div class="row">
+        <div class="col mb-0">
+          <span class="h4 my-1">
+            <%= l(event.date, format: :date) unless event.date.nil? %>
+          </span>
+        </div>
+        <div class="col-auto mb-0 text-right">
+          <span class="h4 my-1">
+            <%= event.time %>
+          </span>
+        </div>
+      </div>
     <% else %>
       <h3 class="mb-2"><%= t('action.heading.team') %></h3>
     <% end %>
@@ -35,12 +48,18 @@
       </div>
     <% end %>
 
-    <div class="my-2">
-      <% if policy(event).leave? %>
+
+    <% if policy(event).leave? %>
+
+      <div class="my-2">
         <%= link_to leave_event_path(event), class: 'btn btn-danger btn-block' do %>
           <span class="fas fa-sign-out-alt"></span> <%= t('action.button.leave') %>
         <% end %>
-      <% elsif event.available_places.positive? %>
+      </div>
+
+    <% elsif event.available_places.positive? %>
+
+      <div class="my-2">
         <% if user_signed_in? %>
           <%= link_to enter_event_path(event), class: 'btn btn-success btn-block' do %>
             <span class="fas fa-sign-in-alt"></span> <%= t('action.button.enter') %>
@@ -50,8 +69,10 @@
             <span class="fas fa-sign-in-alt"></span> <%= t('action.button.enter') %>
           <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+
+    <% end %>
+
 
     <% if policy(event).manage_team? && policy(User).index? %>
       <%= api_add_select event, :volunteers, User, options_for_user_select,
@@ -61,9 +82,9 @@
   </div>
 <% end %>
 
-<% if events.finished.any? && has_upcoming_events %>
-  <a href="javascript:void(0)" onclick="$('.event_finished').slideToggle(); $(this).hide();"
+<% if show_toggle_button %>
+  <a href="javascript:void(0)" onclick="$('.event.hidden').slideToggle(); $(this).hide();"
      class="btn btn-secondary btn-block">
-    <%= t('action.button.showPastEvents') %>
+    <%= t('action.button.showAllEvents') %>
   </a>
 <% end %>

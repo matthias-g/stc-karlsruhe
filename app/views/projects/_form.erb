@@ -142,7 +142,7 @@
         </div>
       </div>
 
-      <div class="white-box events" data-class="DynamicFormList">
+      <div class="events" data-class="DynamicFormList">
         <div class="prototype d-none">
           <% new_object = f.object.class.reflect_on_association(:events).klass.new %>
           <%= f.fields_for(:events, new_object, child_index: :new_item) {
@@ -151,8 +151,15 @@
         <%= f.fields_for :events do |builder| %>
           <%= render 'events/event_fields', f: builder, default_date: Date.current %>
         <% end %>
-        <%= link_to t('project.button.addEvent'), 'javascript:void(0);', class: 'add-link btn btn-secondary' %>
+        <%= link_to t('project.button.addEvent'), 'javascript:void(0);', class: 'add-link btn btn-primary float-right' %>
       </div>
+
+      <% if @project.events.finished.any? %>
+        <a href="javascript:void(0)" onclick="$('.event.hidden').slideToggle(); $(this).hide();"
+           class="btn btn-secondary">
+          <%= t('action.button.showAllEvents') %>
+        </a>
+      <% end %>
 
     </div>
 

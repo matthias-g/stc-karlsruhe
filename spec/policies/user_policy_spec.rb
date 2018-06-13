@@ -100,19 +100,6 @@ RSpec.describe UserPolicy do
     end
   end
 
-  describe 'unsubscribe?' do
-    subject { policy.unsubscribe? }
-
-    context 'as visitor' do
-      it { should_pass }
-    end
-
-    context 'as other user' do
-      let(:current_user) { users(:unrelated) }
-      it { should_pass }
-    end
-  end
-
 
   describe 'permitted_attributes_for_show' do
     subject { policy.permitted_attributes_for_show }

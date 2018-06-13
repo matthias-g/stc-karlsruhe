@@ -3,7 +3,7 @@ class SubscriptionsController < ApplicationController
   def unsubscribe
     subscription = SignedGlobalID.find(params[:sgid], for: :unsubscribe)
     return redirect_to root_path unless subscription
-    type = params[:type].to_sym
+    type = params[:type]&.to_sym
     allowed_types = [:receive_emails_about_action_groups,
                      :receive_emails_about_other_projects,
                      :receive_other_emails_from_orga]

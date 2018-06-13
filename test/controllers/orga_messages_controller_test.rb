@@ -160,8 +160,9 @@ class OrgaMessagesControllerTest < ActionDispatch::IntegrationTest
     sender = users(:admin)
     sign_in sender
     @message.update_attributes recipient: :all_users, content_type: :other_email_from_orga
-    send_and_assert_orga_message(@message, Subscription.all.count + 1)
-    assert_equal all_subscription_mails + [sender.email], mail_recipients
+    not_receivers = Subscription.where(receive_other_emails_from_orga: false).pluck(:email)
+    send_and_assert_orga_message(@message, Subscription.all.count - not_receivers.count + 1)
+    assert_equal all_subscription_mails - not_receivers + [sender.email], mail_recipients
   end
 
   test "send 'other email from orga' to current volunteers" do

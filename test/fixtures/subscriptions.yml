@@ -1,7 +1,13 @@
 volunteer:
   email: volunteer0@example.com
   name: Default
+  receive_emails_about_action_groups: true
+  receive_emails_about_other_projects: true
+  receive_other_emails_from_orga: true
 
 other_volunteer:
   email: volunteer1@example.com
   name: Default2
+  receive_emails_about_action_groups: true
+  receive_emails_about_other_projects: true
+  receive_other_emails_from_orga: false

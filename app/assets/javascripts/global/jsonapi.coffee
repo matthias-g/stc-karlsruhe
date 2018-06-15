@@ -48,7 +48,7 @@
     store.sync data
     deferred.resolve(store.find(type, id))
   ).fail((error) ->
-    console.log("Failed getting resource #{resourceId} of type #{type}", error)
+    console.log("Failed getting resource #{id} of type #{type}", error)
     deferred.reject(error)
   ).fail(handleJsonApiError)
   deferred.promise()
@@ -62,7 +62,9 @@
     return $.when(res)
   # otherwise get it via JSONAPI
   deferred = $.Deferred()
-  $.ajax("/api/#{type}?#{$.param(params)}",
+  url = "/api/#{type}"
+  url += "?#{$.param(params)}" unless $.isEmptyObject(params)
+  $.ajax(url,
     accepts: {jsonapi: 'application/vnd.api+json'}
     converters: {'text jsonapi': (result) -> JSON.parse(result)}
     dataType: 'jsonapi'
@@ -119,12 +121,16 @@ getApiStore = ->
   window.jsonApiStore
 
 # handler for all JSONAPI errors
-handleJsonApiError = (event, xhr, status, error) ->
-  switch status.trim()
+handleJsonApiError = (xhr, textStatus, errorThrown) ->
+  switch errorThrown.trim()
     when 'Forbidden'
-      createFlashMessage 'You have no permission for this action', 'You shall not pass', 'danger'
+      createFlashMessage 'You have no permission for this action', '', 'danger'
+    when 'Unauthorized'
+      createFlashMessage 'You need to be logged in for this action', '', 'danger'
     else
-      response = JSON.parse(xhr.responseText)
-      console.log(response)
+      response = xhr.responseText
+      response = JSON.parse(response) if (typeof response == 'string')
       for error in response.errors
-        createFlashMessage error.detail, error.title, 'danger'
+        switch parseInt(error.code)
+          when 113 then createFlashMessage 'This element is already present', '', 'danger'
+          else createFlashMessage error.detail, error.title, 'danger'

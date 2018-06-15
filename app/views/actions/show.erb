@@ -38,7 +38,7 @@
         <section class="white-box">
           <h2 class="d-print-only"><%= @action.title %></h2>
 
-          <%# action picture %>
+          <%# picture %>
           <% if @action.show_picture? && @action.picture.file %>
             <div class="action-picture picture-container">
               <%= image_tag @action.picture_url(:large) %>
@@ -48,7 +48,7 @@
             </div>
           <% end %>
 
-          <%# action description %>
+          <%# description %>
           <div class="description">
             <%= simple_format( simple_format_urls @action.description ) %>
           </div>
@@ -143,41 +143,35 @@
         </div>
       <% end %>
 
-      <%# action date/location info %>
       <div class="col-sm-6 col-md-12">
+
+        <%# parent action %>
         <% unless @action.parent_action.nil? %>
           <div class="white-box">
             <h3>Die Aktion ist ein Teil von</h3>
             <%= render '/initiatives/entry', initiative: @action.parent_action, show_date: false, show_occupancy: false %>
           </div>
         <% end %>
+
         <div class="white-box">
+
+          <%# leaders %>
           <div id="action-leaders" class="mb-2">
             <h3><%= Action.human_attribute_name('leaders') %></h3>
-            <div class="comma-list">
-              <% @action.leaders.each do |leader| %>
-                <span>
-                  <%= link_to leader.first_name, leader %>
-                  <% if policy(@action).manage_team? %>
-                    <%= api_remove_link '', @action, :leaders, leader, true, data: {'success-remove': 1} %>
-                  <% end %>
-                </span>
-              <% end %>
-            </div>
-            <% if policy(@action).manage_team? && policy(User).index? %>
-              <div class="my-2">
-                <%= api_add_select @action, :leaders, User, options_for_user_select,
-                                   class: 'col-select btn-block', data: {'success-reload': true} %>
+            <% if policy(@action).manage_team? %>
+              <%= vue_component 'RelationshipList', name: "action-#{@action.id}-leader-list",
+                                model_type: 'actions', model_id: @action.id, relationship: 'leaders',
+                                item_type: 'users', enable_add: policy(User).index? %>
+            <% else %>
+              <div class="comma-list">
+                <% @action.leaders.each do |leader| %>
+                  <span><%= link_to leader.first_name, leader %></span>
+                <% end %>
               </div>
             <% end %>
-
-            <%# pool = policy_scope(User.all.where(cleared: false)).order(:first_name, :last_name).map{|user|
-                {id: user.id, name: user.full_name, tokens: "#{user.username} #{user.full_name}"}} %>
-            <%#= react_component 'RelationshipList', {
-                model_type: 'actions', model_id: @action.id, relationship: 'leaders',
-                item_type: 'users', items: @action.leaders.map{|leader| {name: leader.full_name, id: leader.id}},
-                pool: pool} %>
           </div>
+
+          <%# days %>
           <div>
             <h3><%= Action.human_attribute_name('date'.pluralize(@action.all_dates.count)) %></h3>
             <% if @action.subactions.empty? %>
@@ -190,6 +184,8 @@
               <%= @action.all_dates.collect { |date| l(date, format: :short_with_weekday)}.join('<br />').html_safe %>
             <% end %>
           </div>
+
+          <%# location & map %>
           <div>
             <h3><%= Action.human_attribute_name(:location) %></h3>
             <%= simple_format @action.location %>
@@ -207,10 +203,11 @@
               </div>
             </div>
           <% end %>
+
         </div>
       </div>
 
-      <%# sub actions %>
+      <%# subactions %>
       <% subactions = policy_scope(@action.subactions).sort_by { |p| p.start_time || p.date || Time.now } %>
       <% if subactions.any? %>
         <div class="col-sm6 col-md-12">

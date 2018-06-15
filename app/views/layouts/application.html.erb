@@ -22,6 +22,9 @@
   <%= javascript_include_tag 'editing', 'data-turbolinks-track': true if privileged_user? %>
   <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDtdkSuag5OvFbQGveIvrv9WZKJWAk2sNc' %>
 
+  <%= javascript_pack_tag 'application' %>
+  <%= stylesheet_pack_tag 'application', media: :all %>
+
   <meta property="og:title" content="<%= strip_tags (yield(:title).strip.presence || t('layout.siteTitle')) %>" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="<%= url_for(only_path: false, overwrite_params: nil, protocol: :https) %>" />

@@ -1,6 +1,36 @@
 
 module ApiHelper
 
+  def vue_component(component_name, html_options = {})
+    html_options = ApiHelper.format_props(html_options)
+    content_tag(component_name.underscore.dasherize, '', html_options)
+  end
+
+  def self.format_props(props)
+    case props
+    when Hash
+      props.each_with_object({}) do |(key, value), new_props|
+        new_key = key.to_s.dasherize
+        new_key = 'v-bind:' + new_key unless value.is_a? String
+        new_props[new_key] = ApiHelper.camelize_props(value)
+      end
+    else
+      props
+    end
+  end
+
+  def self.camelize_props(props)
+    case props
+    when Hash
+      props.each_with_object({}) do |(key, value), new_props|
+        new_key = key.to_s.camelize(:lower)
+        new_props[new_key] = ApiHelper.camelize_props(value)
+      end
+    else
+      props
+    end
+  end
+
   # SelectPicker for adding to an association
   def api_add_select(model, association, klass, options, html_options = nil)
     html_options ||= {}

@@ -5,6 +5,10 @@ class Api::TagResource < JSONAPI::Resource
 
   has_many :initiatives
 
+  def fetchable_fields
+    Pundit.policy(context[:user], @model).permitted_attributes_for_show
+  end
+
   def self.updatable_fields(context)
     Pundit.policy(context[:user], @model).updatable_fields
   end

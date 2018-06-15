@@ -118,11 +118,11 @@ de:
     label:
       newRole: 'Neue User-Rolle'
       editRole: 'Rolle bearbeiten: "%s"'
-      roleAssignments: 'Rollenzuweisungen an Benutzer'
       editRoles: 'Rollen bearbeiten'
     button:
-      addUser: 'User auswählen'
+      addToUsers: 'User auswählen'
+      removeFromUsers: 'User auswählen'
     message:
       errorsExist: 'Die Rolle konnte wegen folgenden Fehlern nicht gespeichert werden:'
-      addUserSuccess: 'Der User hat jetzt die Rolle %{model}'
-      removeUserSuccess: '%{association} ist nun nicht mehr %{model}'
+      addToUsersSuccess: 'Der User %{item} hat jetzt die Rolle %{model}'
+      removeFromUsersSuccess: '%{item} ist nun nicht mehr %{model}'

@@ -1,4 +1,6 @@
 Rails.application.configure do
+  # Verifies that versions and hashed value of the package contents in the project's package.json
+  config.webpacker.check_yarn_integrity = false
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -112,7 +114,5 @@ Rails.application.configure do
     sender_address: 'no-reply@servethecity-karlsruhe.de',
     exception_recipients: ['failure-notifications@servethecity-karlsruhe.de', 'failure-notifications2@servethecity-karlsruhe.de']
   }
-
-  config.react.variant = :production
 
 end

@@ -20,7 +20,7 @@ onPageLoad ->
   pageLoaded = true
   $('.g-recaptcha').initRecaptcha()
 
-onTurbolinksCache ->
+beforeTurbolinksCache ->
   for id in recaptchaIds
     grecaptcha.reset(id)
   recaptchaIds = []

@@ -37,7 +37,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 
 # asset libraries
-gem 'react-rails'
+gem 'webpacker', '~> 3.5'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'lazyload-rails'

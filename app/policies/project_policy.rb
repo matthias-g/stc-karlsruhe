@@ -50,6 +50,12 @@ class ProjectPolicy < ApplicationPolicy
   alias_method :make_invisible?, :change_visibility?
 
 
+  def permitted_attributes_for_show
+    [:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements,
+     :visible, :short_description, :map_latitude, :map_longitude, :map_zoom,
+     :picture, :picture_source, :events, :leaders, :volunteers, :tags]
+  end
+
   def updatable_fields
     all_fields = [:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements,
                   :visible, :short_description, :map_latitude, :map_longitude, :map_zoom,

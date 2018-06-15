@@ -68,11 +68,15 @@ de:
       clone: 'Aktion klonen'
 
       addLeader: 'Aktionsleiter hinzufügen'
+      addToLeaders: 'Aktionsleiter hinzufügen'
       removeLeader: 'Aktionsleiter entfernen'
+      removeFromLeaders: 'Aktionsleiter entfernen'
       addEvent: 'Termin hinzufügen'
       removeEvent: 'Termin löschen'
       addTag: 'Tag hinzufügen'
+      addToTags: 'Tag hinzufügen'
       removeTag: 'Tag entfernen'
+      removeFromTags: 'Tag entfernen'
       enter: 'Team beitreten'
       leave: 'Team verlassen'
       cropThumbImage: 'Thumbnail anpassen'
@@ -109,10 +113,10 @@ de:
       contactLeader: 'Hier kannst du den Aktionsleitern eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
 
     message:
-      addLeaderSuccess: 'Leiter erfolgreich hinzugefügt'
-      removeLeaderSuccess: 'Leiter erfolgreich entfernt'
-      addTagSuccess: 'Tag hinzugefügt'
-      removeTagSuccess: 'Tag entfernt'
+      addToLeadersSuccess: 'Leiter erfolgreich hinzugefügt'
+      removeFromLeadersSuccess: 'Leiter erfolgreich entfernt'
+      addToTagsSuccess: 'Tag hinzugefügt'
+      removeFromTagsSuccess: 'Tag entfernt'
       imageCropped: 'Der Bildausschnitt wurde angepasst.'
       created: 'Aktion wurde erfolgreich erstellt. Sie muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Aktion wurde erfolgreich aktualisiert.'
@@ -140,8 +144,8 @@ de:
 
   event:
     button:
-      addVolunteer: 'Mitarbeiter hinzufügen'
-      removeVolunteer: 'Mitarbeiter entfernen'
+      addToVolunteers: 'Mitarbeiter hinzufügen'
+      removeFromVolunteers: 'Mitarbeiter entfernen'
     message:
-      addVolunteerSuccess: 'Mitarbeiter erfolgreich hinzugefügt'
-      removeVolunteerSuccess: 'Mitarbeiter erfolgreich entfernt'
+      addToVolunteersSuccess: 'Mitarbeiter erfolgreich hinzugefügt'
+      removeFromVolunteersSuccess: 'Mitarbeiter erfolgreich entfernt'

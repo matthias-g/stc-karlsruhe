@@ -18,6 +18,9 @@
     </div>
   """)
 
+@resourceFlash = (model, action, relationship = null, suffix = '', options = {}) ->
+  createFlashMessage lang('message', model, action, relationship, suffix, options)
+
 # extract flash messages from the given container and append them
 @extractFlashMessages = (html) ->
   $('#flash-messages .alert', html).detach().each (i, ele) ->

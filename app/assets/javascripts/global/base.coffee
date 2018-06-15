@@ -5,11 +5,21 @@
 
 ### API ###
 
-# register given handler for page load
+# register code to be run on page load
+pageload_handlers = []
 @onPageLoad = (handler) ->
-  document.addEventListener 'turbolinks:load', handler
+  pageload_handlers.push handler
 
-# register given handler for page load, but only if we are in the given controller/action
+# register code to be run on any HTML content (handler receives jQuery set)
+content_handlers = []
+@onNewContent = (handler) ->
+  content_handlers.push handler
+
+# register code for running before the page is submitted to Turbolinks cache
+@beforeTurbolinksCache = (handler) ->
+  document.addEventListener 'turbolinks:before-cache', handler
+
+# register register code to be run on page load of a specific controller/action
 @onViewLoad = (controller_actions, handler) ->
   actions = controller_actions.replace(/->/g, '.').split(',')
   @onPageLoad ->
@@ -17,34 +27,11 @@
       if $('#content > #' + action.trim()).length
         handler.call(window)
 
-# register given handler for when new HTML is available
-content_handlers = []
-@onNewContent = (handler) ->
-  content_handlers.push handler
-
-# execute given handler before page is submitted to Turbolinks cache
-@onTurbolinksCache = (handler) ->
-  document.addEventListener 'turbolinks:before-cache', handler
-
-# load a script (once)
-loadedScripts = []
-@requireScript = (path, callback) ->
-  if path in loadedScripts
-    callback()
-  else
-    loadedScripts.push path
-    $.getScript '/assets/' + path + '.js', callback
-
-# executes all onNewContent handlers for the given content
+# informs the system that new HTML content was created
 @registerContent = (jquery_collection) ->
   for handler in content_handlers
     handler.call jquery_collection
 
-# submit the given form with AJAX and extract flash messages from the html response
-@sendFormWithAjax = (form) ->
-  url = $(form).attr('action') + '?' + $(form).serialize()
-  res = $('<div>').load url + ' #flash-messages', ->
-    extractFlashMessages res
 
 
 ### PRIVATE ###
@@ -57,9 +44,14 @@ instantiateClasses = (html) ->
 
 ### INIT ###
 
+document.addEventListener 'turbolinks:load', ->
+  for handler in pageload_handlers
+    handler.call(window)
+  registerContent $('body')
+
+
 onPageLoad ->
   I18n.locale = $('body').data('locale')
-  registerContent $('body')
   $('.modal').on 'shown.bs.modal', ->
     registerContent $('.modal-content', @)
 

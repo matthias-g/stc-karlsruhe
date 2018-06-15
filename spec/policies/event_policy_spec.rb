@@ -182,7 +182,7 @@ RSpec.describe EventPolicy do
     context 'as admin' do
       let(:user) { users(:admin) }
       it 'contains all attributes except team size' do
-        expect(subject).to match_array(all_fields - %i[team_size])
+        expect(subject).to match_array(all_fields - %i[team_size start_time end_time])
       end
     end
   end

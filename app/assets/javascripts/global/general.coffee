@@ -11,11 +11,11 @@ onPageLoad ->
 
 onNewContent ->
   # lazyload images (must be activated with lazy:true in image_tag helper)
-  $('img', @).lazyload threshold: 200
+  $('img', @).lazyload threshold: 500
   # enable datepicker
   $('[data-behaviour~=datepicker]').datepicker(autoclose: true, format: "dd.mm.yyyy", language: 'de')
 
-onTurbolinksCache ->
+beforeTurbolinksCache ->
   selectMenus = $('.bootstrap-select')
   selectMenus.find('button.dropdown-toggle, div.dropdown-menu').remove()
   selectMenus.each ->

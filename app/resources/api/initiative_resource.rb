@@ -15,6 +15,11 @@ class Api::InitiativeResource < JSONAPI::Resource
   has_many :events, always_include_linkage_data: true
   has_many :leaders, class_name: 'User', through: :leaderships, always_include_linkage_data: true
 
+
+  def fetchable_fields
+    Pundit.policy(context[:user], @model).permitted_attributes_for_show
+  end
+
   def self.updatable_fields(context)
     Pundit.policy(context[:user], @model).updatable_fields
   end

@@ -36,16 +36,19 @@
     <% end %>
 
     <% if desired&.positive? %>
-      <div class="comma-list ml-2">
-        <% volunteers.each do |volunteer| %>
-          <span>
-            <%= link_to volunteer.first_name, volunteer %>
-            <% if policy(event).manage_team? %>
-              <%= api_remove_link '', event, :volunteers, volunteer, true, data: {'success-remove': 1} %>
-            <% end %>
-          </span>
-        <% end %>
-      </div>
+
+      <% if policy(event).manage_team? %>
+        <%= vue_component 'RelationshipList', name: "event-#{event.id}-volunteer-list",
+                          model_type: 'events', model_id: event.id, relationship: 'volunteers',
+                          item_type: 'users', enable_add: policy(User).index? %>
+      <% else %>
+        <div class="comma-list">
+          <% volunteers.each do |volunteer| %>
+            <span><%= link_to volunteer.first_name, volunteer %></span>
+          <% end %>
+        </div>
+      <% end %>
+
     <% end %>
 
 
@@ -71,12 +74,6 @@
         <% end %>
       </div>
 
-    <% end %>
-
-
-    <% if policy(event).manage_team? && policy(User).index? %>
-      <%= api_add_select event, :volunteers, User, options_for_user_select,
-                         class: 'col-select btn-block', data: {'success-reload': true} %>
     <% end %>
 
   </div>

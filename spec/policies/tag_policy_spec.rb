@@ -9,6 +9,12 @@ RSpec.describe TagPolicy do
   let(:record) { tags(:default) }
   let(:policy) { TagPolicy.new(current_user, record) }
 
+  describe 'permitted_attributes_for_show' do
+    subject { policy.permitted_attributes_for_show }
+    it 'permits all fields' do
+      expect(subject).to contain_exactly(:title, :initiatives, :icon, :color)
+    end
+  end
 
   describe 'updatable_fields' do
     subject { policy.updatable_fields }

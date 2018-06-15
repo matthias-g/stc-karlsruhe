@@ -2,7 +2,7 @@ module Api
   class EventResource < JSONAPI::Resource
     include JSONAPI::Authorization::PunditScopedResource
 
-    attributes :desired_team_size, :team, :date, :team_size
+    attributes :date, :time, :start_time, :end_time, :desired_team_size, :team_size
 
     has_one :initiative
     has_many :volunteers, class_name: 'User', through: :participations

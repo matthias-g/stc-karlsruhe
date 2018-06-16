@@ -163,7 +163,7 @@
         <%= f.fields_for :events do |builder| %>
           <%= render 'events/event_fields', f: builder, default_date: @action.action_group&.start_date %>
         <% end %>
-        <%= link_to t('action.button.addEvent'), 'javascript:void(0);', class: 'add-link btn btn-primary float-right' %>
+        <%= link_to t('action.button.add_event'), 'javascript:void(0);', class: 'add-link btn btn-primary float-right' %>
       </div>
 
       <% if @action.events.finished.any? %>

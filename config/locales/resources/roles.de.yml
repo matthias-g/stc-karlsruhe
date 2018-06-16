@@ -1,0 +1,19 @@
+de:
+  activerecord:
+    models:
+      role:
+        one: 'Benutzerrolle'
+        other: 'Benutzerrollen'
+
+  role:
+    heading:
+      new: 'Neue User-Rolle'
+      edit: 'Rolle bearbeiten: "%{role}"'
+      index: 'Rollen bearbeiten'
+    button:
+      add_user: 'User auswählen'
+      remove_user: 'User entfernen'
+    message:
+      user_added: '%{item} hat jetzt die Rolle %{model}'
+      user_removed: '%{item} ist nun nicht mehr %{model}'
+      errorsExist: 'Die Rolle konnte wegen folgenden Fehlern nicht gespeichert werden:'

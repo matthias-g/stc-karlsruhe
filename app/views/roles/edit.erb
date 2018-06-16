@@ -1,6 +1,6 @@
 <% provide :title, t('layout.title.roleEdit') %>
 
-<h1><%= t('role.label.editRole') % [@role.title] %></h1>
+<h1><%= t('role.heading.edit', role: @role.title) %></h1>
 
 <%= render 'form' %>
 

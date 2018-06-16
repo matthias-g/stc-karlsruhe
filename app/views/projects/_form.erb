@@ -73,6 +73,13 @@
       </div>
 
       <div class="white-box">
+        <% if @project.persisted? %>
+          <div class="tags">
+            <%= vue_component 'RelationshipList', name: 'tag-list',
+                              model_type: 'projects', model_id: @project.id, relationship: 'tags',
+                              item_type: 'tags', enable_add: true %>
+          </div>
+        <% end %>
         <div class="short_description">
           <%= f.text_area :short_description, help: t('project.help.short_description') %>
         </div>

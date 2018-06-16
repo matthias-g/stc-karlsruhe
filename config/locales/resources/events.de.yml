@@ -1,0 +1,21 @@
+de:
+  activerecord:
+
+    models:
+      event:
+        one: 'Event'
+        other: 'Events'
+
+    attributes:
+      event:
+        date: 'Tag'
+        time: 'Uhrzeit'
+        desired_team_size: 'Plätze'
+
+  event:
+    button:
+      add_volunteer: 'Mitarbeiter hinzufügen'
+      remove_volunteer: 'Mitarbeiter entfernen'
+    message:
+      volunteer_added: 'Mitarbeiter erfolgreich hinzugefügt'
+      volunteer_removed: 'Mitarbeiter erfolgreich entfernt'

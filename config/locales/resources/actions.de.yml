@@ -5,9 +5,6 @@ de:
       action:
         one: 'Aktion'
         other: 'Aktionen'
-      event:
-        one: 'Event'
-        other: 'Events'
 
     attributes:
       action:
@@ -31,10 +28,6 @@ de:
         dates: 'Aktionstage'
         subaction_ids: 'Teilaktionen'
         parent_action_id: 'Überaktion'
-      event:
-        date: 'Tag'
-        time: 'Uhrzeit'
-        desired_team_size: 'Plätze'
 
   action:
     navigation:
@@ -67,16 +60,13 @@ de:
       makeInvisible: 'Verstecken'
       clone: 'Aktion klonen'
 
-      addLeader: 'Aktionsleiter hinzufügen'
-      addToLeaders: 'Aktionsleiter hinzufügen'
-      removeLeader: 'Aktionsleiter entfernen'
-      removeFromLeaders: 'Aktionsleiter entfernen'
-      addEvent: 'Termin hinzufügen'
-      removeEvent: 'Termin löschen'
-      addTag: 'Tag hinzufügen'
-      addToTags: 'Tag hinzufügen'
-      removeTag: 'Tag entfernen'
-      removeFromTags: 'Tag entfernen'
+      add_leader: 'Aktionsleiter hinzufügen'
+      add_event: 'Termin hinzufügen'
+      add_tag: 'Tag hinzufügen'
+      remove_leader: 'Aktionsleiter entfernen'
+      remove_event: 'Termin löschen'
+      remove_tag: 'Tag entfernen'
+
       enter: 'Team beitreten'
       leave: 'Team verlassen'
       cropThumbImage: 'Thumbnail anpassen'
@@ -113,10 +103,10 @@ de:
       contactLeader: 'Hier kannst du den Aktionsleitern eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
 
     message:
-      addToLeadersSuccess: 'Leiter erfolgreich hinzugefügt'
-      removeFromLeadersSuccess: 'Leiter erfolgreich entfernt'
-      addToTagsSuccess: 'Tag hinzugefügt'
-      removeFromTagsSuccess: 'Tag entfernt'
+      leader_added: 'Leiter erfolgreich hinzugefügt'
+      leader_removed: 'Leiter erfolgreich entfernt'
+      tag_added: 'Tag "%{item}" hinzugefügt'
+      tag_removed: 'Tag "%{item}" entfernt'
       imageCropped: 'Der Bildausschnitt wurde angepasst.'
       created: 'Aktion wurde erfolgreich erstellt. Sie muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Aktion wurde erfolgreich aktualisiert.'
@@ -141,11 +131,3 @@ de:
       contactLeader:
         subject: 'Worum geht''s?'
         body: 'Deine Nachricht'
-
-  event:
-    button:
-      addToVolunteers: 'Mitarbeiter hinzufügen'
-      removeFromVolunteers: 'Mitarbeiter entfernen'
-    message:
-      addToVolunteersSuccess: 'Mitarbeiter erfolgreich hinzugefügt'
-      removeFromVolunteersSuccess: 'Mitarbeiter erfolgreich entfernt'

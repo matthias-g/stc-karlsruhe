@@ -138,28 +138,26 @@
         </div>
       <% end %>
 
-      <%# action date/location info %>
       <div class="col-sm-6 col-md-12">
         <div class="white-box">
+
+          <%# leaders %>
           <div id="action-leaders" class="mb-2">
             <h3><%= Project.human_attribute_name('leaders') %></h3>
-            <div class="comma-list">
-              <% @project.leaders.each do |leader| %>
-                <span>
-                  <%= link_to leader.first_name, leader %>
-                  <% if policy(@project).manage_team? %>
-                    <%= api_remove_link '', @project, :leaders, leader, true, data: {'success-remove': 1} %>
-                  <% end %>
-                </span>
-              <% end %>
-            </div>
-            <% if policy(@project).manage_team? && policy(User).index? %>
-              <div class="my-2">
-                <%= api_add_select @project, :leaders, User, options_for_user_select,
-                                   class: 'col-select btn-block', data: {'success-reload': true} %>
+            <% if policy(@project).manage_team? %>
+              <%= vue_component 'RelationshipList', name: "project-#{@project.id}-leader-list",
+                                model_type: 'projects', model_id: @project.id, relationship: 'leaders',
+                                item_type: 'users', enable_add: policy(User).index? %>
+            <% else %>
+              <div class="comma-list">
+                <% @project.leaders.each do |leader| %>
+                  <span><%= link_to leader.first_name, leader %></span>
+                <% end %>
               </div>
             <% end %>
           </div>
+
+          <%# location & map %>
           <div>
             <h3><%= Project.human_attribute_name(:location) %></h3>
             <%= simple_format @project.location %>
@@ -177,6 +175,7 @@
               </div>
             </div>
           <% end %>
+
         </div>
       </div>
 

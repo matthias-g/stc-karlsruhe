@@ -19,9 +19,15 @@
       return capitalize(resource['first-name'])
   resource.title
 
-@lang = (section, model_type, action, relationship = '', suffix = '', options = {}) ->
-  action_fragment = switch action
-    when 'add' then 'addTo' + capitalize(relationship)
-    when 'remove' then 'removeFrom' + capitalize(relationship)
-    else action
-  I18n.t "#{singularize(model_type)}.#{section}.#{action_fragment}#{capitalize(suffix)}", options
+# Looks up a suitable translation for the given action
+# e.g. ll(event_resource, 'added', 'volunteers', 'John Doe')
+#   => I18n.t 'action.message.volunteer_added', model: 'Event 1', item: 'John Doe'
+@ll = (model, action, relationship = '', item = '') ->
+  section = 'button'
+  section = 'message' if action in ['added', 'removed', 'created', 'deleted']
+  root = "#{singularize(model._type)}.#{section}."
+  if item != ''
+    I18n.t(root + singularize(relationship) + '_' + action, model: get_name_for(model), item: item)
+  else if relationship != ''
+    I18n.t(root + action + '_' + singularize(relationship), model: get_name_for(model))
+  else I18n.t(root + action, model: get_name_for(model))

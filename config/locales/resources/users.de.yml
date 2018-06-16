@@ -5,9 +5,6 @@ de:
 
     models:
       user: 'Mitarbeiter'
-      role:
-        one: 'Benutzerrolle'
-        other: 'Benutzerrollen'
       participation:
         zero: 'Aktionsteilnahmen'
         one: 'Aktionsteilnahme'
@@ -113,16 +110,3 @@ de:
       accountDeleted: 'Dein Account wurde gelöscht.'
       fieldEmpty: 'Das Feld darf nicht leer sein.'
       surveySent: 'Vielen Dank für deine Rückmeldung!'
-
-  role:
-    label:
-      newRole: 'Neue User-Rolle'
-      editRole: 'Rolle bearbeiten: "%s"'
-      editRoles: 'Rollen bearbeiten'
-    button:
-      addToUsers: 'User auswählen'
-      removeFromUsers: 'User auswählen'
-    message:
-      errorsExist: 'Die Rolle konnte wegen folgenden Fehlern nicht gespeichert werden:'
-      addToUsersSuccess: 'Der User %{item} hat jetzt die Rolle %{model}'
-      removeFromUsersSuccess: '%{item} ist nun nicht mehr %{model}'

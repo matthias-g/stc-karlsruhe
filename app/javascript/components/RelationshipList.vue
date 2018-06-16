@@ -12,7 +12,7 @@
       </span>
     </div>
 
-    <select v-if="enableAdd" :name="selectName" :id="selectName" class="col-select" data-size="5"
+    <select v-if="enableAdd" :name="selectName" :id="selectName" class="col-select" data-size="5" :title="selectTitle"
           data-live-search="true" ref="addSelect" v-model="selected" v-on:change="addItem(selected)">
       <option v-for="opt in options" :value="opt.id" :data-tokens="opt.tokens">{{opt.name}}</option>
     </select>
@@ -36,7 +36,8 @@
       enableAdd: Boolean
 
     computed:
-      removeTitle: -> lang('button', @modelType, 'remove', @relationship)
+      removeTitle: -> ll(@model, 'remove', @relationship)
+      selectTitle: -> ll(@model, 'add', @relationship)
       selectName: -> 'add-to-' + @name
 
     data: ->
@@ -53,40 +54,38 @@
 
     methods:
       item_url: (item) ->
-          "/" + @itemType + "/" + item.id
+        "/#{@itemType}/#{item.id}"
 
       # get item data
       fetchData: ->
         # fetch model and items
-        apiGet(@modelType, @modelId, include: @relationship).done (res) =>
-          @model = res
-          @items = res[@relationship].map((item) => @item_map(item))
+        apiGet(@modelType, @modelId, include: @relationship).done (data) =>
+          @model = data
+          @items = @convert_items(data[@relationship])
         # fetch possible items
-        apiGetAll(@itemType).done (res) =>
-          @options = res.map((item) => @item_map(item))
+        apiGetAll(@itemType).done (data) =>
+          @options = @convert_items(data)
 
-      # conversion from resource to item object
-      item_map: (item) ->
-        id: item.id, name: get_name_for(item), tokens: get_name_for(item)
+      # conversion from resources to item objects
+      convert_items: (items) ->
+        items.map (item) -> {id: item.id, name: get_name_for(item), tokens: get_name_for(item)}
 
       # adds the item with the given id
       addItem: (id) ->
         return if (id < 0)
         item = find_in_object_array(id, @options)
-        apiAdd(@modelType, @modelId, @relationship, @itemType, item.id).done () =>
+        apiAdd(@modelType, @modelId, @relationship, @itemType, item.id).done =>
           @items.push(item)
           @selected = -1;
-          resourceFlash @modelType, 'add', @relationship, 'success',
-                        model: get_name_for(@model), item: item.name
+          createFlashMessage ll(@model, 'added', @relationship, item.name)
 
       # removes the item with the given index in items
       removeItem: (index) ->
         item = @items[index]
-        if confirm(I18n.t('general.message.confirmRemoveLong', subject: item.name))
-          apiRemove(@modelType, @modelId, @relationship, @itemType, item.id).done () =>
-            @items.splice(index, 1)
-          resourceFlash @modelType, 'remove', @relationship, 'success',
-                        model: get_name_for(@model), item: item.name
+        return unless confirm I18n.t('general.message.confirmRemoveLong', subject: item.name)
+        apiRemove(@modelType, @modelId, @relationship, @itemType, item.id).done =>
+          @items.splice(index, 1)
+          createFlashMessage ll(@model, 'removed', @relationship, item.name)
 
 </script>
 

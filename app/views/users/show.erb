@@ -92,14 +92,14 @@
 
       <% if past_events.any? %>
         <h3 class="mt-3"><%= t('user.heading.pastActions') %></h3>
-        <% past_events.sort_by(&:date).each do |event| %>
+        <% past_events.sort_by(&:date).reverse.each do |event| %>
           <%= render '/events/entry', event: event, show_occupancy: false %>
         <% end %>
       <% end %>
 
       <% if past_initiatives_as_leader.any? %>
         <h3 class="mt-3"><%= t('user.heading.pastActionsAsLeader') %></h3>
-        <% past_initiatives_as_leader.sort_by{ |initiative| [initiative ? 1 : 0, initiative] }.each do |initiative| %>
+        <% past_initiatives_as_leader.sort_by{ |init| [init.is_action? ? 0 : 1, init.date || Date.current] }.reverse.each do |initiative| %>
           <%= render '/initiatives/entry', initiative: initiative, show_occupancy: false %>
         <% end %>
       <% end %>

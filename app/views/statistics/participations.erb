@@ -1,10 +1,13 @@
 <% provide :title, t('layout.title.statistics') %>
 
 <div id="statistics-header" class="section">
-  <div class="select-year">
+  <div class="select-year clearfix">
     <h1>Neue Aktionsteilnahmen <%= @action_group.title %></h1>
     <%= render '/statistics/week_dropdown', target_path: lambda { |action_group| statistiken_teilnahmen_path(action_group: action_group) } %>
   </div>
+  <h3Z>
+    Aktionszeitraum: <%= date_range(@action_group.start_date, @action_group.end_date, format: :long) %>
+  </h3Z>
 </div>
 
 <div class="section">

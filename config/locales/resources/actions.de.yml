@@ -131,3 +131,5 @@ de:
       contactLeader:
         subject: 'Worum geht''s?'
         body: 'Deine Nachricht'
+      filter:
+        filter_work_friendly: 'an Werktagen nur ab 17 Uhr'

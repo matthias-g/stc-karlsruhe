@@ -10,6 +10,7 @@
   <meta name="description" content="<%= strip_tags desc %>" />
   <meta property="og:image" content="https://www.servethecity-karlsruhe.de/images/share.jpg" />
   <meta property="og:description" content="<%= strip_tags desc %>" />
+  <%#= include_requests @included_requests %>
 <% end %>
 
 
@@ -87,13 +88,7 @@
       <%# filter module %>
       <div class="col-sm-6 col-md-12">
         <div class="white-box">
-          <h3><%= t 'action_group.heading.filter' %></h3>
-          <%= bootstrap_form_for(:filter, url: actions_path, method:'get', html: {data: {
-                class: 'ActionFilter', list: '#action-list', info: '#action-group-filter-results'}}) do |f| %>
-            <%= f.select(:day, options_for_day_select(@action_group), include_blank: t('action_group.form.day_filter_blank'), hide_label: true) %>
-            <%= f.check_box :after_17h, label: t('action_group.form.actionsAfter5pm') %>
-            <%= f.submit t('action_group.button.filter'), class:'btn btn-secondary btn-block' %>
-          <% end %>
+          <%= vue_component 'ActionCardListFilter' %>
         </div>
       </div>
 
@@ -121,8 +116,9 @@
   <div class="col-md-9 col-lg-10">
 
     <div id="action-list">
-      <%= render '/actions/action_card_list', actions: @actions %>
-      <% unless actions.any? %>
+      <%= vue_component 'ActionCardList', action_group_id: @action_group.id, filter_dates: ['2018-06-07'] %>
+
+      <% if @action_group.action_count.zero? %>
         <div class="white-box text-center" style="max-width: 600px; margin: 30px">
           <%= t('action_group.info.noActions') %>
         </div>

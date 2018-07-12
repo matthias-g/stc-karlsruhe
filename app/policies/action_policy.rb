@@ -34,7 +34,7 @@ class ActionPolicy < ApplicationPolicy
   end
 
 
-  alias_method :index?, :is_admin_or_coordinator?
+  alias_method :index?, :always
   alias_method :create?, :is_admin_or_coordinator?
 
   alias_method :clone?, :edit?
@@ -50,10 +50,11 @@ class ActionPolicy < ApplicationPolicy
   alias_method :make_visible?, :change_visibility?
   alias_method :make_invisible?, :change_visibility?
 
+
   def permitted_attributes_for_show
     [:title, :description, :location, :latitude, :longitude, :individual_tasks, :material, :requirements,
      :visible, :short_description, :map_latitude, :map_longitude, :map_zoom,
-     :picture, :picture_source, :events, :action_group, :parent_action, :leaders, :volunteers, :tags]
+     :picture, :picture_source, :events, :action_group, :parent_action, :leaders, :volunteers, :tags, :info]
   end
 
   def updatable_fields
@@ -76,7 +77,8 @@ class ActionPolicy < ApplicationPolicy
   end
 
   def is_today_or_past?
-    record.all_events.today_or_past.any?
+    today = Date.current
+    record.all_events.any?{|e| e.date <= today}
   end
 
 end

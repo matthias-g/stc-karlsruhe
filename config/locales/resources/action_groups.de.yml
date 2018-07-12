@@ -25,7 +25,9 @@ de:
   action_group:
 
     heading:
-      filter: 'Filtern'
+      filter_days: 'Tage'
+      filter_tags: 'Tags'
+      filter_other: 'Sonstiges'
 
     button:
       newAction: 'Neue Aktion erstellen'
@@ -40,11 +42,6 @@ de:
       wantToStartOwnAction: 'Du möchtest eine eigene Aktion starten?'
       weHelpYou: 'Wir helfen dir dabei!'
       description: "%{date} findet %{action_group} statt. Welche Aktion passt zu dir?"
-
-    message:
-      found_actions:
-        one: 'Eine übereinstimmende Aktion wurde gefunden.'
-        other: '%{count} übereinstimmende Aktionen gefunden'
 
     form:
       day_filter_blank: '- - - Alle Tage - - -'

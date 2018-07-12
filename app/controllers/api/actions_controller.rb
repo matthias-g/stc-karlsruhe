@@ -1,11 +1,8 @@
 class Api::ActionsController < Api::ApiController
 
-  include JSONAPI::ActsAsResourceController
-
-  private
-
-  def context
-    { user: current_user }
+  def index
+    params[:include] = 'parent-action,action-group,tags' if params[:include].nil?
+    super
   end
 
 end

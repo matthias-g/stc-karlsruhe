@@ -1,7 +1,5 @@
 class Api::GalleryPicturesController < Api::ApiController
 
-  include JSONAPI::ActsAsResourceController
-
   before_action :set_gallery_picture, only: [:rotateRight, :rotateLeft]
 
   def rotateRight
@@ -18,10 +16,6 @@ class Api::GalleryPicturesController < Api::ApiController
 
 
   private
-
-  def context
-    { user: current_user }
-  end
 
   def set_gallery_picture
     @gallery_picture = GalleryPicture.find(params[:id])

@@ -1,15 +1,11 @@
 class Api::ActionGroupResource < JSONAPI::Resource
   include JSONAPI::Authorization::PunditScopedResource
 
-  attribute :title
-  attributes :stats
+  attributes :title, :start_date, :end_date, :default, :declination
   has_many :actions
 
-  def stats
-    {
-        'action_count': @model.actions.visible.count,
-        'active_user_count': @model.active_user_count,
-        'vacancy_count': @model.vacancy_count
-    }
+  def fetchable_fields
+    Pundit.policy(context[:user], @model).permitted_attributes_for_show
   end
+
 end

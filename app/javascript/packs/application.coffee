@@ -1,9 +1,12 @@
-
 import Vue from 'vue/dist/vue.esm'
 import TurbolinksAdapter from 'vue-turbolinks'
-import RelationshipList from '../components/RelationshipList.vue'
+import { store } from '../vuex'
+import '../api/models'
+import '../components'
 
 Vue.use TurbolinksAdapter
+Vue.config.productionTip = false
 
+# create Vue root instance
 onPageLoad =>
-  new Vue(el: '#page', components: {RelationshipList})
+  new Vue(el: '#page', store)

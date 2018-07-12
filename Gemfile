@@ -51,8 +51,8 @@ gem 'chartkick'
 
 # JSON API
 gem 'jbuilder'
-gem 'jsonapi-resources'
-gem 'jsonapi-authorization'
+gem 'jsonapi-resources' #, github: 'cerebris/jsonapi-resources'
+gem 'jsonapi-authorization'# , github: 'venuu/jsonapi-authorization'
 gem 'recaptcha', require: 'recaptcha/rails'
 
 # image management

@@ -13,23 +13,8 @@ class ActionGroupsController < ApplicationController
   end
 
   def show
-    @actions = policy_scope(@action_group.actions.toplevel)
-                   .order(visible: :desc, picture_source: :desc)
-                   .includes(:events, subactions: :events)
-
-    if params[:filter]
-      p = filter_params
-      @actions = @actions.where(visible: (p[:visibility] != 'hidden')) unless p[:visibility].blank?
-
-      unless p[:day].blank? || !p[:day].match(/\A\d{2,4}-\d{1,2}-\d{1,2}\z/)
-        date = Date.parse(p[:day])
-        @actions = @actions.left_outer_joins(:events, subactions: [:events])
-                       .where('events.date = ? OR events_initiatives.date = ?', date, date).distinct
-      end
-
-      @actions = @actions.select { |a| a.start_time && a.start_time.hour >= 17 } if p[:after_17h] == '1'
-    end
-
+    #include_request('api_actions_path', Api::ActionsController,:index,
+    #                filter: {action_group: @action_group.id})
   end
 
   def new

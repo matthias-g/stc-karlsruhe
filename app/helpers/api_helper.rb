@@ -1,34 +1,23 @@
 
 module ApiHelper
 
-  def vue_component(component_name, html_options = {})
-    html_options = ApiHelper.format_props(html_options)
+  def vue_component(component_name, options = {})
+    html_options = options.each_with_object({}) do |(key, value), object|
+      new_key = key.to_s.dasherize
+      if value.is_a? String
+        object[new_key] = value
+      else
+        object['v-bind:' + new_key] = value.to_json
+      end
+    end
     content_tag(component_name.underscore.dasherize, '', html_options)
   end
 
-  def self.format_props(props)
-    case props
-    when Hash
-      props.each_with_object({}) do |(key, value), new_props|
-        new_key = key.to_s.dasherize
-        new_key = 'v-bind:' + new_key unless value.is_a? String
-        new_props[new_key] = ApiHelper.camelize_props(value)
-      end
-    else
-      props
+  def include_requests(requests)
+    mapped = requests.map do |request, response|
+      "window.included_requests[\"#{request}\"] = #{response};"
     end
-  end
-
-  def self.camelize_props(props)
-    case props
-    when Hash
-      props.each_with_object({}) do |(key, value), new_props|
-        new_key = key.to_s.camelize(:lower)
-        new_props[new_key] = ApiHelper.camelize_props(value)
-      end
-    else
-      props
-    end
+    raw("<script>window.included_requests = window.included_requests || {}; #{mapped.join(',')};</script>")
   end
 
   # SelectPicker for adding to an association

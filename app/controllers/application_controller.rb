@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
   # Prevent CSRF attacks by ignoring session
-  protect_from_forgery
+  protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -65,6 +65,21 @@ class ApplicationController < ActionController::Base
     else
       redirect_to new_user_session_path
     end
+  end
+
+  #def current_user
+  #  @current_user ||= super && User.order(id: :asc).includes(:roles).find(@current_user.id)
+  #end
+
+  # Makes the output of the given controller action available in the view
+  def include_request(url_helper, controller_class, action, params)
+    controller = controller_class.new
+    controller.request = request
+    controller.response = controller_class.make_response!(request)
+    controller.params = ActionController::Parameters.new(params.merge(controller: controller_class.controller_path, action: action))
+    request_url = Rails.application.routes.url_helpers.public_send(url_helper, params)
+    @included_requests ||= {}
+    @included_requests[request_url] = controller.send(action)
   end
 
 end

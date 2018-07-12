@@ -12,8 +12,9 @@
       </span>
     </div>
 
-    <select v-if="enableAdd" :name="selectName" :id="selectName" class="col-select" data-size="5" :title="selectTitle"
-          data-live-search="true" ref="addSelect" v-model="selected" v-on:change="addItem(selected)">
+    <select v-if="showSelect" ref="addSelect" v-model="selected" v-on:change="addItem(selected)"
+            :name="selectName" :id="selectName" :title="selectTitle" class="col-select"
+            data-size="5" data-live-search="true">
       <option v-for="opt in options" :value="opt.id" :data-tokens="opt.tokens">{{opt.name}}</option>
     </select>
 
@@ -23,9 +24,13 @@
 
 
 <script lang="coffee">
+  import { api } from '../api'
+  import Utils from '../utils'
+  import i18n_mixins from '../mixins/i18n'
 
   export default
     name: 'RelationshipList'
+    mixins: [i18n_mixins]
 
     props:
       name: String
@@ -36,8 +41,9 @@
       enableAdd: Boolean
 
     computed:
-      removeTitle: -> ll(@model, 'remove', @relationship)
-      selectTitle: -> ll(@model, 'add', @relationship)
+      showSelect: -> @enableAdd && @options.length > 0
+      removeTitle: -> Utils.ll(@model, 'remove', @relationship) if @model
+      selectTitle: -> Utils.ll(@model, 'add', @relationship) if @model
       selectName: -> 'add-to-' + @name
 
     data: ->
@@ -50,7 +56,7 @@
       @fetchData()
 
     updated: ->
-      $(@$refs.addSelect).selectpicker('render') if @enableAdd
+      $(@$refs.addSelect).selectpicker('render') if @showSelect
 
     methods:
       item_url: (item) ->
@@ -58,34 +64,32 @@
 
       # get item data
       fetchData: ->
-        # fetch model and items
-        apiGet(@modelType, @modelId, include: @relationship).done (data) =>
-          @model = data
-          @items = @convert_items(data[@relationship])
-        # fetch possible items
-        apiGetAll(@itemType).done (data) =>
-          @options = @convert_items(data)
+        api.find(@modelType, @modelId, include: @relationship).then (response) =>
+          @model = response.data
+          @items = @convert_items(@model[@relationship])
+        api.findAll(@itemType).then (response) =>
+          @options = @convert_items(response.data)
 
       # conversion from resources to item objects
       convert_items: (items) ->
-        items.map (item) -> {id: item.id, name: get_name_for(item), tokens: get_name_for(item)}
+        items.map (item) -> {id: item.id, name: Utils.get_name_for(item), tokens: Utils.get_name_for(item)}
 
       # adds the item with the given id
       addItem: (id) ->
         return if (id < 0)
-        item = find_in_object_array(id, @options)
-        apiAdd(@modelType, @modelId, @relationship, @itemType, item.id).done =>
+        item = Utils.find_in_object_array(id, @options)
+        api.add(@modelType, @modelId, @relationship, item.id).then =>
           @items.push(item)
           @selected = -1;
-          createFlashMessage ll(@model, 'added', @relationship, item.name)
+          createFlashMessage Utils.ll(@model, 'added', @relationship, item.name)
 
       # removes the item with the given index in items
       removeItem: (index) ->
         item = @items[index]
-        return unless confirm I18n.t('general.message.confirmRemoveLong', subject: item.name)
-        apiRemove(@modelType, @modelId, @relationship, @itemType, item.id).done =>
+        return unless confirm @t('general.message.confirmRemoveLong', subject: item.name)
+        api.remove(@modelType, @modelId, @relationship, item.id).then =>
           @items.splice(index, 1)
-          createFlashMessage ll(@model, 'removed', @relationship, item.name)
+          createFlashMessage Utils.ll(@model, 'removed', @relationship, item.name)
 
 </script>
 

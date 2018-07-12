@@ -31,7 +31,7 @@
 @apiDelete = (type, id) ->
   apiRequest("/api/#{type}/#{id}", 'DELETE')
 
-# gets a resource
+# gets a resource. deprecated
 @apiGet = (type, id, params = {}) ->
   # try to get it from the store
   store = getApiStore()
@@ -49,30 +49,6 @@
     deferred.resolve(store.find(type, id))
   ).fail((error) ->
     console.log("Failed getting resource #{id} of type #{type}", error)
-    deferred.reject(error)
-  ).fail(handleJsonApiError)
-  deferred.promise()
-
-# gets all resources of a type
-@apiGetAll = (type, params = {}) ->
-  # try to get it from the store
-  store = getApiStore()
-  res = store.find(type)
-  if res && (!params['include'] || res[params['include']])
-    return $.when(res)
-  # otherwise get it via JSONAPI
-  deferred = $.Deferred()
-  url = "/api/#{type}"
-  url += "?#{$.param(params)}" unless $.isEmptyObject(params)
-  $.ajax(url,
-    accepts: {jsonapi: 'application/vnd.api+json'}
-    converters: {'text jsonapi': (result) -> JSON.parse(result)}
-    dataType: 'jsonapi'
-  ).done((data) =>
-    store.sync data
-    deferred.resolve(store.findAll(type))
-  ).fail((error) ->
-    console.log("Failed getting resources of type #{type}", error)
     deferred.reject(error)
   ).fail(handleJsonApiError)
   deferred.promise()

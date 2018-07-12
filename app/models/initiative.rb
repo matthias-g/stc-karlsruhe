@@ -6,12 +6,15 @@ class Initiative < ApplicationRecord
 
   has_and_belongs_to_many :tags
   has_many :leaderships, dependent: :destroy
-  has_many :leaders, class_name: 'User', through: :leaderships, source: :user
-  has_many :events, -> { order 'date ASC, start_time ASC' }, foreign_key: :initiative_id, dependent: :destroy
+  has_many :leaders, class_name: 'User', through: :leaderships, source: :user,
+            after_add: :update_cache_fields, after_remove: :update_cache_fields
+  has_many :events, -> { order 'date ASC, start_time ASC' }, foreign_key: :initiative_id, dependent: :destroy,
+            after_add: :update_cache_fields, after_remove: :update_cache_fields
   accepts_nested_attributes_for :events, allow_destroy: true
 
   validates_presence_of :title
   validates_presence_of :type
+  after_save :update_cache_fields
 
   scope :visible,  -> { where(initiatives: { visible: true }) }
   scope :hidden,   -> { where(initiatives: { visible: false }) }
@@ -71,6 +74,8 @@ class Initiative < ApplicationRecord
     nil
   end
 
+  def update_cache_fields(*args)
+  end
 
   protected
 

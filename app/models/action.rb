@@ -1,8 +1,10 @@
 class Action < Initiative
 
   belongs_to :action_group
-  has_many :subactions, class_name: 'Action', foreign_key: :parent_action_id
-  belongs_to :parent_action, class_name: 'Action', foreign_key: :parent_action_id, optional: true
+  has_many :subactions, class_name: 'Action', foreign_key: :parent_action_id,
+           after_add: :update_cache_fields, after_remove: :update_cache_fields
+  belongs_to :parent_action, class_name: 'Action', foreign_key: :parent_action_id, optional: true # TODO: does the foreign_key make sense?
+
 
   validate :parent_action_cannot_be_same_action, :parent_action_cannot_be_a_subaction
   after_initialize :set_default_values
@@ -19,7 +21,7 @@ class Action < Initiative
   end
 
   def all_events
-    Event.joins(:initiative).where('initiative_id = ? OR (initiatives.parent_action_id = ? AND initiatives.visible)', id, id)
+    @all_events ||= Event.joins(:initiative).where('initiative_id = ? OR (initiatives.parent_action_id = ? AND initiatives.visible)', id, id).to_a
   end
 
   def all_dates
@@ -51,7 +53,7 @@ class Action < Initiative
 
 
   def finished?
-    all_events.upcoming.empty?
+    all_events.all?(&:finished?)
   end
 
   def subaction?
@@ -76,11 +78,11 @@ class Action < Initiative
   end
 
   def total_team_size
-    all_events.sum(:team_size)
+    all_events.sum(&:team_size)
   end
 
   def total_desired_team_size
-    all_events.sum(:desired_team_size)
+    all_events.sum(&:desired_team_size)
   end
 
 
@@ -106,6 +108,12 @@ class Action < Initiative
     subactions.each(&:make_invisible!) if subactions
   end
 
+  def update_cache_fields(*args)
+    self.subaction_count = subactions.count
+    save if changed?
+    action_group.update_cache_fields if action_group
+  end
+
   protected
 
   def slug_candidates
@@ -129,7 +137,7 @@ class Action < Initiative
   end
 
   def set_default_values
-    self.action_group ||= ActionGroup.default if action_group.nil?
+    self.action_group = ActionGroup.default if action_group_id == nil
   end
 
 end

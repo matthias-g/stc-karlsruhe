@@ -10,6 +10,7 @@ class Event < ApplicationRecord
   validates_presence_of :date
 
   before_save :set_datetime_fields
+  after_save :update_cache_fields
 
   scope :upcoming, -> { where('events.end_time >= ?', Time.now).order(date: :asc) }
   scope :today_or_past, -> { where('events.date <= ?', Date.current).order(date: :asc) }
@@ -36,7 +37,13 @@ class Event < ApplicationRecord
   end
 
   def finished?
-    date.nil? || (end_time < Time.now) || (date < Date.current)
+    return false unless persisted?
+    date.nil? || (!end_time.nil? && end_time < Time.now) || (date < Date.current)
+  end
+
+  def work_friendly?
+    return true if [0, 6].include?(date&.wday)
+    start_time.present? && (start_time.hour >= 17)
   end
 
   def status
@@ -52,6 +59,7 @@ class Event < ApplicationRecord
   private
 
   def on_volunteer_added(user)
+    update_cache_fields
     return if finished?
     if user.receive_notifications_for_new_participation
       Mailer.event_join_reminder(user, self).deliver_later
@@ -64,6 +72,7 @@ class Event < ApplicationRecord
   end
 
   def on_volunteer_removed(user)
+    update_cache_fields
     return if finished?
     recipients = initiative.leaders.where(receive_notifications_about_volunteers: true)
     recipients.uniq.each do |recipient|
@@ -95,4 +104,9 @@ class Event < ApplicationRecord
     matches = time.match(TIME_REGEX)
     Time.now.change(hour: matches[3], min: matches[4], year: day.year, month: day.month, day: day.day) if matches && matches[3]
   end
+
+  def update_cache_fields(*args)
+    initiative.update_cache_fields if initiative
+  end
+
 end

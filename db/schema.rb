@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_07_111449) do
+ActiveRecord::Schema.define(version: 2018_06_28_150550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 2018_06_07_111449) do
     t.date "end_date"
     t.string "slug"
     t.integer "declination", default: 0
+    t.integer "action_count", default: 0
+    t.integer "active_user_count", default: 0
+    t.integer "available_places_count", default: 0
     t.index ["slug"], name: "index_action_groups_on_slug", unique: true
   end
 
@@ -112,6 +115,7 @@ ActiveRecord::Schema.define(version: 2018_06_07_111449) do
     t.integer "parent_action_id"
     t.string "type"
     t.string "icon"
+    t.integer "subaction_count", default: 0
     t.index ["slug"], name: "index_initiatives_on_slug", unique: true
   end
 

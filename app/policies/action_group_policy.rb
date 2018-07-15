@@ -11,12 +11,4 @@ class ActionGroupPolicy < ApplicationPolicy
   alias_method :update?, :is_admin?
   alias_method :destroy?, :is_admin?
 
-  def permitted_attributes_for_show
-    [:title, :default, :start_date, :end_date, :declination, :actions,
-     :action_count, :active_user_count, :available_places_count]
-  end
-
-  def updatable_fields
-    [:title, :default, :start_date, :end_date, :declination, :actions]
-  end
 end

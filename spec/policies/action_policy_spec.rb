@@ -90,7 +90,7 @@ RSpec.describe ActionPolicy do
 
     context 'as other user' do
       let(:user) { users(:leader) }
-      it { should_fail }
+      it { should_pass }
     end
 
     context 'as admin' do
@@ -287,21 +287,21 @@ RSpec.describe ActionPolicy do
     context 'as admin' do
       let(:user) { users(:admin) }
       it 'contains all attributes except status and gallery' do
-        expect(subject).to match_array(all_fields - %i[status gallery])
+        expect(subject).to match_array(all_fields - %i[status gallery info])
       end
     end
 
     context 'as coordinator' do
       let(:user) { users(:coordinator) }
       it 'contains all attributes except status and gallery' do
-        expect(subject).to match_array(all_fields - %i[status gallery])
+        expect(subject).to match_array(all_fields - %i[status gallery info])
       end
     end
 
     context 'as leader' do
       let(:user) { users(:leader) }
       it 'contains all attributes except status, gallery and visible' do
-        expect(subject).to match_array(all_fields - %i[status gallery visible])
+        expect(subject).to match_array(all_fields - %i[status gallery info visible])
       end
     end
   end

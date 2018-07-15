@@ -8,50 +8,10 @@ class ActionGroupsControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  # VISITOR ACCESS
-
-  test "should show action group" do
-    get show_action_group_url(@action_group)
-    assert_response :success
-    assert_select 'h1', @action_group.title
-    expected_titles = @action_group.actions.visible.toplevel.pluck(:title)
-    assert_select '.action-card .card-title' do |titles|
-      assert_equal expected_titles.length, titles.length
-      actual_titles = titles.collect{|title| title.text}
-      expected_titles.each do |title|
-        assert_includes actual_titles, title
-      end
-    end
-  end
-
-  test "action should show short description" do
-    get show_action_group_url(@action_group)
-    assert_select '.action-card .card-text', @action.short_description
-  end
-
-  test "action should show description if no short description available" do
-    @action.update_attribute :short_description, ''
-    get show_action_group_url(@action_group)
-    assert_select '.action-card .card-text', @action.description
-  end
-
   test "should show filtered action group" do
     get show_action_group_url(@action_group, filter: {day: '2017-07-03'})
     assert_response :success
   end
-
-
-
-  # LEADER ACCESS
-
-  test "leader should see own invisible action" do
-    sign_in users(:leader)
-    @action.update_attribute :visible, false
-    get show_action_group_url(@action_group)
-    assert_response :success
-    assert_select '.action-card .card-title', @action.title
-  end
-
 
 
   # ADMIN ACCESS
@@ -80,21 +40,6 @@ class ActionGroupsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
     assert_select 'h1', 'Aktionswoche 2020'
-  end
-
-  test "admin should see all actions in action group" do
-    sign_in users(:admin)
-    get show_action_group_url(@action_group)
-    assert_response :success
-    assert_select 'h1', @action_group.title
-    expected_titles = @action_group.actions.toplevel.pluck(:title)
-    assert_select '.action-card .card-title' do |titles|
-      assert_equal expected_titles.length, titles.length
-      actual_titles = titles.collect{|title| title.text}
-      expected_titles.each do |title|
-        assert_includes actual_titles, title
-      end
-    end
   end
 
   test "admin should 'edit' action group" do

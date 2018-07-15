@@ -11,4 +11,6 @@ class ActionGroupPolicy < ApplicationPolicy
   alias_method :update?, :is_admin?
   alias_method :destroy?, :is_admin?
 
+  # When adding tests with implementation uncomment respective line in .travis.yml!
+
 end

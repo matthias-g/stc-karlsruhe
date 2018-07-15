@@ -11,7 +11,7 @@ env:
   - TESTSCRIPT="bin/travis-mutant OrgaMessagePolicy"
   - TESTSCRIPT="bin/travis-mutant EventPolicy"
   - TESTSCRIPT="bin/travis-mutant ActionPolicy"
-  - TESTSCRIPT="bin/travis-mutant ActionGroupPolicy"
+  #- TESTSCRIPT="bin/travis-mutant ActionGroupPolicy"
   - TESTSCRIPT="bin/travis-mutant RolePolicy"
   - TESTSCRIPT="bin/travis-mutant UserPolicy"
 script:

@@ -1,6 +1,7 @@
 language: ruby
 before_script:
   - bundle exec rails db:setup
+  - yarn install
 env:
   - TESTSCRIPT="bin/travis-tests"
   - TESTSCRIPT="bin/travis-mutant ApplicationPolicy"

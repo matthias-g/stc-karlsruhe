@@ -72,8 +72,8 @@
     created: ->
       api.findAll('action', filter: {action_group: @actionGroupId}).then (response) =>
         @actions = response.data
-        dates = Utils.removeDuplicates([].concat (action.info.dates for action in @actions)...)
-        tags = Utils.removeDuplicatesById([].concat (action.tags for action in @actions)...)
+        dates = Utils.removeDuplicates(Utils.flatten(action.info.dates for action in @actions))
+        tags = Utils.removeDuplicatesById(Utils.flatten(action.tags for action in @actions))
         store.commit 'setFilterDatesOptions', dates
         store.commit 'setFilterTagsOptions', tags
 

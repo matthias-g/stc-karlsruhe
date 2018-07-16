@@ -6,7 +6,7 @@
                 sgid: subscription.to_sgid_param(for: :unsubscribe, expires_in: 2.months)) do %>
       <%= t("orga_message.form.content_types.#{content_type}") %> abbestellen
     <% end %> oder gleich
-    <%= link_to 'alle E-Mails vom Orga-Team abbestellen', unsubscribe_url(type: :all_emails,
+    <%= link_to 'alle Newsletter abbestellen', unsubscribe_url(type: :all_emails,
                 sgid: subscription.to_sgid_param(for: :unsubscribe, expires_in: 2.months)) %>.
   </p>
 </div>

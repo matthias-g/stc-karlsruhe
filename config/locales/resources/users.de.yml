@@ -22,13 +22,15 @@ de:
         current_password: 'Aktuelles Passwort'
         remember_me: 'merken'
         privacy_consent: 'Datenverwendung'
-        receive_emails_about_action_groups: 'Informationen zu Aktionswochen allgemein (z.B. Ankündigungen der Aktionswochen)'
         receive_emails_about_my_action_groups: 'Informationen zu Aktionswochen, an denen ich teilnehme'
-        receive_emails_about_other_projects: 'Informationen zu weiteren Serve the City Projekten'
-        receive_other_emails_from_orga: 'Sonstige E-Mails vom Orgateam'
         receive_emails_from_other_users: 'Andere Nutzer können mich über ein Kontaktformular kontaktieren'
         receive_notifications_for_new_participation: 'Erhalte eine Benachrichtigung per E-Mail, wenn du bei einer Aktion teilnimmst'
         receive_notifications_about_volunteers: 'Erhalte eine Benachrichtigung, wenn Mitarbeiter einem von dir geleiteten Aktionsteam beitreten oder es verlassen'
+
+      subscription:
+        receive_emails_about_action_groups: 'Informationen zu Aktionswochen allgemein (z.B. Ankündigungen der Aktionswochen)'
+        receive_emails_about_other_projects: 'Informationen zu weiteren Serve the City Projekten'
+        receive_other_emails_from_orga: 'Sonstige E-Mails vom Orgateam'
 
   user:
 
@@ -46,7 +48,8 @@ de:
 
       userData: 'Profildaten'
       user_mail: 'Kontaktiere %{recipient}'
-      emailSettings: 'E-Mail-Einstellungen'
+      notifications: 'Benachrichtigungen'
+      newsletters: 'Newsletters'
       actionsAsLeader: 'Leitung'
       actionsAsVolunteer: 'Teilnahme'
       pastActions: 'Abgeschlossen'

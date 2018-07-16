@@ -109,6 +109,10 @@ class User < ApplicationRecord
     has_role?(:photographer)
   end
 
+  def subscription_id
+    Subscription.find_by_email(email)&.id || -1
+  end
+
   def clear!
     self.first_name = 'cleared'
     self.last_name = 'cleared'

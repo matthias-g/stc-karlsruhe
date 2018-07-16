@@ -46,3 +46,10 @@ api.define 'tag',
   icon: ''
   color: ''
   initiatives: {jsonApi: 'hasMany', type: 'actions'}
+
+api.define 'subscription',
+  email: ''
+  name: ''
+  receiveEmailsAboutActionGroups: false
+  receiveEmailsAboutOtherProjects: false
+  receiveOtherEmailsFromOrga: false

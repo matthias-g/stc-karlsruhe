@@ -65,7 +65,7 @@
           #return false unless action.action_group == @actionGroupId
           return false unless action.info.toplevel
           return false if @filterWorkFriendly and not action.info.work_friendly
-          return false if @filterDates and not Utils.intersect(@filterDates, action.info.dates)
+          return false if @filterDates and not (Utils.intersect(@filterDates, action.info.dates) or action.info.dates.length == 0)
           return false if @filterTags and not Utils.subset(@filterTags, tag.id for tag in action.tags)
           true
 

@@ -8,5 +8,8 @@ coordinator:
 photographer:
   title: photographer
 
+notifications:
+    title: notifications
+
 default:
   title: default

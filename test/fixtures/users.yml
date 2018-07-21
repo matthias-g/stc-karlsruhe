@@ -76,6 +76,13 @@ photographer:
   email: photo@graphs.com
   roles: photographer
 
+notification_recipient:
+  username: notification_recipient
+  first_name: Notification
+  last_name: Recipient
+  email: please-notify-me@example.com
+  roles: notifications
+
 deleted:
   username: deleted
   first_name: Gone

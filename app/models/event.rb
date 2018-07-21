@@ -65,7 +65,7 @@ class Event < ApplicationRecord
       Mailer.event_join_reminder(user, self).deliver_later
     end
     recipients = initiative.leaders.where(receive_notifications_about_volunteers: true)
-    return if recipients.blank?
+    recipients += Role.where('lower(title) = ?', 'notifications').first.users
     recipients.uniq.each do |recipient|
       Mailer.event_join_notification(recipient, user, self).deliver_later
     end
@@ -75,6 +75,7 @@ class Event < ApplicationRecord
     update_cache_fields
     return if finished?
     recipients = initiative.leaders.where(receive_notifications_about_volunteers: true)
+    recipients += Role.where('lower(title) = ?', 'notifications').first.users
     recipients.uniq.each do |recipient|
       Mailer.event_leave_notification(recipient, user, self).deliver_later
     end

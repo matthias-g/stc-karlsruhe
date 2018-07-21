@@ -94,36 +94,61 @@ class EventTest < ActiveSupport::TestCase
 
   test "send notification to volunteer when volunteer enters event" do
     user = users(:unrelated)
+    assert_difference 'ActionMailer::Base.deliveries.size', +3 do
+      perform_enqueued_jobs do
+        @event.add_volunteer user
+      end
+    end
+    assert @event.volunteer?(user)
+    delivered_to_set = ActionMailer::Base.deliveries.collect{ |mail| mail.to }.flatten
+    assert_includes delivered_to_set, user.email
+  end
+
+  test "don't send notification to volunteer when volunteer enters event when user doesn't want that" do
+    user = users(:unrelated)
+    user.update_attribute :receive_notifications_for_new_participation, false
     assert_difference 'ActionMailer::Base.deliveries.size', +2 do
       perform_enqueued_jobs do
         @event.add_volunteer user
       end
     end
     assert @event.volunteer?(user)
-  end
-
-  test "don't send notification to volunteer when volunteer enters event when user doesn't want that" do
-    user = users(:unrelated)
-    user.update_attribute :receive_notifications_for_new_participation, false
-    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
-      perform_enqueued_jobs do
-        @event.add_volunteer user
-      end
-    end
-    assert @event.volunteer?(user)
+    delivered_to_set = ActionMailer::Base.deliveries.collect{ |mail| mail.to }.flatten
+    assert_not_includes delivered_to_set, user.email
   end
 
   test "send notification to leaders when volunteer enters event" do
+    notification_recipients = Role.find_by(title: :notifications).users.pluck(:email).to_set
     leaders = @event.initiative.leaders.pluck(:email).to_set
+    recipients_count = notification_recipients.count + leaders.count
     user = users(:unrelated)
     user.update_attribute :receive_notifications_for_new_participation, false
-    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+    assert_difference 'ActionMailer::Base.deliveries.size', recipients_count do
       perform_enqueued_jobs do
         @event.add_volunteer user
       end
     end
-    notification_email = ActionMailer::Base.deliveries.last
-    assert leaders.superset? notification_email.to.to_set
+    delivered_to_set = ActionMailer::Base.deliveries.collect{ |mail| mail.to }.flatten
+    leaders.each do |leader_address|
+      assert_includes delivered_to_set, leader_address
+    end
+  end
+
+  test "send notification to users with role notifications when volunteer enters event" do
+    notification_recipients = Role.find_by(title: :notifications).users.pluck(:email).to_set
+    leaders = @event.initiative.leaders.pluck(:email).to_set
+    recipients_count = notification_recipients.count + leaders.count
+    user = users(:unrelated)
+    user.update_attribute :receive_notifications_for_new_participation, false
+    assert_difference 'ActionMailer::Base.deliveries.size', recipients_count do
+      perform_enqueued_jobs do
+        @event.add_volunteer user
+      end
+    end
+    delivered_to_set = ActionMailer::Base.deliveries.collect{ |mail| mail.to }.flatten
+    notification_recipients.each do |recipient_address|
+      assert_includes delivered_to_set, recipient_address
+    end
   end
 
   test "don't send notification to leader when volunteer enters event when user doesn't want that" do

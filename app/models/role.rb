@@ -9,7 +9,7 @@ class Role < ApplicationRecord
 
   private
 
-    def camelize_title(role_title = self.title)
-      self.title = role_title.to_s.camelize
-    end
+  def camelize_title(role_title = self.title)
+    self.title = role_title.to_s.camelize
+  end
 end

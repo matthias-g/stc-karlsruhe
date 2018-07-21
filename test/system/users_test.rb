@@ -1,5 +1,7 @@
 require "application_system_test_case"
 
+SimpleCov.command_name "system-tests"
+
 class UsersTest < ApplicationSystemTestCase
 
   test "logging user in" do

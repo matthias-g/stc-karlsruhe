@@ -102,6 +102,8 @@ group :test do
   gem 'simplecov', require: false
   gem 'mutant'
   gem 'mutant-rspec'
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 group :development, :test do

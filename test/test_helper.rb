@@ -5,6 +5,8 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
+Capybara.server = :webrick
+
 class ActiveSupport::TestCase
   include ActiveJob::TestHelper
   ActiveRecord::Migration.check_pending!

@@ -72,3 +72,10 @@ Start server
 ```shell
 $ rails s
 ```
+
+Run tests
+```shell
+$ rails spec
+$ rails test
+$ rails test:system
+```

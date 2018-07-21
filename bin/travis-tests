@@ -10,6 +10,8 @@ bundle exec rails test
 RESULT=$(($RESULT + $?))
 bundle exec rspec
 RESULT=$(($RESULT + $?))
+bundle exec rails test:system
+RESULT=$(($RESULT + $?))
 ./cc-test-reporter after-build --exit-code $RESULT
 RESULT=$(($RESULT + $?))
 if [ $RESULT -eq 0 ]; then

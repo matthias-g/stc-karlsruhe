@@ -1,13 +1,13 @@
 
-<% action = @event.initiative %>
+<% initiative = @event.initiative %>
 
 <p>Hallo <%= @recipient.first_name %>,</p>
 
-<p>gerade hat sich <%= @user.full_name %> bei der von dir geleiteten Aktion
-  <%= link_to action.title, action %> als Mitarbeiter eingetragen.<p>
+<p>gerade hat sich <%= @user.full_name %> bei der von dir geleiteten Aktion / Projekt
+  <%= link_to initiative.title, initiative %> als Mitarbeiter eingetragen.<p>
 
-<p>Damit sind jetzt <%= action.volunteers.count %>
-  von <%= action.desired_team_size %> Plätzen bei der Aktion belegt.</p>
+<p>Damit sind jetzt <%= @event.volunteers.count %>
+  von <%= @event.desired_team_size %> Plätzen an diesem Termin belegt.</p>
 
 <p>Herzliche Grüße</p>
 

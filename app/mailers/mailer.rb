@@ -59,7 +59,7 @@ class Mailer < ActionMailer::Base
     mail to: user.email, subject: t('mailer.event_join_reminder.subject')
   end
 
-  # notification when a user joins an action
+  # notification when a user joins an event
   def event_join_notification(recipient, user, event)
     @recipient = recipient
     @user = user

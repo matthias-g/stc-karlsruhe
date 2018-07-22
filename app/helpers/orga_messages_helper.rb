@@ -2,9 +2,7 @@ module OrgaMessagesHelper
 
   # Returns allowed options for orga message senders
   def from_options
-    ['Serve the City Karlsruhe <contact@servethecity-karlsruhe.de>',
-     'Serve the City Karlsruhe <orga@servethecity-karlsruhe.de>',
-     'Serve the City Karlsruhe <no-reply@servethecity-karlsruhe.de>',
+    ['Serve the City Karlsruhe <orga@servethecity-karlsruhe.de>',
      current_user.full_name + ' <' + current_user.email + '>']
         .map{|g| [g, g]}
   end

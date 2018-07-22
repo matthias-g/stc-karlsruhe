@@ -3,7 +3,7 @@
 <% show_errors_for @message %>
 
 <h1>Kontakt aufnehmen</h1>
-<p>Du hast die eine oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei Dir.</p>
+<p>Du hast die eine oder andere Frage? Erreiche uns schnell per Kontaktformular. Wir melden uns dann bei dir.</p>
 
 <%= bootstrap_form_for @message, url: contact_path do |form| %>
 
@@ -17,7 +17,6 @@
           <%= form.form_group do %>
             <%= recaptcha_tags ajax: true, script: false %>
           <% end %>
-          <%= form.check_box :privacy_consent, label: t('general.form.privacy_consent') %>
         <% end %>
     </div>
   </div>

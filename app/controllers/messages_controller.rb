@@ -1,7 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:send_contact_mail]
   before_action :block_spam, only: [:send_contact_mail]
-  before_action :verify_privacy_consent, only: [:send_contact_mail]
 
   def send_contact_mail
     if @message.valid?
@@ -23,13 +22,6 @@ class MessagesController < ApplicationController
   def block_spam
     unless user_signed_in? || verify_recaptcha(model: @message)
       flash[:alert] = t('mailer.contact_orga_mail.captcha_failed')
-      redirect_to_contact_form
-    end
-  end
-
-  def verify_privacy_consent
-    unless (params[:message][:privacy_consent] == '1') || user_signed_in?
-      flash[:alert] = t('mailer.contact_orga_mail.privacy_consent_missing')
       redirect_to_contact_form
     end
   end

@@ -5,14 +5,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   test "send contact mail" do
     assert_mails_sent(2) do
       post send_contact_mail_url, params: { message: { recipient: 'default@servethecity-karlsruhe.de', sender: 'test@stc.com',
-                                          subject: 'Test', body: 'Hey, how are you?', privacy_consent: '1' } }
-    end
-  end
-
-  test "try sending contact mail but fail privacy consent" do
-    assert_mails_sent(0) do
-      post send_contact_mail_url, params: { message: { recipient: 'default@servethecity-karlsruhe.de', sender: 'test@stc.com',
-                                                       subject: 'Test', body: 'Hey, how are you?', privacy_consent: '0' } }
+                                          subject: 'Test', body: 'Hey, how are you?'} }
     end
   end
 
@@ -20,7 +13,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     Recaptcha.configuration.skip_verify_env.delete("test")
     assert_mails_sent(0) do
       post send_contact_mail_url, params: { message: { recipient: 'default@servethecity-karlsruhe.de', sender: 'test@stc.com',
-                                                       subject: 'Test', body: 'Hey, how are you?', privacy_consent: '1' } }
+                                                       subject: 'Test', body: 'Hey, how are you?'} }
     end
     Recaptcha.configuration.skip_verify_env.push("test")
   end

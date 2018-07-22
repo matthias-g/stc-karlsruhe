@@ -82,7 +82,7 @@ de:
       phoneOptional: 'Handy (optional)'
       usernameOrEmail: 'Username / E-Mail'
       receiveEmailsFromOrga: 'E-Mails vom Orgateam erhalten'
-      privacy_consent: 'Ich stimme der Verwendung meiner Daten gemäß der Datenschutzerklärung zu'
+      privacy_consent: 'Ich stimme der Verwendung meiner Daten gemäß der Datenschutzerklärung zu.'
 
     info:
       waitingForEmailConfirmation: 'Ihre E-Mail-Adresse %{email} ist noch nicht bestätigt.'

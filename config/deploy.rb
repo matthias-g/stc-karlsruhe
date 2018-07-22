@@ -32,7 +32,7 @@ rubyversion = File.open('.ruby-version', &:readline).gsub(/\n/, '')
 set :default_env, { path: "/home/stc/bin:/package/host/localhost/nodejs-8/bin:/package/host/localhost/#{rubyversion}/bin:$PATH" }
 
 # Default value for keep_releases is 5
-set :keep_releases, 20
+set :keep_releases, 5
 
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do

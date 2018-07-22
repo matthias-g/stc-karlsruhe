@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_28_150550) do
+ActiveRecord::Schema.define(version: 2018_07_22_153448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(version: 2018_06_28_150550) do
     t.integer "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["user_id", "event_id"], name: "index_participations_on_user_id_and_event_id", unique: true
   end
 
   create_table "roles", id: :serial, force: :cascade do |t|

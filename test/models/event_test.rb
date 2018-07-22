@@ -4,6 +4,7 @@ class EventTest < ActiveSupport::TestCase
 
   setup do
     @event = events(:default)
+    ActionMailer::Base.deliveries.clear
   end
 
 

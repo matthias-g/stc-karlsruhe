@@ -109,10 +109,16 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Deliver mails on exceptions
-  config.middleware.use ExceptionNotification::Rack, email: {
-    email_prefix: '[Exception] ',
-    sender_address: 'no-reply@servethecity-karlsruhe.de',
-    exception_recipients: ['failure-notifications@servethecity-karlsruhe.de', 'failure-notifications2@servethecity-karlsruhe.de']
-  }
+  config.middleware.use ExceptionNotification::Rack,
+                        ignore_if: ->(env, exception) {
+                          user_agent = env['HTTP_USER_AGENT']
+                          exception.message == "ActionController::InvalidAuthenticityToken" &&
+                              (user_agent.include?('Chrome/52.0.2743.116') || user_agent.include?('Firefox/34.0'))
+                        },
+                        email: {
+                            email_prefix: '[Exception] ',
+                            sender_address: 'no-reply@servethecity-karlsruhe.de',
+                            exception_recipients: ['failure-notifications@servethecity-karlsruhe.de', 'failure-notifications2@servethecity-karlsruhe.de']
+                        }
 
 end

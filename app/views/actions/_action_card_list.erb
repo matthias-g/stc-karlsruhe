@@ -13,12 +13,12 @@
         <h4 class="card-title"><%= link_to action.title, action %></h4>
 
         <% unless action.visible? %>
-          <span class="badge status_hidden %>"><%= t('action.info.status.hidden')%></span>
+          <span class="badge status_hidden %>"><%= t('initiative.info.status.hidden')%></span>
         <% end %>
         <% if action.finished? %>
-          <span class="badge status_finished"><%= t('action.info.status.finished') %></span>
+          <span class="badge status_finished"><%= t('initiative.info.status.finished') %></span>
         <% elsif action.status == :full %>
-          <span class="badge status_full"><%= t('action.info.status.full') %></span>
+          <span class="badge status_full"><%= t('initiative.info.status.full') %></span>
         <% else %>
           <span class="badge status_<%= action.status %>">
             <%= "#{action.total_team_size} / #{action.total_desired_team_size}" %>

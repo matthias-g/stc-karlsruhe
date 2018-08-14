@@ -30,19 +30,18 @@ de:
       filter_other: 'Sonstiges'
 
     button:
-      newAction: 'Neue Aktion erstellen'
-      filter: 'Aktionen filtern'
+      new_action: 'Neue Aktion erstellen'
 
     info:
-      noActions: 'Wir sind zwar schon bei der Planung, aber bisher sind noch keine Aktionen öffentlich. Schau später nochmal vorbei oder kontaktiere uns, wenn du einen Vorschlag für eine Aktion hast!'
+      no_actions: 'Wir sind zwar schon bei der Planung, aber bisher sind noch keine Aktionen öffentlich. Schau später nochmal vorbei oder kontaktiere uns, wenn du einen Vorschlag für eine Aktion hast!'
       vacancies: 'freie Plätze'
       volunteers: 'Mitarbeiter'
 
     help:
-      wantToStartOwnAction: 'Du möchtest eine eigene Aktion starten?'
-      weHelpYou: 'Wir helfen dir dabei!'
+      own_action: 'Du möchtest eine eigene Aktion starten?'
+      we_help: 'Wir helfen dir dabei!'
       description: "%{date} findet %{action_group} statt. Welche Aktion passt zu dir?"
 
     form:
-      day_filter_blank: '- - - Alle Tage - - -'
-      actionsAfter5pm: 'Nur Aktionen ab 17 Uhr anzeigen'
+      filter:
+        filter_work_friendly: 'an Werktagen nur ab 17 Uhr'

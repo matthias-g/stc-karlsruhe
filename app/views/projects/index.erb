@@ -8,7 +8,7 @@
 </div>
 
 <div class="white-box">
-  <%= link_to 'Neues Projekt', new_project_path, class: 'btn btn-primary m-2' %>
+  <%= link_to t('project.button.new'), new_project_path, class: 'btn btn-primary m-2' %>
 
   <% @projects.each do |project| %>
     <%= render 'initiatives/entry', initiative: project %>

@@ -9,7 +9,7 @@
 
 <div class="white-box container-small">
   <h3>Optionen</h3>
-  <%= link_to 'Neue Aktion', new_action_path, class:'btn btn-primary btn-block' %>
+  <%= link_to t('action.button.new'), new_action_path, class:'btn btn-primary btn-block' %>
 </div>
 
 <%= render 'action_card_list', actions: @actions %>

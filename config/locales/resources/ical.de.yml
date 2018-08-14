@@ -1,7 +1,0 @@
-# iCal exports
-
-de:
-  ical:
-    heading:
-      users: 'Aktionen von %{name}'
-      all_actions: 'Alle Aktionen'

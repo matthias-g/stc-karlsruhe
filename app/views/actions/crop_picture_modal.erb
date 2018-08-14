@@ -13,7 +13,7 @@
 
     <div class="modal-header">
       <h5 class="modal-title">
-        <%= t('action.heading.cropImage', crop_target: @crop_target_title) %>
+        <%= t('initiative.heading.crop_picture', crop_target: @crop_target_title) %>
       </h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -30,7 +30,7 @@
     <div class="modal-footer">
       <div class="actions">
         <%= hidden_field_tag 'crop_target', @crop_target_symbol.to_s, id: 'crop_target' %>
-        <%= submit_tag t('action.button.crop'), class: 'btn btn-primary', style:'margin: 20px;' %>
+        <%= submit_tag t('initiative.button.crop'), class: 'btn btn-primary', style:'margin: 20px;' %>
       </div>
     </div>
 

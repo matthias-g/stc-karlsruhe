@@ -22,7 +22,7 @@
     <h4>{{t('action_group.heading.filter_other')}}</h4>
     <div>
       <input type="checkbox" id="filterWorkFriendly" v-model="filterWorkFriendly">
-      <label for="filterWorkFriendly">{{t('action.form.filter.filter_work_friendly')}}</label>
+      <label for="filterWorkFriendly">{{t('action_group.form.filter.filter_work_friendly')}}</label>
     </div>
 
   </div>

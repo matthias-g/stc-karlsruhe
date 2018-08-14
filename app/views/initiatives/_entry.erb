@@ -31,7 +31,7 @@
       <div class="badges">
         <% if [:empty, :soon_full, :full].include? status %>
           <span class="badge status_<%= status %>"
-                title="<%= t('action.info.remainingVacancy', places: desired_team_size - team_size) %>">
+                title="<%= t('initiative.info.remaining_vacancy', places: desired_team_size - team_size) %>">
             <%= "#{team_size} / #{desired_team_size}" %>
           </span>
         <% end %>

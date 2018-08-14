@@ -120,7 +120,7 @@
 
       <% if @action_group.action_count.zero? %>
         <div class="white-box text-center" style="max-width: 600px; margin: 30px">
-          <%= t('action_group.info.noActions') %>
+          <%= t('action_group.info.no_actions') %>
         </div>
       <% end %>
     </div>
@@ -130,13 +130,13 @@
 
 <div class="white-box hidden-sm-up">
   <h3>Eigene Aktion</h3>
-  <span><%= t('action_group.help.wantToStartOwnAction') %></span>
-  <%= link_to t('action_group.help.weHelpYou'), own_action_path, class:'btn btn-secondary btn-new-action' %>
+  <span><%= t('action_group.help.own_action') %></span>
+  <%= link_to t('action_group.help.we_help'), own_action_path, class:'btn btn-secondary btn-new-action' %>
 </div>
 
 <% if policy(:action).new? %>
   <div class="white-box hidden-sm-up">
     <h3>Optionen</h3>
-    <%= link_to t('action_group.button.newAction'), new_action_path, class:'btn btn-secondary btn-block' %>
+    <%= link_to t('action_group.button.new_action'), new_action_path, class:'btn btn-secondary btn-block' %>
   </div>
 <% end %>

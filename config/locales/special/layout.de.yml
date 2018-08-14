@@ -31,10 +31,14 @@ de:
         list: 'Aktionen'
         new: 'Neue Aktion'
         edit: 'Aktion bearbeiten: %{action}'
+        show: 'Aktion %{action}'
       project:
         list: 'Projekte'
         new: 'Neues Projekt'
         edit: 'Projekt bearbeiten: %{project}'
+      ical:
+        users: 'Aktionen von %{name}'
+        all_actions: 'Alle Aktionen'
       newsEntryList: 'Newseinträge'
       newsEntryNew: 'Neuer Newseintrag'
       newsEntryEdit: 'News bearbeiten: %{news_entry}'

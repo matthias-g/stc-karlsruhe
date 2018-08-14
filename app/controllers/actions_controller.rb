@@ -2,7 +2,7 @@ class ActionsController < ApplicationController
 
   before_action :set_action, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:show]
-  before_action :authorize_action, except: [:index, :new, :create, :delete_volunteer]
+  before_action :authorize_action, except: [:index, :new, :create]
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
 
@@ -59,37 +59,37 @@ class ActionsController < ApplicationController
 
   def delete_leader
     @action.delete_leader User.find(params[:user_id])
-    redirect_to @action, notice: t('action.message.leaderRemoved')
+    redirect_to @action, notice: t('initiative.message.leader_removed')
   end
 
   def make_visible
     @action.make_visible!
-    redirect_to @action, notice: t('action.message.madeVisible')
+    redirect_to @action, notice: t('action.message.made_visible')
   end
 
   def make_invisible
     @action.make_invisible!
-    redirect_to @action, notice: t('action.message.madeInvisible')
+    redirect_to @action, notice: t('action.message.made_invisible')
   end
 
   def crop_picture
     @action.crop_picture(params[:crop_x].to_f, params[:crop_y].to_f,
                          params[:crop_w].to_f, params[:crop_h].to_f,
                          params[:crop_target].to_sym)
-    redirect_to @action, notice: t('action.message.imageCropped')
+    redirect_to @action, notice: t('initiative.message.image_cropped')
   end
 
   def crop_picture_modal
     @crop_target_symbol = params[:crop_target].to_sym
     case @crop_target_symbol
     when :thumb
-      @crop_target_title = t('action.heading.cropTarget.thumb')
+      @crop_target_title = t('initiative.heading.crop_target.thumb')
       @crop_target_ratio = 75.0/60
     when :card
-      @crop_target_title = t('action.heading.cropTarget.card')
+      @crop_target_title = t('initiative.heading.crop_target.card')
       @crop_target_ratio = 318.0/220
     when :large
-      @crop_target_title = t('action.heading.cropTarget.large')
+      @crop_target_title = t('initiative.heading.crop_target.large')
       @crop_target_ratio = 775.0/350
     end
     respond_with @action do |format|

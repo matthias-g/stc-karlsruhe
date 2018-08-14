@@ -13,7 +13,7 @@
 
     <% if desired.positive? %>
       <span class="badge status_<%= event.status %> float-right mt-2"
-            title="<%= t('action.info.remainingVacancy', places: desired - team_size) %>">
+            title="<%= t('initiative.info.remaining_vacancy', places: desired - team_size) %>">
         <%= "#{team_size} / #{desired}" %>
       </span>
     <% end %>
@@ -32,7 +32,7 @@
         </div>
       </div>
     <% else %>
-      <h3 class="mb-2"><%= t('action.heading.team') %></h3>
+      <h3 class="mb-2"><%= t('initiative.heading.team') %></h3>
     <% end %>
 
     <% if desired&.positive? %>
@@ -56,7 +56,7 @@
 
       <div class="my-2">
         <%= link_to leave_event_path(event), class: 'btn btn-danger btn-block' do %>
-          <span class="fas fa-sign-out-alt"></span> <%= t('action.button.leave') %>
+          <span class="fas fa-sign-out-alt"></span> <%= t('initiative.button.leave') %>
         <% end %>
       </div>
 
@@ -65,11 +65,11 @@
       <div class="my-2">
         <% if user_signed_in? %>
           <%= link_to enter_event_path(event), class: 'btn btn-success btn-block' do %>
-            <span class="fas fa-sign-in-alt"></span> <%= t('action.button.enter') %>
+            <span class="fas fa-sign-in-alt"></span> <%= t('initiative.button.enter') %>
           <% end %>
         <% else %>
           <%= link_to register_for_participation_event_path(event), class: 'btn btn-success btn-block' do %>
-            <span class="fas fa-sign-in-alt"></span> <%= t('action.button.enter') %>
+            <span class="fas fa-sign-in-alt"></span> <%= t('initiative.button.enter') %>
           <% end %>
         <% end %>
       </div>
@@ -82,6 +82,6 @@
 <% if show_toggle_button %>
   <a href="javascript:void(0)" onclick="$('.event.hidden').slideToggle(); $(this).hide();"
      class="btn btn-secondary btn-block">
-    <%= t('action.button.showAllEvents') %>
+    <%= t('initiative.button.show_all_events') %>
   </a>
 <% end %>

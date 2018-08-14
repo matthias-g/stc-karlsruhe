@@ -21,7 +21,7 @@
   <% end %>
   <div class="labels">
     <% unless @project.visible? %>
-      <span class="badge status_hidden"><%= t('project.info.status.hidden') %></span>
+      <span class="badge status_hidden"><%= t('initiative.info.status.hidden') %></span>
     <% end %>
   </div>
 </div>
@@ -86,11 +86,11 @@
         <div class="col-12">
           <section id="action-communication" class="white-box d-print-none">
             <%= bootstrap_form_for(@message, url: {project: 'contact_volunteers'}) do |f| %>
-              <h3><%= t('project.heading.contactTeam') %></h3>
-              <p><%= t('project.help.contactTeam') %></p>
-              <%= f.text_field :subject, label: t('project.form.contactTeam.subject') %>
-              <%= f.text_area :body, label: t('project.form.contactTeam.body') %>
-              <%= f.submit t('project.button.contactTeam'), class: 'btn btn-primary' %>
+              <h3><%= t('initiative.heading.contact_team') %></h3>
+              <p><%= t('initiative.help.contact_team') %></p>
+              <%= f.text_field :subject, label: t('initiative.form.contact_team.subject') %>
+              <%= f.text_area :body, label: t('initiative.form.contact_team.body') %>
+              <%= f.submit t('initiative.button.contact_team'), class: 'btn btn-primary' %>
             <% end %>
           </section>
         </div>
@@ -100,11 +100,11 @@
         <div class="col-12">
           <section id="action-communication" class="white-box d-print-none">
             <%= bootstrap_form_for(@message, url: {project: 'contact_leaders'}) do |f| %>
-              <h3><%= t('project.heading.contactLeader') %></h3>
-              <p><%= t('project.help.contactLeader') %></p>
-              <%= f.text_field :subject, label: t('project.form.contactLeader.subject') %>
-              <%= f.text_area :body, label: t('project.form.contactLeader.body') %>
-              <%= f.submit t('project.button.contactLeader'), class: 'btn btn-primary' %>
+              <h3><%= t('initiative.heading.contact_leader') %></h3>
+              <p><%= t('initiative.help.contact_leader') %></p>
+              <%= f.text_field :subject, label: t('initiative.form.contact_leader.subject') %>
+              <%= f.text_area :body, label: t('initiative.form.contact_leader.body') %>
+              <%= f.submit t('initiative.button.contact_leader'), class: 'btn btn-primary' %>
             <% end %>
           </section>
         </div>
@@ -121,16 +121,16 @@
         <div class="col-sm-6 col-md-12 d-print-none">
           <section class="white-box">
             <%= link_to edit_project_path(@project), class:'btn btn-primary btn-block' do %>
-              <span class="fas fa-pencil-alt"></span> <%= t('project.button.edit') %>
+              <span class="fas fa-pencil-alt"></span> <%= t('initiative.button.edit') %>
             <% end %>
             <% if policy(@project).change_visibility? %>
               <% if @project.visible %>
                 <%= link_to make_invisible_project_path(@project), class:'btn status_hidden btn-block' do %>
-                  <span class="fas fa-eye-slash"></span> <%= t('project.button.makeInvisible') %>
+                  <span class="fas fa-eye-slash"></span> <%= t('initiative.button.make_invisible') %>
                 <% end %>
               <% else %>
                 <%= link_to make_visible_project_path(@project), class:'btn status_hidden btn-block' do %>
-                  <span class="fas fa-eye"></span> <%= t('project.button.makeVisible') %>
+                  <span class="fas fa-eye"></span> <%= t('initiative.button.make_visible') %>
                 <% end %>
               <% end %>
             <% end %>
@@ -191,7 +191,7 @@
 <div class="footer d-print-none">
   <%= render '/layouts/share' %>
   <%= link_to project_ical_path(@project), class: 'float-right px-1',
-              title: t('project.button.exportICal'), data: { 'turbolinks': false } do %>
+              title: t('initiative.button.export_ical'), data: { 'turbolinks': false } do %>
     <span class="far fa-calendar-alt fa-2x"></span>
   <% end %>
 </div>

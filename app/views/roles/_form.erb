@@ -2,7 +2,7 @@
 
   <% if @role.errors.any? %>
     <div id="error_explanation">
-      <h2><%= t('role.errorsExist') %></h2>
+      <h2><%= t('role.message.errors_exist') %></h2>
       <ul>
       <% @role.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>

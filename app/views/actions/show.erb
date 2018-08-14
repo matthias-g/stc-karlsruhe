@@ -1,4 +1,5 @@
-<% provide :title, 'Aktion "' + @action.title + (@action.parent_action ? (' - ' + @action.parent_action.title) : '') + '"'%>
+<% provide :title, t('layout.title.action.show', action: @action.title)
+   + (@action.parent_action ? (' - ' + @action.parent_action.title) : '') + '"'%>
 <% wrapper_set 'container-medium' %>
 <% wrapper_classes.add('action-invisible') unless @action.visible? %>
 
@@ -22,7 +23,7 @@
   <h1><%= @action.full_title %></h1>
   <div class="labels">
     <% unless @action.visible? %>
-      <span class="badge status_hidden"><%= t('action.info.status.hidden') %></span>
+      <span class="badge status_hidden"><%= t('initiative.info.status.hidden') %></span>
     <% end %>
     <span class="badge status_<%= @action.status %>">
         <%= t "action.info.status.#{@action.status}" %>
@@ -89,15 +90,15 @@
         <div class="col-12">
           <section id="action-communication" class="white-box d-print-none">
             <%= bootstrap_form_for(@message, url: {action: 'contact_volunteers'}) do |f| %>
-              <h3><%= t('action.heading.contactTeam') %></h3>
-              <p><%= t('action.help.contactTeam') %></p>
+              <h3><%= t('initiative.heading.contact_team') %></h3>
+              <p><%= t('initiative.help.contact_team') %></p>
               <%= f.select :recipient_scope, [
-                  [t('action.form.contactTeam.recipient_scopes.this_action'), 'this_action'],
-                  [t('action.form.contactTeam.recipient_scopes.action_and_subactions'), 'action_and_subactions']],
-                           {label: t('action.form.contactTeam.recipient_scope')}, class: 'selectpicker' %>
-              <%= f.text_field :subject, label: t('action.form.contactTeam.subject') %>
-              <%= f.text_area :body, label: t('action.form.contactTeam.body') %>
-              <%= f.submit t('action.button.contactTeam'), class: 'btn btn-primary' %>
+                  [t('action.form.contact_team.recipient_scopes.this_action'), 'this_action'],
+                  [t('action.form.contact_team.recipient_scopes.action_and_subactions'), 'action_and_subactions']],
+                           {label: t('action.form.contact_team.recipient_scope')}, class: 'selectpicker' %>
+              <%= f.text_field :subject, label: t('initiative.form.contact_team.subject') %>
+              <%= f.text_area :body, label: t('initiative.form.contact_team.body') %>
+              <%= f.submit t('initiative.button.contact_team'), class: 'btn btn-primary' %>
             <% end %>
           </section>
         </div>
@@ -105,11 +106,11 @@
         <div class="col-12">
           <section id="action-communication" class="white-box d-print-none">
             <%= bootstrap_form_for(@message, url: {action: 'contact_leaders'}) do |f| %>
-              <h3><%= t('action.heading.contactLeader') %></h3>
-              <p><%= t('action.help.contactLeader') %></p>
-              <%= f.text_field :subject, label: t('action.form.contactLeader.subject') %>
-              <%= f.text_area :body, label: t('action.form.contactLeader.body') %>
-              <%= f.submit t('action.button.contactLeader'), class: 'btn btn-primary' %>
+              <h3><%= t('initiative.heading.contact_leader') %></h3>
+              <p><%= t('initiative.help.contact_leader') %></p>
+              <%= f.text_field :subject, label: t('initiative.form.contact_leader.subject') %>
+              <%= f.text_area :body, label: t('initiative.form.contact_leader.body') %>
+              <%= f.submit t('initiative.button.contact_leader'), class: 'btn btn-primary' %>
             <% end %>
           </section>
         </div>
@@ -126,16 +127,16 @@
         <div class="col-sm-6 col-md-12 d-print-none">
           <section class="white-box">
             <%= link_to edit_action_path(@action), class:'btn btn-primary btn-block' do %>
-              <span class="fas fa-pencil-alt"></span> <%= t('action.button.edit') %>
+              <span class="fas fa-pencil-alt"></span> <%= t('initiative.button.edit') %>
             <% end %>
             <% if policy(@action).change_visibility? %>
               <% if @action.visible %>
                 <%= link_to make_invisible_action_path(@action), class:'btn status_hidden btn-block' do %>
-                  <span class="fas fa-eye-slash"></span> <%= t('action.button.makeInvisible') %>
+                  <span class="fas fa-eye-slash"></span> <%= t('initiative.button.make_invisible') %>
                 <% end %>
               <% else %>
                 <%= link_to make_visible_action_path(@action), class:'btn status_hidden btn-block' do %>
-                  <span class="fas fa-eye"></span> <%= t('action.button.makeVisible') %>
+                  <span class="fas fa-eye"></span> <%= t('initiative.button.make_visible') %>
                 <% end %>
               <% end %>
             <% end %>
@@ -228,11 +229,11 @@
           <%= render 'events/event_team_list', events: @action.events %>
         <% elsif user_signed_in? && @action.volunteers_in_subactions.include?(current_user) %>
           <div class="white-box">
-            <p class="h4 my-0"><%= t('action.info.subactionTeamMember') %></p>
+            <p class="h4 my-0"><%= t('action.info.subaction_team_member') %></p>
           </div>
         <% elsif @action.available_places.zero? && @action.total_available_places.positive? %>
           <div class="white-box">
-            <p class="h4 my-0"><%= t('action.info.enterOneOfThesubactions') %></p>
+            <p class="h4 my-0"><%= t('action.info.enter_subaction') %></p>
           </div>
         <% end %>
       </div>
@@ -244,13 +245,13 @@
 <div class="footer d-print-none">
   <%= render '/layouts/share' %>
   <%= link_to action_ical_path(@action), class: 'float-right px-1',
-              title: t('action.button.exportICal'), data: { 'turbolinks': false } do %>
+              title: t('initiative.button.export_ical'), data: { 'turbolinks': false } do %>
     <span class="far fa-calendar-alt fa-2x"></span>
   <% end %>
   <% if @action.action_group %>
-    <%= link_to t('action.navigation.toOverview'), show_action_group_path(@action.action_group), class: 'btn btn-light' %>
+    <%= link_to t('initiative.navigation.to_overview'), show_action_group_path(@action.action_group), class: 'btn btn-light' %>
   <% end %>
   <% if @action.parent_action %>
-    <%= link_to t('action.navigation.toParentAction'), @action.parent_action, class: 'btn btn-light' %>
+    <%= link_to t('action.navigation.to_parent_action'), @action.parent_action, class: 'btn btn-light' %>
   <% end %>
 </div>

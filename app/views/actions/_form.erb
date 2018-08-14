@@ -49,22 +49,22 @@
             <% if @action.persisted? %>
               <%= link_to crop_picture_modal_action_path(@action, crop_target: 'thumb'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
-                <span class="fas fa-crop"></span> <%= t('action.button.cropThumbImage') %>
+                <span class="fas fa-crop"></span> <%= t('initiative.button.crop_thumb') %>
               <% end %>
               <%= link_to crop_picture_modal_action_path(@action, crop_target: 'large'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'}  do %>
-                <span class="fas fa-crop"></span> <%= t('action.button.cropLargeImage') %>
+                <span class="fas fa-crop"></span> <%= t('initiative.button.crop_large') %>
               <% end %>
               <%= link_to crop_picture_modal_action_path(@action, crop_target: 'card'),
                           class: 'btn btn-secondary', data: {toggle: 'modal', target: '#image_crop_modal'} do %>
-                <span class="fas fa-crop"></span> <%= t('action.button.cropCardImage') %>
+                <span class="fas fa-crop"></span> <%= t('initiative.button.crop_card') %>
               <% end %>
 
             <% end %>
           <% end %>
 
         </div>
-        <%= f.text_field :picture_source, help: t('action.help.picture_source') %>
+        <%= f.text_field :picture_source, help: t('initiative.help.picture_source') %>
       </div>
 
       <div class="white-box">
@@ -76,7 +76,7 @@
           </div>
         <% end %>
         <div class="short_description">
-          <%= f.text_area :short_description, help: t('action.help.short_description') %>
+          <%= f.text_area :short_description, help: t('initiative.help.short_description') %>
         </div>
         <div class="description">
           <%= f.text_area :description %>
@@ -97,7 +97,7 @@
 
       <div class="white-box">
         <h3>
-          <%= t('action.heading.management') %>
+          <%= t('initiative.heading.management') %>
         </h3>
         <%= button_tag class: 'btn btn-success btn-block' do %>
           <span class="fas fa-save"></span> <%= t('general.button.save') %>
@@ -163,13 +163,13 @@
         <%= f.fields_for :events do |builder| %>
           <%= render 'events/event_fields', f: builder, default_date: @action.action_group&.start_date %>
         <% end %>
-        <%= link_to t('action.button.add_event'), 'javascript:void(0);', class: 'add-link btn btn-primary float-right' %>
+        <%= link_to t('initiative.button.create_event'), 'javascript:void(0);', class: 'add-link btn btn-primary float-right' %>
       </div>
 
       <% if @action.events.finished.any? %>
         <a href="javascript:void(0)" onclick="$('.event.hidden').slideToggle(); $(this).hide();"
            class="btn btn-secondary">
-          <%= t('action.button.showAllEvents') %>
+          <%= t('initiative.button.show_all_events') %>
         </a>
       <% end %>
 

@@ -18,12 +18,12 @@ class ActionPolicy < ApplicationPolicy
   end
 
   # if you change this to not ignore the parameter, maybe it should not be optional anymore to make sure you will notice if you forget the parameter
-  def add_to_leaders?(_users = [])
+  def add_to_leaders?(_users = nil)
     edit?
   end
 
   # see comment for add_to_leaders?
-  def remove_from_leaders?(_users = [])
+  def remove_from_leaders?(_users = nil)
     edit?
   end
 

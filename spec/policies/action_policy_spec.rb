@@ -63,7 +63,12 @@ RSpec.describe ActionPolicy do
       let(:user) { users(:volunteer) }
       it { denies_access }
     end
+  end
 
+  describe 'remove_from_leaders? with argument' do
+    subject { policy.remove_from_leaders?([])}
+
+    it { expect(subject) } # just make sure that it accepts the argument
   end
 
   permissions :create?, :change_visibility? do

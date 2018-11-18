@@ -52,7 +52,7 @@ gem 'chartkick'
 # JSON API
 gem 'jbuilder'
 gem 'jsonapi-resources' #, github: 'cerebris/jsonapi-resources'
-gem 'jsonapi-authorization'# , github: 'venuu/jsonapi-authorization'
+gem 'jsonapi-authorization', '0.8.2' # , github: 'venuu/jsonapi-authorization'
 gem 'recaptcha', require: 'recaptcha/rails'
 
 # image management
@@ -68,7 +68,7 @@ gem 'premailer-rails'
 gem 'nokogiri'
 gem 'icalendar'
 gem 'friendly_id'
-gem 'bootsnap'
+gem 'bootsnap', '1.3.1'
 
 # environment
 gem 'pg'

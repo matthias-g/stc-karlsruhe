@@ -8,6 +8,10 @@ module PhotoGallery extend ActiveSupport::Concern
     before_validation :create_gallery!, on: :create
     validates_presence_of :gallery
 
+    def gallery_id
+      self.gallery.id
+    end
+
     private
 
     def create_gallery!

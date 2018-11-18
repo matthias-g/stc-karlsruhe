@@ -50,8 +50,8 @@ RSpec.describe EventPolicy do
   end
 
   describe 'remove_from_volunteers?' do
-    let(:user_to_remove) { users(:volunteer) }
-    subject { policy.remove_from_volunteers?(user_to_remove) }
+    let(:users_to_remove) { [users(:volunteer)] }
+    subject { policy.remove_from_volunteers?(users_to_remove) }
 
     context 'as some user' do
       let(:user) { users(:unrelated) }

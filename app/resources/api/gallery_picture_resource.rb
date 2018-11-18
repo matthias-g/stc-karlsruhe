@@ -15,7 +15,7 @@ class Api::GalleryPictureResource < JSONAPI::Resource
   end
 
   def fetchable_fields
-    Pundit.policy(context[:user], @model).permitted_attributes_for_show
+    Pundit.policy(context[:user], @model_class).permitted_attributes_for_show
   end
 
 end

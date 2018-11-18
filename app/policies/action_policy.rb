@@ -21,6 +21,16 @@ class ActionPolicy < ApplicationPolicy
     is_admin_or_coordinator? || (is_leader? && !record.finished?)
   end
 
+  # if you change this to not ignore the parameter, maybe it should not be optional anymore to make sure you will notice if you forget the parameter
+  def add_to_leaders?(_users = [])
+    edit?
+  end
+
+  # see comment for add_to_leaders?
+  def remove_from_leaders?(_users = [])
+    edit?
+  end
+
   def contact_volunteers?
     record.visible? && edit?
   end

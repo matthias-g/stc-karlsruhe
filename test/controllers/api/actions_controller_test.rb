@@ -90,7 +90,9 @@ class Api::ActionsControllerTest < ActionDispatch::IntegrationTest
 
   test "leader should remove volunteer" do
     sign_in users(:leader)
-    params = {data: [type: User.model_name.plural, id: users(:volunteer).id]}
+    volunteer = users(:volunteer)
+    assert @event.volunteer?(volunteer)
+    params = {data: [type: User.model_name.plural, id: volunteer.id]}
     delete api_event_relationships_volunteers_path(@event), params: params, headers: @headers, as: :json
     assert_response :success
     assert_equal 1, @event.reload.volunteers.count

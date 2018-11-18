@@ -31,14 +31,14 @@ class EventPolicy < ApplicationPolicy
     users.all? { |user| allow_add_volunteer_to_event?(user, record) }
   end
 
-  def remove_from_volunteers?(user)
-    allow_remove_volunteer_from_event?(user, record)
+  def remove_from_volunteers?(users)
+    users.all? { |user| allow_remove_volunteer_from_event?(user, record) }
   end
 
   def replace_volunteers?(users)
     allowed = true
     record.volunteers.each do |volunteer|
-      allowed &= users.include?(volunteer) || remove_from_volunteers?(volunteer)
+      allowed &= users.include?(volunteer) || remove_from_volunteers?([volunteer])
     end
     users.each do |user|
       allowed &= record.volunteer?(user) || add_to_volunteers?([user])

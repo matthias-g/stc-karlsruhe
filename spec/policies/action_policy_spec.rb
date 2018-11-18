@@ -32,36 +32,36 @@ RSpec.describe ActionPolicy do
     end
   end
 
-  describe 'edit?' do
-    subject { policy.edit? }
+  permissions :edit?, :add_to_leaders?, :remove_from_leaders? do
+    subject { described_class }
 
     context 'as visitor' do
-      it { should_fail }
+      it { denies_access }
     end
 
     context 'as leader' do
       let(:user) { users(:leader) }
-      it { should_pass }
+      it { grants_access }
 
       context 'for finished action' do
         before { finish_initiative(action) }
-        it { should_fail }
+        it { denies_access }
       end
     end
 
     context 'as admin' do
       let(:user) { users(:admin) }
-      it { should_pass }
+      it { grants_access }
     end
 
     context 'as coordinator' do
       let(:user) { users(:coordinator) }
-      it { should_pass }
+      it { grants_access }
     end
 
     context 'as other user' do
       let(:user) { users(:volunteer) }
-      it { should_fail }
+      it { denies_access }
     end
 
   end

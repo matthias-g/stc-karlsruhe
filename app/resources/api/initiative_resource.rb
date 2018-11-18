@@ -17,7 +17,7 @@ class Api::InitiativeResource < JSONAPI::Resource
   has_many :leaders, class_name: 'User', through: :leaderships
 
   def self.updatable_fields(context)
-    Pundit.policy(context[:user], @model).updatable_fields
+    Pundit.policy(context[:user], @model_class).updatable_fields
   end
 
 end

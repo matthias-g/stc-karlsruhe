@@ -67,7 +67,10 @@ RSpec.describe ActionPolicy do
 
   describe 'remove_from_leaders? with argument' do
     subject { policy.remove_from_leaders?([])}
-
+    it { expect(subject) } # just make sure that it accepts the argument
+  end
+  describe 'add_to_leaders? with argument' do
+    subject { policy.add_to_leaders?([])}
     it { expect(subject) } # just make sure that it accepts the argument
   end
 

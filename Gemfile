@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.3.8'
+ruby '2.5.3'
 gem 'rails', '~> 5.2.0'
 
 # localization
@@ -68,7 +68,7 @@ gem 'premailer-rails'
 gem 'nokogiri'
 gem 'icalendar'
 gem 'friendly_id'
-gem 'bootsnap', '1.3.1'
+gem 'bootsnap'
 
 # environment
 gem 'pg'

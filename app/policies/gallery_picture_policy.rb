@@ -6,10 +6,6 @@ class GalleryPicturePolicy < ApplicationPolicy
     end
   end
 
-  def show?
-    record.visible || is_admin_or_coordinator? || is_uploader?
-  end
-
   def make_invisible?
     is_admin_or_coordinator? || is_uploader?
   end

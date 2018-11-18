@@ -7,11 +7,6 @@ class NewsEntryPolicy < ApplicationPolicy
   end
 
 
-  def show?
-    record.visible? || edit?
-  end
-
-
   alias_method :edit?, :is_admin_or_coordinator?
   alias_method :new?, :edit?
   alias_method :create?, :edit?

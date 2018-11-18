@@ -13,10 +13,6 @@ class ActionPolicy < ApplicationPolicy
   end
 
 
-  def show?
-    record.visible? || edit?
-  end
-
   def edit?
     is_admin_or_coordinator? || (is_leader? && !record.finished?)
   end

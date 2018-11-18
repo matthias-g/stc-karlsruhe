@@ -124,4 +124,22 @@ RSpec.describe GalleryPicturePolicy do
       end
     end
   end
+
+  describe 'is_uploader?' do
+    subject { policy.send(:is_uploader?) }
+
+    context 'any user' do
+      it { should_fail }
+    end
+
+    context 'for an admin' do
+      let(:current_user) { users(:admin) }
+      it { should_fail }
+    end
+
+    context 'for uploader' do
+      let(:current_user) { users(:picture_uploader) }
+      it { should_pass }
+    end
+  end
 end

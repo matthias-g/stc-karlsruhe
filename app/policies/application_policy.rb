@@ -46,7 +46,8 @@ class ApplicationPolicy
   end
 
   def edit?
-    update?
+    false # TODO change back to update? after https://github.com/mbj/mutant/issues/765 has been fixed
+    # update?
   end
 
   def destroy?

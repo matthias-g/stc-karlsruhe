@@ -2,8 +2,7 @@
   <p>
   --<br />
   In deinem Profil kannst du deine E-Mail-Einstellungen anpassen. Alternativ kannst du hier direkt
-    <%= link_to unsubscribe_url(type: mail_type_to_subscription(content_type),
-                sgid: subscription.to_sgid_param(for: :unsubscribe, expires_in: 2.months)) do %>
+    <%= link_to confirm_newsletter_url(sgid: subscription.to_sgid_param(for: :confirm, expires_in: 2.months)) do %>
       <%= t("orga_message.form.content_types.#{content_type}") %> abbestellen
     <% end %> oder gleich
     <%= link_to 'alle Newsletter abbestellen', unsubscribe_url(type: :all_emails,

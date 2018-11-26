@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_22_153448) do
+ActiveRecord::Schema.define(version: 2018_11_26_202629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,6 +191,7 @@ ActiveRecord::Schema.define(version: 2018_07_22_153448) do
     t.boolean "receive_other_emails_from_orga", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "confirmed_at"
     t.index ["email"], name: "index_subscriptions_on_email"
     t.index ["receive_emails_about_action_groups"], name: "index_subscriptions_on_receive_emails_about_action_groups"
     t.index ["receive_emails_about_other_projects"], name: "index_subscriptions_on_receive_emails_about_other_projects"

@@ -16,3 +16,6 @@ de:
     removal:
       success: Abonnement wurde erfolgreich beendet.
       failed: Fehler beim Beenden des Abonnements. Bitte melde dich über das Kontaktformular.
+    confirmation:
+      success: E-Mail-Adresse erfolgreich bestätigt.
+      failed: Fehler beim Bestätigen deiner E-Mail-Adresse. Bitte melde dich über das Kontaktformular.

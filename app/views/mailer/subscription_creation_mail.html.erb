@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <%= stylesheet_link_tag 'views/admin_mail' %>
+</head>
+<body>
+
+<p>Hallo,</p>
+
+<p>du hast gerade den Newsletter von Serve the City Karlsruhe bestellt.
+  Um Deine E-Mail-Adresse zu bestätigen und den Newsletter zu aktivieren, klicke bitte auf diesen
+  <%= link_to 'Link', confirm_newsletter_url(sgid: @subscription.to_sgid_param(for: :confirm, expires_in: 2.months)) %>.</p>
+
+</body>
+</html>

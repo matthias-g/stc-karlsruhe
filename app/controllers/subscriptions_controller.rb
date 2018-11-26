@@ -24,4 +24,17 @@ class SubscriptionsController < ApplicationController
     redirect_to root_path
   end
 
+  def confirm
+    subscription = SignedGlobalID.find(params[:sgid], for: :confirm)
+    return redirect_to root_path unless subscription
+    subscription.confirmed_at = DateTime.now
+    success = subscription.save
+    if success
+      flash[:notice] = t('subscription.confirmation.success')
+    else
+      flash[:error] = t('subscription.confirmation.failed')
+    end
+    redirect_to root_path
+  end
+
 end

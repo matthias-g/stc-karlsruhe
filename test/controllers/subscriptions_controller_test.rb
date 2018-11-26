@@ -2,6 +2,26 @@ require 'test_helper'
 
 class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
 
+  test "create subscription" do
+    subscription = nil
+    assert_mails_sent(1) do
+      subscription = Subscription.create!(email: 'asdfasfd@asdf.com', name: 'Test Name')
+    end
+    assert subscription.confirmed_at.nil?
+    get confirm_newsletter_url(sgid: subscription.to_sgid(for: :confirm))
+    subscription.reload
+    assert_not subscription.confirmed_at.nil?
+    assert_equal I18n.t('subscription.confirmation.success'), flash[:notice]
+  end
+
+  test "create subscription for existing user is confirmed" do
+    subscription = nil
+    assert_mails_sent(0) do
+      subscription = Subscription.create!(email: users(:leader).email, name: 'Test Name')
+    end
+    assert_not subscription.confirmed_at.nil?
+  end
+
   test "unsubscribe emails about action groups" do
     subscription = subscriptions(:volunteer)
     assert subscription.receive_emails_about_action_groups

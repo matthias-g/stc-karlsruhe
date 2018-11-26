@@ -93,3 +93,5 @@ de:
       subject: 'Austritt aus Aktionsteam'
     gallery_picture_uploaded_notification:
       subject: '%{pictureCount} neue Bilder hochgeladen'
+    subscription_creation:
+      subject: 'Bestätigung deiner E-Mail-Adresse'

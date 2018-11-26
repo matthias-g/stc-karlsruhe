@@ -60,6 +60,11 @@ class Mailer < ActionMailer::Base
          subject: t('mailer.orga_mail_notification.subject', subject: orga_message.subject)
   end
 
+  def subscription_creation_mail(subscription)
+    @subscription = subscription
+    mail to: subscription.email, subject: t('mailer.subscription_creation.subject')
+  end
+
   # reminder email to a user when he/she joins an action
   def event_join_reminder(user, event)
     @user = user

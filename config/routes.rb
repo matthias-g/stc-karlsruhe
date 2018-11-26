@@ -93,6 +93,7 @@ Rails.application.routes.draw do
     end
   end
   get :unsubscribe, to: 'subscriptions#unsubscribe'
+  get :confirm_newsletter, to: 'subscriptions#confirm'
 
 
   # statistics

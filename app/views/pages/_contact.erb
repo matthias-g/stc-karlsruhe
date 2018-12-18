@@ -15,7 +15,7 @@
         <%= form.hidden_field :recipient, value: 'default@servethecity-karlsruhe.de' %>
         <% unless user_signed_in? %>
           <%= form.form_group do %>
-            <%= recaptcha_tags ajax: true, script: false %>
+            <%= recaptcha_tags ajax: true, script: false, noscript: false %>
           <% end %>
         <% end %>
     </div>

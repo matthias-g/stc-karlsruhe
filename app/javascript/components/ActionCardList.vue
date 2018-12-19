@@ -12,13 +12,13 @@
         </h4>
 
         <span v-if="!action.visible" class="badge status_hidden">
-          {{t('action.info.status.hidden')}}
+          {{t('initiative.info.status.hidden')}}
         </span>
         <span v-if="action.info.status == 'finished'" class="badge status_finished">
-          {{t('action.info.status.finished')}}
+          {{t('initiative.info.status.finished')}}
         </span>
         <span v-else-if="action.info.status == 'full'" class="badge status_full">
-          {{t('action.info.status.full')}}
+          {{t('initiative.info.status.full')}}
         </span>
         <span v-else :class="'badge status_' + action.info.status">
           {{ action.info.team_size + '/' + action.info.desired_team_size }}

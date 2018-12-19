@@ -50,7 +50,7 @@
               <div data-lon="<%= init.longitude %>"
                    data-lat="<%= init.latitude %>"
                    data-name="<%= init.full_title %>"
-                   data-href="<%= url_for(initiative) %>"
+                   data-href="<%= url_for(init) %>"
                    data-color="<%= init.finished? ? 'gray' : 'red' %>">
                 <% unless init.date.nil? %>
                   <div class="date"><%= l init.date, format: :date %></div>
@@ -148,7 +148,7 @@
   <div class="row">
     <div class="col-sm-6">
       <h2>Bleib auf dem Laufenden!</h2>
-      <p>
+      <p class="pr-5">
         Wenn du Ankündigungen zu Aktionen oder sonstige interessante und
         aktuelle Infos über Serve the City erhalten möchtest,
         kannst du dich auf dem Newsletter eintragen.

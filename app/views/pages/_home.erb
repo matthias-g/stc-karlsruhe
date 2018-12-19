@@ -38,11 +38,11 @@
 <% events, past_mode = policy_scope(Event.recent.limit(45)), true unless events.any? %>
 
 <section id="home-intro-box" class="full-width top">
-  <h1 class="sr-only">Aktionen</h1>
+  <h2 class="sr-only">Aktionen</h2>
   <div class="row align-items-stretch justify-content-around">
     <div class="col-sm-12 col-lg-5 mb-0">
 
-      <h2 class="sr-only">Karte</h2>
+      <h3 class="sr-only">Karte</h3>
       <div id="home-actions-map" data-class="GoogleMap" data-lat="49.011627" data-lon="8.403869" data-zoom="12">
         <div class="markers">
           <% events.each do |event| %>
@@ -122,7 +122,7 @@
   <div class="row">
     <div class="col-sm-6 col-md-5">
 
-        <h1>Serve the City Karlsruhe</h1>
+        <h2 class="h1">Serve the City Karlsruhe</h2>
         <p>
           ... ist eine Rahmenstruktur für soziales Kurzzeit-Engagement.
           Viele Leute wollen gerne etwas Gutes tun, können sich aber nicht langfristig verpflichten.
@@ -141,49 +141,37 @@
         <iframe allowfullscreen data-frame-src="
           https://www.youtube.com/embed/njiIHf1nlVQ?rel=0&autoplay=true&autohide=1&iv_load_policy=3&color=white&showinfo=0">
         </iframe>
-        <div class="trigger">
-          <div><i class="far fa-play-circle"></i></div>
-        </div>
+        <div class="trigger"><div><i class="far fa-play-circle"></i></div></div>
       </div>
 
     </div>
   </div>
 </section>
 
-<% if false %>
-
-  <section id="home-news">
-    <h1 class="sr-only">News</h1>
-    <div class="swiper-container" data-class="TripleSlider">
-      <div class="swiper-wrapper">
-        <%= render '/news_entries/entries', limit: 7 %>
-      </div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
+<section id="home-newsletter">
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>Bleib auf dem Laufenden!</h2>
+      <p>
+        Wenn du Ankündigungen zu Aktionen oder sonstige interessante und
+        aktuelle Infos über Serve the City erhalten möchtest,
+        kannst du dich auf dem Newsletter eintragen.
+      </p>
+      <p>
+        Außerdem kannst du uns auf
+        <%= link_to 'https://www.facebook.com/servethecity.karlsruhe', :target => "_blank" do %>
+          unserer Facebook-Seite
+        <% end %> folgen.
+      </p>
     </div>
-  </section>
-
-  <section id="home-likebox">
-    <h1>
-      <%= link_to 'https://www.facebook.com/servethecity.karlsruhe', :target => "_blank" do %>
-        <i class="fab fa-facebook" style="font-size: 1.3em;padding-right: 10px;"></i> Serve the City auf Facebook
-      <% end %>
-    </h1>
-    <div>
-      <span data-class="Likebox" data-fb-page="servethecity.karlsruhe"
-            data-fb-token="1632977830272942|_y8PPboBvdNWpQG9jIDhHa--ArA"></span><!-- &#132;Gefällt mir&#147;-Angaben-->
+    <div class="col-sm-6">
+      <%= vue_component 'SubscriptionForm', subscription_id: (user_signed_in? ? current_user.subscription_id : 0) %>
     </div>
-  </section>
-  <section>
-    <a id="home-photo-link" href="https://www.dropbox.com/sh/5yuk5ubbiqwhp1r/5AXIf0bhtd">
-      "Dein Bild für Karlsruhe" &rarr; Link zur Dropbox
-    </a>
-  </section>
-<% end %>
+  </div>
+</section>
 
-
-<section class="text-center">
-  <h1 class="sr-only">Fragen?</h1>
+<section id="home-faq" class="text-center">
+  <h2 class="sr-only">Fragen?</h2>
   <p>
     Fragen? Wenn sie <%= link_to 'hier', '/about' %> nicht beantwortet sind, dann schau dich doch mal <%= link_to 'in unseren FAQs', '/faq' %> um.
     Oder <%= link_to 'schreib uns vom Orga-Team', '/kontakt' %>!
@@ -207,5 +195,32 @@
       <% end %>
     </div>
   </div>
-
 </section>
+
+
+
+<% if false %>
+
+  <section id="home-news">
+    <h2 class="sr-only">News</h2>
+    <div class="swiper-container" data-class="TripleSlider">
+      <div class="swiper-wrapper">
+        <%= render '/news_entries/entries', limit: 7 %>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+
+  <section id="home-likebox">
+    <h2>
+      <%= link_to 'https://www.facebook.com/servethecity.karlsruhe', :target => "_blank" do %>
+        <i class="fab fa-facebook" style="font-size: 1.3em;padding-right: 10px;"></i> Serve the City auf Facebook
+      <% end %>
+    </h2>
+    <div>
+      <span data-class="Likebox" data-fb-page="servethecity.karlsruhe"
+            data-fb-token="1632977830272942|_y8PPboBvdNWpQG9jIDhHa--ArA"></span><!-- &#132;Gefällt mir&#147;-Angaben-->
+    </div>
+  </section>
+<% end %>

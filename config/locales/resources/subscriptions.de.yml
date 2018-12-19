@@ -8,9 +8,13 @@ de:
       subscription:
         email: E-Mail-Adresse
         name: Vorname
+        receive_emails_about_action_groups: 'News über neue Aktionen'
+        receive_emails_about_other_projects: 'News über Projekte'
+        receive_other_emails_from_orga: 'Andere News vom Orga-Team'
 
   subscription:
     creation:
+      submit: Newsletter abonnieren
       success: Abonnement erfolgreich erstellt.
       captcha_failed: Ungültiges Captcha! Abonnement konnte nicht erstellt werden.
     removal:

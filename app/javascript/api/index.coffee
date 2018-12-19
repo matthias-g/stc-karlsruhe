@@ -36,23 +36,16 @@ api.insertMiddlewareBefore 'axios-request', name: 'serialize-undo-camelcase', re
     payload.req.data.data.attributes = new_attr
   payload
 
-# Cache for GET requests
-cached_requests = {}
-
 # Try to get request from request cache
+cached_requests = {}
 api.replaceMiddleware 'axios-request', name: 'cached-axios-request', req: (payload) =>
-  identifier = payload.req.url
-  identifier += '?' + $.param(payload.req.params) if !$.isEmptyObject(payload.req.params)
-  if (identifier of cached_requests) and (payload.req.method == 'GET')
-    {config: {method: 'get', url: payload.req.url, params: payload.req.params}, data: cached_requests[identifier]}
-  else payload.jsonApi.axios(payload.req)
-
-# Save response to request cache
-api.insertMiddlewareBefore 'response', name: 'commit-to-store', res: (payload) =>
-  if payload.res.config.method == 'get'
-    identifier = payload.res.config.url + '?' + $.param(payload.res.config.params)
-    cached_requests[identifier] = payload.res.data
-  payload
+  if payload.req.method != 'GET'
+    return payload.jsonApi.axios(payload.req)
+  else
+    cid = payload.req.url
+    cid += '?' + $.param(payload.req.params) if !$.isEmptyObject(payload.req.params)
+    return cached_requests[cid] if cid of cached_requests
+    return cached_requests[cid] = payload.jsonApi.axios(payload.req)
 
 export { api }
 

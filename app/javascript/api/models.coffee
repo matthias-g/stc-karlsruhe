@@ -53,3 +53,7 @@ api.define 'subscription',
   receiveEmailsAboutActionGroups: false
   receiveEmailsAboutOtherProjects: false
   receiveOtherEmailsFromOrga: false
+
+api.define 'role',
+  title: ''
+  users: {jsonApi: 'hasMany', type: 'users'}

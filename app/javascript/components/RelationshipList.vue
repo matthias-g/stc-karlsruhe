@@ -65,6 +65,7 @@
       # get item data
       fetchData: ->
         api.find(@modelType, @modelId, include: @relationship).then (response) =>
+          console.log(response)
           @model = response.data
           @items = @convert_items(@model[@relationship])
         api.findAll(@itemType).then (response) =>

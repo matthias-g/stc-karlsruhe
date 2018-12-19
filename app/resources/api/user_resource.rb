@@ -8,10 +8,6 @@ class Api::UserResource < JSONAPI::Resource
 
   filter :cleared
 
-  def fetchable_fields
-    Pundit.policy(context[:user], @model_class).permitted_attributes_for_show
-  end
-
   def self.updatable_fields(context)
     Pundit.policy(context[:user], @model_class).updatable_fields
   end

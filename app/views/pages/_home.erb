@@ -35,7 +35,7 @@
 <% end %>
 
 <% events, past_mode = policy_scope(Event.upcoming).includes(:initiative).load, false %>
-<% events, past_mode = policy_scope(Event.recent.limit(45)), true unless events.any? %>
+<% events, past_mode = policy_scope(Event.recent.limit(20)), true unless events.any? %>
 
 <section id="home-intro-box" class="full-width top">
   <h2 class="sr-only">Aktionen</h2>
@@ -45,18 +45,17 @@
       <h3 class="sr-only">Karte</h3>
       <div id="home-actions-map" data-class="GoogleMap" data-lat="49.011627" data-lon="8.403869" data-zoom="12">
         <div class="markers">
-          <% events.each do |event| %>
-            <% action = event.initiative %>
-            <% if action.visible? && !action.longitude.nil? && !action.latitude.nil? %>
-              <div data-lon="<%= action.longitude %>"
-                   data-lat="<%= action.latitude %>"
-                   data-name="<%= action.full_title %>"
-                   data-href="<%= url_for(action) %>"
-                   data-color="<%= action.finished? ? 'gray' : 'red' %>">
-                <% unless event.date.nil? %>
-                  <div class="date"><%= l event.date, format: :date %></div>
+          <% events.map(&:initiative).uniq do |init| %>
+            <% if init.visible? && !init.longitude.nil? && !init.latitude.nil? %>
+              <div data-lon="<%= init.longitude %>"
+                   data-lat="<%= init.latitude %>"
+                   data-name="<%= init.full_title %>"
+                   data-href="<%= url_for(initiative) %>"
+                   data-color="<%= init.finished? ? 'gray' : 'red' %>">
+                <% unless init.date.nil? %>
+                  <div class="date"><%= l init.date, format: :date %></div>
                 <% end %>
-                <%= simple_format(simple_format_urls(action.short_description.empty? ? action.description : action.short_description)) %>
+                <%= simple_format(simple_format_urls(init.short_description.empty? ? init.description : init.short_description)) %>
               </div>
             <% end %>
           <% end %>
@@ -99,12 +98,9 @@
 
       <div id="home-action-list">
 
-        <% if user_signed_in? %>
-          <% my_events = current_user.events.upcoming.load %>
-          <% if my_events.any? %>
-            <% events = my_events %>
-            <h3>Deine Aktionen</h3>
-          <% end %>
+        <% if user_signed_in? && (my_events = current_user.events.upcoming.load).any? %>
+          <% events = my_events %>
+          <h3>Deine Aktionen</h3>
         <% else %>
           <h3><%= past_mode ? 'Vergangene Aktionen' : 'Nächste Aktionen' %></h3>
         <% end %>

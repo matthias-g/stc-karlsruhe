@@ -66,7 +66,7 @@ de:
   initiative:
 
     navigation:
-      to_overview: 'zur zur Übersicht'
+      to_overview: 'zur Übersicht'
       to_initiative: 'zurück'
 
     heading:
@@ -85,8 +85,6 @@ de:
       edit: 'Bearbeiten'
       make_visible: 'Sichtbar machen'
       make_invisible: 'Verstecken'
-      add_leader: 'Leiter hinzufügen'
-      remove_leader: 'Leiter entfernen'
       add_tag: 'Tag hinzufügen'
       remove_tag: 'Tag entfernen'
       create_event: 'Termin hinzufügen'
@@ -149,6 +147,8 @@ de:
 
     button:
       new: 'Neues Projekt'
+      add_leader: 'Leiter hinzufügen'
+      remove_leader: 'Leiter entfernen'
 
     message:
       created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
@@ -177,6 +177,8 @@ de:
     button:
       clone: 'Aktion klonen'
       new: 'Neue Aktion'
+      add_leader: 'Leiter hinzufügen'
+      remove_leader: 'Leiter entfernen'
 
     info:
       subactions:

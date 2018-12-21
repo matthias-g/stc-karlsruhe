@@ -25,7 +25,7 @@ class ActionsController < ApplicationController
 
   def new
     @action = Action.new
-    @action.events.build
+    #@action.events.build
     authorize_action
   end
 

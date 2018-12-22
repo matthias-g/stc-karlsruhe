@@ -32,7 +32,7 @@ gem 'pundit'
 gem 'actionview-encoded_mail_to'
 
 # asset pipeline
-gem 'sass-rails'
+gem 'sass-rails' # TODO unmaintained as of 26 March 2019 (alternative: sassc-rails)
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 

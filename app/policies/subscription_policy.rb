@@ -25,4 +25,10 @@ class SubscriptionPolicy < ApplicationPolicy
   alias_method :update?, :edit?
   alias_method :destroy?, :edit?
 
+  def updatable_fields
+    fields = %i[email name receive_emails_about_action_groups receive_emails_about_other_projects receive_other_emails_from_orga]
+    return fields + %i[confirmed_at] if user && record.email == user.email && user.confirmed?
+    fields
+  end
+
 end

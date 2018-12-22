@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   acts_as_token_authenticatable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
 
   has_many :participations, dependent: :destroy
@@ -111,6 +111,10 @@ class User < ApplicationRecord
 
   def subscription_id
     Subscription.find_by_email(email)&.id || -1
+  end
+
+  def confirmed?
+    !confirmed_at.nil?
   end
 
   def clear!

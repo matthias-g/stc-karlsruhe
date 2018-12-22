@@ -12,9 +12,9 @@ class Subscription < ApplicationRecord
   end
 
   def check_and_send_confirmation_request
-    user = User.find_by_email(email)
-    if user
-      update(confirmed_at: user.created_at) # TODO should be user.confirmed_at
+    if confirmed_at
+      user = User.find_by_email(email)
+      update(confirmed_at: user.created_at)
     end
     Mailer.subscription_creation_mail(self).deliver_later if confirmed_at.nil?
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_26_202629) do
+ActiveRecord::Schema.define(version: 2018_11_27_215034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -265,7 +265,12 @@ ActiveRecord::Schema.define(version: 2018_11_26_202629) do
     t.string "ical_token"
     t.boolean "receive_notifications_for_new_participation", default: true
     t.boolean "receive_notifications_about_volunteers", default: true
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.index ["authentication_token"], name: "index_users_on_authentication_token"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["receive_emails_about_my_action_groups"], name: "index_users_on_receive_emails_about_my_action_groups"
     t.index ["receive_emails_from_other_users"], name: "index_users_on_receive_emails_from_other_users"

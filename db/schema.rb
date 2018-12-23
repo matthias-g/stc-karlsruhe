@@ -260,21 +260,15 @@ ActiveRecord::Schema.define(version: 2018_11_26_202629) do
     t.string "phone", limit: 255, default: ""
     t.boolean "cleared", default: false
     t.string "authentication_token"
-    t.boolean "receive_emails_about_action_groups", default: true
     t.boolean "receive_emails_about_my_action_groups", default: true
-    t.boolean "receive_emails_about_other_projects", default: true
-    t.boolean "receive_other_emails_from_orga", default: true
     t.boolean "receive_emails_from_other_users", default: true
     t.string "ical_token"
     t.boolean "receive_notifications_for_new_participation", default: true
     t.boolean "receive_notifications_about_volunteers", default: true
     t.index ["authentication_token"], name: "index_users_on_authentication_token"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["receive_emails_about_action_groups"], name: "index_users_on_receive_emails_about_action_groups"
     t.index ["receive_emails_about_my_action_groups"], name: "index_users_on_receive_emails_about_my_action_groups"
-    t.index ["receive_emails_about_other_projects"], name: "index_users_on_receive_emails_about_other_projects"
     t.index ["receive_emails_from_other_users"], name: "index_users_on_receive_emails_from_other_users"
-    t.index ["receive_other_emails_from_orga"], name: "index_users_on_receive_other_emails_from_orga"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

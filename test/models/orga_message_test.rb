@@ -61,9 +61,4 @@ class OrgaMessageTest < ActiveSupport::TestCase
     assert_equal all_mails(:coordinator), get_message_recipient_set(sender)
   end
 
-  test "recipients doesn't include users who dont want the mails" do
-    users(:volunteer).update_attribute :receive_emails_about_action_groups, false
-    assert_not_includes @message.recipients(users(:coordinator)), users(:volunteer)
-  end
-
 end

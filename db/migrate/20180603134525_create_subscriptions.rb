@@ -2,6 +2,8 @@ class CreateSubscriptions < ActiveRecord::Migration[5.2]
 
   class User < ActiveRecord::Base
   end
+  class Subscription < ActiveRecord::Base
+  end
 
   def change
     create_table :subscriptions do |t|
@@ -17,7 +19,7 @@ class CreateSubscriptions < ActiveRecord::Migration[5.2]
     reversible do |change|
       change.up do
         User.find_each do |user|
-          return unless user.receive_other_emails_from_orga || user.receive_emails_about_other_projects || user.receive_emails_about_action_groups
+          next unless user.receive_other_emails_from_orga || user.receive_emails_about_other_projects || user.receive_emails_about_action_groups
           Subscription.create!(email: user.email, name: user.first_name,
                                receive_emails_about_action_groups: user.receive_emails_about_action_groups,
                                receive_emails_about_other_projects: user.receive_emails_about_other_projects,
@@ -26,8 +28,8 @@ class CreateSubscriptions < ActiveRecord::Migration[5.2]
       end
     end
 
-    remove_column :users, :receive_emails_about_action_groups
-    remove_column :users, :receive_emails_about_other_projects
-    remove_column :users, :receive_other_emails_from_orga
+    remove_column :users, :receive_emails_about_action_groups, :boolean
+    remove_column :users, :receive_emails_about_other_projects, :boolean
+    remove_column :users, :receive_other_emails_from_orga, :boolean
   end
 end

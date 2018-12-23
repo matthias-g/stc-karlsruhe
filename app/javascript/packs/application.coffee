@@ -10,3 +10,4 @@ Vue.config.productionTip = false
 # create Vue root instance
 onPageLoad =>
   new Vue(el: '#page', store)
+  vuejsInitializedCallback()

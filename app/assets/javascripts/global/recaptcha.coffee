@@ -3,10 +3,11 @@
 
 pageLoaded = false
 recaptchaReady = false
+vuejsInitialized = false
 recaptchaIds = []
 
 $.fn.initRecaptcha = ->
-  return if (!pageLoaded || !recaptchaReady)
+  return if (!pageLoaded || !recaptchaReady || !vuejsInitialized)
   @.each ->
     recaptchaIds.push(grecaptcha.render(@, sitekey: $(@).data('sitekey')))
 
@@ -15,12 +16,19 @@ $.fn.initRecaptcha = ->
   recaptchaReady = true
   $('.g-recaptcha').initRecaptcha()
 
+# this is called after the Vue instance has been created
+@vuejsInitializedCallback = ->
+  vuejsInitialized = true
+  $('.g-recaptcha').initRecaptcha()
+
 
 onPageLoad ->
   pageLoaded = true
   $('.g-recaptcha').initRecaptcha()
 
 beforeTurbolinksCache ->
+  pageLoaded = false
+  vuejsInitialized = false
   for id in recaptchaIds
     grecaptcha.reset(id)
   recaptchaIds = []

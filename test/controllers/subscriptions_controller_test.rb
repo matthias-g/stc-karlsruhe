@@ -14,14 +14,6 @@ class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal I18n.t('subscription.confirmation.success'), flash[:notice]
   end
 
-  test "create subscription for existing user is confirmed" do
-    subscription = nil
-    assert_mails_sent(0) do
-      subscription = Subscription.create!(email: users(:leader).email, name: 'Test Name')
-    end
-    assert_not subscription.confirmed_at.nil?
-  end
-
   test "unsubscribe emails about action groups" do
     subscription = subscriptions(:volunteer)
     assert subscription.receive_emails_about_action_groups

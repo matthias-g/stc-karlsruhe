@@ -5,48 +5,56 @@ leader:
   last_name: Leader
   email: leader@example.com
   encrypted_password: <%= User.new.send(:password_digest, 'testPassword') %>
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 subaction_leader:
   username: subaction_leader
   first_name: Subaction
   last_name: Leader
   email: subleader@example.com
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 volunteer:
   username: volunteer
   first_name: Default
   last_name: Volunteer
   email: volunteer0@example.com
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 subaction_volunteer:
   username: subaction_volunteer
   first_name: Subaction
   last_name: Volunteer
   email: volunteer1@example.com
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 subaction_2_volunteer:
   username: subaction_2_volunteer
   first_name: Subaction Two
   last_name: Volunteer
   email: volunteer2@example.com
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 subaction_3_volunteer:
   username: subaction_3_volunteer
   first_name: Subaction Three
   last_name: Volunteer
   email: volunteer3@example.com
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 unrelated:
   username: unrelated
   first_name: Unrelated
   last_name: User
   email: unrelated@example.com
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 unrelated_2:
   username: unrelated2
   first_name: Unrelated
   last_name: User 2
   email: unrelated2@example.com
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 ancient_user:
   username: ancient
@@ -54,6 +62,7 @@ ancient_user:
   last_name: User
   email: ancient@example.com
   created_at: <%= 33.months.ago.to_s(:db) %>
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 admin:
   username: admin
@@ -61,6 +70,7 @@ admin:
   last_name: Istrator
   email: admin@root.org
   roles: admin
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 coordinator:
   username: coordinator
@@ -68,6 +78,7 @@ coordinator:
   last_name: Nator
   email: coordinator@example.org
   roles: coordinator
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 photographer:
   username: photographer
@@ -75,6 +86,7 @@ photographer:
   last_name: Graph
   email: photo@graphs.com
   roles: photographer
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 notification_recipient:
   username: notification_recipient
@@ -82,6 +94,7 @@ notification_recipient:
   last_name: Recipient
   email: please-notify-me@example.com
   roles: notifications
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 deleted:
   username: deleted
@@ -89,9 +102,24 @@ deleted:
   last_name: Away
   email: deleted@nothing.com
   cleared: true
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 picture_uploader:
   username: picture_uploader
   first_name: Up
   last_name: Loader
   email: uploader@example.com
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
+
+unconfirmed_user:
+  username: unconfirmed_user
+  first_name: Unconfirmed
+  last_name: Mail
+  email: unconfirmed@example.com
+
+confirmed_user:
+  username: confirmed_user
+  first_name: Confirmed
+  last_name: Mail
+  email: confirmed@example.com
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>

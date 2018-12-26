@@ -7,7 +7,7 @@ class OrgaMessageTest < ActiveSupport::TestCase
   end
 
   def get_message_recipient_set(sender)
-    @message.recipients(sender).pluck(:email).to_set
+    @message.calculate_recipients_for_sender(sender).pluck(:email).to_set
   end
 
 
@@ -53,12 +53,19 @@ class OrgaMessageTest < ActiveSupport::TestCase
                  get_message_recipient_set(sender)
 
     @message.recipient = :test
-    assert_equal 1000, @message.recipients(sender).count
+    assert_equal 1000, @message.calculate_recipients_for_sender(sender).count
     assert_equal all_mails(:coordinator), get_message_recipient_set(sender)
 
     @message.recipient = :sender
-    assert_equal 1, @message.recipients(sender).count
+    assert_equal 1, @message.calculate_recipients_for_sender(sender).count
     assert_equal all_mails(:coordinator), get_message_recipient_set(sender)
+  end
+
+
+  test "recipients does not include users who dont want the mails" do
+    assert_includes @message.calculate_recipients_for_sender(users(:coordinator)), subscriptions(:volunteer)
+    subscriptions(:volunteer).update_attribute :receive_emails_about_action_groups, false
+    assert_not_includes @message.calculate_recipients_for_sender(users(:coordinator)), subscriptions(:volunteer)
   end
 
 end

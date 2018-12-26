@@ -1,5 +1,5 @@
 
-<% recipients = @message.recipients(current_user) %>
+<% recipients = @message.calculate_recipients_for_sender(current_user) %>
 
 <h1><%= OrgaMessage.model_name.human %> "<%= strip_tags @message.subject.gsub('{user}', current_user.first_name) %>"</h1>
 

@@ -13,7 +13,7 @@ class OrgaMessage < ApplicationRecord
 
   def send_message(sender)
     self.sender = sender
-    recipient_list = recipients(sender)
+    recipient_list = calculate_recipients_for_sender(sender)
     recipient_list.each do |recipient|
       if newsletter?
         Mailer.orga_subscription_mail(self, recipient).deliver_later
@@ -31,7 +31,7 @@ class OrgaMessage < ApplicationRecord
     self.save
   end
 
-  def recipients(sender)
+  def calculate_recipients_for_sender(sender)
     return recipients_for_sent_mail if sent?
     return recipients_for_newsletter if newsletter?
     recipients_for_user_mail(sender)

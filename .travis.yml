@@ -11,15 +11,17 @@ before_script:
   - yarn install
 env:
   - TESTSCRIPT="bin/travis-tests"
+  #- TESTSCRIPT="bin/travis-mutant ActionGroupPolicy"
+  - TESTSCRIPT="bin/travis-mutant ActionPolicy"
   - TESTSCRIPT="bin/travis-mutant ApplicationPolicy"
+  - TESTSCRIPT="bin/travis-mutant EventPolicy"
   - TESTSCRIPT="bin/travis-mutant GalleryPicturePolicy"
   - TESTSCRIPT="bin/travis-mutant GalleryPolicy"
   - TESTSCRIPT="bin/travis-mutant NewsEntryPolicy"
   - TESTSCRIPT="bin/travis-mutant OrgaMessagePolicy"
-  - TESTSCRIPT="bin/travis-mutant EventPolicy"
-  - TESTSCRIPT="bin/travis-mutant ActionPolicy"
-  #- TESTSCRIPT="bin/travis-mutant ActionGroupPolicy"
   - TESTSCRIPT="bin/travis-mutant RolePolicy"
+  - TESTSCRIPT="bin/travis-mutant SubscriptionPolicy"
+  - TESTSCRIPT="bin/travis-mutant TagPolicy"
   - TESTSCRIPT="bin/travis-mutant UserPolicy"
 script:
   - $TESTSCRIPT

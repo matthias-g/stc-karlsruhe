@@ -14,19 +14,11 @@ module Helpers
   end
 
   def grants_access
-    expect(subject).to permit(user, action)
+    expect(subject).to permit(user, record)
   end
 
   def denies_access
-    expect(subject).not_to permit(user, action)
-  end
-
-  def grants_access_to_project
-    expect(subject).to permit(user, project)
-  end
-
-  def denies_access_to_project
-    expect(subject).not_to permit(user, project)
+    expect(subject).not_to permit(user, record)
   end
 
   def finish_initiative(initiative)

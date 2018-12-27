@@ -8,6 +8,7 @@ RSpec.describe ActionPolicy do
 
   let(:user) { nil }
   let(:action) { actions(:default) }
+  let(:record) { action }
   let(:event) { events(:default) }
   let(:policy) { ActionPolicy.new(user, action) }
 

@@ -16,8 +16,8 @@ class SubscriptionPolicy < ApplicationPolicy
   end
 
   def edit?
-    nil unless user
-    record.email == user.email
+    return nil unless user
+    record.email.eql?(user.email)
   end
 
   alias_method :index?, :is_admin?

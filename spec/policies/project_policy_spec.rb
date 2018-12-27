@@ -8,6 +8,7 @@ RSpec.describe ProjectPolicy do
 
   let(:user) { nil }
   let(:project) { projects(:default_project) }
+  let(:record) { project }
   let(:event) { events(:project_event) }
   let(:policy) { ProjectPolicy.new(user, project) }
 
@@ -15,19 +16,19 @@ RSpec.describe ProjectPolicy do
     subject { described_class }
 
     context 'for visible project' do
-      it { grants_access_to_project }
+      it { grants_access }
     end
 
     context 'for invisible project' do
       before { hide_initiative(project) }
 
       context 'as visitor' do
-        it { denies_access_to_project }
+        it { denies_access }
       end
 
       context 'as leader' do
         let(:user) { users(:leader) }
-        it { grants_access_to_project }
+        it { grants_access }
       end
     end
   end
@@ -71,17 +72,17 @@ RSpec.describe ProjectPolicy do
 
     context 'for other user' do
       let(:user) { users(:leader) }
-      it { denies_access_to_project }
+      it { denies_access }
     end
 
     context 'as admin' do
       let(:user) { users(:admin) }
-      it { grants_access_to_project }
+      it { grants_access }
     end
 
     context 'as coordinator' do
       let(:user) { users(:coordinator) }
-      it { grants_access_to_project }
+      it { grants_access }
     end
   end
 

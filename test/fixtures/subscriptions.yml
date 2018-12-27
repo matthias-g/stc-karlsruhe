@@ -4,6 +4,7 @@ volunteer:
   receive_emails_about_action_groups: true
   receive_emails_about_other_projects: true
   receive_other_emails_from_orga: true
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>
 
 other_volunteer:
   email: volunteer1@example.com
@@ -11,3 +12,4 @@ other_volunteer:
   receive_emails_about_action_groups: true
   receive_emails_about_other_projects: true
   receive_other_emails_from_orga: false
+  confirmed_at: <%= 3.months.ago.to_s(:db) %>

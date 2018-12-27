@@ -30,6 +30,7 @@ class SubscriptionsController < ApplicationController
     subscription.confirmed_at = DateTime.now
     success = subscription.save
     if success
+      Subscription.where(email: subscription.email).where.not(id: subscription.id).map(&:destroy!)
       flash[:notice] = t('subscription.confirmation.success')
     else
       flash[:error] = t('subscription.confirmation.failed')

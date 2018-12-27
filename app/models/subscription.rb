@@ -1,7 +1,7 @@
 class Subscription < ApplicationRecord
 
   validates_presence_of :email, :name
-  validates_uniqueness_of :email
+  validates_uniqueness_of :email, scope: :confirmed_at
 
   after_create :check_and_send_confirmation_request
 

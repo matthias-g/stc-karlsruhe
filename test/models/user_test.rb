@@ -112,7 +112,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not subevent.volunteer?(subaction_volunteer)
   end
 
-  test "changing email also changes subscription" do
+  test "changing email and confirming also changes subscription" do
     user = users(:volunteer)
     old_email = user.email
     new_email = 'volunteers-new-email@example.com'
@@ -120,6 +120,7 @@ class UserTest < ActiveSupport::TestCase
     assert_nil Subscription.find_by_email(new_email)
     user.email = new_email
     user.save!
+    user.confirm
     assert_nil Subscription.find_by_email(old_email)
     assert_not_nil Subscription.find_by_email(new_email)
   end

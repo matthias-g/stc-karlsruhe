@@ -7,7 +7,7 @@ class CreateSubscriptions < ActiveRecord::Migration[5.2]
 
   def change
     create_table :subscriptions do |t|
-      t.string :email, index: true, unique: true
+      t.string :email, index: true, unique: true # correct would be "index: {unique: true}", not fixed because unique removed in 20181227115338
       t.string :name
       t.boolean :receive_emails_about_action_groups, default: true, index: true
       t.boolean :receive_emails_about_other_projects, default: true, index: true

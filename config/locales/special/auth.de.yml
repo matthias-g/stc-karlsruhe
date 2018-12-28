@@ -43,7 +43,7 @@ de:
         action: 'Mein Konto bestätigen'
         greeting: 'Willkommen %{recipient}!'
         instruction: ! 'Folge dem untenstehenden Link, um dein Konto zu bestätigen:'
-        subject: 'Anleitung zur Bestätigung deines Accounts'
+        subject: 'Serve the City Karlsruhe: Bestätigung deines Accounts'
       reset_password_instructions:
         action: 'Passwort ändern'
         greeting: 'Hallo %{recipient}!'

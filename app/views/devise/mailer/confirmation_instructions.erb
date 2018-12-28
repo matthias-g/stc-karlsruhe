@@ -1,5 +1,6 @@
-<p>Welcome <%= @email %>!</p>
+<p>Hallo <%= @resource.first_name %>!</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>Schön, dass du dich bei Serve the City Karlsruhe registriert hast. Herzlich willkommen!</p>
+<p>Über folgenden Link kannst du deinen Account bestätigen, damit du dich anmelden kannst:</p>
 
 <p><%= link_to t('user.button.confirmAccount'), confirmation_url(@resource, :confirmation_token => @token) %></p>

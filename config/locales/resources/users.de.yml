@@ -60,7 +60,6 @@ de:
       loginWithProvider: 'Anmelden via %{provider}'
       logout: 'Abmelden'
       register: 'Profil erstellen'
-      recoverPassword: 'Passwort vergessen?'
       showRegistration: 'Noch kein Profil?'
       confirmAccount: 'Account bestätigen'
       unlockAccount: 'Account freischalten'

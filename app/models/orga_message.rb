@@ -38,7 +38,7 @@ class OrgaMessage < ApplicationRecord
   end
 
   def newsletter?
-    :all_users == recipient.to_sym
+    :newsletter == recipient.to_sym
   end
 
   private

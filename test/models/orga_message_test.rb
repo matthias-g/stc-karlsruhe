@@ -48,7 +48,7 @@ class OrgaMessageTest < ActiveSupport::TestCase
     assert_equal all_mails(:leader, :subaction_leader),
                  get_message_recipient_set(sender)
 
-    @message.recipient = :all_users
+    @message.recipient = :newsletter
     assert_equal all_subscription_mails,
                  get_message_recipient_set(sender)
 

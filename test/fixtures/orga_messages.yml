@@ -1,7 +1,7 @@
 
 default:
   from: Serve the City Karlsruhe <contact@servethecity-karlsruhe.de>
-  recipient: all_users
+  recipient: newsletter
   action_group: default
   content_type: about_action_groups
   subject: 'Bald: Neue Aktionswoche'
@@ -10,7 +10,7 @@ default:
 
 already_sent:
   from: Serve the City Karlsruhe <contact@servethecity-karlsruhe.de>
-  recipient: all_users
+  recipient: newsletter
   action_group: default
   sent_to: 1,2
   content_type: about_action_groups

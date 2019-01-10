@@ -43,8 +43,14 @@ class OrgaMessage < ApplicationRecord
 
   private
 
+  # This does not include users or subscriptions which have been deleted since sending the mail
   def recipients_for_sent_mail
-    sent_to.split(/\s*,\s*/).map(&:to_i).collect {|id| User.find(id) }
+    ids = sent_to.split(/\s*,\s*/).map(&:to_i)
+    if newsletter?
+      Subscription.where(id: ids)
+    else
+      User.where(id: ids)
+    end
   end
 
   def recipients_for_newsletter

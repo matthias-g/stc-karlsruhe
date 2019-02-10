@@ -7,6 +7,6 @@ class Api::EventResource < JSONAPI::Resource
   has_many :volunteers, class_name: 'User', through: :participations
 
   def self.updatable_fields(context)
-    Pundit.policy(context[:user], @model_class).updatable_fields
+    Pundit.policy(context[:user], @model_class || @model).updatable_fields
   end
 end

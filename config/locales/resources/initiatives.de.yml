@@ -119,8 +119,6 @@ de:
       contact_leader: 'Hier kannst du den Leitern eine Nachricht schicken. Ein Kopie wird auch an dich gesendet.'
 
     message:
-      leader_added: 'Leiter erfolgreich hinzugefügt'
-      leader_removed: 'Leiter erfolgreich entfernt'
       tag_added: 'Tag "%{item}" hinzugefügt'
       tag_removed: 'Tag "%{item}" entfernt'
       image_cropped: 'Der Bildausschnitt wurde angepasst.'
@@ -151,6 +149,8 @@ de:
       remove_leader: 'Leiter entfernen'
 
     message:
+      leader_added: 'Leiter erfolgreich hinzugefügt'
+      leader_removed: 'Leiter erfolgreich entfernt'
       created: 'Projekt wurde erfolgreich erstellt. Es muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Projekt wurde erfolgreich aktualisiert.'
       error_list: 'Wegen folgender Fehler konnte das Projekt nicht gespeichert werden:'
@@ -188,6 +188,8 @@ de:
       enter_subaction: 'Melde dich zu einer der Teilaktionen an!'
 
     message:
+      leader_added: 'Leiter erfolgreich hinzugefügt'
+      leader_removed: 'Leiter erfolgreich entfernt'
       created: 'Aktion wurde erfolgreich erstellt. Sie muss noch von jemandem aus dem Kernteam freigeschaltet werden.'
       updated: 'Aktion wurde erfolgreich aktualisiert.'
       error_list: 'Wegen folgender Fehler konnte die Aktion nicht gespeichert werden:'

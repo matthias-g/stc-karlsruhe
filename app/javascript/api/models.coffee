@@ -6,6 +6,8 @@ api.define 'user',
   lastName: ''
   phone: ''
   email: ''
+  roles: {jsonApi: 'hasMany', type: 'role'}
+  actionsAsVolunteer: {jsonApi: 'hasMany', type: 'action'}
 
 api.define 'action',
   title: ''
@@ -21,6 +23,7 @@ api.define 'action',
   mapLatitude: ''
   mapLongitude: ''
   mapZoom: 17
+  status: ''
   pictureSource: ''
   picture: {}
   info: {}
@@ -30,6 +33,29 @@ api.define 'action',
   leaders: {jsonApi: 'hasMany', type: 'users'}
   actionGroup: {jsonApi: 'hasOne', type: 'action_groups'}
   parentAction: {jsonApi: 'hasOne', type: 'actions'}
+
+api.define 'project',
+  title: ''
+  description: ''
+  location: ''
+  latitude: ''
+  longitude: ''
+  individualTasks: ''
+  material: ''
+  requirements: ''
+  visible: false
+  shortDescription: ''
+  mapLatitude: ''
+  mapLongitude: ''
+  mapZoom: 17
+  status: ''
+  pictureSource: ''
+  picture: {}
+  info: {}
+  tags: {jsonApi: 'hasMany', type: 'tags'}
+  volunteers: {jsonApi: 'hasMany', type: 'volunteers'}
+  events: {jsonApi: 'hasMany', type: 'events'}
+  leaders: {jsonApi: 'hasMany', type: 'users'}
 
 api.define 'event',
   date: ''

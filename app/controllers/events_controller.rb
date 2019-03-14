@@ -10,12 +10,12 @@ class EventsController < ApplicationController
 
   def enter
     @event.add_volunteer(current_user)
-    redirect_to @event.initiative, notice: t('action.message.enteredAction')
+    redirect_to @event.initiative, notice: t('action.message.entered_action')
   end
 
   def leave
     @event.delete_volunteer(current_user)
-    redirect_to @event.initiative, notice: t('action.message.leftAction')
+    redirect_to @event.initiative, notice: t('action.message.left_action')
   end
 
   def register_for_participation
@@ -26,7 +26,7 @@ class EventsController < ApplicationController
     volunteer = User.find(params[:user_id])
     authorize_delete_volunteer(volunteer)
     @event.delete_volunteer(volunteer)
-    redirect_to @event.initiative, notice: t('action.message.volunteerRemoved')
+    redirect_to @event.initiative, notice: t('event.message.volunteer_removed')
   end
 
   private

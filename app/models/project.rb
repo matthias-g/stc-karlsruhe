@@ -6,4 +6,8 @@ class Project < Initiative
     false
   end
 
+  def status
+    :empty
+  end
+
 end

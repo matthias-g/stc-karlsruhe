@@ -26,7 +26,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def contact_leaders?
-    record.visible? && is_volunteer?
+    record.visible? && is_volunteer? && !is_leader?
   end
 
   def upload_pictures?

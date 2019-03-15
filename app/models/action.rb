@@ -1,6 +1,6 @@
 class Action < Initiative
 
-  belongs_to :action_group
+  belongs_to :action_group, optional: true
   has_many :subactions, class_name: 'Action', foreign_key: :parent_action_id,
            after_add: :update_cache_fields, after_remove: :update_cache_fields
   belongs_to :parent_action, class_name: 'Action', foreign_key: :parent_action_id, optional: true # TODO: does the foreign_key make sense?
@@ -137,7 +137,7 @@ class Action < Initiative
   end
 
   def set_default_values
-    self.action_group = ActionGroup.default if action_group_id == nil
+    #self.action_group = ActionGroup.default if action_group_id == nil
   end
 
 end

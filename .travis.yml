@@ -6,6 +6,8 @@ before_install:
   - tar -xf geckodriver-v0.21.0-linux64.tar.gz -C bin
   - export PATH=$PATH:$PWD/bin
   - export MOZ_HEADLESS=1
+  - gem update --system
+  - gem install bundler
 before_script:
   - bundle exec rails db:setup
   - yarn install

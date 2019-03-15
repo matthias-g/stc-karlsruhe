@@ -24,7 +24,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def manage_team?
-    ActionPolicy.new(user, record.initiative).manage_team?
+    ActionPolicy.new(user, record.initiative).manage_team? && !record.finished?
   end
 
   def add_to_volunteers?(users)

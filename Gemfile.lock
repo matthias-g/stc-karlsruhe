@@ -483,7 +483,7 @@ DEPENDENCIES
   webpacker (~> 3.5)
 
 RUBY VERSION
-   ruby 2.5.4p155
+   ruby 2.5.5p157
 
 BUNDLED WITH
    2.0.1

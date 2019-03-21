@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.5.4'
+ruby '2.5.5'
 gem 'rails', '~> 5.2.0'
 
 # localization
@@ -56,7 +56,7 @@ gem 'carrierwave'
 # various
 # TODO remove the github: when gem is compatible with Rails 5.2
 # see https://github.com/maclover7/trix/pull/62 or https://github.com/maclover7/trix/pull/64
-gem 'trix', github: 'DRBragg/trix', ref: :c8ca738
+gem 'trix', git: 'https://github.com/DRBragg/trix.git', ref: :c8ca738
 gem 'responders'
 gem 'premailer-rails'
 gem 'nokogiri'

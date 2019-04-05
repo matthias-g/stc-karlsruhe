@@ -10,45 +10,45 @@ GEM
   remote: https://rubygems.org/
   specs:
     abstract_type (0.0.7)
-    actioncable (5.2.2.1)
-      actionpack (= 5.2.2.1)
+    actioncable (5.2.3)
+      actionpack (= 5.2.3)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
-    actionmailer (5.2.2.1)
-      actionpack (= 5.2.2.1)
-      actionview (= 5.2.2.1)
-      activejob (= 5.2.2.1)
+    actionmailer (5.2.3)
+      actionpack (= 5.2.3)
+      actionview (= 5.2.3)
+      activejob (= 5.2.3)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (5.2.2.1)
-      actionview (= 5.2.2.1)
-      activesupport (= 5.2.2.1)
+    actionpack (5.2.3)
+      actionview (= 5.2.3)
+      activesupport (= 5.2.3)
       rack (~> 2.0)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (5.2.2.1)
-      activesupport (= 5.2.2.1)
+    actionview (5.2.3)
+      activesupport (= 5.2.3)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
     actionview-encoded_mail_to (1.0.9)
       rails
-    activejob (5.2.2.1)
-      activesupport (= 5.2.2.1)
+    activejob (5.2.3)
+      activesupport (= 5.2.3)
       globalid (>= 0.3.6)
-    activemodel (5.2.2.1)
-      activesupport (= 5.2.2.1)
-    activerecord (5.2.2.1)
-      activemodel (= 5.2.2.1)
-      activesupport (= 5.2.2.1)
+    activemodel (5.2.3)
+      activesupport (= 5.2.3)
+    activerecord (5.2.3)
+      activemodel (= 5.2.3)
+      activesupport (= 5.2.3)
       arel (>= 9.0)
-    activestorage (5.2.2.1)
-      actionpack (= 5.2.2.1)
-      activerecord (= 5.2.2.1)
+    activestorage (5.2.3)
+      actionpack (= 5.2.3)
+      activerecord (= 5.2.3)
       marcel (~> 0.3.1)
-    activesupport (5.2.2.1)
+    activesupport (5.2.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -73,10 +73,10 @@ GEM
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
-    bindex (0.5.0)
+    bindex (0.6.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    bootsnap (1.4.1)
+    bootsnap (1.4.2)
       msgpack (~> 1.0)
     bootstrap (4.1.3)
       autoprefixer-rails (>= 6.0.3)
@@ -89,7 +89,7 @@ GEM
       actionpack (>= 5.0)
       activemodel (>= 5.0)
     builder (3.2.3)
-    byebug (11.0.0)
+    byebug (11.0.1)
     capistrano (3.11.0)
       airbrussh (>= 1.0.0)
       i18n
@@ -105,7 +105,7 @@ GEM
       daemons (~> 1.3)
     capistrano3-unicorn (0.2.1)
       capistrano (~> 3.1, >= 3.1.0)
-    capybara (3.14.0)
+    capybara (3.16.1)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -142,7 +142,7 @@ GEM
     delayed_job_active_record (4.1.3)
       activerecord (>= 3.0, < 5.3)
       delayed_job (>= 3.0, < 5)
-    devise (4.6.1)
+    devise (4.6.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 6.0)
@@ -150,9 +150,9 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.3)
     docile (1.3.1)
-    dotenv (2.7.1)
-    dotenv-rails (2.7.1)
-      dotenv (= 2.7.1)
+    dotenv (2.7.2)
+    dotenv-rails (2.7.2)
+      dotenv (= 2.7.2)
       railties (>= 3.2, < 6.1)
     equalizer (0.0.11)
     erubi (1.8.0)
@@ -186,10 +186,10 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.2.0)
-    jsonapi-authorization (2.0.0)
+    jsonapi-authorization (3.0.1)
       jsonapi-resources (~> 0.9)
       pundit (>= 1.0.0, < 3.0.0)
-    jsonapi-resources (0.9.5)
+    jsonapi-resources (0.9.6)
       activerecord (>= 4.1)
       concurrent-ruby
       railties (>= 4.1)
@@ -216,7 +216,7 @@ GEM
     method_source (0.9.2)
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2018.0812)
+    mime-types-data (3.2019.0331)
     mimemagic (0.3.3)
     mini_magick (4.9.3)
     mini_mime (1.0.1)
@@ -251,11 +251,11 @@ GEM
     mutant-rspec (0.8.24)
       mutant (~> 0.8.24)
       rspec-core (>= 3.4.0, < 4.0.0)
-    net-scp (1.2.1)
-      net-ssh (>= 2.6.5)
+    net-scp (2.0.0)
+      net-ssh (>= 2.6.5, < 6.0.0)
     net-ssh (5.2.0)
     nio4r (2.3.1)
-    nokogiri (1.10.1)
+    nokogiri (1.10.2)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     parser (2.5.3.0)
@@ -274,23 +274,23 @@ GEM
     public_suffix (3.0.3)
     pundit (2.0.1)
       activesupport (>= 3.0.0)
-    rack (2.0.6)
+    rack (2.0.7)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rails (5.2.2.1)
-      actioncable (= 5.2.2.1)
-      actionmailer (= 5.2.2.1)
-      actionpack (= 5.2.2.1)
-      actionview (= 5.2.2.1)
-      activejob (= 5.2.2.1)
-      activemodel (= 5.2.2.1)
-      activerecord (= 5.2.2.1)
-      activestorage (= 5.2.2.1)
-      activesupport (= 5.2.2.1)
+    rails (5.2.3)
+      actioncable (= 5.2.3)
+      actionmailer (= 5.2.3)
+      actionpack (= 5.2.3)
+      actionview (= 5.2.3)
+      activejob (= 5.2.3)
+      activemodel (= 5.2.3)
+      activerecord (= 5.2.3)
+      activestorage (= 5.2.3)
+      activesupport (= 5.2.3)
       bundler (>= 1.3.0)
-      railties (= 5.2.2.1)
+      railties (= 5.2.3)
       sprockets-rails (>= 2.0.0)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
@@ -300,9 +300,9 @@ GEM
     rails-i18n (5.1.3)
       i18n (>= 0.7, < 2)
       railties (>= 5.0, < 6)
-    railties (5.2.2.1)
-      actionpack (= 5.2.2.1)
-      activesupport (= 5.2.2.1)
+    railties (5.2.3)
+      actionpack (= 5.2.3)
+      activesupport (= 5.2.3)
       method_source
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
@@ -312,9 +312,9 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     rdoc (6.1.1)
-    recaptcha (4.13.1)
+    recaptcha (4.14.0)
       json
-    regexp_parser (1.3.0)
+    regexp_parser (1.4.0)
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
       railties (>= 4.2.0, < 6.0)
@@ -337,7 +337,7 @@ GEM
     rspec-support (3.8.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
-    sass (3.7.3)
+    sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -420,66 +420,66 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionview-encoded_mail_to
-  better_errors
-  binding_of_caller
-  bootsnap
+  actionview-encoded_mail_to (~> 1.0.9)
+  better_errors (~> 2.5.1)
+  binding_of_caller (~> 0.8.0)
+  bootsnap (~> 1.4.2)
   bootstrap (~> 4.1.0)
-  bootstrap-datepicker-rails
-  bootstrap4-select-rails
-  bootstrap_form
-  byebug
-  capistrano
-  capistrano-bundler
-  capistrano-rails
-  capistrano3-delayed-job
-  capistrano3-unicorn
-  capybara
-  carrierwave
-  chartkick
-  coffee-rails
-  delayed_job_active_record
-  devise
-  dotenv-rails
-  exception_notification
-  friendly_id
-  groupdate
-  i18n-js
-  icalendar
-  jbuilder
-  jquery-rails
-  jquery-ui-rails
-  jsonapi-authorization
-  jsonapi-resources
-  lazyload-rails
-  letter_opener
-  listen
-  mini_magick
-  mutant
-  mutant-rspec
-  nokogiri
-  pg
-  photoswipe-rails
-  premailer-rails
-  pundit
+  bootstrap-datepicker-rails (~> 1.8.0)
+  bootstrap4-select-rails (~> 2.0.0)
+  bootstrap_form (~> 4.2.0)
+  byebug (~> 11.0.1)
+  capistrano (~> 3.11.0)
+  capistrano-bundler (~> 1.5.0)
+  capistrano-rails (~> 1.4.0)
+  capistrano3-delayed-job (~> 1.7.6)
+  capistrano3-unicorn (~> 0.2.1)
+  capybara (~> 3.16.1)
+  carrierwave (~> 1.3.1)
+  chartkick (~> 3.0.2)
+  coffee-rails (~> 4.2.2)
+  delayed_job_active_record (~> 4.1.3)
+  devise (~> 4.6.2)
+  dotenv-rails (~> 2.7.2)
+  exception_notification (~> 4.3.0)
+  friendly_id (~> 5.2.5)
+  groupdate (~> 4.1.1)
+  i18n-js (~> 3.2.1)
+  icalendar (~> 2.5.3)
+  jbuilder (~> 2.8.0)
+  jquery-rails (~> 4.3.3)
+  jquery-ui-rails (~> 6.0.1)
+  jsonapi-authorization (~> 3.0.1)
+  jsonapi-resources (~> 0.9.6)
+  lazyload-rails (~> 0.3.1)
+  letter_opener (~> 1.7.0)
+  listen (~> 3.1.5)
+  mini_magick (~> 4.9.3)
+  mutant (~> 0.8.24)
+  mutant-rspec (~> 0.8.24)
+  nokogiri (~> 1.10.2)
+  pg (~> 1.1.4)
+  photoswipe-rails (~> 4.1.2)
+  premailer-rails (~> 1.10.2)
+  pundit (~> 2.0.1)
   rails (~> 5.2.0)
   rails-i18n
-  recaptcha
-  responders
-  rspec-rails
-  sass-rails
-  sdoc
-  selenium-webdriver
+  recaptcha (~> 4.14.0)
+  responders (~> 2.4.1)
+  rspec-rails (~> 3.8.2)
+  sass-rails (~> 5.0.7)
+  sdoc (~> 1.0.0)
+  selenium-webdriver (~> 3.141.0)
   simple_token_authentication (~> 1.0)
-  simplecov
-  spring
-  spring-watcher-listen
-  sqlite3
+  simplecov (~> 0.16.1)
+  spring (~> 2.0.2)
+  spring-watcher-listen (~> 2.0.1)
+  sqlite3 (~> 1.4.0)
   trix!
-  turbolinks
+  turbolinks (~> 5.2.0)
   uglifier (>= 1.3.0)
-  unicorn
-  web-console
+  unicorn (~> 5.5.0)
+  web-console (~> 3.7.0)
   webpacker (~> 3.5)
 
 RUBY VERSION

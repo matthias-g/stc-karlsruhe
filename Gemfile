@@ -97,7 +97,7 @@ group :test do
   gem 'mutant', '~> 0.8.24'
   gem 'mutant-rspec', '~> 0.8.24'
   gem 'capybara', '~> 3.16.1'
-  gem 'selenium-webdriver', '~> 3.141.0'
+  gem 'selenium-webdriver', '~> 3.142.0'
 end
 
 group :development, :test do

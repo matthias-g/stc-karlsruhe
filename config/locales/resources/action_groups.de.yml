@@ -27,7 +27,7 @@ de:
     heading:
       filter_days: 'Tage'
       filter_tags: 'Tags'
-      filter_other: 'Sonstiges'
+      filter_other: Filter
 
     button:
       new_action: 'Neue Aktion erstellen'

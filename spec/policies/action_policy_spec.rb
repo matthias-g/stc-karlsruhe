@@ -198,7 +198,7 @@ RSpec.describe ActionPolicy do
     subject { policy.upload_pictures? }
 
     context 'for future action' do
-      before { event.update_attribute :date, Date.tomorrow }
+      before { action.events.each { |event| event.update_attribute :date, Date.tomorrow } }
 
       context 'as visitor' do
         it { should_fail }

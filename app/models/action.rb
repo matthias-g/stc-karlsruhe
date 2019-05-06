@@ -101,11 +101,13 @@ class Action < Initiative
   def make_visible!
     super
     subactions.each(&:make_visible!) if subactions
+    action_group.update_cache_fields if action_group
   end
 
   def make_invisible!
     super
     subactions.each(&:make_invisible!) if subactions
+    action_group.update_cache_fields if action_group
   end
 
   def update_cache_fields(*args)

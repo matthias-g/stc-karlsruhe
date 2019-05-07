@@ -152,16 +152,6 @@ RSpec.describe EventPolicy do
         before { finish_initiative(event.initiative) }
         it { should_fail }
       end
-
-      context 'for finished event but unfinished initative' do
-        let(:event) { events(:subaction_event) }
-
-        before { event.update_attribute :date, 2.days.ago }
-        it {
-          expect(event.initiative.finished?).to be_falsey
-          should_fail
-        }
-      end
     end
 
     context 'as admin' do
@@ -177,6 +167,16 @@ RSpec.describe EventPolicy do
     context 'as coordinator' do
       let(:user) { users(:coordinator) }
       it { should_pass }
+
+      context 'for finished event but unfinished initative' do
+        let(:event) { events(:subaction_event) }
+
+        before { event.update_attribute :date, 2.days.ago }
+        it {
+          expect(event.initiative.finished?).to be_falsey
+          should_fail
+        }
+      end
     end
 
     context 'as other user' do

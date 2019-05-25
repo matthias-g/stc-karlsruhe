@@ -13,3 +13,10 @@ other_volunteer:
   receive_emails_about_other_projects: true
   receive_other_emails_from_orga: false
   confirmed_at: <%= 3.months.ago.to_s(:db) %>
+
+unconfirmed_subscription:
+  email: unconfirmed-subscription@example.com
+  name: unconfirmed
+  receive_emails_about_action_groups: true
+  receive_emails_about_other_projects: true
+  receive_other_emails_from_orga: true

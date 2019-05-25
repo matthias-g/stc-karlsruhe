@@ -54,7 +54,7 @@ class OrgaMessage < ApplicationRecord
   end
 
   def recipients_for_newsletter
-    query = Subscription.all
+    query = Subscription.confirmed
     query = case content_type.to_sym
             when :about_action_groups
               query.where('subscriptions.receive_emails_about_action_groups': true)

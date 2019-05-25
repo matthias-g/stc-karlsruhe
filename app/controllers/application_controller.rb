@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     sign_in_url = new_user_session_url
-    template = Surveys::Template.where(show_in_user_profile: true).order('RANDOM()').first
+    template = Surveys::Template.where(show_in_user_profile: true).order(Arel.sql('RANDOM()')).first
     if template && !template.submissions.where(user_id: current_user.id).exists?
       stored_location_for(resource) || signed_in_root_path(resource)
     elsif request.referer == sign_in_url || request.referer == new_user_session_url || request.referer =~ /.*\/password\/.*/

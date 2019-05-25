@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def show
     if @user.id === current_user.id
-      template = Surveys::Template.where(show_in_user_profile: true).order('RANDOM()').first
+      template = Surveys::Template.where(show_in_user_profile: true).order(Arel.sql('RANDOM()')).first
       if template && !template.submissions.where(user_id: current_user.id).exists?
         @submission = Surveys::Submission.create_for_template(template)
       end

@@ -1,6 +1,6 @@
 class Surveys::Template < ApplicationRecord
 
-  has_many :questions, -> { order 'position' }, class_name: 'Surveys::Question', dependent: :destroy
+  has_many :questions, -> { order 'position' }, class_name: 'Surveys::Question', dependent: :destroy, inverse_of: :template
   has_many :submissions, :class_name => 'Surveys::Submission', dependent: :destroy
   accepts_nested_attributes_for :questions, reject_if: lambda { |a| a[:text].blank? }, allow_destroy: true
 

@@ -59,7 +59,7 @@ gem 'carrierwave', '~> 1.3.1'
 gem 'trix', git: 'https://github.com/DRBragg/trix.git', ref: :c8ca738
 gem 'responders', '~> 2.4.1'
 gem 'premailer-rails', '~> 1.10.2'
-gem 'nokogiri', '~> 1.10.2'
+gem 'nokogiri', '~> 1.10.8'
 gem 'icalendar', '~> 2.5.3'
 gem 'friendly_id', '~> 5.2.5'
 gem 'bootsnap', '~> 1.4.2'

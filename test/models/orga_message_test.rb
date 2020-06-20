@@ -10,6 +10,8 @@ class OrgaMessageTest < ActiveSupport::TestCase
     @message.calculate_recipients_for_sender(sender).pluck(:email).to_set
   end
 
+
+
   test "sent? is false for unsent message" do
     assert_not @message.sent?
   end
@@ -47,7 +49,7 @@ class OrgaMessageTest < ActiveSupport::TestCase
                  get_message_recipient_set(sender)
 
     @message.recipient = :newsletter
-    assert_equal all_confirmed_subscription_mails,
+    assert_equal all_subscription_mails,
                  get_message_recipient_set(sender)
 
     @message.recipient = :test
@@ -59,14 +61,11 @@ class OrgaMessageTest < ActiveSupport::TestCase
     assert_equal all_mails(:coordinator), get_message_recipient_set(sender)
   end
 
+
   test "recipients does not include users who dont want the mails" do
     assert_includes @message.calculate_recipients_for_sender(users(:coordinator)), subscriptions(:volunteer)
     subscriptions(:volunteer).update_attribute :receive_emails_about_action_groups, false
     assert_not_includes @message.calculate_recipients_for_sender(users(:coordinator)), subscriptions(:volunteer)
-  end
-
-  test "recipients does not include unconfirmed subscriptions" do
-    assert_not_includes @message.calculate_recipients_for_sender(users(:coordinator)), subscriptions(:unconfirmed_subscription)
   end
 
 end

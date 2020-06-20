@@ -37,8 +37,8 @@ class ActiveSupport::TestCase
     user_fixtures.map{|u| users(u).email}.to_set
   end
 
-  def all_confirmed_subscription_mails
-    Subscription.confirmed.pluck(:email).to_set
+  def all_subscription_mails
+    Subscription.all.pluck(:email).to_set
   end
 
 end

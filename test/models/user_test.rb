@@ -74,6 +74,19 @@ class UserTest < ActiveSupport::TestCase
     assert user.cleared
   end
 
+  test "clear! changes are persisted" do
+    user = users(:unrelated)
+    user.clear!
+    user.save!
+    user = User.find(user.id)
+    assert_equal 'cleared', user.first_name
+    assert_equal 'cleared', user.last_name
+    assert_equal '', user.phone
+    assert_not_equal 'unrelated', user.username
+    assert user.email.ends_with?('@cleared.servethecity-karlsruhe.de')
+    assert user.cleared
+  end
+
   test "set_default_username_if_blank!" do
     user1 = User.create first_name: 'Homer', last_name: 'Simpson', email: create_unique_email_address, password: 'password'
     assert_equal 'Homer', user1.username

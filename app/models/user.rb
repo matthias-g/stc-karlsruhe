@@ -124,6 +124,7 @@ class User < ApplicationRecord
     self.username = ''
     set_default_username_if_blank!
     self.email = self.username + '@cleared.servethecity-karlsruhe.de'
+    self.skip_reconfirmation!
     self.cleared = true
   end
 

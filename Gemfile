@@ -65,7 +65,7 @@ gem 'friendly_id', '~> 5.2.5'
 gem 'bootsnap', '~> 1.4.2'
 
 # environment
-gem 'pg', '~> 1.1.4'
+gem 'pg', '~> 1.2.3'
 gem 'dotenv-rails', '~> 2.7.2'
 gem 'unicorn', '~> 5.5.0'
 

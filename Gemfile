@@ -59,7 +59,7 @@ gem 'carrierwave', '~> 1.3.1'
 gem 'trix', git: 'https://github.com/DRBragg/trix.git', ref: :c8ca738
 gem 'responders', '~> 2.4.1'
 gem 'premailer-rails', '~> 1.10.2'
-gem 'nokogiri', '~> 1.10.2'
+gem 'nokogiri', '~> 1.10'
 gem 'icalendar', '~> 2.5.3'
 gem 'friendly_id', '~> 5.2.5'
 gem 'bootsnap', '~> 1.4.2'
@@ -75,25 +75,25 @@ gem 'capistrano3-delayed-job', '~> 1.7.6'
 
 group :development do
   # Use Capistrano for deployment
-  gem 'capistrano', '~> 3.11.0'
-  gem 'capistrano-rails', '~> 1.4.0'
-  gem 'capistrano-bundler', '~> 1.5.0'
+  gem 'capistrano', '~> 3.14'
+  gem 'capistrano-rails', '~> 1.6'
+  gem 'capistrano-bundler', '~> 2.0'
   gem 'capistrano3-unicorn', '~> 0.2.1'
 
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '~> 3.7.0'
-  gem 'listen', '~> 3.1.5'
+  gem 'listen', '~> 3.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring', '~> 2.0.2'
+  gem 'spring', '~> 2.0'
   gem 'spring-watcher-listen', '~> 2.0.1'
 
-  gem 'letter_opener', '~> 1.7.0'
-  gem 'better_errors', '~> 2.5.1'
-  gem 'binding_of_caller', '~> 0.8.0'
+  gem 'letter_opener', '~> 1.7'
+  gem 'better_errors', '~> 2.5'
+  gem 'binding_of_caller', '~> 0.8'
 end
 
 group :test do
-  gem 'simplecov', '~> 0.16.1', require: false
+  gem 'simplecov', '~> 0.19.1', require: false
   gem 'mutant', '~> 0.8.24'
   gem 'mutant-rspec', '~> 0.8.24'
   gem 'capybara', '~> 3.16.1'

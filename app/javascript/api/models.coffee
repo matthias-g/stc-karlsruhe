@@ -31,8 +31,12 @@ api.define 'action',
   volunteers: {jsonApi: 'hasMany', type: 'volunteers'}
   events: {jsonApi: 'hasMany', type: 'events'}
   leaders: {jsonApi: 'hasMany', type: 'users'}
-  actionGroup: {jsonApi: 'hasOne', type: 'action_groups'}
+  actionGroup: {jsonApi: 'hasOne', type: 'action-group'}
   parentAction: {jsonApi: 'hasOne', type: 'actions'}
+
+api.define 'action-group',
+  title: '',
+  actions: {jsonApi: 'hasMany', type: 'action'}
 
 api.define 'project',
   title: ''

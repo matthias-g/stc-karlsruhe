@@ -1,7 +1,6 @@
 Serve the City Karlsruhe
 ========================
 
-[![Dependency Status](https://gemnasium.com/matthias-g/stc-karlsruhe.svg)](https://gemnasium.com/matthias-g/stc-karlsruhe)
 [![Test Coverage](https://codeclimate.com/github/matthias-g/stc-karlsruhe/badges/coverage.svg)](https://codeclimate.com/github/matthias-g/stc-karlsruhe/coverage)
 [![Build Status](https://travis-ci.org/matthias-g/stc-karlsruhe.svg?branch=master)](https://travis-ci.org/matthias-g/stc-karlsruhe)
 

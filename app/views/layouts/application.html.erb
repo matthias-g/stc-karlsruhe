@@ -17,6 +17,9 @@
   <%# empty script tag as workaround for problem in Turbolinks
    see https://github.com/turbolinks/turbolinks/issues/165#issuecomment-241931592 %>
   <script></script>
+  <script type="text/javascript">
+      const RAILS_ENV = '<%= Rails.env %>';
+  </script>
   <%= javascript_include_tag 'https://www.google.com/recaptcha/api.js?onload=recaptchaLoadCallback&render=explicit', defer: true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': true %>
   <%= javascript_include_tag 'editing', 'data-turbolinks-track': true if privileged_user? %>

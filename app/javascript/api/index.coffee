@@ -1,7 +1,7 @@
 import JsonApi from 'devour-client'
 
 # define and extend API
-api = new JsonApi(apiUrl: '/api')
+api = new JsonApi(apiUrl: '/api', logger: RAILS_ENV != 'production')
 
 # misc function singularize for local use
 singularize = api.pluralize.singular

@@ -111,9 +111,8 @@ Rails.application.configure do
   # Deliver mails on exceptions
   config.middleware.use ExceptionNotification::Rack,
                         ignore_if: ->(env, exception) {
-                          user_agent = env['HTTP_USER_AGENT']
-                          exception.message == "ActionController::InvalidAuthenticityToken" &&
-                              (user_agent.include?('Chrome/52.0.2743.116') || user_agent.include?('Firefox/34.0'))
+                          params = env['action_dispatch.request.parameters']
+                          exception.message == "ActionController::InvalidAuthenticityToken" && !params.include?('remember_me')
                         },
                         email: {
                             email_prefix: '[Exception] ',

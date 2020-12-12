@@ -112,7 +112,7 @@ Rails.application.configure do
   config.middleware.use ExceptionNotification::Rack,
                         ignore_if: ->(env, exception) {
                           params = env['action_dispatch.request.parameters']
-                          exception.message == "ActionController::InvalidAuthenticityToken" && !params.include?('remember_me')
+			  exception.message == "ActionController::InvalidAuthenticityToken" && !params.include?('user')
                         },
                         email: {
                             email_prefix: '[Exception] ',

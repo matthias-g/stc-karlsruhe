@@ -20,7 +20,7 @@ group :doc do
 end
 
 # security
-gem 'devise', '~> 4.6.2'
+gem 'devise', '~> 4.6'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'pundit', '~> 2.0.1'
 gem 'actionview-encoded_mail_to', '~> 1.0.9'

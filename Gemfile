@@ -93,7 +93,7 @@ group :development do
 end
 
 group :test do
-  gem 'simplecov', '~> 0.19.1', require: false
+  gem 'simplecov', '~> 0.15', '< 0.18', require: false # TODO remove '< 0.18' once https://github.com/codeclimate/test-reporter/issues/413 is closed
   gem 'mutant', '~> 0.8.24'
   gem 'mutant-rspec', '~> 0.8.24'
   gem 'capybara', '~> 3.16'

@@ -69,7 +69,6 @@ gem 'pg', '~> 1.2.3'
 gem 'dotenv-rails', '~> 2.7.2'
 gem 'unicorn', '~> 5.5.0'
 
-gem 'daemons', '~> 1.3.1'
 gem 'delayed_job_active_record', '~> 4.1.3'
 
 gem 'capistrano3-delayed-job', '~> 1.7.6'

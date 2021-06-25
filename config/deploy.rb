@@ -40,7 +40,3 @@ namespace :deploy do
     invoke 'unicorn:stop'
   end
 end
-
-# Number of delayed_job workers
-# default value: 1
-set :delayed_job_workers, 3

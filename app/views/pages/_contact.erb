@@ -14,6 +14,7 @@
         <%= form.text_area :body, label: t('general.form.body'), rows: 8 %>
         <%= form.hidden_field :recipient, value: 'default@servethecity-karlsruhe.de' %>
         <% unless user_signed_in? %>
+          <%= form.text_field :simple_spam_check, label: t('general.form.simple_spam_check') %>
           <%= form.form_group do %>
             <%= recaptcha_tags ajax: true, script: false, noscript: false %>
           <% end %>

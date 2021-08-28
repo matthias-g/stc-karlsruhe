@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
   end
 
   def block_spam
-    unless user_signed_in? || verify_recaptcha(model: @message)
+    unless user_signed_in? || (verify_recaptcha(model: @message) && @message.simple_spam_check&.strip&.downcase == "karlsruhe")
       flash[:alert] = t('mailer.contact_orga_mail.captcha_failed')
       redirect_to_contact_form
     end

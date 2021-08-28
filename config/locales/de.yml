@@ -33,6 +33,7 @@ de:
       recipient: 'E-Mail-Adresse des Empfängers'
       subject: 'Worum geht''s?'
       body: 'Deine Nachricht'
+      simple_spam_check: 'Bitte gib hier "Karlsruhe" ein:'
 
     declination:
       at:

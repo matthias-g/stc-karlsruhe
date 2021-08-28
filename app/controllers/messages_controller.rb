@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
 
   def send_contact_mail
     if @message.valid?
-      Mailer.contact_orga_mail(@message.body, @message.subject, @message.sender).deliver_later
+      Mailer.contact_orga_mail(@message.body, @message.subject, @message.sender, current_user).deliver_later
       Mailer.contact_orga_mail_copy_for_sender(@message.body, @message.subject, @message.sender).deliver_later
       redirect_to root_path, notice: t('mailer.contact_orga_mail.success')
     else

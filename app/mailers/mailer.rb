@@ -3,8 +3,9 @@ class Mailer < ActionMailer::Base
   layout false, only: 'orga_mail'
   add_template_helper(OrgaMessagesHelper)
 
-  def contact_orga_mail(body, subject, sender)
+  def contact_orga_mail(body, subject, sender, current_user)
     @message = body
+    @current_user = current_user
     recipient = StcKarlsruhe::Application::CONTACT_FORM_RECIPIENT
     mail to: recipient, reply_to: sender, subject: subject
   end

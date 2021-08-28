@@ -1,4 +1,4 @@
 
-Über das Kontaktformular auf servethecity-karlsruhe.de ist eine neue Nachricht eingegangen:
+Über das Kontaktformular auf servethecity-karlsruhe.de ist eine neue Nachricht <%= "von #{@current_user.full_name}" if @current_user %> eingegangen:
 
 <%= @message %>

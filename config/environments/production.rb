@@ -113,7 +113,10 @@ Rails.application.configure do
                         ignore_if: ->(env, exception) {
                           params = env['action_dispatch.request.parameters']
                           exception.message == "ActionController::InvalidAuthenticityToken" &&
-                            (!params.include?('user') || params['user']['login'].include?('@tom.com'))
+                            (!params.include?('user') ||
+                              params['user']['login'].include?('@tom.com') ||
+                              params['user']['login'].include?('admin') ||
+                              params['user']['login'].equal?("1"))
                         },
                         email: {
                             email_prefix: '[Exception] ',

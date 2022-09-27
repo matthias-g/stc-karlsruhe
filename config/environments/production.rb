@@ -116,7 +116,7 @@ Rails.application.configure do
                             (!params.include?('user') ||
                               params['user']['login'].include?('@tom.com') ||
                               params['user']['login'].include?('admin') ||
-                              params['user']['login'].equal?("1"))
+                              params['user']['login'].include?('1') )
                         },
                         email: {
                             email_prefix: '[Exception] ',

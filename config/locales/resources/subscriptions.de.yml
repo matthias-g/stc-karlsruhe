@@ -19,6 +19,7 @@ de:
       captcha_failed: Ungültiges Captcha! Abonnement konnte nicht erstellt werden.
     removal:
       success: Abonnement wurde erfolgreich beendet.
+      already: Abonnement wurde bereits beendet.
       failed: Fehler beim Beenden des Abonnements. Bitte melde dich über das Kontaktformular.
     confirmation:
       success: E-Mail-Adresse erfolgreich bestätigt.

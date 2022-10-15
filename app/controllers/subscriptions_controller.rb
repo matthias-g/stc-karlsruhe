@@ -1,7 +1,13 @@
 class SubscriptionsController < ApplicationController
 
   def unsubscribe
-    subscription = SignedGlobalID.find(params[:sgid], for: :unsubscribe)
+    subscription = nil
+    begin
+      subscription = SignedGlobalID.find(params[:sgid], for: :unsubscribe)
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = t('subscription.removal.already')
+      return redirect_to root_path
+    end
     return redirect_to root_path unless subscription
     type = params[:type]&.to_sym
     allowed_types = [:receive_emails_about_action_groups,

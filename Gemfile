@@ -41,7 +41,7 @@ gem 'bootstrap4-select-rails', '~> 2.0.0'
 gem 'bootstrap-datepicker-rails', '~> 1.8.0'
 gem 'photoswipe-rails', '~> 4.1.2'
 gem 'groupdate', '~> 4.1.1'
-gem 'chartkick', '~> 3.0.2'
+gem 'chartkick', '~> 3.4.0'
 
 # JSON API
 gem 'jbuilder', '~> 2.8.0'

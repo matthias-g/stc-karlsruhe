@@ -37,6 +37,8 @@
 <% events, past_mode = policy_scope(Event.upcoming).includes(:initiative).load, false %>
 <% events, past_mode = policy_scope(Event.recent.limit(20)), true unless events.any? %>
 
+<%= render "pages/retirement_notification" %>
+
 <section id="home-intro-box" class="full-width top">
   <h2 class="sr-only">Aktionen</h2>
   <div class="row align-items-stretch justify-content-around">
@@ -144,27 +146,27 @@
   </div>
 </section>
 
-<section id="home-newsletter">
-  <div class="row">
-    <div class="col-sm-6">
-      <h2>Bleib auf dem Laufenden!</h2>
-      <p class="pr-5">
-        Wenn du Ankündigungen zu Aktionen oder sonstige interessante und
-        aktuelle Infos über Serve the City erhalten möchtest,
-        kannst du dich auf dem Newsletter eintragen.
-      </p>
-      <p>
-        Außerdem kannst du uns auf
-        <%= link_to 'https://www.facebook.com/servethecity.karlsruhe', :target => "_blank" do %>
-          unserer Facebook-Seite
-        <% end %> folgen.
-      </p>
-    </div>
-    <div class="col-sm-6">
-      <%= vue_component 'SubscriptionForm', subscription_id: (user_signed_in? ? current_user.subscription_id : 0) %>
-    </div>
-  </div>
-</section>
+<!--<section id="home-newsletter">-->
+<!--  <div class="row">-->
+<!--    <div class="col-sm-6">-->
+<!--      <h2>Bleib auf dem Laufenden!</h2>-->
+<!--      <p class="pr-5">-->
+<!--        Wenn du Ankündigungen zu Aktionen oder sonstige interessante und-->
+<!--        aktuelle Infos über Serve the City erhalten möchtest,-->
+<!--        kannst du dich auf dem Newsletter eintragen.-->
+<!--      </p>-->
+<!--      <p>-->
+<!--        Außerdem kannst du uns auf-->
+        <%#= link_to 'https://www.facebook.com/servethecity.karlsruhe', :target => "_blank" do %>
+<!--          unserer Facebook-Seite-->
+<!--        <%# end %> folgen.-->
+<!--      </p>-->
+<!--    </div>-->
+<!--    <div class="col-sm-6">-->
+      <%#= vue_component 'SubscriptionForm', subscription_id: (user_signed_in? ? current_user.subscription_id : 0) %>
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
 
 <section id="home-faq" class="text-center">
   <h2 class="sr-only">Fragen?</h2>

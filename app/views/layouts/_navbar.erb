@@ -40,13 +40,15 @@
             <div class="link-text"><%= t('layout.navbar.profile') %></div>
           <% end %>
         </li>
-      <% else %>
-        <li<%= current_page?(new_user_session_path) ? ' class=active' : '' %>>
-          <%= link_to new_user_session_path do %>
-            <div class="link-icon"><span class="fas fa-sign-in-alt"></span></div>
-            <div class="link-text"><%= t('layout.navbar.login') %></div>
-          <% end %>
-        </li>
+      <%# else %>
+        <% if false %>
+          <li<%= current_page?(new_user_session_path) ? ' class=active' : '' %>>
+            <%= link_to new_user_session_path do %>
+              <div class="link-icon"><span class="fas fa-sign-in-alt"></span></div>
+              <div class="link-text"><%= t('layout.navbar.login') %></div>
+            <% end %>
+          </li>
+        <% end %>
       <% end %>
 
       <% if current_user&.in_orga_team? %>

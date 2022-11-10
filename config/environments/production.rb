@@ -114,9 +114,9 @@ Rails.application.configure do
                           params = env['action_dispatch.request.parameters']
                           exception.message == "ActionController::InvalidAuthenticityToken" &&
                             (!params.include?('user') ||
-                              params['user']['login'].include?('@tom.com') ||
-                              params['user']['login'].include?('admin') ||
-                              params['user']['login'].include?('1') )
+                              params['user'].flatten.include?('@tom.com') ||
+                              params['user'].flatten.include?('admin') ||
+                              params['user'].flatten.include?('1') )
                         },
                         email: {
                             email_prefix: '[Exception] ',
